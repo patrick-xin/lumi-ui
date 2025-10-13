@@ -32,7 +32,9 @@ export default async function Page(props: PageProps) {
   const doc = page.data;
   const MDX = doc.body;
   const links = doc.links;
-  const neighbours = findNeighbour(source.pageTree, page.url);
+  const neighbours = findNeighbour(source.pageTree, page.url, {
+    separateRoot: true,
+  });
 
   return (
     <div className="relative grid xl:grid-cols-[minmax(0,1fr)_minmax(200px,260px)] xl:gap-12 2xl:gap-16">

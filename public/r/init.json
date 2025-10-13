@@ -1,0 +1,14 @@
+{
+  "name": "init",
+  "type": "registry:style",
+  "title": "Base Style",
+  "author": "@lumi-ui",
+  "dependencies": ["@base-ui-components/react", "lucide-react"],
+  "css": {
+    "@layer base": {
+      ".root": {
+        "isolation": "isolate"
+      }
+    }
+  }
+}

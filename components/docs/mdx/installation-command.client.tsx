@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { CopyButton } from "@/components/docs/copy-button";
 import { useInstallationConfigStore } from "@/hooks/use-config";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/ui/tabs";
-import { CopyButton } from "./copy-button";
 
 interface InstallationCommandClientProps {
   npm: React.ReactNode;
