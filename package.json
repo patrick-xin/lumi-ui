@@ -1,26 +1,58 @@
 {
   "name": "lumi-ui",
   "version": "0.1.0",
-  "private": true,
+  "description": "Composable React components powered by Base UI and Tailwind CSS — built for clarity, speed, and total code ownership",
+  "homepage": "https://github.com/patrick-xin/lumi-ui#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patrick-xin/lumi-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/patrick-xin/lumi-ui/issues"
+  },
+  "license": "MIT",
+
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "prepare": "husky",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish"
   },
   "dependencies": {
+    "@base-ui-components/react": "1.0.0-beta.4",
+    "class-variance-authority": "^0.7.1",
+    "fumadocs-core": "^15.8.5",
+    "fumadocs-mdx": "^12.0.3",
+    "lucide-react": "^0.545.0",
+    "motion": "^12.23.24",
+    "next": "15.5.4",
+    "next-themes": "^0.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.5.4"
+    "rehype-pretty-code": "^0.14.1",
+    "shiki": "^3.13.0",
+    "zod": "^4.1.12",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@biomejs/biome": "2.2.0",
+    "@changesets/cli": "^2.29.7",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/mdx": "^2.0.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
+    "clsx": "^2.1.1",
+    "husky": "^9.1.7",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4",
-    "@biomejs/biome": "2.2.0"
+    "typescript": "^5"
   }
 }
