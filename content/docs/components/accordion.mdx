@@ -1,22 +1,45 @@
 ---
 title: Accordion
-description: A vertically stacked set of interactive headings that each reveal a section of content.
+description: A set of collapsible panels with headings.
 links:
   doc: https://base-ui.com/react/components/accordion
   api: https://base-ui.com/react/components/accordion#api-reference
 ---
 
-Accordion Component
+<ComponentPreview name="accordion-demo" />
 
-```tsx {3}
-import { Accordion, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+## Installation
 
-<Accordion type="single" collapsible>
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionContent>
-      Yes. It adheres to the WAI-ARIA design pattern.
-    </AccordionContent>
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/accordion
+    ```
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSourceCode name="accordion" title="accordion.tsx" collapsible/>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+
+## Anatomy
+
+```tsx
+ <Accordion>
+  <AccordionItem>
+    <AccordionHeader>
+      <AccordionTrigger/>
+    </AccordionHeader>
+    <AccordionPanel/>
   </AccordionItem>
-</Accordion>
+ </Accordion>
 ```

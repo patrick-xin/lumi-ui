@@ -1,7 +1,19 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { CopyButton } from "@/components/docs/copy-button";
-import { InstallationCommand } from "@/components/docs/installation-command";
+import { CodeTabs } from "@/components/docs/mdx/code-tabs";
+import { ComponentPreview } from "@/components/docs/mdx/component-preview";
+import { ComponentSourceCode } from "@/components/docs/mdx/component-source-code";
+import { InstallationCommand } from "@/components/docs/mdx/installation-command";
+import { Step, Steps } from "@/components/docs/mdx/steps";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/docs/mdx/tables";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/ui/tabs";
 
@@ -213,8 +225,19 @@ export const mdxComponents: MDXComponents = {
       </>
     );
   },
+  Step,
+  Steps,
+  CodeTabs,
   TabsList,
   TabsTrigger,
   TabsContent,
+  table: Table,
+  tbody: TableBody,
+  td: TableCell,
+  thead: TableHead,
+  th: TableHeader,
+  tr: TableRow,
+  ComponentPreview,
+  ComponentSourceCode,
   Tabs,
 };

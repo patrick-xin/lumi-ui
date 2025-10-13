@@ -14,7 +14,9 @@
       "!dist",
       "!build",
       "!.source",
-      "!styles"
+      "!styles",
+      "!registry",
+      "!public"
     ]
   },
   "formatter": {
@@ -27,7 +29,8 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noExplicitAny": "warn"
       },
       "complexity": {
         "useLiteralKeys": "off"

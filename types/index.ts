@@ -1,6 +1,6 @@
 import type { PageTree } from "fumadocs-core/server";
 
-export type ComponentStatus = "planned" | "in-progress" | "new";
+export type ComponentStatus = "planned" | "in-progress" | "new" | undefined;
 
 export type DocPageNode = PageTree.Item & {
   status?: ComponentStatus;
