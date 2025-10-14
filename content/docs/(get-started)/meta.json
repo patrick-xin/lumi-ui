@@ -1,4 +1,4 @@
 {
   "title": "Get Started",
-  "pages": ["introduction"]
+  "pages": ["introduction", "installation", "composition"]
 }

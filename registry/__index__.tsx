@@ -32,7 +32,7 @@ export const components: ComponentRegistry = {
     name: "accordion",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: undefined,
     files:     [
           {
                 "path": "registry/ui/accordion.tsx",
@@ -43,6 +43,26 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/registry/ui/accordion");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "accordion";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "alert-dialog": {
+    name: "alert-dialog",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["class-variance-authority"],
+    files:     [
+          {
+                "path": "registry/ui/alert-dialog.tsx",
+                "type": "registry:ui",
+                "target": ""
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/ui/alert-dialog");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "alert-dialog";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -61,6 +81,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/accordion-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "accordion-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "alert-dialog-demo": {
+    name: "alert-dialog-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["alert-dialog"],
+    files: [{
+      path: "components/examples/alert-dialog-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/alert-dialog-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "alert-dialog-demo";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

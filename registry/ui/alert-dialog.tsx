@@ -1,3 +1,5 @@
+"use client";
+
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui-components/react/alert-dialog";
 import type { VariantProps } from "class-variance-authority";
 import type * as React from "react";

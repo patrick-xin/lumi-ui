@@ -15,7 +15,7 @@ export function ComponentPreviewTabs({
         <TabsTrigger value="code">Code</TabsTrigger>
       </TabsList>
       <TabsContent
-        className="rounded-md relative p-10 flex items-center justify-center min-h-full h-96"
+        className="rounded-md relative p-10 flex items-center justify-center min-h-full"
         value="preview"
       >
         <GradientBorders
@@ -23,8 +23,9 @@ export function ComponentPreviewTabs({
           baseOpacity={40}
           enableHover={false}
         />
-
-        {component}
+        <div className="h-96 self-center overflow-hidden flex justify-center items-center">
+          {component}
+        </div>
       </TabsContent>
       <TabsContent value="code">{source}</TabsContent>
     </Tabs>

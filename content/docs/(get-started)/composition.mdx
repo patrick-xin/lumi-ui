@@ -1,0 +1,133 @@
+---
+title: Composition
+description: A guide to composing Lumi UI components with your own React components and elements.
+---
+
+## A Flexible Foundation
+
+In Lumi UI, composition is powered by a single, flexible concept: the **`render` prop**. This approach, inherited from Base UI, provides a clear and explicit way to customize the underlying structure of a component without sacrificing accessibility or functionality.
+
+Think of it as a designated slot where you can plug in your own custom element or React component, giving you complete control over the final rendered output.
+
+### Changing the Default Element
+
+At its core, the `render` prop lets you replace the default HTML element of a component with one of your own.
+
+Every Lumi UI component renders the most appropriate element by default (e.g., a `<button>` for a trigger, a `<div>` for a menu item). However, you might need a `Menu.Item` to act as a link. The `render` prop makes this trivial.
+
+```tsx title="components/MyNavigation.tsx"
+import { Menu } from '@/lib/components/Menu';
+import { Button } from '@/lib/components/Button';
+
+export default function MyNavigation() {
+  return (
+    <Menu.Root>
+      <Menu.Trigger render={<Button variant="outline" />}>
+        Navigate
+      </Menu.Trigger>
+      <Menu.Portal>
+        <Menu.Positioner>
+          <Menu.Popup>
+            {/* The Menu.Item now renders as an <a> tag */}
+            <Menu.Item render={<a href="/home" />}>
+              Home
+            </Menu.Item>
+            <Menu.Item render={<a href="/settings" />}>
+              Settings
+            </Menu.Item>
+          </Menu.Popup>
+        </Menu.Positioner>
+      </Menu.Portal>
+    </Menu.Root>
+  );
+}
+```
+
+## Coming from Radix UI? `asChild` vs. `render`
+
+If you're used to Radix UI, you're likely familiar with the `asChild` prop. The `render` prop in Lumi UI serves the same fundamental purpose — composing components — but with a slightly different and more explicit mental model.
+
+| Concept | Radix UI (`asChild`) | Lumi UI (`render`) |
+| :--- | :--- | :--- |
+| **Goal** | Merge props with an immediate child component. | Replace the default element with a new one. |
+| **Syntax** | The custom component is placed *inside* as a child. | The custom element is passed *to* the `render` prop. |
+
+Let's compare how you'd make a `Button` component behave like a link.
+
+#### Radix UI (`asChild`)
+
+With `asChild`, the `Button`'s props are merged onto its direct descendant.
+
+```tsx title="Radix UI Example"
+// The <Button>'s props are passed down to the <a> tag.
+<Button asChild>
+  <a href="/profile">View Profile</a>
+</Button>
+```
+
+#### Lumi UI (`render`)
+
+With `render`, you provide the element that the `Button` should render *as*. The children are passed through as normal.
+
+```tsx title="Lumi UI Example"
+// The <Button> renders an <a> tag instead of a <button>.
+<Button render={<a href="/profile" />}>
+  View Profile
+</Button>
+```
+
+The `render` prop is intentionally explicit. It makes the component's structure clear at a glance and avoids the ambiguity that can sometimes arise from implicit prop merging.
+
+## Advanced Composition
+
+The `render` prop's flexibility extends beyond just changing HTML tags.
+
+### Composing with Custom Components
+
+The most powerful use case for `render` is composing Lumi UI primitives with your own custom React components. For example, you can use a custom, styled `NextLink` component as a `Menu.Trigger`.
+
+```tsx title="components/MyComponent.tsx"
+// Assume NextLink is a custom component that wraps next/link
+import { NextLink } from '@/lib/components/NextLink';
+import { Menu } from '@/lib/components/Menu';
+
+<Menu.Trigger render={<NextLink href="/docs" />}>
+  Documentation
+</Menu.Trigger>
+```
+
+When you do this, your custom component **must honor a contract**: it needs to forward the `ref` and spread all props it receives onto the underlying DOM node. This ensures that accessibility attributes and event handlers from the Base UI primitive are correctly applied.
+
+```tsx title="components/NextLink.tsx" {5}
+import Link from 'next/link';
+import * as React from 'react';
+
+const NextLink = React.forwardRef<HTMLAnchorElement, MyLinkProps>(
+  (props, ref) => {
+    return <Link ref={ref} {...props} />;
+  },
+);
+```
+
+### Using a Render Function for State Control
+
+For maximum control, you can pass a function to the `render` prop instead of a React element. This is ideal for performance-critical scenarios or when you need to render different content based on the component's internal state.
+
+The function receives two arguments: `props` (the props to be spread) and `state` (an object containing the component's current state).
+
+For example, you could render a different icon inside a `Switch.Thumb` based on its `checked` state:
+
+```tsx title="components/MySwitch.tsx"
+import { Switch } from '@/lib/components/Switch';
+import { CheckIcon, CloseIcon } from '@/lib/icons';
+
+<Switch.Thumb
+  render={(props, state) => (
+    <span {...props}>
+      {state.checked ? <CheckIcon /> : <CloseIcon />}
+    </span>
+  )}
+/>
+```
+
+This pattern gives you direct access to the component's machinery, allowing for powerful and dynamic compositions while staying true to Lumi UI's philosophy of keeping you close to the metal.

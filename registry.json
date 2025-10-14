@@ -17,11 +17,27 @@
     {
       "name": "accordion",
       "type": "registry:ui",
-      "dependencies": ["@base-ui-components/react"],
+      "title": "Accordion",
+      "description": "A set of collapsible panels with headings.",
+      "dependencies": [],
       "registryDependencies": ["utils"],
       "files": [
         {
           "path": "registry/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "A dialog that requires user response to proceed.",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["utils", "button"],
+      "files": [
+        {
+          "path": "registry/ui/alert-dialog.tsx",
           "type": "registry:ui"
         }
       ]

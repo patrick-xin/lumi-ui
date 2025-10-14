@@ -1,0 +1,46 @@
+---
+title: Installation
+description: Lumi UI uses the `shadcn/ui` CLI for dependency management and component installation.
+---
+
+<Steps>
+  <Step title="Initialize Project & Install Base Theme">
+    Run the following command in your terminal:
+
+    ```bash
+    npx shadcn@latest init https://lumiui.dev/r/init.json
+    ```
+
+    This command initializes your project, installs the necessary dependencies, and sets up the base Lumi UI theme. It also configures a necessary CSS isolation rule (e.g., `root:isolete`) in your global styles.
+  </Step>
+
+  <Step title="Configure Lumi UI Registry">
+    Update your `component.json` file to include the Lumi UI component registry. This allows you to fetch Lumi UI components using the `npx shadcn-ui add` command.
+
+    Add the following entry to your configuration:
+
+    ```json title="component.json" {3-5}
+    {
+      // ... other configurations
+      "registries": {
+        "@lumi-ui": "https://lumiui.dev/r/{name}.json"
+      }
+      // ...
+    }
+    ```
+  </Step>
+
+  <Step title="Apply Root Layout Wrapper">
+    For the scoping and isolation (configured in Step 1) to work correctly, you must wrap your main application content in a `div` with the class name `root`.
+
+    Update your main layout file (e.g., `layout.tsx` or similar) as follows:
+
+    ```tsx title="layout.tsx" {2}
+      <body>
+        <div className="root">{children}</div>
+      </body>
+    ```
+
+    This step ensures all Lumi UI styles are correctly scoped and isolated from the rest of your application. See [portals](https://base-ui.com/react/overview/quick-start#portals) from Base UI for more details.
+  </Step>
+</Steps>

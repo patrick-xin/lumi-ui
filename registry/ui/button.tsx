@@ -1,5 +1,8 @@
+"use client";
+
+import { mergeProps } from "@base-ui-components/react/merge-props";
+import { useRender } from "@base-ui-components/react/use-render";
 import { cva, type VariantProps } from "class-variance-authority";
-import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -34,24 +37,25 @@ const buttonVariants = cva(
   },
 );
 
-interface ButtonProps
-  extends React.ComponentPropsWithoutRef<"button">,
-    VariantProps<typeof buttonVariants> {
-  render?: React.ReactElement;
-}
+export interface ButtonProps
+  extends useRender.ComponentProps<"button">,
+    VariantProps<typeof buttonVariants> {}
 
-function Button({ className, variant, size, render, ...props }: ButtonProps) {
-  const elementProps = {
-    "data-slot": "button",
-    className: cn(buttonVariants({ variant }), className),
-    ...props,
+function Button(props: ButtonProps) {
+  const { render, variant, size, className, ...otherProps } = props;
+
+  const defaultProps: useRender.ElementProps<"button"> = {
+    type: "button",
+    className: cn(buttonVariants({ variant, size, className })),
   };
 
-  if (render) {
-    return React.cloneElement(render, elementProps);
-  }
+  const element = useRender({
+    defaultTagName: "button",
+    render,
+    props: mergeProps<"button">(defaultProps, otherProps),
+  });
 
-  return <button {...elementProps} />;
+  return element;
 }
 
 export { Button, buttonVariants };

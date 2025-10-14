@@ -75,7 +75,7 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
             <button
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "h-9 rounded-l-none border-l data-[popup-open]:[&_svg]:rotate-180 max-md:[&_svg]:rotate-180 max-md:data-[popup-open]:[&_svg]:rotate-0",
+                "h-8 rounded-l-none border-l data-[popup-open]:[&_svg]:rotate-180 max-md:[&_svg]:rotate-180 max-md:data-[popup-open]:[&_svg]:rotate-0",
               )}
               {...props}
             >
@@ -85,7 +85,7 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
         />
 
         <MenuContent
-          align="start"
+          align="end"
           className="w-48 bg-background/80 backdrop-blur-md"
         >
           {Object.entries(menuItems).map(([key, value]) => (

@@ -32,7 +32,7 @@ export function CodeCollapsibleWrapper({
       >
         <Button
           variant="ghost"
-          size={"icon-lg"}
+          size={"sm"}
           className="text-muted-foreground h-7 rounded-md px-2 text-xs"
         >
           {isOpened ? "Collapse" : "Expand"}
@@ -50,7 +50,7 @@ export function CodeCollapsibleWrapper({
       </CollapsiblePanel>
       <div
         className={cn(
-          "from-code/70 to-code text-muted-foreground absolute inset-x-0 -bottom-2 flex h-20 items-center justify-center rounded-b-lg bg-gradient-to-b",
+          "from-code/70 to-code text-muted-foreground absolute inset-x-0 -bottom-2 flex h-24 items-center justify-center bg-gradient-to-b",
           isOpened && "hidden",
         )}
       >

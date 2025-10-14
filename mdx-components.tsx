@@ -6,16 +6,14 @@ import { ComponentPreview } from "@/components/docs/mdx/component-preview";
 import { ComponentSourceCode } from "@/components/docs/mdx/component-source-code";
 import { InstallationCommand } from "@/components/docs/mdx/installation-command";
 import { Step, Steps } from "@/components/docs/mdx/steps";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/docs/mdx/tables";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/ui/tabs";
+import {
+  Table,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from "./components/docs/mdx/tables";
 
 export const mdxComponents: MDXComponents = {
   p: ({ className, ...props }: React.ComponentProps<"p">) => (
@@ -232,11 +230,9 @@ export const mdxComponents: MDXComponents = {
   TabsTrigger,
   TabsContent,
   table: Table,
-  tbody: TableBody,
-  td: TableCell,
-  thead: TableHead,
-  th: TableHeader,
   tr: TableRow,
+  th: TableHeader,
+  td: TableCell,
   ComponentPreview,
   ComponentSourceCode,
   Tabs,
