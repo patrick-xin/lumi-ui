@@ -11,7 +11,7 @@ const links = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-b pt-8 pb-18 sm:pb-0">
+    <footer className="pt-8 pb-18 sm:pb-0">
       <div className="mx-auto max-w-5xl p-6">
         <div className="flex flex-wrap justify-between items-center gap-6">
           <span className="text-muted-foreground inline-flex items-center order-last gap-2 text-center text-xs md:order-first">

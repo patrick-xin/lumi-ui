@@ -16,16 +16,16 @@ export const DocsSidebarNav = ({ tree }: DocsSidebarNavProps) => {
   const pathname = usePathname();
 
   return (
-    <aside className="sticky top-(--header-height) hidden h-[calc(100dvh-var(--header-height))] w-full shrink-0 self-start md:block ">
-      <nav className="pt-12">
+    <aside className="sticky top-(--header-height) hidden h-[calc(100dvh-var(--header-height))] w-full shrink-0 self-start md:block overflow-auto no-scrollbar">
+      <nav className="py-12">
         <ul className="h-full [&>li:not(:first-child)>div]:pt-4 pb-6">
           {tree.children.map((item) => (
             <li key={item.$id}>
-              <div className="relative z-10 pb-4 text-xs text-muted-foreground">
+              <div className="relative z-10 pb-4 text-xs text-muted-foreground/70">
                 {item.name}
               </div>
               {item.type === "folder" && (
-                <ul className="space-y-3.5 border-l">
+                <ul className="space-y-3 border-l">
                   {item.children.map((child) => {
                     if (child.type !== "page") return null;
 
@@ -70,7 +70,7 @@ function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
     return (
       <span
         className={cn(
-          "relative inline-flex items-center pl-4 text-sm",
+          "relative inline-flex items-center pl-4 text-sm pointer-events-none",
           "text-foreground/30",
         )}
       >
@@ -85,7 +85,7 @@ function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
       className={cn(
         "relative text-muted-foreground inline-flex items-center pl-4 text-sm",
         "hover:text-primary transition-colors ease-linear",
-        isActive && "text-foreground",
+        isActive && "text-primary",
       )}
       href={child.url}
     >
