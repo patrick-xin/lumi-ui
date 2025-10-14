@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "@/components/logo";
+import { Logo } from "@/components/logo";
 import { siteConfig } from "@/lib/config";
 
 const links = [
@@ -16,9 +16,8 @@ export function SiteFooter() {
         <div className="flex flex-wrap justify-between items-center gap-6">
           <span className="text-muted-foreground inline-flex items-center order-last gap-2 text-center text-xs md:order-first">
             <span className="inline-flex items-center gap-1">
-              © <Logo className="size-10" />
+              <Logo className="size-10" />
             </span>
-            {new Date().getFullYear()}
           </span>
           <div className="order-first flex flex-wrap justify-center gap-6 text-sm md:order-last">
             {links.map((link) => (

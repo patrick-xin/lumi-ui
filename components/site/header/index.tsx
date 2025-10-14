@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "@/components/logo";
+import { Logo } from "@/components/logo";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { MainNav } from "@/components/site/header/main-nav";
 import { MobileNav } from "@/components/site/header/mobile-nav";

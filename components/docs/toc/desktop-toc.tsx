@@ -153,7 +153,7 @@ export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
   }
 
   return (
-    <div
+    <aside
       className={cn("relative flex flex-col gap-2 p-4 pt-0 text-sm", className)}
     >
       <p className="text-muted-foreground h-6 text-xs items-center flex gap-1.5">
@@ -241,6 +241,6 @@ export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
           })}
         </div>
       </div>
-    </div>
+    </aside>
   );
 }

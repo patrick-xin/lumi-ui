@@ -6,9 +6,12 @@ import {
   AccordionTrigger,
 } from "@/registry/ui/accordion";
 
-export function AccordionDemo() {
+export function AccordionContained() {
   return (
-    <Accordion className="mx-auto w-96 max-w-[calc(100vw-6rem)]">
+    <Accordion
+      variant="contained"
+      className="mx-auto w-96 max-w-[calc(100vw-6rem)]"
+    >
       <AccordionItem>
         <AccordionHeader>
           <AccordionTrigger>What is accordion?</AccordionTrigger>

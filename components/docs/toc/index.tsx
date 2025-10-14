@@ -11,12 +11,12 @@ export function DocsToc({ toc }: DocsTocProps) {
     <>
       {toc && toc.length > 0 && (
         <>
-          <aside className="hidden lg:block lg:sticky top-(--header-height) pt-12 h-[calc(100dvh-var(--header-height))] shrink-0">
-            <DesktopToc toc={toc} />
-          </aside>
-          <div className="lg:hidden">
-            <MobileToc items={toc} />
-          </div>
+          <DesktopToc
+            toc={toc}
+            className="hidden xl:block lg:sticky top-(--header-height) pt-12 h-[calc(100dvh-var(--header-height))] shrink-0"
+          />
+
+          <MobileToc items={toc} className="xl:hidden" />
         </>
       )}
     </>

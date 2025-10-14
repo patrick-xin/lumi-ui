@@ -2,7 +2,7 @@ import Link from "next/link";
 import { siteConfig } from "@/lib/config";
 import { Button } from "@/registry/ui/button";
 
-export default function HeroSection() {
+export function HeroSection() {
   return (
     <section className="overflow-hidden">
       <div
