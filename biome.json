@@ -35,6 +35,9 @@
       },
       "complexity": {
         "useLiteralKeys": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "warn"
       }
     },
     "domains": {
