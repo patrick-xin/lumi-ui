@@ -86,7 +86,7 @@ export default function HeroSection() {
                   size="lg"
                   variant="ghost"
                   render={
-                    <Link href="#link">
+                    <Link href="/docs/components/accordion">
                       <span className="text-nowrap">Browser components</span>
                     </Link>
                   }

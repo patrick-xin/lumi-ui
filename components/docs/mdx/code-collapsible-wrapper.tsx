@@ -56,7 +56,7 @@ export function CodeCollapsibleWrapper({
       >
         <CollapsibleTrigger
           render={
-            <Button size="icon-sm" variant="secondary">
+            <Button size="icon" variant="secondary">
               <ChevronDown />
             </Button>
           }
@@ -65,9 +65,9 @@ export function CodeCollapsibleWrapper({
 
       {isOpened && (
         <CollapsibleTrigger
-          className={cn("absolute inset-x-0 bottom-4 w-fit mx-auto")}
+          className={cn("absolute inset-x-0 bottom-4 mx-auto")}
           render={
-            <Button size="icon-sm" variant="secondary">
+            <Button size="icon" variant="secondary">
               <ChevronUp />
             </Button>
           }

@@ -2,6 +2,8 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "accordion",
   "type": "registry:ui",
+  "title": "Accordion",
+  "description": "A set of collapsible panels with headings.",
   "dependencies": [],
   "registryDependencies": [
     "utils"

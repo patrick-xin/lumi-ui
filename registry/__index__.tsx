@@ -68,6 +68,26 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "dialog": {
+    name: "dialog",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["class-variance-authority"],
+    files:     [
+          {
+                "path": "registry/ui/dialog.tsx",
+                "type": "registry:ui",
+                "target": ""
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/ui/dialog");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "accordion-demo": {
     name: "accordion-demo",
     description: "",
@@ -86,6 +106,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "alert-dialog-custom": {
+    name: "alert-dialog-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["alert-dialog"],
+    files: [{
+      path: "components/examples/alert-dialog-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/alert-dialog-custom");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "alert-dialog-custom";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "alert-dialog-demo": {
     name: "alert-dialog-demo",
     description: "",
@@ -99,6 +137,42 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/alert-dialog-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "alert-dialog-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "dialog-custom": {
+    name: "dialog-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["dialog"],
+    files: [{
+      path: "components/examples/dialog-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/dialog-custom");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-custom";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "dialog-demo": {
+    name: "dialog-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["dialog"],
+    files: [{
+      path: "components/examples/dialog-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/dialog-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-demo";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

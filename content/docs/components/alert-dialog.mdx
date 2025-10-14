@@ -37,7 +37,7 @@ links:
 ```tsx
  <AlertDialog>
   <AlertDialogTrigger/>
-  <AlertDialogContent>
+  <AlertDialogPopup>
     <AlertDialogHeader>
       <AlertDialogTitle/>
       <AlertDialogDescription/>
@@ -46,6 +46,14 @@ links:
       <AlertDialogCancel/>
       <AlertDialogAction/>
     </AlertDialogFooter>
-  </AlertDialogContent>
+  </AlertDialogPopup>
  </AlertDialog>
 ```
+
+## Usage
+
+### Customize Backdrop and Popup
+
+Apply `classNames` to `AlertDialogPopup`
+
+<ComponentPreview name="alert-dialog-custom" />

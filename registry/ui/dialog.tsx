@@ -1,8 +1,11 @@
+"use client";
+
 import { Dialog as DialogPrimitive } from "@base-ui-components/react";
+import type { VariantProps } from "class-variance-authority";
 import { XIcon } from "lucide-react";
 import type * as React from "react";
-
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/registry/ui/button";
 
 function Dialog({
   ...props
@@ -59,9 +62,7 @@ function DialogPopup({
         className={cn(
           "bg-background fixed top-[50%] left-[50%] grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
           "transition-all duration-150",
-          "data-[ending-style]:scale-90 data-[ending-style]:opacity-0 data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
-          // "data-[open]:animate-in data-[closed]:animate-out data-[closed]:fade-out-0 data-[open]:fade-in-0 data-[closed]:zoom-out-95 data-[open]:zoom-in-95",
-          // "data-[open]:animate-in data-[ending-style]:animate-out data-[ending-style]:fade-out-0 data-[starting-style]:fade-in-0 data-[closed]:zoom-out-95 data-[starting-style]:zoom-in-95",
+          "data-[starting-style]:scale-90 data-[starting-style]:opacity-0 data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
           classNames?.popup,
         )}
         {...props}
@@ -85,9 +86,19 @@ function DialogPopup({
 }
 
 function DialogClose({
+  variant,
+  size,
+  className,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Close>) {
-  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />;
+}: React.ComponentProps<typeof DialogPrimitive.Close> &
+  VariantProps<typeof buttonVariants>) {
+  return (
+    <DialogPrimitive.Close
+      className={cn(buttonVariants({ variant, size }), className)}
+      data-slot="dialog-close"
+      {...props}
+    />
+  );
 }
 
 function DialogTitle({

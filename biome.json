@@ -16,7 +16,8 @@
       "!.source",
       "!styles",
       "!registry",
-      "!public"
+      "!public",
+      "!app/og"
     ]
   },
   "formatter": {

@@ -11,7 +11,6 @@ function AlertDialog({
 }: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
   return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />;
 }
-AlertDialog.displayName = "AlertDialog";
 
 function AlertDialogTrigger({
   ...props
@@ -20,7 +19,6 @@ function AlertDialogTrigger({
     <AlertDialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />
   );
 }
-AlertDialogTrigger.displayName = "AlertDialogTrigger";
 
 function AlertDialogPortal({
   ...props
@@ -29,7 +27,6 @@ function AlertDialogPortal({
     <AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />
   );
 }
-AlertDialogPortal.displayName = "AlertDialogPortal";
 
 function AlertDialogBackdrop({
   className,
@@ -48,28 +45,34 @@ function AlertDialogBackdrop({
     />
   );
 }
-AlertDialogBackdrop.displayName = "AlertDialogBackdrop";
 
-function AlertDialogContent({
-  className,
+function AlertDialogPopup({
+  classNames,
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Popup>) {
+}: Omit<
+  React.ComponentProps<typeof AlertDialogPrimitive.Popup>,
+  "className"
+> & {
+  classNames?: {
+    backdrop?: string;
+    popup?: string;
+  };
+}) {
   return (
     <AlertDialogPortal>
-      <AlertDialogBackdrop />
+      <AlertDialogBackdrop className={classNames?.backdrop} />
       <AlertDialogPrimitive.Popup
         data-slot="alert-dialog-content"
         className={cn(
           "fixed top-[50%] left-[50%] grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg sm:max-w-lg",
           "data-[ending-style]:scale-90 data-[ending-style]:opacity-0 data-[starting-style]:scale-90 data-[starting-style]:opacity-0 duration-200",
-          className,
+          classNames?.popup,
         )}
         {...props}
       />
     </AlertDialogPortal>
   );
 }
-AlertDialogContent.displayName = "AlertDialogContent";
 
 function AlertDialogHeader({
   className,
@@ -83,7 +86,6 @@ function AlertDialogHeader({
     />
   );
 }
-AlertDialogHeader.displayName = "AlertDialogHeader";
 
 function AlertDialogFooter({
   className,
@@ -100,7 +102,6 @@ function AlertDialogFooter({
     />
   );
 }
-AlertDialogFooter.displayName = "AlertDialogFooter";
 
 function AlertDialogTitle({
   className,
@@ -114,7 +115,6 @@ function AlertDialogTitle({
     />
   );
 }
-AlertDialogTitle.displayName = "AlertDialogTitle";
 
 function AlertDialogDescription({
   className,
@@ -128,7 +128,6 @@ function AlertDialogDescription({
     />
   );
 }
-AlertDialogDescription.displayName = "AlertDialogDescription";
 
 function AlertDialogAction({
   className,
@@ -144,7 +143,6 @@ function AlertDialogAction({
     />
   );
 }
-AlertDialogAction.displayName = "AlertDialogAction";
 
 function AlertDialogCancel({
   className,
@@ -160,14 +158,13 @@ function AlertDialogCancel({
     />
   );
 }
-AlertDialogCancel.displayName = "AlertDialogCancel";
 
 export {
   AlertDialog,
   AlertDialogTrigger,
   AlertDialogPortal,
   AlertDialogBackdrop,
-  AlertDialogContent,
+  AlertDialogPopup,
   AlertDialogHeader,
   AlertDialogFooter,
   AlertDialogTitle,
