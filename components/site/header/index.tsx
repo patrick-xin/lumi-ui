@@ -3,8 +3,10 @@ import { Logo } from "@/components/logo";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { MainNav } from "@/components/site/header/main-nav";
 import { MobileNav } from "@/components/site/header/mobile-nav";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { siteConfig } from "@/lib/config";
 import { source } from "@/lib/source";
+import { GitHubLink } from "./github-link";
 
 export function SiteHeader() {
   const pageTree = source.pageTree;
@@ -24,7 +26,9 @@ export function SiteHeader() {
           </div>
 
           <div className="flex items-center gap-2 flex-shrink-0">
+            <ThemeSwitcher />
             <ModeSwitcher />
+            <GitHubLink />
           </div>
         </div>
         {/* Mobile */}
@@ -32,7 +36,11 @@ export function SiteHeader() {
           <div className="flex items-center gap-4 min-w-0">
             <MobileNav tree={pageTree} />
           </div>
-          <ModeSwitcher />
+          <div className="flex items-center gap-2">
+            <ThemeSwitcher />
+            <ModeSwitcher />
+            <GitHubLink />
+          </div>
         </div>
       </div>
     </header>
