@@ -8,6 +8,7 @@ import { InstallationCommand } from "@/components/docs/mdx/installation-command"
 import { Step, Steps } from "@/components/docs/mdx/steps";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
+import { ComponentList } from "./components/docs/mdx/component-list";
 import {
   Table,
   TableCell,
@@ -239,4 +240,5 @@ export const mdxComponents: MDXComponents = {
   ComponentPreview,
   ComponentSourceCode,
   Tabs,
+  ComponentList,
 };

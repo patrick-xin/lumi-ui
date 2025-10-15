@@ -2,17 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FOLDERS_WITH_STATUS, NON_CLICKABLE_STATUSES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import type { ComponentStatus, DocPageNode, DocRoot } from "@/types";
+import type { DocPageNode, DocRoot } from "@/types";
 
 interface DocsSidebarNavProps {
   tree: DocRoot;
 }
 
-const FOLDERS_WITH_STATUS = ["Components"];
-const NON_CLICKABLE_STATUSES: ComponentStatus[] = ["planned", "in-progress"];
-
-export const DocsSidebarNav = ({ tree }: DocsSidebarNavProps) => {
+export const DocsSidebar = ({ tree }: DocsSidebarNavProps) => {
   const pathname = usePathname();
 
   return (
@@ -75,7 +73,6 @@ function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
         )}
       >
         {child.name}
-        <StatusBadge status={status} />
       </span>
     );
   }
@@ -90,24 +87,9 @@ function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
       href={child.url}
     >
       <span>{child.name}</span>
-      {shouldShowStatus && status && <StatusBadge status={status} />}
-    </Link>
-  );
-}
-
-function StatusBadge({ status }: { status?: ComponentStatus }) {
-  if (!status) return null;
-
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center ml-2 text-[10px] px-2 py-0.5 rounded-md",
-        // status === "planned" && "border-amber-800 border text-amber-600",
-        //status === "new" && "border-green-800 text-green-600",
-        // status === "in-progress" && "border-pink-600 border text-pink-500",
+      {shouldShowStatus && status && status === "new" && (
+        <span className="inline-block size-2 mt-px rounded-full bg-primary ml-4" />
       )}
-    >
-      {/* {status} */}
-    </span>
+    </Link>
   );
 }
