@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import * as React from "react";
 import {
   Collapsible,
@@ -62,17 +62,6 @@ export function CodeCollapsibleWrapper({
           }
         />
       </div>
-
-      {isOpened && (
-        <CollapsibleTrigger
-          className={cn("absolute inset-x-0 bottom-4 mx-auto")}
-          render={
-            <Button size="icon" variant="secondary">
-              <ChevronUp />
-            </Button>
-          }
-        />
-      )}
     </Collapsible>
   );
 }

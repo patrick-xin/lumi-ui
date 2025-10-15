@@ -12,8 +12,8 @@ const tabsListVariants = cva(
     variants: {
       variant: {
         pill: "rounded-md bg-muted",
-        underline: "border-b bg-transparent p-0 gap-2",
-        ghost: "bg-transparent p-0",
+        underline: "border-b bg-transparent gap-4 p-0",
+        ghost: "bg-transparent gap-3",
         solid: "bg-card rounded-md",
       },
     },
@@ -29,11 +29,11 @@ const tabIndicatorVariants = cva(
     variants: {
       variant: {
         pill: "top-1/2 -translate-y-1/2 h-[var(--active-tab-height)] rounded-md border border-ring/70 bg-input/70 shadow-sm dark:border-input",
-        underline: "bottom-0 h-0.5 bg-primary",
+        underline: "bottom-0 h-0.5 bg-foreground",
         ghost:
           "top-1/2 -translate-y-1/2 h-[var(--active-tab-height)] bg-transparent",
         solid:
-          "top-1/2 -translate-y-1/2 h-[var(--active-tab-height)] rounded-md bg-input/70 shadow-sm",
+          "hidden pointer-events-none h-[var(--active-tab-height)] w-[var(--active-tab-width)]",
       },
     },
     defaultVariants: {
@@ -60,7 +60,7 @@ function useTabsContext() {
 
 function Tabs({
   className,
-  variant = "solid",
+  variant = "pill",
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Root> &
   VariantProps<typeof tabsListVariants>) {
@@ -94,21 +94,24 @@ function TabsList({
   );
 }
 
-function TabsTrigger({
+function TabsTab({
   className,
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Tab>) {
+  const { variant } = useTabsContext();
   return (
     <TabsPrimitive.Tab
-      data-slot="tabs-trigger"
+      data-slot="tabs-tab"
       className={cn(
-        "relative z-[1] inline-flex flex-1 items-center justify-center gap-1.5",
-        "rounded-md px-2 py-1 text-sm font-medium text-nowrap whitespace-nowrap",
-        "text-muted-foreground outline-none transition-colors",
+        "relative z-[1] inline-flex flex-1 items-center justify-center gap-1.5 outline-none",
+        "rounded-md px-2 py-1",
+        "text-sm font-medium text-nowrap whitespace-nowrap text-muted-foreground  hover:text-foreground",
+        "transition-colors duration-200 ease-in",
         "focus-visible:ring-[3px] focus-visible:ring-ring/50",
         "data-[selected]:text-foreground",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        variant === "solid" && "hover:bg-muted data-[selected]:bg-input/70",
         className,
       )}
       {...props}
@@ -131,17 +134,17 @@ function TabIndicator({
   );
 }
 
-function TabsContent({
+function TabsPanel({
   className,
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Panel>) {
   return (
     <TabsPrimitive.Panel
-      data-slot="tabs-content"
+      data-slot="tabs-panel"
       className={cn("flex-1 outline-none", className)}
       {...props}
     />
   );
 }
 
-export { Tabs, TabsList, TabsTrigger, TabsContent };
+export { Tabs, TabsList, TabsTab, TabsPanel };

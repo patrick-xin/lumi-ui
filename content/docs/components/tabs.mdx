@@ -1,10 +1,55 @@
 ---
 title: Tabs
 description: A component for toggling between related panels on the same page.
-status: in-progress
 links:
   doc: https://base-ui.com/react/components/tabs
   api: https://base-ui.com/react/components/tabs#api-reference
 ---
 
-In progress
+<ComponentPreview name="tabs-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/tabs
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="tabs" title="tabs.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## Anatomy
+
+```tsx
+ <Tabs>
+  <TabsList>
+    <TabsTab/>
+  </TabsList>
+  <TabsPanel/>
+ </Tabs>
+```
+
+## Variants
+
+### Underline
+<ComponentPreview name="tabs-underline" />
+
+### Ghost
+<ComponentPreview name="tabs-ghost" />
+
+### Solid
+<ComponentPreview name="tabs-solid" />

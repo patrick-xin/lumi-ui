@@ -3,7 +3,7 @@
 import * as React from "react";
 import { CopyButton } from "@/components/docs/copy-button";
 import { useInstallationConfigStore } from "@/hooks/use-config";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/registry/ui/tabs";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
 interface InstallationCommandClientProps {
   npm: React.ReactNode;
@@ -55,9 +55,9 @@ export function InstallationCommandClient({
           {Object.entries(tabs).map(([key, data]) => {
             if (!data.highlighted) return null;
             return (
-              <TabsTrigger key={key} value={key}>
+              <TabsTab key={key} value={key}>
                 {key}
-              </TabsTrigger>
+              </TabsTab>
             );
           })}
         </div>
@@ -67,12 +67,12 @@ export function InstallationCommandClient({
         if (!data.highlighted) return null;
 
         return (
-          <TabsContent key={manager} value={manager}>
+          <TabsPanel key={manager} value={manager}>
             {data.highlighted}
             {data.code && (
               <CopyButton className="absolute right-2 top-2" code={data.code} />
             )}
-          </TabsContent>
+          </TabsPanel>
         );
       })}
     </Tabs>
