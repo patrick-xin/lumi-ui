@@ -57,7 +57,7 @@ links:
 
 ## Migration from shadcn/ui
 
-Migrating your `Tabs` component from shadcn/ui is straightforward. Our component follows the naming conventions from its primitive library - **Base UI**, just as shadcn/ui follows the conventions from Radix UI. This results in two key differences.
+Migrating your `Tabs` component from shadcn/ui is straightforward. Our component's naming convention is based on its primitive library, Base UI, just as shadcn/ui follows the conventions of Radix UI.
 
 ### Component Naming
 
@@ -70,7 +70,7 @@ The names for the **tab trigger** and **content panel** have been updated to be 
 
 ### Styling with Variants
 
-While shadcn/ui provides a single, polished style that you customize with className, our component comes with a built-in variant system. You can get the default "pill" look (similar to shadcn/ui's) out-of-the-box, or choose another variant like underline with a single prop.
+While shadcn/ui provides a single, polished style that you customize with className, our component comes with a built-in variant system. You can get the default `pill` look (similar to shadcn/ui's) out-of-the-box, or choose another variant like `underline` with a single prop.
 
 
 | Feature | lumi/ui | shadcn/ui
@@ -145,8 +145,7 @@ Here's how to convert a standard shadcn/ui Tabs component to ours.
   </TabsPanel>
 </Tabs>
 
-
-If you prefer to keep using shadcn/ui naming convention and minimal style(without `variants`), copy code below:
+If you prefer to keep using the shadcn/ui naming convention and minimal style (without `variants`), copy the code below:
 
 ```tsx title="tabs.tsx"
 "use client";

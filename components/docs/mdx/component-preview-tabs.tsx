@@ -15,7 +15,7 @@ export function ComponentPreviewTabs({
         <TabsTab value="code">Code</TabsTab>
       </TabsList>
       <TabsPanel
-        className="relative flex items-center justify-center h-[450px]"
+        className="relative flex items-center justify-center h-[420px]"
         value="preview"
       >
         <GradientBorders
@@ -23,12 +23,12 @@ export function ComponentPreviewTabs({
           baseOpacity={40}
           enableHover={false}
         />
-        <div className="w-full h-[450px] flex justify-center items-center">
+        <div className="w-full h-[420px] flex justify-center items-center p-10 has-[[data-slot='accordion']]:items-start">
           {component}
         </div>
       </TabsPanel>
-      <TabsPanel value="code" className="relative h-[450px]">
-        <div className="*:[figure]:h-[450px] *:[figure]:overflow-scroll *:[figure]:no-scrollbar">
+      <TabsPanel value="code" className="relative h-[420px]">
+        <div className="*:[figure]:h-[420px] *:[figure]:overflow-scroll *:[figure]:no-scrollbar">
           {source}
         </div>
       </TabsPanel>

@@ -47,4 +47,227 @@ links:
 
 ## Variants
 
+### Underline
+<ComponentPreview name="accordion-demo" />
+
+### Contained
 <ComponentPreview name="accordion-contained" />
+
+## Migration from shadcn/ui
+
+Migrating your Accordion component from shadcn/ui is straightforward. The main differences stem from our component's use of Base UI as its primitive library, whereas shadcn/ui is built upon Radix UI. This leads to two key distinctions in API and styling.
+
+### Component Naming & Structure
+
+Our component introduces an explicit AccordionHeader for better structural clarity and renames the content panel to be more descriptive.
+
+| shadcn/ui | lumi/ui | Change
+| :--- | :--- | :--- |
+| `AccordionTrigger`  | `AccordionHeader` + `AccordionTrigger` | `AccordionTrigger` is now wrapped by `AccordionHeader`
+| `AccordionContent`  | `AccordionPanel` | Renamed for clarity
+
+### Controlling Behavior: Single vs. Multiple
+
+Another key difference from shadcn/ui is how the accordion's behavior is managed. In shadcn/ui, this is controlled with the `type` prop. You would set it to "single" to allow only one panel to be open at a time. Our component uses a boolean `multiple` prop instead. Setting `multiple={false}` achieves the same "single" behavior.
+
+**Important:** The default behavior has changed. The lumi/ui Accordion defaults to allowing multiple panels to be open (`multiple={true}`). To replicate the default shadcn/ui behavior of only allowing one open panel, you must explicitly add the `multiple={false}` prop.
+
+### Styling with Variants
+
+While shadcn/ui offers a single style that you customize with className, our component includes a built-in variant system. You can switch between styles like underline (the default, similar to shadcn/ui) and contained with a single prop on the root Accordion component.
+
+| Feature | lumi/ui | shadcn/ui
+| :--- | :--- | :--- |
+| **Available Variants**  | `underline`, `contained` | Default `underline` style only
+
+### Migration Example
+
+Here's how to convert a standard shadcn/ui Accordion component to ours. The primary changes are wrapping `AccordionTrigger` with `AccordionHeader` and renaming `AccordionContent` to `AccordionPanel`.
+
+
+<Tabs defaultValue="shadcn/ui">
+  <TabsList>
+    <TabsTab value="shadcn/ui">shadcn/ui</TabsTab>
+    <TabsTab value="lumi/ui">lumi/ui</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="shadcn/ui">
+    ```tsx title="demo-accordion.tsx"
+    import {
+      Accordion,
+      AccordionContent,
+      AccordionItem,
+      AccordionTrigger,
+    } from "@/components/ui/accordion"
+
+    function Demo() {
+      return (
+        <Accordion type="single" collapsible>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      );
+    }
+  ```
+  </TabsPanel>
+
+  <TabsPanel value="lumi/ui">
+  ```tsx title="demo-tabs.tsx" showLineNumbers {4,6,12,15,17,18,20}
+  import {
+    Accordion,
+    AccordionItem,
+    AccordionHeader,   // New import
+    AccordionTrigger,
+    AccordionPanel,    // Renamed from AccordionContent
+  } from "@/registry/ui/accordion";
+
+  function Demo() {
+    return (
+      <Accordion 
+        multiple // Same as type="single"
+      > 
+        <AccordionItem>
+          <AccordionHeader>
+            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          </AccordionHeader>
+          <AccordionPanel>
+            Yes. It adheres to the WAI-ARIA design pattern.
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+    );
+  }
+  ```
+  </TabsPanel>
+</Tabs>
+
+If you prefer to keep using the shadcn/ui naming convention and minimal style (without `variants`), copy the code below:
+
+```tsx
+"use client";
+
+import { Accordion as AccordionPrimitive } from "@base-ui-components/react/accordion";
+import { ChevronDownIcon } from "lucide-react";
+import type * as React from "react";
+
+import { cn } from "@/lib/utils";
+
+function Accordion({
+  ...props
+}: React.ComponentProps<typeof AccordionPrimitive.Root>) {
+  return <AccordionPrimitive.Root data-slot="accordion" {...props} />;
+}
+
+function AccordionItem({
+  className,
+  ...props
+}: React.ComponentProps<typeof AccordionPrimitive.Item>) {
+  return (
+    <AccordionPrimitive.Item
+      data-slot="accordion-item"
+      className={cn("border-b last:border-b-0", className)}
+      {...props}
+    />
+  );
+}
+
+function AccordionTrigger({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
+  return (
+    <AccordionPrimitive.Header data-slot="accordion-header" className="flex">
+      <AccordionPrimitive.Trigger
+        data-slot="accordion-trigger"
+        className={cn(
+          "flex flex-1 items-start justify-between gap-4 text-sm text-left font-medium transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 py-3 hover:underline [&[data-panel-open]>svg]:rotate-180",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+        <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200" />
+      </AccordionPrimitive.Trigger>
+    </AccordionPrimitive.Header>
+  );
+}
+
+function AccordionContent({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof AccordionPrimitive.Panel>) {
+  return (
+    <AccordionPrimitive.Panel
+      data-slot="accordion-content"
+      className={cn(
+        "h-[var(--accordion-panel-height)] overflow-hidden text-sm transition-[height] ease-out",
+        "data-[ending-style]:h-0 data-[starting-style]:h-0",
+      )}
+      {...props}
+    >
+      <div className={cn("pt-0 pb-4", className)}>{children}</div>
+    </AccordionPrimitive.Panel>
+  );
+}
+
+export { Accordion, AccordionItem, AccordionContent, AccordionTrigger };
+```
+
+
+## Usage
+
+To have an accordion item open by default, you need to assign a unique value to the `AccordionItem` and then pass that value inside an array to the `defaultValue` prop on the root Accordion component.
+
+```tsx title="demo.tsx" {11}
+import {
+  Accordion,
+  AccordionItem,
+  AccordionHeader,
+  AccordionTrigger,
+  AccordionPanel,
+} from "@/components/ui/accordion";
+
+function Demo() {
+  return (
+    <Accordion defaultValue={["item-2"]}>
+      <AccordionItem value="item-1">
+        <AccordionHeader>
+          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        </AccordionHeader>
+        <AccordionPanel>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionHeader>
+          <AccordionTrigger>Is it styled?</AccordionTrigger>
+        </AccordionHeader>
+        <AccordionPanel>
+          Yes. It comes with two variants that can be easily customized.
+        </AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionHeader>
+          <AccordionTrigger>Is it animated?</AccordionTrigger>
+        </AccordionHeader>
+        <AccordionPanel>
+          Yes. It's animated by default, but you can disable it if you prefer.
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+```
+To have multiple items open by default, ensure the `multiple` prop is set to true (which it is by default) and include each item's value in the defaultValue array.
+
+```tsx
+<Accordion defaultValue={["item-2", "item-3"]}>
+  {/* ...items */}
+</Accordion>
+```

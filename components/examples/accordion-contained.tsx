@@ -8,10 +8,7 @@ import {
 
 export function AccordionContained() {
   return (
-    <Accordion
-      variant="contained"
-      className="mx-auto w-96 max-w-[calc(100vw-6rem)]"
-    >
+    <Accordion variant="contained" className="mx-auto w-96">
       <AccordionItem>
         <AccordionHeader>
           <AccordionTrigger>What is accordion?</AccordionTrigger>

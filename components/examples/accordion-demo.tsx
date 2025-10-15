@@ -8,7 +8,7 @@ import {
 
 export function AccordionDemo() {
   return (
-    <Accordion className="mx-auto w-96 max-w-[calc(100vw-6rem)]">
+    <Accordion multiple className="mx-auto w-96">
       <AccordionItem>
         <AccordionHeader>
           <AccordionTrigger>What is accordion?</AccordionTrigger>
