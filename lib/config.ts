@@ -12,7 +12,7 @@ export const siteConfig = {
       label: "Docs",
     },
     {
-      href: "/docs/components/accordion",
+      href: "/docs/components",
       label: "Components",
     },
   ],
