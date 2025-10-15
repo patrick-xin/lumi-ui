@@ -134,7 +134,10 @@ export const mdxComponents: MDXComponents = {
   figure: ({ className, ...props }: React.ComponentProps<"figure">) => {
     return (
       <figure
-        className={cn("[&:not(:first-child)]:mt-4", className)}
+        className={cn(
+          "[&:not(:first-child)]:mt-4 max-h-[550px] overflow-y-auto no-scrollbar",
+          className,
+        )}
         {...props}
       />
     );
