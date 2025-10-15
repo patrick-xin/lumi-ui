@@ -4,7 +4,7 @@ import { Button } from "@/registry/ui/button";
 
 export function HeroSection() {
   return (
-    <section className="overflow-hidden">
+    <div className="overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 isolate hidden contain-strict lg:block"
@@ -96,6 +96,6 @@ export function HeroSection() {
           </div>
         </div>
       </section>
-    </section>
+    </div>
   );
 }

@@ -3,40 +3,48 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useTheme } from "next-themes";
 import * as React from "react";
-import { useMetaColor } from "@/hooks/use-meta-color";
 import { useMounted } from "@/hooks/use-mounted";
 import { Button } from "@/registry/ui/button";
 
 export function ModeSwitcher() {
   const { setTheme, resolvedTheme } = useTheme();
-  const { setMetaColor, metaColor } = useMetaColor();
   const mounted = useMounted();
 
-  React.useEffect(() => {
-    setMetaColor(metaColor);
-  }, [metaColor, setMetaColor]);
+  const toggleMode = React.useCallback(() => {
+    if (!resolvedTheme) return;
 
-  const toggleTheme = React.useCallback(() => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    const parts = resolvedTheme.split("-");
+
+    if (parts.length === 2) {
+      const [themeSet, currentMode] = parts;
+      const newMode = currentMode === "dark" ? "light" : "dark";
+      setTheme(`${themeSet}-${newMode}`);
+    } else {
+      setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    }
   }, [resolvedTheme, setTheme]);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return null;
+  }
+
+  const currentMode = resolvedTheme?.includes("dark") ? "dark" : "light";
 
   return (
     <Button
       variant="ghost"
       size="icon"
       className="group/toggle extend-touch-target size-8"
-      onClick={toggleTheme}
+      onClick={toggleMode}
       title="Toggle theme"
     >
       <AnimatePresence mode="wait" initial={false}>
-        {resolvedTheme === "dark" ? (
+        {currentMode === "dark" ? (
           <motion.svg
             key="moon"
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -56,8 +64,8 @@ export function ModeSwitcher() {
           <motion.svg
             key="sun"
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

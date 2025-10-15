@@ -8,11 +8,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 import { Dialog, DialogPopup, DialogTrigger } from "@/registry/ui/dialog";
 
-const TOP_LEVEL_SECTIONS = [
-  { name: "Get Started", title: "", href: "/installation" },
-  { name: "Components", title: "Components", href: "/docs/components" },
-];
-
 export function MobileNav({
   tree,
   className,
@@ -50,7 +45,6 @@ export function MobileNav({
         }}
       >
         <nav className="flex h-full flex-col gap-12 overflow-y-auto p-6 no-scrollbar">
-          <TopLevelNavigation onNavigate={() => setOpen(false)} />
           <TreeNavigation tree={tree} onNavigate={() => setOpen(false)} />
         </nav>
       </DialogPopup>
@@ -76,18 +70,6 @@ function MenuIcon({ open }: { open: boolean }) {
         />
       </div>
       <span className="sr-only">Toggle Menu</span>
-    </div>
-  );
-}
-
-function TopLevelNavigation({ onNavigate }: { onNavigate: () => void }) {
-  return (
-    <div className="flex flex-col gap-3">
-      {TOP_LEVEL_SECTIONS.map((item) => (
-        <MobileLink key={item.name} href={item.href} onOpenChange={onNavigate}>
-          {item.name}
-        </MobileLink>
-      ))}
     </div>
   );
 }

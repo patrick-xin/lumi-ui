@@ -26,14 +26,16 @@ function MenuPositioner({
 }
 
 function MenuPopup({
+  className,
   ...props
 }: React.ComponentProps<typeof MenuPrimitive.Popup>) {
   return (
     <MenuPrimitive.Popup
       className={cn(
-        "bg-popover text-popover-foreground min-w-[8rem] overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md",
+        "bg-popover text-popover-foreground min-w-24 overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md",
         "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
         "data-[ending-style]:scale-90 data-[ending-style]:opacity-0 data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
+        className,
       )}
       data-slot="menu-popup"
       {...props}
@@ -55,7 +57,7 @@ function MenuContent({
         className="max-h-[var(--available-height)]"
         sideOffset={sideOffset}
       >
-        <MenuPopup {...props} />
+        <MenuPopup {...props} className={className} />
       </MenuPrimitive.Positioner>
     </MenuPrimitive.Portal>
   );
