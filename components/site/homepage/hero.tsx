@@ -82,11 +82,10 @@ export function HeroSection() {
                   }
                 />
                 <Button
-                  key={2}
                   size="lg"
                   variant="ghost"
                   render={
-                    <Link href="/docs/components/accordion">
+                    <Link href="/docs/components">
                       <span className="text-nowrap">Browser components</span>
                     </Link>
                   }
