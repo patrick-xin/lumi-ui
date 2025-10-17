@@ -11,9 +11,9 @@ import { Input } from "@/registry/ui/input";
 import { Label } from "@/registry/ui/label";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
-export function TabsDemo() {
+export function TabsVerticalDemo() {
   return (
-    <Tabs defaultValue="account" className="w-full">
+    <Tabs defaultValue="account" orientation="vertical" className="w-full">
       <TabsList>
         <TabsTab value="account">Account</TabsTab>
         <TabsTab value="password">Password</TabsTab>

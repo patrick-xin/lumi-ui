@@ -11,12 +11,18 @@ import { Input } from "@/registry/ui/input";
 import { Label } from "@/registry/ui/label";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
-export function TabsDemo() {
+export function TabsSolidVerticalDemo() {
   return (
-    <Tabs defaultValue="account" className="w-full">
+    <Tabs
+      defaultValue="account"
+      variant="ghost"
+      orientation="vertical"
+      className="w-full gap-4"
+    >
       <TabsList>
         <TabsTab value="account">Account</TabsTab>
         <TabsTab value="password">Password</TabsTab>
+        <TabsTab value="contact">Contact us</TabsTab>
       </TabsList>
       <TabsPanel value="account">
         <Card>
@@ -63,6 +69,30 @@ export function TabsDemo() {
           </CardContent>
           <CardFooter>
             <Button>Save password</Button>
+          </CardFooter>
+        </Card>
+      </TabsPanel>
+      <TabsPanel value="contact">
+        <Card>
+          <CardHeader>
+            <CardTitle>We're here to help!</CardTitle>
+            <CardDescription>Submit your request</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-6">
+            <div className="grid gap-3">
+              <Label htmlFor="tabs-demo-subject">Subject</Label>
+              <Input id="tabs-demo-subject" placeholder="e.g. Billing issue" />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="tabs-demo-message">Message</Label>
+              <Input
+                id="tabs-demo-message"
+                placeholder="Please describe your issue in detail."
+              />
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button>Submit</Button>
           </CardFooter>
         </Card>
       </TabsPanel>

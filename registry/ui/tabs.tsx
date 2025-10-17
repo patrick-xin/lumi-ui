@@ -7,14 +7,16 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const tabsListVariants = cva(
-  "relative z-0 h-9 inline-flex gap-1 w-fit items-center justify-center text-muted-foreground p-[3px]",
+  "relative p-[3px] z-0 flex w-fit h-full items-center justify-center text-muted-foreground data-[orientation=vertical]:flex-col",
   {
     variants: {
       variant: {
-        pill: "rounded-md bg-muted",
-        underline: "border-b bg-transparent gap-4 p-0",
-        ghost: "bg-transparent gap-3",
-        solid: "bg-card rounded-md",
+        pill: "gap-1 rounded-md bg-muted data-[orientation=vertical]:py-1.5 data-[orientation=vertical]:px-1",
+        underline:
+          "gap-4 p-0 bg-transparent border-b data-[orientation=vertical]:border-b-0 data-[orientation=vertical]:border-l",
+        ghost: "gap-3 bg-transparent",
+        solid:
+          "gap-1 rounded-md bg-card data-[orientation=vertical]:gap-1.5 data-[orientation=vertical]:px-2 data-[orientation=vertical]:py-1.5",
       },
     },
     defaultVariants: {
@@ -24,16 +26,17 @@ const tabsListVariants = cva(
 );
 
 const tabIndicatorVariants = cva(
-  "absolute left-0 z-0 w-[var(--active-tab-width)] translate-x-[var(--active-tab-left)] transition-all duration-300 ease-in-out",
+  "absolute z-0 w-(--active-tab-width) h-(--active-tab-height) transition-all duration-300 ease-in-out translate-x-(--active-tab-left) -translate-y-(--active-tab-bottom)",
   {
     variants: {
       variant: {
-        pill: "top-1/2 -translate-y-1/2 h-[var(--active-tab-height)] rounded-md border border-ring/70 bg-input/70 shadow-sm dark:border-input",
-        underline: "bottom-0 h-0.5 bg-foreground",
+        pill: "rounded-md border border-ring/70 bg-input/70 shadow-sm dark:border-input top-1/2 -translate-y-1/2 left-0 data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
+        underline:
+          "bg-foreground bottom-0 left-0 h-0.5 translate-x-(--active-tab-left) data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:left-0 data-[orientation=vertical]:h-(--active-tab-height) data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:translate-x-0 data-[orientation=vertical]:top-(--active-tab-top) data-[orientation=vertical]:translate-y-0 data-[orientation=vertical]:-start-[calc(--spacing(1)-0.5px)]",
         ghost:
-          "top-1/2 -translate-y-1/2 h-[var(--active-tab-height)] bg-transparent",
+          "bg-transparent top-1/2 -translate-y-1/2 left-0 translate-x-(--active-tab-left) data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
         solid:
-          "hidden pointer-events-none h-[var(--active-tab-height)] w-[var(--active-tab-width)]",
+          "hidden pointer-events-none w-0 h-0 translate-x-0 -translate-y-0",
       },
     },
     defaultVariants: {
@@ -61,14 +64,21 @@ function useTabsContext() {
 function Tabs({
   className,
   variant = "pill",
+  orientation = "horizontal",
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Root> &
-  VariantProps<typeof tabsListVariants>) {
+  VariantProps<typeof tabsListVariants> & {
+    orientation?: "horizontal" | "vertical";
+  }) {
   return (
     <TabsContext.Provider value={{ variant }}>
       <TabsPrimitive.Root
         data-slot="tabs"
-        className={cn("flex flex-col gap-2", className)}
+        orientation={orientation}
+        className={cn(
+          "flex gap-2 flex-col data-[orientation=vertical]:flex-row",
+          className,
+        )}
         {...props}
       />
     </TabsContext.Provider>
@@ -85,7 +95,11 @@ function TabsList({
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
-      className={cn(tabsListVariants({ variant }), className)}
+      className={cn(
+        tabsListVariants({ variant }),
+        "data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col",
+        className,
+      )}
       {...props}
     >
       {children}
@@ -99,18 +113,20 @@ function TabsTab({
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Tab>) {
   const { variant } = useTabsContext();
+
   return (
     <TabsPrimitive.Tab
       data-slot="tabs-tab"
       className={cn(
-        "relative z-[1] inline-flex flex-1 items-center justify-center gap-1.5 outline-none",
+        "relative z-[1] inline-flex items-center justify-center gap-1.5 outline-none",
         "rounded-md px-2 py-1",
-        "text-sm font-medium text-nowrap whitespace-nowrap text-muted-foreground  hover:text-foreground",
+        "text-sm font-medium text-nowrap whitespace-nowrap text-muted-foreground hover:text-foreground",
         "transition-colors duration-200 ease-in",
         "focus-visible:ring-[3px] focus-visible:ring-ring/50",
         "data-[selected]:text-foreground",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "data-[orientation=horizontal]:flex-1 data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
         variant === "solid" && "hover:bg-muted data-[selected]:bg-input/70",
         className,
       )}

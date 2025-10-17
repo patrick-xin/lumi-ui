@@ -148,6 +148,26 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "popover": {
+    name: "popover",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    files:     [
+          {
+                "path": "registry/ui/popover.tsx",
+                "type": "registry:ui",
+                "target": ""
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/ui/popover");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "accordion-contained": {
     name: "accordion-contained",
     description: "",
@@ -256,6 +276,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "combobox-demo": {
+    name: "combobox-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [{
+      path: "components/examples/combobox-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/combobox-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "dialog-custom": {
     name: "dialog-custom",
     description: "",
@@ -287,6 +325,42 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/dialog-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "dialog-from-menu": {
+    name: "dialog-from-menu",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["dialog"],
+    files: [{
+      path: "components/examples/dialog-from-menu.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/dialog-from-menu");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-from-menu";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-demo": {
+    name: "popover-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover"],
+    files: [{
+      path: "components/examples/popover-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/popover-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover-demo";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -328,6 +402,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "tabs-demo-vertical": {
+    name: "tabs-demo-vertical",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs"],
+    files: [{
+      path: "components/examples/tabs-demo-vertical.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/tabs-demo-vertical");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-demo-vertical";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "tabs-demo": {
     name: "tabs-demo",
     description: "",
@@ -341,6 +433,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/tabs-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "tabs-ghost-vertical": {
+    name: "tabs-ghost-vertical",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs"],
+    files: [{
+      path: "components/examples/tabs-ghost-vertical.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/tabs-ghost-vertical");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-ghost-vertical";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -382,6 +492,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "tabs-solid-vertical": {
+    name: "tabs-solid-vertical",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs"],
+    files: [{
+      path: "components/examples/tabs-solid-vertical.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/tabs-solid-vertical");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-solid-vertical";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "tabs-solid": {
     name: "tabs-solid",
     description: "",
@@ -395,6 +523,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/tabs-solid");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-solid";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "tabs-underline-vertical": {
+    name: "tabs-underline-vertical",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tabs"],
+    files: [{
+      path: "components/examples/tabs-underline-vertical.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/tabs-underline-vertical");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-underline-vertical";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

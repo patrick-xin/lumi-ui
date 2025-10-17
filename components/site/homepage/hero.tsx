@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { siteConfig } from "@/lib/config";
 import { Button } from "@/registry/ui/button";
 
 export function HeroSection() {
@@ -65,14 +64,36 @@ export function HeroSection() {
                     }}
                   />
                 </div>
-                <h1 className="text-balance text-5xl font-medium md:text-6xl relative">
-                  Illuminate your interface.
+                <h1 className="text-balance tracking-tight text-5xl font-bold md:text-6xl relative">
+                  Illuminate your interface
                 </h1>
               </div>
-              <p className="mt-8 max-w-2xl text-pretty text-lg text-muted-foreground mx-auto">
-                {siteConfig.description}
+              <p className="mt-8 max-w-2xl text-pretty text-lg text-muted-foreground mx-auto xl:mt-12">
+                Composable React components powered by{" "}
+                <span>
+                  <a
+                    href="https://base-ui.com/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary underline"
+                  >
+                    Base UI
+                  </a>
+                </span>{" "}
+                and{" "}
+                <span>
+                  <a
+                    href="https://tailwindcss.com/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary underline"
+                  >
+                    Tailwind CSS
+                  </a>
+                </span>{" "}
+                — built for clarity, speed, and total code ownership.
               </p>
-              <div className="mt-12 flex items-center gap-4 mx-auto">
+              <div className="mt-12 flex items-center gap-4 mx-auto xl:mt-16">
                 <Button
                   size="lg"
                   render={

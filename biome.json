@@ -38,6 +38,9 @@
       },
       "style": {
         "noNonNullAssertion": "warn"
+      },
+      "a11y": {
+        "noSvgWithoutTitle": "warn"
       }
     },
     "domains": {

@@ -156,7 +156,7 @@ export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
     <aside
       className={cn("relative flex flex-col gap-2 p-4 pt-0 text-sm", className)}
     >
-      <p className="text-muted-foreground h-6 text-xs items-center flex gap-1.5">
+      <p className="text-muted-foreground h-6 text-xs items-center flex gap-1.5 mb-2">
         <span className="inline-block">
           <TextAlignStartIcon className="size-4 text-muted-foreground" />
         </span>

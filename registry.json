@@ -97,6 +97,20 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "An accessible popup anchored to a button.",
+      "dependencies": [""],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

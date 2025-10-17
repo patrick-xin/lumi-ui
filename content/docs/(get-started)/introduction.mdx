@@ -1,39 +1,58 @@
 ---
 title: Introduction
-description: Composable React components powered by Base UI and Tailwind CSS — built for clarity, speed, and total code ownership.
+description: Lumi UI is a composable React component system built to make customization effortless — powered by Base UI and Tailwind CSS.
 ---
 
-Lumi UI is an open-source React component system that merges the accessibility and structure of Base UI  with the design freedom of Tailwind CSS.
+Modern UI libraries have a tradeoff problem.
 
-It's inspired by shadcn/ui's philosophy — copy, not install — but reimagined for modern teams who want to stay close to the metal, not trapped in frameworks.
+You either get **beautiful but rigid frameworks** that lock you into someone else’s design language — or **barebones primitives** that demand hours of setup just to look decent.
 
-Think of Lumi UI as your design starter kit:
+**Lumi UI** exists to end that tradeoff.
 
-- Unstyled foundation: Base UI primitives handle accessibility and interaction.
-- Tailwind styling: Use your own design tokens, colors, and spacing.
-- Design layer: Elegant defaults that look polished out-of-the-box but stay fully editable.
-- Own your code: No runtime dependency. Every component is yours.
+Built on [Base UI](https://base-ui.com) and styled with Tailwind CSS, Lumi gives you **complete control** over your design system — without losing accessibility, structure, or speed.
 
+---
+
+## Why Lumi?
+
+Because “customizable” shouldn’t mean “start from scratch.”
+
+Lumi bridges the gap between *unstyled primitives* and *fully themed systems*:
+- **Composed, not abstracted** – Every component is plain React, easy to read, and easy to change.  
+- **Styled your way** – Lumi ships polished defaults, but everything runs through your Tailwind tokens.  
+- **Grounded in accessibility** – Base UI handles ARIA, focus, keyboard, and motion for you.  
+- **No lock-in** – Copy the code, tweak it, ship it. You own every line.  
+
+Lumi isn’t a framework. It’s a **foundation for creative UI systems** — a way to build interfaces that feel consistent, yet unmistakably yours.
+
+---
 
 ## Philosophy
 
-### Own Your Code
-Every component is yours to modify. No need to fork or eject – just edit the files directly.
+### 1. Code Ownership
+Install nothing. Copy everything.  
+You get the source — clean, typed, and modifiable.  
+No runtime dependency, no black box.
 
-### Consistency
-All components follow the same patterns:
-- Predictable prop names
-- Consistent styling approach
-- Unified TypeScript types
-- Standard composition patterns
+### 2. Composable, Predictable Patterns
+Every component follows the same structure:
+- Root → Trigger → Popup → Content (and so on)  
+- Consistent prop naming  
+- Unified TypeScript signatures  
+- Shared class and slot conventions  
 
-### Accessibility First
-Built on Base UI's accessible primitives:
-- ARIA attributes included
-- Keyboard navigation
-- Screen reader support
-- Focus management
+### 3. Accessible by Default
+Accessibility isn’t a feature — it’s the baseline.  
+Base UI handles interaction logic and ARIA roles, so you can focus on the design layer.
+
+### 4. Diversity by Design
+The web doesn’t need more lookalikes.  
+Lumi’s mission is to **make it easier to look different** — to let teams build their own visual language without reinventing interaction logic.
+
+---
 
 ## Getting Started
 
-[Installation Guide](#installation) | [Browse Components](#components) | [View Examples](#examples)
+- [Installation Guide](#installation)  
+- [Browse Components](#components)  
+- [Explore Examples](#examples)

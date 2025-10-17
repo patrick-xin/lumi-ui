@@ -16,7 +16,10 @@ export function DialogCustom() {
       <DialogTrigger render={<Button variant="outline">Show Dialog</Button>} />
       <DialogPopup
         showCloseButton={false}
-        classNames={{ backdrop: "backdrop-blur", popup: "bg-indigo-800" }}
+        classNames={{
+          backdrop: "backdrop-blur",
+          popup: "bg-indigo-800 top-[30%]",
+        }}
       >
         <DialogHeader>
           <DialogTitle className="text-2xl">Notifications</DialogTitle>
