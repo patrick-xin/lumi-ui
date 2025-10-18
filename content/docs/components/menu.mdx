@@ -41,11 +41,11 @@ Import the `Menu`, `MenuTrigger`, `MenuPopup`, `MenuItem`, `MenuSeparator`, `Men
 
 ### Matching the Trigger Width
 
-There are common scenarios where a menu should have the **exact same width** as its trigger button to create a seamless, integrated feel. This is perfect for components like theme switchers, user selectors, or custom select inputs where a disconnected width would feel jarring.
+By default, the `MenuPopup`'s width automatically adapts to fit the widest menu item inside it. This provides great flexibility.
 
-Use the `matchAnchorWidth` prop on the `MenuPopup` component to enforce this behavior.
+However, for components like theme switchers or custom select inputs, you often want the menu to have the exact same width as its trigger to create a more seamless and polished look. For these scenarios, use the `matchAnchorWidth` prop on the `MenuPopup` component.
 
-<ComponentPreview name="menu-match-width" />
+<ComponentPreview name="menu-match-anchor-width" />
 
 ### Open on hover
 

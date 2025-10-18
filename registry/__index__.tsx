@@ -476,19 +476,19 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "menu-match-width": {
-    name: "menu-match-width",
+  "menu-match-anchor-width": {
+    name: "menu-match-anchor-width",
     description: "",
     type: "registry:example",
     registryDependencies: ["menu"],
     files: [{
-      path: "components/examples/menu-match-width.tsx",
+      path: "components/examples/menu-match-anchor-width.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/menu-match-width");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-match-width";
+      const mod = await import("@/components/examples/menu-match-anchor-width");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-match-anchor-width";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
