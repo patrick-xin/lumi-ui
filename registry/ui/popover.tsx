@@ -18,20 +18,14 @@ function PopoverTrigger({
 function PopoverClose({
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Close>) {
-  return (
-    <PopoverPrimitive.Close data-slot="popover-close"{...props} />
-  );
+  return <PopoverPrimitive.Close data-slot="popover-close" {...props} />;
 }
 
 function PopoverPositioner({
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Positioner>) {
   return (
-    <PopoverPrimitive.Positioner
-      className="w-[var(--anchor-width)]"
-      data-slot="popover-positioner"
-      {...props}
-    />
+    <PopoverPrimitive.Positioner data-slot="popover-positioner" {...props} />
   );
 }
 

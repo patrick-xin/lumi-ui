@@ -42,14 +42,31 @@ links:
  </Popover>
 ```
 
+## Usage
+
+Use `PopoverTrigger` to anchor the interaction and `PopoverPopup` to render content.
+```tsx
+// minimal example
+<Popover>
+  <PopoverTrigger>Open</PopoverTrigger>
+  <PopoverPopup>Popover content</PopoverPopup>
+</Popover>
+```
+
+You can add optional props like title, description, or showArrow for built-in structure and visual cues.
+```tsx
+<PopoverPopup title="Popover title" description="Details here" showArrow>
+  Content goes here.
+</PopoverPopup>
+```
+
+
 
 ## Migration from shadcn/ui
 
-Migrating from shadcn/ui's `Popover` is simple. Lumi's version is powered by Base UI primitives instead of Radix UI, which means a few structural and styling updates — but no behavioral surprises.
+Migrating from shadcn/ui's is straightforward. Lumi's version is powered by Base UI primitives, bringing improved structure and naming without changing how you use it.
 
 ### Component Naming & Structure
-
-Lumi uses Base UI's naming convention, which is slightly more expressive. The key change is that `PopoverContent` is now `PopoverPopup`, and we've introduced optional structural parts like `PopoverClose` and `PopoverPositioner` for finer layout control.
 
 | shadcn/ui | lumi/ui | Change
 | :--- | :--- | :--- |
@@ -57,11 +74,10 @@ Lumi uses Base UI's naming convention, which is slightly more expressive. The ke
 | `PopoverAnchor`  | `PopoverPositioner`  | More explicit name and added layout behavior
 | -  | `PopoverClose`  | New helper to close the popover from inside
 
-This structure allows you to control not only where the popup appears but also how it's positioned and aligned.
 
-### Built-in Positioning & Alignment
+### Positioning & Alignment
 
-In shadcn/ui, `alignment` and `offsets` are props on `PopoverContent`. In Lumi, these belong to `PopoverPopup` and can be paired with `PopoverPositioner` for anchor width matching and precise placement.
+`PopoverPopup` supports the same placement props as Base UI — such as `side`, `align`, `sideOffset`, and `alignOffset` — giving you granular control over popup placement relative to its trigger.
 
 ```tsx
 <PopoverPopup
@@ -72,13 +88,13 @@ In shadcn/ui, `alignment` and `offsets` are props on `PopoverContent`. In Lumi, 
   matchAnchorWidth
 />
 ```
-By default, Lumi popovers open **below** the trigger, centered **horizontally**. You can adjust both the side and alignment independently.
+By default, the popup opens below the trigger, centered horizontally.
 
 ### Optional Arrow and Metadata
 
-Lumi adds built-in support for:
+Support for:
 - Arrow via the `showArrow` prop
-- `Titles` and `descriptions` (title, description props)
+- `Titles` and `Descriptions` (title, description props)
 
 These are rendered automatically inside the popup:
 
@@ -92,13 +108,11 @@ These are rendered automatically inside the popup:
 </PopoverPopup>
 ```
 
-### Styling and Animation
+### Styling & Motion
 
 While shadcn/ui relies on Radix's motion data states, Lumi uses Base UI's transition-style API, producing smoother scale-and-fade animations out of the box.
 
 ### Migration Example
-
-Here's how you'd migrate a typical shadcn/ui Popover to Lumi:
 
 <Tabs defaultValue="shadcn/ui"> 
   <TabsList> 
@@ -147,49 +161,3 @@ Here's how you'd migrate a typical shadcn/ui Popover to Lumi:
   ```
   </TabsPanel> 
 </Tabs>
-
-### Minimal Variant (for shadcn parity)
-
-If you prefer to keep shadcn/ui’s simpler structure and minimal style, you can copy the base implementation below. It removes variants and features like arrows, titles, and width matching.
-
-
-```tsx
-"use client";
-
-import { Popover as PopoverPrimitive } from "@base-ui-components/react/popover";
-import type * as React from "react";
-
-import { cn } from "@/lib/utils";
-
-function Popover({
-  ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Root>) {
-  return <PopoverPrimitive.Root data-slot="popover" {...props} />;
-}
-
-function PopoverTrigger({
-  ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {
-  return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />;
-}
-
-function PopoverPopup({
-  className,
-  ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Popup>) {
-  return (
-    <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Popup
-        data-slot="popover-popup"
-        className={cn(
-          "rounded-md bg-popover p-4 text-popover-foreground shadow-md outline outline-border",
-          className,
-        )}
-        {...props}
-      />
-    </PopoverPrimitive.Portal>
-  );
-}
-
-export { Popover, PopoverTrigger, PopoverPopup };
-```

@@ -20,13 +20,13 @@ function NotFound() {
 
             <div className="flex gap-4">
               <Link
-                href={"/"}
+                href="/docs/installation"
                 className="bg-accent/90 transition-colors hover:bg-accent inline-block py-2 px-4 rounded-md"
               >
                 Get Started
               </Link>
               <Link
-                href={"/"}
+                href="/docs/components"
                 className="border-border border transition-colors inline-block py-1.5 px-4 rounded-md"
               >
                 Browser components

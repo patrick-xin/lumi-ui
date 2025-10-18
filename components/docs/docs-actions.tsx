@@ -4,8 +4,8 @@ import { ChevronDownIcon } from "lucide-react";
 import { CopyPageButton } from "@/components/docs/copy-page-button";
 import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/registry/ui/button";
-import { Menu, MenuContent, MenuItem, MenuTrigger } from "@/registry/ui/menu";
+import { Button } from "@/registry/ui/button";
+import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@/registry/ui/menu";
 
 function getPromptUrl(baseURL: string, url: string) {
   return `${baseURL}?q=${encodeURIComponent(
@@ -21,7 +21,7 @@ const menuItems = {
       href={`${url}.mdx`}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-full inline-flex items-center justify-start gap-4"
+      className="w-full inline-flex items-center justify-start gap-3"
     >
       <Icons.markdown className="size-4" />
       <span>View as Markdown</span>
@@ -29,7 +29,7 @@ const menuItems = {
   ),
   v0: (url: string) => (
     <a
-      className="w-full inline-flex items-center justify-start gap-4"
+      className="w-full inline-flex items-center justify-start gap-3"
       href={getPromptUrl("https://v0.dev", url)}
       target="_blank"
       rel="noopener noreferrer"
@@ -40,7 +40,7 @@ const menuItems = {
   ),
   chatgpt: (url: string) => (
     <a
-      className="w-full inline-flex items-center justify-start gap-4"
+      className="w-full inline-flex items-center justify-start gap-3"
       href={getPromptUrl("https://chatgpt.com", url)}
       target="_blank"
       rel="noopener noreferrer"
@@ -51,7 +51,7 @@ const menuItems = {
   ),
   claude: (url: string) => (
     <a
-      className="w-full inline-flex items-center justify-start gap-4"
+      className="w-full inline-flex items-center justify-start gap-3"
       href={getPromptUrl("https://claude.ai/new", url)}
       target="_blank"
       rel="noopener noreferrer"
@@ -72,28 +72,27 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
       <Menu>
         <MenuTrigger
           render={(props) => (
-            <button
+            <Button
+              variant="outline"
+              size="sm"
               className={cn(
-                buttonVariants({ variant: "outline", size: "sm" }),
                 "h-8 rounded-l-none border-l data-[popup-open]:[&_svg]:rotate-180 max-md:[&_svg]:rotate-180 max-md:data-[popup-open]:[&_svg]:rotate-0",
               )}
               {...props}
             >
               <ChevronDownIcon className="size-3.5 transition-transform" />
-            </button>
+            </Button>
           )}
         />
 
-        <MenuContent
-          align="end"
-          className="w-48 bg-background/80 backdrop-blur-md"
+        <MenuPopup
+          className="w-44 bg-background/40 backdrop-blur-md"
+          alignOffset={-40}
         >
           {Object.entries(menuItems).map(([key, value]) => (
-            <MenuItem className="text-xs" key={key}>
-              {value(url)}
-            </MenuItem>
+            <MenuItem className="text-xs" render={value(url)} key={key} />
           ))}
-        </MenuContent>
+        </MenuPopup>
       </Menu>
     </div>
   );

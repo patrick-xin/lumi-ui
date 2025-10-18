@@ -111,6 +111,20 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "menu",
+      "type": "registry:ui",
+      "title": "Menu",
+      "description": "A list of actions in a dropdown, enhanced with keyboard navigation.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
