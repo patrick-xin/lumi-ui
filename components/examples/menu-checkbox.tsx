@@ -18,7 +18,7 @@ export function CheckboxItemsMenu() {
     <Menu>
       <MenuTrigger
         render={
-          <Button>
+          <Button variant="outline">
             Workspace <ChevronDownIcon className="size-4" />
           </Button>
         }

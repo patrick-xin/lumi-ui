@@ -31,6 +31,63 @@ links:
   </TabsPanel>
 </CodeTabs>
 
+## Basic Usage
+
+Import the `Menu`, `MenuTrigger`, `MenuPopup`, `MenuItem`, `MenuSeparator`, `MenuGroup` and `MenuGroupLabel` components. Compose them to create a simple menu.
+
+<ComponentPreview name="menu-basic-usage" />
+
+## Recipes
+
+### Matching the Trigger Width
+
+There are common scenarios where a menu should have the **exact same width** as its trigger button to create a seamless, integrated feel. This is perfect for components like theme switchers, user selectors, or custom select inputs where a disconnected width would feel jarring.
+
+Use the `matchAnchorWidth` prop on the `MenuPopup` component to enforce this behavior.
+
+<ComponentPreview name="menu-match-width" />
+
+### Open on hover
+
+To create a menu that opens on hover, add the `openOnHover` prop to `Menu`. You can additionally configure how quickly the menu opens on hover using the delay prop.
+<ComponentPreview name="menu-open-on-hover" />
+
+### Checkbox items
+
+Use the `<MenuCheckboxItem>` part to create a menu item that can toggle a setting on or off.
+<ComponentPreview name="menu-checkbox" />
+
+### Radio items
+
+Use the `<MenuRadioGroup>` and `<MenuRadioItem>` parts to create menu items that work like radio buttons.
+<ComponentPreview name="menu-radio" />
+
+### Close on click
+
+Use the `closeOnClick` prop to change whether the menu closes when an item is clicked.
+<ComponentPreview name="menu-control" />
+
+### Group labels
+
+Use the `<MenuGroupLabel>` part to add a label to a `<MenuGroup>`
+<ComponentPreview name="menu-group" />
+
+### Nested menu
+
+To create a submenu, nest another menu inside the parent menu with `<MenuSubMenu>`. Use the `<MenuSubmenuTrigger>` part for the menu item that opens the nested menu.
+<ComponentPreview name="menu-nested" />
+
+### Navigate to another page
+
+Use the `render` prop to compose a menu item with an anchor element.
+<ComponentPreview name="menu-navigation" />
+
+
+### Open a dialog
+
+In order to open a dialog using a menu, control the dialog state and open it imperatively using the `onClick` handler on the menu item.
+<ComponentPreview name="menu-dialog" />
+
 
 ## Anatomy
 
@@ -75,52 +132,105 @@ links:
 | `MenuShortcut`  | A simple `<span>` styled to be right-aligned with muted text, perfect for displaying keyboard shortcuts like ⌘S. It should be placed inside a MenuItem.
 
 
-
-
-
-
-## Usage
-
-### Open on hover
-
-To create a menu that opens on hover, add the openOnHover prop to the Root part. You can additionally configure how quickly the menu opens on hover using the delay prop.
-<ComponentPreview name="menu-open-on-hover" />
-
-### Checkbox items
-
-Use the `<MenuCheckboxItem>` part to create a menu item that can toggle a setting on or off.
-<ComponentPreview name="menu-checkbox" />
-
-### Radio items
-
-Use the `<MenuRadioGroup>` and `<MenuRadioItem>` parts to create menu items that work like radio buttons.
-<ComponentPreview name="menu-radio" />
-
-### Close on click
-
-Use the `closeOnClick` prop to change whether the menu closes when an item is clicked.
-<ComponentPreview name="menu-control" />
-
-### Group labels
-
-Use the `<MenuGroupLabel>` part to add a label to a `<MenuGroup>`
-<ComponentPreview name="menu-group" />
-
-### Nested menu
-
-To create a submenu, nest another menu inside the parent menu with `<MenuSubMenu>`. Use the `<MenuSubmenuTrigger>` part for the menu item that opens the nested menu.
-<ComponentPreview name="menu-nested" />
-
-### Navigate to another page
-
-Use the `render` prop to compose a menu item with an anchor element.
-<ComponentPreview name="menu-navigation" />
-
-
-### Open a dialog
-
-In order to open a dialog using a menu, control the dialog state and open it imperatively using the `onClick` handler on the menu item.
-<ComponentPreview name="menu-dialog" />
-
-
 ## Migration from shadcn/ui
+
+The component has been renamed from `DropdownMenu` to `Menu` for brevity and clarity. The names for `content panels` and `labels` have also been updated.
+
+| shadcn/ui | lumi/ui | Change
+| :--- | :--- | :--- |
+| `DropdownMenu`  | `Menu` | Renamed
+| `DropdownMenuContent`  | `MenuPopup` | Renamed
+| `DropdownMenuLabel`  | `MenuGroupLabel` | Renamed
+| `DropdownMenuSub`  | `MenuSubMenu` | Renamed
+| `DropdownMenuSubContent`  | `MenuSubMenuPopup` | Renamed
+| (All other parts)  | (e.g., MenuItem) | Renamed
+
+### Key Differences & New Features
+
+`Menu` component introduces several enhancements for better positioning and styling, which are exposed as props on the `MenuPopup` component.
+
+| Feature | lumi/ui | shadcn/ui
+| :--- | :--- | :--- |
+| Popup Arrow  | `showArrow` prop on `MenuPopup` | Not available
+| Width Matching  | `matchAnchorWidth` prop on `MenuPopup` | Not available
+| Positioning  | Explicit `side`, `align`, `sideOffset` props | Implicitly controlled via props on `DropdownMenuContent`
+
+### Migration Example
+
+<Tabs defaultValue="shadcn/ui">
+  <TabsList>
+    <TabsTab value="shadcn/ui">shadcn/ui</TabsTab>
+    <TabsTab value="lumi/ui">lumi/ui</TabsTab>
+  </TabsList>
+  <TabsPanel value="shadcn/ui">
+    ```tsx title="dropdown-menu-demo.tsx"
+    import {
+      DropdownMenu,
+      DropdownMenuContent,
+      DropdownMenuItem,
+      DropdownMenuPortal,
+      DropdownMenuSeparator,
+      DropdownMenuSub,
+      DropdownMenuSubContent,
+      DropdownMenuSubTrigger,
+      DropdownMenuTrigger,
+    } from "@/components/ui/dropdown-menu";
+
+    function Demo() {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger>Open Menu</DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>More Actions</DropdownMenuSubTrigger>
+              <DropdownMenuPortal>
+                <DropdownMenuSubContent>
+                  <DropdownMenuItem>Delete</DropdownMenuItem>
+                </DropdownMenuSubContent>
+              </DropdownMenuPortal>
+            </DropdownMenuSub>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    }
+    ```
+ </TabsPanel>
+  <TabsPanel value="lumi/ui">
+    ```tsx title="menu-demo.tsx" {2-9}
+    import {
+      Menu, // Renamed from DropdownMenu
+      MenuItem, // Prefix removed
+      MenuPopup, // Renamed from DropdownMenuContent
+      MenuSeparator, // Prefix removed
+      MenuSubMenu, // Renamed from DropdownMenuSub
+      MenuSubMenuPopup, // Renamed from DropdownMenuSubContent
+      MenuSubMenuTrigger, // Prefix removed
+      MenuTrigger, // Prefix removed
+    } from "@/components/ui/menu";
+
+    function Demo() {
+      return (
+        <Menu>
+          <MenuTrigger>Open Menu</MenuTrigger>
+          <MenuPopup>
+            <MenuItem>Profile</MenuItem>
+            <MenuItem>Settings</MenuItem>
+            <MenuSeparator />
+            <MenuSubMenu>
+              <MenuSubMenuTrigger>More Actions</MenuSubMenuTrigger>
+              <MenuSubMenuPopup>
+                <MenuItem>Delete</MenuItem>
+              </MenuSubMenuPopup>
+            </MenuSubMenu>
+          </MenuPopup>
+        </Menu>
+      );
+    }
+```    
+  </TabsPanel>
+</Tabs>
+
+  

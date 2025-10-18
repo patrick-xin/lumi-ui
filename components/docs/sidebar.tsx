@@ -68,7 +68,7 @@ function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
     return (
       <span
         className={cn(
-          "relative inline-flex items-center pl-4 text-sm pointer-events-none",
+          "relative inline-flex items-center pl-4 ml-2 text-sm pointer-events-none",
           "text-foreground/30",
         )}
       >
@@ -80,9 +80,9 @@ function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
   return (
     <Link
       className={cn(
-        "relative text-muted-foreground inline-flex items-center pl-4 text-sm",
-        "hover:text-primary transition-colors ease-linear",
-        isActive && "text-primary",
+        "relative text-muted-foreground inline-flex items-center pl-4 ml-2 text-sm",
+        "hover:text-primary transition-colors ease-linear w-4/6 rounded-sm py-1",
+        isActive && "text-primary bg-accent",
       )}
       href={child.url}
     >

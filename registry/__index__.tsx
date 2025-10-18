@@ -368,6 +368,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "menu-basic-usage": {
+    name: "menu-basic-usage",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-basic-usage.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-basic-usage");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-basic-usage";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "menu-checkbox": {
     name: "menu-checkbox",
     description: "",
@@ -453,6 +471,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/menu-group");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-group";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menu-match-width": {
+    name: "menu-match-width",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-match-width.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-match-width");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-match-width";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

@@ -18,7 +18,7 @@ export function RadioItemsMenu() {
     <Menu>
       <MenuTrigger
         render={
-          <Button>
+          <Button variant="outline">
             Sort By <ChevronDownIcon className="size-4" />
           </Button>
         }

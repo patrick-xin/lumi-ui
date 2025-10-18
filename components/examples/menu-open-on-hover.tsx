@@ -15,7 +15,7 @@ export function HoverMenu() {
           </Button>
         }
       />
-      <MenuPopup matchAnchorWidth>
+      <MenuPopup>
         <MenuItem>Get Up!</MenuItem>
         <MenuItem>Inside Out</MenuItem>
         <MenuItem>Night Beats</MenuItem>

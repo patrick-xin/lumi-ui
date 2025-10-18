@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useMounted } from "@/hooks/use-mounted";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/registry/ui/button";
+import { Button } from "@/registry/ui/button";
 import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@/registry/ui/menu";
 
 export function ThemeSwitcher() {
@@ -34,16 +34,21 @@ export function ThemeSwitcher() {
   return (
     <Menu>
       <MenuTrigger
-        className={cn(
-          buttonVariants({ variant: "outline", size: "sm" }),
-          "h-8 text-xs data-[popup-open]:[&_svg]:rotate-180 extend-touch-target",
-        )}
-      >
-        Theme
-        <ChevronDownIcon className="size-3.5 transition-transform" />
-      </MenuTrigger>
+        render={
+          <Button
+            variant="outline"
+            size="sm"
+            className={cn(
+              "h-8 text-xs data-[popup-open]:[&_svg]:rotate-180 extend-touch-target w-24",
+            )}
+          >
+            Theme
+            <ChevronDownIcon className="size-3.5 transition-transform" />
+          </Button>
+        }
+      />
 
-      <MenuPopup alignOffset={-2}>
+      <MenuPopup matchAnchorWidth>
         <div className="grid grid-cols-1 gap-1">
           <MenuItem
             onClick={() => handleThemeSetChange("shadcn")}
