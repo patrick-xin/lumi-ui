@@ -20,6 +20,13 @@ interface PublicRegistryItem {
   }>;
 }
 
+interface DemoFile {
+  name: string; // e.g., "accordion-demo"
+  folder: string; // e.g., "accordion"
+  relativePath: string; // e.g., "accordion/accordion-demo"
+  fullPath: string; // e.g., "components/examples/accordion/accordion-demo.tsx"
+}
+
 interface Registry {
   $schema: string;
   name: string;
@@ -95,21 +102,61 @@ function readPublicRegistryFiles(): Map<string, PublicRegistryItem> {
   return publicRegistry;
 }
 
-function getExistingDemoFiles(): string[] {
+function getExistingDemoFiles(): DemoFile[] {
   if (!fs.existsSync(EXAMPLES_DIR)) {
     log(`Examples directory does not exist: ${EXAMPLES_DIR}`);
     return [];
   }
 
-  return fs
-    .readdirSync(EXAMPLES_DIR)
-    .filter((file) => file.endsWith(".tsx") && file.includes("-"))
-    .map((file) => file.replace(".tsx", ""));
+  const demoFiles: DemoFile[] = [];
+
+  try {
+    const entries = fs.readdirSync(EXAMPLES_DIR, { withFileTypes: true });
+
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        // Handle nested folder structure: examples/accordion/accordion-demo.tsx
+        const folderPath = path.join(EXAMPLES_DIR, entry.name);
+        const files = fs
+          .readdirSync(folderPath)
+          .filter((file) => file.endsWith(".tsx"));
+
+        for (const file of files) {
+          const name = file.replace(".tsx", "");
+          const relativePath = `${entry.name}/${name}`;
+          const fullPath = `components/examples/${relativePath}.tsx`;
+
+          demoFiles.push({
+            name,
+            folder: entry.name,
+            relativePath,
+            fullPath,
+          });
+        }
+      } else if (entry.name.endsWith(".tsx") && entry.name.includes("-")) {
+        // Handle flat files for backward compatibility
+        const name = entry.name.replace(".tsx", "");
+        const relativePath = name;
+        const fullPath = `components/examples/${name}.tsx`;
+
+        demoFiles.push({
+          name,
+          folder: "",
+          relativePath,
+          fullPath,
+        });
+      }
+    }
+  } catch (error) {
+    log(`Failed to read examples directory: ${error}`);
+  }
+
+  return demoFiles;
 }
 
 function validateRegistry(
   registry: Registry,
-  demoFiles: string[],
+  demoFiles: DemoFile[],
 ): {
   warnings: string[];
   errors: string[];
@@ -129,40 +176,56 @@ function validateRegistry(
       continue;
     }
 
-    // Find all demo files for this component (flexible naming)
-    const componentDemos = demoFiles.filter(
-      (demo) =>
-        demo.startsWith(`${item.name}-`) || demo === `${item.name}-demo`,
-    );
+    // Find all demo files for this component
+    // Priority 1: Folder name matches component name exactly
+    // Priority 2: Demo name starts with component name (for flat files)
+    const componentDemos = demoFiles.filter((demo) => {
+      if (demo.folder && demo.folder === item.name) {
+        return true; // Folder-based match (preferred)
+      }
+      // Fallback for flat files or flexible naming
+      return (
+        demo.name.startsWith(`${item.name}-`) ||
+        demo.name === `${item.name}-demo`
+      );
+    });
 
     if (componentDemos.length > 0) {
       componentsWithDemos.push(item.name);
     } else {
       warnings.push(
-        `Component "${item.name}" is in registry.json but no demo files found. Expected: components/examples/${item.name}-*.tsx`,
+        `Component "${item.name}" is in registry.json but no demo files found. Expected: components/examples/${item.name}/${item.name}-*.tsx`,
       );
     }
   }
 
-  // Check for orphaned demo files (more flexible matching)
+  // Check for orphaned demo files
   for (const demoFile of demoFiles) {
-    // Extract potential component name (everything before the last hyphen)
-    const parts = demoFile.split("-");
-    if (parts.length < 2) continue;
-
-    // Try different component name patterns
     let found = false;
-    for (let i = parts.length - 1; i > 0; i--) {
-      const potentialComponentName = parts.slice(0, i).join("-");
-      if (registryComponentNames.includes(potentialComponentName)) {
-        found = true;
-        break;
+
+    // Check if folder name matches a component (preferred method)
+    if (demoFile.folder && registryComponentNames.includes(demoFile.folder)) {
+      found = true;
+    } else {
+      // Fallback: Extract potential component name from demo name (for flat files)
+      const parts = demoFile.name.split("-");
+      if (parts.length >= 2) {
+        for (let i = parts.length - 1; i > 0; i--) {
+          const potentialComponentName = parts.slice(0, i).join("-");
+          if (registryComponentNames.includes(potentialComponentName)) {
+            found = true;
+            break;
+          }
+        }
       }
     }
 
     if (!found) {
+      const expectedPath = demoFile.folder
+        ? `components/examples/${demoFile.folder}/${demoFile.name}.tsx`
+        : `components/examples/${demoFile.name}.tsx`;
       warnings.push(
-        `Demo file "${demoFile}.tsx" doesn't match any component in registry.json`,
+        `Demo file "${expectedPath}" doesn't match any component in registry.json`,
       );
     }
   }
@@ -170,7 +233,7 @@ function validateRegistry(
   return { warnings, errors, componentsWithDemos };
 }
 
-function generateIndexFile(registry: Registry, demoFiles: string[]): string {
+function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
   const entries: string[] = [];
 
   // Generate UI component entries
@@ -211,31 +274,46 @@ function generateIndexFile(registry: Registry, demoFiles: string[]): string {
   // Generate demo/example entries
   for (const demoFile of demoFiles) {
     // Try to determine which component this demo is for
-    const parts = demoFile.split("-");
     let registryDeps: string[] = [];
 
-    // Look for matching component in registry
-    for (let i = parts.length - 1; i > 0; i--) {
-      const potentialComponentName = parts.slice(0, i).join("-");
-      if (registry.items.some((item) => item.name === potentialComponentName)) {
-        registryDeps = [potentialComponentName];
-        break;
+    // Priority 1: Use folder name if it matches a component
+    if (
+      demoFile.folder &&
+      registry.items.some((item) => item.name === demoFile.folder)
+    ) {
+      registryDeps = [demoFile.folder];
+    } else {
+      // Fallback: Extract from demo name (for flat files)
+      const parts = demoFile.name.split("-");
+      for (let i = parts.length - 1; i > 0; i--) {
+        const potentialComponentName = parts.slice(0, i).join("-");
+        if (
+          registry.items.some((item) => item.name === potentialComponentName)
+        ) {
+          registryDeps = [potentialComponentName];
+          break;
+        }
       }
     }
 
-    entries.push(`  "${demoFile}": {
-    name: "${demoFile}",
+    // Generate import path based on folder structure
+    const importPath = demoFile.folder
+      ? `@/components/examples/${demoFile.folder}/${demoFile.name}`
+      : `@/components/examples/${demoFile.name}`;
+
+    entries.push(`  "${demoFile.name}": {
+    name: "${demoFile.name}",
     description: "",
     type: "registry:example",
     registryDependencies: ${registryDeps.length > 0 ? JSON.stringify(registryDeps) : "undefined"},
     files: [{
-      path: "components/examples/${demoFile}.tsx",
+      path: "${demoFile.fullPath}",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/${demoFile}");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "${demoFile}";
+      const mod = await import("${importPath}");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "${demoFile.name}";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -258,10 +336,10 @@ ${entries.join(",\n")}
 `;
 }
 
-function generateTypesFile(registry: Registry, demoFiles: string[]): string {
+function generateTypesFile(registry: Registry, demoFiles: DemoFile[]): string {
   // Generate union type of all registry names (components + demos)
   const componentNames = registry.items.map((item) => `"${item.name}"`);
-  const demoNames = demoFiles.map((demo) => `"${demo}"`);
+  const demoNames = demoFiles.map((demo) => `"${demo.name}"`);
   const allNames = [...componentNames, ...demoNames].join(" | ");
 
   return `import type React from "react";
@@ -318,6 +396,23 @@ function main() {
   log("\n Scanning for demo files...");
   const demoFiles = getExistingDemoFiles();
   log(`Found ${demoFiles.length} demo files`);
+
+  // Log folder structure summary
+  const folderCounts = demoFiles.reduce(
+    (acc, demo) => {
+      const key = demo.folder || "(flat)";
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  if (Object.keys(folderCounts).length > 1) {
+    log("  Structure breakdown:");
+    for (const [folder, count] of Object.entries(folderCounts)) {
+      log(`    ${folder}: ${count} files`);
+    }
+  }
 
   // Step 4: Validate
   log("\n Validating...");
