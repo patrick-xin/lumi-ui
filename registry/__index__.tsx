@@ -168,6 +168,26 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "menu": {
+    name: "menu",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["lucide-react"],
+    files:     [
+          {
+                "path": "registry/ui/menu.tsx",
+                "type": "registry:ui",
+                "target": ""
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/ui/menu");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "accordion-contained": {
     name: "accordion-contained",
     description: "",
@@ -343,6 +363,168 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/dialog-from-menu");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-from-menu";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menu-checkbox": {
+    name: "menu-checkbox",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-checkbox.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-checkbox");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-checkbox";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menu-control": {
+    name: "menu-control",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-control.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-control");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-control";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menu-demo": {
+    name: "menu-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menu-dialog": {
+    name: "menu-dialog",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-dialog.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-dialog");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-dialog";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menu-group": {
+    name: "menu-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-group");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-group";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menu-navigation": {
+    name: "menu-navigation",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-navigation.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-navigation");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-navigation";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menu-nested": {
+    name: "menu-nested",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-nested.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-nested");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-nested";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menu-open-on-hover": {
+    name: "menu-open-on-hover",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-open-on-hover.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-open-on-hover");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-open-on-hover";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menu-radio": {
+    name: "menu-radio",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menu"],
+    files: [{
+      path: "components/examples/menu-radio.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/menu-radio");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menu-radio";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

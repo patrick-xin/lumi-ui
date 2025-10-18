@@ -12,7 +12,7 @@ import {
   DialogPopup,
   DialogTitle,
 } from "@/registry/ui/dialog";
-import { Menu, MenuContent, MenuItem, MenuTrigger } from "@/registry/ui/menu";
+import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@/registry/ui/menu";
 
 export function DialogFromMenuDemo() {
   const [dialogOpen, setDialogOpen] = React.useState(false);
@@ -22,9 +22,9 @@ export function DialogFromMenuDemo() {
         <MenuTrigger render={<Button variant="outline" />}>
           Open menu
         </MenuTrigger>
-        <MenuContent>
+        <MenuPopup>
           <MenuItem onClick={() => setDialogOpen(true)}>Open dialog</MenuItem>
-        </MenuContent>
+        </MenuPopup>
       </Menu>
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogPopup>

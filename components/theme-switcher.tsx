@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useMounted } from "@/hooks/use-mounted";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/registry/ui/button";
-import { Menu, MenuContent, MenuItem, MenuTrigger } from "@/registry/ui/menu";
+import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@/registry/ui/menu";
 
 export function ThemeSwitcher() {
   const { setTheme, resolvedTheme } = useTheme();
@@ -34,21 +34,16 @@ export function ThemeSwitcher() {
   return (
     <Menu>
       <MenuTrigger
-        render={(props) => (
-          <button
-            className={cn(
-              buttonVariants({ variant: "outline", size: "sm" }),
-              "h-8 text-xs data-[popup-open]:[&_svg]:rotate-180 extend-touch-target",
-            )}
-            {...props}
-          >
-            Theme
-            <ChevronDownIcon className="size-3.5 transition-transform" />
-          </button>
+        className={cn(
+          buttonVariants({ variant: "outline", size: "sm" }),
+          "h-8 text-xs data-[popup-open]:[&_svg]:rotate-180 extend-touch-target",
         )}
-      />
+      >
+        Theme
+        <ChevronDownIcon className="size-3.5 transition-transform" />
+      </MenuTrigger>
 
-      <MenuContent className="min-w-0 w-24" align="start">
+      <MenuPopup alignOffset={-2}>
         <div className="grid grid-cols-1 gap-1">
           <MenuItem
             onClick={() => handleThemeSetChange("shadcn")}
@@ -75,7 +70,7 @@ export function ThemeSwitcher() {
             Amethyst
           </MenuItem>
         </div>
-      </MenuContent>
+      </MenuPopup>
     </Menu>
   );
 }

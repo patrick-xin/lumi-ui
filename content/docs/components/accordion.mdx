@@ -53,9 +53,61 @@ links:
 ### Contained
 <ComponentPreview name="accordion-contained" />
 
-## Migration from shadcn/ui
 
-Migrating your `Accordion` component from shadcn/ui is straightforward. The main differences stem from our component's use of Base UI as its primitive library, whereas shadcn/ui is built upon Radix UI. This leads to two key distinctions in API and styling.
+## Usage
+
+To have an accordion item open by default, you need to assign a unique value to the `AccordionItem` and then pass that value inside an array to the `defaultValue` prop on the root Accordion component.
+
+```tsx title="demo.tsx" {11}
+import {
+  Accordion,
+  AccordionItem,
+  AccordionHeader,
+  AccordionTrigger,
+  AccordionPanel,
+} from "@/components/ui/accordion";
+
+function Demo() {
+  return (
+    <Accordion defaultValue={["item-2"]}>
+      <AccordionItem value="item-1">
+        <AccordionHeader>
+          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        </AccordionHeader>
+        <AccordionPanel>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionHeader>
+          <AccordionTrigger>Is it styled?</AccordionTrigger>
+        </AccordionHeader>
+        <AccordionPanel>
+          Yes. It comes with two variants that can be easily customized.
+        </AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionHeader>
+          <AccordionTrigger>Is it animated?</AccordionTrigger>
+        </AccordionHeader>
+        <AccordionPanel>
+          Yes. It's animated by default, but you can disable it if you prefer.
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+```
+To have multiple items open by default, ensure the `multiple` prop is set to true (which it is by default) and include each item's value in the defaultValue array.
+
+```tsx
+<Accordion defaultValue={["item-2", "item-3"]}>
+  {/* ...items */}
+</Accordion>
+```
+
+
+## Migration from shadcn/ui
 
 ### Component Naming & Structure
 
@@ -145,129 +197,3 @@ Here's how to convert a standard shadcn/ui Accordion component to ours. The prim
   </TabsPanel>
 </Tabs>
 
-If you prefer to keep using the shadcn/ui naming convention and minimal style (without `variants`), copy the code below:
-
-```tsx
-"use client";
-
-import { Accordion as AccordionPrimitive } from "@base-ui-components/react/accordion";
-import { ChevronDownIcon } from "lucide-react";
-import type * as React from "react";
-
-import { cn } from "@/lib/utils";
-
-function Accordion({
-  ...props
-}: React.ComponentProps<typeof AccordionPrimitive.Root>) {
-  return <AccordionPrimitive.Root data-slot="accordion" {...props} />;
-}
-
-function AccordionItem({
-  className,
-  ...props
-}: React.ComponentProps<typeof AccordionPrimitive.Item>) {
-  return (
-    <AccordionPrimitive.Item
-      data-slot="accordion-item"
-      className={cn("border-b last:border-b-0", className)}
-      {...props}
-    />
-  );
-}
-
-function AccordionTrigger({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
-  return (
-    <AccordionPrimitive.Header data-slot="accordion-header" className="flex">
-      <AccordionPrimitive.Trigger
-        data-slot="accordion-trigger"
-        className={cn(
-          "flex flex-1 items-start justify-between gap-4 text-sm text-left font-medium transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 py-3 hover:underline [&[data-panel-open]>svg]:rotate-180",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-        <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200" />
-      </AccordionPrimitive.Trigger>
-    </AccordionPrimitive.Header>
-  );
-}
-
-function AccordionContent({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof AccordionPrimitive.Panel>) {
-  return (
-    <AccordionPrimitive.Panel
-      data-slot="accordion-content"
-      className={cn(
-        "h-[var(--accordion-panel-height)] overflow-hidden text-sm transition-[height] ease-out",
-        "data-[ending-style]:h-0 data-[starting-style]:h-0",
-      )}
-      {...props}
-    >
-      <div className={cn("pt-0 pb-4", className)}>{children}</div>
-    </AccordionPrimitive.Panel>
-  );
-}
-
-export { Accordion, AccordionItem, AccordionContent, AccordionTrigger };
-```
-
-
-## Usage
-
-To have an accordion item open by default, you need to assign a unique value to the `AccordionItem` and then pass that value inside an array to the `defaultValue` prop on the root Accordion component.
-
-```tsx title="demo.tsx" {11}
-import {
-  Accordion,
-  AccordionItem,
-  AccordionHeader,
-  AccordionTrigger,
-  AccordionPanel,
-} from "@/components/ui/accordion";
-
-function Demo() {
-  return (
-    <Accordion defaultValue={["item-2"]}>
-      <AccordionItem value="item-1">
-        <AccordionHeader>
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
-        </AccordionHeader>
-        <AccordionPanel>
-          Yes. It adheres to the WAI-ARIA design pattern.
-        </AccordionPanel>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionHeader>
-          <AccordionTrigger>Is it styled?</AccordionTrigger>
-        </AccordionHeader>
-        <AccordionPanel>
-          Yes. It comes with two variants that can be easily customized.
-        </AccordionPanel>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionHeader>
-          <AccordionTrigger>Is it animated?</AccordionTrigger>
-        </AccordionHeader>
-        <AccordionPanel>
-          Yes. It's animated by default, but you can disable it if you prefer.
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
-  );
-}
-```
-To have multiple items open by default, ensure the `multiple` prop is set to true (which it is by default) and include each item's value in the defaultValue array.
-
-```tsx
-<Accordion defaultValue={["item-2", "item-3"]}>
-  {/* ...items */}
-</Accordion>
-```

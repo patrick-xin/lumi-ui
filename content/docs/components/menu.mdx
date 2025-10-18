@@ -1,10 +1,126 @@
 ---
 title: Menu
 description: A list of actions in a dropdown, enhanced with keyboard navigation.
-status: in-progress
 links:
   doc: https://base-ui.com/react/components/menu
   api: https://base-ui.com/react/components/menu#api-reference
 ---
 
-In progress
+<ComponentPreview name="menu-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/menu
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="menu" title="menu.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## Anatomy
+
+```tsx
+<Menu>
+  <MenuTrigger />
+  <MenuPopup>
+    <MenuItem />
+    <MenuItem>
+      <MenuShortcut />
+    </MenuItem>
+    <MenuCheckboxItem />
+    <MenuSeparator />
+    <MenuGroup>
+      <MenuGroupLabel />
+    </MenuGroup>
+    <MenuRadioGroup>
+      <MenuRadioItem />
+    </MenuRadioGroup>
+    <MenuSubMenu>
+      <MenuSubMenuTrigger />
+      <MenuSubMenuPopup />
+    </MenuSubMenu>
+  </MenuPopup>
+</Menu>
+```
+
+| Component | Role
+| :--- | :--- |
+| `Menu`  | The root component and context provider. It wraps the entire menu functionality but does not render a visible element itself.
+| `MenuTrigger`  | The button or element that the user interacts with to open or close the menu. It's best used with the `render` prop to pass functionality to your own `Button`.
+| `MenuPopup`  |  Component that wraps the floating panel containing your menu items. It handles portaling, positioning, and animations.
+| `MenuItem`  | The most common interactive element within a menu. Can contain text, icons, and a `MenuShortcut`. Use the `variant="destructive"` prop for dangerous actions.
+| `MenuCheckboxItem`  | A menu item that functions as a toggle. It displays a checkmark when active. Use the `checked` and `onCheckedChange` props to control its state.
+| `MenuRadioGroup`  | Wraps a set of `MenuRadioItem` components to create a group where only one item can be selected. Manages the group's state via the `value` and `onValueChange` props.
+| `MenuRadioItem`  | A menu item within a `MenuRadioGroup` that represents a single choice. It displays an indicator when selected.
+| `MenuGroup`  | A simple wrapper used to group related menu items, often used in conjunction with a `MenuGroupLabel`.
+| `MenuGroupLabel`  | A non-interactive, styled label used to provide a title for a `MenuGroup`. This is great for organizing complex menus.
+| `MenuSubMenu`  | The root component for a nested menu. It wraps the trigger and the content of the submenu.
+| `MenuSubMenuTrigger`  | The specific `MenuItem` that, when hovered or clicked, will open its corresponding `MenuSubMenuPopup`. It automatically includes a right-facing chevron.
+| `MenuSubMenuPopup`  | The floating panel that contains the items for a nested submenu. It has its own positioning relative to the MenuSubMenuTrigger.
+| `MenuShortcut`  | A simple `<span>` styled to be right-aligned with muted text, perfect for displaying keyboard shortcuts like ⌘S. It should be placed inside a MenuItem.
+
+
+
+
+
+
+## Usage
+
+### Open on hover
+
+To create a menu that opens on hover, add the openOnHover prop to the Root part. You can additionally configure how quickly the menu opens on hover using the delay prop.
+<ComponentPreview name="menu-open-on-hover" />
+
+### Checkbox items
+
+Use the `<MenuCheckboxItem>` part to create a menu item that can toggle a setting on or off.
+<ComponentPreview name="menu-checkbox" />
+
+### Radio items
+
+Use the `<MenuRadioGroup>` and `<MenuRadioItem>` parts to create menu items that work like radio buttons.
+<ComponentPreview name="menu-radio" />
+
+### Close on click
+
+Use the `closeOnClick` prop to change whether the menu closes when an item is clicked.
+<ComponentPreview name="menu-control" />
+
+### Group labels
+
+Use the `<MenuGroupLabel>` part to add a label to a `<MenuGroup>`
+<ComponentPreview name="menu-group" />
+
+### Nested menu
+
+To create a submenu, nest another menu inside the parent menu with `<MenuSubMenu>`. Use the `<MenuSubmenuTrigger>` part for the menu item that opens the nested menu.
+<ComponentPreview name="menu-nested" />
+
+### Navigate to another page
+
+Use the `render` prop to compose a menu item with an anchor element.
+<ComponentPreview name="menu-navigation" />
+
+
+### Open a dialog
+
+In order to open a dialog using a menu, control the dialog state and open it imperatively using the `onClick` handler on the menu item.
+<ComponentPreview name="menu-dialog" />
+
+
+## Migration from shadcn/ui
