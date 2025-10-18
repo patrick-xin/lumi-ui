@@ -11,7 +11,8 @@ const accordionItemVariants = cva("border-b", {
   variants: {
     variant: {
       underline: "last:border-b-0",
-      contained: "border-0",
+      contained: "border-0 my-2",
+      outline: "border rounded-md my-2",
     },
   },
   defaultVariants: {
@@ -26,7 +27,9 @@ const accordionTriggerVariants = cva(
       variant: {
         underline: "py-3 hover:underline [&[data-panel-open]>svg]:rotate-180",
         contained:
-          "group relative rounded-md items-center bg-background hover:bg-accent hover:text-accent-foreground dark:hover:bg-input/50 py-2 pr-1 pl-3 focus-visible:z-10",
+          "group relative rounded-md items-center bg-background hover:bg-accent hover:text-accent-foreground dark:hover:bg-input/50 py-2 pr-1 pl-3 focus-visible:z-10 data-[panel-open]:bg-accent dark:data-[panel-open]:bg-input/50",
+        outline:
+          "py-2 px-4 hover:underline [&[data-panel-open]>svg]:rotate-180",
       },
     },
     defaultVariants: {
@@ -39,7 +42,8 @@ const accordionPanelContentVariants = cva("text-sm", {
   variants: {
     variant: {
       underline: "pt-0 pb-4",
-      contained: "p-3 text-muted-foreground rounded-md",
+      contained: "py-2 px-3 text-muted-foreground rounded-md",
+      outline: "pt-0 pb-4 px-4",
     },
   },
   defaultVariants: {

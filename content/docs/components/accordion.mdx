@@ -31,6 +31,49 @@ links:
   </TabsPanel>
 </CodeTabs>
 
+## Basic Usage
+
+Import the `Accordion`, `AccordionItem`, `AccordionHeader`, `AccordionTrigger`, and `AccordionPanel` components. Compose them to create a basic accordion.
+
+<ComponentPreview name="accordion-demo" />
+
+## Variants
+
+### Underline (default)
+
+<ComponentPreview name="accordion-demo" />
+
+### Contained
+
+<ComponentPreview name="accordion-contained" />
+
+### Outline
+
+<ComponentPreview name="accordion-outline" />
+
+## Recipes
+
+### Default Open Panels
+
+To have an accordion item open by default, assign a unique value to the `AccordionItem` and pass that value in an array to the `defaultValue` prop on `Accordion` component.
+
+<ComponentPreview name="accordion-default-open-single" />
+
+To have multiple items open by default, ensure the `multiple` prop is set to true (which it is by default) and include each item's value in the defaultValue array.
+
+<ComponentPreview name="accordion-default-open-multiple" />
+
+### Allowing a Single Open Panel
+
+By default, users can open multiple panels at once. To restrict this so that only one panel can be open at a time, set the `multiple` prop to `false`.
+
+<ComponentPreview name="accordion-single" />
+
+### Disable Panel
+
+Pass `disabled` props to `AccordionItem` to disable a panel.
+
+<ComponentPreview name="accordion-disabled" />
 
 ## Anatomy
 
@@ -45,97 +88,36 @@ links:
  </Accordion>
 ```
 
-## Variants
-
-### Underline
-<ComponentPreview name="accordion-demo" />
-
-### Contained
-<ComponentPreview name="accordion-contained" />
-
-
-## Usage
-
-To have an accordion item open by default, you need to assign a unique value to the `AccordionItem` and then pass that value inside an array to the `defaultValue` prop on the root Accordion component.
-
-```tsx title="demo.tsx" {11}
-import {
-  Accordion,
-  AccordionItem,
-  AccordionHeader,
-  AccordionTrigger,
-  AccordionPanel,
-} from "@/components/ui/accordion";
-
-function Demo() {
-  return (
-    <Accordion defaultValue={["item-2"]}>
-      <AccordionItem value="item-1">
-        <AccordionHeader>
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
-        </AccordionHeader>
-        <AccordionPanel>
-          Yes. It adheres to the WAI-ARIA design pattern.
-        </AccordionPanel>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionHeader>
-          <AccordionTrigger>Is it styled?</AccordionTrigger>
-        </AccordionHeader>
-        <AccordionPanel>
-          Yes. It comes with two variants that can be easily customized.
-        </AccordionPanel>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionHeader>
-          <AccordionTrigger>Is it animated?</AccordionTrigger>
-        </AccordionHeader>
-        <AccordionPanel>
-          Yes. It's animated by default, but you can disable it if you prefer.
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
-  );
-}
-```
-To have multiple items open by default, ensure the `multiple` prop is set to true (which it is by default) and include each item's value in the defaultValue array.
-
-```tsx
-<Accordion defaultValue={["item-2", "item-3"]}>
-  {/* ...items */}
-</Accordion>
-```
+| Component | Role
+| :--- | :--- |
+| `Accordion`  | The root component that provides context and controls the accordion's behavior and variants.
+| `AccordionItem`  | A wrapper for each individual collapsible section, uniquely identified by a `value` prop.
+| `AccordionHeader`  | A required wrapper for the `AccordionTrigger` that renders as the `h3`.
+| `AccordionTrigger`  | The `button` element that the user clicks to toggle the collapsed state of an `AccordionPanel`.
+| `AccordionPanel`  | The component that wraps the content to be shown or hidden.
 
 
 ## Migration from shadcn/ui
 
 ### Component Naming & Structure
 
-Our component introduces an explicit `AccordionHeader` for better structural clarity and renames the content panel to be more descriptive.
+The Accordion component has been updated for better structural clarity and a more intuitive API for controlling behavior.
 
 | shadcn/ui | lumi/ui | Change
 | :--- | :--- | :--- |
-| `AccordionTrigger`  | `AccordionHeader` + `AccordionTrigger` | `AccordionTrigger` is now wrapped by `AccordionHeader`
-| `AccordionContent`  | `AccordionPanel` | Renamed for clarity
+| `AccordionTrigger`  | `AccordionHeader > AccordionTrigger` | `AccordionTrigger` is now explicitly wrapped by `AccordionHeader`.
+| `AccordionContent`  | `AccordionPanel` | Renamed
 
-### Controlling Behavior: Single vs. Multiple
-
-Another key difference from shadcn/ui is how the accordion's behavior is managed. In shadcn/ui, this is controlled with the `type` prop. You would set it to "single" to allow only one panel to be open at a time. Our component uses a boolean `multiple` prop instead. Setting `multiple={false}` achieves the same "single" behavior.
-
-**Important:** The default behavior has changed. The lumi/ui Accordion defaults to allowing multiple panels to be open (`multiple={true}`). To replicate the default shadcn/ui behavior of only allowing one open panel, you must explicitly add the `multiple={false}` prop.
-
-### Styling with Variants
-
-While shadcn/ui offers a single style that you customize with className, our component includes a built-in variant system. You can switch between styles like underline (the default, similar to shadcn/ui) and contained with a single prop on the root Accordion component.
+### Key Differences & New Features
 
 | Feature | lumi/ui | shadcn/ui
 | :--- | :--- | :--- |
-| **Available Variants**  | `underline`, `contained` | Default `underline` style only
+| Behavior Control  | `multiple` prop (defaults to true) | `type` prop ("single" or "multiple")
+| Styling Variants  | `variant` prop (`underline`, `contained`, `outline`) | customized with className
+| Structure  | Requires explicit `<AccordionHeader>` wrapper | `<AccordionTrigger>` implicitly contains a header
+
 
 ### Migration Example
-
-Here's how to convert a standard shadcn/ui Accordion component to ours. The primary changes are wrapping `AccordionTrigger` with `AccordionHeader` and renaming `AccordionContent` to `AccordionPanel`.
-
 
 <Tabs defaultValue="shadcn/ui">
   <TabsList>

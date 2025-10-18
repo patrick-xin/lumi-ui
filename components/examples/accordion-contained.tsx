@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Accordion,
   AccordionHeader,
@@ -8,38 +10,34 @@ import {
 
 export function AccordionContained() {
   return (
-    <Accordion variant="contained" className="mx-auto w-96">
-      <AccordionItem>
+    <Accordion
+      variant="contained"
+      defaultValue={["item-1"]}
+      className="w-full max-w-md space-y-2"
+    >
+      <AccordionItem value="item-1">
         <AccordionHeader>
-          <AccordionTrigger>What is accordion?</AccordionTrigger>
+          <AccordionTrigger>How do I install it?</AccordionTrigger>
         </AccordionHeader>
         <AccordionPanel>
-          A collapsible component that organizes content into expandable
-          sections.
+          You can install Lumi UI components via the CLI or by copying and
+          pasting the component code directly into your project.
         </AccordionPanel>
       </AccordionItem>
-      <AccordionItem>
+      <AccordionItem value="item-2">
         <AccordionHeader>
-          <AccordionTrigger>Is it customizable?</AccordionTrigger>
+          <AccordionTrigger>Is it open source?</AccordionTrigger>
+        </AccordionHeader>
+        <AccordionPanel>Yes, code is available to everyone.</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionHeader>
+          <AccordionTrigger>How can I contribute?</AccordionTrigger>
         </AccordionHeader>
         <AccordionPanel>
-          Yes. You can style it with tailwind classes to match your design
-          system.
+          We welcome contributions! Please check out our contributing guide on
+          GitHub to get started.
         </AccordionPanel>
-      </AccordionItem>
-      <AccordionItem>
-        <AccordionHeader>
-          <AccordionTrigger>Is it animated?</AccordionTrigger>
-        </AccordionHeader>
-        <AccordionPanel>
-          Yes. Smooth expand and collapse transitions are built in.
-        </AccordionPanel>
-      </AccordionItem>
-
-      <AccordionItem disabled>
-        <AccordionHeader>
-          <AccordionTrigger>Can it be disabled?</AccordionTrigger>
-        </AccordionHeader>
       </AccordionItem>
     </Accordion>
   );
