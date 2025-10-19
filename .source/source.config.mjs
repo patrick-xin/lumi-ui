@@ -70,8 +70,8 @@ var source_config_default = defineConfig({
       plugins.push([
         () => rehypePrettyCode({
           theme: {
-            dark: "tokyo-night",
-            light: "github-light"
+            dark: "catppuccin-frappe",
+            light: "catppuccin-latte"
           },
           transformers
         })

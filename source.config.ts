@@ -15,8 +15,8 @@ export default defineConfig({
         () =>
           rehypePrettyCode({
             theme: {
-              dark: "tokyo-night",
-              light: "github-light",
+              dark: "catppuccin-frappe",
+              light: "catppuccin-latte",
             },
             transformers: transformers,
           }),
