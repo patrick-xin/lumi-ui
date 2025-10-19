@@ -26,7 +26,7 @@ export function SiteHeader() {
             <MainNav items={siteConfig.navItems} />
           </div>
 
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-3">
             <CommandMenu navGroups={navGroups} />
             <ThemeSwitcher />
             <ModeSwitcher />

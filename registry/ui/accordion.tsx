@@ -21,13 +21,13 @@ const accordionItemVariants = cva("border-b", {
 });
 
 const accordionTriggerVariants = cva(
-  "flex flex-1 items-start justify-between gap-4 text-sm text-left font-medium transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50",
+  "flex flex-1 items-start justify-between gap-4 text-sm text-left font-medium transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 rounded-md",
   {
     variants: {
       variant: {
         underline: "py-3 hover:underline [&[data-panel-open]>svg]:rotate-180",
         contained:
-          "group relative rounded-md items-center bg-background hover:bg-accent hover:text-accent-foreground dark:hover:bg-input/50 py-2 pr-1 pl-3 focus-visible:z-10 data-[panel-open]:bg-accent dark:data-[panel-open]:bg-input/50",
+          "group relative items-center bg-background hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 py-2 pr-1 pl-3 focus-visible:z-10 data-[panel-open]:bg-accent dark:data-[panel-open]:bg-accent/50",
         outline:
           "py-2 px-4 hover:underline [&[data-panel-open]>svg]:rotate-180",
       },

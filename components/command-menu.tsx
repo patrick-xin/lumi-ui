@@ -95,7 +95,7 @@ export function CommandMenu({ navGroups }: { navGroups: NavGroup[] }) {
         }}
       >
         <Combobox items={navGroups}>
-          <div className="flex h-9 items-center gap-2 border px-3 bg-input/50 border-input rounded-md">
+          <div className="flex h-9 items-center gap-2 border px-3 bg-transparent border-input rounded-md">
             <SearchIcon className="size-4 shrink-0 opacity-50" />
             <ComboboxInput
               placeholder="Search documentation..."
@@ -121,7 +121,7 @@ export function CommandMenu({ navGroups }: { navGroups: NavGroup[] }) {
 
                       return (
                         <ComboboxItem
-                          className="text-foreground data-[highlighted]:text-accent-foreground data-[highlighted]:border-input data-[highlighted]:bg-input/50 h-9 rounded-md border border-transparent px-1.5 font-medium relative flex cursor-default items-center gap-2 py-1.5 text-sm outline-hidden select-none"
+                          className="text-foreground data-[highlighted]:text-accent-foreground data-[highlighted]:border-input data-[highlighted]:bg-accent/30 h-9 rounded-md border border-transparent px-1.5 font-medium relative flex cursor-default items-center gap-2 py-1.5 text-sm outline-hidden select-none"
                           key={item.value}
                           value={item}
                           render={
