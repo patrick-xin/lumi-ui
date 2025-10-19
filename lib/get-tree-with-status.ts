@@ -1,3 +1,5 @@
+import "server-only";
+
 import type { PageTree } from "fumadocs-core/server";
 import { source } from "@/lib/source";
 import type { DocNode, DocRoot } from "@/types";
@@ -24,4 +26,52 @@ export function getTreeWithStatus(tree: PageTree.Root): DocRoot {
     ...tree,
     children: tree.children.map(enrichNode),
   };
+}
+
+function getNodeNameAsString(name: React.ReactNode): string | null {
+  if (typeof name === "string") {
+    return name;
+  }
+  if (typeof name === "number") {
+    return String(name);
+  }
+  return null;
+}
+
+export function transformNavigation() {
+  const data = getTreeWithStatus(source.pageTree);
+  return data.children
+    .filter(
+      (node): node is Extract<DocNode, { type: "folder" }> =>
+        node.type === "folder",
+    )
+    .map((folder) => {
+      const folderName = getNodeNameAsString(folder.name);
+      if (!folderName) return null;
+
+      const items = folder.children
+        .filter(
+          (node): node is Extract<DocNode, { type: "page" }> =>
+            node.type === "page",
+        )
+        .map((page) => {
+          const pageLabel = getNodeNameAsString(page.name);
+          if (!pageLabel) return null;
+
+          return {
+            value: page.url.split("/").pop(),
+            label: pageLabel,
+            url: page.url,
+            folderName,
+            status: page.status,
+          };
+        })
+        .filter((item): item is NonNullable<typeof item> => item !== null);
+
+      return {
+        value: folderName,
+        items: items,
+      };
+    })
+    .filter((group): group is NonNullable<typeof group> => group !== null);
 }

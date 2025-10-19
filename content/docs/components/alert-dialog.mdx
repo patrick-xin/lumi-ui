@@ -1,6 +1,6 @@
 ---
 title: Alert Dialog
-description: A dialog that requires user response to proceed.
+description: A modal dialog that interrupts the user with important content and expects a response.
 links:
   doc: https://base-ui.com/react/components/alert-dialog
   api: https://base-ui.com/react/components/alert-dialog#api-reference
@@ -31,29 +31,150 @@ links:
   </TabsPanel>
 </CodeTabs>
 
+## Basic Usage
+
+Import the `AlertDialog`, `AlertDialogTrigger`, `AlertDialogPopup`, `AlertDialogHeader`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogBody`, and `AlertDialogFooter` components. Compose them to create a simple alert dialog.
+
+<ComponentPreview name="alert-dialog-demo" />
+
+## Recipes
+
+### Customizing the Dialog
+
+You can customize the dialog by passing props to the `AlertDialogPopup` component. For example, you can change the `variant` to `destructive` to indicate a destructive action.
+
+<ComponentPreview name="alert-dialog-custom" />
+
 
 ## Anatomy
 
 ```tsx
- <AlertDialog>
-  <AlertDialogTrigger/>
+<AlertDialog>
+  <AlertDialogTrigger />
   <AlertDialogPopup>
     <AlertDialogHeader>
-      <AlertDialogTitle/>
-      <AlertDialogDescription/>
+      <AlertDialogTitle />
+      <AlertDialogDescription />
     </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel/>
-      <AlertDialogAction/>
-    </AlertDialogFooter>
+    <AlertDialogBody />
+    <AlertDialogFooter />
   </AlertDialogPopup>
- </AlertDialog>
+</AlertDialog>
 ```
 
-## Usage
+| Component | Role
+| :--- | :--- |
+| `AlertDialog`  | The root component and context provider.
+| `AlertDialogTrigger`  | The button or element that opens the dialog.
+| `AlertDialogPopup`  |  Component that wraps the floating panel containing the dialog content.
+| `AlertDialogHeader`  | A wrapper for the dialog's title and description.
+| `AlertDialogTitle`  | The title of the dialog.
+| `AlertDialogDescription`  | A short description of the dialog's content.
+| `AlertDialogBody`  | The main content of the dialog.
+| `AlertDialogFooter`  | A wrapper for the dialog's action buttons.
 
-### Customize Backdrop and Popup
 
-Apply `classNames` to `AlertDialogPopup`
+## Migration from shadcn/ui
 
-<ComponentPreview name="alert-dialog-custom" />
+The component has been renamed from `AlertDialog` to `AlertDialog` for consistency. The names for `content panels` and `labels` have also been updated.
+
+| shadcn/ui | lumi/ui | Change
+| :--- | :--- | :--- |
+| `AlertDialog`  | `AlertDialog` | No Change
+| `AlertDialogContent`  | `AlertDialogPopup` | Renamed
+| `AlertDialogTitle`  | `AlertDialogTitle` | No Change
+| `AlertDialogDescription`  | `AlertDialogDescription` | No Change
+| `AlertDialogHeader`  | `AlertDialogHeader` | No Change
+| `AlertDialogFooter`  | `AlertDialogFooter` | No Change
+| `AlertDialogAction`  | `Button` | Replaced with `Button` component
+| `AlertDialogCancel`  | `Button` | Replaced with `Button` component
+
+### Key Differences & New Features
+
+`AlertDialog` component introduces several enhancements for better positioning and styling, which are exposed as props on the `AlertDialogPopup` component.
+
+| Feature | lumi/ui | shadcn/ui
+| :--- | :--- | :--- |
+| Popup Arrow  | `showArrow` prop on `AlertDialogPopup` | Not available
+| Width Matching  | `matchAnchorWidth` prop on `AlertDialogPopup` | Not available
+| Positioning  | Explicit `side`, `align`, `sideOffset` props | Implicitly controlled via props on `AlertDialogContent`
+
+### Migration Example
+
+<Tabs defaultValue="shadcn/ui">
+  <TabsList>
+    <TabsTab value="shadcn/ui">shadcn/ui</TabsTab>
+    <TabsTab value="lumi/ui">lumi/ui</TabsTab>
+  </TabsList>
+  <TabsPanel value="shadcn/ui">
+    ```tsx title="alert-dialog-demo.tsx"
+    import {
+      AlertDialog,
+      AlertDialogAction,
+      AlertDialogCancel,
+      AlertDialogContent,
+      AlertDialogDescription,
+      AlertDialogFooter,
+      AlertDialogHeader,
+      AlertDialogTitle,
+      AlertDialogTrigger,
+    } from "@/components/ui/alert-dialog";
+
+    function Demo() {
+      return (
+        <AlertDialog>
+          <AlertDialogTrigger>Show Dialog</AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your account
+                and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction>Continue</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      );
+    }
+    ```
+ </TabsPanel>
+  <TabsPanel value="lumi/ui">
+    ```tsx title="alert-dialog-demo.tsx"
+    import {
+      AlertDialog,
+      AlertDialogDescription,
+      AlertDialogFooter,
+      AlertDialogHeader,
+      AlertDialogPopup,
+      AlertDialogTitle,
+      AlertDialogTrigger,
+    } from "@/registry/ui/alert-dialog";
+    import { Button } from "@/registry/ui/button";
+
+    function Demo() {
+      return (
+        <AlertDialog>
+          <AlertDialogTrigger render={<Button variant="outline">Show Dialog</Button>} />
+          <AlertDialogPopup>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your account
+                and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <Button variant="ghost">Cancel</Button>
+              <Button>Continue</Button>
+            </AlertDialogFooter>
+          </AlertDialogPopup>
+        </AlertDialog>
+      );
+    }
+```
+  </TabsPanel>
+</Tabs>

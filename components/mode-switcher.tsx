@@ -32,7 +32,7 @@ export function ModeSwitcher() {
 
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       size="icon"
       className="group/toggle extend-touch-target size-8"
       onClick={toggleMode}

@@ -1,7 +1,7 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui-components/react/combobox";
 import type * as React from "react";
 
-function ComboboxRoot({
+function Combobox({
   ...props
 }: React.ComponentProps<typeof ComboboxPrimitive.Root>) {
   return <ComboboxPrimitive.Root data-slot="combobox-root" {...props} />;
@@ -163,7 +163,7 @@ function ComboboxCollection({
 }
 
 export {
-  ComboboxRoot,
+  Combobox,
   ComboboxValue,
   ComboboxIcon,
   ComboboxInput,

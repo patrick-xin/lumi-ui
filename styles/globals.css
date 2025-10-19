@@ -387,7 +387,7 @@
 	counter-increment: step;
 
 	&:before {
-		@apply hidden bg-accent border-background absolute mt-[-6px] ml-[-52px] lg:inline-flex size-10 items-center justify-center rounded-full border-4 text-center -indent-px font-mono text-sm font-medium tracking-tighter;
+		@apply hidden bg-background absolute mt-[-6px] ml-[-52px] lg:inline-flex size-10 items-center justify-center rounded-full border border-input text-center -indent-px font-mono text-sm font-medium text-muted-foreground;
 		content: counter(step);
 	}
   
