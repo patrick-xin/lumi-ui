@@ -69,8 +69,8 @@ function createHighlightOptions({
 } = {}): Partial<HighlightOptions> {
   return {
     themes: {
-      dark: "tokyo-night",
-      light: "github-light",
+      dark: "catppuccin-frappe",
+      light: "catppuccin-latte",
     },
     transformers: [
       {

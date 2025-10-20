@@ -11,7 +11,7 @@ const tabsListVariants = cva(
   {
     variants: {
       variant: {
-        pill: "gap-1 rounded-md bg-muted data-[orientation=vertical]:py-1.5 data-[orientation=vertical]:px-1",
+        pill: "gap-1 rounded-md bg-accent dark:bg-accent/50 text-accent-foreground data-[orientation=vertical]:py-1.5 data-[orientation=vertical]:px-1",
         underline:
           "gap-4 p-0 bg-transparent border-b data-[orientation=vertical]:border-b-0 data-[orientation=vertical]:border-l",
         ghost: "gap-3 bg-transparent",
@@ -30,7 +30,7 @@ const tabIndicatorVariants = cva(
   {
     variants: {
       variant: {
-        pill: "rounded-md border border-ring/70 bg-input/70 shadow-sm dark:border-input top-1/2 -translate-y-1/2 left-0 data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
+        pill: "rounded-md border border-ring/70 bg-accent/70 shadow-sm dark:border-input top-1/2 -translate-y-1/2 left-0 data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
         underline:
           "bg-foreground bottom-0 left-0 h-0.5 translate-x-(--active-tab-left) data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:left-0 data-[orientation=vertical]:h-(--active-tab-height) data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:translate-x-0 data-[orientation=vertical]:top-(--active-tab-top) data-[orientation=vertical]:translate-y-0 data-[orientation=vertical]:-start-[calc(--spacing(1)-0.5px)]",
         ghost:
@@ -127,7 +127,7 @@ function TabsTab({
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "data-[orientation=horizontal]:flex-1 data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
-        variant === "solid" && "hover:bg-muted data-[selected]:bg-input/70",
+        variant === "solid" && "hover:bg-accent data-[selected]:bg-accent/70",
         className,
       )}
       {...props}

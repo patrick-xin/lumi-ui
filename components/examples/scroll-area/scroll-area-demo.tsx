@@ -2,7 +2,7 @@ import { ScrollArea } from "@/registry/ui/scroll-area";
 
 export function ScrollAreaDemo() {
   return (
-    <ScrollArea className="h-[12.5rem] w-96 max-w-[calc(100vw-8rem)] border">
+    <ScrollArea className="h-[12.5rem] w-96 max-w-[calc(100vw-8rem)] border rounded-md">
       <div className="flex flex-col gap-4 py-3 px-4 text-sm leading-[1.375rem]">
         <p>
           Vernacular architecture is building done outside any academic

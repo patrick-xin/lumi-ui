@@ -12,7 +12,7 @@ export function GitHubLink() {
         </Link>
       }
       size="sm"
-      variant="ghost"
+      variant="outline"
       className="h-8 shadow-none"
     />
   );

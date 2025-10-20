@@ -2,19 +2,20 @@ import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { CopyButton } from "@/components/docs/copy-button";
 import { CodeTabs } from "@/components/docs/mdx/code-tabs";
+import { ComponentList } from "@/components/docs/mdx/component-list";
 import { ComponentPreview } from "@/components/docs/mdx/component-preview";
 import { ComponentSourceCode } from "@/components/docs/mdx/component-source-code";
+import { CTACard } from "@/components/docs/mdx/cta-card";
 import { InstallationCommand } from "@/components/docs/mdx/installation-command";
 import { Step, Steps } from "@/components/docs/mdx/steps";
-import { cn } from "@/lib/utils";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
-import { ComponentList } from "./components/docs/mdx/component-list";
 import {
   Table,
   TableCell,
   TableHeader,
   TableRow,
-} from "./components/docs/mdx/tables";
+} from "@/components/docs/mdx/tables";
+import { cn } from "@/lib/utils";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
 export const mdxComponents: MDXComponents = {
   p: ({ className, ...props }: React.ComponentProps<"p">) => (
@@ -241,4 +242,5 @@ export const mdxComponents: MDXComponents = {
   ComponentSourceCode,
   Tabs,
   ComponentList,
+  CTACard,
 };

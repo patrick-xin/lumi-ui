@@ -1,8 +1,10 @@
 "use client";
 
+import type { icons } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FOLDERS_WITH_STATUS, NON_CLICKABLE_STATUSES } from "@/lib/constants";
+import { IconMap } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import type { DocPageNode, DocRoot } from "@/types";
 
@@ -60,7 +62,6 @@ interface NavItemProps {
 
 function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
   const status = child.status;
-
   const shouldRenderAsSpan =
     shouldShowStatus && status && NON_CLICKABLE_STATUSES.includes(status);
 
@@ -76,7 +77,7 @@ function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
       </span>
     );
   }
-
+  const Icon = IconMap[child.icon as keyof typeof icons];
   return (
     <Link
       className={cn(
@@ -86,7 +87,14 @@ function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
       )}
       href={child.url}
     >
-      <span>{child.name}</span>
+      <span className="inline-flex gap-2 items-center">
+        {Icon && <Icon className="size-4" />}
+        {child.name}
+      </span>
+      {isActive && (
+        <div className="absolute -left-[9px] top-0 w-px bg-primary h-full" />
+      )}
+
       {shouldShowStatus && status && status === "new" && (
         <span className="inline-block size-2 mt-px rounded-full bg-primary ml-4" />
       )}

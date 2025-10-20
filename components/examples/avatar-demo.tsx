@@ -4,8 +4,8 @@ export function AvatarDemo() {
   return (
     <div className="flex flex-row flex-wrap items-center gap-12">
       <Avatar>
-        <AvatarImage src="/images/lumi.png" alt="@shadcn" />
-        <AvatarFallback>CN</AvatarFallback>
+        <AvatarImage src="/images/lumi.png" alt="Lumi UI" />
+        <AvatarFallback>Lumi UI</AvatarFallback>
       </Avatar>
       <Avatar className="rounded-lg">
         <AvatarImage

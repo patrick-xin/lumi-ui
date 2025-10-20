@@ -1,18 +1,18 @@
 "use client";
 
-import type { Root } from "fumadocs-core/page-tree";
 import Link, { type LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 import { Dialog, DialogPopup, DialogTrigger } from "@/registry/ui/dialog";
+import type { NavGroup } from "@/types";
 
 export function MobileNav({
-  tree,
+  navGroups,
   className,
 }: {
-  tree: Root;
+  navGroups: NavGroup[];
   className?: string;
 }) {
   const [open, setOpen] = React.useState(false);
@@ -45,7 +45,10 @@ export function MobileNav({
         }}
       >
         <nav className="flex h-full flex-col gap-12 overflow-y-auto p-6 no-scrollbar">
-          <TreeNavigation tree={tree} onNavigate={() => setOpen(false)} />
+          <TreeNavigation
+            navGroups={navGroups}
+            onNavigate={() => setOpen(false)}
+          />
         </nav>
       </DialogPopup>
     </Dialog>
@@ -75,33 +78,29 @@ function MenuIcon({ open }: { open: boolean }) {
 }
 
 function TreeNavigation({
-  tree,
+  navGroups,
   onNavigate,
 }: {
-  tree: Root;
+  navGroups: NavGroup[];
   onNavigate: () => void;
 }) {
   return (
     <div className="flex flex-col gap-8">
-      {tree?.children?.map((group) => {
-        if (group.type !== "folder") return null;
-
+      {navGroups?.map((group) => {
         return (
-          <div key={group.$id} className="flex flex-col gap-4">
+          <div key={group.value} className="flex flex-col gap-4">
             <div className="text-muted-foreground text-sm font-medium">
-              {group.name}
+              {group.value}
             </div>
             <div className="flex flex-col gap-3">
-              {group.children.map((item) => {
-                if (item.type !== "page") return null;
-
+              {group.items.map((item) => {
                 return (
                   <MobileLink
                     key={item.url}
                     href={item.url}
                     onOpenChange={onNavigate}
                   >
-                    {item.name}
+                    {item.label}
                   </MobileLink>
                 );
               })}

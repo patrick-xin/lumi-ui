@@ -15,3 +15,16 @@ export type DocNode = DocPageNode | DocFolderNode | PageTree.Separator;
 export type DocRoot = Omit<PageTree.Root, "children"> & {
   children: DocNode[];
 };
+
+export interface NavItem {
+  value: string | undefined;
+  label: string;
+  url: string;
+  status: ComponentStatus;
+  folderName: string;
+}
+
+export interface NavGroup {
+  value: string;
+  items: NavItem[];
+}
