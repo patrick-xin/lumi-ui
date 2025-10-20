@@ -1,15 +1,11 @@
 "use client";
 
-import {
-  ArrowUpRight,
-  DiamondIcon,
-  type LucideIcon,
-  SearchIcon,
-} from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMounted } from "@/hooks/use-mounted";
+import { IconMap } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
@@ -32,12 +28,6 @@ import {
 } from "@/registry/ui/dialog";
 import { Kbd, KbdGroup } from "@/registry/ui/kbd";
 import type { NavGroup, NavItem } from "@/types";
-
-const iconMap: { [key: string]: LucideIcon } = {
-  "Get Started": ArrowUpRight,
-  Components: DiamondIcon,
-  default: ArrowUpRight,
-};
 
 export function CommandMenu({ navGroups }: { navGroups: NavGroup[] }) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -70,7 +60,7 @@ export function CommandMenu({ navGroups }: { navGroups: NavGroup[] }) {
               "relative h-8 w-full justify-start font-medium shadow-none sm:pr-12 md:w-48 lg:w-56 xl:w-64",
             )}
           >
-            <span className="hidden lg:inline-flex">
+            <span className="hidden lg:inline-flex text-muted-foreground">
               Search documentation...
             </span>
             <span className="inline-flex lg:hidden">Search...</span>
@@ -117,11 +107,11 @@ export function CommandMenu({ navGroups }: { navGroups: NavGroup[] }) {
 
                   <ComboboxCollection>
                     {(item: NavItem) => {
-                      const Icon = iconMap[item.folderName] || iconMap.default;
+                      const Icon = IconMap[item.folderName] || IconMap.default;
 
                       return (
                         <ComboboxItem
-                          className="text-foreground data-[highlighted]:text-accent-foreground data-[highlighted]:border-input data-[highlighted]:bg-accent/30 h-9 rounded-md border border-transparent px-1.5 font-medium relative flex cursor-default items-center gap-2 py-1.5 text-sm outline-hidden select-none"
+                          className="text-foreground data-[highlighted]:text-accent-foreground data-[highlighted]:border-input data-[highlighted]:bg-accent/50 h-9 rounded-md border border-transparent px-1.5 font-medium relative flex cursor-default items-center gap-2 py-1.5 text-sm outline-hidden select-none"
                           key={item.value}
                           value={item}
                           render={
