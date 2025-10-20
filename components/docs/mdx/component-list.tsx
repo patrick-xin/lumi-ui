@@ -15,7 +15,7 @@ export function ComponentList() {
         .map((item) => (
           <div key={item.$id}>
             {item.type === "folder" && (
-              <div className="grid grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-8">
                 {item.children.map((child) => {
                   if (child.type !== "page") return null;
 

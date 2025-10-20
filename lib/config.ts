@@ -3,6 +3,7 @@ export const siteConfig = {
   url: "https://lumiui.dev",
   description:
     "Composable React components powered by Base UI and Tailwind CSS — built for clarity, speed, and total code ownership.",
+  slogan: "Make your interface shine.",
   links: {
     github: "https://github.com/patrick-xin/lumi-ui",
   },
