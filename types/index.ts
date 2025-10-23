@@ -17,11 +17,12 @@ export type DocRoot = Omit<PageTree.Root, "children"> & {
 };
 
 export interface NavItem {
-  value: string | undefined;
+  value: string;
   label: string;
   url: string;
   status: ComponentStatus;
   folderName: string;
+  onSelect?: () => void;
 }
 
 export interface NavGroup {

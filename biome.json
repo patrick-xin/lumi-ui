@@ -31,7 +31,9 @@
       "recommended": true,
       "suspicious": {
         "noUnknownAtRules": "off",
-        "noExplicitAny": "warn"
+        "noExplicitAny": "warn",
+        "noArrayIndexKey": "warn",
+        "noAssignInExpressions": "warn"
       },
       "complexity": {
         "useLiteralKeys": "off"

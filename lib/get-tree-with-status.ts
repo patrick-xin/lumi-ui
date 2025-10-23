@@ -61,7 +61,7 @@ export function transformNavigation() {
           if (!pageLabel) return null;
 
           return {
-            value: page.url.split("/").pop(),
+            value: page.url.split("/").pop() as string,
             label: pageLabel,
             url: page.url,
             folderName,

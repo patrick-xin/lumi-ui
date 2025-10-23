@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { CommandMenu } from "@/components/command-menu";
 import { Logo } from "@/components/logo";
 import { ModeSwitcher } from "@/components/mode-switcher";
+import { CommandMenu } from "@/components/site/header/command-menu";
 import { MobileNav } from "@/components/site/header/mobile-nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { siteConfig } from "@/lib/config";
