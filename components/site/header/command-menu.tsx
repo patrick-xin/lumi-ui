@@ -110,18 +110,23 @@ export function CommandMenu({ navGroups }: { navGroups: NavGroup[] }) {
       >
         <Autocomplete.Portal>
           <Autocomplete.Backdrop className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
-          <Autocomplete.Positioner className="fixed inset-0 z-0 flex items-center justify-center pointer-events-none">
+          <Autocomplete.Positioner
+            positionMethod="fixed"
+            className="inset-0 z-0 bottom-0 pointer-events-none flex justify-center items-center"
+          >
             <Autocomplete.Popup
               className={cn(
                 "relative px-4 pt-3 pb-12 bg-background rounded-md border border-input",
-                "origin-[var(--transform-origin)] transition-[transform,scale,opacity] duration-100",
-                "data-[starting-style]:opacity-0",
-                "data-[ending-style]:opacity-0",
+                "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
+                "data-[starting-style]:scale-90 data-[starting-style]:opacity-0 data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
                 "pointer-events-auto w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
-                "-translate-y-16 sm:-translate-y-20",
+                "-translate-y-12",
               )}
             >
-              <AutocompleteInput placeholder="Search documentation..." />
+              <AutocompleteInput
+                className="focus-visible:border-none focus-visible:ring-0!"
+                placeholder="Search documentation..."
+              />
               <div className="mt-2 overflow-y-auto no-scrollbar h-80">
                 <AutocompleteList className="max-h-full">
                   {(group: NavGroup) => (
@@ -138,7 +143,7 @@ export function CommandMenu({ navGroups }: { navGroups: NavGroup[] }) {
                             <AutocompleteItem
                               key={item.value}
                               value={item}
-                              className="gap-3 text-sm"
+                              className="text-foreground data-[highlighted]:text-accent-foreground data-[highlighted]:border-accent data-[highlighted]:bg-accent/50 h-9 rounded-md border border-transparent px-1.5 font-medium relative flex cursor-default items-center py-1.5 text-sm outline-hidden select-none gap-3"
                             >
                               <Icon className="size-4 text-muted-foreground" />
                               {item.label}
