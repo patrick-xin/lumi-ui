@@ -18,7 +18,7 @@ export const DocsReferences = ({ links }: DocsReferenceProps) => {
     <div className="flex items-center gap-2">
       {links.doc && (
         <Badge
-          variant="secondary"
+          variant="outline"
           render={
             <Link
               href={links.doc}
@@ -34,7 +34,7 @@ export const DocsReferences = ({ links }: DocsReferenceProps) => {
       )}
       {links.api && (
         <Badge
-          variant="secondary"
+          variant="outline"
           render={
             <Link
               href={links.api}

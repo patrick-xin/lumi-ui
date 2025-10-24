@@ -25,7 +25,7 @@ export const DocsSidebar = ({ tree }: DocsSidebarNavProps) => {
                 {item.name}
               </div>
               {item.type === "folder" && (
-                <ul className="space-y-3 border-l">
+                <ul className="space-y-2 border-l">
                   {item.children.map((child) => {
                     if (child.type !== "page") return null;
 

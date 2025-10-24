@@ -55,14 +55,14 @@ export function ThemeSwitcher() {
             disabled={themeSet === "celeste"}
             className="w-full justify-start text-xs h-6 extend-touch-target"
           >
-            <div className="size-2 bg-[oklch(0.47_0.13_265)] rounded-full" />
+            <div className="size-2 bg-[oklch(0.72_0.14_265)] rounded-full" />
           </MenuItem>
           <MenuItem
-            onClick={() => handleThemeSetChange("amethyst")}
-            disabled={themeSet === "amethyst"}
+            onClick={() => handleThemeSetChange("orchid")}
+            disabled={themeSet === "orchid"}
             className="w-full justify-start text-xs h-6 extend-touch-target"
           >
-            <div className="size-2 bg-[oklch(0.6104_0.0767_299.7335)] rounded-full" />
+            <div className="size-2 bg-[oklch(0.71_0.08_302)] rounded-full" />
           </MenuItem>
         </div>
       </MenuPopup>
