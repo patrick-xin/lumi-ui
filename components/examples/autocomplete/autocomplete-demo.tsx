@@ -15,7 +15,7 @@ export function AutocompleteDemo() {
     <Autocomplete items={tags}>
       <Label className="flex flex-col gap-2 items-start">
         Search tags
-        <AutocompleteInput placeholder="e.g. feature" />
+        <AutocompleteInput showSearchIcon placeholder="e.g. feature" />
       </Label>
 
       <AutocompletePopup>

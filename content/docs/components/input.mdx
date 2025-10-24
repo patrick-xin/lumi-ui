@@ -1,10 +1,65 @@
 ---
 title: Input
 description: A native input element that automatically works with Field.
-status: in-progress
 links:
   doc: https://base-ui.com/react/components/input
   api: https://base-ui.com/react/components/input#api-reference
 ---
 
-In progress
+<ComponentPreview name="input-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/input
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="input" title="input.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## Usage
+
+```tsx
+import { Input } from "@/components/ui/input"
+```
+
+```tsx
+<Input />
+```
+
+## Recipes
+
+### Default
+
+<ComponentPreview name="input-demo" />
+
+### File
+
+<ComponentPreview name="input-file" />
+
+### Disabled
+
+<ComponentPreview name="input-disabled" />
+
+### With Label
+
+<ComponentPreview name="input-with-label" />
+
+### With Button
+
+<ComponentPreview name="input-with-button" />

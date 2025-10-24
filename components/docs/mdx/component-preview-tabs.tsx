@@ -23,7 +23,7 @@ export function ComponentPreviewTabs({
           baseOpacity={40}
           enableHover={false}
         />
-        <div className="w-full h-[420px] flex justify-center items-center p-10 has-[[data-slot='accordion']]:items-start has-[[data-slot='popover-trigger']]:items-start has-[[data-slot='menu-trigger']]:items-start">
+        <div className="w-full h-[420px] flex justify-center items-center p-10 has-[[data-slot='accordion']]:items-start has-[[data-slot='popover-trigger']]:items-start has-[[data-slot='menu-trigger']]:items-start [&_input]:max-w-xs">
           {component}
         </div>
       </TabsPanel>

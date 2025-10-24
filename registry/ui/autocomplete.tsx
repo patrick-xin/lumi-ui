@@ -123,7 +123,7 @@ function AutocompleteEmpty({
   return (
     <AutocompletePrimitive.Empty
       data-slot="autocomplete-empty"
-      className="px-4 py-2 text-sm leading-4"
+      className="px-2 py-1 text-sm empty:m-0 empty:p-0"
       {...props}
     />
   );
