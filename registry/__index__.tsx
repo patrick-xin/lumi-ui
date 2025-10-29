@@ -32,7 +32,7 @@ export const components: ComponentRegistry = {
     name: "accordion",
     description: "",
     type: "registry:ui",
-    registryDependencies: undefined,
+    registryDependencies: ["@base-ui-components/react"],
     files:     [
           {
                 "path": "registry/ui/accordion.tsx",
@@ -243,6 +243,26 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/registry/ui/button");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "button";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "checkbox": {
+    name: "checkbox",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: ["@base-ui-components/react"],
+    files:     [
+          {
+                "path": "registry/ui/checkbox.tsx",
+                "type": "registry:ui",
+                "target": ""
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/ui/checkbox");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "checkbox";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -783,6 +803,42 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/button/button-with-icon");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "button-with-icon";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "checkbox-demo": {
+    name: "checkbox-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["checkbox"],
+    files: [{
+      path: "components/examples/checkbox/checkbox-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/checkbox/checkbox-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "checkbox-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "checkbox-disabled": {
+    name: "checkbox-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["checkbox"],
+    files: [{
+      path: "components/examples/checkbox/checkbox-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/checkbox/checkbox-disabled");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "checkbox-disabled";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

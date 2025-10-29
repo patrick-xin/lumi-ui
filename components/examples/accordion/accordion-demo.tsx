@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Accordion,
   AccordionHeader,
@@ -8,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/registry/ui/accordion";
 
-export default function AccordionDemo() {
+export function AccordionDemo() {
   return (
     <Accordion defaultValue={["item-1"]} className="w-full max-w-md">
       <AccordionItem value="item-1">

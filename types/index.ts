@@ -1,18 +1,18 @@
-import type { PageTree } from "fumadocs-core/server";
+import type { Folder, Item, Root, Separator } from "fumadocs-core/page-tree";
 
 export type ComponentStatus = "planned" | "in-progress" | "new" | undefined;
 
-export type DocPageNode = PageTree.Item & {
+export type DocPageNode = Item & {
   status?: ComponentStatus;
 };
 
-type DocFolderNode = PageTree.Folder & {
+type DocFolderNode = Folder & {
   children: DocNode[];
 };
 
-export type DocNode = DocPageNode | DocFolderNode | PageTree.Separator;
+export type DocNode = DocPageNode | DocFolderNode | Separator;
 
-export type DocRoot = Omit<PageTree.Root, "children"> & {
+export type DocRoot = Omit<Root, "children"> & {
   children: DocNode[];
 };
 

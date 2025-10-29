@@ -1,4 +1,4 @@
-import { findNeighbour } from "fumadocs-core/server";
+import { findNeighbour } from "fumadocs-core/page-tree";
 import { notFound } from "next/navigation";
 import { DocsAritcleFooter } from "@/components/docs/docs-article-footer";
 import { DocsAritcleHeader } from "@/components/docs/docs-article-header";
@@ -83,7 +83,7 @@ export default async function Page(props: PageProps) {
   });
 
   return (
-    <div className="relative grid xl:grid-cols-[minmax(0,1fr)_minmax(200px,260px)] xl:gap-12 2xl:gap-16">
+    <div className="relative grid xl:grid-cols-[minmax(0,1fr)_minmax(200px,260px)] xl:gap-12 2xl:gap-16 scroll-mt-20">
       <div className="min-w-0 py-4">
         <article className="max-w-[70ch] mx-auto pt-12 lg:pt-0 space-y-8">
           <DocsAritcleHeader

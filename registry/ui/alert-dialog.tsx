@@ -36,7 +36,7 @@ function AlertDialogBackdrop({
     <AlertDialogPrimitive.Backdrop
       data-slot="alert-dialog-backdrop"
       className={cn(
-        "fixed inset-0 min-h-dvh bg-black/50 transition-opacity duration-200",
+        "fixed inset-0 min-h-dvh bg-black/80 transition-opacity duration-200",
         "data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
         "supports-[-webkit-touch-callout:none]:absolute",
         className,
@@ -62,10 +62,12 @@ function AlertDialogPopup({
     <AlertDialogPortal>
       <AlertDialogBackdrop className={classNames?.backdrop} />
       <AlertDialogPrimitive.Popup
-        data-slot="alert-dialog-content"
+        data-slot="alert-dialog-popup"
         className={cn(
-          "fixed top-[50%] left-[50%] grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg sm:max-w-lg",
-          "data-[ending-style]:scale-90 data-[ending-style]:opacity-0 data-[starting-style]:scale-90 data-[starting-style]:opacity-0 duration-200",
+          "w-full max-w-[calc(100%-2rem)] grid gap-4 bg-background outline outline-border p-6 rounded shadow sm:max-w-lg",
+          "fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-all duration-150",
+          "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
+          "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
           classNames?.popup,
         )}
         {...props}
@@ -123,7 +125,7 @@ function AlertDialogDescription({
   return (
     <AlertDialogPrimitive.Description
       data-slot="alert-dialog-description"
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn(" text-sm text-muted-foreground", className)}
       {...props}
     />
   );
@@ -162,6 +164,7 @@ function AlertDialogCancel({
 export {
   AlertDialog,
   AlertDialogTrigger,
+  AlertDialogBackdrop,
   AlertDialogPopup,
   AlertDialogHeader,
   AlertDialogFooter,

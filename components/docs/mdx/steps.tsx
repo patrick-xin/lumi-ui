@@ -20,11 +20,7 @@ interface StepProps extends React.HTMLAttributes<HTMLDivElement> {
 export function Step({ title, className, children, ...props }: StepProps) {
   return (
     <div className={cn("relative mt-8 pt-2", className)} {...props}>
-      <h3
-        className={cn("step text-lg font-semibold tracking-tight scroll-m-32")}
-      >
-        {title}
-      </h3>
+      <div className={cn("step text-base scroll-m-32")}>{title}</div>
       <div className="mt-4">{children}</div>
     </div>
   );

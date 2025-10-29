@@ -33,9 +33,41 @@ links:
 
 ## Basic Usage
 
-Import the `AlertDialog`, `AlertDialogTrigger`, `AlertDialogPopup`, `AlertDialogHeader`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogBody`, and `AlertDialogFooter` components. Compose them to create a simple alert dialog.
-
-<ComponentPreview name="alert-dialog-demo" />
+```tsx
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogPopup,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/registry/ui/alert-dialog";
+```
+```tsx
+export function AlertDialogDemo() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger>Show Alert Dialog</AlertDialogTrigger>
+      <AlertDialogPopup>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogPopup>
+    </AlertDialog>
+  );
+}
+```
 
 ## Recipes
 
@@ -56,7 +88,6 @@ You can customize the dialog by passing props to the `AlertDialogPopup` componen
       <AlertDialogTitle />
       <AlertDialogDescription />
     </AlertDialogHeader>
-    <AlertDialogBody />
     <AlertDialogFooter />
   </AlertDialogPopup>
 </AlertDialog>
@@ -70,7 +101,6 @@ You can customize the dialog by passing props to the `AlertDialogPopup` componen
 | `AlertDialogHeader`  | A wrapper for the dialog's title and description.
 | `AlertDialogTitle`  | The title of the dialog.
 | `AlertDialogDescription`  | A short description of the dialog's content.
-| `AlertDialogBody`  | The main content of the dialog.
 | `AlertDialogFooter`  | A wrapper for the dialog's action buttons.
 
 

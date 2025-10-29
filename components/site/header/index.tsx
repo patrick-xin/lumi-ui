@@ -16,7 +16,7 @@ export function SiteHeader() {
       <div className="flex h-full items-center container justify-between mx-auto w-full">
         {/* Desktop */}
         <div className="hidden md:flex items-center justify-between gap-6 flex-1 min-w-0">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center focus-state">
             <Logo />
             <span className="sr-only">{siteConfig.name}</span>
           </Link>

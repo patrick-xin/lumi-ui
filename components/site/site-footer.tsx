@@ -5,7 +5,7 @@ import { Separator } from "@/registry/ui/separator";
 
 export function SiteFooter() {
   return (
-    <footer className="pt-8 pb-18 sm:pb-0">
+    <footer className="">
       <div className="mx-auto max-w-5xl p-6">
         <div className="flex flex-wrap justify-center items-center gap-6">
           <span className="text-muted-foreground gap-2 flex items-center text-center text-xs">

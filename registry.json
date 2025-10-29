@@ -19,7 +19,7 @@
       "type": "registry:ui",
       "title": "Accordion",
       "description": "A set of collapsible panels with headings.",
-      "dependencies": [],
+      "dependencies": ["@base-ui-components/react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -164,6 +164,20 @@
       "files": [
         {
           "path": "registry/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "An easily stylable checkbox component.",
+      "dependencies": ["@base-ui-components/react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/checkbox.tsx",
           "type": "registry:ui"
         }
       ]

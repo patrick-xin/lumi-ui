@@ -101,7 +101,7 @@
 
   [data-theme="celeste-light"] {
     --radius: 0.5rem;
-    --background: oklch(0.99 0 0);
+    --background: oklch(0.99 0.01 250);
     --foreground: oklch(0.18 0 0);
     --card: oklch(0.99 0 0);
     --card-foreground: oklch(0.18 0 0);
@@ -120,11 +120,11 @@
     --input: oklch(0.92 0 0);
     --ring: oklch(0.65 0.08 265);
 
-    --surface: oklch(0.97 0 0);
+    --surface: oklch(0.97 0.01 252);
     --surface-foreground: var(--foreground);
     --code: var(--surface);
     --code-foreground: var(--surface-foreground);
-    --code-highlight: oklch(0.94 0 0);
+    --code-highlight: oklch(0.94 0.02 250);
   }
 
   [data-theme="celeste-dark"]  {
@@ -151,10 +151,11 @@
     --ring: oklch(0.63 0.1 265);
 
     --surface: oklch(0.21 0.02 265);
-    --surface-foreground: oklch(0.96 0.01 265);
+    --surface-foreground: oklch(0.69 0.04 263);
     --code: var(--surface);
     --code-foreground: var(--surface-foreground);
     --code-highlight: oklch(0.28 0.03 265);
+    
   }
 
   [data-theme="orchid-light"]{
@@ -224,6 +225,7 @@
   }
   html {
     @apply scroll-smooth;
+    scrollbar-gutter: stable;
   }
 
 	body {
@@ -254,6 +256,10 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+@utility focus-state{
+  @apply outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-1;
 }
 
 @utility extend-touch-target {
@@ -384,7 +390,7 @@
 	counter-increment: step;
 
 	&:before {
-		@apply hidden bg-background absolute mt-[-8px] ml-[-52px] lg:inline-flex size-10 items-center justify-center rounded-full border border-input text-center -indent-px font-mono text-sm font-medium text-muted-foreground;
+		@apply hidden bg-background absolute mt-[-8px] ml-[-52px] lg:inline-flex size-10 items-center justify-center rounded-full border border-input text-center -indent-px font-mono text-xs font-medium text-muted-foreground;
 		content: counter(step);
 	}
   

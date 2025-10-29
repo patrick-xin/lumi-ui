@@ -65,7 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("font-sans group/body antialiased", fontVariables)}>
+      <body className={cn("font-sans antialiased", fontVariables)}>
         <ThemeProvider>
           <div className="root">{children}</div>
         </ThemeProvider>
