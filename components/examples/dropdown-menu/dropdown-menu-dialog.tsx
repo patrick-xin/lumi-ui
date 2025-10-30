@@ -13,36 +13,39 @@ import {
   DialogTitle,
 } from "@/registry/ui/dialog";
 import {
-  Menu,
-  MenuItem,
-  MenuPopup,
-  MenuSeparator,
-  MenuTrigger,
-} from "@/registry/ui/menu";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/registry/ui/dropdown-menu";
 
 export function DialogTriggerMenu() {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
 
   return (
     <>
-      <Menu>
-        <MenuTrigger
+      <DropdownMenu>
+        <DropdownMenuTrigger
           render={
             <Button variant="outline">
               Actions <ChevronDownIcon className="size-4" />
             </Button>
           }
         />
-        <MenuPopup>
-          <MenuItem>Edit</MenuItem>
-          <MenuItem>Duplicate</MenuItem>
-          <MenuSeparator />
-          <MenuItem variant="destructive" onClick={() => setDialogOpen(true)}>
+        <DropdownMenuContent>
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <DropdownMenuItem>Duplicate</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            variant="destructive"
+            onClick={() => setDialogOpen(true)}
+          >
             <TrashIcon className="size-4 mr-2" />
             Delete
-          </MenuItem>
-        </MenuPopup>
-      </Menu>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
       <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
         <DialogPopup>
           <DialogHeader>

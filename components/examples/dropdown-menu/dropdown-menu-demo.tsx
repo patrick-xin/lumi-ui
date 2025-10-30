@@ -23,21 +23,21 @@ import {
   DialogTitle,
 } from "@/registry/ui/dialog";
 import {
-  Menu,
-  MenuCheckboxItem,
-  MenuGroup,
-  MenuGroupLabel,
-  MenuItem,
-  MenuPopup,
-  MenuRadioGroup,
-  MenuRadioItem,
-  MenuSeparator,
-  MenuShortcut,
-  MenuSubMenu,
-  MenuSubMenuPopup,
-  MenuSubMenuTrigger,
-  MenuTrigger,
-} from "@/registry/ui/menu";
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuGroupLabel,
+  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSubMenu,
+  DropdownMenuSubMenuContent,
+  DropdownMenuSubMenuTrigger,
+  DropdownMenuTrigger,
+} from "@/registry/ui/dropdown-menu";
 
 export function MenuDemo() {
   const [showMinimap, setShowMinimap] = React.useState(true);
@@ -48,31 +48,31 @@ export function MenuDemo() {
 
   return (
     <>
-      <Menu>
-        <MenuTrigger
+      <DropdownMenu>
+        <DropdownMenuTrigger
           render={
-            <Button variant="outline">
+            <Button variant="secondary">
               View Options <ChevronDown className="ml-2 size-4" />
             </Button>
           }
         />
-        <MenuPopup align="start">
-          <MenuItem>
+        <DropdownMenuContent align="start">
+          <DropdownMenuItem>
             <FilePlus className="size-4" />
             <span>New File</span>
-            <MenuShortcut>⌘N</MenuShortcut>
-          </MenuItem>
-          <MenuSubMenu>
-            <MenuSubMenuTrigger>
+            <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuSubMenu>
+            <DropdownMenuSubMenuTrigger>
               <Share2 className="size-4" />
               <span>Share</span>
-            </MenuSubMenuTrigger>
-            <MenuSubMenuPopup>
-              <MenuItem>
+            </DropdownMenuSubMenuTrigger>
+            <DropdownMenuSubMenuContent>
+              <DropdownMenuItem>
                 <ClipboardIcon />
                 Copy Link
-              </MenuItem>
-              <MenuItem
+              </DropdownMenuItem>
+              <DropdownMenuItem
                 render={
                   <Link href="/settings/sharing" className="w-full">
                     <Settings className="size-4" />
@@ -80,12 +80,12 @@ export function MenuDemo() {
                   </Link>
                 }
               />
-            </MenuSubMenuPopup>
-          </MenuSubMenu>
-          <MenuSeparator />
-          <MenuGroup>
-            <MenuGroupLabel>Editor Layout</MenuGroupLabel>
-            <MenuCheckboxItem
+            </DropdownMenuSubMenuContent>
+          </DropdownMenuSubMenu>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuGroupLabel>Editor Layout</DropdownMenuGroupLabel>
+            <DropdownMenuCheckboxItem
               checked={showMinimap}
               onCheckedChange={setShowMinimap}
             >
@@ -95,39 +95,48 @@ export function MenuDemo() {
                 <EyeOff className="size-4" />
               )}
               <span>Show Minimap</span>
-            </MenuCheckboxItem>
-            <MenuCheckboxItem checked={wordWrap} onCheckedChange={setWordWrap}>
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
+              checked={wordWrap}
+              onCheckedChange={setWordWrap}
+            >
               <WrapText className="size-4" />
               <span>Enable Word Wrap</span>
-            </MenuCheckboxItem>
-            <MenuCheckboxItem
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
               checked={showStatusBar}
               onCheckedChange={setShowStatusBar}
               disabled
             >
               <Eye className="size-4" />
               <span>Show Status Bar (Locked)</span>
-            </MenuCheckboxItem>
-          </MenuGroup>
-          <MenuSeparator />
-          <MenuGroup>
-            <MenuGroupLabel>Sort Files By</MenuGroupLabel>
-            <MenuRadioGroup value={sortBy} onValueChange={setSortBy}>
-              <MenuRadioItem value="modified">Last Modified</MenuRadioItem>
-              <MenuRadioItem value="created">Date Created</MenuRadioItem>
-              <MenuRadioItem value="alpha">Alphabetical</MenuRadioItem>
-            </MenuRadioGroup>
-          </MenuGroup>
-          <MenuSeparator />
-          <MenuItem
+            </DropdownMenuCheckboxItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuGroupLabel>Sort Files By</DropdownMenuGroupLabel>
+            <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
+              <DropdownMenuRadioItem value="modified">
+                Last Modified
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="created">
+                Date Created
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="alpha">
+                Alphabetical
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
             variant="destructive"
             onClick={() => setDeleteDialogOpen(true)}
           >
             <Trash2 className="size-4" />
             <span>Delete Workspace...</span>
-          </MenuItem>
-        </MenuPopup>
-      </Menu>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
       <Dialog open={isDeleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <DialogPopup>
           <DialogHeader>

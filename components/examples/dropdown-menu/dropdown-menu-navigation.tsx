@@ -3,20 +3,25 @@
 import { ChevronDownIcon, ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/registry/ui/button";
-import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@/registry/ui/menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/registry/ui/dropdown-menu";
 
 export function NavigationMenu() {
   return (
-    <Menu>
-      <MenuTrigger
+    <DropdownMenu>
+      <DropdownMenuTrigger
         render={
           <Button variant="outline">
             Navigate <ChevronDownIcon className="size-4" />
           </Button>
         }
       />
-      <MenuPopup>
-        <MenuItem
+      <DropdownMenuContent>
+        <DropdownMenuItem
           render={
             <a
               href="https://google.com"
@@ -28,14 +33,14 @@ export function NavigationMenu() {
             </a>
           }
         />
-        <MenuItem
+        <DropdownMenuItem
           render={
             <Link href="/docs/components" className="w-full">
               Go to Components
             </Link>
           }
         />
-      </MenuPopup>
-    </Menu>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

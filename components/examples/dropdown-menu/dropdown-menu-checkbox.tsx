@@ -4,39 +4,39 @@ import { ChevronDownIcon } from "lucide-react";
 import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
-  Menu,
-  MenuCheckboxItem,
-  MenuPopup,
-  MenuTrigger,
-} from "@/registry/ui/menu";
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/registry/ui/dropdown-menu";
 
 export function CheckboxItemsMenu() {
   const [showMinimap, setShowMinimap] = React.useState(true);
   const [showSidebar, setShowSidebar] = React.useState(false);
 
   return (
-    <Menu>
-      <MenuTrigger
+    <DropdownMenu>
+      <DropdownMenuTrigger
         render={
           <Button variant="outline">
             Workspace <ChevronDownIcon className="size-4" />
           </Button>
         }
       />
-      <MenuPopup>
-        <MenuCheckboxItem
+      <DropdownMenuContent>
+        <DropdownMenuCheckboxItem
           checked={showMinimap}
           onCheckedChange={setShowMinimap}
         >
           Show Minimap
-        </MenuCheckboxItem>
-        <MenuCheckboxItem
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
           checked={showSidebar}
           onCheckedChange={setShowSidebar}
         >
           Show Sidebar
-        </MenuCheckboxItem>
-      </MenuPopup>
-    </Menu>
+        </DropdownMenuCheckboxItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

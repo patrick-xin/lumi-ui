@@ -5,7 +5,12 @@ import { CopyPageButton } from "@/components/docs/copy-page-button";
 import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
-import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@/registry/ui/menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/registry/ui/dropdown-menu";
 
 function getPromptUrl(baseURL: string, url: string) {
   return `${baseURL}?q=${encodeURIComponent(
@@ -69,8 +74,8 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
         slug={slug}
         className="rounded-r-none border-r-0 text-xs"
       />
-      <Menu>
-        <MenuTrigger
+      <DropdownMenu>
+        <DropdownMenuTrigger
           render={(props) => (
             <Button
               variant="outline"
@@ -85,15 +90,19 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
           )}
         />
 
-        <MenuPopup
+        <DropdownMenuContent
           className="w-44 bg-background/40 backdrop-blur-md"
           alignOffset={-40}
         >
           {Object.entries(menuItems).map(([key, value]) => (
-            <MenuItem className="text-xs" render={value(url)} key={key} />
+            <DropdownMenuItem
+              className="text-xs"
+              render={value(url)}
+              key={key}
+            />
           ))}
-        </MenuPopup>
-      </Menu>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 }
