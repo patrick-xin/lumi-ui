@@ -92,6 +92,7 @@ function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
   const Icon = IconMap[child.icon as keyof typeof icons];
   return (
     <Button
+      nativeButton={false}
       variant={"ghost"}
       size={"sm"}
       className={cn(

@@ -12,16 +12,22 @@ function DropdownMenu({
   return <BaseMenu.Root data-slot="dropdown-menu" {...props} />;
 }
 
+function DropdownMenuTrigger({
+  ...props
+}: React.ComponentProps<typeof BaseMenu.Trigger>) {
+  return <BaseMenu.Trigger data-slot="dropdown-menu-trigger" {...props} />;
+}
+
 function DropdownMenuPortal({
   ...props
 }: React.ComponentProps<typeof BaseMenu.Portal>) {
   return <BaseMenu.Portal data-slot="dropdown-menu-portal" {...props} />;
 }
 
-function DropdownMenuTrigger({
+function DropdownMenuBackdrop({
   ...props
-}: React.ComponentProps<typeof BaseMenu.Trigger>) {
-  return <BaseMenu.Trigger data-slot="dropdown-menu-trigger" {...props} />;
+}: React.ComponentProps<typeof BaseMenu.Backdrop>) {
+  return <BaseMenu.Backdrop data-slot="dropdown-menu-backdrop" {...props} />;
 }
 
 function DropdownMenuPositioner({
@@ -67,6 +73,11 @@ type DropdownMenuContentProps = React.ComponentProps<typeof BaseMenu.Popup> & {
    * @default false
    */
   matchAnchorWidth?: boolean;
+  positionerProps?: Omit<
+    React.ComponentProps<typeof BaseMenu.Positioner>,
+    "children" | "className"
+  >;
+  portalProps?: React.ComponentProps<typeof BaseMenu.Portal>;
 };
 
 function DropdownMenuContent({
@@ -78,10 +89,12 @@ function DropdownMenuContent({
   sideOffset = 4,
   showArrow = false,
   matchAnchorWidth = false,
-  ...props
+  positionerProps,
+  portalProps,
+  ...popupProps
 }: DropdownMenuContentProps) {
   return (
-    <DropdownMenuPortal>
+    <DropdownMenuPortal {...portalProps}>
       <DropdownMenuPositioner
         sideOffset={sideOffset}
         align={align}
@@ -91,6 +104,7 @@ function DropdownMenuContent({
           matchAnchorWidth && "w-[var(--anchor-width)]",
           "max-h-(--available-height)",
         )}
+        {...positionerProps}
       >
         <DropdownMenuPopup
           data-slot="dropdown-menu-content"
@@ -101,12 +115,12 @@ function DropdownMenuContent({
             "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
             className,
           )}
-          {...props}
+          {...popupProps}
         >
           {showArrow && (
-            <BaseMenu.Arrow className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180">
+            <DropdownMenuArrow className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180">
               <ArrowSvg />
-            </BaseMenu.Arrow>
+            </DropdownMenuArrow>
           )}
           {children}
         </DropdownMenuPopup>
@@ -156,6 +170,12 @@ function DropdownMenuSeparator({
   );
 }
 
+function DropdownMenuArrow({
+  ...props
+}: React.ComponentProps<typeof BaseMenu.Arrow>) {
+  return <BaseMenu.Arrow data-slot="dropdown-menu-arrow" {...props} />;
+}
+
 function ArrowSvg(props: React.ComponentProps<"svg">) {
   return (
     <svg width="20" height="10" viewBox="0 0 20 10" fill="none" {...props}>
@@ -180,7 +200,7 @@ function DropdownMenuSubMenu({
 }: React.ComponentProps<typeof BaseMenu.SubmenuRoot>) {
   return (
     <BaseMenu.SubmenuRoot
-      delay={0}
+    
       data-slot="dropdown-menu-sub-menu"
       {...props}
     />
@@ -336,11 +356,13 @@ function DropdownMenuShortcut({
 
 export {
   DropdownMenu,
-  DropdownMenuPortal,
   DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuPopup,
+  DropdownMenuPortal,
+  DropdownMenuBackdrop,
   DropdownMenuPositioner,
+  DropdownMenuPopup,
+  DropdownMenuContent,
+  DropdownMenuArrow,
   DropdownMenuItem,
   DropdownMenuGroup,
   DropdownMenuGroupLabel,

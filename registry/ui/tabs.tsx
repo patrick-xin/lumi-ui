@@ -1,6 +1,6 @@
 "use client";
 
-import { Tabs as TabsPrimitive } from "@base-ui-components/react/tabs";
+import { Tabs as BaseTabs } from "@base-ui-components/react/tabs";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
@@ -66,13 +66,13 @@ function Tabs({
   variant = "pill",
   orientation = "horizontal",
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root> &
+}: React.ComponentProps<typeof BaseTabs.Root> &
   VariantProps<typeof tabsListVariants> & {
     orientation?: "horizontal" | "vertical";
   }) {
   return (
     <TabsContext.Provider value={{ variant }}>
-      <TabsPrimitive.Root
+      <BaseTabs.Root
         data-slot="tabs"
         orientation={orientation}
         className={cn(
@@ -89,11 +89,11 @@ function TabsList({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.List>) {
+}: React.ComponentProps<typeof BaseTabs.List>) {
   const { variant } = useTabsContext();
 
   return (
-    <TabsPrimitive.List
+    <BaseTabs.List
       data-slot="tabs-list"
       className={cn(
         tabsListVariants({ variant }),
@@ -104,18 +104,18 @@ function TabsList({
     >
       {children}
       <TabIndicator />
-    </TabsPrimitive.List>
+    </BaseTabs.List>
   );
 }
 
 function TabsTab({
   className,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Tab>) {
+}: React.ComponentProps<typeof BaseTabs.Tab>) {
   const { variant } = useTabsContext();
 
   return (
-    <TabsPrimitive.Tab
+    <BaseTabs.Tab
       data-slot="tabs-tab"
       className={cn(
         "relative z-[1] inline-flex items-center justify-center gap-1.5 outline-none",
@@ -123,11 +123,12 @@ function TabsTab({
         "text-sm font-medium text-nowrap whitespace-nowrap text-muted-foreground hover:text-foreground",
         "transition-colors duration-200 ease-in",
         "focus-visible:ring-[3px] focus-visible:ring-ring/50",
-        "data-[selected]:text-foreground",
+        "data-[active]:text-foreground",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "data-[orientation=horizontal]:flex-1 data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
-        variant === "solid" && "hover:bg-accent data-[selected]:bg-accent/70",
+        variant === "solid" && "hover:bg-accent data-[active]:bg-accent/70",
+        variant === "ghost" && "data-[active]:text-foreground",
         className,
       )}
       {...props}
@@ -138,11 +139,11 @@ function TabsTab({
 function TabIndicator({
   className,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Indicator>) {
+}: React.ComponentProps<typeof BaseTabs.Indicator>) {
   const { variant } = useTabsContext();
 
   return (
-    <TabsPrimitive.Indicator
+    <BaseTabs.Indicator
       data-slot="tab-indicator"
       className={cn(tabIndicatorVariants({ variant }), className)}
       {...props}
@@ -153,9 +154,9 @@ function TabIndicator({
 function TabsPanel({
   className,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Panel>) {
+}: React.ComponentProps<typeof BaseTabs.Panel>) {
   return (
-    <TabsPrimitive.Panel
+    <BaseTabs.Panel
       data-slot="tabs-panel"
       className={cn("flex-1 outline-none", className)}
       {...props}

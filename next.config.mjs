@@ -21,6 +21,9 @@ const config = {
       },
     ],
   },
+  experimental: {
+    turbopackFileSystemCacheForDev: true,
+  },
   async rewrites() {
     return [
       {

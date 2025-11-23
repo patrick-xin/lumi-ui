@@ -76,18 +76,17 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
       />
       <DropdownMenu>
         <DropdownMenuTrigger
-          render={(props) => (
+          render={
             <Button
               variant="outline"
               size="sm"
               className={cn(
                 "h-8 rounded-l-none border-l data-[popup-open]:[&_svg]:rotate-180 max-md:[&_svg]:rotate-180 max-md:data-[popup-open]:[&_svg]:rotate-0",
               )}
-              {...props}
             >
               <ChevronDownIcon className="size-3.5 transition-transform" />
             </Button>
-          )}
+          }
         />
 
         <DropdownMenuContent

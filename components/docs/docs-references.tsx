@@ -17,36 +17,30 @@ export const DocsReferences = ({ links }: DocsReferenceProps) => {
   return (
     <div className="flex items-center gap-2">
       {links.doc && (
-        <Badge
-          variant="outline"
-          render={
-            <Link
-              href={links.doc}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1"
-            >
-              Docs
-              <ArrowUpRight className="h-3 w-3" />
-            </Link>
-          }
-        />
+        <Badge variant="outline">
+          <Link
+            href={links.doc}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1"
+          >
+            Docs
+            <ArrowUpRight className="h-3 w-3" />
+          </Link>
+        </Badge>
       )}
       {links.api && (
-        <Badge
-          variant="outline"
-          render={
-            <Link
-              href={links.api}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1"
-            >
-              API Reference
-              <ArrowUpRight className="h-3 w-3" />
-            </Link>
-          }
-        />
+        <Badge variant="outline">
+          <Link
+            href={links.api}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1"
+          >
+            API Reference
+            <ArrowUpRight className="h-3 w-3" />
+          </Link>
+        </Badge>
       )}
     </div>
   );

@@ -86,6 +86,9 @@ Use the `render` prop to compose a menu item with an anchor element.
 In order to open a dialog using a menu, control the dialog state and open it imperatively using the `onClick` handler on the menu item.
 <ComponentPreview name="dropdown-menu-dialog" />
 
+### Create your own
+
+<ComponentPreview name="dropdown-menu-custom" />
 
 ## Anatomy
 
@@ -114,7 +117,9 @@ In order to open a dialog using a menu, control the dialog state and open it imp
       </DropdownMenuRadioGroup>
       <DropdownMenuSubMenu>
         <DropdownMenuSubMenuTrigger />
-        <DropdownMenuSubMenuContent />
+        <DropdownMenuSubMenuContent>
+          {/* Submenu items  */}
+        </DropdownMenuSubMenuContent>
       </DropdownMenuSubMenu>
     </DropdownMenuContent>
   </DropdownMenu>
@@ -143,7 +148,18 @@ In order to open a dialog using a menu, control the dialog state and open it imp
       <DropdownMenuPortal>
         <DropdownMenuPositioner>
           <DropdownMenuPopup>
-            {/* Dropdown menu items  */}
+            <DropdownMenuItem />
+            <DropdownMenuItem>
+              <DropdownMenuShortcut />
+            </DropdownMenuItem>
+            <DropdownMenuCheckboxItem />
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuGroupLabel />
+            </DropdownMenuGroup>
+            <DropdownMenuRadioGroup>
+              <DropdownMenuRadioItem />
+            </DropdownMenuRadioGroup>
             <DropdownMenuSubMenu>
               <DropdownMenuSubMenuTrigger />
               <DropdownMenuPortal>
@@ -224,9 +240,8 @@ In order to open a dialog using a menu, control the dialog state and open it imp
 | :--- | :--- | :--- |
 | **Positioning Props**  | `DropdownMenuContent` includes `side`, `sideOffset`, `align`, and `alignOffset` directly. | These props are inherited from the underlying Radix UI component but not explicitly defined.
 | **Arrow Display**  | `DropdownMenuContent` has a `showArrow` prop to display a pointer arrow. | No built-in arrow functionality.
-| **Width Matching**  | DropdownMenuContent has a matchAnchorWidth prop to match the trigger's width. | This behavior requires manual implementation.
+| **Width Matching**  | `DropdownMenuContent` has a `matchAnchorWidth` prop to match the trigger's width. | This behavior requires manual implementation.
 | **Animation**  | Animations are handled via `data-[starting-style]` and `data-[ending-style]` attributes for more direct CSS control. | Animations are handled via `data-[state=open]` and `data-[state=closed]` with Tailwind CSS animation classes.
-| **Underlying Component**  | `DropdownMenuPositioner` is introduced to handle the positioning logic separately from the content. | Positioning is handled within the `DropdownMenuContent` component.
 
 ### Migration Example
 

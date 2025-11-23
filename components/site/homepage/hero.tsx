@@ -96,6 +96,7 @@ export function HeroSection() {
               <div className="mt-12 flex items-center gap-4 mx-auto xl:mt-16">
                 <Button
                   size="lg"
+                  nativeButton={false}
                   render={
                     <Link href="/docs/introduction">
                       <span className="text-nowrap">View docs</span>
@@ -104,6 +105,7 @@ export function HeroSection() {
                 />
                 <Button
                   size="lg"
+                  nativeButton={false}
                   variant="ghost"
                   render={
                     <Link href="/docs/components">

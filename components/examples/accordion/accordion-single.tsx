@@ -10,11 +10,7 @@ import {
 
 export default function AccordionSingle() {
   return (
-    <Accordion
-      multiple={false}
-      defaultValue={["item-1"]}
-      className="w-full max-w-md"
-    >
+    <Accordion multiple defaultValue={["item-1"]} className="w-full max-w-md">
       <AccordionItem value="item-1">
         <AccordionHeader>
           <AccordionTrigger>

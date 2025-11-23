@@ -11,9 +11,11 @@ import {
 
 export function HoverMenu() {
   return (
-    // Pass `openOnHover` and `delay` directly to the Menu
-    <DropdownMenu openOnHover delay={200}>
+    // Pass `openOnHover` and `delay` directly to the DropdownMenuTrigger
+    <DropdownMenu>
       <DropdownMenuTrigger
+        delay={200}
+        openOnHover
         render={
           <Button variant="outline">
             Workspace <ChevronDownIcon className="size-4" />
