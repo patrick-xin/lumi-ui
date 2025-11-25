@@ -27,13 +27,153 @@ links:
       <Step title="Copy and paste the following code into your project.">
         <ComponentSourceCode name="select" title="select.tsx" collapsible/>
       </Step>
-       <Step title="Update the import paths to match your project setup."/>
+      <Step title="Update the import paths to match your project setup."/>
     </Steps>
   </TabsPanel>
 </CodeTabs>
 
+## Basic Usage
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+```
+
+```tsx
+<Select>
+  <SelectTrigger className="w-[180px]">
+    <SelectValue placeholder="Theme" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="light">Light</SelectItem>
+    <SelectItem value="dark">Dark</SelectItem>
+    <SelectItem value="system">System</SelectItem>
+  </SelectContent>
+</Select>
+```
 
 ## Recipes
 
+### Scrollable
+
+When the content exceeds the viewport height, scroll buttons automatically appear.
+
 <ComponentPreview name="select-scrollable" />
 
+### Item Aligned (Positioning)
+
+By default, the select uses popper positioning (detached from the trigger). To have the selected item align with the trigger text (classic OS behavior), use position="item-aligned".
+
+<ComponentPreview name="select-aligned" />
+
+### Auto Label Lookup
+
+The trigger automatically displays the label text.
+
+<ComponentPreview name="select-simple" />
+
+### Custom Render
+
+You can render custom JSX (Icons + Colors) in the trigger and items.
+
+<ComponentPreview name="select-custom-render" />
+
+### Track State
+
+You can track the state of the select and use it to display additional information.
+
+<ComponentPreview name="select-track-state" />
+
+## Anatomy
+
+```tsx
+<Select>
+  <SelectGroup>
+    <SelectValue />
+    <SelectTrigger />
+    <SelectContent>
+      <SelectLabel />
+      <SelectItem />
+      <SelectSeparator />
+      <SelectScrollUpButton />
+      <SelectScrollDownButton />
+    </SelectContent>
+  </SelectGroup>
+</Select>
+```
+
+| Component | Role |
+| :--- | :--- |
+| `Select` | The root component that manages the open/closed state and value. |
+| `SelectTrigger` | The button that toggles the list. |
+| `SelectValue` | Displays the current value or a placeholder. Updated API. |
+| `SelectContent` | The popover container. Internally handles positioning and the scroll area. |
+| `SelectGroup` | Used to group items. |
+| `SelectLabel` | Used to render a label for a group. |
+| `SelectItem` | An individual option. |
+| `SelectSeparator` | A visual separator between items. |
+| `SelectScrollUpButton` | Explicit scroll control for the top of the list. |
+| `SelectScrollDownButton` | Explicit scroll control for the bottom of the list. |
+
+## Migration from shadcn/ui
+
+### Rendering Labels
+
+❌ The Radix Way (Will show raw values in Trigger)
+
+```tsx
+// 🔴 BAD: Trigger will show "apple" instead of "Apple"
+<Select>
+  <SelectTrigger>
+    <SelectValue />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="apple">Apple</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+✅ The Base UI Way (Shows correct labels)
+
+```tsx
+// 🟢 GOOD: Trigger shows "Apple"
+const fruits = [{ value: "apple", label: "Apple" }]
+
+<Select items={fruits}>
+  <SelectTrigger>
+    <SelectValue />
+  </SelectTrigger>
+  <SelectContent>
+    {fruits.map(f => (
+      <SelectItem key={f.value} value={f.value}>{f.label}</SelectItem>
+    ))}
+  </SelectContent>
+</Select>
+```
+
+### Component Naming & Structure
+
+The Select component in Lumi UI is built on top of Base UI but follows a similar API to shadcn/ui (which uses Radix UI).
+
+| shadcn/ui | lumi/ui | Change |
+| :--- | :--- | :--- |
+| `Select` | `Select` | Same |
+| `SelectTrigger` | `SelectTrigger` | Same |
+| `SelectValue` | `SelectValue` | Same |
+| `SelectContent` | `SelectContent` | Same |
+| `SelectItem` | `SelectItem` | Same |
+| `SelectLabel` | `SelectLabel` | Same |
+| `SelectGroup` | `SelectGroup` | Same |
+| `SelectSeparator` | `SelectSeparator` | Same |
+
+### Key Differences
+
+| Feature | lumi/ui | shadcn/ui |
+| :--- | :--- | :--- |
+| Underlying Library | Base UI | Radix UI |
+| Animation | CSS-based (Tailwind) | Radix Primitives + Tailwind |

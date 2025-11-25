@@ -1,9 +1,9 @@
-"use client";
-
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/registry/ui/select";
@@ -22,12 +22,15 @@ export function SelectDemo() {
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
-      <SelectContent>
-        {fruits.map((fruit) => (
-          <SelectItem key={fruit.value} value={fruit.value}>
-            {fruit.label}
-          </SelectItem>
-        ))}
+      <SelectContent position="item-aligned">
+        <SelectGroup>
+          <SelectLabel>Fruits</SelectLabel>
+          {fruits.map((fruit) => (
+            <SelectItem key={fruit.value} value={fruit.value}>
+              {fruit.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
       </SelectContent>
     </Select>
   );

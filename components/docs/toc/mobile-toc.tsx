@@ -117,7 +117,7 @@ export function MobileToc({ items, className, ...props }: PageTOCPopoverProps) {
       <div
         {...props}
         className={cn(
-          "fixed h-10 w-full top-(--header-height) inset-x-0 bg-background/10 backdrop-blur-md border-b border-border/20",
+          "fixed z-50 h-10 w-full top-(--header-height) inset-x-0 bg-background/10 backdrop-blur-md border-b border-border/20",
           open && "border-0",
           className,
         )}
@@ -128,7 +128,7 @@ export function MobileToc({ items, className, ...props }: PageTOCPopoverProps) {
             showCloseButton={false}
             classNames={{
               popup: cn(
-                "mx-0 w-screen max-w-none rounded-none p-0 border-0 shadow-none",
+                "mx-0 w-screen max-w-none! rounded-none p-0 border-0 shadow-none",
                 "top-[calc(var(--header-height)+2.5rem)] translate-y-0 left-0 translate-x-0",
                 "max-h-[calc(100vh-var(--header-height)-2.5rem)]",
                 "data-[starting-style]:!scale-100 data-[ending-style]:!scale-100",

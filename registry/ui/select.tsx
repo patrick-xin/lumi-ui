@@ -1,34 +1,44 @@
 "use client"
 
 import * as React from "react"
-import { Select as SelectPrimitive } from "@base-ui-components/react/select"
+import { Select as BaseSelect } from "@base-ui-components/react/select"
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
 function Select({
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Root>) {
-  return <SelectPrimitive.Root data-slot="select" {...props} />
+}: React.ComponentProps<typeof BaseSelect.Root>) {
+  return <BaseSelect.Root data-slot="select" {...props} />
 }
 
 function SelectGroup({
-  className,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Group>) {
-  return (
-    <SelectPrimitive.Group
-      data-slot="select-group"
-      className={cn("py-1.5 p-1", className)}
-      {...props}
-    />
-  )
+}: React.ComponentProps<typeof BaseSelect.Group>) {
+  return <BaseSelect.Group data-slot="select-group" {...props} />
 }
 
 function SelectValue({
+  className,
+  placeholder,
+  children,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Value>) {
-  return <SelectPrimitive.Value data-slot="select-value" {...props} />
+}: React.ComponentProps<typeof BaseSelect.Value> & {
+  placeholder?: string
+}) {
+  return (
+    <BaseSelect.Value
+      data-slot="select-value"
+      data-placeholder-text={placeholder}
+      className={cn(
+        "data-[placeholder]:before:content-[attr(data-placeholder-text)] data-[placeholder]:text-muted-foreground",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </BaseSelect.Value>
+  )
 }
 
 function SelectTrigger({
@@ -36,30 +46,32 @@ function SelectTrigger({
   children,
   size = "default",
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
+}: React.ComponentProps<typeof BaseSelect.Trigger> & {
   size?: "default" | "sm"
 }) {
   return (
-    <SelectPrimitive.Trigger
+    <BaseSelect.Trigger
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "border-input flex w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs [&>span]:line-clamp-1",
+        "border-input flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs outline-none",
         "dark:bg-input/30 dark:hover:bg-input/50",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "focus-visible:ring-[3px]",
         "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
         "disabled:cursor-not-allowed disabled:opacity-50",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "data-[size=default]:h-9 data-[size=sm]:h-8",
+        "transition-[color,box-shadow]",
+        "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
         className
       )}
       {...props}
     >
       {children}
-      <SelectPrimitive.Icon>
+      <BaseSelect.Icon>
         <ChevronDownIcon className="size-4 opacity-50" />
-      </SelectPrimitive.Icon>
-    </SelectPrimitive.Trigger>
+      </BaseSelect.Icon>
+    </BaseSelect.Trigger>
   )
 }
 
@@ -72,53 +84,54 @@ function SelectContent({
   alignOffset = 0,
   position = "popper",
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Popup> &
+}: React.ComponentProps<typeof BaseSelect.Popup> &
   Pick<
-    React.ComponentProps<typeof SelectPrimitive.Positioner>,
+    React.ComponentProps<typeof BaseSelect.Positioner>,
     "side" | "sideOffset" | "align" | "alignOffset"
   > & {
     position?: "popper" | "item-aligned"
   }) {
   return (
-    <SelectPrimitive.Portal>
-      <SelectPrimitive.Positioner
+    <BaseSelect.Portal>
+      <BaseSelect.Positioner
         side={side}
         align={align}
         sideOffset={sideOffset}
         alignOffset={alignOffset}
         alignItemWithTrigger={position === "item-aligned"}
-        className="z-50"
+        className="outline-none select-none z-10"
       >
-        <SelectPrimitive.Popup
+        <BaseSelect.Popup
           data-slot="select-content"
           className={cn(
-            "bg-popover text-popover-foreground relative flex flex-col min-w-[var(--anchor-width)] rounded-md border shadow-md",
-            "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
-            "data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
-            "transition-[transform,opacity,scale] duration-150",
+            "bg-popover text-popover-foreground relative overflow-hidden rounded-md border shadow-md min-w-[var(--anchor-width)]",
+            "origin-[var(--transform-origin)] transition-[transform,scale,opacity]  duration-150 ease-out", 
+            "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
+            "data-[ending-style]:scale-90 data-[ending-style]:opacity-0 data-[ending-style]:transition-none", 
+            "data-[side=none]:data-[ending-style]:transition-none  data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100 data-[side=none]:data-[starting-style]:transition-none",
             className
           )}
           {...props}
         >
           <SelectScrollUpButton />
-          <SelectPrimitive.List className="p-1 overflow-auto max-h-[min(24rem,var(--available-height))]">
+          <BaseSelect.List className="relative p-1 scroll-py-6 overflow-y-auto max-h-[min(24rem,var(--available-height))]">
             {children}
-          </SelectPrimitive.List>
+          </BaseSelect.List>
           <SelectScrollDownButton />
-        </SelectPrimitive.Popup>
-      </SelectPrimitive.Positioner>
-    </SelectPrimitive.Portal>
+        </BaseSelect.Popup>
+      </BaseSelect.Positioner>
+    </BaseSelect.Portal>
   )
 }
 
 function SelectLabel({
   className,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.GroupLabel>) {
+}: React.ComponentProps<typeof BaseSelect.GroupLabel>) {
   return (
-    <SelectPrimitive.GroupLabel
+    <BaseSelect.GroupLabel
       data-slot="select-label"
-      className={cn("py-1.5 pl-8 pr-2 text-sm font-semibold", className)}
+      className={cn("text-muted-foreground px-2 py-1.5 text-xs", className)}
       {...props}
     />
   )
@@ -128,13 +141,12 @@ function SelectItem({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Item>) {
+}: React.ComponentProps<typeof BaseSelect.Item>) {
   return (
-    <SelectPrimitive.Item
+    <BaseSelect.Item
       data-slot="select-item"
       className={cn(
-        "relative flex w-full cursor-default items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none",
-        "focus:bg-accent focus:text-accent-foreground",
+        "relative flex cursor-default items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none",
         "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0",
@@ -142,22 +154,25 @@ function SelectItem({
       )}
       {...props}
     >
-      <SelectPrimitive.ItemIndicator className="absolute right-2 flex size-3.5 items-center justify-center">
-        <CheckIcon className="size-4" />
-      </SelectPrimitive.ItemIndicator>
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-    </SelectPrimitive.Item>
+      <span className="absolute right-2 flex size-3.5 items-center justify-center">
+        <BaseSelect.ItemIndicator>
+          <CheckIcon className="size-4" />
+        </BaseSelect.ItemIndicator>
+      </span>
+
+      <BaseSelect.ItemText>{children}</BaseSelect.ItemText>
+    </BaseSelect.Item>
   )
 }
 
 function SelectSeparator({
   className,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Separator>) {
+}: React.ComponentProps<typeof BaseSelect.Separator>) {
   return (
-    <SelectPrimitive.Separator
+    <BaseSelect.Separator
       data-slot="select-separator"
-      className={cn("bg-muted -mx-1 my-1 h-px", className)}
+      className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
       {...props}
     />
   )
@@ -166,36 +181,36 @@ function SelectSeparator({
 function SelectScrollUpButton({
   className,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.ScrollUpArrow>) {
+}: React.ComponentProps<typeof BaseSelect.ScrollUpArrow>) {
   return (
-    <SelectPrimitive.ScrollUpArrow
+    <BaseSelect.ScrollUpArrow
       data-slot="select-scroll-up-button"
       className={cn(
-        "flex cursor-default items-center justify-center py-1 text-muted-foreground/50",
+       "top-0 z-1 flex h-7 w-full cursor-default items-center justify-center rounded-md bg-popover text-center text-xs before:absolute data-[side=none]:before:-top-full before:left-0 before:h-full before:w-full before:content-['']",
         className
       )}
       {...props}
     >
       <ChevronUpIcon className="size-4" />
-    </SelectPrimitive.ScrollUpArrow>
+    </BaseSelect.ScrollUpArrow>
   )
 }
 
 function SelectScrollDownButton({
   className,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.ScrollDownArrow>) {
+}: React.ComponentProps<typeof BaseSelect.ScrollDownArrow>) {
   return (
-    <SelectPrimitive.ScrollDownArrow
+    <BaseSelect.ScrollDownArrow
       data-slot="select-scroll-down-button"
       className={cn(
-        "flex cursor-default items-center justify-center py-1 text-muted-foreground/50",
+       "bottom-0 z-1 flex h-7 w-full cursor-default items-center justify-center rounded-md bg-popover text-center text-xs before:absolute data-[side=none]:before:-bottom-full before:left-0 before:h-full before:w-full before:content-['']",
         className
       )}
       {...props}
     >
       <ChevronDownIcon className="size-4" />
-    </SelectPrimitive.ScrollDownArrow>
+    </BaseSelect.ScrollDownArrow>
   )
 }
 
