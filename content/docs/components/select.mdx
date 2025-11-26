@@ -65,11 +65,29 @@ When the content exceeds the viewport height, scroll buttons automatically appea
 
 <ComponentPreview name="select-scrollable" />
 
-### Item Aligned (Positioning)
+### With Groups
 
-By default, the select uses popper positioning (detached from the trigger). To have the selected item align with the trigger text (classic OS behavior), use position="item-aligned".
+Use `SelectGroup` and `SelectLabel` to organize items into sections.
+
+<ComponentPreview name="select-grouped" />
+
+### Multiple selection
+
+Add the `multiple` prop to the `<Select>` component to allow multiple selections.
+
+<ComponentPreview name="select-multiple" />
+
+### Item Aligned
+
+Use `position="item-aligned"` for classic OS-style positioning where the selected item aligns with the trigger.
 
 <ComponentPreview name="select-aligned" />
+
+### Disabled
+
+Disable the entire select or individual items.
+
+<ComponentPreview name="select-disabled" />
 
 ### Auto Label Lookup
 
@@ -93,41 +111,41 @@ You can track the state of the select and use it to display additional informati
 
 ```tsx
 <Select>
-  <SelectGroup>
+  <SelectTrigger>
     <SelectValue />
-    <SelectTrigger />
-    <SelectContent>
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
       <SelectLabel />
       <SelectItem />
-      <SelectSeparator />
-      <SelectScrollUpButton />
-      <SelectScrollDownButton />
-    </SelectContent>
-  </SelectGroup>
+    </SelectGroup>
+    <SelectSeparator />
+  </SelectContent>
 </Select>
 ```
 
 | Component | Role |
 | :--- | :--- |
-| `Select` | The root component that manages the open/closed state and value. |
-| `SelectTrigger` | The button that toggles the list. |
-| `SelectValue` | Displays the current value or a placeholder. Updated API. |
-| `SelectContent` | The popover container. Internally handles positioning and the scroll area. |
-| `SelectGroup` | Used to group items. |
-| `SelectLabel` | Used to render a label for a group. |
-| `SelectItem` | An individual option. |
-| `SelectSeparator` | A visual separator between items. |
-| `SelectScrollUpButton` | Explicit scroll control for the top of the list. |
-| `SelectScrollDownButton` | Explicit scroll control for the bottom of the list. |
+| `Select` | Root component that manages state and value. |
+| `SelectTrigger` | Button that toggles the dropdown. |
+| `SelectValue` | Displays the selected value or placeholder. |
+| `SelectContent` | Popover container with positioning and scroll handling. |
+| `SelectGroup` | Groups related items together. |
+| `SelectLabel` | Label for a group of items. |
+| `SelectItem` | Individual selectable option. |
+| `SelectSeparator` | Visual divider between items or groups. |
+| `SelectScrollUpButton` | Scroll control at the top of the list. |
+| `SelectScrollDownButton` | Scroll control at the bottom of the list. |
 
 ## Migration from shadcn/ui
 
 ### Rendering Labels
-
-❌ The Radix Way (Will show raw values in Trigger)
+  
+<Callout variant="destructive" title="The Radix Way (Will show raw values in Trigger)">
+  Trigger will show 'apple' instead of 'Apple'
+</Callout>
 
 ```tsx
-// 🔴 BAD: Trigger will show "apple" instead of "Apple"
 <Select>
   <SelectTrigger>
     <SelectValue />
@@ -138,10 +156,11 @@ You can track the state of the select and use it to display additional informati
 </Select>
 ```
 
-✅ The Base UI Way (Shows correct labels)
+<Callout variant="info" title="The Base UI Way (Shows correct labels)">
+  Trigger shows "Apple"
+</Callout>
 
 ```tsx
-// 🟢 GOOD: Trigger shows "Apple"
 const fruits = [{ value: "apple", label: "Apple" }]
 
 <Select items={fruits}>
@@ -156,24 +175,5 @@ const fruits = [{ value: "apple", label: "Apple" }]
 </Select>
 ```
 
-### Component Naming & Structure
 
-The Select component in Lumi UI is built on top of Base UI but follows a similar API to shadcn/ui (which uses Radix UI).
 
-| shadcn/ui | lumi/ui | Change |
-| :--- | :--- | :--- |
-| `Select` | `Select` | Same |
-| `SelectTrigger` | `SelectTrigger` | Same |
-| `SelectValue` | `SelectValue` | Same |
-| `SelectContent` | `SelectContent` | Same |
-| `SelectItem` | `SelectItem` | Same |
-| `SelectLabel` | `SelectLabel` | Same |
-| `SelectGroup` | `SelectGroup` | Same |
-| `SelectSeparator` | `SelectSeparator` | Same |
-
-### Key Differences
-
-| Feature | lumi/ui | shadcn/ui |
-| :--- | :--- | :--- |
-| Underlying Library | Base UI | Radix UI |
-| Animation | CSS-based (Tailwind) | Radix Primitives + Tailwind |

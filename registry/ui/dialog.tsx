@@ -87,15 +87,11 @@ function DialogPopup({
 }
 
 function DialogClose({
-  variant,
-  size,
-  className,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Close> &
   VariantProps<typeof buttonVariants>) {
   return (
     <DialogPrimitive.Close
-      className={cn(buttonVariants({ variant, size }), className)}
       data-slot="dialog-close"
       {...props}
     />

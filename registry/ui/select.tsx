@@ -31,7 +31,7 @@ function SelectValue({
       data-slot="select-value"
       data-placeholder-text={placeholder}
       className={cn(
-        "data-[placeholder]:before:content-[attr(data-placeholder-text)] data-[placeholder]:text-muted-foreground",
+        "data-[placeholder]:text-muted-foreground data-[placeholder]:before:content-[attr(data-placeholder-text)]",
         className
       )}
       {...props}
@@ -56,10 +56,10 @@ function SelectTrigger({
       className={cn(
         "border-input flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs outline-none",
         "dark:bg-input/30 dark:hover:bg-input/50",
-        "focus-visible:ring-[3px]",
+        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
         "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
         "disabled:cursor-not-allowed disabled:opacity-50",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "[&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "data-[size=default]:h-9 data-[size=sm]:h-8",
         "transition-[color,box-shadow]",
         "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
@@ -83,6 +83,7 @@ function SelectContent({
   sideOffset = 4,
   alignOffset = 0,
   position = "popper",
+  showArrow = true,
   ...props
 }: React.ComponentProps<typeof BaseSelect.Popup> &
   Pick<
@@ -90,6 +91,7 @@ function SelectContent({
     "side" | "sideOffset" | "align" | "alignOffset"
   > & {
     position?: "popper" | "item-aligned"
+    showArrow?: boolean
   }) {
   return (
     <BaseSelect.Portal>
@@ -99,16 +101,16 @@ function SelectContent({
         sideOffset={sideOffset}
         alignOffset={alignOffset}
         alignItemWithTrigger={position === "item-aligned"}
-        className="outline-none select-none z-10"
+        className="z-50 outline-none"
       >
         <BaseSelect.Popup
           data-slot="select-content"
           className={cn(
             "bg-popover text-popover-foreground relative overflow-hidden rounded-md border shadow-md min-w-[var(--anchor-width)]",
-            "origin-[var(--transform-origin)] transition-[transform,scale,opacity]  duration-150 ease-out", 
-            "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
-            "data-[ending-style]:scale-90 data-[ending-style]:opacity-0 data-[ending-style]:transition-none", 
-            "data-[side=none]:data-[ending-style]:transition-none  data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100 data-[side=none]:data-[starting-style]:transition-none",
+            "origin-[var(--transform-origin)] transition-[transform,scale,opacity] duration-150 ease-out",
+            "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
+            "data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:transition-none",
+            "data-[side=none]:transition-none data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100",
             className
           )}
           {...props}
@@ -146,10 +148,12 @@ function SelectItem({
     <BaseSelect.Item
       data-slot="select-item"
       className={cn(
-        "relative flex cursor-default items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none",
+        "relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none",
         "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+        "[&_svg:not([class*='text-'])]:text-muted-foreground",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "*:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
         className
       )}
       {...props}
@@ -213,6 +217,8 @@ function SelectScrollDownButton({
     </BaseSelect.ScrollDownArrow>
   )
 }
+
+
 
 export {
   Select,

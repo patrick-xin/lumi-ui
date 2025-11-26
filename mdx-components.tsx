@@ -1,6 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { CopyButton } from "@/components/docs/copy-button";
+import { Callout } from "@/components/docs/mdx/call-out";
 import { CodeTabs } from "@/components/docs/mdx/code-tabs";
 import { ComponentList } from "@/components/docs/mdx/component-list";
 import { ComponentPreview } from "@/components/docs/mdx/component-preview";
@@ -243,4 +244,5 @@ export const mdxComponents: MDXComponents = {
   Tabs,
   ComponentList,
   CTACard,
+  Callout,
 };

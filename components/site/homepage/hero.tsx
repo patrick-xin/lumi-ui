@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/registry/ui/button";
+import { Banner } from "../../banner";
 
 export function HeroSection() {
   return (
@@ -64,6 +65,7 @@ export function HeroSection() {
                     }}
                   />
                 </div>
+                <Banner />
                 <h1 className="text-balance tracking-tight text-5xl font-bold md:text-6xl relative">
                   Illuminate your interface
                 </h1>
