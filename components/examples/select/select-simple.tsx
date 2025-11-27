@@ -50,25 +50,17 @@ const statuses = [
 
 export function SelectSimple() {
   return (
-    <div className="space-y-2">
-      <h3 className="text-sm font-medium">Pattern 1: Auto-Label Lookup</h3>
-      <p className="text-xs text-muted-foreground">
-        The trigger automatically displays the label text.
-      </p>
-
-      {/* Pass 'items' here so Base UI knows how to map value -> label */}
-      <Select items={statuses}>
-        <SelectTrigger className="w-[200px]">
-          <SelectValue placeholder="Select a status" />
-        </SelectTrigger>
-        <SelectContent>
-          {statuses.map((status) => (
-            <SelectItem key={status.value} value={status.value}>
-              {status.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
+    <Select items={statuses}>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a status" />
+      </SelectTrigger>
+      <SelectContent>
+        {statuses.map((status) => (
+          <SelectItem key={status.value} value={status.value}>
+            {status.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }

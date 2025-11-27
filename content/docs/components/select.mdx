@@ -89,19 +89,26 @@ Disable the entire select or individual items.
 
 <ComponentPreview name="select-disabled" />
 
-### Auto Label Lookup
+### Data-Driven Items
 
-The trigger automatically displays the label text.
+Pass an array of objects to the `items` prop to automatically handle value-label lookups and rendering.
 
 <ComponentPreview name="select-simple" />
 
 ### Custom Render
 
-You can render custom JSX (Icons + Colors) in the trigger and items.
+You can customize the rendered content while still using the `items` prop for accessibility.
 
 <ComponentPreview name="select-custom-render" />
 
+### Controlled
+
+Control the value state programmatically.
+
+<ComponentPreview name="select-controlled" />
+
 ### Track State
+
 
 You can track the state of the select and use it to display additional information.
 
@@ -139,41 +146,77 @@ You can track the state of the select and use it to display additional informati
 
 ## Migration from shadcn/ui
 
-### Rendering Labels
-  
-<Callout variant="destructive" title="The Radix Way (Will show raw values in Trigger)">
-  Trigger will show 'apple' instead of 'Apple'
-</Callout>
+### Component Naming & Structure
 
-```tsx
-<Select>
-  <SelectTrigger>
-    <SelectValue />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="apple">Apple</SelectItem>
-  </SelectContent>
-</Select>
-```
+Our component wraps Base UI's `Select` primitive but maintains shadcn/ui's naming convention for easy migration.
 
-<Callout variant="info" title="The Base UI Way (Shows correct labels)">
-  Trigger shows "Apple"
-</Callout>
+| shadcn/ui | Lumi UI | Notes |
+| :--- | :--- | :--- |
+| `Select` | `Select` | Supports `items` and `multiple` props. |
+| `SelectTrigger` | `SelectTrigger` | Identical usage. |
+| `SelectValue` | `SelectValue` | Identical usage. |
+| `SelectContent` | `SelectContent` | Identical usage. |
+| `SelectItem` | `SelectItem` | Identical usage. |
+| `SelectGroup` | `SelectGroup` | Identical usage. |
+| `SelectLabel` | `SelectLabel` | Identical usage. |
 
-```tsx
-const fruits = [{ value: "apple", label: "Apple" }]
+### Key Differences & New Features
 
-<Select items={fruits}>
-  <SelectTrigger>
-    <SelectValue />
-  </SelectTrigger>
-  <SelectContent>
-    {fruits.map(f => (
-      <SelectItem key={f.value} value={f.value}>{f.label}</SelectItem>
-    ))}
-  </SelectContent>
-</Select>
-```
+| Feature | Lumi UI | shadcn/ui (Radix) |
+| :--- | :--- | :--- |
+| **Label Rendering** | Automatic via `items` prop | Manual mapping required |
+| **Multi-select** | Native `multiple` prop | Requires custom implementation |
+| **Positioning** | `popper` or `item-aligned` | Mostly `popper` |
+| **Arrow** | Optional (removed by default) | Included by default |
+
+### Migration Example
+
+<Tabs defaultValue="shadcn/ui">
+  <TabsList>
+    <TabsTab value="shadcn/ui">shadcn/ui</TabsTab>
+    <TabsTab value="lumi/ui">lumi/ui</TabsTab>
+  </TabsList>
+  <TabsPanel value="shadcn/ui">
+    <Callout variant="destructive" title="The Radix Way">
+      Requires manual mapping for labels if values differ.
+    </Callout>
+    ```tsx
+    <Select>
+      <SelectTrigger>
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">Apple</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+      </SelectContent>
+    </Select>
+    ```
+  </TabsPanel>
+  <TabsPanel value="lumi/ui">
+    <Callout variant="info" title="The Base UI Way">
+      Use the `items` prop for automatic label handling and better accessibility.
+    </Callout>
+    ```tsx
+    const fruits = [
+      { value: "apple", label: "Apple" },
+      { value: "banana", label: "Banana" },
+    ]
+
+    <Select items={fruits}>
+      <SelectTrigger>
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        {fruits.map((fruit) => (
+          <SelectItem key={fruit.value} value={fruit.value}>
+            {fruit.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+    ```
+  </TabsPanel>
+</Tabs>
 
 
 

@@ -1,10 +1,53 @@
 ---
 title: Collapsible
 description: A collapsible panel controlled by a button.
-status: in-progress
 links:
   doc: https://base-ui.com/react/components/collapsible
   api: https://base-ui.com/react/components/collapsible#api-reference
 ---
 
-In progress
+<ComponentPreview name="collapsible-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/collapsible
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="collapsible" title="collapsible.tsx" collapsible/>
+      </Step>
+      <Step title="Update the import paths to match your project setup."/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## Basic Usage
+
+```tsx
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+```
+
+```tsx
+<Collapsible>
+  <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
+  <CollapsibleContent>
+    Yes. Free to use for personal and commercial projects. No attribution
+    required.
+  </CollapsibleContent>
+</Collapsible>
+```

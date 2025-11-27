@@ -51,41 +51,34 @@ const statuses = [
 
 export function SelectRich() {
   return (
-    <div className="space-y-2">
-      <h3 className="text-sm font-medium">Pattern 2: Custom Render</h3>
-      <p className="text-xs text-muted-foreground">
-        The trigger renders custom JSX (Icons + Colors).
-      </p>
-      <Select>
-        <SelectTrigger className="w-[200px]">
-          {/* We pass a function child to handle the display logic */}
-          <SelectValue placeholder="Select a status">
-            {(val) => {
-              const selected = statuses.find((s) => s.value === val);
-              if (!selected) return null;
+    <Select items={statuses}>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a status">
+          {(val) => {
+            const selected = statuses.find((s) => s.value === val);
+            if (!selected) return null;
 
-              const Icon = selected.icon;
-              return (
-                <div className="flex items-center gap-2">
-                  <Icon className={cn("h-4 w-4", selected.color)} />
-                  <span>{selected.label}</span>
-                </div>
-              );
-            }}
-          </SelectValue>
-        </SelectTrigger>
-
-        <SelectContent>
-          {statuses.map((status) => (
-            <SelectItem key={status.value} value={status.value}>
+            const Icon = selected.icon;
+            return (
               <div className="flex items-center gap-2">
-                <status.icon className={cn("h-4 w-4", status.color)} />
-                <span>{status.label}</span>
+                <Icon className={cn("h-4 w-4", selected.color)} />
+                <span>{selected.label}</span>
               </div>
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
+            );
+          }}
+        </SelectValue>
+      </SelectTrigger>
+
+      <SelectContent>
+        {statuses.map((status) => (
+          <SelectItem key={status.value} value={status.value}>
+            <div className="flex items-center gap-2">
+              <status.icon className={cn("h-4 w-4", status.color)} />
+              <span>{status.label}</span>
+            </div>
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }

@@ -83,7 +83,6 @@ function SelectContent({
   sideOffset = 4,
   alignOffset = 0,
   position = "popper",
-  showArrow = true,
   ...props
 }: React.ComponentProps<typeof BaseSelect.Popup> &
   Pick<
@@ -91,7 +90,6 @@ function SelectContent({
     "side" | "sideOffset" | "align" | "alignOffset"
   > & {
     position?: "popper" | "item-aligned"
-    showArrow?: boolean
   }) {
   return (
     <BaseSelect.Portal>
@@ -163,7 +161,6 @@ function SelectItem({
           <CheckIcon className="size-4" />
         </BaseSelect.ItemIndicator>
       </span>
-
       <BaseSelect.ItemText>{children}</BaseSelect.ItemText>
     </BaseSelect.Item>
   )
@@ -217,8 +214,6 @@ function SelectScrollDownButton({
     </BaseSelect.ScrollDownArrow>
   )
 }
-
-
 
 export {
   Select,
