@@ -1,6 +1,5 @@
 "use client";
 
-import { AlertDialog as AlertDialogPrimitive } from "@base-ui-components/react/alert-dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,12 +10,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
+  createAlertDialogHandle,
 } from "@/registry/ui/alert-dialog";
 import { Button } from "@/registry/ui/button";
 
 // 1. Create a handle with type
 type AlertPayload = { id: string; name: string };
-const deleteAlertHandle = AlertDialogPrimitive.createHandle<AlertPayload>();
+const deleteAlertHandle = createAlertDialogHandle<AlertPayload>();
 
 export function DetachedTriggerDemo() {
   return (

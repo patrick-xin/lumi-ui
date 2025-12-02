@@ -1,10 +1,47 @@
 ---
 title: Progress
 description: Displays the status of a task that takes a long time.
-status: in-progress
 links:
   doc: https://base-ui.com/react/components/progress
   api: https://base-ui.com/react/components/progress#api-reference
 ---
 
-In progress
+<ComponentPreview name="progress-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/progress
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="progress" title="progress.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## Recipes
+
+### Usage with Label and Value
+
+<ComponentPreview name="progress-with-label" />
+
+### Indeterminate state
+
+<ComponentPreview name="progress-indeterminate" />
+
+### Custom Indicator
+
+<ComponentPreview name="progress-custom" />

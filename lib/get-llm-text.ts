@@ -8,40 +8,74 @@ import type { RegistryName } from "@/registry/__registry";
 
 export async function getLLMText(page: InferPageType<typeof source>) {
   const processed = await page.data.getText("processed");
-  let output = `# ${page.data.title} (${page.url})\n\n${processed}`;
 
-  // Extract component name from page slug or title
+  const seenComponents = new Set<string>();
+
+  let output = `---
+title: ${page.data.title}
+description: ${page.data.description}
+${page.data.links ? `Doc link: ${page.data.links.doc}` : ``}
+${page.data.links ? `API link: ${page.data.links.api}` : ``}
+Page URL: ${page.url}
+---\n\n`;
+
   const componentName = extractComponentName(page);
 
   if (componentName && componentName in components) {
     const sourceCode = await getComponentSourceCode(componentName);
-    const demoCode = await getDemoCode(componentName);
-
     if (sourceCode) {
-      output += `\n\n## Source Code\n\n\`\`\`tsx\n${sourceCode}\n\`\`\``;
-    }
-
-    if (demoCode) {
-      output += `\n\n## Demo Code\n\n\`\`\`tsx\n${demoCode}\n\`\`\``;
+      output += `## Component Source Code\n\n\`\`\`tsx\n${sourceCode}\n\`\`\`\n\n`;
+      seenComponents.add(componentName);
     }
   }
 
+  output += await processContent(processed, seenComponents);
+
   return output;
+}
+
+async function processContent(
+  content: string,
+  seenComponents: Set<string>,
+): Promise<string> {
+  const componentPreviewRegex = /<ComponentPreview[^>]+name="([^"]+)"[^>]*\/>/g;
+  const matches = [...content.matchAll(componentPreviewRegex)];
+  let result = content;
+
+  for (const match of matches) {
+    const [fullTag, name] = match;
+    const componentName = name as RegistryName;
+
+    if (componentName in components) {
+      if (seenComponents.has(componentName)) {
+        const replacement = `${fullTag}\n\n<!-- Code for ${componentName} is defined above -->\n`;
+        result = result.replace(fullTag, replacement);
+        continue;
+      }
+
+      const demoCode = await getComponentSourceCode(componentName);
+
+      if (demoCode) {
+        const replacement = `${fullTag}\n\n\`\`\`tsx\n${demoCode}\n\`\`\`\n`;
+        result = result.replace(fullTag, replacement);
+        seenComponents.add(componentName);
+      }
+    }
+  }
+
+  return result;
 }
 
 function extractComponentName(
   page: InferPageType<typeof source>,
 ): RegistryName | null {
-  // Try to extract component name from URL path
   const urlSegments = page.url.split("/");
   const lastSegment = urlSegments[urlSegments.length - 1];
 
-  // Check if it's a valid component name
   if (lastSegment && lastSegment in components) {
     return lastSegment as RegistryName;
   }
 
-  // Try to extract from title
   const titleLower = page.data.title?.toLowerCase();
   if (titleLower && titleLower in components) {
     return titleLower as RegistryName;
@@ -64,29 +98,6 @@ async function getComponentSourceCode(
     return rewriteRegistryImports(originalCode);
   } catch (error) {
     console.error(`Failed to read source code for ${componentName}:`, error);
-    return null;
-  }
-}
-
-async function getDemoCode(
-  componentName: RegistryName,
-): Promise<string | null> {
-  try {
-    // Look for demo files that match the component name
-    const demoName = `${componentName}-demo` as RegistryName;
-
-    if (demoName in components) {
-      const demoComponent = components[demoName];
-      if (demoComponent?.files?.[0]?.path) {
-        const filePath = path.join(process.cwd(), demoComponent.files[0].path);
-        const demoCode = await fs.readFile(filePath, "utf-8");
-        return rewriteRegistryImports(demoCode);
-      }
-    }
-
-    return null;
-  } catch (error) {
-    console.error(`Failed to read demo code for ${componentName}:`, error);
     return null;
   }
 }

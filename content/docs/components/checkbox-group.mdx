@@ -1,10 +1,43 @@
 ---
 title: Checkbox Group
 description: Provides shared state to a series of checkboxes.
-status: in-progress
 links:
   doc: https://base-ui.com/react/components/checkbox-group
   api: https://base-ui.com/react/components/checkbox-group#api-reference
 ---
 
-In progress
+<ComponentPreview name="checkbox-group-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/checkbox-group
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="checkbox-group" title="checkbox-group.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## Recipes
+
+### Parent checkbox
+
+<ComponentPreview name="checkbox-parent" />
+
+### Nested parent checkbox
+
+<ComponentPreview name="checkbox-nested-parent" />

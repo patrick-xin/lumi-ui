@@ -18,7 +18,7 @@ export function CopyPageButton({ slug, className }: CopyPageButtonProps) {
   const handleCopy = async () => {
     setIsLoading(true);
 
-    const url = `/llms.mdx/${slug?.join("/")}`;
+    const url = `/llms/${slug?.join("/")}`;
 
     try {
       const cached = contentCache.get(url);

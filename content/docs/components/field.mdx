@@ -1,10 +1,242 @@
 ---
 title: Field
 description: A component that provides labelling and validation for form controls.
-status: in-progress
 links:
   doc: https://base-ui.com/react/components/field
   api: https://base-ui.com/react/components/field#api-reference
 ---
 
-In progress
+<ComponentPreview name="field-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/field
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="field" title="field.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## Recipes
+
+### Input
+<ComponentPreview name="field-input" />
+
+### Select
+<ComponentPreview name="field-select" />
+
+### Fieldset
+<ComponentPreview name="field-fieldset" />
+
+### Checkbox
+<ComponentPreview name="field-checkbox" />
+
+### Radio
+<ComponentPreview name="field-radio" />
+
+
+This is a refined, professional documentation guide ready to be shared with your team. I have structured it to be "copy-paste ready" for an internal wiki (like Notion, Confluence, or a GitHub README).
+
+I integrated your original notes, corrected the minor nuances, and added critical details from the official documentation regarding **complex components**, **styling states**, and **validation**.
+
+***
+
+# Base UI: Forms & Fields Guide
+
+## 1. The Golden Rule: "One Field per Answer"
+
+When deciding how to structure a form, ask: **"How many answers am I expecting from the user here?"**
+
+*   **1 Answer (String/Number)** = One `<Field>` wrapping an Input/Select.
+    *   *Example:* Name, Age, Country.
+*   **1 Answer (Boolean)** = One `<Field>` wrapping a Checkbox/Switch.
+    *   *Example:* "I agree to terms", "Enable Dark Mode".
+*   **1 Answer (Array of strings)** = One `<Field>` wrapping a CheckboxGroup.
+    *   *Example:* "Select your dietary restrictions."
+*   **❌ NEVER** use `<Field>` to wrap a visual section (like "Billing Details") that contains multiple distinct questions. Use `<Fieldset>` for that.
+
+## 2. The Hierarchy Cheat Sheet
+
+Memorize these two patterns. They cover 99% of our use cases.
+
+### Pattern A: The Logical Section
+*Used when grouping distinct inputs (e.g., Address, Billing).*
+
+*   **Parent:** `<Fieldset>` (Semantic HTML grouping)
+*   **Label:** `<Fieldset.Legend>`
+*   **Children:** Multiple `<Field>` components.
+
+```tsx
+<Fieldset>
+  <FieldsetLegend className="text-lg font-bold">Billing Details</FieldsetLegend>
+  
+  {/* Question 1 */}
+  <Field name="company">
+     <FieldLabel>Company</FieldLabel>
+     <FieldControl />
+  </Field>
+
+  {/* Question 2 */}
+  <Field name="taxId">
+     <FieldLabel>Tax ID</FieldLabel>
+     <FieldControl />
+  </Field>
+</Fieldset>
+```
+
+### Pattern B: The Choice Group
+*Used when one question has multiple options (Radio/Checkbox groups).*
+
+*   **Parent:** `<Field>` (The logic wrapper that holds the validation/name)
+*   **Child:** `<Fieldset>` (Groups the options semantically)
+*   **Grandchild:** The Group Component (`RadioGroup`, `CheckboxGroup`)
+
+```tsx
+<Field name="notification_method"> {/* Wraps everything! */}
+  {/* The Fieldset renders the Group component directly */}
+  <Fieldset render={<RadioGroup />}>
+    <FieldsetLegend>How should we contact you?</FieldsetLegend>
+    
+    <FieldItem>
+      <Radio value="email" />
+      <FieldLabel>Email</FieldLabel>
+    </FieldItem>
+    
+    <FieldItem>
+      <Radio value="sms" />
+      <FieldLabel>SMS</FieldLabel>
+    </FieldItem>
+  </Fieldset>
+  
+  <FieldError />
+</Field>
+```
+
+---
+
+## 3. Composition: Native vs. Complex Controls
+
+This is the most common point of confusion. The `Field` works differently depending on what goes inside.
+
+| Input Type | Component to use | Example |
+| :--- | :--- | :--- |
+| **Native HTML** | `<FieldControl>` | Inputs, Textareas. |
+| **Complex Base UI** | The Component's Root | `<Select>`, `<Slider>`, `<Switch>`, `<NumberField>`, `<Combobox>` |
+
+**Code Comparison:**
+
+```tsx
+{/* 1. NATIVE INPUT */}
+<Field name="username">
+  <FieldLabel>Username</FieldLabel>
+  <FieldControl /> {/* Renders an <input> */}
+</Field>
+
+{/* 2. COMPLEX COMPONENT (Select) */}
+<Field name="role">
+  <FieldLabel>Role</FieldLabel>
+  {/* DO NOT wrap this in FieldControl */}
+  <Select> 
+    <SelectTrigger>...</SelectTrigger>
+    <SelectPortal>...</SelectPortal>
+  </Select>
+</Field>
+```
+
+---
+
+## 4. Validation & Errors
+
+Base UI handles validation logic automatically. You generally do not need conditional rendering logic (e.g., `{hasError && ...}`).
+
+### Client-Side Validation
+Use the `match` prop on `<Field.Error>` to display messages based on the HTML ValidityState.
+
+```tsx
+<Field name="email">
+  <FieldControl required type="email" />
+  
+  {/* Shows for any error */}
+  <FieldError className="text-red-500" />
+  
+  {/* OR: Specific messages for specific rules */}
+  <FieldError match="valueMissing">This field is required.</FieldError>
+  <FieldError match="typeMismatch">Please enter a valid email.</FieldError>
+</Field>
+```
+
+### Server-Side Error Hydration
+If you pass an `errors` object to the top-level `<Form>` component, Base UI automatically maps strings to the matching `<Field>` name.
+
+```tsx
+// Server response: { errors: { slug: "This slug is already taken" } }
+
+<Form errors={serverResponse.errors}>
+  <Field name="slug">
+    <FieldControl />
+    {/* This will automatically display "This slug is already taken" */}
+    <FieldError /> 
+  </Field>
+</Form>
+```
+
+---
+
+## 5. Styling (Data Attributes)
+
+Base UI is unstyled. It uses **Data Attributes** to communicate state to CSS/Tailwind. Do not rely on internal React state for styling.
+
+**Common Attributes:**
+*   `data-invalid`: Field has an error.
+*   `data-dirty`: Value has changed.
+*   `data-focused`: Input is focused.
+*   `data-disabled`: Field is disabled.
+
+**Tailwind Example:**
+```tsx
+<FieldLabel className="text-gray-700 data-[invalid]:text-red-600">
+  Name
+</FieldLabel>
+
+<FieldControl className="border-gray-300 data-[invalid]:border-red-600 data-[focused]:ring-2" />
+```
+
+---
+
+## 6. Component Reference
+
+| Component | Responsibility | Notes |
+| :--- | :--- | :--- |
+| **`Field`** | State, A11y, Validation. | Must have a `name` prop for form submission. |
+| **`FieldLabel`** | Accessible Label. | Automatically links to the control via ID. |
+| **`FieldControl`** | Native Input Wrapper. | Renders `<input>` by default. Don't use for Select/Combobox/Slider. |
+| **`FieldDescription`** | Help Text. | Automatically linked via `aria-describedby`. |
+| **`FieldError`** | Validation Message. | Automatically linked via `aria-describedby` when invalid. |
+| **`Fieldset`** | Grouping. | Renders `<fieldset>`. Use for sections or Radio/Checkbox groups. |
+| **`FieldsetLegend`**| Group Title. | Mandatory accessibility label for a Fieldset. |
+| **`FieldItem`** | Layout Helper. | Used *inside* Radio/Checkbox groups to glue one input+label pair together. |
+
+---
+
+## 7. Common Gotchas ⚠️
+
+1.  **Nesting Fields:** Never put a `<Field>` inside another `<Field>`. Flat structures are better.
+2.  **Missing Names:** If using `react-hook-form` or native submission, `Field` **must** have a `name` prop.
+3.  **The `Field.Item` Mistake:** Do not wrap a `<FieldItem>` (inside a checkbox group) with a `<Field>`. The Checkbox Group *is* the Field; the items are just options within it.
+4.  **Implicit vs Explicit Labeling:**
+    *   *Text Inputs:* Sibling usually works best (`<Label>Name</Label><Control />`).
+    *   *Radio/Checkbox:* Wrapping works best (`<Label><Radio /> Option 1</Label>`) to increase click target size.

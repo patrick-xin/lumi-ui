@@ -152,6 +152,8 @@ function AlertDialogCancel({
   );
 }
 
+const createAlertDialogHandle = BaseAlertDialog.createHandle
+
 export {
   AlertDialog,
   AlertDialogTrigger,
@@ -164,4 +166,5 @@ export {
   AlertDialogCancel,
   AlertDialogPortal,
   AlertDialogBackdrop,
+  createAlertDialogHandle,
 };

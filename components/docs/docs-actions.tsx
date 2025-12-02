@@ -23,7 +23,7 @@ Help me understand how to use it. Be ready to explain concepts, give examples, o
 const menuItems = {
   markdown: (url: string) => (
     <a
-      href={`${url}.mdx`}
+      href={`${url}.md`}
       target="_blank"
       rel="noopener noreferrer"
       className="w-full inline-flex items-center justify-start gap-3"
