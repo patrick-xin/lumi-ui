@@ -15,6 +15,7 @@ export const DocsQuickNav = ({ neighbours }: DocsQuickNavProps) => {
     <nav aria-label="Quick page navigation" className="flex gap-2">
       {neighbours.previous && (
         <Button
+          nativeButton={false}
           variant="secondary"
           size="icon-sm"
           render={
@@ -27,6 +28,7 @@ export const DocsQuickNav = ({ neighbours }: DocsQuickNavProps) => {
       )}
       {neighbours.next && (
         <Button
+          nativeButton={false}
           variant="secondary"
           size="icon-sm"
           render={

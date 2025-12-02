@@ -1,10 +1,55 @@
 ---
 title: Slider
 description: An easily stylable range input.
-status: in-progress
 links:
   doc: https://base-ui.com/react/components/slider
   api: https://base-ui.com/react/components/slider#api-reference
 ---
 
-In progress
+<ComponentPreview name="slider-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/slider
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="slider" title="slider.tsx" collapsible/>
+      </Step>
+       <Step title="Update the import paths to match your project setup."/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## Recipes
+
+### Range Slider
+<ComponentPreview name="slider-range" />
+
+### Edge Aligned Thumbs
+By default, the slider thumb is centered on the value. This means at 0% and 100%, half of the thumb hangs outside the track's bounds.
+
+Use `thumbAlignment="edge"` to keep the entire thumb **contained inside the track boundaries**. This is useful when:
+1.  The slider is flush against a screen edge or container wall.
+2.  The parent container has `overflow: hidden` (which would otherwise clip half the thumb).
+
+| Mode | Visual Behavior |
+| :--- | :--- |
+| **`center`** (Default) | The **center** of the thumb aligns with the start/end. The thumb overflows the track by 50% of its width. |
+| **`edge`** | The **outer edge** of the thumb aligns with the start/end. The thumb stays 100% inside the track. |
+
+<ComponentPreview name="slider-edge" />
+
+### Vertical Slider
+<ComponentPreview name="slider-vertical" />

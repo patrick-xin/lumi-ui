@@ -47,10 +47,3 @@ export const TableCell = ({ className, ...props }: ComponentProps<"td">) => (
     {...props}
   />
 );
-
-Table.displayName = "Table";
-TableHead.displayName = "TableHead";
-TableBody.displayName = "TableBody";
-TableRow.displayName = "TableRow";
-TableHeader.displayName = "TableHeader";
-TableCell.displayName = "TableCell";

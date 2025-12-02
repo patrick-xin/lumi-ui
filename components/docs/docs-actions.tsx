@@ -5,7 +5,12 @@ import { CopyPageButton } from "@/components/docs/copy-page-button";
 import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
-import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@/registry/ui/menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/registry/ui/dropdown-menu";
 
 function getPromptUrl(baseURL: string, url: string) {
   return `${baseURL}?q=${encodeURIComponent(
@@ -18,7 +23,7 @@ Help me understand how to use it. Be ready to explain concepts, give examples, o
 const menuItems = {
   markdown: (url: string) => (
     <a
-      href={`${url}.mdx`}
+      href={`${url}.md`}
       target="_blank"
       rel="noopener noreferrer"
       className="w-full inline-flex items-center justify-start gap-3"
@@ -69,31 +74,34 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
         slug={slug}
         className="rounded-r-none border-r-0 text-xs"
       />
-      <Menu>
-        <MenuTrigger
-          render={(props) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          render={
             <Button
               variant="outline"
               size="sm"
               className={cn(
                 "h-8 rounded-l-none border-l data-[popup-open]:[&_svg]:rotate-180 max-md:[&_svg]:rotate-180 max-md:data-[popup-open]:[&_svg]:rotate-0",
               )}
-              {...props}
             >
               <ChevronDownIcon className="size-3.5 transition-transform" />
             </Button>
-          )}
+          }
         />
 
-        <MenuPopup
+        <DropdownMenuContent
           className="w-44 bg-background/40 backdrop-blur-md"
           alignOffset={-40}
         >
           {Object.entries(menuItems).map(([key, value]) => (
-            <MenuItem className="text-xs" render={value(url)} key={key} />
+            <DropdownMenuItem
+              className="text-xs"
+              render={value(url)}
+              key={key}
+            />
           ))}
-        </MenuPopup>
-      </Menu>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 }

@@ -29,6 +29,7 @@ export const DocsAritcleFooter = ({ neighbours }: DocsAritcleFooterProps) => {
       >
         {neighbours.previous && (
           <Button
+            nativeButton={false}
             variant="outline"
             size="sm"
             className="justify-end"
@@ -43,6 +44,7 @@ export const DocsAritcleFooter = ({ neighbours }: DocsAritcleFooterProps) => {
 
         {neighbours.next && (
           <Button
+            nativeButton={false}
             variant="outline"
             size="sm"
             className="justify-end"

@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/lib/config";
 import { fontVariables } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/registry/ui/toaster";
 
 export const metadata: Metadata = {
   title: {
@@ -65,9 +66,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("font-sans group/body antialiased", fontVariables)}>
+      <body className={cn("font-sans antialiased", fontVariables)}>
         <ThemeProvider>
           <div className="root">{children}</div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

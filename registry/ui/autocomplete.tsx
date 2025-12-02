@@ -1,21 +1,17 @@
 "use client";
 
-import { Autocomplete as AutocompletePrimitive } from "@base-ui-components/react/autocomplete";
+import { Autocomplete as BaseAutocomplete } from "@base-ui-components/react/autocomplete";
 import { SearchIcon, X } from "lucide-react";
 import type * as React from "react";
 import { cn } from "@/lib/utils";
 
-function Autocomplete({
-  ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Root>) {
-  return <AutocompletePrimitive.Root data-slot="autocomplete" {...props} />;
-}
+const Autocomplete = BaseAutocomplete.Root;
 
 function AutocompleteInput({
   className,
   showSearchIcon = false,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Input> & {
+}: React.ComponentProps<typeof BaseAutocomplete.Input> & {
   showSearchIcon?: boolean;
 }) {
   return (
@@ -26,7 +22,7 @@ function AutocompleteInput({
       {showSearchIcon && (
         <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 shrink-0 opacity-50" />
       )}
-      <AutocompletePrimitive.Input
+      <BaseAutocomplete.Input
         className={cn(
           "h-9 w-full min-w-0 rounded-md border border-input bg-transparent py-1 text-base shadow-xs",
           "placeholder:text-muted-foreground",
@@ -47,74 +43,119 @@ function AutocompleteInput({
 
 function AutocompletePortal({
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Portal>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Portal>) {
   return (
-    <AutocompletePrimitive.Portal data-slot="autocomplete-portal" {...props} />
+    <BaseAutocomplete.Portal data-slot="autocomplete-portal" {...props} />
   );
 }
 
 function AutocompletePositioner({
+  className,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Positioner>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Positioner>) {
   return (
-    <AutocompletePrimitive.Positioner
+    <BaseAutocomplete.Positioner
       data-slot="autocomplete-positioner"
-      className="outline-none"
+      className={cn("outline-none", className)}
       {...props}
     />
   );
 }
 
 function AutocompletePopup({
+  children,
+  classNames,
+  align = "center",
+  alignOffset = 0,
+  side = "bottom",
+  sideOffset = 5,
+  matchAnchorWidth = true,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Popup>) {
+}: Omit<
+  React.ComponentProps<typeof BaseAutocomplete.Popup>,
+  "className"
+> & {
+  align?: BaseAutocomplete.Positioner.Props["align"];
+  alignOffset?: BaseAutocomplete.Positioner.Props["alignOffset"];
+  side?: BaseAutocomplete.Positioner.Props["side"];
+  sideOffset?: BaseAutocomplete.Positioner.Props["sideOffset"];
+  classNames?: {
+    backdrop?: string;
+    popup?: string;
+    positioner?: string;
+  };
+  matchAnchorWidth?: boolean;
+}) {
   return (
-    <AutocompletePrimitive.Popup
-      data-slot="autocomplete-popup"
-      className={cn(
-        "px-1 py-2 rounded-md bg-popover border border-input",
-        "w-[var(--anchor-width)] max-h-[min(var(--available-height),23rem)] max-w-[var(--available-width)]",
-        "overflow-y-auto scroll-pt-2 scroll-pb-2 overscroll-contain",
-        "origin-[var(--transform-origin)] transition-[transform,scale,opacity] duration-100",
-        "data-[starting-style]:opacity-0",
-        "data-[ending-style]:opacity-0",
-      )}
-      {...props}
-    />
+    <AutocompletePortal>
+      <AutocompleteBackdrop className={cn(classNames?.backdrop)} />
+      <AutocompletePositioner
+        align={align}
+        alignOffset={alignOffset}
+        side={side}
+        sideOffset={sideOffset}
+        className={cn(classNames?.positioner)}
+      >
+        <BaseAutocomplete.Popup
+          data-slot="autocomplete-popup"
+          className={cn(
+            "px-1 py-2 rounded-md bg-popover border border-input",
+            "max-h-[min(var(--available-height),23rem)] max-w-[var(--available-width)]",
+            "overflow-y-auto scroll-pt-2 scroll-pb-2 overscroll-contain",
+            "origin-[var(--transform-origin)] transition-[transform,scale,opacity] duration-100",
+            "data-[starting-style]:opacity-0",
+            "data-[ending-style]:opacity-0",
+            classNames?.popup,
+            matchAnchorWidth && "w-[var(--anchor-width)]",
+          )}
+          {...props}
+        >
+          {children}
+        </BaseAutocomplete.Popup>
+      </AutocompletePositioner>
+    </AutocompletePortal>
   );
 }
 
 function AutocompleteEmpty({
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Empty>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Empty>) {
   return (
-    <AutocompletePrimitive.Empty
+    <BaseAutocomplete.Empty
       data-slot="autocomplete-empty"
-      className="px-4 py-2 text-[0.925rem] leading-4 empty:m-0 empty:p-0"
+      className="px-2 py-1 text-sm empty:m-0 empty:p-0"
       {...props}
     />
   );
 }
 
 function AutocompleteList({
+  className,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.List>) {
+}: React.ComponentProps<typeof BaseAutocomplete.List>) {
   return (
-    <AutocompletePrimitive.List data-slot="autocomplete-list" {...props} />
+    <BaseAutocomplete.List
+      className={cn("space-y-1.5", className)}
+      data-slot="autocomplete-list"
+      {...props}
+    />
   );
 }
 
 function AutocompleteItem({
+  className,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Item>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Item>) {
   return (
-    <AutocompletePrimitive.Item
+    <BaseAutocomplete.Item
       data-slot="autocomplete-item"
       className={cn(
         "relative flex items-center gap-2 rounded-sm cursor-default px-2 py-1 text-base outline-none select-none",
+        "transition-[color,box-shadow]",
         "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
         "[&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
+        className,
       )}
       {...props}
     />
@@ -123,9 +164,9 @@ function AutocompleteItem({
 
 function AutocompleteValue({
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Value>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Value>) {
   return (
-    <AutocompletePrimitive.Value data-slot="autocomplete-value" {...props} />
+    <BaseAutocomplete.Value data-slot="autocomplete-value" {...props} />
   );
 }
 
@@ -144,9 +185,9 @@ function AutocompleteControl({
 
 function AutocompleteTrigger({
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Trigger>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Trigger>) {
   return (
-    <AutocompletePrimitive.Trigger
+    <BaseAutocomplete.Trigger
       data-slot="autocomplete-trigger"
       {...props}
     />
@@ -156,9 +197,9 @@ function AutocompleteTrigger({
 function AutocompleteIcon({
   className,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Icon>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Icon>) {
   return (
-    <AutocompletePrimitive.Icon
+    <BaseAutocomplete.Icon
       data-slot="autocomplete-icon"
       className={cn("h-4 w-4 opacity-50", className)}
       {...props}
@@ -169,9 +210,9 @@ function AutocompleteIcon({
 function AutocompleteStatus({
   className,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Status>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Status>) {
   return (
-    <AutocompletePrimitive.Status
+    <BaseAutocomplete.Status
       data-slot="autocomplete-status"
       className={cn(
         "px-2 py-1.5 text-sm text-muted-foreground empty:m-0 empty:p-0",
@@ -183,11 +224,13 @@ function AutocompleteStatus({
 }
 
 function AutocompleteBackdrop({
+  className,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Backdrop>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Backdrop>) {
   return (
-    <AutocompletePrimitive.Backdrop
+    <BaseAutocomplete.Backdrop
       data-slot="autocomplete-backdrop"
+      className={cn(className)}
       {...props}
     />
   );
@@ -195,9 +238,9 @@ function AutocompleteBackdrop({
 
 function AutocompleteCollection({
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Collection>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Collection>) {
   return (
-    <AutocompletePrimitive.Collection
+    <BaseAutocomplete.Collection
       data-slot="autocomplete-collection"
       {...props}
     />
@@ -207,9 +250,9 @@ function AutocompleteCollection({
 function AutocompleteRow({
   className,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Row>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Row>) {
   return (
-    <AutocompletePrimitive.Row
+    <BaseAutocomplete.Row
       data-slot="autocomplete-row"
       className={cn("flex items-center gap-2", className)}
       {...props}
@@ -221,9 +264,9 @@ function AutocompleteClear({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Clear>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Clear>) {
   return (
-    <AutocompletePrimitive.Clear
+    <BaseAutocomplete.Clear
       data-slot="autocomplete-clear"
       className={cn(
         "absolute cursor-pointer top-1/2 -translate-y-1/2 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100",
@@ -234,32 +277,45 @@ function AutocompleteClear({
       {...props}
     >
       {children ? children : <X className="size-3.5" />}
-    </AutocompletePrimitive.Clear>
+    </BaseAutocomplete.Clear>
   );
 }
 
 function AutocompleteArrow({
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Arrow>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Arrow>) {
   return (
-    <AutocompletePrimitive.Arrow data-slot="autocomplete-arrow" {...props} />
+    <BaseAutocomplete.Arrow data-slot="autocomplete-arrow" {...props} />
   );
 }
 
 function AutocompleteGroup({
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Group>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Group>) {
   return (
-    <AutocompletePrimitive.Group data-slot="autocomplete-group" {...props} />
+    <BaseAutocomplete.Group
+      data-slot="autocomplete-group"
+      className="space-y-1.5"
+      {...props}
+    />
   );
 }
 
 function AutocompleteGroupLabel({
+  sticky = false,
+  className,
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.GroupLabel>) {
+}: React.ComponentProps<typeof BaseAutocomplete.GroupLabel> & {
+  sticky?: boolean;
+}) {
   return (
-    <AutocompletePrimitive.GroupLabel
+    <BaseAutocomplete.GroupLabel
       data-slot="autocomplete-group-label"
+      className={cn(
+        "px-2 py-1.5 text-sm text-muted-foreground",
+        sticky && "sticky top-0 z-10 bg-popover",
+        className,
+      )}
       {...props}
     />
   );
@@ -267,9 +323,9 @@ function AutocompleteGroupLabel({
 
 function AutocompleteSeparator({
   ...props
-}: React.ComponentProps<typeof AutocompletePrimitive.Separator>) {
+}: React.ComponentProps<typeof BaseAutocomplete.Separator>) {
   return (
-    <AutocompletePrimitive.Separator
+    <BaseAutocomplete.Separator
       data-slot="autocomplete-separator"
       {...props}
     />

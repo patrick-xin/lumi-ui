@@ -1,10 +1,43 @@
 ---
 title: Form
 description: A native form element with consolidated error handling.
-status: in-progress
 links:
   doc: https://base-ui.com/react/components/form
   api: https://base-ui.com/react/components/form#api-reference
 ---
 
-In progress
+<ComponentPreview name="form-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/form
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="form" title="form.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## Recipes
+
+### Native Submit
+
+<ComponentPreview name="form-native-submit" />
+
+### On Form Submit
+
+<ComponentPreview name="form-on-form-submit" />

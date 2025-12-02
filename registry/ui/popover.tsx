@@ -1,31 +1,31 @@
-import { Popover as PopoverPrimitive } from "@base-ui-components/react/popover";
+import { Popover as BasePopover } from "@base-ui-components/react/popover";
 import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
 function Popover({
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Root>) {
-  return <PopoverPrimitive.Root data-slot="popover" {...props} />;
+}: React.ComponentProps<typeof BasePopover.Root>) {
+  return <BasePopover.Root data-slot="popover" {...props} />;
 }
 
 function PopoverTrigger({
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {
-  return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />;
+}: React.ComponentProps<typeof BasePopover.Trigger>) {
+  return <BasePopover.Trigger data-slot="popover-trigger" {...props} />;
 }
 
 function PopoverClose({
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Close>) {
-  return <PopoverPrimitive.Close data-slot="popover-close" {...props} />;
+}: React.ComponentProps<typeof BasePopover.Close>) {
+  return <BasePopover.Close data-slot="popover-close" {...props} />;
 }
 
 function PopoverPositioner({
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Positioner>) {
+}: React.ComponentProps<typeof BasePopover.Positioner>) {
   return (
-    <PopoverPrimitive.Positioner data-slot="popover-positioner" {...props} />
+    <BasePopover.Positioner data-slot="popover-positioner" {...props} />
   );
 }
 
@@ -41,26 +41,26 @@ function PopoverPopup({
   description,
   matchAnchorWidth = false,
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Popup> & {
-  align?: PopoverPrimitive.Positioner.Props["align"];
-  alignOffset?: PopoverPrimitive.Positioner.Props["alignOffset"];
-  side?: PopoverPrimitive.Positioner.Props["side"];
-  sideOffset?: PopoverPrimitive.Positioner.Props["sideOffset"];
+}: React.ComponentProps<typeof BasePopover.Popup> & {
+  align?: BasePopover.Positioner.Props["align"];
+  alignOffset?: BasePopover.Positioner.Props["alignOffset"];
+  side?: BasePopover.Positioner.Props["side"];
+  sideOffset?: BasePopover.Positioner.Props["sideOffset"];
   showArrow?: boolean;
   title?: string;
   description?: string;
   matchAnchorWidth?: boolean;
 }) {
   return (
-    <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Positioner
+    <BasePopover.Portal>
+      <BasePopover.Positioner
         align={align}
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
         className={cn(matchAnchorWidth && "w-[var(--anchor-width)]")}
       >
-        <PopoverPrimitive.Popup
+        <BasePopover.Popup
           data-slot="popover-popup"
           className={cn(
             "rounded-md bg-popover p-4 text-popover-foreground shadow-md outline outline-border dark:-outline-offset-1",
@@ -72,30 +72,30 @@ function PopoverPopup({
           {...props}
         >
           {title && (
-            <PopoverPrimitive.Title
+            <BasePopover.Title
               data-slot="popover-title"
               className="text-base font-semibold"
             >
               {title}
-            </PopoverPrimitive.Title>
+            </BasePopover.Title>
           )}
           {description && (
-            <PopoverPrimitive.Description
+            <BasePopover.Description
               data-slot="popover-description"
               className="text-muted-foreground text-sm"
             >
               {description}
-            </PopoverPrimitive.Description>
+            </BasePopover.Description>
           )}
           {showArrow && (
-            <PopoverPrimitive.Arrow className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180">
+            <BasePopover.Arrow className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180">
               <ArrowSvg />
-            </PopoverPrimitive.Arrow>
+            </BasePopover.Arrow>
           )}
           {children}
-        </PopoverPrimitive.Popup>
-      </PopoverPrimitive.Positioner>
-    </PopoverPrimitive.Portal>
+        </BasePopover.Popup>
+      </BasePopover.Positioner>
+    </BasePopover.Portal>
   );
 }
 

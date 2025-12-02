@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { CommandMenu } from "@/components/command-menu";
 import { Logo } from "@/components/logo";
 import { ModeSwitcher } from "@/components/mode-switcher";
+import { CommandMenu } from "@/components/site/header/command-menu";
 import { MobileNav } from "@/components/site/header/mobile-nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { siteConfig } from "@/lib/config";
@@ -16,7 +16,7 @@ export function SiteHeader() {
       <div className="flex h-full items-center container justify-between mx-auto w-full">
         {/* Desktop */}
         <div className="hidden md:flex items-center justify-between gap-6 flex-1 min-w-0">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center focus-state">
             <Logo />
             <span className="sr-only">{siteConfig.name}</span>
           </Link>

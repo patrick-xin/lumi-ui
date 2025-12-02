@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/registry/ui/button";
+import { Banner } from "../../banner";
 
 export function HeroSection() {
   return (
@@ -64,6 +65,7 @@ export function HeroSection() {
                     }}
                   />
                 </div>
+                <Banner />
                 <h1 className="text-balance tracking-tight text-5xl font-bold md:text-6xl relative">
                   Illuminate your interface
                 </h1>
@@ -96,6 +98,7 @@ export function HeroSection() {
               <div className="mt-12 flex items-center gap-4 mx-auto xl:mt-16">
                 <Button
                   size="lg"
+                  nativeButton={false}
                   render={
                     <Link href="/docs/introduction">
                       <span className="text-nowrap">View docs</span>
@@ -104,6 +107,7 @@ export function HeroSection() {
                 />
                 <Button
                   size="lg"
+                  nativeButton={false}
                   variant="ghost"
                   render={
                     <Link href="/docs/components">

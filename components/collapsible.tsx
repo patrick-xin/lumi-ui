@@ -10,7 +10,7 @@ function CollapsibleTrigger({ ...props }: BaseCollapsible.Trigger.Props) {
   return <BaseCollapsible.Trigger data-slot="collapsible-trigger" {...props} />;
 }
 
-function CollapsiblePanel({
+function CollapsibleContent({
   className,
   ...props
 }: BaseCollapsible.Panel.Props) {
@@ -23,4 +23,4 @@ function CollapsiblePanel({
   );
 }
 
-export { Collapsible, CollapsiblePanel, CollapsibleTrigger };
+export { Collapsible, CollapsibleContent, CollapsibleTrigger };

@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-
 import { Button } from "@/registry/ui/button";
 import {
   Dialog,
@@ -12,20 +11,27 @@ import {
   DialogPopup,
   DialogTitle,
 } from "@/registry/ui/dialog";
-import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@/registry/ui/menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/registry/ui/dropdown-menu";
 
 export function DialogFromMenuDemo() {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   return (
     <>
-      <Menu>
-        <MenuTrigger render={<Button variant="outline" />}>
+      <DropdownMenu>
+        <DropdownMenuTrigger render={<Button variant="outline" />}>
           Open menu
-        </MenuTrigger>
-        <MenuPopup>
-          <MenuItem onClick={() => setDialogOpen(true)}>Open dialog</MenuItem>
-        </MenuPopup>
-      </Menu>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem onClick={() => setDialogOpen(true)}>
+            Open dialog
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogPopup>
           <DialogHeader>

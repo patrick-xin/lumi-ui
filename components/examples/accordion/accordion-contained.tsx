@@ -13,7 +13,7 @@ export function AccordionContained() {
     <Accordion
       variant="contained"
       defaultValue={["item-1"]}
-      className="w-full max-w-md space-y-2"
+      className="w-full max-w-md"
     >
       <AccordionItem value="item-1">
         <AccordionHeader>

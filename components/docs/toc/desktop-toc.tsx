@@ -201,8 +201,7 @@ export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
                   paddingLeft: `${getItemOffset(item.depth)}px`,
                 }}
                 className={cn(
-                  "relative py-1.5 text-sm text-muted-foreground transition-colors [overflow-wrap:anywhere] first:pt-0 last:pb-0",
-                  "hover:text-primary",
+                  "relative inline-flex py-1.5 text-sm text-muted-foreground transition-colors w-fit first:pt-0 last:pb-0 hover:text-primary focus-state",
                   "data-[active=true]:text-primary",
                 )}
               >

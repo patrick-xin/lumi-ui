@@ -1,6 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { CopyButton } from "@/components/docs/copy-button";
+import { Callout } from "@/components/docs/mdx/call-out";
 import { CodeTabs } from "@/components/docs/mdx/code-tabs";
 import { ComponentList } from "@/components/docs/mdx/component-list";
 import { ComponentPreview } from "@/components/docs/mdx/component-preview";
@@ -195,7 +196,7 @@ export const mdxComponents: MDXComponents = {
       return (
         <code
           className={cn(
-            "bg-muted relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] break-words outline-none",
+            "bg-accent text-accent-foreground relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] break-words outline-none",
             className,
           )}
           {...props}
@@ -243,4 +244,5 @@ export const mdxComponents: MDXComponents = {
   Tabs,
   ComponentList,
   CTACard,
+  Callout,
 };

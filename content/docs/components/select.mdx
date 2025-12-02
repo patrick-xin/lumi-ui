@@ -1,10 +1,222 @@
 ---
 title: Select
 description: A common form component for choosing a predefined value in a dropdown menu.
-status: in-progress
 links:
   doc: https://base-ui.com/react/components/select
   api: https://base-ui.com/react/components/select#api-reference
 ---
 
-In progress
+<ComponentPreview name="select-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/select
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="select" title="select.tsx" collapsible/>
+      </Step>
+      <Step title="Update the import paths to match your project setup."/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## Basic Usage
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+```
+
+```tsx
+<Select>
+  <SelectTrigger className="w-[180px]">
+    <SelectValue placeholder="Theme" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="light">Light</SelectItem>
+    <SelectItem value="dark">Dark</SelectItem>
+    <SelectItem value="system">System</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+## Recipes
+
+### Scrollable
+
+When the content exceeds the viewport height, scroll buttons automatically appear.
+
+<ComponentPreview name="select-scrollable" />
+
+### With Groups
+
+Use `SelectGroup` and `SelectLabel` to organize items into sections.
+
+<ComponentPreview name="select-grouped" />
+
+### Multiple selection
+
+Add the `multiple` prop to the `<Select>` component to allow multiple selections.
+
+<ComponentPreview name="select-multiple" />
+
+### Item Aligned
+
+Use `position="item-aligned"` for classic OS-style positioning where the selected item aligns with the trigger.
+
+<ComponentPreview name="select-aligned" />
+
+### Disabled
+
+Disable the entire select or individual items.
+
+<ComponentPreview name="select-disabled" />
+
+### Data-Driven Items
+
+Pass an array of objects to the `items` prop to automatically handle value-label lookups and rendering.
+
+<ComponentPreview name="select-simple" />
+
+### Custom Render
+
+You can customize the rendered content while still using the `items` prop for accessibility.
+
+<ComponentPreview name="select-custom-render" />
+
+### Controlled
+
+Control the value state programmatically.
+
+<ComponentPreview name="select-controlled" />
+
+### Track State
+
+
+You can track the state of the select and use it to display additional information.
+
+<ComponentPreview name="select-track-state" />
+
+## Anatomy
+
+```tsx
+<Select>
+  <SelectTrigger>
+    <SelectValue />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel />
+      <SelectItem />
+    </SelectGroup>
+    <SelectSeparator />
+  </SelectContent>
+</Select>
+```
+
+| Component | Role |
+| :--- | :--- |
+| `Select` | Root component that manages state and value. |
+| `SelectTrigger` | Button that toggles the dropdown. |
+| `SelectValue` | Displays the selected value or placeholder. |
+| `SelectContent` | Popover container with positioning and scroll handling. |
+| `SelectGroup` | Groups related items together. |
+| `SelectLabel` | Label for a group of items. |
+| `SelectItem` | Individual selectable option. |
+| `SelectSeparator` | Visual divider between items or groups. |
+| `SelectScrollUpButton` | Scroll control at the top of the list. |
+| `SelectScrollDownButton` | Scroll control at the bottom of the list. |
+
+## Migration from shadcn/ui
+
+### Component Naming & Structure
+
+Our component wraps Base UI's `Select` primitive but maintains shadcn/ui's naming convention for easy migration.
+
+| shadcn/ui | Lumi UI | Notes |
+| :--- | :--- | :--- |
+| `Select` | `Select` | Supports `items` and `multiple` props. |
+| `SelectTrigger` | `SelectTrigger` | Identical usage. |
+| `SelectValue` | `SelectValue` | Identical usage. |
+| `SelectContent` | `SelectContent` | Identical usage. |
+| `SelectItem` | `SelectItem` | Identical usage. |
+| `SelectGroup` | `SelectGroup` | Identical usage. |
+| `SelectLabel` | `SelectLabel` | Identical usage. |
+
+### Key Differences & New Features
+
+| Feature | Lumi UI | shadcn/ui (Radix) |
+| :--- | :--- | :--- |
+| **Label Rendering** | Automatic via `items` prop | Manual mapping required |
+| **Multi-select** | Native `multiple` prop | Requires custom implementation |
+| **Positioning** | `popper` or `item-aligned` | Mostly `popper` |
+| **Arrow** | Optional (removed by default) | Included by default |
+
+### Migration Example
+
+<Tabs defaultValue="shadcn/ui">
+  <TabsList>
+    <TabsTab value="shadcn/ui">shadcn/ui</TabsTab>
+    <TabsTab value="lumi/ui">lumi/ui</TabsTab>
+  </TabsList>
+  <TabsPanel value="shadcn/ui">
+    <Callout variant="destructive" title="The Radix Way">
+      Requires manual mapping for labels if values differ.
+    </Callout>
+    ```tsx
+    <Select>
+      <SelectTrigger>
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">Apple</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+      </SelectContent>
+    </Select>
+    ```
+  </TabsPanel>
+  <TabsPanel value="lumi/ui">
+    <Callout variant="info" title="The Base UI Way">
+      Use the `items` prop for automatic label handling and better accessibility.
+    </Callout>
+    ```tsx
+    const fruits = [
+      { value: "apple", label: "Apple" },
+      { value: "banana", label: "Banana" },
+    ]
+
+    <Select items={fruits}>
+      <SelectTrigger>
+        <SelectValue placeholder="Select a fruit" />
+      </SelectTrigger>
+      <SelectContent>
+        {fruits.map((fruit) => (
+          <SelectItem key={fruit.value} value={fruit.value}>
+            {fruit.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+    ```
+  </TabsPanel>
+</Tabs>
+
+
+

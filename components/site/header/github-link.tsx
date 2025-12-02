@@ -6,6 +6,7 @@ import { Button } from "@/registry/ui/button";
 export function GitHubLink() {
   return (
     <Button
+      nativeButton={false}
       render={
         <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
           <Icons.gitHub />

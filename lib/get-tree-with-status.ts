@@ -1,11 +1,11 @@
 import "server-only";
 
-import type { PageTree } from "fumadocs-core/server";
+import type { Node, Root } from "fumadocs-core/page-tree";
 import { source } from "@/lib/source";
 import type { DocNode, DocRoot } from "@/types";
 
-export function getTreeWithStatus(tree: PageTree.Root): DocRoot {
-  const enrichNode = (node: PageTree.Node): DocNode => {
+export function getTreeWithStatus(tree: Root): DocRoot {
+  const enrichNode = (node: Node): DocNode => {
     if (node.type === "page") {
       const page = source.getNodePage(node);
 
@@ -61,7 +61,7 @@ export function transformNavigation() {
           if (!pageLabel) return null;
 
           return {
-            value: page.url.split("/").pop(),
+            value: page.url.split("/").pop() as string,
             label: pageLabel,
             url: page.url,
             folderName,
