@@ -110,47 +110,60 @@ function getExistingDemoFiles(): DemoFile[] {
 
   const demoFiles: DemoFile[] = [];
 
-  try {
-    const entries = fs.readdirSync(EXAMPLES_DIR, { withFileTypes: true });
+  function scanDirectory(directory: string, prefix = "") {
+    try {
+      const entries = fs.readdirSync(directory, { withFileTypes: true });
 
-    for (const entry of entries) {
-      if (entry.isDirectory()) {
-        // Handle nested folder structure: examples/accordion/accordion-demo.tsx
-        const folderPath = path.join(EXAMPLES_DIR, entry.name);
-        const files = fs
-          .readdirSync(folderPath)
-          .filter((file) => file.endsWith(".tsx"));
+      for (const entry of entries) {
+        if (entry.isDirectory()) {
+          // Recurse into "ui" and "blocks" directories
+          if (
+            (entry.name === "ui" || entry.name === "blocks") &&
+            prefix === ""
+          ) {
+            scanDirectory(path.join(directory, entry.name), entry.name);
+            continue;
+          }
 
-        for (const file of files) {
-          const name = file.replace(".tsx", "");
-          const relativePath = `${entry.name}/${name}`;
+          // Handle component/block folders
+          const folderPath = path.join(directory, entry.name);
+          const files = fs
+            .readdirSync(folderPath)
+            .filter((file) => file.endsWith(".tsx"));
+
+          for (const file of files) {
+            const name = file.replace(".tsx", "");
+            const folderName = prefix ? `${prefix}/${entry.name}` : entry.name;
+            const relativePath = `${folderName}/${name}`;
+            const fullPath = `components/examples/${relativePath}.tsx`;
+
+            demoFiles.push({
+              name,
+              folder: folderName,
+              relativePath,
+              fullPath,
+            });
+          }
+        } else if (entry.name.endsWith(".tsx") && entry.name.includes("-")) {
+          // Handle flat files
+          const name = entry.name.replace(".tsx", "");
+          const relativePath = prefix ? `${prefix}/${name}` : name;
           const fullPath = `components/examples/${relativePath}.tsx`;
 
           demoFiles.push({
             name,
-            folder: entry.name,
+            folder: prefix,
             relativePath,
             fullPath,
           });
         }
-      } else if (entry.name.endsWith(".tsx") && entry.name.includes("-")) {
-        // Handle flat files for backward compatibility
-        const name = entry.name.replace(".tsx", "");
-        const relativePath = name;
-        const fullPath = `components/examples/${name}.tsx`;
-
-        demoFiles.push({
-          name,
-          folder: "",
-          relativePath,
-          fullPath,
-        });
       }
+    } catch (error) {
+      log(`Failed to read directory ${directory}: ${error}`);
     }
-  } catch (error) {
-    log(`Failed to read examples directory: ${error}`);
   }
 
+  scanDirectory(EXAMPLES_DIR);
   return demoFiles;
 }
 
@@ -180,8 +193,12 @@ function validateRegistry(
     // Priority 1: Folder name matches component name exactly
     // Priority 2: Demo name starts with component name (for flat files)
     const componentDemos = demoFiles.filter((demo) => {
-      if (demo.folder && demo.folder === item.name) {
-        return true; // Folder-based match (preferred)
+      if (demo.folder) {
+        // Handle nested folders (e.g. ui/accordion)
+        const componentName = demo.folder.split("/").pop();
+        if (componentName === item.name) {
+          return true; // Folder-based match (preferred)
+        }
       }
       // Fallback for flat files or flexible naming
       return (
@@ -204,9 +221,14 @@ function validateRegistry(
     let found = false;
 
     // Check if folder name matches a component (preferred method)
-    if (demoFile.folder && registryComponentNames.includes(demoFile.folder)) {
-      found = true;
-    } else {
+    if (demoFile.folder) {
+      const componentName = demoFile.folder.split("/").pop();
+      if (componentName && registryComponentNames.includes(componentName)) {
+        found = true;
+      }
+    }
+
+    if (!found) {
       // Fallback: Extract potential component name from demo name (for flat files)
       const parts = demoFile.name.split("-");
       if (parts.length >= 2) {
@@ -246,11 +268,17 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
       })) || [];
 
     let componentLazyLoad = "";
-    if (item.type === "registry:ui" || item.type === "registry:lib") {
+    if (
+      item.type === "registry:ui" ||
+      item.type === "registry:lib" ||
+      item.type === "registry:block"
+    ) {
       const importPath =
         item.type === "registry:ui"
           ? `@/registry/ui/${item.name}`
-          : `@/registry/lib/${item.name}`;
+          : item.type === "registry:lib"
+            ? `@/registry/lib/${item.name}`
+            : `@/registry/blocks/${item.name}`;
 
       componentLazyLoad = `component: React.lazy(async () => {
       const mod = await import("${importPath}");
@@ -277,11 +305,14 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
     let registryDeps: string[] = [];
 
     // Priority 1: Use folder name if it matches a component
+    const folderComponentName = demoFile.folder
+      ? demoFile.folder.split("/").pop()
+      : "";
     if (
-      demoFile.folder &&
-      registry.items.some((item) => item.name === demoFile.folder)
+      folderComponentName &&
+      registry.items.some((item) => item.name === folderComponentName)
     ) {
-      registryDeps = [demoFile.folder];
+      registryDeps = [folderComponentName];
     } else {
       // Fallback: Extract from demo name (for flat files)
       const parts = demoFile.name.split("-");
@@ -360,7 +391,7 @@ export interface RegistryFile {
 export interface RegistryEntry {
   name: string;
   description?: string;
-  type: "registry:ui" | "registry:example" | "registry:lib" | "registry:hook";
+  type: "registry:ui" | "registry:example" | "registry:lib" | "registry:hook" | "registry:block";
   registryDependencies?: string[];
   files: RegistryFile[];
   component?: React.LazyExoticComponent<React.ComponentType<unknown>>;

@@ -1,4 +1,5 @@
 import { Checkbox } from "@/registry/ui/checkbox";
+import { CheckboxGroup } from "@/registry/ui/checkbox-group";
 import {
   Field,
   FieldDescription,
@@ -11,7 +12,6 @@ import {
   FieldsetDescription,
   FieldsetLegend,
 } from "@/registry/ui/fieldset";
-import { CheckboxGroup } from "../../../registry/ui/checkbox-group";
 
 export function FieldCheckbox() {
   return (

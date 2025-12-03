@@ -283,7 +283,7 @@
   }
 
   [data-rehype-pretty-code-title] {
-    border-bottom: var-(--border);
+    border-bottom: var(--border);
     border-bottom-width: 1px;
     border-bottom-style: solid;
     padding-block: calc(var(--spacing) * 2.5);

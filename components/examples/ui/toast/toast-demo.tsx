@@ -1,8 +1,8 @@
 "use client";
 
 import { toast } from "@/hooks/use-toast"; // Import the helper, not the hook
+import { Avatar } from "@/registry/ui/avatar";
 import { Button } from "@/registry/ui/button";
-import { Avatar } from "../../../registry/ui/avatar";
 
 export function ToastDemo() {
   return (

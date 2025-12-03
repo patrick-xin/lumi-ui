@@ -13,8 +13,8 @@ import {
   AutocompleteRow,
   AutocompleteTrigger,
 } from "@/registry/ui/autocomplete";
+import { Button } from "@/registry/ui/button";
 import { Input } from "@/registry/ui/input";
-import { Button } from "../../../registry/ui/button";
 
 export function EmojiPickerAutocompleteDemo() {
   const [pickerOpen, setPickerOpen] = React.useState(false);

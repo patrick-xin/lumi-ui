@@ -16,7 +16,7 @@ export interface RegistryFile {
 export interface RegistryEntry {
   name: string;
   description?: string;
-  type: "registry:ui" | "registry:example" | "registry:lib" | "registry:hook";
+  type: "registry:ui" | "registry:example" | "registry:lib" | "registry:hook" | "registry:block";
   registryDependencies?: string[];
   files: RegistryFile[];
   component?: React.LazyExoticComponent<React.ComponentType<unknown>>;

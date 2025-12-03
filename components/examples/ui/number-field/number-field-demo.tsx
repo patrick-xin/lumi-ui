@@ -1,3 +1,4 @@
+import { Field, FieldLabel } from "@/registry/ui/field";
 import {
   NumberField,
   NumberFieldDecrement,
@@ -5,7 +6,6 @@ import {
   NumberFieldIncrement,
   NumberFieldInput,
 } from "@/registry/ui/number-field";
-import { Field, FieldLabel } from "../../../registry/ui/field";
 
 export function NumberFieldDemo() {
   return (

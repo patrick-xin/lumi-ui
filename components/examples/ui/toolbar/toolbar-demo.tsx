@@ -1,4 +1,5 @@
 import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
+import { Toggle } from "@/registry/ui/toggle";
 import {
   Toolbar,
   ToolbarButton,
@@ -6,7 +7,6 @@ import {
   ToolbarLink,
   ToolbarSeparator,
 } from "@/registry/ui/toolbar";
-import { Toggle } from "../../../registry/ui/toggle";
 
 export default function EditorToolbar() {
   return (
