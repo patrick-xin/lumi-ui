@@ -163,7 +163,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "registry/ui/input.tsx",
+          "path": "registry/ui/button.tsx",
           "type": "registry:ui"
         }
       ]

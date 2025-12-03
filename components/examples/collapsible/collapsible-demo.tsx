@@ -33,14 +33,14 @@ export function CollapsibleDemo() {
         />
       </div>
       <div className="rounded-md border px-4 py-2 font-mono text-sm">
-        @radix-ui/primitives
+        base ui components
       </div>
       <CollapsibleContent className="flex flex-col gap-2">
         <div className="rounded-md border px-4 py-2 font-mono text-sm">
-          @radix-ui/colors
+          @base-ui-components/react
         </div>
         <div className="rounded-md border px-4 py-2 font-mono text-sm">
-          @stitches/react
+          @lumi-ui/components
         </div>
       </CollapsibleContent>
     </Collapsible>

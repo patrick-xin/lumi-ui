@@ -38,8 +38,6 @@ function PreviewCardContent({
         <BasePreviewCard.Popup
           data-slot="preview-card-content"
           className={cn(
-            // 1. REMOVED "border"
-            // 2. ADDED "outline outline-border dark:-outline-offset-1" (Matches Popover)
             "bg-popover text-popover-foreground z-50 w-64 rounded-md p-4 shadow-md outline outline-border dark:-outline-offset-1",
             "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
             "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",

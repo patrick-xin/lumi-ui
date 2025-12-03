@@ -38,21 +38,18 @@ function Slider({
       <BaseSlider.Control
         className={cn(
           "flex w-full items-center py-2",
-          // Vertical styles for Control
           "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:px-2 data-[orientation=vertical]:py-0"
         )}
       >
         <BaseSlider.Track
           className={cn(
             "bg-secondary relative h-2 w-full grow rounded-full",
-            // Vertical styles for Track
             "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2"
           )}
         >
           <BaseSlider.Indicator
             className={cn(
               "bg-primary absolute h-full rounded-full",
-              // Vertical styles for Indicator
               "data-[orientation=vertical]:w-full"
             )}
           />
