@@ -15,11 +15,12 @@ export function SiteFooter() {
                 <Logo className="size-10" />
               </Link>
             </span>
-            <Separator
-              orientation="vertical"
-              className="h-3 inline-block mx-2"
-            />
+            <Separator orientation="vertical" className="h-3! mx-2" />
             <span>{siteConfig.slogan}</span>
+            <Separator orientation="vertical" className="h-3! mx-2" />
+            <span className="">
+              Base UI version: <span>1.0.0-beta.7</span>
+            </span>
           </span>
         </div>
       </div>

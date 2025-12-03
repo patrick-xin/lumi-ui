@@ -39,7 +39,7 @@ export function ThemeSwitcher() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline" size="icon-sm">
+          <Button variant="outline" size="icon-sm" title="Switch theme">
             <PaletteIcon className="size-4 transition-transform" />
           </Button>
         }
