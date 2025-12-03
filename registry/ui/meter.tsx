@@ -5,10 +5,6 @@ import { Meter as BaseMeter } from "@base-ui-components/react/meter"
 
 import { cn } from "@/lib/utils"
 
-/**
- * A simple Meter bar, mirroring the API of the Progress component.
- * Use this when you don't need the custom Label/Value layout.
- */
 function Meter({
   ref,
   className,
@@ -29,9 +25,6 @@ function Meter({
   )
 }
 
-/**
- * Decomposed components for building complex Meter layouts (e.g. with Labels and Values).
- */
 const MeterRoot = ({
   ref,
   className,

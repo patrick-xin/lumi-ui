@@ -4,11 +4,7 @@ import * as React from "react";
 import { Field as BaseField } from "@base-ui-components/react/field";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { Separator } from "./separator";
-
-/* -------------------------------------------------------------------------- */
-/*                                    Field                                   */
-/* -------------------------------------------------------------------------- */
+import { Separator } from "@/registry/ui/separator";
 
 const fieldVariants = cva(
   "group/field grid w-full gap-2", 
@@ -20,10 +16,8 @@ const fieldVariants = cva(
           "grid-cols-[max-content_1fr] items-start gap-x-4 gap-y-1",
           "[&>[data-slot=field-label]]:mt-2", 
         ],
-        // The Responsive variant relies on FieldGroup being the parent
         responsive: [
           "grid-cols-1",
-          // When container > md, switch to horizontal layout logic
           "@md/field-group:grid-cols-[max-content_1fr] @md/field-group:items-start @md/field-group:gap-x-4 @md/field-group:gap-y-1",
           "@md/field-group:[&>[data-slot=field-label]]:mt-2",
         ],
@@ -50,12 +44,6 @@ function Field({ className, orientation, ...props }: FieldProps) {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                 Field Item                                 */
-/* -------------------------------------------------------------------------- */
-
-// THIS REPLACES the need for complex `has-[checkbox]` logic on the parent.
-// Use this for Checkboxes, Radios, and Switch rows.
 function FieldItem({
   className,
   ...props
@@ -64,8 +52,8 @@ function FieldItem({
     <BaseField.Item
       data-slot="field-item"
       className={cn(
-        "flex items-center gap-2", // The classic shadcn checkbox row layout
-        "space-y-0", // Override potential stack spacing
+        "flex items-center gap-2", 
+        "space-y-0",
         "data-[disabled]:opacity-50",
         className
       )}
@@ -73,10 +61,6 @@ function FieldItem({
     />
   );
 }
-
-/* -------------------------------------------------------------------------- */
-/*                                 Field Label                                */
-/* -------------------------------------------------------------------------- */
 
 function FieldLabel({
   className,
@@ -87,9 +71,7 @@ function FieldLabel({
       data-slot="field-label"
       className={cn(
         "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-        // Styling when inside a FieldItem (Checkbox/Radio label)
         "group-data-[slot=field-item]/field:font-normal", 
-        // Styling when inside a horizontal Field (Standard Form label)
         "group-data-[orientation=horizontal]/field:justify-self-start",
         className
       )}
@@ -98,18 +80,12 @@ function FieldLabel({
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                Field Control                               */
-/* -------------------------------------------------------------------------- */
-
-// Shared styles for Inputs, Textareas, and Select Triggers
 export const controlStyles = cn(
   "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors",
   "file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground",
   "placeholder:text-muted-foreground",
   "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
   "disabled:cursor-not-allowed disabled:opacity-50",
-  // Base UI handles data-invalid automatically
   "data-[invalid]:border-destructive data-[invalid]:focus-visible:ring-destructive"
 );
 
@@ -126,10 +102,6 @@ function FieldControl({
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                Field Content                               */
-/* -------------------------------------------------------------------------- */
-
 function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -143,10 +115,6 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
     />
   );
 }
-
-/* -------------------------------------------------------------------------- */
-/*                                    Error                                   */
-/* -------------------------------------------------------------------------- */
 
 function FieldError({
   className,
@@ -182,7 +150,6 @@ function FieldDescription({
   );
 }
 
-
 function FieldSeparator({
   children,
   className,
@@ -213,12 +180,7 @@ function FieldSeparator({
   )
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                 Field Group                                */
-/* -------------------------------------------------------------------------- */
-
 const fieldGroupVariants = cva(
-  // Establishes the container for responsive @md/field-group queries
   "@container/field-group flex w-full flex-col",
   {
     variants: {
@@ -250,7 +212,7 @@ function FieldGroup({ className, spacing, ...props }: FieldGroupProps) {
 
 export {
   Field,
-  FieldItem, // This is the new component for Checkbox/Radio rows
+  FieldItem,
   FieldLabel,
   FieldControl,
   FieldContent,

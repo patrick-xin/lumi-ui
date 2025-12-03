@@ -1,6 +1,6 @@
 "use client";
 
-import { Autocomplete as AutocompletePrimitive } from "@base-ui-components/react/autocomplete";
+import { Autocomplete as BaseAutocomplete } from "@base-ui-components/react/autocomplete";
 import { Loader } from "lucide-react";
 import * as React from "react";
 import {
@@ -19,7 +19,7 @@ export function AsyncAutocompleteDemo() {
   const [searchResults, setSearchResults] = React.useState<Movie[]>([]);
   const [error, setError] = React.useState<string | null>(null);
 
-  const { contains } = AutocompletePrimitive.useFilter({ sensitivity: "base" });
+  const { contains } = BaseAutocomplete.useFilter({ sensitivity: "base" });
 
   React.useEffect(() => {
     if (!searchValue) {

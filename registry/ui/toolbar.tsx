@@ -36,7 +36,6 @@ function ToolbarGroup({
   );
 }
 
-// Reuse Button variants but default to "ghost" and "sm" for the toolbar context
 interface ToolbarButtonProps
   extends React.ComponentProps<typeof BaseToolbar.Button>,
     VariantProps<typeof buttonVariants> {}
@@ -52,7 +51,6 @@ function ToolbarButton({
       data-slot="toolbar-button"
       className={cn(
         buttonVariants({ variant, size, className }),
-        // Add support for Base UI's 'pressed' state matching the 'ghost' hover state
         "data-[pressed]:bg-accent data-[pressed]:text-accent-foreground"
       )}
       {...props}
@@ -81,7 +79,6 @@ function ToolbarLink({
     <BaseToolbar.Link
       data-slot="toolbar-link"
       className={cn(
-        // Reusing 'link' variant styles manually or just keeping it distinct
         "text-muted-foreground hover:text-foreground inline-flex items-center justify-center gap-2 rounded-sm px-2.5 py-1.5 text-sm font-medium underline-offset-4 outline-none transition-colors hover:underline",
         "focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",

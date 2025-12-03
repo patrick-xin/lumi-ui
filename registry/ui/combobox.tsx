@@ -5,13 +5,6 @@ import { Check, ChevronDown, Search, X } from "lucide-react";
 import type * as React from "react";
 import { cn } from "@/lib/utils";
 
-/**
- * ARCHITECTURAL NOTES:
- * 1. React 19: No forwardRef used. Refs are passed directly via props.
- * 2. Structure: We consolidated Portal -> Positioner -> Popup into `ComboboxContent` for DX.
- * 3. Styling: strict adherence to Shadcn variables (ring, border, input, popover).
- */
-
 const Combobox = BaseCombobox.Root;
 
 function ComboboxValue({
@@ -25,11 +18,6 @@ function ComboboxValue({
   );
 }
 
-/**
- * ComboboxTrigger
- * Mimics the Shadcn SelectTrigger.
- * automatically handles the Chevron rotation via data attributes.
- */
 function ComboboxTrigger({
   className,
   children,
@@ -56,16 +44,10 @@ function ComboboxTrigger({
   );
 }
 
-/**
- * ComboboxInput
- * Smart Component:
- * - Standalone: Looks like a standard Input.
- * - Inside Chips (multiple): Strips borders to blend in.
- * - Search Mode: Can render a search icon if desired.
- */
+
 function ComboboxInput({
   className,
-  multiple, // Context hint
+  multiple, 
   showSearchIcon,
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Input> & {
@@ -81,9 +63,7 @@ function ComboboxInput({
         data-slot="combobox-input"
         className={cn(
           "flex w-full rounded-md border border-input bg-transparent py-1 text-base shadow-xs transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          // Search Icon Padding
           showSearchIcon ? "pl-9 pr-3" : "px-3",
-          // Standalone Mode
           !multiple &&
             "h-9 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
           // Multi-Select Mode (blends into container)
@@ -95,11 +75,7 @@ function ComboboxInput({
   );
 }
 
-/**
- * ComboboxChips
- * The container for multi-select tags.
- * It mimics the visual style of a standard Input, wrapping the chips and the borderless input.
- */
+
 function ComboboxChips({
   className,
   ...props
@@ -153,17 +129,12 @@ function ComboboxChipRemove({
   );
 }
 
-/**
- * ComboboxContent
- * Consolidated Wrapper: Portal -> Backdrop -> Positioner -> Popup
- * This reduces boilerplate significantly.
- */
 function ComboboxPopup({
   className,
   children,
   align = "start",
   sideOffset = 4,
-  matchAnchorWidth = true, // Default to true for cleaner Select-like UI
+  matchAnchorWidth = true,
   classNames,
   ...props
 }: Omit<React.ComponentProps<typeof BaseCombobox.Popup>, "className"> & {
@@ -192,9 +163,7 @@ function ComboboxPopup({
           data-slot="combobox-content"
           className={cn(
             "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md",
-            // Animation States
             "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-            // Base UI Transition Props
             "origin-[var(--transform-origin)] transition-[transform,scale,opacity] duration-100 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
             matchAnchorWidth && "w-[var(--anchor-width)]",
             className
@@ -253,11 +222,6 @@ function ComboboxGroupLabel({
   );
 }
 
-/**
- * ComboboxItem
- * Standard Shadcn alignment: Check on the LEFT, Text on the RIGHT.
- * We use `pl-8` to reserve space for the indicator.
- */
 function ComboboxItem({
   className,
   children,
