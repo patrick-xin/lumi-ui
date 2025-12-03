@@ -1,9 +1,9 @@
 "use client";
 
+import * as React from "react";
 import { Accordion as BaseAccordion } from "@base-ui-components/react/accordion";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ChevronDownIcon, PlusIcon } from "lucide-react";
-import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -101,7 +101,7 @@ function AccordionTrigger({
   return (
     <BaseAccordion.Trigger
       data-slot="accordion-trigger"
-      className={cn(accordionTriggerVariants({ variant }), className)}
+      className={cn(accordionTriggerVariants({ variant, className }))}
       {...props}
     >
       {children}
@@ -136,7 +136,9 @@ function AccordionPanel({
     <BaseAccordion.Panel
       data-slot="accordion-panel"
       className={cn(
-        "h-[var(--accordion-panel-height)] overflow-hidden text-sm transition-[height] duration-200 ease-out data-[ending-style]:h-0 data-[starting-style]:h-0",
+        "h-[var(--accordion-panel-height)] overflow-hidden text-sm",
+        "transition-[height] duration-200 ease-out",
+        "data-[ending-style]:h-0 data-[starting-style]:h-0",
       )}
       {...props}
     >

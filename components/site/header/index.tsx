@@ -6,6 +6,7 @@ import { MobileNav } from "@/components/site/header/mobile-nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { siteConfig } from "@/lib/config";
 import { transformNavigation } from "@/lib/get-tree-with-status";
+import { Badge } from "@/registry/ui/badge";
 import { GitHubLink } from "./github-link";
 
 export function SiteHeader() {
@@ -16,10 +17,16 @@ export function SiteHeader() {
       <div className="flex h-full items-center container justify-between mx-auto w-full">
         {/* Desktop */}
         <div className="hidden md:flex items-center justify-between gap-6 flex-1 min-w-0">
-          <Link href="/" className="flex items-center focus-state">
-            <Logo />
-            <span className="sr-only">{siteConfig.name}</span>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center focus-state">
+              <Logo />
+              <span className="sr-only">{siteConfig.name}</span>
+            </Link>
+            <Badge variant="outline" className="text-[10px] text-primary">
+              Beta
+            </Badge>
+          </div>
+
           <div className="flex items-center justify-end gap-3">
             <CommandMenu navGroups={navGroups} />
             <ThemeSwitcher />
