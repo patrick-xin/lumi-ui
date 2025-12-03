@@ -235,7 +235,7 @@ export const components: ComponentRegistry = {
     registryDependencies: ["class-variance-authority"],
     files:     [
           {
-                "path": "registry/ui/input.tsx",
+                "path": "registry/ui/button.tsx",
                 "type": "registry:ui",
                 "target": ""
           }

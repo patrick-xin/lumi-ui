@@ -62,10 +62,10 @@ export function Callout({
       {...props}
     >
       <Icon className="size-4" />
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-2">
         {title && <div className="font-medium leading-none">{title}</div>}
         {children && (
-          <div className="text-sm [&_p]:leading-relaxed text-foreground/80 w-full">
+          <div className="text-sm [&_p]:leading-relaxed text-foreground/80 w-full [&_code]:bg-primary/10">
             {children}
           </div>
         )}

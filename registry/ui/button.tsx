@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Button as BaseButton } from "@base-ui-components/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -37,7 +38,7 @@ const buttonVariants = cva(
   }
 );
 
-export type ButtonProps = React.ComponentProps<typeof BaseButton> &
+type ButtonProps = React.ComponentProps<typeof BaseButton> &
   VariantProps<typeof buttonVariants> & {
     isLoading?: boolean;
   };
