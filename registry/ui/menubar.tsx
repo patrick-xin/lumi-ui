@@ -1,9 +1,9 @@
 "use client";
 
+import * as React from "react";
 import { Menu as BaseMenu } from "@base-ui-components/react/menu";
 import { Menubar as BaseMenubar } from "@base-ui-components/react/menubar";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
-import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 

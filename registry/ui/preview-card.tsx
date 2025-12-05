@@ -1,7 +1,7 @@
 "use client";
 
+import * as React from "react";
 import { PreviewCard as BasePreviewCard } from "@base-ui-components/react/preview-card";
-import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 

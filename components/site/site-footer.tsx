@@ -19,7 +19,7 @@ export function SiteFooter() {
             <span>{siteConfig.slogan}</span>
             <Separator orientation="vertical" className="h-4!" />
             <span>
-              Base UI version: <span>1.0.0-beta.7</span>
+              Base UI version: <span>1.0.0-rc.0</span>
             </span>
           </span>
         </div>

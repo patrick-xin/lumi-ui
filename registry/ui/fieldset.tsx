@@ -2,9 +2,10 @@
 
 import * as React from "react"
 import { Fieldset as BaseFieldset } from "@base-ui-components/react/fieldset"
+import { cva, VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { cva, VariantProps } from "class-variance-authority"
+
 
 function Fieldset({
   className,

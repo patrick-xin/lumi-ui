@@ -1,5 +1,5 @@
+import * as React from "react";
 import { Separator as BaseSeparator } from "@base-ui-components/react/separator";
-import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 

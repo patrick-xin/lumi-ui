@@ -1,8 +1,9 @@
 "use client";
 
+import * as React from "react";
 import { Combobox as BaseCombobox } from "@base-ui-components/react/combobox";
 import { Check, ChevronDown, Search, X } from "lucide-react";
-import type * as React from "react";
+
 import { cn } from "@/lib/utils";
 
 const Combobox = BaseCombobox.Root;

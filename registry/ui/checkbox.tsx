@@ -1,10 +1,10 @@
 "use client"
 
-import * as React from "react"
-import { Checkbox as BaseCheckbox } from "@base-ui-components/react/checkbox"
-import { CheckIcon, MinusIcon } from "lucide-react"
+import * as React from "react";
+import { Checkbox as BaseCheckbox } from "@base-ui-components/react/checkbox";
+import { CheckIcon, MinusIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 function Checkbox({
   className,

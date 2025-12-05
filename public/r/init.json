@@ -3,7 +3,14 @@
   "type": "registry:style",
   "title": "Base Style",
   "author": "@lumi-ui",
-  "dependencies": ["@base-ui-components/react", "lucide-react"],
+  "dependencies": [
+    "@base-ui-components/react", 
+    "lucide-react",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": ["utils"],
   "css": {
     "@layer base": {
       ".root": {

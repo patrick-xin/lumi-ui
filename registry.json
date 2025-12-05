@@ -19,7 +19,11 @@
       "type": "registry:ui",
       "title": "Accordion",
       "description": "A set of collapsible panels with headings.",
-      "dependencies": ["@base-ui-components/react"],
+      "dependencies": [
+        "@base-ui-components/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -33,7 +37,7 @@
       "type": "registry:ui",
       "title": "Avatar",
       "description": "An easily stylable avatar component.",
-      "dependencies": [],
+      "dependencies": ["@base-ui-components/react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -47,7 +51,7 @@
       "type": "registry:ui",
       "title": "Alert Dialog",
       "description": "A dialog that requires user response to proceed.",
-      "dependencies": ["class-variance-authority"],
+      "dependencies": ["@base-ui-components/react"],
       "registryDependencies": ["utils", "button"],
       "files": [
         {
@@ -61,7 +65,11 @@
       "type": "registry:ui",
       "title": "Dialog",
       "description": "A popup that opens on top of the entire page.",
-      "dependencies": ["class-variance-authority"],
+      "dependencies": [
+        "@base-ui-components/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
       "registryDependencies": ["utils", "button"],
       "files": [
         {
@@ -75,7 +83,7 @@
       "type": "registry:ui",
       "title": "Tabs",
       "description": "A component for toggling between related panels on the same page.",
-      "dependencies": ["class-variance-authority"],
+      "dependencies": ["@base-ui-components/react", "class-variance-authority"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -89,7 +97,7 @@
       "type": "registry:ui",
       "title": "Scroll Area",
       "description": "A native scroll container with custom scrollbars.",
-      "dependencies": [""],
+      "dependencies": ["@base-ui-components/react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -103,7 +111,7 @@
       "type": "registry:ui",
       "title": "Popover",
       "description": "An accessible popup anchored to a button.",
-      "dependencies": [""],
+      "dependencies": ["@base-ui-components/react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -117,7 +125,7 @@
       "type": "registry:ui",
       "title": "Dropdown Menu",
       "description": "A list of actions in a dropdown, enhanced with keyboard navigation.",
-      "dependencies": ["lucide-react"],
+      "dependencies": ["@base-ui-components/react", "lucide-react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -131,7 +139,7 @@
       "type": "registry:ui",
       "title": "Autocomplete",
       "description": "An input that suggests options as you type.",
-      "dependencies": ["lucide-react"],
+      "dependencies": ["@base-ui-components/react", "lucide-react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -145,7 +153,7 @@
       "type": "registry:ui",
       "title": "Autocomplete",
       "description": "A native input element that automatically works with Field.",
-      "dependencies": ["class-variance-authority"],
+      "dependencies": ["@base-ui-components/react", "class-variance-authority"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -159,7 +167,7 @@
       "type": "registry:ui",
       "title": "Button",
       "description": "Displays a button or a component that looks like a button.",
-      "dependencies": ["class-variance-authority"],
+      "dependencies": ["@base-ui-components/react", "class-variance-authority"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -173,7 +181,7 @@
       "type": "registry:ui",
       "title": "Checkbox",
       "description": "An easily stylable checkbox component.",
-      "dependencies": ["@base-ui-components/react"],
+      "dependencies": ["@base-ui-components/react", "lucide-react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -201,7 +209,7 @@
       "type": "registry:ui",
       "title": "Select",
       "description": "A common form component for choosing a predefined value in a dropdown menu.",
-      "dependencies": ["@base-ui-components/react"],
+      "dependencies": ["@base-ui-components/react", "lucide-react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -215,7 +223,11 @@
       "type": "registry:ui",
       "title": "Navigation Menu",
       "description": "A collection of links and menus for website navigation.",
-      "dependencies": ["lucide-react", "class-variance-authority"],
+      "dependencies": [
+        "@base-ui-components/react",
+        "lucide-react",
+        "class-variance-authority"
+      ],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -243,7 +255,7 @@
       "type": "registry:ui",
       "title": "Collapsible",
       "description": "A collapsible panel controlled by a button.",
-      "dependencies": ["lucide-react", "class-variance-authority"],
+      "dependencies": ["class-variance-authority"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -285,8 +297,8 @@
       "type": "registry:ui",
       "title": "Field",
       "description": "A component that provides labeling and validation for form controls.",
-      "dependencies": ["@base-ui-components/react"],
-      "registryDependencies": ["utils"],
+      "dependencies": ["@base-ui-components/react", "class-variance-authority"],
+      "registryDependencies": ["utils", "separator"],
       "files": [
         {
           "path": "registry/ui/field.tsx",
@@ -299,7 +311,7 @@
       "type": "registry:ui",
       "title": "Field Set",
       "description": "A native fieldset element with an easily stylable legend.",
-      "dependencies": ["@base-ui-components/react"],
+      "dependencies": ["@base-ui-components/react", "class-variance-authority"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -327,8 +339,8 @@
       "type": "registry:ui",
       "title": "Radio Group",
       "description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.",
-      "dependencies": ["@base-ui-components/react"],
-      "registryDependencies": ["utils"],
+      "dependencies": ["@base-ui-components/react", "lucide-react"],
+      "registryDependencies": ["radio", "utils"],
       "files": [
         {
           "path": "registry/ui/radio-group.tsx",
@@ -355,7 +367,7 @@
       "type": "registry:ui",
       "title": "Toggle",
       "description": "A two-state button that can be on or off.",
-      "dependencies": ["@base-ui-components/react"],
+      "dependencies": ["@base-ui-components/react", "class-variance-authority"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -369,8 +381,8 @@
       "type": "registry:ui",
       "title": "Toggle Group",
       "description": "Provides a shared state to a series of toggle buttons.",
-      "dependencies": ["@base-ui-components/react"],
-      "registryDependencies": ["utils"],
+      "dependencies": ["@base-ui-components/react", "class-variance-authority"],
+      "registryDependencies": ["toggle", "utils"],
       "files": [
         {
           "path": "registry/ui/toggle-group.tsx",
@@ -383,8 +395,12 @@
       "type": "registry:ui",
       "title": "Toast",
       "description": "Generates toast notifications.",
-      "dependencies": ["@base-ui-components/react"],
-      "registryDependencies": ["utils"],
+      "dependencies": [
+        "@base-ui-components/react",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["button", "utils"],
       "files": [
         {
           "path": "registry/ui/toast.tsx",
@@ -397,8 +413,8 @@
       "type": "registry:ui",
       "title": "Checkbox Group",
       "description": "Provides a shared state to a series of checkboxes.",
-      "dependencies": ["@base-ui-components/react"],
-      "registryDependencies": ["utils"],
+      "dependencies": ["@base-ui-components/react", "class-variance-authority"],
+      "registryDependencies": ["checkbox", "utils"],
       "files": [
         {
           "path": "registry/ui/checkbox-group.tsx",
@@ -439,7 +455,7 @@
       "type": "registry:ui",
       "title": "Number Field",
       "description": "A numeric input element with increment and decrement buttons, and a scrub area.",
-      "dependencies": ["@base-ui-components/react"],
+      "dependencies": ["@base-ui-components/react", "lucide-react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -467,8 +483,8 @@
       "type": "registry:ui",
       "title": "Toolbar",
       "description": "A container for grouping a set of buttons and controls.",
-      "dependencies": ["@base-ui-components/react"],
-      "registryDependencies": ["utils"],
+      "dependencies": ["@base-ui-components/react", "class-variance-authority"],
+      "registryDependencies": ["button", "utils"],
       "files": [
         {
           "path": "registry/ui/toolbar.tsx",
@@ -481,7 +497,7 @@
       "type": "registry:ui",
       "title": "Context Menu",
       "description": "A menu that appears at the pointer on right click or long press.",
-      "dependencies": ["@base-ui-components/react"],
+      "dependencies": ["@base-ui-components/react", "lucide-react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -495,7 +511,7 @@
       "type": "registry:ui",
       "title": "Combobox",
       "description": "An input combined with a list of predefined items to select.",
-      "dependencies": ["@base-ui-components/react"],
+      "dependencies": ["@base-ui-components/react", "lucide-react"],
       "registryDependencies": ["utils"],
       "files": [
         {
@@ -509,8 +525,8 @@
       "type": "registry:ui",
       "title": "Menubar",
       "description": "A menu bar providing commands and options for your application.",
-      "dependencies": ["@base-ui-components/react"],
-      "registryDependencies": ["utils"],
+      "dependencies": ["@base-ui-components/react", "lucide-react"],
+      "registryDependencies": ["menu", "utils"],
       "files": [
         {
           "path": "registry/ui/menubar.tsx",
