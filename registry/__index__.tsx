@@ -32,7 +32,7 @@ export const components: ComponentRegistry = {
     name: "accordion",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/accordion.tsx",
@@ -52,7 +52,7 @@ export const components: ComponentRegistry = {
     name: "avatar",
     description: "",
     type: "registry:ui",
-    registryDependencies: undefined,
+    registryDependencies: ["@base-ui-components/react"],
     files:     [
           {
                 "path": "registry/ui/avatar.tsx",
@@ -72,7 +72,7 @@ export const components: ComponentRegistry = {
     name: "alert-dialog",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["class-variance-authority"],
+    registryDependencies: ["@base-ui-components/react"],
     files:     [
           {
                 "path": "registry/ui/alert-dialog.tsx",
@@ -92,7 +92,7 @@ export const components: ComponentRegistry = {
     name: "dialog",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["class-variance-authority"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/dialog.tsx",
@@ -112,7 +112,7 @@ export const components: ComponentRegistry = {
     name: "tabs",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["class-variance-authority"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/tabs.tsx",
@@ -132,7 +132,7 @@ export const components: ComponentRegistry = {
     name: "scroll-area",
     description: "",
     type: "registry:ui",
-    registryDependencies: undefined,
+    registryDependencies: ["@base-ui-components/react"],
     files:     [
           {
                 "path": "registry/ui/scroll-area.tsx",
@@ -152,7 +152,7 @@ export const components: ComponentRegistry = {
     name: "popover",
     description: "",
     type: "registry:ui",
-    registryDependencies: undefined,
+    registryDependencies: ["@base-ui-components/react"],
     files:     [
           {
                 "path": "registry/ui/popover.tsx",
@@ -172,7 +172,7 @@ export const components: ComponentRegistry = {
     name: "dropdown-menu",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["lucide-react"],
+    registryDependencies: ["@base-ui-components/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/dropdown-menu.tsx",
@@ -192,7 +192,7 @@ export const components: ComponentRegistry = {
     name: "autocomplete",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["lucide-react"],
+    registryDependencies: ["@base-ui-components/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/autocomplete.tsx",
@@ -212,7 +212,7 @@ export const components: ComponentRegistry = {
     name: "input",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["class-variance-authority"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/input.tsx",
@@ -232,7 +232,7 @@ export const components: ComponentRegistry = {
     name: "button",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["class-variance-authority"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/button.tsx",
@@ -252,7 +252,7 @@ export const components: ComponentRegistry = {
     name: "checkbox",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/checkbox.tsx",
@@ -292,7 +292,7 @@ export const components: ComponentRegistry = {
     name: "select",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/select.tsx",
@@ -312,7 +312,7 @@ export const components: ComponentRegistry = {
     name: "navigation-menu",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["lucide-react","class-variance-authority"],
+    registryDependencies: ["@base-ui-components/react","lucide-react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/navigation-menu.tsx",
@@ -352,7 +352,7 @@ export const components: ComponentRegistry = {
     name: "collapsible",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["lucide-react","class-variance-authority"],
+    registryDependencies: ["class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/collapsible.tsx",
@@ -412,7 +412,7 @@ export const components: ComponentRegistry = {
     name: "field",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/field.tsx",
@@ -432,7 +432,7 @@ export const components: ComponentRegistry = {
     name: "fieldset",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/fieldset.tsx",
@@ -472,7 +472,7 @@ export const components: ComponentRegistry = {
     name: "radio-group",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/radio-group.tsx",
@@ -512,7 +512,7 @@ export const components: ComponentRegistry = {
     name: "toggle",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/toggle.tsx",
@@ -532,7 +532,7 @@ export const components: ComponentRegistry = {
     name: "toggle-group",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/toggle-group.tsx",
@@ -552,7 +552,7 @@ export const components: ComponentRegistry = {
     name: "toast",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","lucide-react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/toast.tsx",
@@ -572,7 +572,7 @@ export const components: ComponentRegistry = {
     name: "checkbox-group",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/checkbox-group.tsx",
@@ -632,7 +632,7 @@ export const components: ComponentRegistry = {
     name: "number-field",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/number-field.tsx",
@@ -672,7 +672,7 @@ export const components: ComponentRegistry = {
     name: "toolbar",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/toolbar.tsx",
@@ -692,7 +692,7 @@ export const components: ComponentRegistry = {
     name: "context-menu",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/context-menu.tsx",
@@ -712,7 +712,7 @@ export const components: ComponentRegistry = {
     name: "combobox",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/combobox.tsx",
@@ -732,7 +732,7 @@ export const components: ComponentRegistry = {
     name: "menubar",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui-components/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/menubar.tsx",
@@ -964,37 +964,37 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "async": {
-    name: "async",
+  "autocomplete-async": {
+    name: "autocomplete-async",
     description: "",
     type: "registry:example",
     registryDependencies: ["autocomplete"],
     files: [{
-      path: "components/examples/ui/autocomplete/async.tsx",
+      path: "components/examples/ui/autocomplete/autocomplete-async.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/autocomplete/async");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "async";
+      const mod = await import("@/components/examples/ui/autocomplete/autocomplete-async");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "autocomplete-async";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
     meta: undefined,
   },
-  "auto-highlight": {
-    name: "auto-highlight",
+  "autocomplete-auto-highlight": {
+    name: "autocomplete-auto-highlight",
     description: "",
     type: "registry:example",
     registryDependencies: ["autocomplete"],
     files: [{
-      path: "components/examples/ui/autocomplete/auto-highlight.tsx",
+      path: "components/examples/ui/autocomplete/autocomplete-auto-highlight.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/autocomplete/auto-highlight");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "auto-highlight";
+      const mod = await import("@/components/examples/ui/autocomplete/autocomplete-auto-highlight");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "autocomplete-auto-highlight";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -1018,73 +1018,109 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "fuzzy-matching": {
-    name: "fuzzy-matching",
+  "autocomplete-fuzzy-matching": {
+    name: "autocomplete-fuzzy-matching",
     description: "",
     type: "registry:example",
     registryDependencies: ["autocomplete"],
     files: [{
-      path: "components/examples/ui/autocomplete/fuzzy-matching.tsx",
+      path: "components/examples/ui/autocomplete/autocomplete-fuzzy-matching.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/autocomplete/fuzzy-matching");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "fuzzy-matching";
+      const mod = await import("@/components/examples/ui/autocomplete/autocomplete-fuzzy-matching");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "autocomplete-fuzzy-matching";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
     meta: undefined,
   },
-  "grid-layout": {
-    name: "grid-layout",
+  "autocomplete-grid-layout": {
+    name: "autocomplete-grid-layout",
     description: "",
     type: "registry:example",
     registryDependencies: ["autocomplete"],
     files: [{
-      path: "components/examples/ui/autocomplete/grid-layout.tsx",
+      path: "components/examples/ui/autocomplete/autocomplete-grid-layout.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/autocomplete/grid-layout");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "grid-layout";
+      const mod = await import("@/components/examples/ui/autocomplete/autocomplete-grid-layout");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "autocomplete-grid-layout";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
     meta: undefined,
   },
-  "grouped": {
-    name: "grouped",
+  "autocomplete-grouped": {
+    name: "autocomplete-grouped",
     description: "",
     type: "registry:example",
     registryDependencies: ["autocomplete"],
     files: [{
-      path: "components/examples/ui/autocomplete/grouped.tsx",
+      path: "components/examples/ui/autocomplete/autocomplete-grouped.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/autocomplete/grouped");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "grouped";
+      const mod = await import("@/components/examples/ui/autocomplete/autocomplete-grouped");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "autocomplete-grouped";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
     meta: undefined,
   },
-  "inline": {
-    name: "inline",
+  "autocomplete-inline": {
+    name: "autocomplete-inline",
     description: "",
     type: "registry:example",
     registryDependencies: ["autocomplete"],
     files: [{
-      path: "components/examples/ui/autocomplete/inline.tsx",
+      path: "components/examples/ui/autocomplete/autocomplete-inline.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/autocomplete/inline");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "inline";
+      const mod = await import("@/components/examples/ui/autocomplete/autocomplete-inline");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "autocomplete-inline";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "autocomplete-limit-result": {
+    name: "autocomplete-limit-result",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["autocomplete"],
+    files: [{
+      path: "components/examples/ui/autocomplete/autocomplete-limit-result.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/autocomplete/autocomplete-limit-result");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "autocomplete-limit-result";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "autocomplete-with-clear-trigger": {
+    name: "autocomplete-with-clear-trigger",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["autocomplete"],
+    files: [{
+      path: "components/examples/ui/autocomplete/autocomplete-with-clear-trigger.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/autocomplete/autocomplete-with-clear-trigger");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "autocomplete-with-clear-trigger";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

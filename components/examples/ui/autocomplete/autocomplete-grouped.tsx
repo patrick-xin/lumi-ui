@@ -11,7 +11,6 @@ import {
 import type * as React from "react";
 import {
   Autocomplete,
-  AutocompleteClear,
   AutocompleteCollection,
   AutocompleteEmpty,
   AutocompleteGroup,
@@ -21,7 +20,6 @@ import {
   AutocompleteList,
   AutocompletePopup,
 } from "@/registry/ui/autocomplete";
-import { Label } from "@/registry/ui/label";
 
 // --- Sample Data ---
 interface Command {
@@ -62,41 +60,29 @@ const groupedCommands = groupCommands(commands);
 
 export function GroupedCommandDemo() {
   return (
-    <div className="w-full max-w-sm mx-auto">
-      <Autocomplete
-        defaultOpen
-        items={groupedCommands}
-        itemToStringValue={(item) => item.label}
-      >
-        <Label className="flex flex-col gap-1.5 text-sm font-medium text-foreground">
-          Command Palette
-          <div className="relative">
-            <AutocompleteInput
-              showSearchIcon
-              placeholder="Type a command or search..."
-            />
-            <AutocompleteClear className="right-3" />
-          </div>
-        </Label>
-        <AutocompletePopup>
-          <AutocompleteEmpty>No results found.</AutocompleteEmpty>
-          <AutocompleteList>
-            {(group: { value: string; items: Command[] }) => (
-              <AutocompleteGroup key={group.value} items={group.items}>
-                <AutocompleteGroupLabel>{group.value}</AutocompleteGroupLabel>
-                <AutocompleteCollection>
-                  {(command: Command) => (
-                    <AutocompleteItem key={command.id} value={command}>
-                      {command.icon}
-                      <span>{command.label}</span>
-                    </AutocompleteItem>
-                  )}
-                </AutocompleteCollection>
-              </AutocompleteGroup>
-            )}
-          </AutocompleteList>
-        </AutocompletePopup>
-      </Autocomplete>
-    </div>
+    <Autocomplete
+      items={groupedCommands}
+      itemToStringValue={(item) => item.label}
+    >
+      <AutocompleteInput placeholder="Type a command or search..." />
+      <AutocompletePopup>
+        <AutocompleteEmpty>No results found.</AutocompleteEmpty>
+        <AutocompleteList>
+          {(group: { value: string; items: Command[] }) => (
+            <AutocompleteGroup key={group.value} items={group.items}>
+              <AutocompleteGroupLabel>{group.value}</AutocompleteGroupLabel>
+              <AutocompleteCollection>
+                {(command: Command) => (
+                  <AutocompleteItem key={command.id} value={command}>
+                    {command.icon}
+                    <span>{command.label}</span>
+                  </AutocompleteItem>
+                )}
+              </AutocompleteCollection>
+            </AutocompleteGroup>
+          )}
+        </AutocompleteList>
+      </AutocompletePopup>
+    </Autocomplete>
   );
 }

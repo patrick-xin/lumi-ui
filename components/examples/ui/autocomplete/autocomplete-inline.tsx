@@ -8,16 +8,11 @@ import {
   AutocompleteList,
   AutocompletePopup,
 } from "@/registry/ui/autocomplete";
-import { Label } from "@/registry/ui/label";
 
-export function AutocompleteDemo() {
+export function AutocompleteInlineDemo() {
   return (
-    <Autocomplete items={tags}>
-      <Label className="flex flex-col gap-2 items-start">
-        Search tags
-        <AutocompleteInput placeholder="e.g. feature" />
-      </Label>
-
+    <Autocomplete items={tags} mode="both">
+      <AutocompleteInput placeholder="e.g. feature" />
       <AutocompletePopup>
         <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
         <AutocompleteList>

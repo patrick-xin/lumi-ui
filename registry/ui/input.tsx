@@ -9,7 +9,7 @@ const inputVariants = cva(
     placeholder:text-muted-foreground
     file:text-foreground file:text-sm file:font-medium disabled:pointer-events-none file:inline-flex file:h-7 file:border-0 file:bg-transparent
     disabled:cursor-not-allowed disabled:opacity-50
-   focus-visible:border-border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/50
+    focus-visible:border-border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/50
     selection:bg-primary selection:text-primary-foreground 
     aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive
   `,

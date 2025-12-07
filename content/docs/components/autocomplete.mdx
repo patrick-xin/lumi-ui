@@ -34,3 +34,67 @@ links:
 
 
 ## Anatomy
+
+## Recipes
+
+### Async
+Load items asynchronously while typing and render custom status content.
+<ComponentPreview name="autocomplete-async" />
+
+### Inline autocomplete
+Autofill the input with the highlighted item while navigating with arrow keys using the `mode` prop. Accepts `aria-autocomplete` values `list`, `both`, `inline`, or `none`.
+<ComponentPreview name="autocomplete-inline" />
+
+### Grouped
+Organize related options with `<AutocompleteGroup>` and `<AutocompleteGroupLabel>` to add section headings inside the popup.
+
+Groups are represented by an array of objects with an `items` property, which itself is an array of individual items for each group. An extra property, such as `value`, can be provided for the heading text when rendering the group label.
+<ComponentPreview name="autocomplete-grouped" />
+
+### Fuzzy Matching
+Use fuzzy matching to find relevant results even when the query doesn’t exactly match the item text.
+<ComponentPreview name="autocomplete-fuzzy-matching" />
+
+### Limit results
+Limit the number of visible items using the `limit` prop and guide users to refine their query using `<AutocompleteStatus>`.
+<ComponentPreview name="autocomplete-limit-result" />
+
+### Auto Highlight
+The first matching item can be automatically highlighted as the user types by specifying the `autoHighlight` prop on `<Autocomplete>`. Set the prop’s value to `always` if the highlight should always be present, such as when the list is rendered inline within a dialog.
+
+The prop can be combined with the `keepHighlight` and `highlightItemOnHover` props to configure how the highlight behaves during mouse interactions.
+<ComponentPreview name="autocomplete-auto-highlight" />
+
+### Grid Layout
+Display items in a grid layout, wrapping each `row` in `<AutocompleteRow>` components.
+<ComponentPreview name="autocomplete-grid-layout" />
+
+### Create your own with trigger and clear
+<ComponentPreview name="autocomplete-with-clear-trigger" />
+
+## Anatomy
+
+```tsx
+<Autocomplete>
+  <AutocompleteInput />
+  <AutocompleteTrigger />
+  <AutocompleteIcon />
+  <AutocompleteClear />
+  <AutocompleteValue />
+  <AutocompletePopup>
+    <AutocompleteArrow />
+    <AutocompleteStatus />
+    <AutocompleteEmpty />
+    <AutocompleteList>
+      <AutocompleteRow>
+        <AutocompleteItem />
+      </AutocompleteRow>
+      <AutocompleteSeparator />
+      <AutocompleteGroup>
+        <AutocompleteGroupLabel />
+      </AutocompleteGroup>
+      <AutocompleteCollection />
+    </AutocompleteList>
+  </AutocompletePopup>
+</Autocomplete>
+```

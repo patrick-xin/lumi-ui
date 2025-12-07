@@ -11,7 +11,6 @@ import {
   AutocompletePopup,
   AutocompleteStatus,
 } from "@/registry/ui/autocomplete";
-import { Label } from "@/registry/ui/label";
 
 export function AsyncAutocompleteDemo() {
   const [searchValue, setSearchValue] = React.useState("");
@@ -85,11 +84,7 @@ export function AsyncAutocompleteDemo() {
       itemToStringValue={(item) => item.title}
       filter={null}
     >
-      <Label className="flex flex-col gap-2">
-        Search movies by name or year
-        <AutocompleteInput placeholder="e.g. Pulp Fiction or 1994" />
-      </Label>
-
+      <AutocompleteInput placeholder="e.g. Pulp Fiction or 1994" />
       {shouldRenderPopup && (
         <AutocompletePopup aria-busy={isLoading || undefined}>
           <AutocompleteStatus>{status}</AutocompleteStatus>

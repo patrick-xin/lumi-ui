@@ -2,22 +2,19 @@
 
 import {
   Autocomplete,
+  AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
   AutocompletePopup,
 } from "@/registry/ui/autocomplete";
-import { Label } from "@/registry/ui/label";
 
-export function AutocompleteInlineDemo() {
+export function AutocompleteAutoHighlightDemo() {
   return (
-    <Autocomplete items={tags} mode="both">
-      <Label>
-        Search tags
-        <AutocompleteInput placeholder="e.g. feature" />
-      </Label>
-
+    <Autocomplete items={tags} autoHighlight>
+      <AutocompleteInput placeholder="e.g. feature" />
       <AutocompletePopup>
+        <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
         <AutocompleteList>
           {(tag: Tag) => (
             <AutocompleteItem key={tag.id} value={tag}>

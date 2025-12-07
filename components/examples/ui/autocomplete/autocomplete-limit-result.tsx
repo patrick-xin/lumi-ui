@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import {
   Autocomplete,
   AutocompleteEmpty,
@@ -7,18 +8,37 @@ import {
   AutocompleteItem,
   AutocompleteList,
   AutocompletePopup,
+  AutocompleteStatus,
+  useAutoCompleteFilter,
 } from "@/registry/ui/autocomplete";
-import { Label } from "@/registry/ui/label";
 
-export function AutocompleteAutoHighlightDemo() {
+const limit = 8;
+
+export default function ExampleAutocompleteLimit() {
+  const [value, setValue] = React.useState("");
+
+  const { contains } = useAutoCompleteFilter({ sensitivity: "base" });
+
+  const totalMatches = React.useMemo(() => {
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return tags.length;
+    }
+    return tags.filter((t) => contains(t.value, trimmed)).length;
+  }, [value, contains]);
+
+  const moreCount = Math.max(0, totalMatches - limit);
+
   return (
-    <Autocomplete items={tags} autoHighlight>
-      <Label className="flex flex-col gap-1">
-        Auto highlight on type
-        <AutocompleteInput placeholder="e.g. feature" />
-      </Label>
+    <Autocomplete
+      items={tags}
+      value={value}
+      onValueChange={setValue}
+      limit={limit}
+    >
+      <AutocompleteInput placeholder="e.g. component" />
       <AutocompletePopup>
-        <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
+        <AutocompleteEmpty>No results found for "{value}"</AutocompleteEmpty>
         <AutocompleteList>
           {(tag: Tag) => (
             <AutocompleteItem key={tag.id} value={tag}>
@@ -26,6 +46,11 @@ export function AutocompleteAutoHighlightDemo() {
             </AutocompleteItem>
           )}
         </AutocompleteList>
+        <AutocompleteStatus>
+          {moreCount > 0
+            ? `Hiding ${moreCount} results (type a more specific query to narrow results)`
+            : null}
+        </AutocompleteStatus>
       </AutocompletePopup>
     </Autocomplete>
   );
@@ -36,6 +61,7 @@ interface Tag {
   value: string;
 }
 
+// Larger dataset to make the limit visible.
 const tags: Tag[] = [
   { id: "t1", value: "feature" },
   { id: "t2", value: "fix" },
@@ -43,6 +69,15 @@ const tags: Tag[] = [
   { id: "t4", value: "docs" },
   { id: "t5", value: "internal" },
   { id: "t6", value: "mobile" },
+  { id: "t7", value: "frontend" },
+  { id: "t8", value: "backend" },
+  { id: "t9", value: "performance" },
+  { id: "t10", value: "accessibility" },
+  { id: "t11", value: "design" },
+  { id: "t12", value: "research" },
+  { id: "t13", value: "testing" },
+  { id: "t14", value: "infrastructure" },
+  { id: "t15", value: "documentation" },
   { id: "c-accordion", value: "component: accordion" },
   { id: "c-alert-dialog", value: "component: alert dialog" },
   { id: "c-autocomplete", value: "component: autocomplete" },

@@ -11,7 +11,6 @@ import {
   AutocompletePopup,
   AutocompleteValue,
 } from "@/registry/ui/autocomplete";
-import { Label } from "@/registry/ui/label";
 
 export function FuzzyMatchingAutocompleteDemo() {
   return (
@@ -20,11 +19,7 @@ export function FuzzyMatchingAutocompleteDemo() {
       filter={fuzzyFilter}
       itemToStringValue={(item) => item.title}
     >
-      <Label className="flex flex-col gap-1">
-        Fuzzy search documentation
-        <AutocompleteInput placeholder="e.g. React" />
-      </Label>
-
+      <AutocompleteInput placeholder="e.g. React" />
       <AutocompletePopup>
         <AutocompleteEmpty>
           No results found for "{<AutocompleteValue />}"
