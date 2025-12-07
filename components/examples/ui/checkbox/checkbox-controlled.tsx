@@ -9,14 +9,12 @@ export function CheckboxControlledDemo() {
   return (
     <div className="space-y-4">
       <div className="text-xs font-mono">Accepted: {accepted.toString()}</div>
-      <Field name="terms">
-        <FieldLabel>
-          <Checkbox
-            checked={accepted}
-            onCheckedChange={(checked) => setAccepted(checked)}
-          />
-          Accept terms and conditions
-        </FieldLabel>
+      <Field name="terms" className="flex items-center gap-2">
+        <Checkbox
+          checked={accepted}
+          onCheckedChange={(checked) => setAccepted(checked)}
+        />
+        <FieldLabel>Accept terms and conditions</FieldLabel>
       </Field>
     </div>
   );

@@ -23,11 +23,9 @@ export function CheckboxFormDemo() {
   return (
     <div>
       <Form onSubmit={handleSubmit}>
-        <Field name="terms">
-          <FieldLabel>
-            <Checkbox />
-            Accept terms and conditions
-          </FieldLabel>
+        <Field name="terms" className="flex items-center gap-2">
+          <Checkbox />
+          <FieldLabel>Accept terms and conditions</FieldLabel>
         </Field>
         <Button type="submit">Submit</Button>
       </Form>

@@ -16,8 +16,8 @@ import {
 export function FieldCheckbox() {
   return (
     <form className="w-full max-w-md space-y-4">
-      <Field name="showDesktopItems" className="bg-red-700">
-        <Fieldset className={"bg-blue-700"} render={<CheckboxGroup />}>
+      <Field name="showDesktopItems">
+        <Fieldset render={<CheckboxGroup />}>
           <FieldsetLegend variant="legend">
             Show these items on the desktop
           </FieldsetLegend>
@@ -43,8 +43,8 @@ export function FieldCheckbox() {
         </Fieldset>
       </Field>
       <FieldSeparator />
-      <Field name="syncDesktopDocuments" className="bg-amber-700">
-        <FieldItem className="">
+      <Field name="syncDesktopDocuments">
+        <FieldItem>
           <Checkbox defaultChecked />
           <FieldLabel>Sync Desktop & Documents folders</FieldLabel>
         </FieldItem>

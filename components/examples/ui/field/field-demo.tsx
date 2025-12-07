@@ -26,13 +26,13 @@ export function FieldDemo() {
   return (
     <div className="w-full max-w-md">
       <form>
-        <FieldGroup className="bg-red-900">
-          <Fieldset className="bg-amber-900">
+        <FieldGroup>
+          <Fieldset>
             <FieldsetLegend>Payment Method</FieldsetLegend>
             <FieldsetDescription>
               All transactions are secure and encrypted
             </FieldsetDescription>
-            <FieldGroup className="bg-green-900">
+            <FieldGroup>
               <Field name="checkout-card-name">
                 <FieldLabel>Name on Card</FieldLabel>
                 <FieldControl placeholder="Evil Rabbit" required />

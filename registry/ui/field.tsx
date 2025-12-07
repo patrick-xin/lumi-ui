@@ -14,7 +14,6 @@ const fieldVariants = cva(
         vertical: "grid-cols-1",
         horizontal: [
           "grid-cols-[max-content_1fr] items-start gap-x-4 gap-y-1",
-          "[&>[data-slot=field-label]]:mt-2", 
         ],
         responsive: [
           "grid-cols-1",
