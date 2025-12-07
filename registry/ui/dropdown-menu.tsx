@@ -63,15 +63,7 @@ type DropdownMenuContentProps = React.ComponentProps<typeof BaseMenu.Popup> & {
   sideOffset?: React.ComponentProps<typeof BaseMenu.Positioner>["sideOffset"];
   align?: React.ComponentProps<typeof BaseMenu.Positioner>["align"];
   alignOffset?: React.ComponentProps<typeof BaseMenu.Positioner>["alignOffset"];
-  /**
-   * Whether to display the arrow pointing to the trigger.
-   * @default false
-   */
   showArrow?: boolean;
-  /**
-   * Whether the menu's width should match the trigger's width.
-   * @default false
-   */
   matchAnchorWidth?: boolean;
   positionerProps?: Omit<
     React.ComponentProps<typeof BaseMenu.Positioner>,

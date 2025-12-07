@@ -15,18 +15,12 @@ function Checkbox({
       data-slot="checkbox"
       className={cn(
         "peer size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none",
-        // Base styles
         "border-input dark:bg-input/30",
-        // Checked styles
-        "data-[checked]:bg-primary data-[checked]:text-primary-foreground data-[checked]:border-primary",
-        // Indeterminate styles
-        "data-[indeterminate]:bg-primary data-[indeterminate]:text-primary-foreground data-[indeterminate]:border-primary",
-        // Focus styles
+        "data-checked:bg-primary data-checked:text-primary-foreground data-checked:border-primary",
+        "data-indeterminate:bg-primary data-indeterminate:text-primary-foreground data-indeterminate:border-primary",
         "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        // Invalid/error styles
-        "data-[invalid]:ring-destructive/20 dark:data-[invalid]:ring-destructive/40 data-[invalid]:border-destructive",
-        // Disabled styles
-        "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
+        "data-invalid:ring-destructive/20 dark:data-invalid:ring-destructive/40 data-invalid:border-destructive",
+        "data-disabled:cursor-not-allowed data-disabled:opacity-50",
         className
       )}
       {...props}

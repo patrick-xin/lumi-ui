@@ -7,29 +7,6 @@ import { ChevronDownIcon, PlusIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-/**
- * @private INTERNAL GUIDELINES FOR AI AGENTS
- * This interface defines the strict rules for this component.
- */
-interface AGENTS_READ_THIS {
-  LIBRARY: "Base UI (NOT Radix UI)";
-  STRATEGY: "Use 'render' prop for composition. NEVER use 'asChild'.";
-  ANATOMY: {
-    Root: "Accordion - wraps everything";
-    Item: "AccordionItem - wraps Header and Panel";
-    Header: "AccordionHeader - REQUIRED wrapper for Trigger (a11y)";
-    Trigger: "AccordionTrigger - the button";
-    Panel: "AccordionPanel - the content";
-  };
-  CRITICAL_RULES: [
-    "Base UI uses `render` prop to render other elements. Do not use `asChild` or `as`. ",
-    "Panel MUST have `h-[var(--accordion-panel-height)]` class for animation",
-    "Do NOT remove `AccordionHeader`, it is required for WAI-ARIA",
-  ];
-}
-
-
-
 const accordionItemVariants = cva("border-b", {
   variants: {
     variant: {
@@ -89,24 +66,6 @@ function useAccordionContext() {
   return context;
 }
 
-/**
- * The Root Accordion Component.
- * @param {boolean} multiple - Whether multiple items can be open at the same time. Default: `false`.
- * @param {any[]} value - Controlled value (array of item IDs).
- * @param {any[]} defaultValue - Initial uncontrolled value.
- * @param {boolean} disabled - Whether the component should ignore user interaction.
- * @example
- * // SINGLE OPEN (Default)
- * <Accordion>
- *   <AccordionItem value="item-1">...</AccordionItem>
- * </Accordion>
- * 
- * @example
- * // MULTIPLE OPEN + CONTAINED STYLE
- * <Accordion multiple variant="contained" defaultValue={["item-2", "item-3"]}>
- *   <AccordionItem value="item-1">...</AccordionItem>
- * </Accordion>
- */
 function Accordion({
   variant = "underline",
   ...props
@@ -119,10 +78,6 @@ function Accordion({
   );
 }
 
-/**
- *@param {string} value - A unique value. If not provided, a unique ID is auto-generated.
- *@param {boolean} disabled - Disables this specific item.
- */
 function AccordionItem({
   className,
   ...props
@@ -137,16 +92,6 @@ function AccordionItem({
   );
 }
 
-/**
- * The interactive trigger button. Use `render` prop to render other elements, set `nativeButton={false}` to ensure proper accessibility semantics.
- * Icons are automatically injected based on the Accordion `variant`.
- * @example
- * // Render Button
- * <AccordionTrigger render={<Button/>}>
- * @example
- * // Render other element
- * <AccordionTrigger render={<div/>} nativeButton={false}>
- */
 function AccordionTrigger({
   className,
   children,
@@ -169,10 +114,6 @@ function AccordionTrigger({
   );
 }
 
-/**
- * Required wrapper for Accessibility (WAI-ARIA). Renders <h3/> by default.
- * @remarks Do not omit this component. It wraps the Trigger.
- */
 function AccordionHeader(
   props: React.ComponentProps<typeof BaseAccordion.Header>,
 ) {
@@ -185,11 +126,6 @@ function AccordionHeader(
   );
 }
 
-/**
- * The content panel.
- * @remarks 
- * ANIMATION WARNING: This component relies on `var(--accordion-panel-height)`.
- */
 function AccordionPanel({
   className,
   children,

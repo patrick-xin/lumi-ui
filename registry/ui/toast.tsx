@@ -95,8 +95,6 @@ const Toast = ({
         "data-[ending-style]:opacity-0 data-[ending-style]:scale-90",
         "data-[ending-style]:data-[swipe-direction=right]:translate-x-full",
         "data-[ending-style]:data-[swipe-direction=left]:-translate-x-full",
-        
-        // Apply Variants
         toastVariants({ stack }),
         className
       )}

@@ -47,7 +47,6 @@ const NumberFieldInput = ({
       "flex-1 min-w-0 bg-transparent px-3 text-center text-sm tabular-nums outline-none",
       "placeholder:text-muted-foreground",
       "selection:bg-primary selection:text-primary-foreground",
-      // Fix: Use ring-inset so the ring is contained within the overflow-hidden parent
       "focus-visible:z-10 focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring/50",
       "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
       "disabled:cursor-not-allowed",
@@ -67,7 +66,6 @@ const NumberFieldDecrement = ({
     ref={ref}
     className={cn(
       "flex aspect-square h-full shrink-0 items-center justify-center border-r border-input bg-muted text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50",
-      // Fix: Use ring-inset here too for consistency
       "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring/50",
       className
     )}

@@ -67,7 +67,6 @@ function ComboboxInput({
           showSearchIcon ? "pl-9 pr-3" : "px-3",
           !multiple &&
             "h-9 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-          // Multi-Select Mode (blends into container)
           multiple && "h-auto border-none shadow-none focus-visible:ring-0",
         )}
         {...props}

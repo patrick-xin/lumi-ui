@@ -71,14 +71,10 @@ const navigationMenuTriggerStyle = cva(
     "rounded-md bg-background px-4 py-2",
     "text-sm font-medium",
     "outline-none transition-[color,box-shadow]",
-    // Hover state
     "hover:bg-accent hover:text-accent-foreground",
-    // Focus state
     "focus:bg-accent focus:text-accent-foreground",
     "focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-1",
-    // Disabled state
     "disabled:pointer-events-none disabled:opacity-50",
-    // Open state (Base UI uses data-popup-open)
     "data-[popup-open]:bg-accent/50 data-[popup-open]:text-accent-foreground",
     "data-[popup-open]:hover:bg-accent data-[popup-open]:focus:bg-accent",
   ]
@@ -86,7 +82,6 @@ const navigationMenuTriggerStyle = cva(
 
 interface NavigationMenuTriggerProps
   extends React.ComponentProps<typeof BaseNavigationMenu.Trigger> {
-  /** Whether to show the chevron icon */
   showIcon?: boolean
 }
 
@@ -120,19 +115,14 @@ function NavigationMenuContent({
     <BaseNavigationMenu.Content
       data-slot="navigation-menu-content"
       className={cn(
-        // Base styles
         "w-full p-2 pr-2.5 md:w-auto",
-        // Animation styles using Base UI data attributes
         "transition-[opacity,transform] duration-200 ease-out",
-        // Starting style (entering)
         "data-[starting-style]:opacity-0",
         "data-[starting-style]:data-[activation-direction=left]:translate-x-[-12px]",
         "data-[starting-style]:data-[activation-direction=right]:translate-x-[12px]",
-        // Ending style (exiting)
         "data-[ending-style]:opacity-0",
         "data-[ending-style]:data-[activation-direction=left]:translate-x-[12px]",
         "data-[ending-style]:data-[activation-direction=right]:translate-x-[-12px]",
-        // Non-viewport styles (inline rendering)
         "group-data-[viewport=false]/navigation-menu:bg-popover",
         "group-data-[viewport=false]/navigation-menu:text-popover-foreground",
         "group-data-[viewport=false]/navigation-menu:absolute",
@@ -143,7 +133,6 @@ function NavigationMenuContent({
         "group-data-[viewport=false]/navigation-menu:rounded-md",
         "group-data-[viewport=false]/navigation-menu:border",
         "group-data-[viewport=false]/navigation-menu:shadow",
-        // Nested link focus styles
         "**:data-[slot=navigation-menu-link]:focus:ring-0",
         "**:data-[slot=navigation-menu-link]:focus:outline-none",
         className
@@ -155,9 +144,7 @@ function NavigationMenuContent({
 
 interface NavigationMenuViewportProps {
   className?: string
-  /** Offset from the trigger in pixels */
   sideOffset?: number
-  /** Custom arrow element. Set to false to hide arrow. */
   arrow?: React.ReactNode | false
 }
 
@@ -180,17 +167,12 @@ function NavigationMenuViewport({
         <BaseNavigationMenu.Popup
           data-slot="navigation-menu-viewport"
           className={cn(
-            // Base styles
             "relative overflow-hidden",
             "rounded-md border bg-popover text-popover-foreground shadow-lg",
-            // Dynamic sizing
             "h-[var(--popup-height)] w-[var(--popup-width)]",
             "origin-[var(--transform-origin)]",
-            // Animation
             "transition-[opacity,transform,width,height] duration-200 ease-out",
-            // Starting style (entering)
             "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
-            // Ending style (exiting)
             "data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
             className
           )}
@@ -215,18 +197,13 @@ function NavigationMenuLink({
     <BaseNavigationMenu.Link
       data-slot="navigation-menu-link"
       className={cn(
-        // Base styles
         "flex flex-col gap-1 rounded-sm p-2 text-sm",
         "outline-none transition-all",
-        // Icon styles
         "[&_svg:not([class*='text-'])]:text-muted-foreground",
         "[&_svg:not([class*='size-'])]:size-4",
-        // Hover state
         "hover:bg-accent hover:text-accent-foreground",
-        // Focus state
         "focus:bg-accent focus:text-accent-foreground",
         "focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-1",
-        // Active state (Base UI uses data-active)
         "data-[active]:bg-accent/50 data-[active]:text-accent-foreground",
         "data-[active]:hover:bg-accent data-[active]:focus:bg-accent",
         className
@@ -248,7 +225,6 @@ function NavigationMenuArrow({ className, children }: NavigationMenuArrowProps) 
       className={cn(
         "z-[1] flex h-2 w-4 items-end justify-center overflow-hidden",
         "transition-[left] duration-200 ease-out",
-        // Position based on side
         "data-[side=bottom]:-top-2",
         "data-[side=top]:-bottom-2 data-[side=top]:rotate-180",
         "data-[side=left]:-right-2 data-[side=left]:rotate-90",
