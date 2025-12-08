@@ -7,6 +7,7 @@ import * as React from "react";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMounted } from "@/hooks/use-mounted";
 import { IconMap } from "@/lib/icons";
+import { getSearchGroups } from "@/lib/sidebar-utils";
 import { cn } from "@/lib/utils";
 import {
   AutocompleteCollection,
@@ -19,9 +20,10 @@ import {
 } from "@/registry/ui/autocomplete";
 import { Button } from "@/registry/ui/button";
 import { Kbd, KbdGroup } from "@/registry/ui/kbd";
-import type { NavGroup, NavItem } from "@/types";
+import type { DocRoot, NavGroup, NavItem } from "@/types";
 
-export function CommandMenu({ navGroups }: { navGroups: NavGroup[] }) {
+export function CommandMenu({ tree }: { tree: DocRoot }) {
+  const navGroups = React.useMemo(() => getSearchGroups(tree), [tree]);
   const [isOpen, setIsOpen] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
   const router = useRouter();
@@ -55,7 +57,7 @@ export function CommandMenu({ navGroups }: { navGroups: NavGroup[] }) {
   const handleValueChange = React.useCallback(
     (value: string, details: Autocomplete.Root.ChangeEventDetails) => {
       if (details.reason === "item-press") {
-        const selectedItem = allItemsMap.get(value); // O(1) lookup
+        const selectedItem = allItemsMap.get(value);
 
         if (selectedItem) {
           router.push(selectedItem.url);
@@ -96,6 +98,7 @@ export function CommandMenu({ navGroups }: { navGroups: NavGroup[] }) {
       <Autocomplete.Root
         modal
         mode="both"
+        autoHighlight
         open={isOpen}
         onOpenChange={setIsOpen}
         items={navGroups}

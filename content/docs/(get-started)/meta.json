@@ -1,5 +1,5 @@
 {
   "title": "Get Started",
   "defaultOpen": true,
-  "pages": ["introduction", "..."]
+  "pages": ["introduction", "...", "components"]
 }

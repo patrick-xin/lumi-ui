@@ -1,8 +1,15 @@
 import type { icons } from "lucide-react";
 import { FOLDERS_WITH_STATUS } from "@/lib/constants";
 import { IconMap } from "@/lib/icons";
-import type { DocFolderNode, DocNode, DocPageNode, DocRoot } from "@/types";
-import type { SidebarItem } from "@/types/sidebar";
+import type {
+  DocFolderNode,
+  DocNode,
+  DocPageNode,
+  DocRoot,
+  NavGroup,
+  NavItem,
+  SidebarItem,
+} from "@/types";
 
 const isActive = (url: string, pathname: string) => url === pathname;
 
@@ -10,7 +17,6 @@ export function normalizeSidebarTree(
   tree: DocRoot,
   pathname: string,
 ): SidebarItem[] {
-  // Transform Fumadocs Root Children to SidebarHeaders
   const normalized = tree.children
     .map((node) => {
       if (node.type === "folder") {
@@ -27,9 +33,6 @@ export function normalizeSidebarTree(
       return null;
     })
     .filter(Boolean) as SidebarItem[];
-
-  // 2. INJECT MANUAL LINKS HERE IF NEEDED
-  normalized.push({ type: "link", label: "llm.txt", href: "/llm.txt" });
 
   return normalized;
 }
@@ -78,7 +81,6 @@ function transformChildren(
     .filter(Boolean) as SidebarItem[];
 }
 
-// Helper: recursively check if any descendant is active
 export function hasActiveChild(items: SidebarItem[]): boolean {
   return items.some((item) => {
     if (item.type === "link") {
@@ -89,4 +91,43 @@ export function hasActiveChild(items: SidebarItem[]): boolean {
     }
     return false;
   });
+}
+
+export function getSearchGroups(tree: DocRoot): NavGroup[] {
+  const sidebarItems = normalizeSidebarTree(tree, "");
+
+  const groups: NavGroup[] = [];
+
+  const flatten = (items: SidebarItem[], currentContext: string) => {
+    const currentGroupItems: NavItem[] = [];
+
+    items.forEach((item) => {
+      if (item.type === "link") {
+        currentGroupItems.push({
+          value: item.href,
+          label: item.label,
+          url: item.href,
+          status: item.status,
+          folderName: currentContext,
+        });
+      } else if (item.type === "folder") {
+        flatten(item.items, item.label);
+      } else if (item.type === "header") {
+        flatten(item.items, item.label);
+      }
+    });
+
+    // Only add the group if it actually has direct link children
+    if (currentGroupItems.length > 0) {
+      groups.push({
+        value: currentContext,
+        items: currentGroupItems,
+      });
+    }
+  };
+
+  // Start flattening
+  flatten(sidebarItems, "General");
+
+  return groups;
 }

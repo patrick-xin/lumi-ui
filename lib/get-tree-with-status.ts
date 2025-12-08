@@ -49,13 +49,13 @@ export function transformNavigation(): NavGroup[] {
     if (node.type === "folder") {
       const folderName = getNodeNameAsString(node.name);
 
-      // 1. Collect all direct PAGE children of this folder
+      // Collect all direct PAGE children of this folder
       const pageChildren = node.children.filter(
         (child): child is Extract<DocNode, { type: "page" }> =>
           child.type === "page",
       );
 
-      // 2. If this folder has pages, create a Navigation Group for it
+      // If this folder has pages, create a Navigation Group for it
       if (folderName && pageChildren.length > 0) {
         const items = pageChildren
           .map((page) => {
@@ -80,7 +80,7 @@ export function transformNavigation(): NavGroup[] {
         }
       }
 
-      // 3. Recursively visit sub-folders (to find "Form & Input" inside "Components")
+      // Recursively visit sub-folders (to find "Form & Input" inside "Components")
       const folderChildren = node.children.filter(
         (child): child is Extract<DocNode, { type: "folder" }> =>
           child.type === "folder",

@@ -12,12 +12,12 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/registry/ui/collapsible";
-import type { DocRoot } from "@/types";
 import type {
+  DocRoot,
   SidebarFolderItem,
   SidebarItem,
   SidebarLinkItem,
-} from "@/types/sidebar";
+} from "@/types";
 
 interface DocsSidebarProps {
   tree: DocRoot;
@@ -53,7 +53,6 @@ const SidebarSection = ({ item }: { item: SidebarItem }) => {
       <h4 className="px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
         {item.label}
       </h4>
-      {/* We pass level=0 to start the indentation tree */}
       <SidebarTree items={item.items} level={0} />
     </div>
   );
@@ -112,7 +111,7 @@ const SidebarFolder = ({
             <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
           </Button>
         }
-      ></CollapsibleTrigger>
+      />
       <CollapsibleContent>
         <div className="pt-1">
           <SidebarTree items={item.items} level={level + 1} />
@@ -156,6 +155,6 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
           )}
         </Link>
       }
-    ></Button>
+    />
   );
 };
