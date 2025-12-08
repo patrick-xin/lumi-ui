@@ -37,7 +37,7 @@ export function MobileNav({
         showCloseButton={false}
         classNames={{
           popup: cn(
-            "mx-0 h-[calc(100dvh-4rem)] w-screen max-w-none rounded-none border-0 p-0 top-16 translate-y-0", // Removed overflow-auto
+            "mx-0 h-[calc(100dvh-4rem)] w-screen max-w-none rounded-none border-0 p-0 top-16 translate-y-0",
             "data-[starting-style]:!scale-100 data-[ending-style]:!scale-100",
             "bg-background/70 backdrop-blur",
           ),

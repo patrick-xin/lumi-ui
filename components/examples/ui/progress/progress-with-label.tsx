@@ -86,21 +86,13 @@ export default function ProgressDemo() {
         </ProgressRoot>
         <div className="flex gap-2">
           {!isUploading ? (
-            <Button
-              onClick={startUpload}
-              disabled={isComplete}
-              className="flex-1"
-            >
-              <Play className="mr-2 h-4 w-4" />
+            <Button onClick={startUpload} disabled={isComplete}>
+              <Play />
               {value > 0 && !isComplete ? "Resume" : "Start Upload"}
             </Button>
           ) : (
-            <Button
-              onClick={pauseUpload}
-              variant="secondary"
-              className="flex-1"
-            >
-              <Pause className="mr-2 h-4 w-4" />
+            <Button onClick={pauseUpload} variant="secondary">
+              <Pause />
               Pause
             </Button>
           )}
@@ -110,7 +102,7 @@ export default function ProgressDemo() {
             variant="outline"
             disabled={value === 0 && !isUploading}
           >
-            <RotateCcw className="mr-2 h-4 w-4" />
+            <RotateCcw />
             Reset
           </Button>
         </div>

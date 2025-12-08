@@ -1,13 +1,12 @@
 "use client";
 
-import { toast } from "@/hooks/use-toast"; // Import the helper, not the hook
+import { toast } from "@/hooks/use-toast";
 import { Avatar } from "@/registry/ui/avatar";
 import { Button } from "@/registry/ui/button";
 
 export function ToastDemo() {
   return (
     <div className="flex gap-2">
-      {/* 1. Simple Usage */}
       <Button
         onClick={() =>
           toast("Event Created", {
@@ -23,8 +22,6 @@ export function ToastDemo() {
       >
         Default
       </Button>
-
-      {/* 2. Semantic Usage (Success/Error/etc) */}
       <Button
         variant="destructive"
         onClick={() =>
@@ -36,8 +33,6 @@ export function ToastDemo() {
       >
         Delete
       </Button>
-
-      {/* 2. Semantic Usage (Success/Error/etc) */}
       <Button
         onClick={() =>
           toast({
@@ -62,8 +57,6 @@ export function ToastDemo() {
       >
         Request
       </Button>
-
-      {/* 3. Promise Usage */}
       <Button
         variant="outline"
         onClick={() =>

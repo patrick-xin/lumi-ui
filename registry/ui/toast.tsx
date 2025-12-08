@@ -71,14 +71,12 @@ const toastVariants = cva(
 );
 
 const Toast = ({
-  ref,
   className,
   stack,
   ...props
 }: React.ComponentProps<typeof BaseToast.Root> & VariantProps<typeof toastVariants>) => {
   return (
     <BaseToast.Root
-      ref={ref}
       className={cn(
         "[--scale:calc(max(0,1-(var(--toast-index)*0.1)))]",
         "[--shrink:calc(1-var(--scale))]",
@@ -104,12 +102,10 @@ const Toast = ({
 };
 
 const ToastContent = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseToast.Content>) => (
   <BaseToast.Content
-    ref={ref}
     className={cn(
       "overflow-hidden transition-opacity duration-200",
       "data-[behind]:pointer-events-none data-[behind]:opacity-0",
@@ -122,36 +118,30 @@ const ToastContent = ({
 );
 
 const ToastTitle = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseToast.Title>) => (
   <BaseToast.Title
-    ref={ref}
     className={cn("text-sm font-semibold leading-none tracking-tight", className)}
     {...props}
   />
 );
 
 const ToastDescription = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseToast.Description>) => (
   <BaseToast.Description
-    ref={ref}
     className={cn("text-sm opacity-90 leading-relaxed", className)}
     {...props}
   />
 );
 
 const ToastAction = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseToast.Action>) => (
   <BaseToast.Action
-    ref={ref}
     className={cn(
       buttonVariants({ variant: "outline", size: "sm" }),
       "shrink-0 h-7 px-3 text-xs font-medium transition-colors hover:bg-secondary focus:outline-none disabled:pointer-events-none disabled:opacity-50",
@@ -162,12 +152,10 @@ const ToastAction = ({
 );
 
 const ToastClose = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseToast.Close>) => (
   <BaseToast.Close
-    ref={ref}
     aria-label="Close"
     className={cn(
       "absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100",

@@ -97,7 +97,6 @@ export function MultiFileUpload() {
           size="sm"
           onClick={startAllUploads}
           disabled={isUploading || allComplete}
-          className="flex-1"
         >
           <Play className="mr-2 h-3 w-3" />
           Upload All

@@ -2,7 +2,7 @@ import "server-only";
 
 import type { Node, Root } from "fumadocs-core/page-tree";
 import { source } from "@/lib/source";
-import type { DocNode, DocRoot } from "@/types";
+import type { DocNode, DocRoot, NavGroup, NavItem } from "@/types";
 
 export function getTreeWithStatus(tree: Root): DocRoot {
   const enrichNode = (node: Node): DocNode => {
@@ -40,40 +40,58 @@ function getNodeNameAsString(name: React.ReactNode): string | null {
   return null;
 }
 
-export function transformNavigation() {
-  const data = getTreeWithStatus(source.pageTree);
-  return data.children
-    .filter(
-      (node): node is Extract<DocNode, { type: "folder" }> =>
-        node.type === "folder",
-    )
-    .map((folder) => {
-      const folderName = getNodeNameAsString(folder.name);
-      if (!folderName) return null;
+export function transformNavigation(): NavGroup[] {
+  const docRoot = getTreeWithStatus(source.pageTree);
+  const groups: NavGroup[] = [];
 
-      const items = folder.children
-        .filter(
-          (node): node is Extract<DocNode, { type: "page" }> =>
-            node.type === "page",
-        )
-        .map((page) => {
-          const pageLabel = getNodeNameAsString(page.name);
-          if (!pageLabel) return null;
+  // Recursive function to traverse folders
+  const visit = (node: DocNode) => {
+    if (node.type === "folder") {
+      const folderName = getNodeNameAsString(node.name);
 
-          return {
-            value: page.url.split("/").pop() as string,
-            label: pageLabel,
-            url: page.url,
-            folderName,
-            status: page.status,
-          };
-        })
-        .filter((item): item is NonNullable<typeof item> => item !== null);
+      // Collect all direct PAGE children of this folder
+      const pageChildren = node.children.filter(
+        (child): child is Extract<DocNode, { type: "page" }> =>
+          child.type === "page",
+      );
 
-      return {
-        value: folderName,
-        items: items,
-      };
-    })
-    .filter((group): group is NonNullable<typeof group> => group !== null);
+      // If this folder has pages, create a Navigation Group for it
+      if (folderName && pageChildren.length > 0) {
+        const items = pageChildren
+          .map((page) => {
+            const pageLabel = getNodeNameAsString(page.name);
+            if (!pageLabel) return null;
+
+            return {
+              value: page.url.split("/").pop() as string,
+              label: pageLabel,
+              url: page.url,
+              folderName: folderName,
+              status: page.status,
+            };
+          })
+          .filter((item): item is NavItem => item !== null);
+
+        if (items.length > 0) {
+          groups.push({
+            value: folderName,
+            items,
+          });
+        }
+      }
+
+      // Recursively visit sub-folders (to find "Form & Input" inside "Components")
+      const folderChildren = node.children.filter(
+        (child): child is Extract<DocNode, { type: "folder" }> =>
+          child.type === "folder",
+      );
+
+      folderChildren.forEach(visit);
+    }
+  };
+
+  // Start the recursion from the root children
+  docRoot.children.forEach(visit);
+
+  return groups;
 }

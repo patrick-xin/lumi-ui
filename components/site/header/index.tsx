@@ -5,12 +5,17 @@ import { CommandMenu } from "@/components/site/header/command-menu";
 import { MobileNav } from "@/components/site/header/mobile-nav";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { siteConfig } from "@/lib/config";
-import { transformNavigation } from "@/lib/get-tree-with-status";
+import {
+  getTreeWithStatus,
+  transformNavigation,
+} from "@/lib/get-tree-with-status";
+import { source } from "@/lib/source";
 import { Badge } from "@/registry/ui/badge";
 import { GitHubLink } from "./github-link";
 
 export function SiteHeader() {
   const navGroups = transformNavigation();
+  const tree = getTreeWithStatus(source.pageTree);
   return (
     <header className="sticky top-0 z-50 w-full h-[var(--header-height)] transition-colors duration-300 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[color-mix(in_oklab,var(--color-foreground)_7.5%,transparent)] via-50% to-transparent" />
@@ -28,7 +33,7 @@ export function SiteHeader() {
           </div>
 
           <div className="flex items-center justify-end gap-3">
-            <CommandMenu navGroups={navGroups} />
+            <CommandMenu tree={tree} />
             <ThemeSwitcher />
             <ModeSwitcher />
             <GitHubLink />
