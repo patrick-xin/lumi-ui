@@ -36,7 +36,6 @@ export function IndeterminateDemo() {
           size="sm"
           variant={isLoading ? "secondary" : "default"}
           onClick={() => setIsLoading(!isLoading)}
-          className="w-full"
         >
           {isLoading ? "Stop" : "Start Indeterminate"}
         </Button>

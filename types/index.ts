@@ -6,7 +6,7 @@ export type DocPageNode = Item & {
   status?: ComponentStatus;
 };
 
-type DocFolderNode = Folder & {
+export type DocFolderNode = Folder & {
   children: DocNode[];
 };
 

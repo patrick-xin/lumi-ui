@@ -1,120 +1,161 @@
 "use client";
 
-import type { icons } from "lucide-react";
+import { ChevronRight, ExternalLink, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FOLDERS_WITH_STATUS, NON_CLICKABLE_STATUSES } from "@/lib/constants";
-import { IconMap } from "@/lib/icons";
+import { useMemo } from "react";
+import { hasActiveChild, normalizeSidebarTree } from "@/lib/sidebar-utils";
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/registry/ui/button";
-import type { DocPageNode, DocRoot } from "@/types";
+import { Button } from "@/registry/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/registry/ui/collapsible";
+import type { DocRoot } from "@/types";
+import type {
+  SidebarFolderItem,
+  SidebarItem,
+  SidebarLinkItem,
+} from "@/types/sidebar";
 
-interface DocsSidebarNavProps {
+interface DocsSidebarProps {
   tree: DocRoot;
 }
 
-export const DocsSidebar = ({ tree }: DocsSidebarNavProps) => {
+export const DocsSidebar = ({ tree }: DocsSidebarProps) => {
   const pathname = usePathname();
 
+  const items = useMemo(
+    () => normalizeSidebarTree(tree, pathname),
+    [tree, pathname],
+  );
+
   return (
-    <aside
-      className={cn(
-        "fixed inset-y-0 z-30 hidden md:flex",
-        "w-[240px] xl:w-[260px] left-[max(0px,calc(50%-var(--container-size)/2))]",
-        "h-full flex-col top-[var(--header-height)]",
-      )}
-    >
-      <div className="h-[calc(100svh-var(--header-height))] w-full overflow-y-auto no-scrollbar">
-        <nav className="relative">
-          <div className="from-background via-background/80 to-background/50 sticky -top-1 z-10 h-8 shrink-0 bg-gradient-to-b blur-xs" />
-          <ul className="h-full [&>li:not(:first-child)>div]:pt-4 pb-6">
-            {tree.children.map((item) => (
-              <li key={item.$id}>
-                <div className="relative z-10 pb-4 text-xs text-muted-foreground/70">
-                  {item.name}
-                </div>
-                {item.type === "folder" && (
-                  <ul className="space-y-1 border-l">
-                    {item.children.map((child) => {
-                      if (child.type !== "page") return null;
-
-                      const pageNode = child as DocPageNode;
-                      const shouldShowStatus = FOLDERS_WITH_STATUS.includes(
-                        item.name as string,
-                      );
-
-                      return (
-                        <li key={child.$id} className="relative">
-                          <NavItem
-                            child={pageNode}
-                            isActive={child.url === pathname}
-                            shouldShowStatus={shouldShowStatus}
-                          />
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-          <div className="from-background via-background/80 to-background/50 sticky -bottom-1 z-10 h-16 shrink-0 bg-gradient-to-t blur-xs" />
+    <aside className="fixed inset-y-0 left-[max(0px,calc(50%-var(--container-size)/2))] z-30 hidden h-full w-[240px] flex-col bg-background xl:w-[260px] md:flex top-[var(--header-height)]">
+      <div className="h-full overflow-y-auto no-scrollbar pb-[240px] pl-2 pr-4 pt-6">
+        <nav className="w-full space-y-6">
+          {items.map((item, index) => (
+            <SidebarSection key={index} item={item} />
+          ))}
         </nav>
       </div>
     </aside>
   );
 };
 
-interface NavItemProps {
-  child: DocPageNode;
-  isActive: boolean;
-  shouldShowStatus: boolean;
-}
+// Section Header (e.g. "GET STARTED", "COMPONENTS")
+const SidebarSection = ({ item }: { item: SidebarItem }) => {
+  if (item.type !== "header") return null;
 
-function NavItem({ child, isActive, shouldShowStatus }: NavItemProps) {
-  const status = child.status;
-  const shouldRenderAsSpan =
-    shouldShowStatus && status && NON_CLICKABLE_STATUSES.includes(status);
+  return (
+    <div className="flex flex-col gap-2">
+      <h4 className="px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
+        {item.label}
+      </h4>
+      {/* We pass level=0 to start the indentation tree */}
+      <SidebarTree items={item.items} level={0} />
+    </div>
+  );
+};
 
-  if (shouldRenderAsSpan) {
+const SidebarTree = ({
+  items,
+  level,
+}: {
+  items: SidebarItem[];
+  level: number;
+}) => {
+  if (!items.length) return null;
+
+  return (
+    <ul className={cn("grid gap-1", level > 0 && "pl-4 border-l ml-2")}>
+      {items.map((item, index) => (
+        <li key={index}>
+          {item.type === "folder" ? (
+            <SidebarFolder item={item} level={level} />
+          ) : item.type === "link" ? (
+            <SidebarLink item={item} />
+          ) : null}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+// Collapsible Folder
+const SidebarFolder = ({
+  item,
+  level,
+}: {
+  item: SidebarFolderItem;
+  level: number;
+}) => {
+  const isActiveFolder = useMemo(
+    () => hasActiveChild(item.items),
+    [item.items],
+  );
+
+  return (
+    <Collapsible defaultOpen={true} className="group/collapsible">
+      <CollapsibleTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="sm"
+            className={cn(
+              "w-full justify-between h-8 px-2 text-sm font-medium hover:bg-accent/50",
+              isActiveFolder && "text-primary font-semibold bg-accent/10",
+            )}
+          >
+            {item.label}
+            <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
+          </Button>
+        }
+      ></CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="pt-1">
+          <SidebarTree items={item.items} level={level + 1} />
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+};
+
+const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
+  const Icon = item.icon as LucideIcon;
+
+  if (item.disabled) {
     return (
-      <span
-        className={cn(
-          "relative justify-start items-center pl-4 ml-3 text-sm pointer-events-none",
-          "text-foreground/30",
-          buttonVariants({ size: "sm", variant: "ghost" }),
-        )}
-      >
-        {child.name}
+      <span className="flex h-8 w-full items-center px-2 text-sm text-muted-foreground/40 cursor-not-allowed">
+        {item.label}
       </span>
     );
   }
-  const Icon = IconMap[child.icon as keyof typeof icons];
+
   return (
     <Button
-      nativeButton={false}
-      variant={"ghost"}
-      size={"sm"}
+      variant="ghost"
+      size="sm"
       className={cn(
-        "relative text-muted-foreground justify-start items-center pl-4 ml-2 text-sm",
-        "hover:text-primary transition-colors ease-linear w-4/6",
-        isActive && "text-primary bg-accent",
+        "w-full justify-start h-8 px-2 text-sm font-normal text-muted-foreground transition-colors",
+        item.active && "bg-accent text-primary font-medium",
+        "hover:bg-accent/80 hover:text-accent-foreground",
       )}
+      nativeButton={false}
       render={
-        <Link href={child.url}>
-          <span className="inline-flex gap-2 items-center">
-            {Icon && <Icon className="size-4" />}
-            {child.name}
-          </span>
-          {isActive && (
-            <div className="absolute -left-[9px] top-0 w-px bg-primary h-full" />
-          )}
+        <Link href={item.href} target={item.external ? "_blank" : undefined}>
+          {Icon && <Icon className="mr-2 h-4 w-4 shrink-0" />}
+          <span className="truncate">{item.label}</span>
 
-          {shouldShowStatus && status && status === "new" && (
-            <span className="inline-block size-2 mt-px rounded-full bg-primary ml-4" />
+          {item.status === "new" && (
+            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+          )}
+          {item.external && (
+            <ExternalLink className="ml-auto h-3 w-3 opacity-50" />
           )}
         </Link>
       }
-    />
+    ></Button>
   );
-}
+};

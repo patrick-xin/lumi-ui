@@ -1,8 +1,8 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "toast",
+  "name": "toaster",
   "type": "registry:ui",
-  "title": "Toast",
+  "title": "Toaster",
   "description": "Generates toast notifications.",
   "dependencies": [
     "@base-ui-components/react",
@@ -10,7 +10,7 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "button",
+    "toast",
     "utils"
   ],
   "files": [
