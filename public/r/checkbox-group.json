@@ -5,9 +5,11 @@
   "title": "Checkbox Group",
   "description": "Provides a shared state to a series of checkboxes.",
   "dependencies": [
-    "@base-ui-components/react"
+    "@base-ui-components/react",
+    "class-variance-authority"
   ],
   "registryDependencies": [
+    "checkbox",
     "utils"
   ],
   "files": [

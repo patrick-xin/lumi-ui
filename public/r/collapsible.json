@@ -5,7 +5,6 @@
   "title": "Collapsible",
   "description": "A collapsible panel controlled by a button.",
   "dependencies": [
-    "lucide-react",
     "class-variance-authority"
   ],
   "registryDependencies": [

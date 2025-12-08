@@ -5,9 +5,11 @@
   "title": "Toolbar",
   "description": "A container for grouping a set of buttons and controls.",
   "dependencies": [
-    "@base-ui-components/react"
+    "@base-ui-components/react",
+    "class-variance-authority"
   ],
   "registryDependencies": [
+    "button",
     "utils"
   ],
   "files": [

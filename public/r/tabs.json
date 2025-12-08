@@ -5,6 +5,7 @@
   "title": "Tabs",
   "description": "A component for toggling between related panels on the same page.",
   "dependencies": [
+    "@base-ui-components/react",
     "class-variance-authority"
   ],
   "registryDependencies": [

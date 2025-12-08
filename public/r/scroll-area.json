@@ -5,7 +5,7 @@
   "title": "Scroll Area",
   "description": "A native scroll container with custom scrollbars.",
   "dependencies": [
-    ""
+    "@base-ui-components/react"
   ],
   "registryDependencies": [
     "utils"

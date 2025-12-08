@@ -5,7 +5,7 @@
   "title": "Popover",
   "description": "An accessible popup anchored to a button.",
   "dependencies": [
-    ""
+    "@base-ui-components/react"
   ],
   "registryDependencies": [
     "utils"

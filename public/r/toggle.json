@@ -5,7 +5,8 @@
   "title": "Toggle",
   "description": "A two-state button that can be on or off.",
   "dependencies": [
-    "@base-ui-components/react"
+    "@base-ui-components/react",
+    "class-variance-authority"
   ],
   "registryDependencies": [
     "utils"

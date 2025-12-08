@@ -5,9 +5,11 @@
   "title": "Toggle Group",
   "description": "Provides a shared state to a series of toggle buttons.",
   "dependencies": [
-    "@base-ui-components/react"
+    "@base-ui-components/react",
+    "class-variance-authority"
   ],
   "registryDependencies": [
+    "toggle",
     "utils"
   ],
   "files": [

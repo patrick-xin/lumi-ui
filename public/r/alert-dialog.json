@@ -5,7 +5,7 @@
   "title": "Alert Dialog",
   "description": "A dialog that requires user response to proceed.",
   "dependencies": [
-    "class-variance-authority"
+    "@base-ui-components/react"
   ],
   "registryDependencies": [
     "utils",

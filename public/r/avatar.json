@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Avatar",
   "description": "An easily stylable avatar component.",
-  "dependencies": [],
+  "dependencies": [
+    "@base-ui-components/react"
+  ],
   "registryDependencies": [
     "utils"
   ],

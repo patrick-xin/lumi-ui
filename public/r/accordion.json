@@ -5,7 +5,9 @@
   "title": "Accordion",
   "description": "A set of collapsible panels with headings.",
   "dependencies": [
-    "@base-ui-components/react"
+    "@base-ui-components/react",
+    "class-variance-authority",
+    "lucide-react"
   ],
   "registryDependencies": [
     "utils"
