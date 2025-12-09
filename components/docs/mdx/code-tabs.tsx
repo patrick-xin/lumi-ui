@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { useInstallationConfigStore } from "@/hooks/use-config";
 import { Tabs } from "@/registry/ui/tabs";
 
@@ -11,9 +11,7 @@ export function CodeTabs({
 }: React.ComponentProps<typeof Tabs>) {
   const { config, setInstallationConfig } = useInstallationConfigStore();
 
-  const installationType = React.useMemo(() => {
-    return config.installationType || "cli";
-  }, [config]);
+  const installationType = config.installationType || "cli";
 
   return (
     <Tabs

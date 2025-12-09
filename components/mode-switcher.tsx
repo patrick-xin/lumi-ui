@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useTheme } from "next-themes";
-import * as React from "react";
 import { useMounted } from "@/hooks/use-mounted";
 import { Button } from "@/registry/ui/button";
 
@@ -10,7 +9,7 @@ export function ModeSwitcher() {
   const { setTheme, resolvedTheme } = useTheme();
   const mounted = useMounted();
 
-  const toggleMode = React.useCallback(() => {
+  const toggleMode = () => {
     if (!resolvedTheme) return;
 
     const parts = resolvedTheme.split("-");
@@ -22,7 +21,7 @@ export function ModeSwitcher() {
     } else {
       setTheme(resolvedTheme === "dark" ? "light" : "dark");
     }
-  }, [resolvedTheme, setTheme]);
+  };
 
   if (!mounted) {
     return null;

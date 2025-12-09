@@ -7,24 +7,22 @@ import { Minus, Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const NumberField = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseNumberField.Root>) => (
   <BaseNumberField.Root
-    ref={ref}
+    data-slot="number-field"
     className={cn("grid gap-1.5", className)}
     {...props}
   />
 )
 
 const NumberFieldGroup = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseNumberField.Group>) => (
   <BaseNumberField.Group
-    ref={ref}
+    data-slot="number-field-group"
     className={cn(
       "flex h-9 w-full overflow-hidden rounded-md border border-input bg-transparent",
       "shadow-xs",
@@ -36,13 +34,11 @@ const NumberFieldGroup = ({
 )
 
 const NumberFieldInput = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseNumberField.Input>) => (
   <BaseNumberField.Input
-    ref={ref}
-    data-slot="input"
+    data-slot="number-field-input"
     className={cn(
       "flex-1 min-w-0 bg-transparent px-3 text-center text-sm tabular-nums outline-none",
       "placeholder:text-muted-foreground",
@@ -57,13 +53,12 @@ const NumberFieldInput = ({
 )
 
 const NumberFieldDecrement = ({
-  ref,
   className,
   children,
   ...props
 }: React.ComponentProps<typeof BaseNumberField.Decrement>) => (
   <BaseNumberField.Decrement
-    ref={ref}
+    data-slot="number-field-decrement"
     className={cn(
       "flex aspect-square h-full shrink-0 items-center justify-center border-r border-input bg-muted text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50",
       "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring/50",
@@ -76,13 +71,12 @@ const NumberFieldDecrement = ({
 )
 
 const NumberFieldIncrement = ({
-  ref,
   className,
   children,
   ...props
 }: React.ComponentProps<typeof BaseNumberField.Increment>) => (
   <BaseNumberField.Increment
-    ref={ref}
+    data-slot="number-field-increment"
     className={cn(
       "flex aspect-square h-full shrink-0 items-center justify-center border-l border-input bg-muted text-muted-foreground transition-colors hover:bg-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50",
       "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring/50",
@@ -95,7 +89,6 @@ const NumberFieldIncrement = ({
 )
 
 const NumberFieldScrubArea = ({
-  ref,
   className,
   children,
   icon,
@@ -104,7 +97,7 @@ const NumberFieldScrubArea = ({
   icon?: React.ReactNode
 }) => (
   <BaseNumberField.ScrubArea
-    ref={ref}
+    data-slot="number-field-scrub-area"
     className={cn(
       "group flex w-fit cursor-ew-resize items-center gap-1.5 select-none text-sm font-medium leading-none text-muted-foreground transition-colors hover:text-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
       className
@@ -113,6 +106,7 @@ const NumberFieldScrubArea = ({
   >
     {children}
     <BaseNumberField.ScrubAreaCursor
+      data-slot="number-field-scrub-area-cursor"
       className={cn(
         "drop-shadow-[0_1px_1px_#0008] filter",
         "opacity-0 transition-opacity group-hover:opacity-100 group-active:opacity-100"

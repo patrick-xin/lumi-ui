@@ -23,7 +23,7 @@ import { Kbd, KbdGroup } from "@/registry/ui/kbd";
 import type { DocRoot, NavGroup, NavItem } from "@/types";
 
 export function CommandMenu({ tree }: { tree: DocRoot }) {
-  const navGroups = React.useMemo(() => getSearchGroups(tree), [tree]);
+  const navGroups = getSearchGroups(tree);
   const [isOpen, setIsOpen] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
   const router = useRouter();
@@ -44,32 +44,29 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
     };
   }, []);
 
-  const allItemsMap = React.useMemo(() => {
-    const map = new Map<string, NavItem>();
-    for (const group of navGroups) {
-      for (const item of group.items) {
-        map.set(item.value, item);
-      }
+  const allItemsMap = new Map<string, NavItem>();
+  for (const group of navGroups) {
+    for (const item of group.items) {
+      allItemsMap.set(item.value, item);
     }
-    return map;
-  }, [navGroups]);
+  }
 
-  const handleValueChange = React.useCallback(
-    (value: string, details: Autocomplete.Root.ChangeEventDetails) => {
-      if (details.reason === "item-press") {
-        const selectedItem = allItemsMap.get(value);
+  const handleValueChange = (
+    value: string,
+    details: Autocomplete.Root.ChangeEventDetails,
+  ) => {
+    if (details.reason === "item-press") {
+      const selectedItem = allItemsMap.get(value);
 
-        if (selectedItem) {
-          router.push(selectedItem.url);
-          setIsOpen(false);
-          setInputValue("");
-        }
-      } else {
-        setInputValue(value);
+      if (selectedItem) {
+        router.push(selectedItem.url);
+        setIsOpen(false);
+        setInputValue("");
       }
-    },
-    [allItemsMap, router],
-  );
+    } else {
+      setInputValue(value);
+    }
+  };
 
   if (!isMounted) {
     return null;

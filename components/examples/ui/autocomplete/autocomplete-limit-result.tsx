@@ -18,14 +18,10 @@ export default function ExampleAutocompleteLimit() {
   const [value, setValue] = React.useState("");
 
   const { contains } = useAutoCompleteFilter({ sensitivity: "base" });
-
-  const totalMatches = React.useMemo(() => {
-    const trimmed = value.trim();
-    if (!trimmed) {
-      return tags.length;
-    }
-    return tags.filter((t) => contains(t.value, trimmed)).length;
-  }, [value, contains]);
+  const trimmed = value.trim();
+  const totalMatches = trimmed
+    ? tags.filter((t) => contains(t.value, trimmed)).length
+    : tags.length;
 
   const moreCount = Math.max(0, totalMatches - limit);
 

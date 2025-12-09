@@ -6,7 +6,6 @@ import {
   type ComponentProps,
   createContext,
   useContext,
-  useMemo,
   useState,
 } from "react";
 import { useTocActiveItem } from "@/hooks/use-toc-active-Item";
@@ -32,10 +31,9 @@ function useTocContext() {
 function TocTrigger() {
   const { open, items, activeHeading } = useTocContext();
 
-  const activeItem = useMemo(() => {
-    if (!activeHeading) return null;
-    return items.find((item) => item.url === `#${activeHeading}`);
-  }, [items, activeHeading]);
+  const activeItem = activeHeading
+    ? items.find((item) => item.url === `#${activeHeading}`)
+    : null;
 
   return (
     <DialogTrigger
@@ -101,16 +99,10 @@ export interface PageTOCPopoverProps extends ComponentProps<"div"> {
 export function MobileToc({ items, className, ...props }: PageTOCPopoverProps) {
   const [open, setOpen] = useState(false);
 
-  const itemIds = useMemo(
-    () => items.map((item) => item.url.slice(1)),
-    [items],
-  );
+  const itemIds = items.map((item) => item.url.slice(1));
   const activeHeading = useTocActiveItem(itemIds);
 
-  const contextValue = useMemo(
-    () => ({ items, activeHeading, open, setOpen }),
-    [items, activeHeading, open],
-  );
+  const contextValue = { items, activeHeading, open, setOpen };
 
   return (
     <TocContext.Provider value={contextValue}>

@@ -6,14 +6,12 @@ import { Meter as BaseMeter } from "@base-ui-components/react/meter"
 import { cn } from "@/lib/utils"
 
 function Meter({
-  ref,
   className,
   value,
   ...props
 }: React.ComponentProps<typeof BaseMeter.Root>) {
   return (
     <BaseMeter.Root
-      ref={ref}
       value={value}
       className={cn("relative w-full", className)}
       {...props}
@@ -26,24 +24,20 @@ function Meter({
 }
 
 const MeterRoot = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseMeter.Root>) => (
   <BaseMeter.Root
-    ref={ref}
     className={cn("w-full gap-2", className)}
     {...props}
   />
 )
 
 const MeterTrack = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseMeter.Track>) => (
   <BaseMeter.Track
-    ref={ref}
     className={cn(
       "relative h-2 w-full overflow-hidden rounded-full bg-primary/20",
       className
@@ -53,12 +47,10 @@ const MeterTrack = ({
 )
 
 const MeterIndicator = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseMeter.Indicator>) => (
   <BaseMeter.Indicator
-    ref={ref}
     className={cn(
       "h-full flex-1 bg-primary transition-all duration-500",
       className
@@ -68,24 +60,20 @@ const MeterIndicator = ({
 )
 
 const MeterLabel = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseMeter.Label>) => (
   <BaseMeter.Label
-    ref={ref}
     className={cn("text-sm font-medium leading-none", className)}
     {...props}
   />
 )
 
 const MeterValue = ({
-  ref,
   className,
   ...props
 }: React.ComponentProps<typeof BaseMeter.Value>) => (
   <BaseMeter.Value
-    ref={ref}
     className={cn("text-sm text-muted-foreground", className)}
     {...props}
   />
