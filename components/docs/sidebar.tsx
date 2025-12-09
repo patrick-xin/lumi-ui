@@ -17,6 +17,7 @@ import type {
   SidebarItem,
   SidebarLinkItem,
 } from "@/types";
+import { Badge } from "../../registry/ui/badge";
 
 interface DocsSidebarProps {
   tree: DocRoot;
@@ -120,6 +121,14 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
     return (
       <span className="flex h-8 w-full items-center px-2 text-sm text-muted-foreground/40 cursor-not-allowed">
         {item.label}
+        {item.status === "planned" && (
+          <Badge
+            variant="outline"
+            className="ml-auto text-[9px] font-medium text-muted-foreground/50"
+          >
+            Planned
+          </Badge>
+        )}
       </span>
     );
   }
@@ -140,7 +149,13 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
           <span className="truncate">{item.label}</span>
 
           {item.status === "new" && (
-            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+          )}
+          {item.status === "planned" && (
+            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-muted-foreground/50" />
+          )}
+          {item.status === "in-progress" && (
+            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-amber-500/70" />
           )}
           {item.external && (
             <ExternalLink className="ml-auto h-3 w-3 opacity-50" />

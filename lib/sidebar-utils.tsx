@@ -73,6 +73,7 @@ function transformChildren(
             ? IconMap[page.icon as keyof typeof icons]
             : undefined,
           status: shouldShowStatus ? page.status : undefined,
+          disabled: page.status === "planned",
         } as SidebarItem;
       }
 

@@ -2,6 +2,7 @@ import { findNeighbour } from "fumadocs-core/page-tree";
 import { notFound } from "next/navigation";
 import { DocsAritcleFooter } from "@/components/docs/docs-article-footer";
 import { DocsAritcleHeader } from "@/components/docs/docs-article-header";
+import { Callout } from "@/components/docs/mdx/call-out";
 import { DocsToc } from "@/components/docs/toc";
 import { source } from "@/lib/source";
 import { absoluteUrl } from "@/lib/utils";
@@ -94,6 +95,12 @@ export default async function Page(props: PageProps) {
             slug={params.slug}
             url={page.url}
           />
+          {doc.status === "in-progress" && (
+            <Callout variant="warning" className="[&_p]:m-0">
+              This component is currently in progress. The API and
+              implementation details may change.
+            </Callout>
+          )}
           <MDX components={mdxComponents} />
           <DocsAritcleFooter neighbours={neighbours} />
         </article>

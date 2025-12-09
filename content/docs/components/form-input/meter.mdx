@@ -30,3 +30,38 @@ links:
     </Steps>
   </TabsPanel>
 </CodeTabs>
+
+
+## Basic Usage
+```tsx
+import { Meter } from "@/components/ui/meter";
+```
+
+```tsx
+export default function ExampleMeter() {
+  return (
+    <Meter value={75}>
+      <MeterTrack>
+        <MeterIndicator />
+      </MeterTrack>
+    </Meter>
+  );
+}
+```
+
+## Anatomy
+```tsx
+<Meter>
+  <MeterLabel />
+  <MeterTrack>
+    <MeterIndicator />
+  </MeterTrack>
+  <MeterValue />
+</Meter>
+```
+
+## Recipes
+
+### With Label and Value
+
+<ComponentPreview name="meter-custom" />
