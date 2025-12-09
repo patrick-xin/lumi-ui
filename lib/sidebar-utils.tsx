@@ -109,6 +109,7 @@ export function getSearchGroups(tree: DocRoot): NavGroup[] {
           url: item.href,
           status: item.status,
           folderName: currentContext,
+          icon: item.icon,
         });
       } else if (item.type === "folder") {
         flatten(item.items, item.label);

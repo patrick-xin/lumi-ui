@@ -48,10 +48,6 @@ export default function InternalLayout({
     });
   }
 
-  // Construct the tree
-  // The DocsSidebar expects top-level items to be sections (headers), and children to be links.
-  // So we wrap all component pages under a "Components" folder.
-
   const tree: DocRoot = {
     $id: "root",
     name: "Demos",

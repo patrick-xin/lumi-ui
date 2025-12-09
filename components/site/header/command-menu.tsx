@@ -140,7 +140,9 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                       <AutocompleteCollection>
                         {(item: NavItem) => {
                           const Icon =
-                            IconMap[item.folderName] || IconMap.default;
+                            (item.icon as React.ElementType) ||
+                            IconMap[item.folderName] ||
+                            IconMap.default;
 
                           return (
                             <AutocompleteItem

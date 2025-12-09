@@ -4,6 +4,7 @@ import {
   Component,
   Diamond,
   type LucideProps,
+  Palette,
   Play,
 } from "lucide-react";
 
@@ -12,7 +13,16 @@ export const IconMap: Record<string, React.ComponentType<LucideProps>> = {
   Play,
   Component,
   Diamond,
-  "Get Started": ArrowUpRight,
+  Palette,
+  "Get Started": Book,
   Components: Diamond,
+  "Form & Input": Diamond,
+  "Layout & Navigation": Diamond,
+  "Feedback & Status": Diamond,
+  "Display & Media": Diamond,
+  "Overlays & Dialogs": Diamond,
+  Misc: Diamond,
+  Themes: Palette,
+  Introduction: Book,
   default: ArrowUpRight,
 };

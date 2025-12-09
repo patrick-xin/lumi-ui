@@ -23,6 +23,7 @@ export interface NavItem {
   url: string;
   status: ComponentStatus;
   folderName: string;
+  icon?: LucideIcon | ReactNode;
   onSelect?: () => void;
 }
 
