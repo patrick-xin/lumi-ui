@@ -2190,6 +2190,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "meter-custom": {
+    name: "meter-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["meter"],
+    files: [{
+      path: "components/examples/ui/meter/meter-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/meter/meter-custom");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "meter-custom";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "meter-demo": {
     name: "meter-demo",
     description: "",

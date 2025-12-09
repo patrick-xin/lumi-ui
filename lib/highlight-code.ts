@@ -1,10 +1,5 @@
-import type { HighlightOptions } from "fumadocs-core/highlight";
-import * as React from "react";
-import {
-  createHighlighter,
-  type Highlighter,
-  type ShikiTransformer,
-} from "shiki";
+import { type HighlightOptions, highlight } from "fumadocs-core/highlight";
+import type { ShikiTransformer } from "shiki";
 
 export const transformers = [
   {
@@ -98,56 +93,11 @@ function createHighlightOptions({
   };
 }
 
-let highlighterPromise: Promise<Highlighter> | null = null;
-
-async function getHighlighter() {
-  if (!highlighterPromise) {
-    highlighterPromise = createHighlighter({
-      themes: ["catppuccin-frappe", "catppuccin-latte"],
-      langs: [
-        "javascript",
-        "typescript",
-        "tsx",
-        "jsx",
-        "json",
-        "css",
-        "html",
-        "bash",
-        "shell",
-        "markdown",
-        "mdx",
-        "yaml",
-        "xml",
-        "diff",
-      ],
-    });
-  }
-  return highlighterPromise;
-}
-
 export async function highlightCode(
   code: string,
   lang: string,
   opts?: { lineNumbers?: boolean },
 ) {
-  const highlighter = await getHighlighter();
   const options = createHighlightOptions({ lineNumbers: opts?.lineNumbers });
-
-  const html = highlighter.codeToHtml(code, {
-    lang,
-    themes: {
-      dark: "catppuccin-frappe",
-      light: "catppuccin-latte",
-    },
-    transformers: [
-      ...transformers,
-      ...(options.transformers as ShikiTransformer[]),
-    ],
-    defaultColor: false,
-  });
-
-  return React.createElement("div", {
-    dangerouslySetInnerHTML: { __html: html },
-    className: "contents",
-  });
+  return await highlight(code, { lang, ...options });
 }
