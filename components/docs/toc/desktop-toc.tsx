@@ -90,10 +90,7 @@ function TOCThumb({
 
 export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const itemIds = React.useMemo(
-    () => toc.map((item) => item.url.replace("#", "")),
-    [toc],
-  );
+  const itemIds = toc.map((item) => item.url.replace("#", ""));
   const activeHeading = useTocActiveItem(itemIds);
   const [svg, setSvg] = React.useState<{
     path: string;

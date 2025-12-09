@@ -24,6 +24,7 @@ const config = {
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },
+  reactCompiler: true,
   async rewrites() {
     return [
       {

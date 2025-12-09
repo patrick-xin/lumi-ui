@@ -3,7 +3,6 @@
 import { ChevronRight, ExternalLink, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMemo } from "react";
 import { hasActiveChild, normalizeSidebarTree } from "@/lib/sidebar-utils";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
@@ -25,11 +24,7 @@ interface DocsSidebarProps {
 
 export const DocsSidebar = ({ tree }: DocsSidebarProps) => {
   const pathname = usePathname();
-
-  const items = useMemo(
-    () => normalizeSidebarTree(tree, pathname),
-    [tree, pathname],
-  );
+  const items = normalizeSidebarTree(tree, pathname);
 
   return (
     <aside className="fixed inset-y-0 left-[max(0px,calc(50%-var(--container-size)/2))] z-30 hidden h-full w-[240px] flex-col bg-background xl:w-[260px] md:flex top-[var(--header-height)]">
@@ -90,10 +85,7 @@ const SidebarFolder = ({
   item: SidebarFolderItem;
   level: number;
 }) => {
-  const isActiveFolder = useMemo(
-    () => hasActiveChild(item.items),
-    [item.items],
-  );
+  const isActiveFolder = hasActiveChild(item.items);
 
   return (
     <Collapsible defaultOpen={true} className="group/collapsible">

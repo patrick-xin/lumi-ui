@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import { CopyButton } from "@/components/docs/copy-button";
 import { useInstallationConfigStore } from "@/hooks/use-config";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
@@ -29,14 +29,12 @@ export function InstallationCommandClient({
   const { config, setInstallationConfig } = useInstallationConfigStore();
   const packageManager = config.packageManager || "pnpm";
 
-  const tabs = React.useMemo(() => {
-    return {
-      pnpm: { highlighted: pnpm, code: pnpmCode },
-      npm: { highlighted: npm, code: npmCode },
-      yarn: { highlighted: yarn, code: yarnCode },
-      bun: { highlighted: bun, code: bunCode },
-    };
-  }, [npm, pnpm, yarn, bun, npmCode, pnpmCode, yarnCode, bunCode]);
+  const tabs = {
+    pnpm: { highlighted: pnpm, code: pnpmCode },
+    npm: { highlighted: npm, code: npmCode },
+    yarn: { highlighted: yarn, code: yarnCode },
+    bun: { highlighted: bun, code: bunCode },
+  };
 
   return (
     <Tabs

@@ -23,12 +23,13 @@ import { Kbd, KbdGroup } from "@/registry/ui/kbd";
 import type { DocRoot, NavGroup, NavItem } from "@/types";
 
 export function CommandMenu({ tree }: { tree: DocRoot }) {
-  const navGroups = React.useMemo(() => getSearchGroups(tree), [tree]);
+  const navGroups = getSearchGroups(tree);
   const [isOpen, setIsOpen] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
   const router = useRouter();
   const isMac = useIsMac();
   const isMounted = useMounted();
+  const isNavigatingRef = React.useRef(false);
 
   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -44,32 +45,21 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
     };
   }, []);
 
-  const allItemsMap = React.useMemo(() => {
-    const map = new Map<string, NavItem>();
-    for (const group of navGroups) {
-      for (const item of group.items) {
-        map.set(item.value, item);
-      }
-    }
-    return map;
-  }, [navGroups]);
+  const handleOpenChange = () => {
+    isNavigatingRef.current = false;
+    setIsOpen(true);
+  };
 
-  const handleValueChange = React.useCallback(
-    (value: string, details: Autocomplete.Root.ChangeEventDetails) => {
-      if (details.reason === "item-press") {
-        const selectedItem = allItemsMap.get(value);
+  const handleValueChange = (value: string) => {
+    setInputValue(value);
+  };
 
-        if (selectedItem) {
-          router.push(selectedItem.url);
-          setIsOpen(false);
-          setInputValue("");
-        }
-      } else {
-        setInputValue(value);
-      }
-    },
-    [allItemsMap, router],
-  );
+  const handleSelect = (item: NavItem) => {
+    isNavigatingRef.current = true; // Mark that we are navigating
+    router.push(item.url);
+    setIsOpen(false);
+    setInputValue("");
+  };
 
   if (!isMounted) {
     return null;
@@ -78,7 +68,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
   return (
     <>
       <Button
-        onClick={() => setIsOpen(true)}
+        onClick={handleOpenChange}
         variant="outline"
         className={cn(
           "relative h-8 w-full justify-start font-medium shadow-none sm:pr-12 md:w-48 lg:w-56 xl:w-64",
@@ -97,19 +87,14 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
       </Button>
       <Autocomplete.Root
         modal
-        mode="both"
         autoHighlight
         open={isOpen}
         onOpenChange={setIsOpen}
         items={navGroups}
         value={inputValue}
         onValueChange={handleValueChange}
-        itemToStringValue={(item) => item.value}
-        onOpenChangeComplete={(open) => {
-          if (!open) {
-            setInputValue("");
-          }
-        }}
+        itemToStringValue={(item) => item.label}
+        onOpenChangeComplete={(open) => !open && setInputValue("")}
       >
         <Autocomplete.Portal>
           <Autocomplete.Backdrop className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
@@ -118,6 +103,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
             className="inset-0 z-0 bottom-0 pointer-events-none flex justify-center items-center"
           >
             <Autocomplete.Popup
+              finalFocus={() => !isNavigatingRef.current}
               className={cn(
                 "relative px-4 pt-3 pb-12 bg-background rounded-md border border-input",
                 "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
@@ -131,7 +117,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                 placeholder="Search documentation..."
               />
               <div className="mt-2 overflow-y-auto no-scrollbar h-80">
-                <AutocompleteList className="max-h-full">
+                <AutocompleteList className="max-h-full no-scrollbar">
                   {(group: NavGroup) => (
                     <AutocompleteGroup key={group.value} items={group.items}>
                       <AutocompleteGroupLabel className="text-muted-foreground text-sm mb-1">
@@ -140,10 +126,13 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                       <AutocompleteCollection>
                         {(item: NavItem) => {
                           const Icon =
-                            IconMap[item.folderName] || IconMap.default;
+                            (item.icon as React.ElementType) ||
+                            IconMap[item.folderName] ||
+                            IconMap.default;
 
                           return (
                             <AutocompleteItem
+                              onClick={() => handleSelect(item)}
                               key={item.value}
                               value={item}
                               className="text-foreground data-[highlighted]:text-accent-foreground data-[highlighted]:border-accent data-[highlighted]:bg-accent/50 h-9 rounded-md border border-transparent px-1.5 font-medium relative flex cursor-default items-center py-1.5 text-sm outline-hidden select-none gap-3"

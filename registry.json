@@ -463,7 +463,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "registry/ui/slider.tsx",
+          "path": "registry/ui/separator.tsx",
           "type": "registry:ui"
         }
       ]

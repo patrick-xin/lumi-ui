@@ -635,7 +635,7 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui-components/react"],
     files:     [
           {
-                "path": "registry/ui/slider.tsx",
+                "path": "registry/ui/separator.tsx",
                 "type": "registry:ui",
                 "target": ""
           }

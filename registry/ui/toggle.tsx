@@ -34,10 +34,10 @@ interface ToggleProps
   className?: string
 }
 
-function Toggle({ className, variant, size, ref, ...props }: ToggleProps) {
+function Toggle({ className, variant, size, ...props }: ToggleProps) {
   return (
     <BaseToggle
-      ref={ref}
+      data-slot="toggle"
       className={cn(toggleVariants({ variant, size, className }))}
       {...props}
     />
