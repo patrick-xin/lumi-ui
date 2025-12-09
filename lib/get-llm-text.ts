@@ -16,7 +16,7 @@ title: ${page.data.title}
 description: ${page.data.description}
 ${page.data.links ? `Doc link: ${page.data.links.doc}` : ``}
 ${page.data.links ? `API link: ${page.data.links.api}` : ``}
-Page URL: ${page.url}
+Page URL: ${process.env.NEXT_PUBLIC_APP_URL}${page.url}
 ---\n\n`;
 
   const componentName = extractComponentName(page);

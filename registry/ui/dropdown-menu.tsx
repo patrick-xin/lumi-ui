@@ -80,7 +80,7 @@ function DropdownMenuContent({
   side = "bottom",
   sideOffset = 4,
   showArrow = false,
-  matchAnchorWidth = false,
+  matchAnchorWidth = true,
   positionerProps,
   portalProps,
   ...popupProps

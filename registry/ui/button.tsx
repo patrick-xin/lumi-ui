@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Button as BaseButton } from "@base-ui-components/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -38,7 +37,7 @@ const buttonVariants = cva(
   }
 );
 
-type ButtonProps = React.ComponentProps<typeof BaseButton> &
+type ButtonProps = BaseButton.Props &
   VariantProps<typeof buttonVariants> & {
     isLoading?: boolean;
   };

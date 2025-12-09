@@ -3,7 +3,7 @@
 import React from "react";
 import {
   AlertDialog,
-  AlertDialogCancel,
+  AlertDialogClose,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -18,14 +18,14 @@ import {
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 
-export function AlertDialogOpenFromMenu() {
+export function AlertDialogOpenFromMenuDemo() {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button variant="outline" />}>
-          Open menu
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger
+          render={<Button variant="outline">Open menu</Button>}
+        />
         <DropdownMenuContent>
           <DropdownMenuItem onClick={() => setDialogOpen(true)}>
             Open dialog
@@ -42,9 +42,7 @@ export function AlertDialogOpenFromMenu() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel render={<Button variant="ghost" />}>
-              Close
-            </AlertDialogCancel>
+            <AlertDialogClose>Close</AlertDialogClose>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

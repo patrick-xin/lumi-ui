@@ -57,7 +57,7 @@ function ComponentGrid({
   if (pageNodes.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-8">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-8">
       {pageNodes.map((page) => (
         <NavItem key={page.$id} child={page} shouldShowStatus={showStatus} />
       ))}
@@ -72,7 +72,6 @@ interface NavItemProps {
 
 function NavItem({ child, shouldShowStatus }: NavItemProps) {
   const status = child.status;
-
   const isNonClickable =
     shouldShowStatus && status && NON_CLICKABLE_STATUSES.includes(status);
 
@@ -80,10 +79,13 @@ function NavItem({ child, shouldShowStatus }: NavItemProps) {
     return (
       <span
         className={cn(
-          "relative inline-flex items-center px-4 py-2 text-sm font-medium border rounded-md bg-muted/50 text-muted-foreground/50 cursor-not-allowed select-none",
+          "relative inline-flex items-center justify-between px-4 py-2 text-sm font-medium rounded-md bg-muted/50 text-muted-foreground/50 cursor-not-allowed select-none",
         )}
       >
-        {child.name}
+        <span>{child.name}</span>
+        {shouldShowStatus && status === "planned" && (
+          <span className="text-[10px] font-medium opacity-70">Planned</span>
+        )}
       </span>
     );
   }
@@ -92,14 +94,17 @@ function NavItem({ child, shouldShowStatus }: NavItemProps) {
     <Link
       href={child.url}
       className={cn(
-        "group relative inline-flex items-center gap-4 px-4 py-2 text-sm font-medium transition-all duration-200",
+        "group relative inline-flex items-center justify-between px-4 py-2 text-sm font-medium transition-all duration-200",
         "rounded-md bg-background text-muted-foreground",
         "hover:text-foreground",
       )}
     >
       <span>{child.name}</span>
       {shouldShowStatus && status === "new" && (
-        <span className="flex h-2 w-2 rounded-full bg-primary shadow-[0_0_6px_rgba(37,99,235,0.5)]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+      )}
+      {shouldShowStatus && status === "in-progress" && (
+        <span className="h-1.5 w-1.5 rounded-full bg-amber-500/70" />
       )}
     </Link>
   );
