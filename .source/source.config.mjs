@@ -8,7 +8,10 @@ import rehypePrettyCode from "rehype-pretty-code";
 import { z } from "zod";
 
 // lib/highlight-code.ts
-import { highlight } from "fumadocs-core/highlight";
+import * as React from "react";
+import {
+  createHighlighter
+} from "shiki";
 var transformers = [
   {
     code(node) {
