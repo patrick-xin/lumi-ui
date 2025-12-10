@@ -6,10 +6,10 @@ import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
+  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogPopup,
   DialogTitle,
 } from "@/registry/ui/dialog";
 import {
@@ -47,7 +47,7 @@ export function DialogTriggerMenu() {
         </DropdownMenuContent>
       </DropdownMenu>
       <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
-        <DialogPopup>
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>Are you sure?</DialogTitle>
             <DialogDescription>
@@ -56,17 +56,20 @@ export function DialogTriggerMenu() {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <DialogClose variant="ghost" onClick={() => setDialogOpen(false)}>
+            <DialogClose
+              render={<Button variant="ghost" />}
+              onClick={() => setDialogOpen(false)}
+            >
               Cancel
             </DialogClose>
             <DialogClose
-              variant="destructive"
+              render={<Button variant="destructive" />}
               onClick={() => setDialogOpen(false)}
             >
               Delete
             </DialogClose>
           </DialogFooter>
-        </DialogPopup>
+        </DialogContent>
       </Dialog>
     </>
   );

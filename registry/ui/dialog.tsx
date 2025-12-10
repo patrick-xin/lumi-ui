@@ -49,7 +49,7 @@ function DialogBackdrop({ className, ...props }: BaseDialog.Backdrop.Props) {
   );
 }
 
-function DialogPopup({ className, children, ...props }: BaseDialog.Popup.Props) {
+function DialogPopup({ className, children, ...props }:  React.ComponentProps<typeof BaseDialog.Popup>) {
   return (
     <BaseDialog.Popup
       data-slot="dialog-popup"
