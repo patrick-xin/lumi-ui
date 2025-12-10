@@ -2,17 +2,20 @@
 
 import * as React from "react";
 import { AlertDialog as BaseAlertDialog } from "@base-ui-components/react/alert-dialog";
-import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/registry/ui/button";
 import type { VariantProps } from "class-variance-authority";
 
-function AlertDialog<Payload>({ ...props }: BaseAlertDialog.Root.Props<Payload>) {
+import { cn } from "@/lib/utils";
+
+function AlertDialog<Payload>({
+  ...props
+}: React.ComponentProps<typeof BaseAlertDialog.Root<Payload>>) {
   return <BaseAlertDialog.Root data-slot="alert-dialog" {...props} />;
 }
 
 function AlertDialogTrigger<Payload>({
   ...props
-}: BaseAlertDialog.Trigger.Props<Payload>) {
+}: React.ComponentProps<typeof BaseAlertDialog.Trigger<Payload>>) {
   return (
     <BaseAlertDialog.Trigger<Payload>
       data-slot="alert-dialog-trigger"
@@ -23,14 +26,14 @@ function AlertDialogTrigger<Payload>({
 
 function AlertDialogPortal({
   ...props
-}: BaseAlertDialog.Portal.Props) {
+}: React.ComponentProps<typeof BaseAlertDialog.Portal>) {
   return <BaseAlertDialog.Portal data-slot="alert-dialog-portal" {...props} />;
 }
 
 function AlertDialogBackdrop({
   className,
   ...props
-}: BaseAlertDialog.Backdrop.Props) {
+}: React.ComponentProps<typeof BaseAlertDialog.Backdrop>) {
   return (
     <BaseAlertDialog.Backdrop
       data-slot="alert-dialog-backdrop"
@@ -40,7 +43,7 @@ function AlertDialogBackdrop({
         "data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
         "data-[nested-dialog-open]:opacity-0",
         "supports-[-webkit-touch-callout:none]:absolute",
-        className,
+        className
       )}
       {...props}
     />
@@ -50,7 +53,7 @@ function AlertDialogBackdrop({
 function AlertDialogPopup({
   className,
   ...props
-}: BaseAlertDialog.Popup.Props) {
+}: React.ComponentProps<typeof BaseAlertDialog.Popup>) {
   return (
     <BaseAlertDialog.Popup
       data-slot="alert-dialog-popup"
@@ -63,12 +66,12 @@ function AlertDialogPopup({
 function AlertDialogViewport({
   className,
   ...props
-}: BaseAlertDialog.Viewport.Props) {
+}: React.ComponentProps<typeof BaseAlertDialog.Viewport>) {
   return (
     <BaseAlertDialog.Viewport
       className={cn(
         "fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4",
-        className,
+        className
       )}
       data-slot="alert-dialog-viewport"
       {...props}
@@ -79,7 +82,7 @@ function AlertDialogViewport({
 function AlertDialogContent({
   className,
   ...props
-}: BaseAlertDialog.Popup.Props) {
+}: React.ComponentProps<typeof BaseAlertDialog.Popup>) {
   return (
     <AlertDialogPortal>
       <AlertDialogBackdrop />
@@ -92,7 +95,7 @@ function AlertDialogContent({
             "data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
             "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
             "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-lg data-[nested-dialog-open]:after:bg-black/10",
-            className,
+            className
           )}
           {...props}
         />
@@ -123,7 +126,7 @@ function AlertDialogFooter({
       data-slot="alert-dialog-footer"
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className,
+        className
       )}
       {...props}
     />
@@ -133,7 +136,7 @@ function AlertDialogFooter({
 function AlertDialogTitle({
   className,
   ...props
-}: BaseAlertDialog.Title.Props) {
+}: React.ComponentProps<typeof BaseAlertDialog.Title>) {
   return (
     <BaseAlertDialog.Title
       data-slot="alert-dialog-title"
@@ -146,7 +149,7 @@ function AlertDialogTitle({
 function AlertDialogDescription({
   className,
   ...props
-}: BaseAlertDialog.Description.Props) {
+}: React.ComponentProps<typeof BaseAlertDialog.Description>) {
   return (
     <BaseAlertDialog.Description
       data-slot="alert-dialog-description"
@@ -160,7 +163,7 @@ function AlertDialogClose({
   className,
   variant,
   ...props
-}: BaseAlertDialog.Close.Props &
+}: React.ComponentProps<typeof BaseAlertDialog.Close> &
   VariantProps<typeof buttonVariants>) {
   return (
     <BaseAlertDialog.Close
@@ -175,16 +178,16 @@ const createAlertDialogHandle = BaseAlertDialog.createHandle;
 
 export {
   AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogPopup,
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogClose,
-  AlertDialogPortal,
   AlertDialogBackdrop,
+  AlertDialogClose,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogPopup,
+  AlertDialogPortal,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   createAlertDialogHandle,
-  // Pre-assembled components
+  // Pre-assembled component
   AlertDialogContent,
 };

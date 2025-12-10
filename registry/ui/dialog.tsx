@@ -2,30 +2,39 @@
 
 import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui-components/react";
-import { XIcon } from "lucide-react";
 import { Button } from "@/registry/ui/button";
+import { XIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-function Dialog<Payload>({ ...props }: BaseDialog.Root.Props<Payload>) {
+function Dialog<Payload>({
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Root<Payload>>) {
   return <BaseDialog.Root data-slot="dialog" {...props} />;
 }
 
-function DialogTrigger<Payload>({ ...props }: BaseDialog.Trigger.Props<Payload>) {
+function DialogTrigger<Payload>({
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Trigger<Payload>>) {
   return <BaseDialog.Trigger<Payload> data-slot="dialog-trigger" {...props} />;
 }
 
-function DialogPortal({ ...props }: BaseDialog.Portal.Props) {
+function DialogPortal({
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Portal>) {
   return <BaseDialog.Portal data-slot="dialog-portal" {...props} />;
 }
 
-function DialogViewport({ className, ...props }: BaseDialog.Viewport.Props) {
+function DialogViewport({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Viewport>) {
   return (
     <BaseDialog.Viewport
       className={cn(
         "fixed inset-0 grid place-items-center p-4 sm:p-6",
         "outline-none",
-        className,
+        className
       )}
       data-slot="dialog-viewport"
       {...props}
@@ -33,7 +42,10 @@ function DialogViewport({ className, ...props }: BaseDialog.Viewport.Props) {
   );
 }
 
-function DialogBackdrop({ className, ...props }: BaseDialog.Backdrop.Props) {
+function DialogBackdrop({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Backdrop>) {
   return (
     <BaseDialog.Backdrop
       data-slot="dialog-backdrop"
@@ -42,14 +54,18 @@ function DialogBackdrop({ className, ...props }: BaseDialog.Backdrop.Props) {
         "transition-all duration-150",
         "data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
         "supports-[-webkit-touch-callout:none]:absolute",
-        className,
+        className
       )}
       {...props}
     />
   );
 }
 
-function DialogPopup({ className, children, ...props }:  React.ComponentProps<typeof BaseDialog.Popup>) {
+function DialogPopup({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Popup>) {
   return (
     <BaseDialog.Popup
       data-slot="dialog-popup"
@@ -66,7 +82,7 @@ function DialogContent({
   className,
   showCloseButton = true,
   ...props
-}: BaseDialog.Popup.Props & {
+}: React.ComponentProps<typeof BaseDialog.Popup> & {
   showCloseButton?: boolean;
 }) {
   return (
@@ -84,7 +100,7 @@ function DialogContent({
             "data-[nested-dialog-open]:scale-[calc(1-0.04*var(--nested-dialogs))]",
             "data-[nested-dialog-open]:translate-y-[calc(1rem*var(--nested-dialogs))]",
             "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-[inherit] data-[nested-dialog-open]:after:bg-black/10 data-[nested-dialog-open]:after:content-['']",
-            className,
+            className
           )}
           {...props}
         >
@@ -106,7 +122,10 @@ function DialogContent({
   );
 }
 
-function DialogClose({ className, ...props }: BaseDialog.Close.Props) {
+function DialogClose({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Close>) {
   return (
     <BaseDialog.Close
       data-slot="dialog-close"
@@ -116,7 +135,10 @@ function DialogClose({ className, ...props }: BaseDialog.Close.Props) {
   );
 }
 
-function DialogTitle({ className, ...props }: BaseDialog.Title.Props) {
+function DialogTitle({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Title>) {
   return (
     <BaseDialog.Title
       data-slot="dialog-title"
@@ -126,7 +148,10 @@ function DialogTitle({ className, ...props }: BaseDialog.Title.Props) {
   );
 }
 
-function DialogDescription({ className, ...props }: BaseDialog.Description.Props) {
+function DialogDescription({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Description>) {
   return (
     <BaseDialog.Description
       data-slot="dialog-description"
@@ -152,7 +177,7 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="dialog-footer"
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className,
+        className
       )}
       {...props}
     />
@@ -162,18 +187,18 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
 const createDialogHandle = BaseDialog.createHandle;
 
 export {
+  createDialogHandle,
   Dialog,
-  DialogViewport,
+  DialogBackdrop,
   DialogClose,
-  DialogPopup,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogBackdrop,
+  DialogPopup,
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-  createDialogHandle,
+  DialogViewport,
   // Pre-assembled component
   DialogContent,
 };
