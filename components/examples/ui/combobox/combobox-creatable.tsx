@@ -17,9 +17,9 @@ import {
 } from "@/registry/ui/combobox";
 import {
   Dialog,
+  DialogContent,
   DialogDescription,
   DialogFooter,
-  DialogPopup,
   DialogTitle,
 } from "@/registry/ui/dialog";
 import { Input } from "@/registry/ui/input";
@@ -194,7 +194,7 @@ export function CreatableComboboxDemo() {
       </Combobox>
 
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-        <DialogPopup initialFocus={createInputRef}>
+        <DialogContent initialFocus={createInputRef}>
           <DialogTitle>Create new label</DialogTitle>
           <DialogDescription>Add a new label to select.</DialogDescription>
           <form onSubmit={handleCreateSubmit} className="space-y-4">
@@ -214,7 +214,7 @@ export function CreatableComboboxDemo() {
               <Button type="submit">Create</Button>
             </DialogFooter>
           </form>
-        </DialogPopup>
+        </DialogContent>
       </Dialog>
     </React.Fragment>
   );

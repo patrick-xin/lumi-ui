@@ -2,10 +2,10 @@ import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
+  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogPopup,
   DialogTitle,
   DialogTrigger,
 } from "@/registry/ui/dialog";
@@ -14,7 +14,7 @@ export function DialogDemo() {
   return (
     <Dialog>
       <DialogTrigger render={<Button>Show Dialog</Button>} />
-      <DialogPopup>
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Notifications</DialogTitle>
           <DialogDescription>
@@ -22,9 +22,9 @@ export function DialogDemo() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <DialogClose>Close</DialogClose>
+          <DialogClose render={<Button variant="outline">Close</Button>} />
         </DialogFooter>
-      </DialogPopup>
+      </DialogContent>
     </Dialog>
   );
 }

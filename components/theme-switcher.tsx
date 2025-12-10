@@ -44,7 +44,7 @@ export function ThemeSwitcher() {
           </Button>
         }
       />
-      <DropdownMenuContent>
+      <DropdownMenuContent matchAnchorWidth={false}>
         <div className="grid grid-cols-3 gap-1">
           <DropdownMenuItem
             onClick={() => handleThemeSetChange("shadcn")}

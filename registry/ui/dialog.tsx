@@ -1,22 +1,22 @@
 "use client";
 
+import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui-components/react";
-import type { VariantProps } from "class-variance-authority";
+import { Button } from "@/registry/ui/button";
 import { XIcon } from "lucide-react";
-import type * as React from "react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/registry/ui/button";
 
-function Dialog({
+import { cn } from "@/lib/utils";
+
+function Dialog<Payload>({
   ...props
-}: React.ComponentProps<typeof BaseDialog.Root>) {
+}: React.ComponentProps<typeof BaseDialog.Root<Payload>>) {
   return <BaseDialog.Root data-slot="dialog" {...props} />;
 }
 
-function DialogTrigger({
+function DialogTrigger<Payload>({
   ...props
-}: React.ComponentProps<typeof BaseDialog.Trigger>) {
-  return <BaseDialog.Trigger data-slot="dialog-trigger" {...props} />;
+}: React.ComponentProps<typeof BaseDialog.Trigger<Payload>>) {
+  return <BaseDialog.Trigger<Payload> data-slot="dialog-trigger" {...props} />;
 }
 
 function DialogPortal({
@@ -25,16 +25,36 @@ function DialogPortal({
   return <BaseDialog.Portal data-slot="dialog-portal" {...props} />;
 }
 
+function DialogViewport({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Viewport>) {
+  return (
+    <BaseDialog.Viewport
+      className={cn(
+        "fixed inset-0 grid place-items-center p-4 sm:p-6",
+        "outline-none",
+        className
+      )}
+      data-slot="dialog-viewport"
+      {...props}
+    />
+  );
+}
+
 function DialogBackdrop({
   className,
   ...props
 }: React.ComponentProps<typeof BaseDialog.Backdrop>) {
   return (
     <BaseDialog.Backdrop
-      data-slot="dialog-overlay"
+      data-slot="dialog-backdrop"
       className={cn(
-        "fixed inset-0 min-h-dvh bg-black/50 transition-all duration-150 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0 supports-[-webkit-touch-callout:none]:absolute",
-        className,
+        "fixed inset-0 min-h-dvh bg-black/50",
+        "transition-all duration-150",
+        "data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
+        "supports-[-webkit-touch-callout:none]:absolute",
+        className
       )}
       {...props}
     />
@@ -42,57 +62,74 @@ function DialogBackdrop({
 }
 
 function DialogPopup({
-  classNames,
+  className,
   children,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Popup>) {
+  return (
+    <BaseDialog.Popup
+      data-slot="dialog-popup"
+      className={cn("relative bg-background p-6", className)}
+      {...props}
+    >
+      {children}
+    </BaseDialog.Popup>
+  );
+}
+
+function DialogContent({
+  children,
+  className,
   showCloseButton = true,
   ...props
-}: Omit<React.ComponentProps<typeof BaseDialog.Popup>, "className"> & {
+}: React.ComponentProps<typeof BaseDialog.Popup> & {
   showCloseButton?: boolean;
-  classNames?: {
-    backdrop?: string;
-    popup?: string;
-    close?: string;
-  };
 }) {
   return (
-    <DialogPortal data-slot="dialog-portal">
-      <DialogBackdrop className={cn(classNames?.backdrop)} />
-      <BaseDialog.Popup
-        data-slot="dialog-popup"
-        className={cn(
-          "bg-background grid gap-4 w-full max-w-[calc(100%-2rem)] rounded-lg border p-6 shadow-lg sm:max-w-lg",
-          "fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]",
-          "transition-all duration-150",
-          "data-[starting-style]:scale-90 data-[starting-style]:opacity-0 data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
-          classNames?.popup,
-        )}
-        {...props}
-      >
-        {children}
-        {showCloseButton && (
-          <BaseDialog.Close
-            data-slot="dialog-close"
-            className={cn(
-              "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-              classNames?.close,
-            )}
-          >
-            <XIcon />
-            <span className="sr-only">Close</span>
-          </BaseDialog.Close>
-        )}
-      </BaseDialog.Popup>
+    <DialogPortal>
+      <DialogBackdrop />
+      <DialogViewport>
+        <DialogPopup
+          className={cn(
+            "grid gap-4 rounded-lg border shadow-lg overflow-hidden",
+            "w-full max-w-[calc(100%-2rem)] max-h-full min-h-0 sm:max-w-lg",
+            "-mt-8",
+            "transition-all duration-150",
+            "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
+            "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
+            "data-[nested-dialog-open]:scale-[calc(1-0.04*var(--nested-dialogs))]",
+            "data-[nested-dialog-open]:translate-y-[calc(1rem*var(--nested-dialogs))]",
+            "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-[inherit] data-[nested-dialog-open]:after:bg-black/10 data-[nested-dialog-open]:after:content-['']",
+            className
+          )}
+          {...props}
+        >
+          {children}
+          {showCloseButton && (
+            <DialogClose
+              className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+              render={
+                <Button variant="ghost" size="icon-sm">
+                  <XIcon />
+                  <span className="sr-only">Close</span>
+                </Button>
+              }
+            />
+          )}
+        </DialogPopup>
+      </DialogViewport>
     </DialogPortal>
   );
 }
 
 function DialogClose({
+  className,
   ...props
-}: React.ComponentProps<typeof BaseDialog.Close> &
-  VariantProps<typeof buttonVariants>) {
+}: React.ComponentProps<typeof BaseDialog.Close>) {
   return (
     <BaseDialog.Close
       data-slot="dialog-close"
+      className={cn(className)}
       {...props}
     />
   );
@@ -140,22 +177,28 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="dialog-footer"
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className,
+        className
       )}
       {...props}
     />
   );
 }
 
+const createDialogHandle = BaseDialog.createHandle;
+
 export {
+  createDialogHandle,
   Dialog,
+  DialogBackdrop,
   DialogClose,
-  DialogPopup,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogBackdrop,
+  DialogPopup,
   DialogPortal,
   DialogTitle,
   DialogTrigger,
+  DialogViewport,
+  // Pre-assembled component
+  DialogContent,
 };

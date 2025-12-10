@@ -5,10 +5,10 @@ import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
+  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogPopup,
   DialogTitle,
 } from "@/registry/ui/dialog";
 import {
@@ -33,7 +33,7 @@ export function DialogFromMenuDemo() {
         </DropdownMenuContent>
       </DropdownMenu>
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogPopup>
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>Settings</DialogTitle>
             <DialogDescription>Change your preferences</DialogDescription>
@@ -41,7 +41,7 @@ export function DialogFromMenuDemo() {
           <DialogFooter>
             <DialogClose render={<Button variant="ghost" />}>Close</DialogClose>
           </DialogFooter>
-        </DialogPopup>
+        </DialogContent>
       </Dialog>
     </>
   );

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
-import { Dialog, DialogPopup, DialogTrigger } from "@/registry/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/registry/ui/dialog";
 import type { NavGroup } from "@/types";
 
 export function MobileNav({
@@ -33,16 +33,13 @@ export function MobileNav({
         }
       />
 
-      <DialogPopup
+      <DialogContent
         showCloseButton={false}
-        classNames={{
-          popup: cn(
-            "mx-0 h-[calc(100dvh-4rem)] w-screen max-w-none rounded-none border-0 p-0 top-16 translate-y-0",
-            "data-[starting-style]:!scale-100 data-[ending-style]:!scale-100",
-            "bg-background/70 backdrop-blur",
-          ),
-          backdrop: "hidden",
-        }}
+        className={cn(
+          "mx-0 h-[calc(100dvh-4rem)] w-screen max-w-none rounded-none border-0 p-0 top-16 translate-y-0",
+          "data-[starting-style]:!scale-100 data-[ending-style]:!scale-100",
+          "bg-background/70 backdrop-blur",
+        )}
       >
         <nav className="flex h-full flex-col gap-12 overflow-y-auto p-6 no-scrollbar">
           <TreeNavigation
@@ -50,7 +47,7 @@ export function MobileNav({
             onNavigate={() => setOpen(false)}
           />
         </nav>
-      </DialogPopup>
+      </DialogContent>
     </Dialog>
   );
 }

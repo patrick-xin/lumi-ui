@@ -16,10 +16,10 @@ import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
   Dialog,
+  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogPopup,
   DialogTitle,
 } from "@/registry/ui/dialog";
 import {
@@ -138,7 +138,7 @@ export function MenuDemo() {
         </DropdownMenuContent>
       </DropdownMenu>
       <Dialog open={isDeleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <DialogPopup>
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>Are you absolutely sure?</DialogTitle>
             <DialogDescription>
@@ -162,7 +162,7 @@ export function MenuDemo() {
               Yes, delete workspace
             </Button>
           </DialogFooter>
-        </DialogPopup>
+        </DialogContent>
       </Dialog>
     </>
   );
