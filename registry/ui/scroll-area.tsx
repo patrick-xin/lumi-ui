@@ -17,13 +17,26 @@ function ScrollArea({
     >
       <BaseScrollArea.Viewport
         data-slot="scroll-area-viewport"
-        className="h-full overscroll-contain focus-visible:ring-ring/50 size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:outline-1"
+        className="min-h-0 overflow-y-auto overscroll-contain py-6 pr-6 pl-1 focus-visible:outline focus-visible:outline-1 focus-visible:-outline-offset-1 focus-visible:outline-[var(--color-blue)]"
       >
-        {children}
+        <ScrollContent>{children}</ScrollContent>
       </BaseScrollArea.Viewport>
       <ScrollBar />
       <BaseScrollArea.Corner />
     </BaseScrollArea.Root>
+  );
+}
+
+function ScrollContent({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseScrollArea.Content>) {
+  return (
+    <BaseScrollArea.Content
+      data-slot="scroll-area-content"
+      className={cn(className)}
+      {...props}
+    />
   );
 }
 
@@ -54,4 +67,4 @@ function ScrollBar({
   );
 }
 
-export { ScrollArea, ScrollBar };
+export { ScrollArea, ScrollContent, ScrollBar };

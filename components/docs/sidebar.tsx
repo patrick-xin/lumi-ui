@@ -28,7 +28,8 @@ export const DocsSidebar = ({ tree }: DocsSidebarProps) => {
   const items = normalizeSidebarTree(tree, pathname);
 
   return (
-    <aside className="fixed inset-y-0 left-[max(0px,calc(50%-var(--container-size)/2))] z-30 hidden h-full w-[240px] flex-col bg-background xl:w-[260px] md:flex top-[var(--header-height)]">
+    <aside className="fixed inset-y-0 left-[max(0px,calc(50%-var(--container-size)/2))] z-30 hidden h-full w-[240px] flex-col bg-background md:flex top-[var(--header-height)]">
+      <div className="from-background via-background/80 to-background/50 sticky top-0 z-10 h-8 shrink-0 bg-gradient-to-b blur-xs" />
       <div className="h-full overflow-y-auto no-scrollbar pb-[240px] pl-2 pr-4 pt-6">
         <nav className="w-full space-y-6">
           {items.map((item, index) => (
@@ -96,8 +97,8 @@ const SidebarFolder = ({
             variant="ghost"
             size="sm"
             className={cn(
-              "w-full justify-between h-8 px-2 text-sm font-medium hover:bg-accent/50",
-              isActiveFolder && "text-primary font-semibold bg-accent/10",
+              "w-full justify-between h-8 px-2 text-sm font-semibold",
+              isActiveFolder && "text-primary",
             )}
           >
             {item.label}

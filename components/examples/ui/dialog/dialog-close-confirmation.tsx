@@ -6,6 +6,8 @@ import {
   AlertDialogClose,
   AlertDialogContent,
   AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
   AlertDialogTitle,
 } from "@/registry/ui/alert-dialog";
 import { Button } from "@/registry/ui/button";
@@ -13,12 +15,14 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogFooter,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/registry/ui/dialog";
 import { Textarea } from "@/registry/ui/textarea";
 
-export default function AlertDialogCloseConfirmationDemo() {
+export default function ExampleDialog() {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [confirmationOpen, setConfirmationOpen] = React.useState(false);
   const [textareaValue, setTextareaValue] = React.useState("");
@@ -38,11 +42,11 @@ export default function AlertDialogCloseConfirmationDemo() {
         }
       }}
     >
-      <DialogTrigger render={<Button variant="outline">Tweet</Button>} />
+      <DialogTrigger render={<Button>Tweet</Button>} />
       <DialogContent>
-        <DialogTitle className="-mt-1.5 mb-1 text-lg font-medium">
-          New tweet
-        </DialogTitle>
+        <DialogHeader>
+          <DialogTitle>New tweet</DialogTitle>
+        </DialogHeader>
         <form
           className="mt-4 flex flex-col gap-6"
           onSubmit={(event) => {
@@ -57,27 +61,26 @@ export default function AlertDialogCloseConfirmationDemo() {
             value={textareaValue}
             onChange={(event) => setTextareaValue(event.target.value)}
           />
-          <div className="flex justify-end gap-4">
+          <DialogFooter>
             <DialogClose render={<Button variant="outline">Cancel</Button>} />
-
             <Button type="submit">Tweet</Button>
-          </div>
+          </DialogFooter>
         </form>
       </DialogContent>
 
       {/* Confirmation dialog */}
       <AlertDialog open={confirmationOpen} onOpenChange={setConfirmationOpen}>
         <AlertDialogContent>
-          <AlertDialogTitle className="-mt-1.5 mb-1 text-lg font-medium">
-            Discard tweet?
-          </AlertDialogTitle>
-          <AlertDialogDescription className="mb-6">
-            Your tweet will be lost.
-          </AlertDialogDescription>
-          <div className="flex items-center justify-end gap-4">
-            <AlertDialogClose variant="outline">Go back</AlertDialogClose>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Discard tweet?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Your tweet will be lost.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogClose render={<Button>Go back</Button>} />
             <Button
-              type="button"
+              variant="destructive"
               onClick={() => {
                 setConfirmationOpen(false);
                 setDialogOpen(false);
@@ -85,7 +88,7 @@ export default function AlertDialogCloseConfirmationDemo() {
             >
               Discard
             </Button>
-          </div>
+          </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </Dialog>

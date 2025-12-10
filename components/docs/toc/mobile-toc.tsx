@@ -11,7 +11,7 @@ import {
 import { useTocActiveItem } from "@/hooks/use-toc-active-Item";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
-import { Dialog, DialogPopup, DialogTrigger } from "@/registry/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/registry/ui/dialog";
 
 const TocContext = createContext<{
   items: TOCItemType[];
@@ -116,21 +116,21 @@ export function MobileToc({ items, className, ...props }: PageTOCPopoverProps) {
       >
         <Dialog open={open} onOpenChange={setOpen}>
           <TocTrigger />
-          <DialogPopup
+          <DialogContent
             showCloseButton={false}
-            classNames={{
-              popup: cn(
-                "mx-0 w-screen max-w-none! rounded-none p-0 border-0 shadow-none",
-                "top-[calc(var(--header-height)+2.5rem)] translate-y-0 left-0 translate-x-0",
-                "max-h-[calc(100vh-var(--header-height)-2.5rem)]",
-                "data-[starting-style]:!scale-100 data-[ending-style]:!scale-100",
-                "bg-background/80 backdrop-blur border-b",
-              ),
-              backdrop: cn("bg-transparent"),
-            }}
+            // classNames={{
+            //   popup: cn(
+            //     "mx-0 w-screen max-w-none! rounded-none p-0 border-0 shadow-none",
+            //     "top-[calc(var(--header-height)+2.5rem)] translate-y-0 left-0 translate-x-0",
+            //     "max-h-[calc(100vh-var(--header-height)-2.5rem)]",
+            //     "data-[starting-style]:!scale-100 data-[ending-style]:!scale-100",
+            //     "bg-background/80 backdrop-blur border-b",
+            //   ),
+            //   backdrop: cn("bg-transparent"),
+            // }}
           >
             <TocContent />
-          </DialogPopup>
+          </DialogContent>
         </Dialog>
       </div>
     </TocContext.Provider>

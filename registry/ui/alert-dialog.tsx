@@ -2,27 +2,24 @@
 
 import * as React from "react";
 import { AlertDialog as BaseAlertDialog } from "@base-ui-components/react/alert-dialog";
-import { buttonVariants } from "@/registry/ui/button";
-
 import { cn } from "@/lib/utils";
-import { VariantProps } from "class-variance-authority";
+import { buttonVariants } from "@/registry/ui/button";
+import type { VariantProps } from "class-variance-authority";
 
-const AlertDialog = (({
-  ...props
-}: BaseAlertDialog.Root.Props) => (
-  <BaseAlertDialog.Root data-slot="alert-dialog" {...props} />
-)) as typeof BaseAlertDialog.Root;
+function AlertDialog<Payload>({ ...props }: BaseAlertDialog.Root.Props<Payload>) {
+  return <BaseAlertDialog.Root data-slot="alert-dialog" {...props} />;
+}
 
-const AlertDialogTrigger = (({
-  className,
+function AlertDialogTrigger<Payload>({
   ...props
-}: BaseAlertDialog.Trigger.Props) => (
-  <BaseAlertDialog.Trigger
-    data-slot="alert-dialog-trigger"
-    className={cn(className)}
-    {...props}
-  />
-));
+}: BaseAlertDialog.Trigger.Props<Payload>) {
+  return (
+    <BaseAlertDialog.Trigger<Payload>
+      data-slot="alert-dialog-trigger"
+      {...props}
+    />
+  );
+}
 
 function AlertDialogPortal({
   ...props
@@ -79,7 +76,6 @@ function AlertDialogViewport({
   );
 }
 
-
 function AlertDialogContent({
   className,
   ...props
@@ -98,8 +94,8 @@ function AlertDialogContent({
             "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-lg data-[nested-dialog-open]:after:bg-black/10",
             className,
           )}
-        {...props}
-      />
+          {...props}
+        />
       </AlertDialogViewport>
     </AlertDialogPortal>
   );
@@ -164,7 +160,8 @@ function AlertDialogClose({
   className,
   variant,
   ...props
-}: BaseAlertDialog.Close.Props & VariantProps<typeof buttonVariants>) {
+}: BaseAlertDialog.Close.Props &
+  VariantProps<typeof buttonVariants>) {
   return (
     <BaseAlertDialog.Close
       data-slot="alert-dialog-close"
@@ -188,6 +185,6 @@ export {
   AlertDialogPortal,
   AlertDialogBackdrop,
   createAlertDialogHandle,
-  // Pre assembled components
+  // Pre-assembled components
   AlertDialogContent,
 };
