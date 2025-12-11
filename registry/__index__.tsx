@@ -2658,6 +2658,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "scroll-area-no-scrollbar": {
+    name: "scroll-area-no-scrollbar",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["scroll-area"],
+    files: [{
+      path: "components/examples/ui/scroll-area/scroll-area-no-scrollbar.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/scroll-area/scroll-area-no-scrollbar");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "scroll-area-no-scrollbar";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "select-aligned": {
     name: "select-aligned",
     description: "",

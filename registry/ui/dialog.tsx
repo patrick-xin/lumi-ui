@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui-components/react";
-import { Button } from "@/registry/ui/button";
 import { XIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -31,12 +30,8 @@ function DialogViewport({
 }: React.ComponentProps<typeof BaseDialog.Viewport>) {
   return (
     <BaseDialog.Viewport
-      className={cn(
-        "fixed inset-0 grid place-items-center p-4 sm:p-6",
-        "outline-none",
-        className
-      )}
       data-slot="dialog-viewport"
+      className={cn("fixed inset-0 p-4 sm:p-6 outline-none", className)}
       {...props}
     />
   );
@@ -50,11 +45,11 @@ function DialogBackdrop({
     <BaseDialog.Backdrop
       data-slot="dialog-backdrop"
       className={cn(
-        "fixed inset-0 min-h-dvh bg-black/50",
+        "fixed inset-0 min-h-dvh bg-black/70 backdrop-blur-xs",
         "transition-all duration-150",
         "data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
         "supports-[-webkit-touch-callout:none]:absolute",
-        className
+        className,
       )}
       {...props}
     />
@@ -69,7 +64,7 @@ function DialogPopup({
   return (
     <BaseDialog.Popup
       data-slot="dialog-popup"
-      className={cn("relative bg-background p-6", className)}
+      className={cn("relative bg-background p-4 sm:p-6", className)}
       {...props}
     >
       {children}
@@ -88,50 +83,50 @@ function DialogContent({
   return (
     <DialogPortal>
       <DialogBackdrop />
-      <DialogViewport>
-        <DialogPopup
+      <DialogViewport className="grid place-items-center">
+        <BaseDialog.Popup
           className={cn(
-            "grid gap-4 rounded-lg border shadow-lg overflow-hidden -mt-8",
-            "w-full max-w-[calc(100%-2rem)] max-h-full min-h-0 sm:max-w-lg",
-            "transition-all duration-150",
+            "relative grid w-full max-w-[calc(100%-2rem)] gap-4 p-4",
+            "bg-background bg-clip-padding rounded-lg border shadow-lg overflow-hidden",
+            "min-h-0 max-h-full sm:max-w-lg sm:p-6 sm:rounded-md",
+            "will-change-transform transition-all duration-150 origin-top",
             "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
             "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
             "data-[nested-dialog-open]:scale-[calc(1-0.04*var(--nested-dialogs))]",
             "data-[nested-dialog-open]:translate-y-[calc(1rem*var(--nested-dialogs))]",
-            "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-[inherit] data-[nested-dialog-open]:after:bg-black/10 data-[nested-dialog-open]:after:content-['']",
-            className
+            "data-[nested-dialog-open]:after:absolute",
+            "data-[nested-dialog-open]:after:inset-0",
+            "data-[nested-dialog-open]:after:rounded-[inherit]",
+            "data-[nested-dialog-open]:after:bg-black/10",
+            "data-[nested-dialog-open]:after:content-['']",
+            "max-sm:data-[starting-style]:translate-y-4",
+            "max-sm:data-[ending-style]:translate-y-4",
+            className,
           )}
           {...props}
         >
           {children}
           {showCloseButton && (
-            <DialogClose
-              className="absolute right-2 top-2"
-              render={
-                <Button variant="ghost" size="icon-sm">
-                  <XIcon />
-                  <span className="sr-only">Close</span>
-                </Button>
-              }
-            />
+            <BaseDialog.Close
+              className={cn(
+                "absolute top-2 right-2 rounded-xs opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none",
+                "focus:ring-2 focus:ring-offset-2 focus:outline-hidden ring-offset-background focus:ring-ring",
+                "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+                "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
+              )}
+            >
+              <XIcon />
+              <span className="sr-only">Close</span>
+            </BaseDialog.Close>
           )}
-        </DialogPopup>
+        </BaseDialog.Popup>
       </DialogViewport>
     </DialogPortal>
   );
 }
 
-function DialogClose({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseDialog.Close>) {
-  return (
-    <BaseDialog.Close
-      data-slot="dialog-close"
-      className={cn(className)}
-      {...props}
-    />
-  );
+function DialogClose({ ...props }: BaseDialog.Close.Props) {
+  return <BaseDialog.Close data-slot="dialog-close" {...props} />;
 }
 
 function DialogTitle({
@@ -176,7 +171,7 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="dialog-footer"
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className
+        className,
       )}
       {...props}
     />

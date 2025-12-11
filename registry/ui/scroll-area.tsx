@@ -30,7 +30,7 @@ function ScrollAreaViewport({
       data-slot="scroll-area-viewport"
       className={cn(
         "h-full w-full rounded-[inherit] overscroll-contain",
-        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/50 focus-visible:outline-offset-2",
+        "focus-visible:outline focus-visible:outline-ring/50 focus-visible:outline-offset-2",
         gradientScrollFade && [
           "before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:w-full before:content-['']",
           "after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:z-10 after:w-full after:content-['']",
@@ -110,10 +110,12 @@ function ScrollAreaScrollBar({
 function ScrollArea({
   className,
   gradientScrollFade = false,
+  noScrollBar = false,
   children,
   ...props
 }: React.ComponentProps<typeof BaseScrollArea.Root> & {
   gradientScrollFade?: boolean;
+  noScrollBar?: boolean;
 }) {
   return (
     <ScrollAreaRoot
@@ -123,8 +125,12 @@ function ScrollArea({
       <ScrollAreaViewport gradientScrollFade={gradientScrollFade} className="flex-1 min-h-0">
         <ScrollAreaContent>{children}</ScrollAreaContent>
       </ScrollAreaViewport>
-      <ScrollAreaScrollBar orientation="vertical" />
-      <ScrollAreaScrollBar orientation="horizontal" />
+      {!noScrollBar && (
+        <>
+          <ScrollAreaScrollBar orientation="vertical" />
+          <ScrollAreaScrollBar orientation="horizontal" />
+        </>
+      )}
       <ScrollAreaCorner />
     </ScrollAreaRoot>
   );

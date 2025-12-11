@@ -5,19 +5,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { hasActiveChild, normalizeSidebarTree } from "@/lib/sidebar-utils";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/registry/ui/badge";
 import { Button } from "@/registry/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/registry/ui/collapsible";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 import type {
   DocRoot,
   SidebarFolderItem,
   SidebarItem,
   SidebarLinkItem,
 } from "@/types";
-import { Badge } from "../../registry/ui/badge";
 
 interface DocsSidebarProps {
   tree: DocRoot;
@@ -28,15 +29,14 @@ export const DocsSidebar = ({ tree }: DocsSidebarProps) => {
   const items = normalizeSidebarTree(tree, pathname);
 
   return (
-    <aside className="fixed inset-y-0 left-[max(0px,calc(50%-var(--container-size)/2))] z-30 hidden h-full w-[240px] flex-col bg-background md:flex top-[var(--header-height)]">
-      <div className="from-background via-background/80 to-background/50 sticky top-0 z-10 h-8 shrink-0 bg-gradient-to-b blur-xs" />
-      <div className="h-full overflow-y-auto no-scrollbar pb-[240px] pl-2 pr-4 pt-6">
-        <nav className="w-full space-y-6">
+    <aside className="fixed inset-y-0 left-[max(0px,calc(50%-var(--container-size)/2))] z-30 hidden w-[240px] flex-col bg-background md:flex top-[var(--header-height)]">
+      <ScrollArea gradientScrollFade noScrollBar className="px-2">
+        <nav className="w-full space-y-6 pt-8 pb-48">
           {items.map((item, index) => (
-            <SidebarSection key={index} item={item} />
+            <SidebarSection key={String(index)} item={item} />
           ))}
         </nav>
-      </div>
+      </ScrollArea>
     </aside>
   );
 };

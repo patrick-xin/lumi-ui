@@ -289,12 +289,9 @@ Note that there is no separate onTriggerIdChange prop. Instead, the onOpenChange
 
 ## Migration Guide
 
-While Lumi UI shares a similar component composition structure with Shadcn UI (Radix), there are architectural differences regarding trigger composition, scrolling behavior, and animation logic.
-
 ### Trigger Composition (render prop)
 
-Shadcn UI utilizes the `asChild` pattern to merge the trigger logic with a child element. Lumi UI uses a `render` prop pattern to explicitly pass the trigger element.
-
+Radix UI uses the `asChild` pattern to merge the trigger logic with a child element. Base UI uses the `render` prop for changing HTML tags or using custom triggers.
 
 ```tsx
 // Before:
@@ -307,7 +304,7 @@ Shadcn UI utilizes the `asChild` pattern to merge the trigger logic with a child
 ```
 
 <Callout variant="warning" title="Warning">
-If you used `asChild` on any other parts, switch to `render` prop pattern.
+Switch to using the `render` prop instead of `asChild`.
 </Callout>
 
 ### Example
