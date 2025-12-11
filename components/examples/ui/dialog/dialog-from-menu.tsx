@@ -39,7 +39,9 @@ export function DialogFromMenuDemo() {
             <DialogDescription>Change your preferences</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <DialogClose render={<Button variant="ghost" />}>Close</DialogClose>
+            <DialogClose render={<Button variant="outline" />}>
+              Close
+            </DialogClose>
           </DialogFooter>
         </DialogContent>
       </Dialog>

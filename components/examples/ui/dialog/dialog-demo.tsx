@@ -14,7 +14,7 @@ export function DialogDemo() {
   return (
     <Dialog>
       <DialogTrigger render={<Button>Show Dialog</Button>} />
-      <DialogContent showCloseButton>
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Notifications</DialogTitle>
           <DialogDescription>
