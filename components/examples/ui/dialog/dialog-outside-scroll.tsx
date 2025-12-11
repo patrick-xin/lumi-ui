@@ -54,12 +54,10 @@ export default function OutsideScrollDialog() {
                   <div className="flex flex-col gap-6">
                     {Array.from({ length: 12 }).map((_, i) => (
                       <div
-                        className="flex h-48 w-full shrink-0 items-center justify-center rounded-md bg-accent"
+                        className="flex h-48 w-full shrink-0 items-center justify-center rounded-md bg-accent/30"
                         key={String(i)}
                       >
-                        <span className="font-medium text-sm">
-                          Item {i + 1}
-                        </span>
+                        <span className="font-medium text-sm">{i + 1}</span>
                       </div>
                     ))}
                   </div>
