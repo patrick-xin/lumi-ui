@@ -1,7 +1,8 @@
 "use client";
 
+import * as React from "react";
 import { ScrollArea as BaseScrollArea } from "@base-ui-components/react/scroll-area";
-import type * as React from "react";
+
 import { cn } from "@/lib/utils";
 
 function ScrollArea({
@@ -12,12 +13,15 @@ function ScrollArea({
   return (
     <BaseScrollArea.Root
       data-slot="scroll-area"
-      className={cn("relative", className)}
+      className={cn("relative overflow-hidden flex flex-col", className)}
       {...props}
     >
       <BaseScrollArea.Viewport
         data-slot="scroll-area-viewport"
-        className="min-h-0 overflow-y-auto overscroll-contain py-6 pr-6 pl-1 focus-visible:outline focus-visible:outline-1 focus-visible:-outline-offset-1 focus-visible:outline-[var(--color-blue)]"
+        className={cn(
+          "flex-1 min-h-0 w-full pr-4 overflow-y-auto rounded-[inherit] overscroll-contain",
+          "focus-visible:outline focus-visible:outline-ring/5 focus-visible:outline-offset-2",
+        )}
       >
         <ScrollContent>{children}</ScrollContent>
       </BaseScrollArea.Viewport>
@@ -67,4 +71,4 @@ function ScrollBar({
   );
 }
 
-export { ScrollArea, ScrollContent, ScrollBar };
+export { ScrollArea, ScrollBar, ScrollContent };
