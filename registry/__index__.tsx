@@ -2586,19 +2586,19 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "scroll-area-demo-horizontal-scrolling": {
-    name: "scroll-area-demo-horizontal-scrolling",
+  "scroll-area-both": {
+    name: "scroll-area-both",
     description: "",
     type: "registry:example",
     registryDependencies: ["scroll-area"],
     files: [{
-      path: "components/examples/ui/scroll-area/scroll-area-demo-horizontal-scrolling.tsx",
+      path: "components/examples/ui/scroll-area/scroll-area-both.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/scroll-area/scroll-area-demo-horizontal-scrolling");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "scroll-area-demo-horizontal-scrolling";
+      const mod = await import("@/components/examples/ui/scroll-area/scroll-area-both");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "scroll-area-both";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -2617,6 +2617,42 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/scroll-area/scroll-area-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "scroll-area-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "scroll-area-gradient-scroll-fade": {
+    name: "scroll-area-gradient-scroll-fade",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["scroll-area"],
+    files: [{
+      path: "components/examples/ui/scroll-area/scroll-area-gradient-scroll-fade.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/scroll-area/scroll-area-gradient-scroll-fade");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "scroll-area-gradient-scroll-fade";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "scroll-area-horizontal-scrolling": {
+    name: "scroll-area-horizontal-scrolling",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["scroll-area"],
+    files: [{
+      path: "components/examples/ui/scroll-area/scroll-area-horizontal-scrolling.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/scroll-area/scroll-area-horizontal-scrolling");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "scroll-area-horizontal-scrolling";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

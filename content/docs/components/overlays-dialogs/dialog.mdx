@@ -51,7 +51,7 @@ export function DialogDemo() {
   return (
     <Dialog>
       <DialogTrigger>Show Alert Dialog</DialogTrigger>
-      <DialogContent>
+      <DialogContent showCloseButton>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>
@@ -285,3 +285,82 @@ Note that there is no separate onTriggerIdChange prop. Instead, the onOpenChange
 | [`DialogTitle`](https://base-ui.com/react/components/dialog#title) | A heading that labels the dialog. Renders an `<h2>` element. |
 | [`DialogDescription`](https://base-ui.com/react/components/dialog#description) | A paragraph with additional information about the dialog. Renders a `<p>` element. |
 | [`DialogClose`](https://base-ui.com/react/components/dialog#close) | A button that closes the dialog. Renders a `<button>` element.|
+
+
+## Migration Guide
+
+While Lumi UI shares a similar component composition structure with Shadcn UI (Radix), there are architectural differences regarding trigger composition, scrolling behavior, and animation logic.
+
+### Trigger Composition (render prop)
+
+Shadcn UI utilizes the `asChild` pattern to merge the trigger logic with a child element. Lumi UI uses a `render` prop pattern to explicitly pass the trigger element.
+
+
+```tsx
+// Before:
+<DialogTrigger asChild>
+  <Button>Open</Button>
+</DialogTrigger>
+
+// After:
+<DialogTrigger render={<Button>Open</Button>} />
+```
+
+<Callout variant="warning" title="Warning">
+If you used `asChild` on any other parts, switch to `render` prop pattern.
+</Callout>
+
+### Example
+
+<Tabs defaultValue="shadcn/ui">
+  <TabsList>
+    <TabsTab value="shadcn/ui">shadcn/ui</TabsTab>
+    <TabsTab value="lumi/ui">lumi/ui</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="shadcn/ui">
+    ```tsx title="dialog-demo.tsx"
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline">Edit Profile</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          {/* Form content */}
+        </div>
+        <DialogFooter>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  ```
+  </TabsPanel>
+
+  <TabsPanel value="lumi/ui">
+  ```tsx title="dialog-demo.tsx" {2, 12}
+ <Dialog>
+    <DialogTrigger render={<Button variant="outline">Edit Profile</Button>} />
+    <DialogContent className="sm:max-w-[425px]">
+      <DialogHeader>
+        <DialogTitle>Edit profile</DialogTitle>
+      </DialogHeader>
+      <div className="grid gap-4 py-4">
+        {/* Form content */}
+      </div>
+      <DialogFooter>
+        <DialogClose render={<Button variant="ghost">Cancel</Button>} />
+        <Button type="submit">Save changes</Button>
+      </DialogFooter>
+    </DialogContent>
+</Dialog>
+  ```
+  </TabsPanel>
+</Tabs>
+
+<Callout variant="info" title="Info">
+`DialogContent` wraps the popup in a specific structure: Portal > Backdrop > Viewport > Popup.
+If you need a custom layout, simpler usage is to use the primitives directly instead of the pre-assembled `DialogContent`.
+</Callout>

@@ -1,4 +1,4 @@
-import { ScrollArea, ScrollBar } from "@/registry/ui/scroll-area";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 export function ScrollAreaHorizontalDemo() {
   return (
@@ -6,14 +6,13 @@ export function ScrollAreaHorizontalDemo() {
       <div className="flex w-max space-x-4 p-4">
         {Array.from({ length: 12 }).map((_, i) => (
           <div
-            className="flex h-48 w-32 shrink-0 items-center justify-center rounded-md bg-accent"
+            className="flex h-48 w-32 shrink-0 items-center justify-center rounded-md bg-accent/30"
             key={String(i)}
           >
-            <span className="font-medium text-sm">Item {i + 1}</span>
+            <span className="font-medium text-sm">{i + 1}</span>
           </div>
         ))}
       </div>
-      <ScrollBar orientation="horizontal" />
     </ScrollArea>
   );
 }

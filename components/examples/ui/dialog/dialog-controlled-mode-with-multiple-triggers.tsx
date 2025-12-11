@@ -37,21 +37,18 @@ export default function DialogDetachedTriggersControlledDemo() {
           id="trigger-1"
           payload={1}
         />
-
         <DialogTrigger
           render={<Button>Open 2</Button>}
           handle={demoDialog}
           id="trigger-2"
           payload={2}
         />
-
         <DialogTrigger
           render={<Button>Open 3</Button>}
           handle={demoDialog}
           id="trigger-3"
           payload={3}
         />
-
         <Button
           variant="outline"
           onClick={() => {
@@ -62,7 +59,6 @@ export default function DialogDetachedTriggersControlledDemo() {
           Open programmatically (Dialog 2)
         </Button>
       </div>
-
       <Dialog
         handle={demoDialog}
         open={open}

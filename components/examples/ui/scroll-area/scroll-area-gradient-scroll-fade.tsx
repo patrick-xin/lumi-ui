@@ -1,8 +1,11 @@
 import { ScrollArea } from "@/registry/ui/scroll-area";
 
-export function ScrollAreaDemo() {
+export function ScrollAreaGradientScrollFadeDemo() {
   return (
-    <ScrollArea className="h-50 w-96 max-w-md border rounded-md">
+    <ScrollArea
+      gradientScrollFade
+      className="h-50 w-96 max-w-md border rounded-md"
+    >
       <div className="flex flex-col gap-4 py-3 pr-6 pl-4 text-sm text-muted-foreground">
         <p>
           Vernacular architecture is building done outside any academic
