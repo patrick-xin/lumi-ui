@@ -16,7 +16,7 @@ function Dialog<Payload>({
 function DialogTrigger<Payload>({
   ...props
 }: React.ComponentProps<typeof BaseDialog.Trigger<Payload>>) {
-  return <BaseDialog.Trigger<Payload> data-slot="dialog-trigger" {...props} />;
+  return <BaseDialog.Trigger data-slot="dialog-trigger" {...props} />;
 }
 
 function DialogPortal({
@@ -80,7 +80,7 @@ function DialogPopup({
 function DialogContent({
   children,
   className,
-  showCloseButton = true,
+  showCloseButton = false,
   ...props
 }: React.ComponentProps<typeof BaseDialog.Popup> & {
   showCloseButton?: boolean;
@@ -91,9 +91,8 @@ function DialogContent({
       <DialogViewport>
         <DialogPopup
           className={cn(
-            "grid gap-4 rounded-lg border shadow-lg overflow-hidden",
+            "grid gap-4 rounded-lg border shadow-lg overflow-hidden -mt-8",
             "w-full max-w-[calc(100%-2rem)] max-h-full min-h-0 sm:max-w-lg",
-            "-mt-8",
             "transition-all duration-150",
             "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
             "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
@@ -107,7 +106,7 @@ function DialogContent({
           {children}
           {showCloseButton && (
             <DialogClose
-              className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+              className="absolute right-2 top-2"
               render={
                 <Button variant="ghost" size="icon-sm">
                   <XIcon />
