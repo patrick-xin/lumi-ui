@@ -31,16 +31,8 @@ function ScrollAreaViewport({
       className={cn(
         "h-full w-full rounded-[inherit] overscroll-contain",
         "focus-visible:outline focus-visible:outline-ring/50 focus-visible:outline-offset-2",
-        gradientScrollFade && [
-          "before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:w-full before:content-['']",
-          "after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:z-10 after:w-full after:content-['']",
-          "before:transition-[height] before:duration-100 before:ease-out",
-          "after:transition-[height] after:duration-100 after:ease-out",
-          "before:bg-gradient-to-b before:from-background before:to-transparent",
-          "after:bg-gradient-to-t after:from-background after:to-transparent",
-          "before:[--scroll-area-overflow-y-start:inherit] before:h-[min(40px,var(--scroll-area-overflow-y-start))]",
-          "after:[--scroll-area-overflow-y-end:inherit] after:h-[min(40px,var(--scroll-area-overflow-y-end,40px))]",
-        ],
+        gradientScrollFade && 
+          "mask-[linear-gradient(to_bottom,transparent,black_min(1.2rem,var(--scroll-area-overflow-y-start)),black_calc(100%-min(1.2rem,var(--scroll-area-overflow-y-end,1.2rem))),transparent)]",
         className,
       )}
       {...props}
