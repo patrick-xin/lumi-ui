@@ -2,61 +2,59 @@
 
 import { ChevronDown } from "lucide-react";
 import * as React from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/registry/ui/button";
 import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleTrigger,
-} from "@/components/collapsible";
-import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
+} from "@/registry/ui/collapsible";
 import { Separator } from "@/registry/ui/separator";
 
 export function CodeCollapsibleWrapper({
   className,
   children,
   ...props
-}: React.ComponentProps<"div"> & { defaultOpen?: boolean }) {
-  const [isOpened, setIsOpened] = React.useState(props.defaultOpen ?? false);
+}: React.ComponentProps<typeof Collapsible>) {
+  const [isOpened, setIsOpened] = React.useState(false);
 
   return (
     <Collapsible
-      open={isOpened}
+      className={cn("group/collapsible relative", className)}
       onOpenChange={setIsOpened}
-      className={cn("relative", className)}
+      open={isOpened}
+      {...props}
     >
-      <CollapsibleTrigger
-        nativeButton={false}
-        render={
-          <div className="absolute top-1.5 right-9 z-10 flex items-center" />
-        }
+      <div className="absolute top-1 right-8 z-10 flex items-center">
+        <CollapsibleTrigger
+          render={
+            <Button
+              className="text-muted-foreground text-xs"
+              size="sm"
+              variant="ghost"
+            >
+              {isOpened ? "Collapse" : "Expand"}
+            </Button>
+          }
+        />
+        <Separator className="mx-1.5 h-5" orientation="vertical" />
+      </div>
+      <CollapsiblePanel
+        className="[&>figure]:md:mx-0 relative mt-6 h-full overflow-hidden data-closed:max-h-64 [&>figure]:mt-0"
+        hidden={false}
+        keepMounted
       >
-        <Button
-          variant="ghost"
-          size={"sm"}
-          className="text-muted-foreground h-7 rounded-md px-2 text-xs"
-        >
-          {isOpened ? "Collapse" : "Expand"}
-        </Button>
-        <Separator orientation="vertical" className="mx-2 h-4" />
-      </CollapsibleTrigger>
-
-      <CollapsiblePanel keepMounted hidden={false} className="relative">
-        <div
-          data-closed={isOpened ? undefined : ""}
-          className="overflow-hidden data-[open]:h-auto data-[closed]:h-64"
-        >
-          {children}
-        </div>
+        {children}
       </CollapsiblePanel>
       <div
         className={cn(
-          "from-code/70 to-code text-muted-foreground absolute inset-x-0 -bottom-2 flex h-24 items-center justify-center bg-gradient-to-b",
+          "text-muted-foreground absolute inset-x-0 -bottom-2 flex h-24 items-center justify-center bg-gradient-to-b from-code/70 to-code",
           isOpened && "hidden",
         )}
       >
         <CollapsibleTrigger
           render={
-            <Button size="icon" variant="secondary">
+            <Button size="icon-sm" variant="secondary">
               <ChevronDown />
             </Button>
           }
