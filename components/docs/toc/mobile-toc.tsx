@@ -2,41 +2,36 @@
 
 import type { TOCItemType } from "fumadocs-core/toc";
 import { ChevronDown } from "lucide-react";
-import {
-  type ComponentProps,
-  createContext,
-  useContext,
-  useState,
-} from "react";
+import { type ComponentProps, useState } from "react";
 import { useTocActiveItem } from "@/hooks/use-toc-active-Item";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/registry/ui/dialog";
+import {
+  createDialogHandle,
+  Dialog,
+  DialogPopup,
+  DialogPortal,
+  DialogTrigger,
+} from "@/registry/ui/dialog";
 
-const TocContext = createContext<{
+function TocTrigger({
+  handle,
+  open,
+  items,
+  activeHeading,
+}: {
+  handle: any;
+  open: boolean;
   items: TOCItemType[];
   activeHeading: string | null;
-  open: boolean;
-  setOpen: (open: boolean) => void;
-} | null>(null);
-
-function useTocContext() {
-  const context = useContext(TocContext);
-  if (!context) {
-    throw new Error("useTocContext must be used within a TocProvider");
-  }
-  return context;
-}
-
-function TocTrigger() {
-  const { open, items, activeHeading } = useTocContext();
-
+}) {
   const activeItem = activeHeading
     ? items.find((item) => item.url === `#${activeHeading}`)
     : null;
 
   return (
     <DialogTrigger
+      handle={handle}
       render={
         <Button
           variant="ghost"
@@ -61,9 +56,15 @@ function TocTrigger() {
   );
 }
 
-function TocContent() {
-  const { items, activeHeading, setOpen } = useTocContext();
-
+function TocContent({
+  items,
+  activeHeading,
+  setOpen,
+}: {
+  items: TOCItemType[];
+  activeHeading: string | null;
+  setOpen: (open: boolean) => void;
+}) {
   return (
     <div className="flex flex-col p-4 text-sm">
       {items.map((item) => {
@@ -98,41 +99,40 @@ export interface PageTOCPopoverProps extends ComponentProps<"div"> {
 
 export function MobileToc({ items, className, ...props }: PageTOCPopoverProps) {
   const [open, setOpen] = useState(false);
-
+  const [tocHandle] = useState(() => createDialogHandle());
   const itemIds = items.map((item) => item.url.slice(1));
   const activeHeading = useTocActiveItem(itemIds);
 
-  const contextValue = { items, activeHeading, open, setOpen };
-
   return (
-    <TocContext.Provider value={contextValue}>
-      <div
-        {...props}
-        className={cn(
-          "fixed z-50 h-10 w-full top-(--header-height) inset-x-0 bg-background/10 backdrop-blur-md border-b border-border/20",
-          open && "border-0",
-          className,
-        )}
-      >
-        <Dialog open={open} onOpenChange={setOpen}>
-          <TocTrigger />
-          <DialogContent
-            showCloseButton={false}
-            // classNames={{
-            //   popup: cn(
-            //     "mx-0 w-screen max-w-none! rounded-none p-0 border-0 shadow-none",
-            //     "top-[calc(var(--header-height)+2.5rem)] translate-y-0 left-0 translate-x-0",
-            //     "max-h-[calc(100vh-var(--header-height)-2.5rem)]",
-            //     "data-[starting-style]:!scale-100 data-[ending-style]:!scale-100",
-            //     "bg-background/80 backdrop-blur border-b",
-            //   ),
-            //   backdrop: cn("bg-transparent"),
-            // }}
+    <div
+      {...props}
+      className={cn(
+        "fixed z-50 h-10 w-full top-(--header-height) inset-x-0 bg-background/10 backdrop-blur-md border-b border-border/20",
+        open && "border-0",
+        className,
+      )}
+    >
+      <TocTrigger
+        handle={tocHandle}
+        open={open}
+        items={items}
+        activeHeading={activeHeading}
+      />
+      <Dialog handle={tocHandle} open={open} onOpenChange={setOpen}>
+        <DialogPortal>
+          <DialogPopup
+            className={cn(
+              "fixed top-[calc(var(--header-height)+2.5rem)] h-[calc(100vh-var(--header-height)-2.5rem)] w-screen z-50 data-[starting-style]:opacity-0 data-[ending-style]:opacity-100",
+            )}
           >
-            <TocContent />
-          </DialogContent>
-        </Dialog>
-      </div>
-    </TocContext.Provider>
+            <TocContent
+              items={items}
+              activeHeading={activeHeading}
+              setOpen={setOpen}
+            />
+          </DialogPopup>
+        </DialogPortal>
+      </Dialog>
+    </div>
   );
 }

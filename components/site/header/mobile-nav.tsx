@@ -5,7 +5,12 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/registry/ui/dialog";
+import {
+  Dialog,
+  DialogPopup,
+  DialogPortal,
+  DialogTrigger,
+} from "@/registry/ui/dialog";
 import type { NavGroup } from "@/types";
 
 export function MobileNav({
@@ -32,22 +37,16 @@ export function MobileNav({
           </Button>
         }
       />
-
-      <DialogContent
-        showCloseButton={false}
-        className={cn(
-          "mx-0 h-[calc(100dvh-4rem)] w-screen max-w-none rounded-none border-0 p-0 top-16 translate-y-0",
-          "data-[starting-style]:!scale-100 data-[ending-style]:!scale-100",
-          "bg-background/70 backdrop-blur",
-        )}
-      >
-        <nav className="flex h-full flex-col gap-12 overflow-y-auto p-6 no-scrollbar">
-          <TreeNavigation
-            navGroups={navGroups}
-            onNavigate={() => setOpen(false)}
-          />
-        </nav>
-      </DialogContent>
+      <DialogPortal>
+        <DialogPopup className="top-16 bg-background h-[calc(100dvh-4rem)] fixed w-screen">
+          <nav className="flex h-full flex-col gap-12 overflow-y-auto p-6 no-scrollbar">
+            <TreeNavigation
+              navGroups={navGroups}
+              onNavigate={() => setOpen(false)}
+            />
+          </nav>
+        </DialogPopup>
+      </DialogPortal>
     </Dialog>
   );
 }

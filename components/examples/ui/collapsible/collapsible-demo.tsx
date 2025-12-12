@@ -6,7 +6,7 @@ import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
   Collapsible,
-  CollapsibleContent,
+  CollapsiblePanel,
   CollapsibleTrigger,
 } from "@/registry/ui/collapsible";
 
@@ -35,14 +35,14 @@ export function CollapsibleDemo() {
       <div className="rounded-md border px-4 py-2 font-mono text-sm">
         base ui components
       </div>
-      <CollapsibleContent className="flex flex-col gap-2">
+      <CollapsiblePanel className="flex flex-col gap-2">
         <div className="rounded-md border px-4 py-2 font-mono text-sm">
           @base-ui/react
         </div>
         <div className="rounded-md border px-4 py-2 font-mono text-sm">
           @lumi-ui/components
         </div>
-      </CollapsibleContent>
+      </CollapsiblePanel>
     </Collapsible>
   );
 }

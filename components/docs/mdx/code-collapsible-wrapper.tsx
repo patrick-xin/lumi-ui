@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react";
 import * as React from "react";
 import {
   Collapsible,
-  CollapsibleContent,
+  CollapsiblePanel,
   CollapsibleTrigger,
 } from "@/components/collapsible";
 import { cn } from "@/lib/utils";
@@ -40,14 +40,14 @@ export function CodeCollapsibleWrapper({
         <Separator orientation="vertical" className="mx-2 h-4" />
       </CollapsibleTrigger>
 
-      <CollapsibleContent keepMounted hidden={false} className="relative">
+      <CollapsiblePanel keepMounted hidden={false} className="relative">
         <div
           data-closed={isOpened ? undefined : ""}
           className="overflow-hidden data-[open]:h-auto data-[closed]:h-64"
         >
           {children}
         </div>
-      </CollapsibleContent>
+      </CollapsiblePanel>
       <div
         className={cn(
           "from-code/70 to-code text-muted-foreground absolute inset-x-0 -bottom-2 flex h-24 items-center justify-center bg-gradient-to-b",

@@ -10,17 +10,20 @@ function CollapsibleTrigger({ ...props }: BaseCollapsible.Trigger.Props) {
   return <BaseCollapsible.Trigger data-slot="collapsible-trigger" {...props} />;
 }
 
-function CollapsibleContent({
+function CollapsiblePanel({
   className,
   ...props
 }: BaseCollapsible.Panel.Props) {
   return (
     <BaseCollapsible.Panel
       data-slot="collapsible-content"
-      className={cn(className)}
+      className={cn(
+        "flex [&[hidden]:not([hidden='until-found'])]:hidden h-[var(--collapsible-panel-height)] flex-col justify-end overflow-hidden text-sm transition-all ease-out data-[ending-style]:h-0 data-[starting-style]:h-0 duration-150",
+        className,
+      )}
       {...props}
     />
   );
 }
 
-export { Collapsible, CollapsibleContent, CollapsibleTrigger };
+export { Collapsible, CollapsiblePanel, CollapsibleTrigger };

@@ -64,7 +64,12 @@ function DialogPopup({
   return (
     <BaseDialog.Popup
       data-slot="dialog-popup"
-      className={cn("relative bg-background p-4 sm:p-6", className)}
+      className={cn(
+        "relative bg-background p-4 sm:p-6",
+        "will-change-transform transition-all duration-150",
+        "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
+        className,
+      )}
       {...props}
     >
       {children}

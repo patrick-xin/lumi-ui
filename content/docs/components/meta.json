@@ -5,6 +5,7 @@
     "layout-nav",
     "overlays-dialogs",
     "feedback-status",
-    "display-media"
+    "display-media",
+    "misc"
   ]
 }

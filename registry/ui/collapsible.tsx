@@ -12,7 +12,7 @@ function CollapsibleTrigger({ ...props }: BaseCollapsible.Trigger.Props) {
   );
 }
 
-function CollapsibleContent({
+function CollapsiblePanel({
   className,
   ...props
 }: BaseCollapsible.Panel.Props) {
@@ -30,4 +30,4 @@ function CollapsibleContent({
   );
 }
 
-export { Collapsible, CollapsibleContent, CollapsibleTrigger };
+export { Collapsible, CollapsiblePanel, CollapsibleTrigger };

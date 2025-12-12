@@ -9,7 +9,7 @@ import { Badge } from "@/registry/ui/badge";
 import { Button } from "@/registry/ui/button";
 import {
   Collapsible,
-  CollapsibleContent,
+  CollapsiblePanel,
   CollapsibleTrigger,
 } from "@/registry/ui/collapsible";
 import { ScrollArea } from "@/registry/ui/scroll-area";
@@ -106,11 +106,11 @@ const SidebarFolder = ({
           </Button>
         }
       />
-      <CollapsibleContent>
+      <CollapsiblePanel>
         <div className="pt-1">
           <SidebarTree items={item.items} level={level + 1} />
         </div>
-      </CollapsibleContent>
+      </CollapsiblePanel>
     </Collapsible>
   );
 };
