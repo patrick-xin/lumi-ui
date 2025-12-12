@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Accordion as BaseAccordion } from "@base-ui-components/react/accordion";
+import { Accordion as BaseAccordion } from "@base-ui/react/accordion";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ChevronDownIcon, PlusIcon } from "lucide-react";
 

@@ -4,7 +4,7 @@ import {
   Toast,
   type ToastManagerAddOptions,
   type ToastManagerPromiseOptions,
-} from "@base-ui-components/react/toast";
+} from "@base-ui/react/toast";
 import type * as React from "react";
 
 export interface BaseToastData {

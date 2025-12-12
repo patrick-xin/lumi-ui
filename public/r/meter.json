@@ -5,7 +5,7 @@
   "title": "Meter",
   "description": "A graphical display of a numeric value within a range.",
   "dependencies": [
-    "@base-ui-components/react"
+    "@base-ui/react"
   ],
   "registryDependencies": [
     "utils"
@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "registry/ui/meter.tsx",
-      "content": "import * as React from \"react\";\nimport { Meter as BaseMeter } from \"@base-ui-components/react/meter\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst Meter = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseMeter.Root>) => (\n  <BaseMeter.Root\n    data-slot=\"meter\"\n    className={cn(\"relative w-full\", className)}\n    {...props}\n  />\n);\n\nconst MeterTrack = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseMeter.Track>) => (\n  <BaseMeter.Track\n    data-slot=\"meter-track\"\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-full bg-primary/20\",\n      className,\n    )}\n    {...props}\n  />\n);\n\nconst MeterIndicator = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseMeter.Indicator>) => (\n  <BaseMeter.Indicator\n    data-slot=\"meter-indicator\"\n    className={cn(\n      \"h-full flex-1 bg-primary transition-all duration-500\",\n      className,\n    )}\n    {...props}\n  />\n);\n\nconst MeterLabel = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseMeter.Label>) => (\n  <BaseMeter.Label\n    data-slot=\"meter-label\"\n    className={cn(\"text-sm font-medium leading-none\", className)}\n    {...props}\n  />\n);\n\nconst MeterValue = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseMeter.Value>) => (\n  <BaseMeter.Value\n    data-slot=\"meter-value\"\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n);\n\nexport { Meter, MeterTrack, MeterIndicator, MeterLabel, MeterValue };\n",
+      "content": "import * as React from \"react\";\nimport { Meter as BaseMeter } from \"@base-ui/react/meter\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst Meter = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseMeter.Root>) => (\n  <BaseMeter.Root\n    data-slot=\"meter\"\n    className={cn(\"relative w-full\", className)}\n    {...props}\n  />\n);\n\nconst MeterTrack = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseMeter.Track>) => (\n  <BaseMeter.Track\n    data-slot=\"meter-track\"\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-full bg-primary/20\",\n      className,\n    )}\n    {...props}\n  />\n);\n\nconst MeterIndicator = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseMeter.Indicator>) => (\n  <BaseMeter.Indicator\n    data-slot=\"meter-indicator\"\n    className={cn(\n      \"h-full flex-1 bg-primary transition-all duration-500\",\n      className,\n    )}\n    {...props}\n  />\n);\n\nconst MeterLabel = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseMeter.Label>) => (\n  <BaseMeter.Label\n    data-slot=\"meter-label\"\n    className={cn(\"text-sm font-medium leading-none\", className)}\n    {...props}\n  />\n);\n\nconst MeterValue = ({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseMeter.Value>) => (\n  <BaseMeter.Value\n    data-slot=\"meter-value\"\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n);\n\nexport { Meter, MeterTrack, MeterIndicator, MeterLabel, MeterValue };\n",
       "type": "registry:ui"
     }
   ]

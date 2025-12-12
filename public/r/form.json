@@ -5,7 +5,7 @@
   "title": "Form",
   "description": "A native form element with consolidated error handling.",
   "dependencies": [
-    "@base-ui-components/react"
+    "@base-ui/react"
   ],
   "registryDependencies": [
     "utils"
@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "registry/ui/form.tsx",
-      "content": "import * as React from \"react\"\nimport { Form as BaseForm } from \"@base-ui-components/react/form\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Form({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseForm>) {\n  return (\n    <BaseForm\n      data-slot=\"form\"\n      className={cn(\"flex flex-col gap-6\", className)}\n      {...props}\n    />\n  )\n}\n\ntype FormProps = React.ComponentProps<typeof BaseForm>\ntype FormErrors = NonNullable<FormProps[\"errors\"]>\ntype FormValues = Record<string, unknown>\n\nexport { Form }\nexport type { FormErrors, FormProps, FormValues }",
+      "content": "import * as React from \"react\"\nimport { Form as BaseForm } from \"@base-ui/react/form\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Form({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseForm>) {\n  return (\n    <BaseForm\n      data-slot=\"form\"\n      className={cn(\"flex flex-col gap-6\", className)}\n      {...props}\n    />\n  )\n}\n\ntype FormProps = React.ComponentProps<typeof BaseForm>\ntype FormErrors = NonNullable<FormProps[\"errors\"]>\ntype FormValues = Record<string, unknown>\n\nexport { Form }\nexport type { FormErrors, FormProps, FormValues }",
       "type": "registry:ui"
     }
   ]

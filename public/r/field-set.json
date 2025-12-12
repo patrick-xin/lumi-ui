@@ -5,7 +5,7 @@
   "title": "Field Set",
   "description": "A native fieldset element with an easily stylable legend.",
   "dependencies": [
-    "@base-ui-components/react"
+    "@base-ui/react"
   ],
   "registryDependencies": [
     "utils"
@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "registry/ui/field-set.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Fieldset as BaseFieldset } from \"@base-ui-components/react/fieldset\"\n\nimport { cn } from \"@/lib/utils\"\nimport { cva, VariantProps } from \"class-variance-authority\"\n\nfunction Fieldset({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseFieldset.Root>) {\n  return (\n    <BaseFieldset.Root\n      data-slot=\"fieldset\"\n      className={cn(\"flex flex-col gap-4\", className)}\n      {...props}\n    />\n  )\n}\n\nconst fieldsetLegendVariants = cva(\n  \"text-foreground leading-none font-medium\",\n  {\n    variants: {\n      variant: {\n        legend: \"text-base\",\n        label: \"text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"legend\",\n    },\n  }\n)\n\ntype FieldsetLegendProps = React.ComponentProps<typeof BaseFieldset.Legend> &\n  VariantProps<typeof fieldsetLegendVariants>\n\nfunction FieldsetLegend({\n  className,\n  variant,\n  ...props\n}: FieldsetLegendProps) {\n  return (\n    <BaseFieldset.Legend\n      data-slot=\"fieldset-legend\"\n      className={cn(fieldsetLegendVariants({ variant }), className)}\n      {...props}\n    />\n  )\n}\n\nfunction FieldsetDescription({\n  className,\n  ...props\n}: React.ComponentProps<\"p\">) {\n  return (\n    <p\n      data-slot=\"fieldset-description\"\n      className={cn(\"-mt-4 text-sm text-muted-foreground\", className)}\n      {...props}\n    />\n  )\n}\n\nexport {\n  Fieldset,\n  FieldsetDescription,\n  FieldsetLegend,\n}",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Fieldset as BaseFieldset } from \"@base-ui/react/fieldset\"\n\nimport { cn } from \"@/lib/utils\"\nimport { cva, VariantProps } from \"class-variance-authority\"\n\nfunction Fieldset({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseFieldset.Root>) {\n  return (\n    <BaseFieldset.Root\n      data-slot=\"fieldset\"\n      className={cn(\"flex flex-col gap-4\", className)}\n      {...props}\n    />\n  )\n}\n\nconst fieldsetLegendVariants = cva(\n  \"text-foreground leading-none font-medium\",\n  {\n    variants: {\n      variant: {\n        legend: \"text-base\",\n        label: \"text-sm\",\n      },\n    },\n    defaultVariants: {\n      variant: \"legend\",\n    },\n  }\n)\n\ntype FieldsetLegendProps = React.ComponentProps<typeof BaseFieldset.Legend> &\n  VariantProps<typeof fieldsetLegendVariants>\n\nfunction FieldsetLegend({\n  className,\n  variant,\n  ...props\n}: FieldsetLegendProps) {\n  return (\n    <BaseFieldset.Legend\n      data-slot=\"fieldset-legend\"\n      className={cn(fieldsetLegendVariants({ variant }), className)}\n      {...props}\n    />\n  )\n}\n\nfunction FieldsetDescription({\n  className,\n  ...props\n}: React.ComponentProps<\"p\">) {\n  return (\n    <p\n      data-slot=\"fieldset-description\"\n      className={cn(\"-mt-4 text-sm text-muted-foreground\", className)}\n      {...props}\n    />\n  )\n}\n\nexport {\n  Fieldset,\n  FieldsetDescription,\n  FieldsetLegend,\n}",
       "type": "registry:ui"
     }
   ]

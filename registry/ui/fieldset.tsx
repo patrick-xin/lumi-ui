@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Fieldset as BaseFieldset } from "@base-ui-components/react/fieldset"
+import { Fieldset as BaseFieldset } from "@base-ui/react/fieldset"
 import { cva, VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"

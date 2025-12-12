@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Form as BaseForm } from "@base-ui-components/react/form"
+import { Form as BaseForm } from "@base-ui/react/form"
 
 import { cn } from "@/lib/utils"
 

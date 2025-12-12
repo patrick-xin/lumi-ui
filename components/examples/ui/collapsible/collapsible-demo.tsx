@@ -37,7 +37,7 @@ export function CollapsibleDemo() {
       </div>
       <CollapsibleContent className="flex flex-col gap-2">
         <div className="rounded-md border px-4 py-2 font-mono text-sm">
-          @base-ui-components/react
+          @base-ui/react
         </div>
         <div className="rounded-md border px-4 py-2 font-mono text-sm">
           @lumi-ui/components

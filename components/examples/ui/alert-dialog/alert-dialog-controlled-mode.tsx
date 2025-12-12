@@ -1,6 +1,6 @@
 "use client";
 
-import type { AlertDialogRootChangeEventDetails } from "@base-ui-components/react";
+import type { AlertDialogRootChangeEventDetails } from "@base-ui/react";
 import * as React from "react";
 import {
   AlertDialog,

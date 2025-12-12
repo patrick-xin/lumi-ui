@@ -4,7 +4,7 @@
   "title": "Base Style",
   "author": "@lumi-ui",
   "dependencies": [
-    "@base-ui-components/react", 
+    "@base-ui/react", 
     "lucide-react",
     "class-variance-authority",
     "clsx",

@@ -32,7 +32,7 @@ export const components: ComponentRegistry = {
     name: "accordion",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority","lucide-react"],
+    registryDependencies: ["@base-ui/react","class-variance-authority","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/accordion.tsx",
@@ -52,7 +52,7 @@ export const components: ComponentRegistry = {
     name: "avatar",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/avatar.tsx",
@@ -72,7 +72,7 @@ export const components: ComponentRegistry = {
     name: "alert-dialog",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/alert-dialog.tsx",
@@ -92,7 +92,7 @@ export const components: ComponentRegistry = {
     name: "dialog",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority","lucide-react"],
+    registryDependencies: ["@base-ui/react","class-variance-authority","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/dialog.tsx",
@@ -112,7 +112,7 @@ export const components: ComponentRegistry = {
     name: "tabs",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/tabs.tsx",
@@ -132,7 +132,7 @@ export const components: ComponentRegistry = {
     name: "scroll-area",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/scroll-area.tsx",
@@ -152,7 +152,7 @@ export const components: ComponentRegistry = {
     name: "popover",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/popover.tsx",
@@ -172,7 +172,7 @@ export const components: ComponentRegistry = {
     name: "dropdown-menu",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react"],
+    registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/dropdown-menu.tsx",
@@ -192,7 +192,7 @@ export const components: ComponentRegistry = {
     name: "autocomplete",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react"],
+    registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/autocomplete.tsx",
@@ -212,7 +212,7 @@ export const components: ComponentRegistry = {
     name: "input",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/input.tsx",
@@ -232,7 +232,7 @@ export const components: ComponentRegistry = {
     name: "button",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/button.tsx",
@@ -252,7 +252,7 @@ export const components: ComponentRegistry = {
     name: "checkbox",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react"],
+    registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/checkbox.tsx",
@@ -272,7 +272,7 @@ export const components: ComponentRegistry = {
     name: "switch",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/switch.tsx",
@@ -292,7 +292,7 @@ export const components: ComponentRegistry = {
     name: "select",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react"],
+    registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/select.tsx",
@@ -312,7 +312,7 @@ export const components: ComponentRegistry = {
     name: "navigation-menu",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/navigation-menu.tsx",
@@ -372,7 +372,7 @@ export const components: ComponentRegistry = {
     name: "preview-card",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/preview-card.tsx",
@@ -392,7 +392,7 @@ export const components: ComponentRegistry = {
     name: "progress",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/progress.tsx",
@@ -412,7 +412,7 @@ export const components: ComponentRegistry = {
     name: "field",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/field.tsx",
@@ -432,7 +432,7 @@ export const components: ComponentRegistry = {
     name: "fieldset",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/fieldset.tsx",
@@ -452,7 +452,7 @@ export const components: ComponentRegistry = {
     name: "form",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/form.tsx",
@@ -472,7 +472,7 @@ export const components: ComponentRegistry = {
     name: "radio-group",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react"],
+    registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/radio-group.tsx",
@@ -492,7 +492,7 @@ export const components: ComponentRegistry = {
     name: "tooltip",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/tooltip.tsx",
@@ -512,7 +512,7 @@ export const components: ComponentRegistry = {
     name: "toggle",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/toggle.tsx",
@@ -532,7 +532,7 @@ export const components: ComponentRegistry = {
     name: "toggle-group",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/toggle-group.tsx",
@@ -552,7 +552,7 @@ export const components: ComponentRegistry = {
     name: "toast",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/toast.tsx",
@@ -572,7 +572,7 @@ export const components: ComponentRegistry = {
     name: "toaster",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/toast.tsx",
@@ -592,7 +592,7 @@ export const components: ComponentRegistry = {
     name: "checkbox-group",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/checkbox-group.tsx",
@@ -612,7 +612,7 @@ export const components: ComponentRegistry = {
     name: "slider",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/slider.tsx",
@@ -632,7 +632,7 @@ export const components: ComponentRegistry = {
     name: "separator",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/separator.tsx",
@@ -652,7 +652,7 @@ export const components: ComponentRegistry = {
     name: "number-field",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react"],
+    registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/number-field.tsx",
@@ -672,7 +672,7 @@ export const components: ComponentRegistry = {
     name: "meter",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react"],
+    registryDependencies: ["@base-ui/react"],
     files:     [
           {
                 "path": "registry/ui/meter.tsx",
@@ -692,7 +692,7 @@ export const components: ComponentRegistry = {
     name: "toolbar",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","class-variance-authority"],
+    registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
                 "path": "registry/ui/toolbar.tsx",
@@ -712,7 +712,7 @@ export const components: ComponentRegistry = {
     name: "context-menu",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react"],
+    registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/context-menu.tsx",
@@ -732,7 +732,7 @@ export const components: ComponentRegistry = {
     name: "combobox",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react"],
+    registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/combobox.tsx",
@@ -752,7 +752,7 @@ export const components: ComponentRegistry = {
     name: "menubar",
     description: "",
     type: "registry:ui",
-    registryDependencies: ["@base-ui-components/react","lucide-react"],
+    registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
                 "path": "registry/ui/menubar.tsx",

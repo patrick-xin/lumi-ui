@@ -1,6 +1,6 @@
 "use client";
 
-import type { DialogRootChangeEventDetails } from "@base-ui-components/react";
+import type { DialogRootChangeEventDetails } from "@base-ui/react";
 import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
