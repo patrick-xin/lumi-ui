@@ -1,0 +1,76 @@
+"use client";
+
+import { Collapsible } from "@base-ui/react/collapsible";
+import { ChevronDown } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import type * as React from "react";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/registry/ui/button";
+import { Separator } from "@/registry/ui/separator";
+
+export function CodeCollapsibleWrapper({
+  className,
+  children,
+  ...props
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Collapsible.Root
+      render={(renderProps, state) => (
+        <div
+          {...renderProps}
+          className={cn("group/collapsible relative", className)}
+          {...props}
+        >
+          <div className="absolute top-1 right-8 z-10 flex items-center">
+            <Collapsible.Trigger
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "sm" }),
+                "text-muted-foreground text-xs",
+              )}
+            >
+              {state.open ? "Collapse" : "Expand"}
+            </Collapsible.Trigger>
+            <Separator className="mx-1.5 h-5" orientation="vertical" />
+          </div>
+          <Collapsible.Panel
+            keepMounted
+            render={
+              <motion.div
+                hidden={false}
+                initial={false}
+                animate={{ height: state.open ? "auto" : 256 }}
+                transition={{ ease: [0.16, 1, 0.3, 1] }}
+                className="relative mt-6 h-full overflow-hidden [&>figure]:mt-0 [&>figure]:md:mx-0"
+              >
+                {children}
+
+                <AnimatePresence>
+                  {!state.open && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="text-muted-foreground absolute inset-x-0 -bottom-2 flex h-24 items-center justify-center bg-gradient-to-b from-code/70 to-code"
+                    >
+                      <Collapsible.Trigger
+                        className={buttonVariants({
+                          variant: "secondary",
+                          size: "icon-sm",
+                        })}
+                      >
+                        <ChevronDown />
+                      </Collapsible.Trigger>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            }
+          />
+        </div>
+      )}
+    />
+  );
+}
