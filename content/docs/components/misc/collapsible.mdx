@@ -51,3 +51,100 @@ import {
   </CollapsiblePanel>
 </Collapsible>
 ```
+
+## Cookbook
+
+### Usage with Motion
+
+<ComponentPreview name="collapsible-with-motion" />
+
+### File Tree
+
+<ComponentPreview name="collapsible-file-tree" />
+
+## API Reference
+
+| Component | Description |
+| :--- | :--- |
+| [`Collapsible`](https://base-ui.com/react/components/collapsible#root) | Groups all parts of the collapsible. Renders a `<div>` element. |
+| [`CollapsibleTrigger`](https://base-ui.com/react/components/collapsible#trigger) | A button that opens and closes the collapsible panel. Renders a `<button>` element. |
+| [`CollapsiblePanel`](https://base-ui.com/react/components/collapsible#panel) | A panel with the collapsible contents. Renders a `<div>` element. |
+
+### CollapsiblePanel
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `animation` | `"css"` \| `"none"` | `"css"` | Controls default animation of the collapsible panel. |
+
+<Callout title="Info" variant="info">
+Use `animation="none"` on `<CollapsiblePanel />` to disable the default animation. Useful when using motion library or implementing custom animation.
+</Callout>
+
+## Migration Guide
+
+### Trigger Composition (render prop)
+
+Radix UI uses the `asChild` pattern to merge the trigger logic with a child element. Base UI uses the `render` prop for changing HTML tags or using custom triggers.
+
+```tsx
+// Before:
+<CollapsibleTrigger asChild>
+  <Button>Open</Button>
+</CollapsibleTrigger>
+
+// After:
+<CollapsibleTrigger render={<Button>Open</Button>} />
+```
+
+<Callout variant="warning" title="Warning">
+Switch to using the `render` prop instead of `asChild`.
+</Callout>
+
+### Example
+
+<Tabs defaultValue="shadcn/ui">
+  <TabsList>
+    <TabsTab value="shadcn/ui">shadcn/ui</TabsTab>
+    <TabsTab value="lumi/ui">lumi/ui</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="shadcn/ui">
+    ```tsx title="collapsible-demo.tsx"
+    import {
+      Collapsible,
+      CollapsibleContent,
+      CollapsibleTrigger,
+    } from "@/components/ui/collapsible"
+    
+    <Collapsible>
+      <CollapsibleTrigger asChild>
+        <Button variant="outline">Open</Button>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div>
+          {/* Content */}
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  ```
+  </TabsPanel>
+
+  <TabsPanel value="lumi/ui">
+  ```tsx title="collapsible-demo.tsx" {3, 8-9, 13}
+  import {
+    Collapsible,
+    CollapsiblePanel,
+    CollapsibleTrigger,
+  } from "@/components/ui/collapsible"
+
+<Collapsible>
+    <CollapsibleTrigger render={<Button variant="outline">Open</Button>} />
+    <CollapsiblePanel>
+      <div>
+        {/* Content */}
+      </div>
+    </CollapsiblePanel>
+</Collapsible>
+  ```
+  </TabsPanel>
+</Tabs>

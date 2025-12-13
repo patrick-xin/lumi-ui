@@ -1,48 +1,38 @@
-"use client";
-
-import { ChevronsUpDown } from "lucide-react";
-import * as React from "react";
-
-import { Button } from "@/registry/ui/button";
+import type * as React from "react";
 import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleTrigger,
 } from "@/registry/ui/collapsible";
+import { Button } from "../../../../registry/ui/button";
 
-export function CollapsibleDemo() {
-  const [isOpen, setIsOpen] = React.useState(false);
-
+export default function ExampleCollapsible() {
   return (
-    <Collapsible
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      className="flex w-[350px] flex-col gap-2"
-    >
-      <div className="flex items-center justify-between gap-4 px-4">
-        <h4 className="text-sm font-semibold">
-          @peduarte starred 3 repositories
-        </h4>
-        <CollapsibleTrigger
-          render={
-            <Button variant="ghost" size="icon" className="size-8">
-              <ChevronsUpDown />
-              <span className="sr-only">Toggle</span>
-            </Button>
-          }
-        />
-      </div>
-      <div className="rounded-md border px-4 py-2 font-mono text-sm">
-        base ui components
-      </div>
-      <CollapsiblePanel className="flex flex-col gap-2">
-        <div className="rounded-md border px-4 py-2 font-mono text-sm">
-          @base-ui/react
-        </div>
-        <div className="rounded-md border px-4 py-2 font-mono text-sm">
-          @lumi-ui/components
+    <Collapsible className="flex min-h-36 w-56 flex-col justify-center">
+      <CollapsibleTrigger
+        render={
+          <Button className="group justify-start">
+            <ChevronIcon className="size-3 transition-all ease-out group-data-panel-open:rotate-90" />
+            Recovery keys
+          </Button>
+        }
+      />
+
+      <CollapsiblePanel>
+        <div className="flex flex-col gap-2 mt-2 rounded-md bg-accent/30 py-2 pl-4">
+          <div>alien-bean-pasta</div>
+          <div>wild-irish-burrito</div>
+          <div>horse-battery-staple</div>
         </div>
       </CollapsiblePanel>
     </Collapsible>
+  );
+}
+
+export function ChevronIcon(props: React.ComponentProps<"svg">) {
+  return (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" {...props}>
+      <path d="M3.5 9L7.5 5L3.5 1" stroke="currentcolor" />
+    </svg>
   );
 }

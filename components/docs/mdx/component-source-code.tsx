@@ -4,7 +4,7 @@ import { rewriteRegistryImports } from "@/lib/rewrite-imports";
 import { components } from "@/registry/__index__";
 import type { RegistryName } from "@/registry/__registry";
 import { CodeBlock } from "./code-block";
-import { CodeCollapsibleWrapper } from "./code-collapsible-wrapper";
+import { CodeCollapsibleWrapper } from "./collapsible-wrapper";
 
 export async function ComponentSourceCode({
   name,

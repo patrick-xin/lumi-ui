@@ -1596,6 +1596,42 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "collapsible-file-tree": {
+    name: "collapsible-file-tree",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["collapsible"],
+    files: [{
+      path: "components/examples/ui/collapsible/collapsible-file-tree.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/collapsible/collapsible-file-tree");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "collapsible-file-tree";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "collapsible-with-motion": {
+    name: "collapsible-with-motion",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["collapsible"],
+    files: [{
+      path: "components/examples/ui/collapsible/collapsible-with-motion.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/collapsible/collapsible-with-motion");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "collapsible-with-motion";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "combobox-creatable": {
     name: "combobox-creatable",
     description: "",
