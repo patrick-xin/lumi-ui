@@ -6,10 +6,10 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-function Select({
-  ...props
-}: React.ComponentProps<typeof BaseSelect.Root>) {
-  return <BaseSelect.Root data-slot="select" {...props} />
+function Select<Value, Multiple extends boolean | undefined = false>(
+  props: BaseSelect.Root.Props<Value, Multiple>,
+): React.JSX.Element {
+  return <BaseSelect.Root {...props} />;
 }
 
 function SelectGroup({

@@ -199,17 +199,17 @@ To implement this, both dialogs should be controlled. The confirmation dialog ma
 
 <ComponentPreview name="dialog-close-confirmation" />
 
-### Outside scroll dialog
-
-The dialog can be made scrollable by using `<DialogViewport>` as an outer scrollable container for `<DialogPopup>` while the popup can extend past the bottom edge. The scrollable area uses the `Scroll Area` component to provide custom scrollbars.
-
-<ComponentPreview name="dialog-outside-scroll" />
-
 ### Inside scroll dialog
 
 Use `<DialogScrollArea>` inside `<DialogContent>` to make an inner container scrollable while the popup stays fully on screen.
 
 <ComponentPreview name="dialog-with-scroll-area" />
+
+### Outside scroll dialog
+
+The dialog can be made scrollable by using `<DialogViewport>` as an outer scrollable container for `<DialogPopup>` while the popup can extend past the bottom edge. The scrollable area uses the `Scroll Area` component to provide custom scrollbars.
+
+<ComponentPreview name="dialog-outside-scroll" />
 
 ### Placing elements outside the popup
 When adding elements that should appear “outside” the colored popup area, continue to place them inside `<DialogPopup>`, but create a child element that has the popup styles. This ensures they are kept in the tab order and announced correctly by screen readers.
