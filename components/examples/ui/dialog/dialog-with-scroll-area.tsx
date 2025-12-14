@@ -8,16 +8,16 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogScrollArea,
   DialogTitle,
   DialogTrigger,
 } from "@/registry/ui/dialog";
-import { ScrollArea } from "@/registry/ui/scroll-area";
 
 export default function InsideScrollDialog() {
   return (
     <Dialog>
       <DialogTrigger render={<Button>Open dialog</Button>} />
-      <DialogContent className="flex flex-col max-w-2xl">
+      <DialogContent className="flex flex-col max-w-3xl!">
         <DialogHeader>
           <DialogTitle>Dialog</DialogTitle>
           <DialogDescription>
@@ -25,7 +25,7 @@ export default function InsideScrollDialog() {
             content to scroll.
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="flex-1 min-h-0 w-full pr-4">
+        <DialogScrollArea>
           <div className="flex flex-col gap-6">
             {Array.from({ length: 12 }).map((_, i) => (
               <div
@@ -36,7 +36,7 @@ export default function InsideScrollDialog() {
               </div>
             ))}
           </div>
-        </ScrollArea>
+        </DialogScrollArea>
         <DialogFooter>
           <DialogClose render={<Button>Close</Button>} />
         </DialogFooter>

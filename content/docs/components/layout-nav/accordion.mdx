@@ -37,10 +37,9 @@ links:
 ```tsx
 import {
   Accordion,
-  AccordionHeader,
   AccordionItem,
   AccordionPanel,
-  AccordionTrigger,
+  AccordionSummary,
 } from "@/components/ui/accordion";
 ```
 
@@ -49,27 +48,14 @@ export function AccordionDemo() {
   return (
     <Accordion defaultValue={["item-1"]} className="w-full max-w-md">
       <AccordionItem value="item-1">
-        <AccordionHeader>
-          <AccordionTrigger>What is Lumi UI?</AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>What is Lumi UI?</AccordionSummary>
         <AccordionPanel>
           Lumi UI is an open-source component library designed for building
           beautiful and accessible user interfaces with React.
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionHeader>
-          <AccordionTrigger>What is tech stack?</AccordionTrigger>
-        </AccordionHeader>
-        <AccordionPanel>
-          Lumi is built on top of Base UI and Tailwind CSS, providing a solid
-          foundation of accessibility and reliability.
-        </AccordionPanel>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionHeader>
-          <AccordionTrigger>Can I customize the components?</AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>Can I customize the components?</AccordionSummary>
         <AccordionPanel>
           Absolutely. Components are built with Tailwind CSS and CVA, making
           them easy to style and extend to match your brand.
@@ -80,21 +66,48 @@ export function AccordionDemo() {
 }
 ```
 
-## Variants
+## Anatomy
 
-### Underline (default)
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
 
-<ComponentPreview name="accordion-demo" />
+  <TabsPanel value="common">
+```tsx
+<Accordion>
+  <AccordionItem>
+    <AccordionSummary/>
+    <AccordionPanel/>
+  </AccordionItem>
+</Accordion>
+```
+  </TabsPanel>
 
-### Contained
+  <TabsPanel value="primitive">
+```tsx
+<Accordion>
+  <AccordionItem>
+    <AccordionHeader>
+      <AccordionTrigger/>
+    </AccordionHeader>
+    <AccordionPanel/>
+  </AccordionItem>
+</Accordion>
+```
+  </TabsPanel>
+</Tabs>
 
-<ComponentPreview name="accordion-contained" />
+## Cookbook
 
-### Outline
+### Custom Trigger with icon
 
-<ComponentPreview name="accordion-outline" />
+<ComponentPreview name="accordion-custom-trigger-icon" />
 
-## Recipes
+### Custom Trigger without icon
+
+<ComponentPreview name="accordion-custom-trigger-without-icon" />
 
 ### Default Open Panels
 
@@ -118,46 +131,57 @@ Pass `disabled` props to `AccordionItem` to disable a panel.
 
 <ComponentPreview name="accordion-disabled" />
 
-## Anatomy
+### Usage with Motion
 
-```tsx
- <Accordion>
-  <AccordionItem>
-    <AccordionHeader>
-      <AccordionTrigger/>
-    </AccordionHeader>
-    <AccordionPanel/>
-  </AccordionItem>
- </Accordion>
-```
+Base UI spreads its `className` (including transition styles) onto 
+your custom component via the `render` prop. This causes both CSS and JS 
+animations to run simultaneously, resulting in janky behavior.
 
-| Component | Role
+<Callout variant="info" title="Important">
+  When using `render` with animation libraries like Motion, you can set 
+  `animation="none"` to reset default css transitions and prevent conflicts between CSS transitions and JavaScript animations.
+</Callout>
+
+<ComponentPreview name="accordion-motion" />
+
+
+## API Reference
+
+| Component | Description
 | :--- | :--- |
-| `Accordion`  | The root component that provides context and controls the accordion's behavior and variants.
-| `AccordionItem`  | A wrapper for each individual collapsible section, uniquely identified by a `value` prop.
-| `AccordionHeader`  | A required wrapper for the `AccordionTrigger` that renders as the `h3`.
-| `AccordionTrigger`  | The `button` element that the user clicks to toggle the collapsed state of an `AccordionPanel`.
-| `AccordionPanel`  | The component that wraps the content to be shown or hidden.
+| [`Accordion`](https://base-ui.com/react/components/accordion#accordion)  | Groups all parts of the accordion. Renders a `<div>` element.
+| [`AccordionItem`](https://base-ui.com/react/components/accordion#accordionitem)  | Groups an accordion header with the corresponding panel. Renders a `<div>` element.
+| [`AccordionHeader`](https://base-ui.com/react/components/accordion#accordionheader)  | A heading that labels the corresponding panel. Renders an `<h3>` element.
+| [`AccordionTrigger`](https://base-ui.com/react/components/accordion#accordiontrigger)  | A button that opens and closes the corresponding panel. Renders a `<button>` element.
+| [`AccordionPanel`](https://base-ui.com/react/components/accordion#accordionpanel)  | A collapsible panel with the accordion item contents. Renders a `<div>` element.
+| `AccordionSummary` | Styled container that wraps the `AccordionHeader` and `AccordionTrigger`.
+
+### AccordionPanel
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `animation` | `"css"` \| `"none"` | `"css"` | Controls default animation of the accordion panel. |
 
 
-## Migration from shadcn/ui
+## Migration Guide
+
+### Props changes
+
+| Component | Base UI Prop | Radix UI Prop |
+| :--- | :--- | :--- |
+| Accordion | `multiple` (default: `false`) |  `"single"` or `"multiple"`
+| Accordion | - | `collapsible`
+| AccordionItem | `defaultValue` (any []) | `defaultValue` (string)
 
 ### Component Naming & Structure
 
-The Accordion component has been updated for better structural clarity and a more intuitive API for controlling behavior.
+Similar `AccordionTrigger` in shadcn, `AccordionSummary` explicitly wraps `AccordionTrigger` and `AccordionHeader`.
 
-| shadcn/ui | lumi/ui | Change
-| :--- | :--- | :--- |
-| `AccordionTrigger`  | `AccordionHeader > AccordionTrigger` | `AccordionTrigger` is now explicitly wrapped by `AccordionHeader`.
-| `AccordionContent`  | `AccordionPanel` | Renamed
+`AccordionContent` is renamed to `AccordionPanel`.
 
-### Key Differences & New Features
-
-| Feature | lumi/ui | shadcn/ui
-| :--- | :--- | :--- |
-| Behavior Control  | `multiple` prop (defaults to true) | `type` prop ("single" or "multiple")
-| Styling Variants  | `variant` prop (`underline`, `contained`, `outline`) | customized with className
-| Structure  | Requires explicit `<AccordionHeader>` wrapper | `<AccordionTrigger>` implicitly contains a header
+<Callout variant="success" title="Tip">
+  lumi/ui export all primitive components, making it easier to customize the components than fits your design.
+</Callout>
 
 
 ### Migration Example
@@ -193,27 +217,30 @@ The Accordion component has been updated for better structural clarity and a mor
   </TabsPanel>
 
   <TabsPanel value="lumi/ui">
-  ```tsx title="demo-tabs.tsx" showLineNumbers {4,6,12,15,17,18,20}
+  ```tsx title="demo-tabs.tsx" showLineNumbers {4,5,11-12,15,18}
   import {
     Accordion,
     AccordionItem,
-    AccordionHeader,   // New import
-    AccordionTrigger,
-    AccordionPanel,    // Renamed from AccordionContent
+    AccordionSummary,
+    AccordionPanel,
   } from "@/registry/ui/accordion";
 
   function Demo() {
     return (
       <Accordion 
         multiple // Same as type="single"
+        defaultValue={["item-1", "item-2"]}
       > 
-        <AccordionItem>
-          <AccordionHeader>
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
-          </AccordionHeader>
+        <AccordionItem value="item-1">
+          <AccordionSummary>
+            Is it accessible?
+          </AccordionSummary>
           <AccordionPanel>
             Yes. It adheres to the WAI-ARIA design pattern.
           </AccordionPanel>
+        </AccordionItem>
+        <AccordionItem value="item-2">
+          {...}
         </AccordionItem>
       </Accordion>
     );
@@ -221,4 +248,6 @@ The Accordion component has been updated for better structural clarity and a mor
   ```
   </TabsPanel>
 </Tabs>
+
+
 

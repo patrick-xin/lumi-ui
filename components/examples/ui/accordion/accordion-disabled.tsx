@@ -2,37 +2,30 @@
 
 import {
   Accordion,
-  AccordionHeader,
   AccordionItem,
   AccordionPanel,
-  AccordionTrigger,
+  AccordionSummary,
 } from "@/registry/ui/accordion";
 
-export function AccordionDisabled() {
+export function AccordionDisabledDemo() {
   return (
-    <Accordion variant="outline" className="w-full max-w-md">
+    <Accordion className="w-full max-w-md">
       <AccordionItem>
-        <AccordionHeader>
-          <AccordionTrigger>What is accordion?</AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>What is accordion?</AccordionSummary>
         <AccordionPanel>
-          A collapsible component that organizes content into expandable
-          sections.
+          <div className="w-full h-12 bg-accent/30 rounded-md" />
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem>
-        <AccordionHeader>
-          <AccordionTrigger>Is it customizable?</AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>Is it customizable?</AccordionSummary>
         <AccordionPanel>
-          Yes. You can style it with tailwind classes to match your design
-          system.
+          <div className="w-full h-12 bg-accent/30 rounded-md" />
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem disabled>
-        <AccordionHeader>
-          <AccordionTrigger>Can it be disabled?</AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>
+          <div className="w-full h-12 bg-accent/30 rounded-md" />
+        </AccordionSummary>
       </AccordionItem>
     </Accordion>
   );

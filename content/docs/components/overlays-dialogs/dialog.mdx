@@ -85,7 +85,8 @@ export function DialogDemo() {
     <DialogHeader>     
       <DialogTitle />     
       <DialogDescription />     
-    </DialogHeader>     
+    </DialogHeader>
+    <DialogScrollArea />     
     <DialogFooter>     
       <DialogClose />     
     </DialogFooter>   
@@ -206,9 +207,9 @@ The dialog can be made scrollable by using `<DialogViewport>` as an outer scroll
 
 ### Inside scroll dialog
 
-The dialog can be made scrollable by making an inner container scrollable while the popup stays fully on screen. `<DialogViewport>` is used as a positioning container for `<DialogPopup>`, while an inner scrollable area is created using the `Scroll Area` component.
+Use `<DialogScrollArea>` inside `<DialogContent>` to make an inner container scrollable while the popup stays fully on screen.
 
-<ComponentPreview name="dialog-inside-scroll" />
+<ComponentPreview name="dialog-with-scroll-area" />
 
 ### Placing elements outside the popup
 When adding elements that should appear “outside” the colored popup area, continue to place them inside `<DialogPopup>`, but create a child element that has the popup styles. This ensures they are kept in the tab order and announced correctly by screen readers.
@@ -268,7 +269,6 @@ Note that there is no separate onTriggerIdChange prop. Instead, the onOpenChange
 
 <ComponentPreview name="dialog-controlled-mode-with-multiple-triggers" />
 
-
 ## API Reference
 
 | Component | Description |
@@ -282,6 +282,7 @@ Note that there is no separate onTriggerIdChange prop. Instead, the onOpenChange
 | `DialogContent` | Pre-assembled component that wraps `DialogPortal`, `DialogBackdrop`, `DialogViewport`, and `DialogPopup` with default styles. |
 | `DialogHeader` | Styled container for convenience purpose. |
 | `DialogFooter` | Styled container for convenience purpose. |
+| `DialogScrollArea` | Scrollable container for the dialog contents. Renders [`<ScrollArea>`](https://www.lumiui.dev/docs/components/layout-nav/scroll-area).
 | [`DialogTitle`](https://base-ui.com/react/components/dialog#title) | A heading that labels the dialog. Renders an `<h2>` element. |
 | [`DialogDescription`](https://base-ui.com/react/components/dialog#description) | A paragraph with additional information about the dialog. Renders a `<p>` element. |
 | [`DialogClose`](https://base-ui.com/react/components/dialog#close) | A button that closes the dialog. Renders a `<button>` element.|

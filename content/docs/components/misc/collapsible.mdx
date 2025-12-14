@@ -52,6 +52,15 @@ import {
 </Collapsible>
 ```
 
+### Anatomy
+
+```tsx
+<Collapsible>
+  <CollapsibleTrigger/>
+  <CollapsiblePanel/>
+</Collapsible>
+```
+
 ## Cookbook
 
 ### Usage with Motion
@@ -76,9 +85,17 @@ import {
 | :--- | :--- | :--- | :--- |
 | `animation` | `"css"` \| `"none"` | `"css"` | Controls default animation of the collapsible panel. |
 
-<Callout title="Info" variant="info">
-Use `animation="none"` on `<CollapsiblePanel />` to disable the default animation. Useful when using motion library or implementing custom animation.
+### Usage with Motion
+
+Base UI spreads its `className` (including transition styles) onto 
+your custom component via the `render` prop. This causes both CSS and JS 
+animations to run simultaneously, resulting in janky behavior.
+
+<Callout variant="info" title="Important">
+  When using `render` with animation libraries like Motion, you can set 
+  `animation="none"` to reset default css transitions and prevent conflicts between CSS transitions and JavaScript animations.
 </Callout>
+
 
 ## Migration Guide
 
@@ -148,3 +165,6 @@ Switch to using the `render` prop instead of `asChild`.
   ```
   </TabsPanel>
 </Tabs>
+
+
+
