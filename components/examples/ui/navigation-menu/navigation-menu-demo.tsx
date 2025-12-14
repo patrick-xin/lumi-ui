@@ -66,15 +66,15 @@ export function NavigationMenuDemo() {
                   href="/"
                 >
                   <div className="mb-2 text-lg font-medium sm:mt-4">
-                    shadcn/ui
+                    Lumi UI
                   </div>
                   <p className="text-muted-foreground text-sm leading-tight">
-                    Beautifully designed components built with Tailwind CSS.
+                    Optimized for Agents. Built for Humans.
                   </p>
                 </NavigationMenuLink>
               </li>
               <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
+                Re-usable components built using Base UI and Tailwind CSS.
               </ListItem>
               <ListItem href="/docs/installation" title="Installation">
                 How to install dependencies and structure your app.
