@@ -13,19 +13,22 @@ export default function AccordionDemo() {
       <AccordionItem value="item-1">
         <AccordionSummary>Item 1</AccordionSummary>
         <AccordionPanel>
-          <div className="w-full h-12 bg-accent/30 rounded-md" />
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt,
+          repellendus?
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionSummary>Item 2</AccordionSummary>
         <AccordionPanel>
-          <div className="w-full h-12 bg-accent/30 rounded-md" />
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt,
+          repellendus?
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem value="item-3">
         <AccordionSummary>Item 3</AccordionSummary>
         <AccordionPanel>
-          <div className="w-full h-12 bg-accent/30 rounded-md" />
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt,
+          repellendus?
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

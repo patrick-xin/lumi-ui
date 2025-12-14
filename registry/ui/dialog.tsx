@@ -5,6 +5,7 @@ import { Dialog as BaseDialog } from "@base-ui/react";
 import { XIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { ScrollArea } from "./scroll-area";
 
 function Dialog<Payload>({
   ...props
@@ -183,6 +184,19 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+function DialogScrollArea({ className, ...props }: React.ComponentProps<typeof ScrollArea>) {
+  return (
+    <ScrollArea
+      data-slot="dialog-scroll-area"
+      className={cn(
+        "flex-1 min-h-0 w-full pr-4",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
 const createDialogHandle = BaseDialog.createHandle;
 
 export {
@@ -198,6 +212,7 @@ export {
   DialogTitle,
   DialogTrigger,
   DialogViewport,
+  DialogScrollArea,
   // Pre-assembled component
   DialogContent,
 };

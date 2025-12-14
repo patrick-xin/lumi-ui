@@ -38,7 +38,7 @@ export function AccordionCustomTriggerWithoutIconDemo() {
             </AccordionTrigger>
           </AccordionHeader>
           <AccordionPanel className="py-2 px-4 bg-background">
-            <div className="w-full h-12 rounded-md" />
+            {item.label}
           </AccordionPanel>
         </AccordionItem>
       ))}

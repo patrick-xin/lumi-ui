@@ -45,8 +45,9 @@ export function AccordionCustomTriggerIconDemo() {
               <Plus className="size-4" />
             </AccordionTrigger>
           </AccordionHeader>
-          <AccordionPanel className="py-2">
-            <div className="w-full h-12 bg-accent/30 rounded-md" />
+          <AccordionPanel className="py-2 px-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt,
+            repellendus?
           </AccordionPanel>
         </AccordionItem>
       ))}

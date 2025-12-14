@@ -1848,24 +1848,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "dialog-inside-scroll": {
-    name: "dialog-inside-scroll",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["dialog"],
-    files: [{
-      path: "components/examples/ui/dialog/dialog-inside-scroll.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/dialog/dialog-inside-scroll");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-inside-scroll";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "dialog-nested": {
     name: "dialog-nested",
     description: "",
@@ -1915,6 +1897,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/dialog/dialog-outside-scroll");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-outside-scroll";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "dialog-with-scroll-area": {
+    name: "dialog-with-scroll-area",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["dialog"],
+    files: [{
+      path: "components/examples/ui/dialog/dialog-with-scroll-area.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/dialog/dialog-with-scroll-area");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-with-scroll-area";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
