@@ -2,37 +2,30 @@
 
 import {
   Accordion,
-  AccordionHeader,
   AccordionItem,
   AccordionPanel,
-  AccordionTrigger,
+  AccordionSummary,
 } from "@/registry/ui/accordion";
 
-export function Demo() {
+export function AccordionDefaultOpenMultipleDemo() {
   return (
     <Accordion className="w-full max-w-md" defaultValue={["item-2", "item-3"]}>
       <AccordionItem value="item-1">
-        <AccordionHeader>
-          <AccordionTrigger>defult closed</AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>defult closed</AccordionSummary>
         <AccordionPanel>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, possimus.
+          <div className="w-full h-12 bg-accent/30 rounded-md" />
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionHeader>
-          <AccordionTrigger>I'm default open</AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>I'm default open</AccordionSummary>
         <AccordionPanel>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, possimus.
+          <div className="w-full h-12 bg-accent/30 rounded-md" />
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem value="item-3">
-        <AccordionHeader>
-          <AccordionTrigger>I'm default open as well</AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>I'm default open as well</AccordionSummary>
         <AccordionPanel>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, possimus.
+          <div className="w-full h-12 bg-accent/30 rounded-md" />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

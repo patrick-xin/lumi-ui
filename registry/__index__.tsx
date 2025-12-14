@@ -768,19 +768,37 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "accordion-contained": {
-    name: "accordion-contained",
+  "accordion-custom-trigger-icon": {
+    name: "accordion-custom-trigger-icon",
     description: "",
     type: "registry:example",
     registryDependencies: ["accordion"],
     files: [{
-      path: "components/examples/ui/accordion/accordion-contained.tsx",
+      path: "components/examples/ui/accordion/accordion-custom-trigger-icon.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/accordion/accordion-contained");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "accordion-contained";
+      const mod = await import("@/components/examples/ui/accordion/accordion-custom-trigger-icon");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "accordion-custom-trigger-icon";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "accordion-custom-trigger-without-icon": {
+    name: "accordion-custom-trigger-without-icon",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["accordion"],
+    files: [{
+      path: "components/examples/ui/accordion/accordion-custom-trigger-without-icon.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/accordion/accordion-custom-trigger-without-icon");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "accordion-custom-trigger-without-icon";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -858,19 +876,19 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "accordion-outline": {
-    name: "accordion-outline",
+  "accordion-motion": {
+    name: "accordion-motion",
     description: "",
     type: "registry:example",
     registryDependencies: ["accordion"],
     files: [{
-      path: "components/examples/ui/accordion/accordion-outline.tsx",
+      path: "components/examples/ui/accordion/accordion-motion.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/accordion/accordion-outline");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "accordion-outline";
+      const mod = await import("@/components/examples/ui/accordion/accordion-motion");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "accordion-motion";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

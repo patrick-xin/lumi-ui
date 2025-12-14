@@ -1,12 +1,12 @@
 import type * as React from "react";
+import { Button } from "@/registry/ui/button";
 import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleTrigger,
 } from "@/registry/ui/collapsible";
-import { Button } from "../../../../registry/ui/button";
 
-export default function ExampleCollapsible() {
+export default function CollapsibleDemo() {
   return (
     <Collapsible className="flex min-h-36 w-56 flex-col justify-center">
       <CollapsibleTrigger
@@ -17,7 +17,6 @@ export default function ExampleCollapsible() {
           </Button>
         }
       />
-
       <CollapsiblePanel>
         <div className="flex flex-col gap-2 mt-2 rounded-md bg-accent/30 py-2 pl-4">
           <div>alien-bean-pasta</div>

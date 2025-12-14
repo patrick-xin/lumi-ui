@@ -2,43 +2,32 @@
 
 import {
   Accordion,
-  AccordionHeader,
   AccordionItem,
   AccordionPanel,
-  AccordionTrigger,
+  AccordionSummary,
 } from "@/registry/ui/accordion";
 
-export default function AccordionSingle() {
+export default function AccordionSingleDemo() {
   return (
     <Accordion multiple defaultValue={["item-1"]} className="w-full max-w-md">
       <AccordionItem value="item-1">
-        <AccordionHeader>
-          <AccordionTrigger>
-            How is this different from shadcn/ui?
-          </AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>
+          How is this different from shadcn/ui?
+        </AccordionSummary>
         <AccordionPanel>
-          Lumi UI enhances upon shadcn/ui by offering a more consistent API,
-          additional component variants, and new features, while maintaining the
-          same core principles.
+          <div className="w-full h-12 bg-accent/30 rounded-md" />
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionHeader>
-          <AccordionTrigger>What are the key dependencies?</AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>What are the key dependencies?</AccordionSummary>
         <AccordionPanel>
-          The component library relies on React, Tailwind CSS, Base UI, and CVA
-          (Class Variance Authority) to provide its functionality and styling.
+          <div className="w-full h-12 bg-accent/30 rounded-md" />
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem value="item-3">
-        <AccordionHeader>
-          <AccordionTrigger>Where can I report a bug?</AccordionTrigger>
-        </AccordionHeader>
+        <AccordionSummary>Where can I report a bug?</AccordionSummary>
         <AccordionPanel>
-          You can open an issue on our official GitHub repository. Please
-          provide as much detail as possible to help us resolve it quickly.
+          <div className="w-full h-12 bg-accent/30 rounded-md" />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

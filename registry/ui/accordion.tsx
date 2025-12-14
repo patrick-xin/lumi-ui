@@ -3,92 +3,61 @@
 import * as React from "react";
 import { Accordion as BaseAccordion } from "@base-ui/react/accordion";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ChevronDownIcon, PlusIcon } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-const accordionItemVariants = cva("border-b", {
-  variants: {
-    variant: {
-      underline: "last:border-b-0",
-      contained: "border-0 my-2",
-      outline: "border rounded-md py-2 my-2",
-    },
-  },
-  defaultVariants: {
-    variant: "underline",
-  },
-});
-
-const accordionTriggerVariants = cva(
-  "flex flex-1 items-start justify-between gap-4 text-sm text-left font-medium transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 rounded-md",
-  {
-    variants: {
-      variant: {
-        underline: "py-4 hover:underline [&[data-panel-open]>svg]:rotate-180",
-        contained:
-          "group py-2 relative items-center bg-background hover:bg-accent px-3 hover:text-accent-foreground data-[panel-open]:bg-accent dark:data-[panel-open]:bg-accent/50 dark:hover:bg-accent/50 [&[data-panel-open]>svg]:rotate-45",
-        outline: "px-3 hover:underline [&[data-panel-open]>svg]:rotate-180",
-      },
-    },
-    defaultVariants: {
-      variant: "underline",
-    },
-  },
-);
-
-const accordionPanelVariants = cva("text-sm", {
-  variants: {
-    variant: {
-      underline: "pt-0 pb-4",
-      contained: "py-2 px-3 text-muted-foreground rounded-md",
-      outline: "py-2 px-4",
-    },
-  },
-  defaultVariants: {
-    variant: "underline",
-  },
-});
-
-type AccordionContextValue = {
-  variant: VariantProps<typeof accordionTriggerVariants>["variant"];
-};
-
-const AccordionContext = React.createContext<AccordionContextValue | undefined>(
-  undefined,
-);
-
-function useAccordionContext() {
-  const context = React.useContext(AccordionContext);
-  if (!context) {
-    throw new Error("Accordion components must be used within <Accordion>");
-  }
-  return context;
+function Accordion({ ...props }: BaseAccordion.Root.Props) {
+  return <BaseAccordion.Root data-slot="accordion" {...props} />;
 }
 
-function Accordion({
-  variant = "underline",
-  ...props
-}: React.ComponentProps<typeof BaseAccordion.Root> &
-  VariantProps<typeof accordionTriggerVariants>) {
-  return (
-    <AccordionContext.Provider value={{ variant }}>
-      <BaseAccordion.Root data-slot="accordion" {...props} />
-    </AccordionContext.Provider>
-  );
-}
-
-function AccordionItem({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseAccordion.Item>) {
-  const { variant } = useAccordionContext();
+function AccordionItem({ className, ...props }: BaseAccordion.Item.Props) {
   return (
     <BaseAccordion.Item
       data-slot="accordion-item"
-      className={cn(accordionItemVariants({ variant }), className)}
+      className={cn(
+        "border-b last:border-b-0 data-[disabled]:opacity-50",
+        className,
+      )}
       {...props}
     />
+  );
+}
+
+function AccordionHeader({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseAccordion.Header>) {
+  return (
+    <BaseAccordion.Header
+      data-slot="accordion-header"
+      className={cn("flex", className)}
+      {...props}
+    />
+  );
+}
+
+function AccordionSummary({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof AccordionTrigger>) {
+  return (
+    <BaseAccordion.Header>
+      <BaseAccordion.Trigger
+        className={cn(
+          "flex flex-1 w-full items-center justify-between text-sm py-4 font-medium transition-all hover:underline text-left",
+          "[&[data-panel-open]>svg]:rotate-180",
+          "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1",
+          "[&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:shrink-0",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+        <ChevronDown className="h-4 w-4 text-muted-foreground pointer-events-none" />
+      </BaseAccordion.Trigger>
+    </BaseAccordion.Header>
   );
 }
 
@@ -96,63 +65,64 @@ function AccordionTrigger({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof BaseAccordion.Trigger>) {
-  const { variant } = useAccordionContext();
+}: BaseAccordion.Trigger.Props) {
   return (
     <BaseAccordion.Trigger
       data-slot="accordion-trigger"
-      className={cn(accordionTriggerVariants({ variant, className }))}
+      className={cn(
+        "flex flex-1 items-center justify-between font-medium",
+        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1",
+        "[&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:shrink-0",
+        className,
+      )}
       {...props}
     >
       {children}
-      {variant === "contained" ? (
-        <PlusIcon className="text-muted-foreground size-4 shrink-0 transition-all ease-out" />
-      ) : (
-        <ChevronDownIcon className="text-muted-foreground translate-y-0.5 pointer-events-none size-4 shrink-0 transition-transform duration-200" />
-      )}
     </BaseAccordion.Trigger>
   );
 }
 
-function AccordionHeader(
-  props: React.ComponentProps<typeof BaseAccordion.Header>,
-) {
-  return (
-    <BaseAccordion.Header
-      data-slot="accordion-header"
-      className="flex"
-      {...props}
-    />
-  );
-}
+const panelVariants = cva(
+  "overflow-hidden text-base",
+  {
+    variants: {
+      animation: {
+        css: "h-[var(--accordion-panel-height)] data-[starting-style]:h-0 data-[ending-style]:h-0 transition-[height] duration-200 ease-out",
+        none: "",
+      },
+    },
+    defaultVariants: {
+      animation: "css",
+    },
+  },
+);
+
+interface AccordionPanelProps
+  extends BaseAccordion.Panel.Props,
+    VariantProps<typeof panelVariants> {}
 
 function AccordionPanel({
   className,
+  animation,
   children,
   ...props
-}: React.ComponentProps<typeof BaseAccordion.Panel>) {
-  const { variant } = useAccordionContext();
+}: AccordionPanelProps) {
   return (
     <BaseAccordion.Panel
       data-slot="accordion-panel"
-      className={cn(
-        "h-[var(--accordion-panel-height)] overflow-hidden text-sm",
-        "transition-[height] duration-200 ease-out",
-        "data-[ending-style]:h-0 data-[starting-style]:h-0",
-      )}
+      className={cn(panelVariants({ animation }))}
       {...props}
     >
-      <div className={cn(accordionPanelVariants({ variant }), className)}>
-        {children}
-      </div>
+      <div className={cn("pb-4 pt-0 text-sm", className)}>{children}</div>
     </BaseAccordion.Panel>
   );
 }
 
 export {
   Accordion,
-  AccordionHeader,
   AccordionItem,
-  AccordionPanel,
   AccordionTrigger,
+  AccordionPanel,
+  AccordionHeader,
+  AccordionSummary,
 };

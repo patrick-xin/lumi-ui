@@ -35,7 +35,7 @@ export function CollapsibleWithMotionDemo() {
         }
       />
       <CollapsiblePanel
-        // disable default animation
+        // disable default css transition
         animation="none"
         keepMounted
         render={
@@ -43,7 +43,6 @@ export function CollapsibleWithMotionDemo() {
             hidden={false}
             initial={false}
             animate={{ height: open ? "auto" : 100 }}
-            transition={{ ease: [0.16, 1, 0.3, 1], duration: 0.3 }}
             className="relative overflow-hidden"
           >
             <div
