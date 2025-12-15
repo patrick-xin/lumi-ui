@@ -4,7 +4,6 @@ description: A component that provides labelling and validation for form control
 links:
   doc: https://base-ui.com/react/components/field
   api: https://base-ui.com/react/components/field#api-reference
-status: in-progress
 ---
 
 <ComponentPreview name="field-demo" />
@@ -32,19 +31,67 @@ status: in-progress
   </TabsPanel>
 </CodeTabs>
 
-## Recipes
+## Anatomy
 
-### Input
-<ComponentPreview name="field-input" />
+```tsx
+<Field>
+  <FieldLabel />
+  <FieldControl />
+  <FieldDescription />
+  <FieldItem />
+  <FieldError />
+  <FieldValidity />
+</FieldRoot>
+```
+
+## State and Validation
+
+### Required
+<ComponentPreview name="field-required" />
+
+### Error
+<ComponentPreview name="field-error" />
+
+### Validity
+<ComponentPreview name="field-validity" />
+
+## Use with other form controls
+
+<Callout variant="warning" title="Warning">
+  Form controls must have an accessible name in order to be recognized by assistive technologies. `<FieldLabel>` and `<FieldDescription>` automatically assign the accessible name and description to their associated control.
+</Callout>
 
 ### Select
 <ComponentPreview name="field-select" />
 
-### Fieldset
-<ComponentPreview name="field-fieldset" />
+<Callout variant="success" title="Note">
+  You can implicitly label [`<Checkbox>`](https://www.lumiui.dev/docs/components/form-input/checkbox), [`<Radio>`](https://www.lumiui.dev/docs/components/form-input/radio-group) and [`<Switch>`](https://www.lumiui.dev/docs/components/form-input/switch) components by enclosing them with `<FieldLabel>`. See below Checkbox example. 
+</Callout>
 
 ### Checkbox
 <ComponentPreview name="field-checkbox" />
 
-### Radio
+### Fieldset
+<ComponentPreview name="field-fieldset" />
+
+### Radio Group
 <ComponentPreview name="field-radio" />
+
+### Autocomplete
+<ComponentPreview name="field-autocomplete" />
+
+
+
+
+
+## API Reference
+
+| Component | Description |
+| :--- | :--- |
+| [`Field`](https://base-ui.com/react/components/field#root) | Groups all parts of the field. Renders a `<div>` element. |
+| [`FieldLabel`](https://base-ui.com/react/components/field#label) | An accessible label that is automatically associated with the field control. Renders a `<label>` element. |
+| [`FieldControl`](https://base-ui.com/react/components/field#control) | The form control to label and validate. Renders an `<input>` element. You can omit this part and use any Base UI input component instead. For example, Input, Checkbox, or Select, among others, will work with Field out of the box. |
+| [`FieldDescription`](https://base-ui.com/react/components/field#description) | A paragraph with additional information about the field. Renders a `<p>` element. |
+| [`FieldItem`](https://base-ui.com/react/components/field#item) | Groups individual items in a checkbox group or radio group with a label and description. Renders a `<div>` element. |
+| [`FieldError`](https://base-ui.com/react/components/field#error) | An error message displayed if the field control fails validation. Renders a `<div>` element. |
+| [`FieldValidity`](https://base-ui.com/react/components/field#validity) | Used to display a custom message based on the field’s validity. Requires children to be a function that accepts field validity state as an argument. |

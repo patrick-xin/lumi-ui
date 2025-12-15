@@ -58,8 +58,6 @@ export function CreatableComboboxDemo() {
       setQuery("");
       return;
     }
-
-    // Ensure we don't collide with an existing id (e.g., value "docs" vs. existing id "docs")
     const existingIds = new Set(labels.map((l) => l.id));
     let uniqueId = baseId;
     if (existingIds.has(uniqueId)) {
@@ -126,9 +124,6 @@ export function CreatableComboboxDemo() {
         onInputValueChange={setQuery}
         onOpenChange={(open, details) => {
           if ("key" in details.event && details.event.key === "Enter") {
-            // When pressing Enter:
-            // - If the typed value exactly matches an existing item, add that item to the selected chips
-            // - Otherwise, create a new item
             if (trimmed === "") {
               return;
             }

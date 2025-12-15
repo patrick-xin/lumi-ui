@@ -1,34 +1,30 @@
-import { Field, FieldItem, FieldLabel } from "@/registry/ui/field";
 import {
-  Fieldset,
-  FieldsetDescription,
-  FieldsetLegend,
-} from "@/registry/ui/fieldset";
+  Field,
+  FieldDescription,
+  FieldItem,
+  FieldLabel,
+} from "@/registry/ui/field";
+import { Fieldset, FieldsetLegend } from "@/registry/ui/fieldset";
 import { RadioGroup, RadioGroupItem } from "@/registry/ui/radio-group";
 
-export function FieldRadio() {
+export function FieldRadioGroupDemo() {
   return (
-    <div className="w-full max-w-md">
-      <Field>
-        <Fieldset render={<RadioGroup defaultValue="ssd" />}>
-          <FieldsetLegend>Subscription Plan</FieldsetLegend>
-          <FieldsetDescription>
-            Yearly and lifetime plans offer significant savings.
-          </FieldsetDescription>
-          <FieldItem>
-            <RadioGroupItem value="monthly" />
-            <FieldLabel className="font-normal">
-              Monthly ($9.99/month)
-            </FieldLabel>
-          </FieldItem>
-          <FieldItem>
-            <RadioGroupItem value="yearly" />
-            <FieldLabel className="font-normal">
-              Yearly ($99.99/month)
-            </FieldLabel>
-          </FieldItem>
-        </Fieldset>
-      </Field>
-    </div>
+    <Field>
+      <Fieldset
+        className="bg-red-950 gap-3"
+        render={<RadioGroup defaultValue="fuji-apple" />}
+      >
+        <FieldsetLegend>Best apple</FieldsetLegend>
+        <FieldDescription>Choose your favourite apple.</FieldDescription>
+        <FieldItem>
+          <RadioGroupItem value="fuji-apple" />
+          <FieldLabel className="font-normal">Fuji</FieldLabel>
+        </FieldItem>
+        <FieldItem>
+          <RadioGroupItem value="gala-apple" />
+          <FieldLabel className="font-normal">Gala</FieldLabel>
+        </FieldItem>
+      </Fieldset>
+    </Field>
   );
 }

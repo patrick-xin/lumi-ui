@@ -50,7 +50,6 @@ export default function ExampleForm() {
 }
 
 async function submitForm(value: string) {
-  // Mimic a server response
   await new Promise((resolve) => {
     setTimeout(resolve, 1000);
   });

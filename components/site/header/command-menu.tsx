@@ -20,6 +20,7 @@ import {
 } from "@/registry/ui/autocomplete";
 import { Button } from "@/registry/ui/button";
 import { Kbd, KbdGroup } from "@/registry/ui/kbd";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 import type { DocRoot, NavGroup, NavItem } from "@/types";
 
 export function CommandMenu({ tree }: { tree: DocRoot }) {
@@ -105,7 +106,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
             <Autocomplete.Popup
               finalFocus={() => !isNavigatingRef.current}
               className={cn(
-                "relative px-4 pt-3 pb-12 bg-background rounded-md border border-input",
+                "relative px-4 pt-3 bg-background rounded-md border border-input",
                 "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
                 "data-[starting-style]:scale-90 data-[starting-style]:opacity-0 data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
                 "pointer-events-auto w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
@@ -116,8 +117,8 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                 className="focus-visible:border-none focus-visible:ring-0!"
                 placeholder="Search documentation..."
               />
-              <div className="mt-2 overflow-y-auto no-scrollbar h-80">
-                <AutocompleteList className="max-h-full no-scrollbar">
+              <ScrollArea noScrollBar className="mt-2 h-80">
+                <AutocompleteList className="max-h-full">
                   {(group: NavGroup) => (
                     <AutocompleteGroup key={group.value} items={group.items}>
                       <AutocompleteGroupLabel className="text-muted-foreground text-sm mb-1">
@@ -152,27 +153,27 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                 <AutocompleteEmpty className="text-center py-12 text-muted-foreground">
                   No results found.
                 </AutocompleteEmpty>
-                <div className="absolute bottom-0 inset-x-0 border-t">
-                  <div className="py-2 px-4 flex items-center gap-3">
-                    <div className="inline-flex items-center gap-1">
-                      <Kbd>
-                        <ArrowUp />
-                      </Kbd>
-                      <Kbd>
-                        <ArrowDown />
-                      </Kbd>
-                      <span className="text-xs text-muted-foreground">
-                        Navigate
-                      </span>
-                    </div>
-                    <div className="inline-flex items-center gap-1">
-                      <Kbd>
-                        <CornerDownLeftIcon />
-                      </Kbd>
-                      <span className="text-xs text-muted-foreground">
-                        Go to Page
-                      </span>
-                    </div>
+              </ScrollArea>
+              <div className="absolute bottom-0 inset-x-0 border-t bg-background">
+                <div className="py-2 px-4 flex items-center gap-3">
+                  <div className="inline-flex items-center gap-1">
+                    <Kbd>
+                      <ArrowUp />
+                    </Kbd>
+                    <Kbd>
+                      <ArrowDown />
+                    </Kbd>
+                    <span className="text-xs text-muted-foreground">
+                      Navigate
+                    </span>
+                  </div>
+                  <div className="inline-flex items-center gap-1">
+                    <Kbd>
+                      <CornerDownLeftIcon />
+                    </Kbd>
+                    <span className="text-xs text-muted-foreground">
+                      Go to Page
+                    </span>
                   </div>
                 </div>
               </div>

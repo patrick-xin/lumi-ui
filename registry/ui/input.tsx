@@ -19,7 +19,7 @@ const inputVariants = cva(
   },
 );
 
-export function Input({
+function Input({
   variant,
   className,
   type,
@@ -35,3 +35,5 @@ export function Input({
     />
   );
 }
+
+export { Input, inputVariants };
