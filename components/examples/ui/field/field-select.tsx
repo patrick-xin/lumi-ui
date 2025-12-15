@@ -7,30 +7,31 @@ import {
   SelectValue,
 } from "@/registry/ui/select";
 
-export function FieldSelect() {
+const fruits = [
+  { value: "apple", label: "Apple" },
+  { value: "banana", label: "Banana" },
+  { value: "blueberry", label: "Blueberry" },
+  { value: "grapes", label: "Grapes" },
+  { value: "pineapple", label: "Pineapple" },
+];
+
+export function FieldSelectDemo() {
   return (
-    <div className="w-full max-w-md">
-      <Field>
-        <FieldLabel>Department</FieldLabel>
-        <Select>
-          <SelectTrigger>
-            <SelectValue placeholder="Choose department" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="engineering">Engineering</SelectItem>
-            <SelectItem value="design">Design</SelectItem>
-            <SelectItem value="marketing">Marketing</SelectItem>
-            <SelectItem value="sales">Sales</SelectItem>
-            <SelectItem value="support">Customer Support</SelectItem>
-            <SelectItem value="hr">Human Resources</SelectItem>
-            <SelectItem value="finance">Finance</SelectItem>
-            <SelectItem value="operations">Operations</SelectItem>
-          </SelectContent>
-        </Select>
-        <FieldDescription>
-          Select your department or area of work.
-        </FieldDescription>
-      </Field>
-    </div>
+    <Field>
+      <FieldLabel>Fruit</FieldLabel>
+      <Select items={fruits}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select a fruit" />
+        </SelectTrigger>
+        <SelectContent>
+          {fruits.map((fruit) => (
+            <SelectItem key={fruit.value} value={fruit.value}>
+              {fruit.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <FieldDescription>Select your favourite fruit.</FieldDescription>
+    </Field>
   );
 }

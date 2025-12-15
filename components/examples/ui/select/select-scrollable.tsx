@@ -9,8 +9,6 @@ import {
 } from "@/registry/ui/select";
 
 export function SelectScrollable() {
-  // 1. We flatten the groups to pass to the 'items' prop.
-  // This tells Base UI: "When 'est' is selected, show 'Eastern Standard Time...'"
   const flatItems = timezoneGroups.flatMap((group) => group.items);
 
   return (
@@ -18,11 +16,6 @@ export function SelectScrollable() {
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="Select a timezone" />
       </SelectTrigger>
-
-      {/* 
-        Our SelectContent already has max-height and overflow-y-auto 
-        defined in the library component, so scrolling happens automatically.
-      */}
       <SelectContent align="center">
         {timezoneGroups.map((group) => (
           <SelectGroup key={group.label}>

@@ -5,6 +5,7 @@ import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
 import { Check, ChevronDown, Search, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { Input } from "./input";
 
 const Combobox = BaseCombobox.Root;
 
@@ -62,13 +63,7 @@ function ComboboxInput({
       )}
       <BaseCombobox.Input
         data-slot="combobox-input"
-        className={cn(
-          "flex w-full rounded-md border border-input bg-transparent py-1 text-base shadow-xs transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          showSearchIcon ? "pl-9 pr-3" : "px-3",
-          !multiple &&
-            "h-9 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-          multiple && "h-auto border-none shadow-none focus-visible:ring-0",
-        )}
+        render={<Input/>}
         {...props}
       />
     </div>

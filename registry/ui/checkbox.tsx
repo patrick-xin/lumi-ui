@@ -14,7 +14,7 @@ function Checkbox({
     <BaseCheckbox.Root
       data-slot="checkbox"
       className={cn(
-        "peer size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none",
+        "peer inline-flex size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none",
         "border-input dark:bg-input/30",
         "data-checked:bg-primary data-checked:text-primary-foreground data-checked:border-primary",
         "data-indeterminate:bg-primary data-indeterminate:text-primary-foreground data-indeterminate:border-primary",

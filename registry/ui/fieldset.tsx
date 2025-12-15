@@ -2,9 +2,9 @@
 
 import * as React from "react"
 import { Fieldset as BaseFieldset } from "@base-ui/react/fieldset"
-import { cva, VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { Separator } from "./separator"
 
 
 function Fieldset({
@@ -15,7 +15,8 @@ function Fieldset({
     <BaseFieldset.Root
       data-slot="fieldset"
       className={cn(
-        "flex flex-col gap-3",
+        "flex flex-col gap-5",
+        "[&_[data-slot=fieldset-legend]+[data-slot=fieldset-description]]:-mt-3.5",
         className
       )}
       {...props}
@@ -23,33 +24,14 @@ function Fieldset({
   )
 }
 
-const fieldsetLegendVariants = cva(
-  "text-foreground font-medium",
-  {
-    variants: {
-      variant: {
-        legend: "text-base",
-        label: "text-sm",
-      },
-    },
-    defaultVariants: {
-      variant: "legend",
-    },
-  }
-)
-
-type FieldsetLegendProps = React.ComponentProps<typeof BaseFieldset.Legend> &
-  VariantProps<typeof fieldsetLegendVariants>
-
 function FieldsetLegend({
   className,
-  variant,
   ...props
-}: FieldsetLegendProps) {
+}: React.ComponentProps<typeof BaseFieldset.Legend>) {
   return (
     <BaseFieldset.Legend
       data-slot="fieldset-legend"
-      className={cn(fieldsetLegendVariants({ variant }), className)}
+      className={cn("text-foreground font-medium text-base", className)}
       {...props}
     />
   )
@@ -68,8 +50,18 @@ function FieldsetDescription({
   )
 }
 
+function FieldsetSeparator({
+  className,
+  ...props
+}: React.ComponentProps<typeof Separator>) {
+  return (
+    <Separator className={cn("my-2", className)} {...props}/>
+  )
+}
+
 export {
   Fieldset,
   FieldsetDescription,
   FieldsetLegend,
+  FieldsetSeparator,
 }

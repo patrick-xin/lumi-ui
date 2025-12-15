@@ -1,11 +1,13 @@
 import { Checkbox } from "@/registry/ui/checkbox";
-import { Label } from "@/registry/ui/label";
+import { Field, FieldLabel } from "@/registry/ui/field";
 
 export function CheckboxDemo() {
   return (
-    <div className="flex items-center gap-3">
-      <Checkbox id="terms" />
-      <Label htmlFor="terms">Accept terms and conditions</Label>
-    </div>
+    <Field>
+      <FieldLabel>
+        <Checkbox defaultChecked />
+        Enable notifications
+      </FieldLabel>
+    </Field>
   );
 }
