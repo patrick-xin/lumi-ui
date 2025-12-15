@@ -1,21 +1,17 @@
+import { Field, FieldItem, FieldLabel } from "@/registry/ui/field";
 import {
-  Field,
-  FieldDescription,
-  FieldItem,
-  FieldLabel,
-} from "@/registry/ui/field";
-import { Fieldset, FieldsetLegend } from "@/registry/ui/fieldset";
+  Fieldset,
+  FieldsetDescription,
+  FieldsetLegend,
+} from "@/registry/ui/fieldset";
 import { RadioGroup, RadioGroupItem } from "@/registry/ui/radio-group";
 
 export function FieldRadioGroupDemo() {
   return (
     <Field>
-      <Fieldset
-        className="bg-red-950 gap-3"
-        render={<RadioGroup defaultValue="fuji-apple" />}
-      >
+      <Fieldset render={<RadioGroup defaultValue="fuji-apple" />}>
         <FieldsetLegend>Best apple</FieldsetLegend>
-        <FieldDescription>Choose your favourite apple.</FieldDescription>
+        <FieldsetDescription>Choose your favourite apple.</FieldsetDescription>
         <FieldItem>
           <RadioGroupItem value="fuji-apple" />
           <FieldLabel className="font-normal">Fuji</FieldLabel>
