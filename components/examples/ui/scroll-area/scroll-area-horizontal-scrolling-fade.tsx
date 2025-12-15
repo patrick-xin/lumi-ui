@@ -1,12 +1,15 @@
 import { ScrollArea } from "@/registry/ui/scroll-area";
 
-export function ScrollAreaDemo() {
+export function ScrollAreaHorizontalFadeDemo() {
   return (
-    <ScrollArea className="h-50 w-96 max-w-md border rounded-md">
-      <div className="flex flex-col gap-4 py-3 pr-6 pl-4 text-sm text-muted-foreground">
+    <ScrollArea
+      gradientScrollFade
+      className="w-96 rounded-md border whitespace-nowrap"
+    >
+      <div className="flex w-max space-x-4 p-4">
         {Array.from({ length: 12 }).map((_, i) => (
           <div
-            className="flex h-48 w-full shrink-0 items-center justify-center rounded-md bg-accent/30"
+            className="flex h-48 w-32 shrink-0 items-center justify-center rounded-md bg-accent/30"
             key={String(i)}
           >
             <span className="font-medium text-sm">{i + 1}</span>

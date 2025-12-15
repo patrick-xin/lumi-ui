@@ -2694,6 +2694,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "scroll-area-horizontal-scrolling-fade": {
+    name: "scroll-area-horizontal-scrolling-fade",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["scroll-area"],
+    files: [{
+      path: "components/examples/ui/scroll-area/scroll-area-horizontal-scrolling-fade.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/scroll-area/scroll-area-horizontal-scrolling-fade");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "scroll-area-horizontal-scrolling-fade";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "scroll-area-horizontal-scrolling": {
     name: "scroll-area-horizontal-scrolling",
     description: "",

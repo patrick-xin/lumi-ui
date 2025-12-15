@@ -31,9 +31,12 @@ function ScrollAreaViewport({
       className={cn(
         "h-full w-full rounded-[inherit] overscroll-contain",
         "focus-visible:outline focus-visible:outline-ring/50 focus-visible:outline-offset-2",
-        gradientScrollFade && 
-          "mask-[linear-gradient(to_bottom,transparent,black_min(1.2rem,var(--scroll-area-overflow-y-start)),black_calc(100%-min(1.2rem,var(--scroll-area-overflow-y-end,1.2rem))),transparent)]",
-        className,
+        gradientScrollFade &&
+          cn(
+            "mask-[linear-gradient(to_bottom,transparent,black_min(1.2rem,var(--scroll-area-overflow-y-start)),black_calc(100%-min(1.2rem,var(--scroll-area-overflow-y-end,1.2rem))),transparent),linear-gradient(to_right,transparent,black_min(1.2rem,var(--scroll-area-overflow-x-start)),black_calc(100%-min(1.2rem,var(--scroll-area-overflow-x-end,1.2rem))),transparent)]",
+            "[mask-composite:intersect] [-webkit-mask-composite:source-in]"
+          ),
+        className
       )}
       {...props}
     />
