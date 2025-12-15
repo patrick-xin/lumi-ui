@@ -11,6 +11,7 @@ import {
   DialogPortal,
   DialogTrigger,
 } from "@/registry/ui/dialog";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 import type { NavGroup } from "@/types";
 
 export function MobileNav({
@@ -38,12 +39,14 @@ export function MobileNav({
         }
       />
       <DialogPortal>
-        <DialogPopup className="top-16 bg-background h-[calc(100dvh-4rem)] fixed w-screen">
-          <nav className="flex h-full flex-col gap-12 overflow-y-auto p-6 no-scrollbar">
-            <TreeNavigation
-              navGroups={navGroups}
-              onNavigate={() => setOpen(false)}
-            />
+        <DialogPopup className="top-16 bg-background/80 backdrop-blur-md h-[calc(100dvh-4rem)] fixed w-screen py-0">
+          <nav className="flex h-full flex-col gap-12">
+            <ScrollArea gradientScrollFade noScrollBar>
+              <TreeNavigation
+                navGroups={navGroups}
+                onNavigate={() => setOpen(false)}
+              />
+            </ScrollArea>
           </nav>
         </DialogPopup>
       </DialogPortal>
@@ -81,7 +84,7 @@ function TreeNavigation({
   onNavigate: () => void;
 }) {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 my-6">
       {navGroups?.map((group) => {
         return (
           <div key={group.value} className="flex flex-col gap-4">
