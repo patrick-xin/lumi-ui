@@ -2,8 +2,8 @@ import {
   Select,
   SelectContent,
   SelectGroup,
+  SelectGroupLabel,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/registry/ui/select";
@@ -16,15 +16,15 @@ const fruits = [
   { value: "pineapple", label: "Pineapple" },
 ];
 
-export function SelectDemo() {
+export function SelectAlignItemWithTriggerDemo() {
   return (
     <Select items={fruits}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger>
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
-      <SelectContent position="item-aligned">
+      <SelectContent alignItemWithTrigger>
         <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
+          <SelectGroupLabel>Fruits</SelectGroupLabel>
           {fruits.map((fruit) => (
             <SelectItem key={fruit.value} value={fruit.value}>
               {fruit.label}

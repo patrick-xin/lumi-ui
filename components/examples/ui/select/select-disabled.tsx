@@ -23,7 +23,7 @@ export function SelectDisabledDemo() {
       // Disable the entire select
       // disabled
     >
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger>
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
       <SelectContent>

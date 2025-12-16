@@ -19,7 +19,7 @@ const fruits = [
 export function SelectDemo() {
   return (
     <Select items={fruits}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger>
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
       <SelectContent>

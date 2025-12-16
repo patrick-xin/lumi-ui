@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/registry/ui/select";
+import { Button } from "../../../../registry/ui/button";
 
 const fruits = [
   { value: "apple", label: "Apple" },
@@ -18,41 +19,22 @@ const fruits = [
   { value: "pineapple", label: "Pineapple" },
 ];
 
-export default function SelectControlled() {
+export default function SelectControlledDemo() {
   const [value, setValue] = React.useState("apple");
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-2">
-        <button
-          type="button"
-          className="bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md px-3 text-xs"
-          onClick={() => setValue("banana")}
-        >
-          Select Banana
-        </button>
-        <button
-          type="button"
-          className="bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md px-3 text-xs"
-          onClick={() => setValue("grapes")}
-        >
-          Select Grapes
-        </button>
-        <button
-          type="button"
-          className="bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md px-3 text-xs"
-          onClick={() => setValue("")}
-        >
-          Reset
-        </button>
+        <Button onClick={() => setValue("banana")}>Select Banana</Button>
+        <Button onClick={() => setValue("grapes")}>Select Grapes</Button>
+        <Button onClick={() => setValue("")}>Reset</Button>
       </div>
-
       <Select
         items={fruits}
         value={value}
         onValueChange={(val) => setValue(val as string)}
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger>
           <SelectValue placeholder="Select a fruit" />
         </SelectTrigger>
         <SelectContent>

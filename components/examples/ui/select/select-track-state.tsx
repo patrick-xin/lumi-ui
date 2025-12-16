@@ -15,7 +15,7 @@ const frameworks = [
   { value: "astro", label: "Astro" },
 ];
 
-export function FrameworkSelect() {
+export function SelectTrackStateDemo() {
   const [value, setValue] = React.useState<string>("next");
 
   return (
@@ -28,7 +28,7 @@ export function FrameworkSelect() {
         value={value}
         onValueChange={(val) => setValue(val as string)}
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger>
           <SelectValue placeholder="Select framework" />
         </SelectTrigger>
         <SelectContent>
