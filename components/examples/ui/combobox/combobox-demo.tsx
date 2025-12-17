@@ -2,11 +2,11 @@
 
 import {
   Combobox,
+  ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
-  ComboboxPopup,
 } from "@/registry/ui/combobox";
 import { Label } from "@/registry/ui/label";
 
@@ -22,7 +22,7 @@ export function ComboboxDemo() {
         />
       </div>
 
-      <ComboboxPopup>
+      <ComboboxContent>
         <ComboboxEmpty>No fruits found.</ComboboxEmpty>
         <ComboboxList>
           {(item: string) => (
@@ -31,7 +31,7 @@ export function ComboboxDemo() {
             </ComboboxItem>
           )}
         </ComboboxList>
-      </ComboboxPopup>
+      </ComboboxContent>
     </Combobox>
   );
 }

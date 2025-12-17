@@ -1,27 +1,24 @@
 "use client";
-
 import * as React from "react";
-
 import {
   Combobox,
   ComboboxChip,
   ComboboxChips,
+  ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
-  ComboboxPopup,
   ComboboxValue,
 } from "@/registry/ui/combobox";
-import { Label } from "@/registry/ui/label";
 
-export function ComboboxMultipleDemo() {
+export function ComboboxMultipleSelectDemo() {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
-
+  const id = React.useId();
   return (
     <Combobox items={langs} multiple>
-      <div className="flex w-80 flex-col gap-2">
-        <Label htmlFor="select-language">Select a language</Label>
+      <div className="flex flex-col gap-2 w-72">
+        <label htmlFor={id}>Select a language</label>
         <ComboboxChips ref={containerRef}>
           <ComboboxValue>
             {(value: ProgrammingLanguage[]) => (
@@ -38,18 +35,13 @@ export function ComboboxMultipleDemo() {
                     ))}
                   </div>
                 )}
-                <ComboboxInput
-                  id="select-language"
-                  placeholder="e.g. TypeScript"
-                  multiple
-                />
+                <ComboboxInput id={id} placeholder="e.g. TypeScript" multiple />
               </React.Fragment>
             )}
           </ComboboxValue>
         </ComboboxChips>
       </div>
-
-      <ComboboxPopup>
+      <ComboboxContent sideOffset={8}>
         <ComboboxEmpty>No languages found.</ComboboxEmpty>
         <ComboboxList>
           {(language: ProgrammingLanguage) => (
@@ -58,7 +50,7 @@ export function ComboboxMultipleDemo() {
             </ComboboxItem>
           )}
         </ComboboxList>
-      </ComboboxPopup>
+      </ComboboxContent>
     </Combobox>
   );
 }
