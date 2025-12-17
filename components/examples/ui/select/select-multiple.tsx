@@ -36,7 +36,7 @@ function renderValue(value: Language[]) {
   return firstLanguage + additionalLanguages;
 }
 
-export default function MultiSelectExample() {
+export default function MultiSelectDemo() {
   return (
     <Select multiple defaultValue={["javascript", "typescript"]}>
       <SelectTrigger className="w-[200px]">

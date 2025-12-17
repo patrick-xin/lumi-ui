@@ -2,24 +2,24 @@ import {
   Select,
   SelectContent,
   SelectGroup,
+  SelectGroupLabel,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/registry/ui/select";
 
-export function SelectScrollable() {
+export function SelectScrollableDemo() {
   const flatItems = timezoneGroups.flatMap((group) => group.items);
 
   return (
     <Select items={flatItems}>
-      <SelectTrigger className="w-[280px]">
+      <SelectTrigger className="w-80">
         <SelectValue placeholder="Select a timezone" />
       </SelectTrigger>
-      <SelectContent align="center">
+      <SelectContent>
         {timezoneGroups.map((group) => (
           <SelectGroup key={group.label}>
-            <SelectLabel>{group.label}</SelectLabel>
+            <SelectGroupLabel>{group.label}</SelectGroupLabel>
             {group.items.map((item) => (
               <SelectItem key={item.value} value={item.value}>
                 {item.label}

@@ -8,11 +8,11 @@ import {
   Combobox,
   ComboboxChip,
   ComboboxChips,
+  ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
-  ComboboxPopup,
   ComboboxValue,
 } from "@/registry/ui/combobox";
 import {
@@ -58,6 +58,8 @@ export function CreatableComboboxDemo() {
       setQuery("");
       return;
     }
+
+    // Ensure we don't collide with an existing id (e.g., value "docs" vs. existing id "docs")
     const existingIds = new Set(labels.map((l) => l.id));
     let uniqueId = baseId;
     if (existingIds.has(uniqueId)) {
@@ -122,8 +124,11 @@ export function CreatableComboboxDemo() {
         value={selected}
         inputValue={query}
         onInputValueChange={setQuery}
-        onOpenChange={(open, details) => {
+        onOpenChange={(_, details) => {
           if ("key" in details.event && details.event.key === "Enter") {
+            // When pressing Enter:
+            // - If the typed value exactly matches an existing item, add that item to the selected chips
+            // - Otherwise, create a new item
             if (trimmed === "") {
               return;
             }
@@ -147,7 +152,7 @@ export function CreatableComboboxDemo() {
           }
         }}
       >
-        <div className="flex w-80 flex-col gap-2">
+        <div className="flex flex-col w-72 gap-2">
           <Label htmlFor={id}>Labels</Label>
           <ComboboxChips ref={containerRef}>
             <ComboboxValue>
@@ -169,7 +174,7 @@ export function CreatableComboboxDemo() {
           </ComboboxChips>
         </div>
 
-        <ComboboxPopup>
+        <ComboboxContent ref={containerRef}>
           <ComboboxEmpty>No labels found.</ComboboxEmpty>
           <ComboboxList>
             {(item: LabelItem) =>
@@ -185,7 +190,7 @@ export function CreatableComboboxDemo() {
               )
             }
           </ComboboxList>
-        </ComboboxPopup>
+        </ComboboxContent>
       </Combobox>
 
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>

@@ -49,10 +49,10 @@ const statuses = [
   },
 ];
 
-export function SelectRich() {
+export function SelectCustomRenderDemo() {
   return (
     <Select items={statuses}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger>
         <SelectValue placeholder="Select a status">
           {(val) => {
             const selected = statuses.find((s) => s.value === val);
@@ -68,8 +68,7 @@ export function SelectRich() {
           }}
         </SelectValue>
       </SelectTrigger>
-
-      <SelectContent>
+      <SelectContent alignItemWithTrigger>
         {statuses.map((status) => (
           <SelectItem key={status.value} value={status.value}>
             <div className="flex items-center gap-2">

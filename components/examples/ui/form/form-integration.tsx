@@ -15,11 +15,11 @@ import { Checkbox } from "@/registry/ui/checkbox";
 import { CheckboxGroup } from "@/registry/ui/checkbox-group";
 import {
   Combobox,
+  ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
-  ComboboxPopup,
 } from "@/registry/ui/combobox";
 import {
   Field,
@@ -111,7 +111,7 @@ export function ProjectQuoteForm() {
           <FieldLabel>Headquarters Location</FieldLabel>
           <ComboboxInput placeholder="Select major city..." />
 
-          <ComboboxPopup>
+          <ComboboxContent>
             <ComboboxEmpty>No location found</ComboboxEmpty>
             <ComboboxList>
               {(location: string) => (
@@ -120,7 +120,7 @@ export function ProjectQuoteForm() {
                 </ComboboxItem>
               )}
             </ComboboxList>
-          </ComboboxPopup>
+          </ComboboxContent>
         </Combobox>
         <FieldError />
       </Field>
