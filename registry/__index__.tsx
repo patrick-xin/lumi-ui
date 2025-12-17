@@ -1650,6 +1650,42 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "combobox-async-multiple": {
+    name: "combobox-async-multiple",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [{
+      path: "components/examples/ui/combobox/combobox-async-multiple.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/combobox/combobox-async-multiple");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox-async-multiple";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-async-single": {
+    name: "combobox-async-single",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [{
+      path: "components/examples/ui/combobox/combobox-async-single.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/combobox/combobox-async-single");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox-async-single";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "combobox-creatable": {
     name: "combobox-creatable",
     description: "",
@@ -1681,6 +1717,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/combobox/combobox-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "combobox-grouped": {
+    name: "combobox-grouped",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [{
+      path: "components/examples/ui/combobox/combobox-grouped.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/combobox/combobox-grouped");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox-grouped";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
