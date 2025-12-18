@@ -91,6 +91,8 @@ function AutocompletePopup({
           className={cn(
             "px-1 py-2 rounded-md bg-popover border border-input overflow-y-auto",
             "max-h-[23rem] max-w-[var(--available-width)]",
+            "outline outline-border dark:-outline-offset-1",
+            "animate-popup",
             matchAnchorWidth && "w-[var(--anchor-width)]",
             className,
           )}

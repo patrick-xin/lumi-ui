@@ -51,8 +51,8 @@ export function MenuDemo() {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button variant="secondary">
-              View Options <ChevronDown className="ml-2 size-4" />
+            <Button variant="secondary" className="w-60">
+              View Options <ChevronDown />
             </Button>
           }
         />

@@ -98,9 +98,7 @@ function MenubarPopup({
           data-slot="menubar-popup"
           className={cn(
             "p-1 min-w-40 bg-popover text-popover-foreground rounded-md outline outline-border dark:-outline-offset-1 shadow-md",
-            "transition-[transform,scale,opacity] origin-[var(--transform-origin)]",
-            "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
-            "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
+            "animate-popup",
             "data-[instant]:transition-none",
             className,
           )}

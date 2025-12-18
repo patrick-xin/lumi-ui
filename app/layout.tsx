@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://lumiui.dev",
+    process.env.NEXT_PUBLIC_APP_URL || "https://www.lumiui.dev",
   ),
   description: siteConfig.description,
   keywords: [
@@ -61,6 +61,9 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
+  alternates: {
+    canonical: "./",
+  },
 };
 
 export default function RootLayout({

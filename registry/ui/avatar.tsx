@@ -4,12 +4,12 @@ import { cn } from "@/lib/utils";
 function Avatar({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAvatar.Root>) {
+}: BaseAvatar.Root.Props) {
   return (
     <BaseAvatar.Root
       data-slot="avatar"
       className={cn(
-        "relative flex size-8 shrink-0 overflow-hidden rounded-full",
+        "relative flex size-8 shrink-0 overflow-hidden rounded-full select-none",
         className,
       )}
       {...props}
@@ -20,11 +20,11 @@ function Avatar({
 function AvatarImage({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAvatar.Image>) {
+}: BaseAvatar.Image.Props) {
   return (
     <BaseAvatar.Image
       data-slot="avatar-image"
-      className={cn("aspect-square size-full", className)}
+      className={cn("aspect-square size-full object-cover", className)}
       {...props}
     />
   );
@@ -33,7 +33,7 @@ function AvatarImage({
 function AvatarFallback({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAvatar.Fallback>) {
+}: BaseAvatar.Fallback.Props) {
   return (
     <BaseAvatar.Fallback
       data-slot="avatar-fallback"

@@ -39,9 +39,7 @@ function PreviewCardContent({
           data-slot="preview-card-content"
           className={cn(
             "bg-popover text-popover-foreground z-50 w-64 rounded-md p-4 shadow-md outline outline-border dark:-outline-offset-1",
-            "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
-            "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
-            "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
+            "animate-popup",
             className,
           )}
           {...props}

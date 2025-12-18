@@ -4,7 +4,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInput,
+  ComboboxInputGroup,
   ComboboxItem,
   ComboboxList,
 } from "@/registry/ui/combobox";
@@ -15,11 +15,7 @@ export function ComboboxDemo() {
     <Combobox items={fruits}>
       <div className="relative flex flex-col gap-2">
         <Label htmlFor="select-fruit">Select a fruit</Label>
-        <ComboboxInput
-          className="w-80"
-          id="select-fruit"
-          placeholder="e.g. Apple"
-        />
+        <ComboboxInputGroup id="select-fruit" placeholder="e.g. Apple" />
       </div>
 
       <ComboboxContent>

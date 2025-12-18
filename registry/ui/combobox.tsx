@@ -94,7 +94,7 @@ function ComboboxInputGroup({
   return (
     <div
       className={cn(
-        "relative w-full [&_input]:pr-10 has-[data-slot=clear]:[&_input]:pr-8 has-[data-slot=trigger]:[&_input]:pr-8 has-[data-slot=clear]:has-[data-slot=trigger]:[&_input]:pr-14",
+        "relative w-full min-w-12 [&_input]:pr-10 has-[data-slot=clear]:[&_input]:pr-8 has-[data-slot=trigger]:[&_input]:pr-8 has-[data-slot=clear]:has-[data-slot=trigger]:[&_input]:pr-14",
         className,
       )}
       data-slot="combobox-input-group"
@@ -308,7 +308,7 @@ function ComboboxItemIndicator({
 function ComboboxContent({
   className,
   children,
-  sideOffset = 4,
+  sideOffset = 6,
   align = "start",
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Popup> & {
@@ -324,11 +324,11 @@ function ComboboxContent({
       >
         <BaseCombobox.Popup
           className={cn(
-            "bg-popover text-popover-foreground relative flex flex-col rounded-md border shadow-md outline-none",
-            "w-[var(--anchor-width)] max-w-[var(--available-width)] max-h-[min(var(--available-height),24rem)]",
-            "transition-[transform,scale,opacity] origin-[var(--transform-origin)] duration-100",
-            "data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
-            "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
+            "bg-popover text-popover-foreground relative flex flex-col rounded-md border shadow-md",
+            "outline outline-border dark:-outline-offset-1",
+            "w-[var(--anchor-width)] max-w-[var(--available-width)]",
+            "max-h-[min(var(--available-height),24rem)]",
+            "animate-popup",
             className,
           )}
           {...props}

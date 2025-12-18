@@ -1,7 +1,13 @@
 import { Button } from "@/registry/ui/button";
 import { Input } from "@/registry/ui/input";
 import { Label } from "@/registry/ui/label";
-import { Popover, PopoverPopup, PopoverTrigger } from "@/registry/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/registry/ui/popover";
 
 export function PopoverDemo() {
   return (
@@ -9,13 +15,13 @@ export function PopoverDemo() {
       <PopoverTrigger
         render={<Button variant="outline">Open popover</Button>}
       />
-      <PopoverPopup className="w-96" showArrow sideOffset={8}>
+      <PopoverContent className="w-96" showArrow sideOffset={8}>
         <div className="grid gap-4">
           <div className="space-y-2">
-            <h4 className="leading-none font-medium">Dimensions</h4>
-            <p className="text-muted-foreground text-sm">
+            <PopoverTitle>Dimensions</PopoverTitle>
+            <PopoverDescription>
               Set the dimensions for the layer.
-            </p>
+            </PopoverDescription>
           </div>
           <div className="grid gap-2">
             <div className="grid grid-cols-3 items-center gap-4">
@@ -52,7 +58,7 @@ export function PopoverDemo() {
             </div>
           </div>
         </div>
-      </PopoverPopup>
+      </PopoverContent>
     </Popover>
   );
 }

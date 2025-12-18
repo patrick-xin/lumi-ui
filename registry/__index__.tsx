@@ -768,6 +768,26 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "arrow-svg": {
+    name: "arrow-svg",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    files:     [
+          {
+                "path": "registry/ui/arrow-svg.tsx",
+                "type": "registry:ui",
+                "target": ""
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/ui/arrow-svg");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "arrow-svg";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "accordion-custom-trigger-icon": {
     name: "accordion-custom-trigger-icon",
     description: "",
@@ -2658,19 +2678,127 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "popover-controlled-mode": {
+    name: "popover-controlled-mode",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover"],
+    files: [{
+      path: "components/examples/ui/popover/popover-controlled-mode.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/popover/popover-controlled-mode");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover-controlled-mode";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "popover-demo": {
     name: "popover-demo",
     description: "",
     type: "registry:example",
     registryDependencies: ["popover"],
     files: [{
-      path: "components/examples/ui/popover-demo.tsx",
+      path: "components/examples/ui/popover/popover-demo.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/popover-demo");
+      const mod = await import("@/components/examples/ui/popover/popover-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-detached-trigger": {
+    name: "popover-detached-trigger",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover"],
+    files: [{
+      path: "components/examples/ui/popover/popover-detached-trigger.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/popover/popover-detached-trigger");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover-detached-trigger";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-match-anchor-width": {
+    name: "popover-match-anchor-width",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover"],
+    files: [{
+      path: "components/examples/ui/popover/popover-match-anchor-width.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/popover/popover-match-anchor-width");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover-match-anchor-width";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-open-on-hover": {
+    name: "popover-open-on-hover",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover"],
+    files: [{
+      path: "components/examples/ui/popover/popover-open-on-hover.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/popover/popover-open-on-hover");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover-open-on-hover";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-with-animation": {
+    name: "popover-with-animation",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover"],
+    files: [{
+      path: "components/examples/ui/popover/popover-with-animation.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/popover/popover-with-animation");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover-with-animation";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "popover-with-arrow": {
+    name: "popover-with-arrow",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["popover"],
+    files: [{
+      path: "components/examples/ui/popover/popover-with-arrow.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/popover/popover-with-arrow");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover-with-arrow";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

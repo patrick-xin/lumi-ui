@@ -128,7 +128,7 @@ export default function ExampleAsyncSingleCombobox() {
     >
       <div className="flex flex-col gap-1">
         <label htmlFor={id}>Assign reviewer</label>
-        <ComboboxInputGroup />
+        <ComboboxInputGroup placeholder="Search..." />
       </div>
 
       <ComboboxContent aria-busy={isPending || undefined}>

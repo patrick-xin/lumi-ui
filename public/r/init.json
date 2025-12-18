@@ -11,10 +11,33 @@
     "tailwind-merge"
   ],
   "registryDependencies": ["utils"],
+  "cssVars": {
+    "theme": {
+      "--ease-out": "cubic-bezier(0.19, 1, 0.22, 1)",
+      "--ease-in": "cubic-bezier(0.4, 0, 1, 1)",
+      "--duration": "200ms",
+      "--duration-end": "100ms"
+    }
+  },
   "css": {
     "@layer base": {
       ".root": {
         "isolation": "isolate"
+      }
+    },
+    "@utility animate-popup": {
+      "transform-origin": "var(--transform-origin)",
+      "transition-property": "opacity, scale, translate, display, overlay",
+      "transition-duration": "var(--duration)",
+      "transition-behavior": "allow-discrete",
+      "transition-timing-function": "var(--ease-out)",
+      "&[data-starting-style], &[data-ending-style]": {
+        "opacity": "0",
+        "scale": "0.95"
+      },
+      "&[data-ending-style]": {
+        "transition-timing-function": "var(--ease-in)",
+        "transition-duration": "var(--duration-end)"
       }
     }
   }
