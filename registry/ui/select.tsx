@@ -98,9 +98,8 @@ function SelectContent({
           data-slot="select-content"
           className={cn(
             "bg-popover text-popover-foreground relative overflow-hidden rounded-md border shadow-md min-w-[var(--anchor-width)]",
-            "origin-[var(--transform-origin)] transition-[transform,scale,opacity] duration-150 ease-out",
-            "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
-            "data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:transition-none",
+            "outline outline-border dark:-outline-offset-1",
+            "animate-popup",
             "data-[side=none]:transition-none data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100",
             className,
           )}

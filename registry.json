@@ -112,7 +112,7 @@
       "title": "Popover",
       "description": "An accessible popup anchored to a button.",
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["utils"],
+      "registryDependencies": ["utils", "arrow-svg"],
       "files": [
         {
           "path": "registry/ui/popover.tsx",
@@ -530,7 +530,7 @@
       "title": "Combobox",
       "description": "An input combined with a list of predefined items to select.",
       "dependencies": ["@base-ui/react", "lucide-react"],
-      "registryDependencies": ["utils"],
+      "registryDependencies": ["input", "utils"],
       "files": [
         {
           "path": "registry/ui/combobox.tsx",
@@ -548,6 +548,20 @@
       "files": [
         {
           "path": "registry/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "arrow-svg",
+      "type": "registry:ui",
+      "title": "Arrow SVG",
+      "description": "Arrow SVG component.",
+      "dependencies": [""],
+      "registryDependencies": [""],
+      "files": [
+        {
+          "path": "registry/ui/arrow-svg.tsx",
           "type": "registry:ui"
         }
       ]

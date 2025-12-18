@@ -17,7 +17,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInput,
+  ComboboxInputGroup,
   ComboboxItem,
   ComboboxList,
 } from "@/registry/ui/combobox";
@@ -60,7 +60,7 @@ export function ProjectQuoteForm() {
   return (
     <Form
       aria-label="Request project quote"
-      className="flex w-full max-w-md flex-col gap-6 rounded-2xl border bg-card p-8 shadow-sm"
+      className="flex w-full max-w-lg flex-col gap-6 rounded-md border bg-card p-8 shadow-md"
       onFormSubmit={(formValues) => {
         toast({
           title: "Quote Request Sent",
@@ -109,7 +109,10 @@ export function ProjectQuoteForm() {
       <Field name="clientLocation">
         <Combobox items={LOCATIONS} required>
           <FieldLabel>Headquarters Location</FieldLabel>
-          <ComboboxInput placeholder="Select major city..." />
+          <ComboboxInputGroup
+            placeholder="Select major city..."
+            className={"w-80"}
+          />
 
           <ComboboxContent>
             <ComboboxEmpty>No location found</ComboboxEmpty>
@@ -159,11 +162,11 @@ export function ProjectQuoteForm() {
         <FieldError />
       </Field>
 
-      <div className="grid grid-cols-2 gap-4">
-        <Field name="projectType">
+      <div className="grid grid-cols-3 gap-8">
+        <Field name="projectType" className="col-span-2">
           <FieldLabel>Type</FieldLabel>
           <Select items={PROJECT_TYPES} required>
-            <SelectTrigger>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Marketing Website" />
             </SelectTrigger>
             <SelectContent>
@@ -177,7 +180,7 @@ export function ProjectQuoteForm() {
           <FieldError />
         </Field>
 
-        <Field name="timelineWeeks">
+        <Field name="timelineWeeks" className="col-span-1">
           <FieldLabel>Timeline (Weeks)</FieldLabel>
           <NumberField defaultValue={4} min={1} max={52} required>
             <NumberFieldGroup>

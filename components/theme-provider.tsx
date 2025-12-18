@@ -10,7 +10,7 @@ export function ThemeProvider({
   return (
     <NextThemesProvider
       attribute="data-theme"
-      defaultTheme="shadcn-dark"
+      defaultTheme="celeste-dark"
       enableSystem
       disableTransitionOnChange
       enableColorScheme
