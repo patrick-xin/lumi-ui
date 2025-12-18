@@ -1,35 +1,35 @@
-import type * as React from "react";
-import { Popover as BasePopover } from "@base-ui/react/popover";
+import {
+  Popover as BasePopover,
+  type PopoverTriggerProps,
+} from "@base-ui/react/popover";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 import { cn } from "@/lib/utils";
 
-function Popover({ ...props }: React.ComponentProps<typeof BasePopover.Root>) {
+function Popover<Payload = unknown>({
+  ...props
+}: BasePopover.Root.Props<Payload>) {
   return <BasePopover.Root data-slot="popover" {...props} />;
 }
 
-function PopoverTrigger({
+function PopoverTrigger<Payload = unknown>({
   ...props
-}: React.ComponentProps<typeof BasePopover.Trigger>) {
+}: PopoverTriggerProps<Payload>) {
   return <BasePopover.Trigger data-slot="popover-trigger" {...props} />;
 }
 
-function PopoverBackdrop({
-  ...props
-}: React.ComponentProps<typeof BasePopover.Backdrop>) {
+function PopoverBackdrop({ ...props }: BasePopover.Backdrop.Props) {
   return <BasePopover.Backdrop data-slot="popover-backdrop" {...props} />;
 }
 
-function PopoverPortal({
-  ...props
-}: React.ComponentProps<typeof BasePopover.Portal>) {
+function PopoverPortal({ ...props }: BasePopover.Portal.Props) {
   return <BasePopover.Portal data-slot="popover-portal" {...props} />;
 }
 
 function PopoverPositioner({
   className,
   ...props
-}: React.ComponentProps<typeof BasePopover.Positioner>) {
+}: BasePopover.Positioner.Props) {
   return (
     <BasePopover.Positioner
       data-slot="popover-positioner"
@@ -42,15 +42,13 @@ function PopoverPositioner({
   );
 }
 
-function PopoverPopup({
-  className,
-  ...props
-}: React.ComponentProps<typeof BasePopover.Popup>) {
+function PopoverPopup({ className, ...props }: BasePopover.Popup.Props) {
   return (
     <BasePopover.Popup
       data-slot="popover-popup"
       className={cn(
-        "rounded-md bg-popover p-3 text-popover-foreground shadow-md outline outline-border dark:-outline-offset-1",
+        "relative rounded-md bg-popover text-popover-foreground shadow-md outline outline-border dark:-outline-offset-1",
+        "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
         className,
       )}
       {...props}
@@ -58,20 +56,22 @@ function PopoverPopup({
   );
 }
 
-function PopoverArrow({
-  ...props
-}: React.ComponentProps<typeof BasePopover.Arrow>) {
+function PopoverArrow({ className, ...props }: BasePopover.Arrow.Props) {
   return (
-    <BasePopover.Arrow data-slot="popover-arrow" {...props}>
+    <BasePopover.Arrow
+      data-slot="popover-arrow"
+      className={cn(
+        "data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180",
+        className,
+      )}
+      {...props}
+    >
       <ArrowSvg />
     </BasePopover.Arrow>
   );
 }
 
-function PopoverTitle({
-  className,
-  ...props
-}: React.ComponentProps<typeof BasePopover.Title>) {
+function PopoverTitle({ className, ...props }: BasePopover.Title.Props) {
   return (
     <BasePopover.Title
       data-slot="popover-title"
@@ -84,7 +84,7 @@ function PopoverTitle({
 function PopoverDescription({
   className,
   ...props
-}: React.ComponentProps<typeof BasePopover.Description>) {
+}: BasePopover.Description.Props) {
   return (
     <BasePopover.Description
       data-slot="popover-description"
@@ -94,15 +94,17 @@ function PopoverDescription({
   );
 }
 
-function PopoverViewport({
-  ...props
-}: React.ComponentProps<typeof BasePopover.Viewport>) {
-  return <BasePopover.Viewport data-slot="popover-viewport" {...props} />;
+function PopoverViewport({ className, ...props }: BasePopover.Viewport.Props) {
+  return (
+    <BasePopover.Viewport
+      data-slot="popover-viewport"
+      className={cn("relative h-full w-full", className)}
+      {...props}
+    />
+  );
 }
 
-function PopoverClose({
-  ...props
-}: React.ComponentProps<typeof BasePopover.Close>) {
+function PopoverClose({ ...props }: BasePopover.Close.Props) {
   return <BasePopover.Close data-slot="popover-close" {...props} />;
 }
 
@@ -112,20 +114,16 @@ function PopoverContent({
   align = "center",
   alignOffset = 0,
   side = "bottom",
-  sideOffset = 6,
+  sideOffset = 8,
   showArrow = false,
-  title,
-  description,
   matchAnchorWidth = false,
   ...props
-}: React.ComponentProps<typeof BasePopover.Popup> & {
+}: BasePopover.Popup.Props & {
   align?: BasePopover.Positioner.Props["align"];
   alignOffset?: BasePopover.Positioner.Props["alignOffset"];
   side?: BasePopover.Positioner.Props["side"];
   sideOffset?: BasePopover.Positioner.Props["sideOffset"];
   showArrow?: boolean;
-  title?: string;
-  description?: string;
   matchAnchorWidth?: boolean;
 }) {
   return (
@@ -141,32 +139,13 @@ function PopoverContent({
           data-slot="popover-popup"
           className={cn(
             "rounded-md bg-popover p-3 text-popover-foreground shadow-md outline outline-border dark:-outline-offset-1",
+            "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
             "animate-popup",
             className,
           )}
           {...props}
         >
-          {title && (
-            <BasePopover.Title
-              data-slot="popover-title"
-              className="text-sm font-semibold"
-            >
-              {title}
-            </BasePopover.Title>
-          )}
-          {description && (
-            <BasePopover.Description
-              data-slot="popover-description"
-              className="text-muted-foreground text-sm"
-            >
-              {description}
-            </BasePopover.Description>
-          )}
-          {showArrow && (
-            <BasePopover.Arrow className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180">
-              <ArrowSvg />
-            </BasePopover.Arrow>
-          )}
+          {showArrow && <PopoverArrow />}
           {children}
         </BasePopover.Popup>
       </BasePopover.Positioner>

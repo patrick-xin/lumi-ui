@@ -32,92 +32,221 @@ links:
 </CodeTabs>
 
 
+## Basic Usage
+
+```tsx
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/registry/ui/popover";
+
+export function PopoverDemo() {
+  return (
+    <Popover>
+      <PopoverTrigger>Open</PopoverTrigger>
+      <PopoverContent>
+        <PopoverTitle>Popover title</PopoverTitle>
+        <PopoverDescription>Popover description</PopoverDescription>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
 ## Anatomy
 
-```tsx
- <Popover>
-  <PopoverTrigger/>
-  <PopoverPopup />
- </Popover>
-```
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
 
-## Usage
-
-Use `PopoverTrigger` to anchor the interaction and `PopoverPopup` to render content.
+  <TabsPanel value="common">
 ```tsx
-<Popover>
-  <PopoverTrigger>Open</PopoverTrigger>
-  <PopoverPopup>Popover content</PopoverPopup>
+<Popover>   
+  <PopoverTrigger />
+  <PopoverContent>     
+    <PopoverTitle />     
+    <PopoverDescription />     
+  </PopoverContent> 
 </Popover>
 ```
+  </TabsPanel>
 
-You can add optional props like title, description, or showArrow for built-in structure and visual cues.
+  <TabsPanel value="primitive">
 ```tsx
-<PopoverPopup title="Popover title" description="Details here" showArrow>
-  Content goes here.
-</PopoverPopup>
+<Popover>
+  <PopoverTrigger />
+  <PopoverPortal>
+    <PopoverBackdrop />
+    <PopoverPositioner>
+      <PopoverPopup>
+        <PopoverArrow />
+        <PopoverViewport>
+          <PopoverTitle />
+          <PopoverDescription />
+          <PopoverClose />
+        </PopoverViewport>
+      </PopoverPopup>
+    </PopoverPositioner>
+  </PopoverPortal>
+</Popover>
 ```
+  </TabsPanel>
+</Tabs>
 
 ## Cookbook
+
+### With arrow
+
+<ComponentPreview name="popover-with-arrow" />
+
+### Match anchor width
+
+<ComponentPreview name="popover-match-anchor-width" />
 
 ### Open on hover
 
 <ComponentPreview name="popover-open-on-hover" />
 
-### Detached Trigger
+### Detached triggers
+
+A popover can be controlled by a trigger located either inside or outside the `<Popover.Root>` component. For simple, one-off interactions, place the `<Popover.Trigger>` inside `<Popover.Root>`, as shown in the example at the top of this page. However, if defining the popover’s content next to its trigger is not practical, you can use a detached trigger. This involves placing the `<Popover.Trigger>` outside of `<Popover.Root>` and linking them with a handle created by the `createPopoverHandle` function.
+
+
+```tsx
+import { createPopoverHandle } from "@/registry/ui/popover";
+
+const demoPopover = createPopoverHandle();
+
+<PopoverTrigger handle={demoPopover}>
+  Trigger
+</PopoverTrigger>
+
+<Popover handle={demoPopover}>
+  ...
+</Popover>
+```
 
 <ComponentPreview name="popover-detached-trigger" />
 
 
-## Migration from shadcn/ui
+### Multiple triggers
 
-Migrating from shadcn/ui's is straightforward. Lumi's version is powered by Base UI primitives, bringing improved structure and naming without changing how you use it.
+A single popover can be opened by multiple trigger elements. You can achieve this by using the same handle for several detached triggers, or by placing multiple `<PopoverTrigger>` components inside a single `<Popover>`.
 
-### Component Naming & Structure
-
-| shadcn/ui | lumi/ui | Change
-| :--- | :--- | :--- |
-| `PopoverContent`  | `PopoverPopup`  | Renamed for clarity
-| `PopoverAnchor`  | `PopoverPositioner`  | More explicit name and added layout behavior
-| -  | `PopoverClose`  | New helper to close the popover from inside
-
-
-### Positioning & Alignment
-
-`PopoverPopup` supports the same placement props as Base UI — such as `side`, `align`, `sideOffset`, and `alignOffset` — giving you granular control over popup placement relative to its trigger.
-
-```tsx
-<PopoverPopup
-  side="bottom"
-  align="center"
-  sideOffset={6}
-  alignOffset={4}
-  matchAnchorWidth
-/>
-```
-By default, the popup opens below the trigger, centered horizontally.
-
-### Optional Arrow and Metadata
-
-Support for:
-- Arrow via the `showArrow` prop
-- `Titles` and `Descriptions` (title, description props)
-
-These are rendered automatically inside the popup:
-
-```tsx
-<PopoverPopup
-  title="Popover title"
-  description="Description text"
-  showArrow
->
-  {/* Your content */}
-</PopoverPopup>
+```tsx title="Multiple triggers within the Popover"
+<Popover>
+  <PopoverTrigger>Trigger 1</PopoverTrigger>
+  <PopoverTrigger>Trigger 2</PopoverTrigger>
+  ...
+</Popover>
 ```
 
-### Styling & Motion
+```tsx title="Multiple detached triggers"
+const demoPopover = createPopoverHandle();
 
-While shadcn/ui relies on Radix's motion data states, Lumi uses Base UI's transition-style API, producing smoother scale-and-fade animations out of the box.
+<PopoverTrigger handle={demoPopover}>
+  Trigger 1
+</PopoverTrigger>
+
+<PopoverTrigger handle={demoPopover}>
+  Trigger 2
+</PopoverTrigger>
+
+<Popover handle={demoPopover}>
+  ...
+</Popover>
+```
+
+The popover can render different content depending on which trigger opened it. This is achieved by passing a payload to the `<PopoverTrigger>` and using the function-as-a-child pattern in `<Popover>`. The payload can be strongly typed by providing a type argument to the `createPopoverHandle()` function:
+
+```tsx
+const demoPopover = createPopoverHandle<{ text: string }>();
+
+<PopoverTrigger handle={demoPopover} payload={{ text: 'Trigger 1' }}>
+  Trigger 1
+</PopoverTrigger>
+
+<PopoverTrigger handle={demoPopover} payload={{ text: 'Trigger 2' }}>
+  Trigger 2
+</PopoverTrigger>
+
+<Popover handle={demoPopover}>
+  {({ payload }) => (
+    <PopoverPortal>
+      <PopoverPositioner>
+        <PopoverPopup>
+          <PopoverArrow />
+          <PopoverTitle>Popover</PopoverTitle>
+          {payload !== undefined && (
+            <PopoverDescription>
+              This has been opened by {payload.text}
+            </PopoverDescription>
+          )}
+        </PopoverPopup>
+      </PopoverPositioner>
+    </PopoverPortal>
+  )}
+</Popover>
+```
+
+### Controlled mode with multiple triggers
+
+You can control the popover’s open state externally using the `open` and `onOpenChange` props on `<Popover>`. This allows you to manage the popover’s visibility based on your application’s state. When using multiple triggers, you have to manage which trigger is active with the `triggerId` prop on `<Popover>` and the id prop on each `<PopoverTrigger>`.
+
+Note that there is no separate `onTriggerIdChange` prop. Instead, the `onOpenChange` callback receives an additional argument, `eventDetails`, which contains the trigger element that initiated the state change.
+
+<ComponentPreview name="popover-controlled-mode" />
+
+### Animating the Popover
+
+You can animate a popover as it moves between different trigger elements. This includes animating its position, size, and content.
+
+#### Position and Size
+
+To animate the popover’s position, apply CSS transitions to the left, right, top, and bottom properties of the Positioner part. To animate its size, transition the width and height of the Popup part.
+
+#### Content
+
+The popover also supports content transitions. This is useful when different triggers display different content within the same popover.
+
+To enable content animations, wrap the content in the `<PopoverViewport>` part. This part provides features to create direction-aware animations. It renders a div with a data-activation-direction attribute (left, right, up, or down) that indicates the new trigger’s position relative to the previous one.
+
+Inside the `<PopoverViewport>`, the content is further wrapped in divs with data attributes to help with styling:
+  
+- `data-current`: The currently visible content when no transitions are present or the incoming content.
+- `data-previous`: The outgoing content during a transition.
+
+You can use these attributes to style the enter and exit animations.
+
+<ComponentPreview name="popover-with-animation" />
+
+## Migration Guide
+
+### Trigger Composition
+
+Radix UI uses the `asChild` pattern to merge the trigger logic with a child element. Base UI uses the `render` prop for changing HTML tags or using custom triggers.
+
+```tsx
+// Before:
+<PopoverTrigger asChild>
+  <Button>Open</Button>
+</PopoverTrigger>
+
+// After:
+<PopoverTrigger render={<Button>Open</Button>} />
+// or use buttonVariant to style trigger
+<PopoverTrigger className={buttonVariants({ variant: "outline" })} />
+```
+
+<Callout variant="warning" title="Warning">
+Switch to using the `render` prop instead of `asChild`.
+</Callout>
+
 
 ### Migration Example
 
@@ -130,13 +259,16 @@ While shadcn/ui relies on Radix's motion data states, Lumi uses Base UI's transi
 
   ```tsx title="demo-popover.tsx" 
   import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+  import { Button } from "@/components/ui/button";
 
   export function Demo() {
     return (
       <Popover>
-        <PopoverTrigger>Open</PopoverTrigger>
+        <PopoverTrigger asChild>
+          <Button>Open</Button>
+        </PopoverTrigger>
         <PopoverContent>
-        This is a popover.
+          {...}
         </PopoverContent>
       </Popover>
     );
@@ -144,24 +276,28 @@ While shadcn/ui relies on Radix's motion data states, Lumi uses Base UI's transi
   ```
   </TabsPanel>
   <TabsPanel value="lumi/ui">
-  ```tsx title="demo-popover.tsx" showLineNumbers {4,12,13,14}
+  ```tsx title="demo-popover.tsx" showLineNumbers {5-6,13,15-16}
   import {
     Popover,
     PopoverTrigger,
-    PopoverPopup,       // Renamed from PopoverContent
-  } from "@/registry/ui/popover";
+    PopoverContent,
+    PopoverTitle,
+    PopoverDescription,
+  } from "@/components/ui/popover";
+  import { Button } from "@/components/ui/button";
 
   export function Demo() {
     return (
       <Popover>
-        <PopoverTrigger>Open</PopoverTrigger>
-        <PopoverPopup
+        <PopoverTrigger render={<Button>Open</Button>} />
+        <PopoverContent
           showArrow
-          title="Popover title"
-          description="This is a Lumi popover."
+          matchAnchorWidth
         >
-          This is a popover.
-        </PopoverPopup>
+          <PopoverTitle>Popover title</PopoverTitle>
+          <PopoverDescription>This is a popover.</PopoverDescription>
+          {...}
+        </PopoverContent>
       </Popover>
     );
   }

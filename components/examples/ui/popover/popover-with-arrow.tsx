@@ -10,14 +10,13 @@ import {
   PopoverTrigger,
 } from "@/registry/ui/popover";
 
-export default function PopoverOpenOnHoverDemo() {
+export default function PopoverWithArrowDemo() {
   return (
     <Popover>
       <PopoverTrigger
         className={buttonVariants({ variant: "outline", size: "icon-sm" })}
-        openOnHover
       >
-        <BellIcon aria-label="Notifications" />
+        <BellIcon />
       </PopoverTrigger>
       <PopoverContent showArrow>
         <PopoverTitle>Notifications</PopoverTitle>

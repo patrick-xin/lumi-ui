@@ -90,11 +90,11 @@ function AlertDialogContent({
       <AlertDialogViewport className="grid place-items-center">
         <BaseAlertDialog.Popup
           className={cn(
-            "grid w-full max-w-lg gap-4 border bg-background p-6 shadow-lg duration-200 rounded-lg",
+            "grid w-full max-w-lg gap-4 border bg-background p-4 shadow-lg rounded-lg",
             "scale-[calc(1-0.1*var(--nested-dialogs,0))]",
-            "translate-y-[calc(-50%+1.25rem*var(--nested-dialogs,0))]",
-            "data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
-            "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
+            "translate-y-[calc(-50%+1.25rem*var(--nested-dialogs,0))] will-change-transform transition-all duration-200 origin-top",
+            "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
+            "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
             "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-lg data-[nested-dialog-open]:after:bg-black/10",
             className
           )}
