@@ -1,11 +1,14 @@
+import { Field, FieldDescription, FieldLabel } from "@/registry/ui/field";
 import { Input } from "@/registry/ui/input";
-import { Label } from "@/registry/ui/label";
 
 export function InputWithLabel() {
   return (
-    <div className="grid w-full max-w-sm items-center gap-3">
-      <Label htmlFor="email">Email</Label>
+    <Field>
+      <FieldLabel>Email</FieldLabel>
       <Input type="email" id="email" placeholder="Email" />
-    </div>
+      <FieldDescription>
+        We won't send you spam or promotional emails.
+      </FieldDescription>
+    </Field>
   );
 }

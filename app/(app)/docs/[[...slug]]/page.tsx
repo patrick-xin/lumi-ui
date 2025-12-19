@@ -86,7 +86,7 @@ export default async function Page(props: PageProps) {
   return (
     <div className="relative grid xl:grid-cols-[minmax(0,1fr)_minmax(200px,240px)] xl:gap-12 2xl:gap-16 scroll-mt-20">
       <div className="min-w-0 py-4 rounded-md">
-        <article className="max-w-[75ch] mx-auto pt-12 lg:pt-0 space-y-8 px-6">
+        <article className="max-w-[75ch] mx-auto pt-12 lg:pt-0 space-y-8 px-0 lg:px-6">
           <DocsAritcleHeader
             description={doc.description}
             links={links}

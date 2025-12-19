@@ -43,15 +43,17 @@ function FieldLabel({
 
 function FieldControl({
   className,
-  variant = "md",
+  inputSize = "default",
+  variant = "default",
   ...props
 }: React.ComponentProps<typeof BaseField.Control> & {
+  inputSize?: VariantProps<typeof inputVariants>["inputSize"];
   variant?: VariantProps<typeof inputVariants>["variant"];
 }) {
   return (
     <BaseField.Control
       data-slot="field-control"
-      className={cn(inputVariants({ variant }), className)}
+      className={cn(inputVariants({ inputSize, variant }), className)}
       {...props}
     />
   );
