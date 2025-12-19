@@ -138,7 +138,7 @@ function PopoverContent({
         <BasePopover.Popup
           data-slot="popover-popup"
           className={cn(
-            "rounded-md bg-popover p-3 text-popover-foreground shadow-md outline outline-border dark:-outline-offset-1",
+            "relative rounded-md bg-popover p-3 text-popover-foreground shadow-md outline outline-border dark:-outline-offset-1",
             "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
             "animate-popup",
             className,
