@@ -1,10 +1,9 @@
 import { Input } from "@/registry/ui/input";
-import { Label } from "@/registry/ui/label";
 
 export function InputFile() {
   return (
     <div className="grid w-full max-w-sm items-center gap-3">
-      <Label htmlFor="picture">Picture</Label>
+      <label htmlFor="picture">Picture</label>
       <Input id="picture" type="file" />
     </div>
   );

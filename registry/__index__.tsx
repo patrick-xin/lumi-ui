@@ -2552,6 +2552,42 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "input-sizes": {
+    name: "input-sizes",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["input"],
+    files: [{
+      path: "components/examples/ui/input/input-sizes.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/input/input-sizes");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "input-sizes";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "input-styles": {
+    name: "input-styles",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["input"],
+    files: [{
+      path: "components/examples/ui/input/input-styles.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/input/input-styles");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "input-styles";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "input-with-button": {
     name: "input-with-button",
     description: "",
@@ -2565,6 +2601,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/input/input-with-button");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "input-with-button";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "input-with-form": {
+    name: "input-with-form",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["input"],
+    files: [{
+      path: "components/examples/ui/input/input-with-form.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/input/input-with-form");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "input-with-form";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

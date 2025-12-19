@@ -5,29 +5,36 @@ import { cn } from "@/lib/utils";
 
 const inputVariants = cva(
   [
-    "h-9 px-3 py-1 w-full min-w-0 rounded-md border border-input bg-transparent text-base shadow-xs transition-[color,box-shadow] outline-none md:text-sm dark:bg-input/30",
+    "w-full min-w-0 rounded-md shadow-xs border border-input transition-[color,box-shadow] outline-none",
     "placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground",
     "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
     "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-2",
     "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-    "file:text-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium",
+    "file:text-foreground file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium",
   ],
   {
     variants: {
-      variant: {
+      inputSize: {
+        default: "h-9 px-2.5 py-1 text-base md:text-sm",
         sm: "h-8 px-2 text-sm",
-        md: "h-9 px-3 py-1 text-base md:text-sm",
-        lg: "h-11 px-4 text-lg md:text-base",
+        lg: "h-10 px-2.5 text-lg md:text-base",
       },
+      variant:{
+        default:"bg-transparent dark:bg-input/30",
+        transparent:"bg-transparent",
+        ghost: "border-transparent shadow-none focus-visible:border-ring focus-visible:shadow-xs",
+      }
     },
     defaultVariants: {
-      variant: "md",
+      inputSize: "default",
+      variant:"default",
     },
   },
 );
 
 function Input({
   variant,
+  inputSize,
   className,
   type,
   ...props
@@ -37,7 +44,7 @@ function Input({
     <BaseInput
       type={type}
       data-slot="input"
-      className={cn(inputVariants({ variant }), className)}
+      className={cn(inputVariants({ variant, inputSize }), className)}
       {...props}
     />
   );

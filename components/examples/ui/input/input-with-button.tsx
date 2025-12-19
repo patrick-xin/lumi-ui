@@ -3,11 +3,23 @@ import { Input } from "@/registry/ui/input";
 
 export function InputWithButton() {
   return (
-    <div className="flex w-full max-w-sm items-center gap-2">
-      <Input type="email" placeholder="Email" />
-      <Button type="submit" variant="outline">
-        Subscribe
-      </Button>
+    <div className="flex flex-col w-full max-w-md gap-4">
+      <div className="flex items-center gap-2">
+        <Input placeholder="default" />
+        <Button variant="outline">Default</Button>
+      </div>
+      <div className="flex items-center gap-2">
+        <Input inputSize="sm" placeholder="small" />
+        <Button size="sm" variant="outline">
+          Small
+        </Button>
+      </div>
+      <div className="flex items-center gap-2">
+        <Input inputSize="lg" placeholder="large" />
+        <Button size="lg" variant="outline">
+          Large
+        </Button>
+      </div>
     </div>
   );
 }
