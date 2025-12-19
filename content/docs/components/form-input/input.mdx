@@ -32,7 +32,7 @@ links:
 </CodeTabs>
 
 
-## Usage
+## Basic Usage
 
 ```tsx
 import { Input } from "@/components/ui/input"
@@ -42,19 +42,22 @@ import { Input } from "@/components/ui/input"
 <Input />
 ```
 
-## Recipes
+## Variants
 
-### Default
-
-<ComponentPreview name="input-demo" />
-
-### Sizes
+### Size
 
 <ComponentPreview name="input-sizes" />
 
-### Styles
+### Appearance
 
 <ComponentPreview name="input-styles" />
+
+## Recipes
+
+<Callout variant="warning" title="Warning">
+Form controls must have an accessible name: The input must have a meaningful label. Prefer using [`<Field>`](/docs/components/form-input/field) to provide a visible text label and description, or use the aria-label attribute as an alternative. See [**With Field**](#with-field) example below
+</Callout>
+
 
 ### File
 
