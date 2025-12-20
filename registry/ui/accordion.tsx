@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Accordion as BaseAccordion } from "@base-ui/react/accordion";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ChevronDown } from "lucide-react";
@@ -27,7 +26,7 @@ function AccordionItem({ className, ...props }: BaseAccordion.Item.Props) {
 function AccordionHeader({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAccordion.Header>) {
+}: BaseAccordion.Header.Props) {
   return (
     <BaseAccordion.Header
       data-slot="accordion-header"
@@ -41,7 +40,7 @@ function AccordionSummary({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof AccordionTrigger>) {
+}: BaseAccordion.Trigger.Props) {
   return (
     <BaseAccordion.Header>
       <BaseAccordion.Trigger
@@ -97,16 +96,12 @@ const panelVariants = cva(
   },
 );
 
-interface AccordionPanelProps
-  extends BaseAccordion.Panel.Props,
-    VariantProps<typeof panelVariants> {}
-
 function AccordionPanel({
   className,
   animation,
   children,
   ...props
-}: AccordionPanelProps) {
+}: BaseAccordion.Panel.Props & VariantProps<typeof panelVariants>) {
   return (
     <BaseAccordion.Panel
       data-slot="accordion-panel"

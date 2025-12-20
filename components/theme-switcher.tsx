@@ -67,6 +67,27 @@ export function ThemeSwitcher() {
           >
             <div className="size-2 bg-[oklch(0.71_0.08_302)] rounded-full" />
           </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => handleThemeSetChange("lagoon")}
+            disabled={themeSet === "lagoon"}
+            className="w-full justify-start text-xs h-6 extend-touch-target"
+          >
+            <div className="size-2 bg-[oklch(0.55_0.15_180)] rounded-full" />
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => handleThemeSetChange("dune")}
+            disabled={themeSet === "dune"}
+            className="w-full justify-start text-xs h-6 extend-touch-target"
+          >
+            <div className="size-2 bg-[oklch(0.66_0.197_36)] rounded-full" />
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => handleThemeSetChange("canopy")}
+            disabled={themeSet === "canopy"}
+            className="w-full justify-start text-xs h-6 extend-touch-target"
+          >
+            <div className="size-2 bg-[oklch(0.72_0.18_128)] rounded-full" />
+          </DropdownMenuItem>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>

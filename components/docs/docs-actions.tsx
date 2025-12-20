@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, MessageCircle } from "lucide-react";
 import { CopyPageButton } from "@/components/docs/copy-page-button";
 import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
@@ -65,6 +65,17 @@ const menuItems = {
       <span>Open in Claude</span>
     </a>
   ),
+  t3: (url: string) => (
+    <a
+      className="w-full inline-flex items-center justify-start gap-3"
+      href={getPromptUrl("https://t3.chat/new", url)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <MessageCircle className="size-4" />
+      <span>Open in T3</span>
+    </a>
+  ),
 };
 
 export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
@@ -90,8 +101,8 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
         />
 
         <DropdownMenuContent
-          className="w-44 bg-background/40 backdrop-blur-md"
-          alignOffset={-40}
+          className="w-44 bg-background/40 backdrop-blur-md -translate-x-28"
+          // alignOffset={-120}
         >
           {Object.entries(menuItems).map(([key, value]) => (
             <DropdownMenuItem

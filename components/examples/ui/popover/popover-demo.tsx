@@ -1,8 +1,10 @@
+import { XIcon } from "lucide-react";
 import { Button } from "@/registry/ui/button";
 import { Input } from "@/registry/ui/input";
 import { Label } from "@/registry/ui/label";
 import {
   Popover,
+  PopoverClose,
   PopoverContent,
   PopoverDescription,
   PopoverTitle,
@@ -58,6 +60,14 @@ export function PopoverDemo() {
             </div>
           </div>
         </div>
+        <PopoverClose
+          className="absolute top-2 right-2"
+          render={
+            <Button variant="outline" size="icon-sm">
+              <XIcon />
+            </Button>
+          }
+        />
       </PopoverContent>
     </Popover>
   );

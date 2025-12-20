@@ -40,10 +40,10 @@ const NumberFieldInput = ({
   <BaseNumberField.Input
     data-slot="number-field-input"
     className={cn(
-      "flex-1 min-w-0 px-3 text-center text-sm tabular-nums outline-none",
+      "flex-1 min-w-0 px-3 text-center text-sm tabular-nums outline-none rounded-xs",
       "placeholder:text-muted-foreground",
       "selection:bg-primary selection:text-primary-foreground",
-      "focus-visible:z-10 focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring/50",
+      "focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/50",
       "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
       "disabled:cursor-not-allowed",
       className

@@ -17,6 +17,8 @@ import {
 } from "@/components/docs/mdx/tables";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
+import { ApplyThemeButton } from "./components/docs/mdx/apply-theme-button";
+import { ColorPallete } from "./components/docs/mdx/color-pallete";
 
 export const mdxComponents: MDXComponents = {
   p: ({ className, ...props }: React.ComponentProps<"p">) => (
@@ -245,4 +247,6 @@ export const mdxComponents: MDXComponents = {
   ComponentList,
   CTACard,
   Callout,
+  ApplyThemeButton,
+  ColorPallete,
 };

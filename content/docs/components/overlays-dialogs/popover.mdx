@@ -248,6 +248,12 @@ Switch to using the `render` prop instead of `asChild`.
 </Callout>
 
 
+### New components
+
+- `<PopoverTitle>`
+- `<PopoverDescription>`
+- `<PopoverClose>`
+
 ### Migration Example
 
 <Tabs defaultValue="shadcn/ui"> 
@@ -276,13 +282,14 @@ Switch to using the `render` prop instead of `asChild`.
   ```
   </TabsPanel>
   <TabsPanel value="lumi/ui">
-  ```tsx title="demo-popover.tsx" showLineNumbers {5-6,13,15-16}
+  ```tsx title="demo-popover.tsx" showLineNumbers {5-7}
   import {
     Popover,
     PopoverTrigger,
     PopoverContent,
     PopoverTitle,
     PopoverDescription,
+    PopoverClose
   } from "@/components/ui/popover";
   import { Button } from "@/components/ui/button";
 
@@ -290,13 +297,17 @@ Switch to using the `render` prop instead of `asChild`.
     return (
       <Popover>
         <PopoverTrigger render={<Button>Open</Button>} />
-        <PopoverContent
-          showArrow
-          matchAnchorWidth
-        >
+        <PopoverContent showArrow matchAnchorWidth>
           <PopoverTitle>Popover title</PopoverTitle>
           <PopoverDescription>This is a popover.</PopoverDescription>
-          {...}
+          <PopoverClose
+            render={
+              <Button variant="outline" size="icon-sm">
+                <XIcon />
+              </Button>
+            }
+          />
+          { ... }
         </PopoverContent>
       </Popover>
     );

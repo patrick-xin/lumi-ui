@@ -31,7 +31,7 @@ export default function EditorToolbar() {
 
       <ToolbarSeparator />
 
-      <ToolbarLink href="#" className="ml-auto">
+      <ToolbarLink href="#" className="ml-auto text-xs">
         Edited 5 mins ago
       </ToolbarLink>
     </Toolbar>
