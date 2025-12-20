@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const panelVariants = cva("overflow-hidden", {
   variants: {
     animation: {
-      css: "h-[var(--collapsible-panel-height)] data-[starting-style]:h-0 data-[ending-style]:h-0 transition-all duration-150 ease-out",
+      css: "h-[var(--collapsible-panel-height)] data-[starting-style]:h-0 data-[ending-style]:h-0 transition-all duration-150",
       none: "",
     },
   },

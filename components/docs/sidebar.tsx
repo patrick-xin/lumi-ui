@@ -150,7 +150,7 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
           <span className="truncate">{item.label}</span>
 
           {item.status === "new" && (
-            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
           )}
           {item.status === "planned" && (
             <span className="ml-auto h-1.5 w-1.5 rounded-full bg-muted-foreground/50" />

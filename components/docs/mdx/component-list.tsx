@@ -32,8 +32,7 @@ export function ComponentList() {
       )}
       {categories.map((category) => (
         <div key={category.$id} className="space-y-6">
-          {/* Category Label (e.g. "Form & Input") */}
-          <h3 className="text-lg font-semibold tracking-tight text-foreground">
+          <h3 className="text-lg lg:text-xl font-semibold tracking-tight text-foreground">
             {category.name}
           </h3>
           <ComponentGrid items={category.children} showStatus={showStatus} />
@@ -101,7 +100,7 @@ function NavItem({ child, shouldShowStatus }: NavItemProps) {
     >
       <span>{child.name}</span>
       {shouldShowStatus && status === "new" && (
-        <span className="h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
       )}
       {shouldShowStatus && status === "in-progress" && (
         <span className="h-1.5 w-1.5 rounded-full bg-amber-500/70" />
