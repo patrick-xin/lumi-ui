@@ -1,0 +1,35 @@
+{
+  "name": "@lumi-ui/ui",
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "@base-ui/react": "^1.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "next": "^16.1.0",
+    "react": "^19.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "next": "^16.1.0",
+    "react": "^19.0.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "exports": {
+    "./*.css": "./src/styles/*.css",
+    "./globals.css": {
+      "import": "./src/styles/globals.css",
+      "style": "./src/styles/globals.css",
+      "default": "./src/styles/globals.css"
+    },
+    "./lib/*": "./src/lib/*.ts",
+    "./hooks/*": "./src/hooks/*.ts",
+    "./postcss.config": "./postcss.config.mjs",
+    "./*": "./src/components/ui/*.tsx"
+  }
+}

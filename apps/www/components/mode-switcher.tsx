@@ -1,8 +1,8 @@
 "use client";
 
+import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
 import { AnimatePresence, motion } from "motion/react";
 import { useTheme } from "next-themes";
-import { useMounted } from "@/hooks/use-mounted";
 import { Button } from "@/registry/ui/button";
 
 export function ModeSwitcher() {

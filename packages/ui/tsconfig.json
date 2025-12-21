@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "composite": true,
+    "incremental": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@lumi-ui/ui/*": ["./src/*"]
+    },
+    "types": ["next", "react", "node"]
+  },
+  "exclude": ["node_modules", "dist"],
+  "extends": "@lumi-ui/tsconfig/next.json",
+  "include": ["."]
+}

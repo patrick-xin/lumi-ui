@@ -1,5 +1,5 @@
+import { Button } from "@lumi-ui/ui/button";
 import Link from "next/link";
-import { Button } from "@/registry/ui/button";
 
 export function HeroSection() {
   return (
