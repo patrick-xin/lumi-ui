@@ -1,5 +1,6 @@
 "use client";
 
+import { useCopyToClipboard } from "@lumi-ui/ui/hooks/use-copy-to-clipboard";
 import {
   type Easing,
   motion,
@@ -8,7 +9,6 @@ import {
   type Variants,
 } from "motion/react";
 import type * as React from "react";
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 

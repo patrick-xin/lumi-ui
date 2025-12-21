@@ -1,9 +1,9 @@
 "use client";
 
+import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
 import { PaletteIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { useMounted } from "@/hooks/use-mounted";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,

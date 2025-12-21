@@ -1,11 +1,11 @@
 "use client";
 
 import { Autocomplete } from "@base-ui/react/autocomplete";
+import { useIsMac } from "@lumi-ui/ui/hooks/use-is-mac";
+import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
 import { ArrowDown, ArrowUp, CornerDownLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
-import { useIsMac } from "@/hooks/use-is-mac";
-import { useMounted } from "@/hooks/use-mounted";
 import { IconMap } from "@/lib/icons";
 import { getSearchGroups } from "@/lib/sidebar-utils";
 import { cn } from "@/lib/utils";
