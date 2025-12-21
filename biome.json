@@ -9,15 +9,15 @@
     "ignoreUnknown": true,
     "includes": [
       "**",
-      "!node_modules",
-      "!.next",
-      "!dist",
-      "!build",
-      "!.source",
-      "!styles",
-      "!registry",
-      "!public",
-      "!app/og"
+      "!**/node_modules",
+      "!**/.next",
+      "!**/dist",
+      "!**/build",
+      "!**/.source",
+      "!**/styles",
+      "!**/registry",
+      "!**/public",
+      "!**/app/og"
     ]
   },
   "formatter": {

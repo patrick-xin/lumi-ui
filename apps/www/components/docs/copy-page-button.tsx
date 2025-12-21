@@ -65,11 +65,11 @@ export function CopyPageButton({ slug, className }: CopyPageButtonProps) {
       aria-label="Copy page content as MDX"
     >
       {isLoading ? (
-        <Loader2 className="h-4 w-4 animate-spin" />
+        <Loader2 className="size-4 animate-spin" />
       ) : copied ? (
-        <Check className="h-4 w-4" />
+        <Check className="size-4" />
       ) : (
-        <Copy className="h-4 w-4" />
+        <Copy className="size-4" />
       )}
       <span className="ml-2">Copy Page</span>
     </Button>
