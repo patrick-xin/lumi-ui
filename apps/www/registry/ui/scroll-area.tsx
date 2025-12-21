@@ -63,7 +63,7 @@ function ScrollAreaContent({
   return (
     <BaseScrollArea.Content
       data-slot="scroll-area-content"
-      className={cn("flex-1 px-1", className)}
+      className={cn("flex-1", className)}
       {...props}
     />
   );

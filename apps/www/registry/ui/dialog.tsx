@@ -6,6 +6,7 @@ import { XIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "./scroll-area";
+import { cva } from "class-variance-authority";
 
 function Dialog<Payload>({
   ...props
@@ -32,7 +33,7 @@ function DialogViewport({
   return (
     <BaseDialog.Viewport
       data-slot="dialog-viewport"
-      className={cn("fixed inset-0 p-4 sm:p-6 outline-none", className)}
+      className={cn("fixed inset-0 outline-none", className)}
       {...props}
     />
   );
@@ -46,9 +47,7 @@ function DialogBackdrop({
     <BaseDialog.Backdrop
       data-slot="dialog-backdrop"
       className={cn(
-        "fixed inset-0 min-h-dvh bg-black/70 backdrop-blur-xs",
-        "transition-all duration-150",
-        "data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
+        "fixed inset-0 min-h-dvh bg-black/70",
         "supports-[-webkit-touch-callout:none]:absolute",
         className,
       )}
@@ -57,18 +56,34 @@ function DialogBackdrop({
   );
 }
 
+
+const panelVariants = cva("overflow-hidden", {
+  variants: {
+    animation: {
+      css: "transition-all duration-150 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
+      none: "",
+    },
+  },
+  defaultVariants: {
+    animation: "css",
+  },
+})
+
+
 function DialogPopup({
   className,
   children,
+  animation = "css",
   ...props
-}: React.ComponentProps<typeof BaseDialog.Popup>) {
+}: React.ComponentProps<typeof BaseDialog.Popup> & {
+  animation?: "css" | "none";
+}) {
   return (
     <BaseDialog.Popup
       data-slot="dialog-popup"
       className={cn(
         "relative bg-background p-4 sm:p-6",
-        "will-change-transform transition-all duration-150",
-        "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
+        panelVariants({ animation }),
         className,
       )}
       {...props}

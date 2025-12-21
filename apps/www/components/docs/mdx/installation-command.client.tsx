@@ -68,7 +68,7 @@ export function InstallationCommandClient({
           <TabsPanel key={manager} value={manager}>
             {data.highlighted}
             {data.code && (
-              <CopyButton className="absolute right-2 top-2" code={data.code} />
+              <CopyButton className="absolute top-2 right-2" code={data.code} />
             )}
           </TabsPanel>
         );

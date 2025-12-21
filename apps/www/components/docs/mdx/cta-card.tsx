@@ -14,12 +14,12 @@ const CardContent: React.FC<CardContentProps> = ({
 }) => (
   <>
     {icon && (
-      <span className="text-primary bg-accent/50 p-2 rounded-md">{icon}</span>
+      <span className="rounded-md bg-accent/50 p-2 text-primary">{icon}</span>
     )}
     <div className="space-y-4">
-      <div className="text-base font-semibold">{title}</div>
+      <div className="font-semibold text-base">{title}</div>
       {description && (
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <p className="text-muted-foreground text-sm">{description}</p>
       )}
     </div>
   </>
