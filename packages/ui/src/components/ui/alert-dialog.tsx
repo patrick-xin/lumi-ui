@@ -37,10 +37,7 @@ function AlertDialogBackdrop({
     <BaseAlertDialog.Backdrop
       data-slot="alert-dialog-backdrop"
       className={cn(
-        "fixed inset-0 min-h-dvh bg-black/70 backdrop-blur-xs",
-        "transition-all duration-150",
-        "data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
-        "supports-[-webkit-touch-callout:none]:absolute",
+        "fixed inset-0 min-h-dvh supports-[-webkit-touch-callout:none]:absolute",
         className,
       )}
       {...props}
@@ -55,12 +52,7 @@ function AlertDialogPopup({
   return (
     <BaseAlertDialog.Popup
       data-slot="alert-dialog-popup"
-      className={cn(
-        "relative bg-background p-4 sm:p-6",
-        "will-change-transform transition-all duration-150",
-        "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
-        className,
-      )}
+      className={cn("relative bg-background will-change-transform ", className)}
       {...props}
     />
   );
@@ -72,7 +64,7 @@ function AlertDialogViewport({
 }: React.ComponentProps<typeof BaseAlertDialog.Viewport>) {
   return (
     <BaseAlertDialog.Viewport
-      className={cn("fixed inset-0 p-4 sm:p-6 outline-none", className)}
+      className={cn("fixed inset-0 outline-none", className)}
       data-slot="alert-dialog-viewport"
       {...props}
     />
@@ -178,15 +170,16 @@ const createAlertDialogHandle = BaseAlertDialog.createHandle;
 
 export {
   AlertDialog,
-  AlertDialogBackdrop,
-  AlertDialogClose,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogPopup,
-  AlertDialogPortal,
-  AlertDialogTitle,
   AlertDialogTrigger,
+  AlertDialogPortal,
+  AlertDialogBackdrop,
+  AlertDialogViewport,
+  AlertDialogPopup,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogClose,
   createAlertDialogHandle,
   // Pre-assembled component
   AlertDialogContent,

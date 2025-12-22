@@ -108,6 +108,16 @@ function PopoverClose({ ...props }: BasePopover.Close.Props) {
   return <BasePopover.Close data-slot="popover-close" {...props} />;
 }
 
+
+type PopoverContentProps = React.ComponentProps<typeof BasePopover.Popup>&{
+  align?: BasePopover.Positioner.Props["align"];
+  alignOffset?: BasePopover.Positioner.Props["alignOffset"];
+  side?: BasePopover.Positioner.Props["side"];
+  sideOffset?: BasePopover.Positioner.Props["sideOffset"];
+  showArrow?: boolean;
+  matchAnchorWidth?: boolean;
+}
+
 function PopoverContent({
   children,
   className,
@@ -118,14 +128,7 @@ function PopoverContent({
   showArrow = false,
   matchAnchorWidth = false,
   ...props
-}: BasePopover.Popup.Props & {
-  align?: BasePopover.Positioner.Props["align"];
-  alignOffset?: BasePopover.Positioner.Props["alignOffset"];
-  side?: BasePopover.Positioner.Props["side"];
-  sideOffset?: BasePopover.Positioner.Props["sideOffset"];
-  showArrow?: boolean;
-  matchAnchorWidth?: boolean;
-}) {
+}: PopoverContentProps) {
   return (
     <BasePopover.Portal>
       <BasePopover.Positioner

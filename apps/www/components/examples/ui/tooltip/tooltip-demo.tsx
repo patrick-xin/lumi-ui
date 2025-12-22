@@ -1,11 +1,11 @@
 import { Button } from "@/registry/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip";
 
-export function SimpleTooltip() {
+export function TooltipDemo() {
   return (
     <Tooltip>
       <TooltipTrigger render={<Button variant={"outline"}>Hover me</Button>} />
-      <TooltipContent side="bottom">
+      <TooltipContent>
         <p>Hello from tooltip!</p>
       </TooltipContent>
     </Tooltip>

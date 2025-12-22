@@ -30,3 +30,78 @@ links:
     </Steps>
   </TabsPanel>
 </CodeTabs>
+
+## Basic Usage
+
+```tsx
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
+```
+
+```tsx
+<Tooltip>
+  <TooltipTrigger>Hover me</TooltipTrigger>
+  <TooltipContent>
+    Tooltip
+  </TooltipContent>
+</Tooltip>
+```
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+```tsx
+<TooltipProvider>
+  <Tooltip>   
+    <TooltipTrigger />
+    <TooltipContent />
+  </Tooltip>
+  <Tooltip>   
+    <TooltipTrigger />
+    <TooltipContent />
+  </Tooltip>
+</TooltipProvider>
+```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger />
+    <TooltipPortal>
+      <TooltipPositioner>
+        <TooltipPopup>
+          <TooltipArrow />
+        </TooltipPopup>
+      </TooltipPositioner>
+    </TooltipPortal>
+  </Tooltip>
+</TooltipProvider>
+```
+  </TabsPanel>
+</Tabs>
+
+
+## Cookbook
+
+### Change Delay
+<ComponentPreview name="tooltip-delay" />
+
+### Detached Triggers
+<ComponentPreview name="tooltip-detached-triggers" />
+
+### Controlled mode with multiple triggers
+<ComponentPreview name="tooltip-controlled" />
+
+### With Animation
+<ComponentPreview name="tooltip-animation" />

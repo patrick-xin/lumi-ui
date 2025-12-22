@@ -128,7 +128,7 @@ function SelectArrow({
       data-slot="select-arrow"
       {...props}
     >
-      <ArrowSvg/>
+      <ArrowSvg variant="popover"/>
     </BaseSelect.Arrow>
   );
 }

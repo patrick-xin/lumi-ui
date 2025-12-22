@@ -3866,6 +3866,60 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "tooltip-animation": {
+    name: "tooltip-animation",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tooltip"],
+    files: [{
+      path: "components/examples/ui/tooltip/tooltip-animation.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/tooltip/tooltip-animation");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tooltip-animation";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "tooltip-controlled": {
+    name: "tooltip-controlled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tooltip"],
+    files: [{
+      path: "components/examples/ui/tooltip/tooltip-controlled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/tooltip/tooltip-controlled");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tooltip-controlled";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "tooltip-delay": {
+    name: "tooltip-delay",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tooltip"],
+    files: [{
+      path: "components/examples/ui/tooltip/tooltip-delay.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/tooltip/tooltip-delay");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tooltip-delay";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "tooltip-demo": {
     name: "tooltip-demo",
     description: "",
@@ -3879,6 +3933,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/tooltip/tooltip-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tooltip-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "tooltip-detached-triggers": {
+    name: "tooltip-detached-triggers",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["tooltip"],
+    files: [{
+      path: "components/examples/ui/tooltip/tooltip-detached-triggers.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/tooltip/tooltip-detached-triggers");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tooltip-detached-triggers";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
