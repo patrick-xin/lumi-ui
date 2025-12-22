@@ -32,9 +32,9 @@ export function ComponentList() {
       )}
       {categories.map((category) => (
         <div key={category.$id} className="space-y-6">
-          <h3 className="text-lg lg:text-xl font-semibold tracking-tight text-foreground">
+          <h2 className="text-lg lg:text-xl font-semibold tracking-tight text-foreground">
             {category.name}
-          </h3>
+          </h2>
           <ComponentGrid items={category.children} showStatus={showStatus} />
         </div>
       ))}

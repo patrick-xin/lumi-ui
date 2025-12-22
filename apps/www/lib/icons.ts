@@ -1,4 +1,5 @@
 import {
+  Activity,
   ArrowUpRight,
   Book,
   Component,
@@ -14,6 +15,7 @@ export const IconMap: Record<string, React.ComponentType<LucideProps>> = {
   Component,
   Diamond,
   Palette,
+  Activity,
   "Get Started": Book,
   Components: Diamond,
   "Form & Input": Diamond,

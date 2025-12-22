@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Select as BaseSelect } from "@base-ui/react/select";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 import { cn } from "@/lib/utils";
 
@@ -13,34 +14,15 @@ function Select<Value, Multiple extends boolean | undefined = false>(
 }
 
 function SelectTrigger({
-  className,
   children,
-  size = "default",
   ...props
-}: React.ComponentProps<typeof BaseSelect.Trigger> & {
-  size?: "default" | "sm";
-}) {
+}: React.ComponentProps<typeof BaseSelect.Trigger>) {
   return (
     <BaseSelect.Trigger
       data-slot="select-trigger"
-      data-size={size}
-      className={cn(
-        "border-input flex min-w-40 w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs outline-none transition-[color,box-shadow]",
-        "dark:bg-input/30 dark:hover:bg-input/50",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-        "disabled:cursor-not-allowed disabled:opacity-50",
-        "[&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "data-[size=default]:h-9 data-[size=sm]:h-8",
-        "dark:data-[popup-open]:bg-input/50",
-        className,
-      )}
       {...props}
     >
       {children}
-      <BaseSelect.Icon>
-        <ChevronDownIcon className="size-4 opacity-50" />
-      </BaseSelect.Icon>
     </BaseSelect.Trigger>
   );
 }
@@ -68,80 +50,123 @@ function SelectValue({
   );
 }
 
-function SelectContent({
+function SelectIcon({
   className,
-  children,
-  side = "bottom",
-  align = "start",
-  sideOffset = 4,
-  alignOffset = 0,
-  alignItemWithTrigger = false,
   ...props
-}: React.ComponentProps<typeof BaseSelect.Popup> &
-  Pick<
-    React.ComponentProps<typeof BaseSelect.Positioner>,
-    "side" | "sideOffset" | "align" | "alignOffset" | "alignItemWithTrigger"
-  > & {
-    position?: "popper" | "item-aligned";
-  }) {
+}: React.ComponentProps<typeof BaseSelect.Icon>) {
   return (
-    <BaseSelect.Portal>
-      <BaseSelect.Positioner
-        side={side}
-        align={align}
-        sideOffset={sideOffset}
-        alignOffset={alignOffset}
-        alignItemWithTrigger={alignItemWithTrigger}
-        className="z-50 outline-none"
-      >
-        <BaseSelect.Popup
-          data-slot="select-content"
-          className={cn(
-            "bg-popover text-popover-foreground relative overflow-hidden rounded-md border shadow-md min-w-[var(--anchor-width)]",
-            "outline outline-border dark:-outline-offset-1",
-            "animate-popup",
-            "data-[side=none]:transition-none data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100",
-            className,
-          )}
-          {...props}
-        >
-          <SelectScrollUpButton />
-          <BaseSelect.List className="relative p-1 scroll-py-6 overflow-y-auto max-h-[min(24rem,var(--available-height))]">
-            {children}
-          </BaseSelect.List>
-          <SelectScrollDownButton />
-        </BaseSelect.Popup>
-      </BaseSelect.Positioner>
-    </BaseSelect.Portal>
+    <BaseSelect.Icon
+      data-slot="select-icon"
+      className={cn("pointer-events-none", className)}
+      {...props}
+    />
+  );
+}
+
+function SelectBackdrop({
+  ...props
+}: React.ComponentProps<typeof BaseSelect.Backdrop>) {
+  return (
+    <BaseSelect.Backdrop
+      data-slot="select-backdrop"
+      {...props}
+    />
+  );
+}
+
+function SelectPortal({
+  ...props
+}: React.ComponentProps<typeof BaseSelect.Portal>) {
+  return (
+    <BaseSelect.Portal
+      data-slot="select-portal"
+      {...props}
+    />
+  );
+}
+
+function SelectPositioner({
+  alignItemWithTrigger,
+  ...props
+}: React.ComponentProps<typeof BaseSelect.Positioner>) {
+  return (
+    <BaseSelect.Positioner
+      data-slot="select-positioner"
+      alignItemWithTrigger={alignItemWithTrigger}
+      {...props}
+    />
+  );
+}
+
+function SelectPopup({
+  ...props
+}: React.ComponentProps<typeof BaseSelect.Popup>) {
+  return (
+    <BaseSelect.Popup
+      data-slot="select-popup"
+      {...props}
+    />
+  );
+}
+
+function SelectList({
+  ...props
+}: React.ComponentProps<typeof BaseSelect.List>) {
+  return (
+    <BaseSelect.List
+      data-slot="select-list"
+      {...props}
+    />
+  );
+}
+
+function SelectArrow({
+  ...props
+}: React.ComponentProps<typeof BaseSelect.Arrow>) {
+  return (
+    <BaseSelect.Arrow
+      data-slot="select-arrow"
+      {...props}
+    >
+      <ArrowSvg/>
+    </BaseSelect.Arrow>
   );
 }
 
 function SelectItem({
-  className,
   children,
   ...props
 }: React.ComponentProps<typeof BaseSelect.Item>) {
   return (
     <BaseSelect.Item
       data-slot="select-item"
-      className={cn(
-        "relative grid grid-cols-[1fr_1rem] w-full cursor-default items-center gap-2 rounded-sm py-1.5 px-2 text-sm outline-hidden select-none",
-        "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
-        "[&_svg:not([class*='text-'])]:text-muted-foreground",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "*:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
-        className,
-      )}
       {...props}
     >
-      <BaseSelect.ItemText className="col-start-1">
-        {children}
-      </BaseSelect.ItemText>
-      <BaseSelect.ItemIndicator className="col-start-2">
-        <CheckIcon className="size-3.5" />
-      </BaseSelect.ItemIndicator>
+     {children}
     </BaseSelect.Item>
+  );
+}
+
+
+function SelectItemText({
+  ...props
+}: React.ComponentProps<typeof BaseSelect.ItemText>) {
+  return (
+    <BaseSelect.ItemText
+      data-slot="select-item-text"
+      {...props}
+    />
+  );
+}
+
+function SelectItemIndicator({
+  ...props
+}: React.ComponentProps<typeof BaseSelect.ItemIndicator>) {
+  return (
+    <BaseSelect.ItemIndicator
+      data-slot="select-item-indicator"
+      {...props}
+    />
   );
 }
 
@@ -213,15 +238,173 @@ function SelectScrollDownButton({
   );
 }
 
+type SelectTriggerGroupProps = Omit<
+  React.ComponentProps<typeof BaseSelect.Trigger>,
+  "children"
+> & {
+  size?: "default" | "sm";
+  icon?: React.ReactNode;
+  iconPlacement?: "left" | "right";
+  placeholder?: string;
+  children?: React.ComponentProps<typeof BaseSelect.Value>["children"];
+};
+
+function SelectTriggerGroup({
+  className,
+  children,
+  size = "default",
+  icon,
+  iconPlacement = "right",
+  placeholder,
+  ...props
+}: SelectTriggerGroupProps) {
+  return (
+    <BaseSelect.Trigger
+      data-size={size}
+      className={cn(
+        "group flex items-center gap-2 min-w-40 dark:bg-input/30 dark:hover:bg-input/50 ",
+        "rounded-md border border-input bg-transparent py-2 text-sm shadow-xs transition-[color,box-shadow]",
+        "outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50",
+        "disabled:cursor-not-allowed disabled:opacity-50",
+        "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
+        "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:opacity-50 [&_svg]:transition-all",
+        "dark:data-[popup-open]:bg-input/50",
+        "data-[size=default]:h-9 data-[size=sm]:h-8",
+        iconPlacement === "left" ? "px-2" : "px-3",
+        className,
+      )}
+      {...props}
+    >
+      <BaseSelect.Value
+      data-slot="select-value"
+      data-placeholder-text={placeholder}
+      className="flex flex-1 items-center gap-2 truncate line-clamp-1 data-[placeholder]:text-muted-foreground data-[placeholder]:before:content-[attr(data-placeholder-text)]"
+      >
+      {children}
+    </BaseSelect.Value>
+      {
+        <BaseSelect.Icon
+          data-slot="select-icon"
+          className={cn(
+            "flex-none shrink-0 pointer-events-none",
+            iconPlacement === "left" && "-order-1",
+          )}
+        >
+          {icon || <ChevronDownIcon />}
+        </BaseSelect.Icon>
+      }
+    </BaseSelect.Trigger>
+  );
+}
+
+function SelectContent({
+  className,
+  children,
+  side = "bottom",
+  align = "start",
+  sideOffset = 4,
+  alignOffset = 0,
+  alignItemWithTrigger = false,
+  ...props
+}: React.ComponentProps<typeof BaseSelect.Popup> &
+  Pick<
+    React.ComponentProps<typeof BaseSelect.Positioner>,
+    "side" | "sideOffset" | "align" | "alignOffset" | "alignItemWithTrigger"
+  >) {
+  return (
+    <SelectPortal>
+      <BaseSelect.Positioner
+        side={side}
+        align={align}
+        sideOffset={sideOffset}
+        alignOffset={alignOffset}
+        alignItemWithTrigger={alignItemWithTrigger}
+        className="z-50 outline-none"
+      >
+        <BaseSelect.Popup
+          data-slot="select-content"
+          className={cn(
+            "bg-popover text-popover-foreground relative overflow-hidden rounded-md border shadow-md min-w-[var(--anchor-width)]",
+            "outline outline-border dark:-outline-offset-1",
+            "animate-popup",
+            "data-[side=none]:transition-none data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100 data-[side=none]:min-w-[calc(var(--anchor-width)+0.3rem)]",
+            className,
+          )}
+          {...props}
+        >
+          <SelectScrollUpButton />
+          <BaseSelect.List className="relative p-1 scroll-py-6 overflow-y-auto max-h-[min(24rem,var(--available-height))]">
+            {children}
+          </BaseSelect.List>
+          <SelectScrollDownButton />
+        </BaseSelect.Popup>
+      </BaseSelect.Positioner>
+    </SelectPortal>
+  );
+}
+
+function SelectItemContent({
+  className,
+  children,
+  icon,
+  iconPlacement = "right",
+  ...props
+}: React.ComponentProps<typeof BaseSelect.Item> & {
+  icon?: React.ReactNode;
+  iconPlacement?: "left" | "right";
+}) {
+  return (
+    <BaseSelect.Item
+      data-slot="select-item"
+      className={cn(
+        "relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 px-2 text-sm outline-hidden select-none",
+        "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+        "[&_svg:not([class*='text-'])]:text-muted-foreground",
+        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "*:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        iconPlacement === "left" && "pl-7",
+        className,
+      )}
+      {...props}
+    >
+      <BaseSelect.ItemText className="flex-1 truncate text-left">
+        {children}
+      </BaseSelect.ItemText>
+      <BaseSelect.ItemIndicator
+        className={cn(
+          "flex shrink-0 items-center justify-center",
+          iconPlacement === "left" && "absolute left-2 top-1/2 -translate-y-1/2"
+        )}
+      >
+        {icon || <CheckIcon className="size-3.5" />}
+      </BaseSelect.ItemIndicator>
+    </BaseSelect.Item>
+  );
+}
+
 export {
   Select,
-  SelectGroup,
-  SelectValue,
   SelectTrigger,
-  SelectContent,
-  SelectGroupLabel,
+  SelectValue,
+  SelectIcon,
+  SelectBackdrop,
+  SelectPortal,
+  SelectPositioner,
+  SelectPopup,
+  SelectList,
+  SelectArrow,
   SelectItem,
-  SelectSeparator,
+  SelectItemText,
+  SelectItemIndicator,
+  SelectGroup,
+  SelectGroupLabel,
   SelectScrollUpButton,
   SelectScrollDownButton,
+  SelectSeparator,
+  // Pre-assembled components
+  SelectTriggerGroup,
+  SelectContent,
+  SelectItemContent
 };

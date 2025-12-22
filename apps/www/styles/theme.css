@@ -394,7 +394,7 @@
   }
 
   [data-theme="canopy-light"] {
-    --radius: 0.3rem; 
+    --radius: 0.325rem; 
 
     --background: oklch(0.99 0.005 128); 
     --foreground: oklch(0.15 0.04 128);
@@ -446,7 +446,7 @@
   }
 
   [data-theme="canopy-dark"] {
-    --radius: 0.3rem;
+    --radius: 0.325rem;
 
     --background: oklch(0.18 0.02 135); 
     --foreground: oklch(0.96 0.01 128);

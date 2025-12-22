@@ -82,7 +82,7 @@ function DialogPopup({
     <BaseDialog.Popup
       data-slot="dialog-popup"
       className={cn(
-        "relative bg-background p-4 sm:p-6",
+        "bg-background p-4 sm:p-6",
         panelVariants({ animation }),
         className,
       )}
@@ -103,19 +103,16 @@ function DialogContent({
 }) {
   return (
     <DialogPortal>
-      <DialogBackdrop />
+      <BaseDialog.Backdrop className="fixed inset-0 min-h-dvh bg-black/70 animate-backdrop supports-backdrop-filter:backdrop-blur-xs" />
       <DialogViewport className="grid place-items-center">
         <BaseDialog.Popup
           className={cn(
             "relative grid w-full max-w-[calc(100%-2rem)] gap-4 p-4",
             "bg-background bg-clip-padding rounded-lg border shadow-lg overflow-hidden",
             "min-h-0 max-h-full sm:max-w-lg sm:p-6 sm:rounded-md",
-            "will-change-transform transition-all duration-150 origin-top",
-            "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
-            "data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
+            "animate-dialog",
             "data-[nested-dialog-open]:scale-[calc(1-0.04*var(--nested-dialogs))] data-[nested-dialog-open]:translate-y-[calc(1rem*var(--nested-dialogs))]",
             "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-[inherit] data-[nested-dialog-open]:after:bg-black/10 data-[nested-dialog-open]:after:content-['']",
-            "max-sm:data-[starting-style]:translate-y-4 max-sm:data-[ending-style]:translate-y-4",
             className,
           )}
           {...props}

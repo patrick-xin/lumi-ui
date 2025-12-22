@@ -17,12 +17,6 @@ export function SiteFooter() {
             </span>
             <Separator orientation="vertical" className="h-4!" />
             <span>{siteConfig.slogan}</span>
-            <span className="hidden md:inline-flex items-center gap-2">
-              <Separator orientation="vertical" className="h-4!" />
-              <span>
-                Base UI version: <span>1.0.0</span>
-              </span>
-            </span>
           </span>
         </div>
       </div>

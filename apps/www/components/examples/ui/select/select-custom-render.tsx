@@ -2,6 +2,7 @@
 
 import {
   CheckCircle2,
+  ChevronsUpDownIcon,
   Circle,
   CircleDashed,
   HelpCircle,
@@ -11,9 +12,8 @@ import { cn } from "@/registry/lib/utils";
 import {
   Select,
   SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  SelectItemContent,
+  SelectTriggerGroup,
 } from "@/registry/ui/select";
 
 const statuses = [
@@ -52,30 +52,31 @@ const statuses = [
 export function SelectCustomRenderDemo() {
   return (
     <Select items={statuses}>
-      <SelectTrigger>
-        <SelectValue placeholder="Select a status">
-          {(val) => {
-            const selected = statuses.find((s) => s.value === val);
-            if (!selected) return null;
+      <SelectTriggerGroup
+        icon={<ChevronsUpDownIcon />}
+        placeholder="Select a status"
+      >
+        {(val) => {
+          const selected = statuses.find((s) => s.value === val);
+          if (!selected) return null;
 
-            const Icon = selected.icon;
-            return (
-              <div className="flex items-center gap-2">
-                <Icon className={cn("h-4 w-4", selected.color)} />
-                <span>{selected.label}</span>
-              </div>
-            );
-          }}
-        </SelectValue>
-      </SelectTrigger>
+          const Icon = selected.icon;
+          return (
+            <span className="flex items-center gap-2">
+              <Icon className={cn("size-4", selected.color)} />
+              <span>{selected.label}</span>
+            </span>
+          );
+        }}
+      </SelectTriggerGroup>
       <SelectContent alignItemWithTrigger>
         {statuses.map((status) => (
-          <SelectItem key={status.value} value={status.value}>
+          <SelectItemContent key={status.value} value={status.value}>
             <div className="flex items-center gap-2">
-              <status.icon className={cn("h-4 w-4", status.color)} />
+              <status.icon className={cn("size-4", status.color)} />
               <span>{status.label}</span>
             </div>
-          </SelectItem>
+          </SelectItemContent>
         ))}
       </SelectContent>
     </Select>

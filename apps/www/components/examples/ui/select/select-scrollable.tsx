@@ -3,9 +3,8 @@ import {
   SelectContent,
   SelectGroup,
   SelectGroupLabel,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  SelectItemContent,
+  SelectTriggerGroup,
 } from "@/registry/ui/select";
 
 export function SelectScrollableDemo() {
@@ -13,17 +12,16 @@ export function SelectScrollableDemo() {
 
   return (
     <Select items={flatItems}>
-      <SelectTrigger className="w-80">
-        <SelectValue placeholder="Select a timezone" />
-      </SelectTrigger>
+      <SelectTriggerGroup className="w-80" placeholder="Select a timezone" />
+
       <SelectContent>
         {timezoneGroups.map((group) => (
           <SelectGroup key={group.label}>
             <SelectGroupLabel>{group.label}</SelectGroupLabel>
             {group.items.map((item) => (
-              <SelectItem key={item.value} value={item.value}>
+              <SelectItemContent key={item.value} value={item.value}>
                 {item.label}
-              </SelectItem>
+              </SelectItemContent>
             ))}
           </SelectGroup>
         ))}

@@ -4,9 +4,8 @@ import * as React from "react";
 import {
   Select,
   SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  SelectItemContent,
+  SelectTriggerGroup,
 } from "@/registry/ui/select";
 
 const frameworks = [
@@ -21,21 +20,19 @@ export function SelectTrackStateDemo() {
   return (
     <div className="space-y-4">
       <div className="text-sm text-muted-foreground">
-        Selected value: <strong>{value}</strong>
+        Selected value: <span className="text-foreground">{value}</span>
       </div>
       <Select
         items={frameworks}
         value={value}
         onValueChange={(val) => setValue(val as string)}
       >
-        <SelectTrigger>
-          <SelectValue placeholder="Select framework" />
-        </SelectTrigger>
+        <SelectTriggerGroup placeholder="Select framework" />
         <SelectContent>
           {frameworks.map((fw) => (
-            <SelectItem key={fw.value} value={fw.value}>
+            <SelectItemContent key={fw.value} value={fw.value}>
               {fw.label}
-            </SelectItem>
+            </SelectItemContent>
           ))}
         </SelectContent>
       </Select>

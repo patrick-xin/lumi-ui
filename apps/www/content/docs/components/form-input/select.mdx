@@ -38,138 +38,169 @@ links:
 import {
   Select,
   SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+  SelectItemContent,
+  SelectTriggerGroup,
+} from "@/components/ui/select";
 ```
 
 ```tsx
 <Select>
-  <SelectTrigger className="w-[180px]">
-    <SelectValue placeholder="Theme" />
-  </SelectTrigger>
+  <SelectTriggerGroup placeholder="Select a fruit" />
   <SelectContent>
-    <SelectItem value="light">Light</SelectItem>
-    <SelectItem value="dark">Dark</SelectItem>
-    <SelectItem value="system">System</SelectItem>
+    <SelectItemContent value="Apple">Apple</SelectItemContent>
   </SelectContent>
 </Select>
 ```
 
-## Recipes
-
-### Scrollable
-
-When the content exceeds the viewport height, scroll buttons automatically appear.
-
-<ComponentPreview name="select-scrollable" />
-
-### With Groups
-
-Use `SelectGroup` and `SelectGroupLabel` to organize items into sections.
-
-<ComponentPreview name="select-grouped" />
-
-### Multiple selection
-
-Add the `multiple` prop to the `<Select>` component to allow multiple selections.
-
-<ComponentPreview name="select-multiple" />
-
-### Item Aligned
-
-Use `position="item-aligned"` for classic OS-style positioning where the selected item aligns with the trigger.
-
-<ComponentPreview name="select-aligned" />
-
-### Disabled
-
-Disable the entire select or individual items.
-
-<ComponentPreview name="select-disabled" />
-
-### Data-Driven Items
-
-Pass an array of objects to the `items` prop to automatically handle value-label lookups and rendering.
-
-<ComponentPreview name="select-data-driven" />
-
-### Custom Render
-
-You can customize the rendered content while still using the `items` prop for accessibility.
-
-<ComponentPreview name="select-custom-render" />
-
-### Controlled
-
-Control the value state programmatically.
-
-<ComponentPreview name="select-controlled" />
-
-### Track State
-
-
-You can track the state of the select and use it to display additional information.
-
-<ComponentPreview name="select-track-state" />
-
 ## Anatomy
 
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+```tsx
+<Select>   
+  <SelectTriggerGroup />
+  <SelectContent>
+    <SelectGroup>
+      <SelectGroupLabel />
+      <SelectItemContent />
+    </SelectGroup>
+  </SelectContent> 
+</Select>
+```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
 ```tsx
 <Select>
   <SelectTrigger>
     <SelectValue />
+    <SelectIcon />
   </SelectTrigger>
-  <SelectContent>
-    <SelectGroup>
-      <SelectGroupLabel />
-      <SelectItem />
-    </SelectGroup>
-    <SelectSeparator />
-  </SelectContent>
+  <SelectPortal>
+    <SelectBackdrop />
+    <SelectPositioner>
+      <SelectScrollUpArrow />
+      <SelectPopup>
+        <SelectArrow />
+        <SelectList>
+          <SelectItem>
+            <SelectItemText />
+            <SelectItemIndicator />
+          </SelectItem>
+          <SelectSeparator />
+          <SelectGroup>
+            <SelectGroupLabel />
+          </SelectGroup>
+        </SelectList>
+      </SelectPopup>
+      <SelectScrollDownArrow />
+    </SelectPositioner>
+  </SelectPortal>
 </Select>
 ```
+  </TabsPanel>
+</Tabs>
 
-| Component | Role |
-| :--- | :--- |
-| `Select` | Root component that manages state and value. |
-| `SelectTrigger` | Button that toggles the dropdown. |
-| `SelectValue` | Displays the selected value or placeholder. |
-| `SelectContent` | Popover container with positioning and scroll handling. |
-| `SelectGroup` | Groups related items together. |
-| `SelectGroupLabel` | Label for a group of items. |
-| `SelectItem` | Individual selectable option. |
-| `SelectSeparator` | Visual divider between items or groups. |
-| `SelectScrollUpButton` | Scroll control at the top of the list. |
-| `SelectScrollDownButton` | Scroll control at the bottom of the list. |
+## Features
 
-## Migration from shadcn/ui
+### Custom Styles
+<ComponentPreview name="select-input-group" />
 
-### Component Naming & Structure
+### Item Aligned
+<ComponentPreview name="select-aligned" />
 
-Our component wraps Base UI's `Select` primitive but maintains shadcn/ui's naming convention for easy migration.
+### Scrollable
+<ComponentPreview name="select-scrollable" />
 
-| shadcn/ui | Lumi UI | Notes |
-| :--- | :--- | :--- |
-| `Select` | `Select` | Supports `items` and `multiple` props. |
-| `SelectTrigger` | `SelectTrigger` | Identical usage. |
-| `SelectValue` | `SelectValue` | Identical usage. |
-| `SelectContent` | `SelectContent` | Identical usage. |
-| `SelectItem` | `SelectItem` | Identical usage. |
-| `SelectGroup` | `SelectGroup` | Identical usage. |
-| `SelectGroupLabel` | `SelectGroupLabel` | Identical usage. |
+### Multiple selection
+Add the `multiple` prop to the `<Select>` component to allow multiple selections.
+<ComponentPreview name="select-multiple" />
 
-### Key Differences & New Features
+### With Groups
+Use `SelectGroup` and `SelectGroupLabel` to organize items into sections.
+<ComponentPreview name="select-grouped" />
 
-| Feature | Lumi UI | shadcn/ui (Radix) |
-| :--- | :--- | :--- |
-| **Label Rendering** | Automatic via `items` prop | Manual mapping required |
-| **Multi-select** | Native `multiple` prop | Requires custom implementation |
-| **Positioning** | `popper` or `item-aligned` | Mostly `popper` |
-| **Arrow** | Optional (removed by default) | Included by default |
+<Callout variant="info" title="Note">
+ This component uses the `animate-popup` utility class to ensure consistency with other overlays. You can customize transitions, easing, and duration in css file. See details in Animation Guide.
+</Callout>
 
-### Migration Example
+## States
+
+### Disabled
+<ComponentPreview name="select-disabled" />
+
+### Invalid
+<ComponentPreview name="select-invalid" />
+
+## Cookbook
+
+### Custom Render
+You can customize the rendered content while still using the `items` prop for accessibility.
+<ComponentPreview name="select-custom-render" />
+
+### Controlled
+Control the value state programmatically.
+<ComponentPreview name="select-controlled" />
+
+### Track State
+You can track the state of the select and use it to display additional information.
+<ComponentPreview name="select-track-state" />
+
+## API Reference
+
+### SelectTriggerGroup
+
+A high-level trigger component that combines the `Trigger`, `Value`, and `Icon` into a single styled element. It handles sizing, icons, and placeholder text automatically.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `size` | `"default" \| "sm"` | `"default"` | Controls the height and padding of the trigger. |
+| `placeholder` | `string` | `-` | Text to display when no value is selected. |
+| `icon` | `React.ReactNode` | `<ChevronDownIcon />` | The indicator icon. If not provided, defaults to a chevron. |
+| `iconPlacement` | `"left" \| "right"` | `"right"` | Positions the icon either at the start or end of the trigger. |
+| `children` | `ReactNode` | `-` | The selected value content (usually passed automatically by the Root). |
+| `className` | `string` | `-` | Additional CSS classes. |
+| `...props` | `BaseSelect.Trigger` | `-` | Passes all other props to the underlying `BaseSelect.Trigger`. |
+
+---
+
+### SelectContent
+
+A composite component that wraps the `Portal` , `Positioner`, `Popup`, `List`, and scroll buttons.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | The preferred side of the trigger to render the content. |
+| `align` | `"start" \| "center" \| "end"` | `"start"` | The preferred alignment against the trigger. |
+| `sideOffset` | `number` | `4` | The distance in pixels from the trigger. |
+| `alignOffset` | `number` | `0` | An offset in pixels from the `align` edge. |
+| `alignItemWithTrigger` | `boolean` | `false` | Whether the selected item should be aligned with the trigger. |
+| `children` | `ReactNode` | `-` | The list of items (`SelectItem` or `SelectItemContent`). |
+| `className` | `string` | `-` | Additional CSS classes for the popup container. |
+| `...props` | `BaseSelect.Popup` | `-` | Passes all other props to the underlying `BaseSelect.Popup`. |
+
+---
+
+### SelectItemContent
+
+A convenience component for list items. It combines the `Item`, `ItemText`, and `ItemIndicator` (check icon) into a single component, managing styles and layouts for selected states.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `value` | `string` | **Required** | The value of the item to be submitted when selected. |
+| `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the item. |
+| `icon` | `React.ReactNode` | `<CheckIcon />` | Custom icon to show when the item is selected. |
+| `iconPlacement` | `"left" \| "right"` | `"right"` | Positions the selection indicator icon. |
+| `children` | `ReactNode` | `-` | The text label of the item. |
+| `className` | `string` | `-` | Additional CSS classes. |
+| `...props` | `BaseSelect.Item` | `-` | Passes all other props to the underlying `BaseSelect.Item`. |
+
+## Difference with shadcn/ui
 
 <Tabs defaultValue="shadcn/ui">
   <TabsList>
@@ -177,41 +208,51 @@ Our component wraps Base UI's `Select` primitive but maintains shadcn/ui's namin
     <TabsTab value="lumi/ui">lumi/ui</TabsTab>
   </TabsList>
   <TabsPanel value="shadcn/ui">
-    <Callout variant="destructive" title="The Radix Way">
-      Requires manual mapping for labels if values differ.
-    </Callout>
     ```tsx
+    import { 
+      Select, 
+      SelectContent, 
+      SelectItem, 
+      SelectTrigger,
+      SelectLabel,
+      SelectGroup,
+    } from "@/components/ui/select";
+
     <Select>
       <SelectTrigger>
-        <SelectValue placeholder="Select a fruit" />
+        <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="apple">Apple</SelectItem>
-        <SelectItem value="banana">Banana</SelectItem>
+        <SelectGroup>
+          <SelectLabel>Fruits</SelectLabel>
+          <SelectItem value="apple">
+            Apple
+          </SelectItem>
+        </SelectGroup>
       </SelectContent>
     </Select>
     ```
   </TabsPanel>
   <TabsPanel value="lumi/ui">
-    <Callout variant="info" title="The Base UI Way">
-      Use the `items` prop for automatic label handling and better accessibility.
-    </Callout>
-    ```tsx
-    const fruits = [
-      { value: "apple", label: "Apple" },
-      { value: "banana", label: "Banana" },
-    ]
+    ```tsx {3, 5, 7}
+    import {
+      Select,
+      SelectTriggerGroup,
+      SelectContent,
+      SelectItemContent,
+      SelectGroup,
+      SelectGroupLabel,
+    } from "@/components/ui/select";
 
-    <Select items={fruits}>
-      <SelectTrigger>
-        <SelectValue placeholder="Select a fruit" />
-      </SelectTrigger>
+    <Select>
+      <SelectTriggerGroup placeholder="Select a fruit" />
       <SelectContent>
-        {fruits.map((fruit) => (
-          <SelectItem key={fruit.value} value={fruit.value}>
-            {fruit.label}
-          </SelectItem>
-        ))}
+        <SelectGroup>
+          <SelectGroupLabel>Fruits</SelectGroupLabel>
+          <SelectItemContent value="apple">
+            Apple
+          </SelectItemContent>
+        </SelectGroup>
       </SelectContent>
     </Select>
     ```

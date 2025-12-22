@@ -1,5 +1,11 @@
 {
   "title": "Get Started",
   "defaultOpen": true,
-  "pages": ["introduction", "...", "components"]
+  "pages": [
+    "introduction",
+    "installation",
+    "composition",
+    "animation-guide",
+    "components"
+  ]
 }
