@@ -102,7 +102,7 @@ export const mdxComponents: MDXComponents = {
     </h6>
   ),
   strong: ({ className, ...props }: React.ComponentProps<"strong">) => (
-    <strong className={cn("font-medium", className)} {...props} />
+    <strong className={cn("font-medium text-primary", className)} {...props} />
   ),
   ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
     <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />

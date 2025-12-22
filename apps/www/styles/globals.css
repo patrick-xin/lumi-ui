@@ -9,10 +9,11 @@
   --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --duration: 200ms;
-  --duration-end: 100ms;
+  --duration-fast: 150ms;
 }
 
 @utility animate-popup {
+  will-change: transform, opacity;
   transform-origin: var(--transform-origin);
 
   transition-property: opacity, scale, translate, display, overlay;
@@ -22,12 +23,53 @@
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.9;
+    scale: 0.95;
   }
 
   &[data-ending-style] {
     transition-timing-function: var(--ease-in);
-    transition-duration: var(--duration-end);
+    transition-duration: var(--duration-fast);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
+
+@utility animate-dialog {
+  will-change: transform, opacity;
+  transform-origin: top;
+
+  transition-property: opacity, scale, translate, display, overlay;
+  transition-duration: var(--duration-fast);
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.9;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+  
+}
+
+
+@utility animate-backdrop {
+  transition-property: opacity, display, overlay;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: linear; 
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0ms !important;
   }
 }
 

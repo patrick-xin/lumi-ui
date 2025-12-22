@@ -33,6 +33,7 @@ function FieldLabel({
       className={cn(
         "inline-flex items-center gap-2 text-sm leading-none font-medium select-none transition-colors",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "data-[invalid]:text-destructive",
         "group-has-required:after:content-['*'] group-has-required:after:text-destructive group-has-required:after:-ml-0.5 group-has-required:pointer-events-none",
         className,
       )}

@@ -1,0 +1,175 @@
+---
+title: Animation
+description: Understand Lumi UI's animation system.
+icon: Activity
+---
+
+Lumi UI provides a streamlined animation system that uses **CSS Transitions** instead of traditional CSS animations, creating a more responsive, native-like experience while keeping your code clean and maintainable.
+
+## Core Philosophy
+
+### Native Feel with CSS Transitions
+Unlike most libraries that use CSS Animations (which must complete once started), Lumi UI uses CSS Transitions that track element state. This means animations can smoothly reverse direction mid-way, preventing the "snapping" effect when users interact quickly.
+
+### Clean, Minimal Code
+Replace verbose animation classes with single utility classes:
+
+Traditional approach:
+```tsx
+<PopoverPrimitive.Popup 
+  className="data-[state=open]:animate-in data-[state=closed]:animate-out 
+    data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 
+    data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 ..." />
+```
+
+Lumi UI approach:
+```tsx
+<BasePopover.Popup className="animate-popup ..." />
+```
+
+## Available Animation Classes
+
+| Class | Usage |
+| :--- | :--- |
+| `animate-popup` | Used for **Popovers, Dropdowns, Selects** etc... 
+| `animate-dialog` | Used for **Modals and Dialogs**.
+| `animate-backdrop` | Used for **Overlays**. |
+
+See [`Component Compatibility`](#component-compatibility) below for details.
+
+## Installation & Setup
+
+<Callout variant="info" title="Tailwind CSS v4 Required" >
+    Tailwind CSS v4+ (required for @utility and @theme directives)
+</Callout>
+
+If you installed [`init`](/docs/installation) command via CLI, these styles are already set up. If you are installing manually, add the following to your CSS.
+
+<Steps>
+  <Step title="Add CSS variables to your @theme block">
+    ```css
+    --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --duration: 200ms;
+    --duration-end: 150ms;
+    ```
+  </Step>
+  <Step title="Add animation utilities to your main CSS file">
+    ```css
+    @utility animate-popup {
+      transform-origin: var(--transform-origin);
+      transition-property: opacity, scale, translate, display, overlay; 
+      transition-duration: var(--duration);
+      transition-timing-function: var(--ease-out);
+
+      &[data-starting-style],
+      &[data-ending-style] {
+        opacity: 0;
+        scale: 0.95;
+      }
+      &[data-ending-style] {
+        transition-timing-function: var(--ease-in);
+        transition-duration: var(--duration-end);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        transition-duration: 0ms !important;
+        animation-duration: 0ms !important;
+      }
+    }
+
+    @utility animate-dialog {
+      transform-origin: top;
+
+      transition-property: opacity, scale, translate, display, overlay;
+      transition-duration: var(--duration-fast);
+
+      &[data-starting-style],
+      &[data-ending-style] {
+        opacity: 0;
+        scale: 0.9;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        transition-duration: 0ms !important;
+        animation-duration: 0ms !important;
+      }
+      
+    }
+
+    @utility animate-backdrop {
+      transition-property: opacity, display, overlay;
+      transition-duration: var(--duration-fast);
+      transition-timing-function: linear; 
+
+      &[data-starting-style],
+      &[data-ending-style] {
+        opacity: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        transition-duration: 0ms !important;
+      }
+    }
+
+    ```
+  </Step>
+</Steps>
+
+## Customization
+
+### Global Customization
+
+Control animations across your entire app by modifying CSS variables:
+
+```css
+@theme {
+  /* How long the open animation takes */
+  --duration: 200ms;
+  
+  /* How long the close animation takes (usually faster feels snappier) */
+  --duration-end: 100ms;
+
+  /* The "bounciness" of the opening (Ease Out) */
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  
+  /* The "speed" of the closing (Ease In) */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+```
+
+Read more about customizations in [Tailwind CSS](https://tailwindcss.com/docs/transition-property).
+
+### Component-Specific Overrides
+For unique animation needs, override the utility class.
+
+<ComponentPreview name="custom-animation-example" />
+
+### Accessibility
+- Respects `prefers-reduced-motion` media query
+- Animations are disabled when users prefer reduced motion
+- Smooth transitions for users who enable animations
+
+## Opting out
+
+Remove the utility class and use standard Tailwind classes for complete control:
+
+```tsx
+<DialogPopup
+  className="transition-transform duration-[700ms] ease-[cubic-bezier(0.45,1.005,0,1.005)] data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 data-[ending-style]:duration-[350ms] data-[ending-style]:ease-[cubic-bezier(0.375,0.015,0.545,0.455)] motion-reduce:transition-none"
+/>
+```
+
+## Component Compatibility
+
+Uses `animate-popup`:
+- Form Input: [`Autocomplete`](/docs/components/form-input/autocomplete), [`Combobox`](/docs/components/form-input/combobox), [`Select`](/docs/components/form-input/select)
+- Overlays & Dialogs: [`ContextMenu`](/docs/components/overlays-dialogs/context-menu), [`DropdownMenu`](/docs/components/overlays-dialogs/dropdown-menu), [`Popover`](/docs/components/overlays-dialogs/popover), [`PreviewCard`](/docs/components/overlays-dialogs/preview-card)
+- Navigation: [`Menubar`](/docs/components/layout-nav/menubar)
+
+---
+
+Uses `animate-dialog` & `animate-backdrop`: [`Dialog`](/docs/components/overlays-dialogs/dialog), [`AlertDialog`](/docs/components/overlays-dialogs/alert-dialog)
+
+
+

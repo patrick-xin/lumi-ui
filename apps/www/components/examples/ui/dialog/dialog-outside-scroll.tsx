@@ -28,8 +28,8 @@ export default function OutsideScrollDialog() {
     <Dialog>
       <DialogTrigger render={<Button>Open dialog</Button>} />
       <DialogPortal>
-        <DialogBackdrop />
-        <DialogViewport className="group/dialog fixed inset-0 block">
+        <DialogBackdrop className="transition-[backdrop-filter,opacity] duration-[600ms] ease-[var(--ease-out-fast)] backdrop-blur-[1.5px] data-[starting-style]:backdrop-blur-0 data-[starting-style]:opacity-0 data-[ending-style]:backdrop-blur-0 data-[ending-style]:opacity-0 data-[ending-style]:duration-[350ms] data-[ending-style]:ease-[cubic-bezier(0.375,0.015,0.545,0.455)] dark:opacity-70 supports-[-webkit-touch-callout:none]:absolute" />
+        <DialogViewport className="group/dialog fixed inset-0">
           <ScrollAreaRoot
             style={{ position: undefined }}
             className="h-full overscroll-contain group-data-[ending-style]/dialog:pointer-events-none"
@@ -37,7 +37,8 @@ export default function OutsideScrollDialog() {
             <ScrollAreaViewport className="h-full overscroll-contain group-data-[ending-style]/dialog:pointer-events-none">
               <ScrollAreaContent className="flex min-h-full items-center justify-center">
                 <DialogPopup
-                  className="w-full max-w-[calc(100%-2rem)] max-h-full min-h-0 sm:max-w-lg"
+                  animation="none"
+                  className="relative mx-auto my-18 w-[min(40rem,calc(100vw-2rem))] rounded-lg transition-transform duration-[700ms] ease-[cubic-bezier(0.45,1.005,0,1.005)] data-[starting-style]:translate-y-[100dvh] data-[ending-style]:translate-y-[max(100dvh,100%)] data-[ending-style]:duration-[350ms] data-[ending-style]:ease-[cubic-bezier(0.375,0.015,0.545,0.455)] motion-reduce:transition-none"
                   ref={popupRef}
                   initialFocus={popupRef}
                 >

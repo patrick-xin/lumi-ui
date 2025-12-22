@@ -1814,6 +1814,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "custom-animation-example": {
+    name: "custom-animation-example",
+    description: "",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [{
+      path: "components/examples/ui/custom-animation-example.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/custom-animation-example");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "custom-animation-example";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "dialog-close-confirmation": {
     name: "dialog-close-confirmation",
     description: "",
@@ -3146,24 +3164,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "select-data-driven": {
-    name: "select-data-driven",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["select"],
-    files: [{
-      path: "components/examples/ui/select/select-data-driven.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/select/select-data-driven");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "select-data-driven";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "select-demo": {
     name: "select-demo",
     description: "",
@@ -3213,6 +3213,42 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/select/select-grouped");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "select-grouped";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "select-input-group": {
+    name: "select-input-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    files: [{
+      path: "components/examples/ui/select/select-input-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/select/select-input-group");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "select-input-group";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "select-invalid": {
+    name: "select-invalid",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    files: [{
+      path: "components/examples/ui/select/select-invalid.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/select/select-invalid");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "select-invalid";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

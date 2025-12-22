@@ -5,9 +5,8 @@ import {
   SelectContent,
   SelectGroup,
   SelectGroupLabel,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  SelectItemContent,
+  SelectTriggerGroup,
 } from "@/registry/ui/select";
 
 const fruits = [
@@ -31,32 +30,30 @@ const proteins = [
 export function SelectGroupedDemo() {
   return (
     <Select items={[...fruits, ...vegetables, ...proteins]}>
-      <SelectTrigger>
-        <SelectValue placeholder="Select food" />
-      </SelectTrigger>
-      <SelectContent>
+      <SelectTriggerGroup placeholder="Select food" />
+      <SelectContent alignItemWithTrigger>
         <SelectGroup>
           <SelectGroupLabel>Fruits</SelectGroupLabel>
           {fruits.map((item) => (
-            <SelectItem key={item.value} value={item.value}>
+            <SelectItemContent key={item.value} value={item.value}>
               {item.label}
-            </SelectItem>
+            </SelectItemContent>
           ))}
         </SelectGroup>
         <SelectGroup>
           <SelectGroupLabel>Vegetables</SelectGroupLabel>
           {vegetables.map((item) => (
-            <SelectItem key={item.value} value={item.value}>
+            <SelectItemContent key={item.value} value={item.value}>
               {item.label}
-            </SelectItem>
+            </SelectItemContent>
           ))}
         </SelectGroup>
         <SelectGroup>
           <SelectGroupLabel>Proteins</SelectGroupLabel>
           {proteins.map((item) => (
-            <SelectItem key={item.value} value={item.value}>
+            <SelectItemContent key={item.value} value={item.value}>
               {item.label}
-            </SelectItem>
+            </SelectItemContent>
           ))}
         </SelectGroup>
       </SelectContent>

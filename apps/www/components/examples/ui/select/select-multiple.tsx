@@ -3,9 +3,8 @@
 import {
   Select,
   SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  SelectItemContent,
+  SelectTriggerGroup,
 } from "@/registry/ui/select";
 
 const languages = {
@@ -39,14 +38,14 @@ function renderValue(value: Language[]) {
 export default function MultiSelectDemo() {
   return (
     <Select multiple defaultValue={["javascript", "typescript"]}>
-      <SelectTrigger className="w-[200px]">
-        <SelectValue placeholder="Select a language">{renderValue}</SelectValue>
-      </SelectTrigger>
+      <SelectTriggerGroup className="w-[200px]" placeholder="Select a language">
+        {renderValue}
+      </SelectTriggerGroup>
       <SelectContent>
         {values.map((value) => (
-          <SelectItem key={value} value={value}>
+          <SelectItemContent key={value} value={value}>
             {languages[value]}
-          </SelectItem>
+          </SelectItemContent>
         ))}
       </SelectContent>
     </Select>

@@ -1,15 +1,13 @@
 "use client";
 
 import * as React from "react";
-
+import { Button } from "@/registry/ui/button";
 import {
   Select,
   SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  SelectItemContent,
+  SelectTriggerGroup,
 } from "@/registry/ui/select";
-import { Button } from "../../../../registry/ui/button";
 
 const fruits = [
   { value: "apple", label: "Apple" },
@@ -27,25 +25,27 @@ export default function SelectControlledDemo() {
       <div className="flex gap-2">
         <Button onClick={() => setValue("banana")}>Select Banana</Button>
         <Button onClick={() => setValue("grapes")}>Select Grapes</Button>
-        <Button onClick={() => setValue("")}>Reset</Button>
+        <Button variant="outline" onClick={() => setValue("")}>
+          Reset
+        </Button>
       </div>
       <Select
         items={fruits}
         value={value}
         onValueChange={(val) => setValue(val as string)}
       >
-        <SelectTrigger>
-          <SelectValue placeholder="Select a fruit" />
-        </SelectTrigger>
+        <SelectTriggerGroup placeholder="Select a fruit" />
         <SelectContent>
           {fruits.map((fruit) => (
-            <SelectItem key={fruit.value} value={fruit.value}>
+            <SelectItemContent key={fruit.value} value={fruit.value}>
               {fruit.label}
-            </SelectItem>
+            </SelectItemContent>
           ))}
         </SelectContent>
       </Select>
-      <p className="text-muted-foreground text-sm">Selected value: {value}</p>
+      <p className="text-muted-foreground text-sm">
+        Selected value: <span className="text-foreground">{value}</span>
+      </p>
     </div>
   );
 }

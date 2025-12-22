@@ -3,9 +3,8 @@
 import {
   Select,
   SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  SelectItemContent,
+  SelectTriggerGroup,
 } from "@/registry/ui/select";
 
 const fruits = [
@@ -18,26 +17,31 @@ const fruits = [
 
 export function SelectDisabledDemo() {
   return (
-    <Select
-      items={fruits}
-      // Disable the entire select
-      // disabled
-    >
-      <SelectTrigger>
-        <SelectValue placeholder="Select a fruit" />
-      </SelectTrigger>
-      <SelectContent>
-        {fruits.map((fruit) => (
-          <SelectItem
-            // Disable individual items
-            disabled={fruit.value === "blueberry"}
-            key={fruit.value}
-            value={fruit.value}
-          >
-            {fruit.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <div className="flex gap-4">
+      <Select items={fruits}>
+        <SelectTriggerGroup placeholder="Select a fruit" />
+        <SelectContent>
+          {fruits.map((fruit) => (
+            <SelectItemContent
+              disabled={fruit.value === "blueberry"}
+              key={fruit.value}
+              value={fruit.value}
+            >
+              {fruit.label}
+            </SelectItemContent>
+          ))}
+        </SelectContent>
+      </Select>
+      <Select items={fruits} disabled>
+        <SelectTriggerGroup placeholder="Select a fruit" />
+        <SelectContent>
+          {fruits.map((fruit) => (
+            <SelectItemContent key={fruit.value} value={fruit.value}>
+              {fruit.label}
+            </SelectItemContent>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 }
