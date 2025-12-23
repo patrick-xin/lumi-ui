@@ -20,6 +20,16 @@ function PreviewCardTrigger({
   );
 }
 
+function PreviewCardPopup({
+  className,
+  ...props
+}: React.ComponentProps<typeof BasePreviewCard.Popup>) {
+  return (
+    <BasePreviewCard.Popup data-slot="preview-card-popup"
+    className={cn("", className)} {...props} />
+  );
+}
+
 function PreviewCardContent({
   children,
   className,

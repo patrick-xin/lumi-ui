@@ -31,8 +31,26 @@ links:
   </TabsPanel>
 </CodeTabs>
 
+## Basic Usage
+Form is composed together with [Field](/docs/components/form-input/field). 
 
-## Recipes
+```tsx
+import { Form } from "@/components/ui/form"
+import { Field, FieldLabel, FieldControl, FieldError } from "@/components/ui/field"
+```
+
+```tsx
+<Form>
+  <Field>
+    <FieldLabel />
+    <FieldControl />
+    <FieldError />
+  </Field>
+</Form>
+```
+
+
+## Cookbook
 
 ### Native Submit
 

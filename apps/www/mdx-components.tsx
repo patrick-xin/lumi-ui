@@ -102,13 +102,19 @@ export const mdxComponents: MDXComponents = {
     </h6>
   ),
   strong: ({ className, ...props }: React.ComponentProps<"strong">) => (
-    <strong className={cn("font-medium text-primary", className)} {...props} />
+    <strong className={cn("font-semibold", className)} {...props} />
   ),
   ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
-    <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
+    <ul
+      className={cn("my-6 ml-6 list-disc marker:text-primary", className)}
+      {...props}
+    />
   ),
   ol: ({ className, ...props }: React.ComponentProps<"ol">) => (
-    <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
+    <ol
+      className={cn("my-6 ml-6 list-decimal marker:text-primary", className)}
+      {...props}
+    />
   ),
   li: ({ className, ...props }: React.ComponentProps<"li">) => (
     <li className={cn("mt-2", className)} {...props} />
@@ -134,7 +140,14 @@ export const mdxComponents: MDXComponents = {
       );
     }
 
-    return <Link href={props.href}>{props.children}</Link>;
+    return (
+      <Link
+        className="inline-flex items-center justify-center text-primary underline-offset-4 hover:underline transition-colors ease-linear"
+        href={props.href}
+      >
+        {props.children}
+      </Link>
+    );
   },
   figure: ({ className, ...props }: React.ComponentProps<"figure">) => {
     return (
@@ -198,7 +211,7 @@ export const mdxComponents: MDXComponents = {
       return (
         <code
           className={cn(
-            "bg-accent text-accent-foreground relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-[0.8rem] break-words outline-none",
+            "text-code-foreground bg-code relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-sm break-words outline-none",
             className,
           )}
           {...props}

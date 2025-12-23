@@ -6,7 +6,7 @@ import {
   ComboboxChips,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInput,
+  ComboboxInputGroup,
   ComboboxItem,
   ComboboxList,
   ComboboxValue,
@@ -17,30 +17,29 @@ export function ComboboxMultipleSelectDemo() {
   const id = React.useId();
   return (
     <Combobox items={langs} multiple>
-      <div className="flex flex-col gap-2 w-72">
-        <label htmlFor={id}>Select a language</label>
-        <ComboboxChips ref={containerRef}>
-          <ComboboxValue>
-            {(value: ProgrammingLanguage[]) => (
-              <React.Fragment>
-                {value.length > 0 && (
-                  <div className="flex flex-wrap gap-1 p-1">
-                    {value.map((language) => (
-                      <ComboboxChip
-                        key={language.id}
-                        aria-label={language.value}
-                      >
-                        {language.value}
-                      </ComboboxChip>
-                    ))}
-                  </div>
-                )}
-                <ComboboxInput id={id} placeholder="e.g. TypeScript" multiple />
-              </React.Fragment>
-            )}
-          </ComboboxValue>
-        </ComboboxChips>
-      </div>
+      <ComboboxChips ref={containerRef} className="w-64">
+        <ComboboxValue>
+          {(value: ProgrammingLanguage[]) => (
+            <React.Fragment>
+              {value.length > 0 && (
+                <div className="flex flex-wrap gap-1 p-1.5">
+                  {value.map((language) => (
+                    <ComboboxChip key={language.id} aria-label={language.value}>
+                      {language.value}
+                    </ComboboxChip>
+                  ))}
+                </div>
+              )}
+              <ComboboxInputGroup
+                id={id}
+                placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
+                variant="ghost"
+                showTrigger={false}
+              />
+            </React.Fragment>
+          )}
+        </ComboboxValue>
+      </ComboboxChips>
       <ComboboxContent sideOffset={8}>
         <ComboboxEmpty>No languages found.</ComboboxEmpty>
         <ComboboxList>

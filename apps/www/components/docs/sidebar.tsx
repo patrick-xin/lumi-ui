@@ -31,7 +31,7 @@ export const DocsSidebar = ({ tree }: DocsSidebarProps) => {
   return (
     <aside className="fixed inset-y-0 left-[max(0px,calc(50%-var(--container-size)/2))] z-30 hidden w-[240px] flex-col bg-background md:flex top-[var(--header-height)]">
       <ScrollArea gradientScrollFade noScrollBar className="px-2">
-        <nav className="w-full space-y-6 pt-8 pb-48">
+        <nav className="w-full space-y-6 pt-16 xl:pt-8 pb-48">
           {items.map((item, index) => (
             <SidebarSection key={String(index)} item={item} />
           ))}
