@@ -218,6 +218,7 @@ function ComboboxPopup({
       className={cn(
         "bg-popover w-[var(--anchor-width)] max-w-[var(--available-width)]",
         "transition-[transform,scale,opacity] origin-[var(--transform-origin)] duration-100",
+        "outline outline-border dark:-outline-offset-1",
         "data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
         "data-[starting-style]:scale-95 data-[starting-style]:opacity-0",
       )}
@@ -324,7 +325,7 @@ function ComboboxContent({
       >
         <BaseCombobox.Popup
           className={cn(
-            "bg-popover text-popover-foreground relative flex flex-col rounded-md border shadow-md",
+            "bg-popover text-popover-foreground relative flex flex-col rounded-md shadow-md",
             "outline outline-border dark:-outline-offset-1",
             "w-[var(--anchor-width)] max-w-[var(--available-width)]",
             "max-h-[min(var(--available-height),24rem)]",
