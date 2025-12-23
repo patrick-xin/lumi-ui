@@ -1,4 +1,6 @@
 "use client";
+
+import { Loader2 } from "lucide-react";
 import * as React from "react";
 import {
   Combobox,
@@ -6,7 +8,7 @@ import {
   ComboboxChips,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInput,
+  ComboboxInputGroup,
   ComboboxItem,
   ComboboxList,
   ComboboxStatus,
@@ -56,10 +58,7 @@ export default function ExampleAsyncMultipleCombobox() {
     if (isPending) {
       return (
         <React.Fragment>
-          <span
-            aria-hidden
-            className="inline-block size-3 animate-[spin_0.75s_linear_infinite] rounded-full border border-current border-r-transparent rtl:border-r-current rtl:border-l-transparent"
-          />
+          <Loader2 className=" h-4 w-4 animate-spin" />
           Searching...
         </React.Fragment>
       );
@@ -154,40 +153,37 @@ export default function ExampleAsyncMultipleCombobox() {
         });
       }}
     >
-      <div className="flex flex-col gap-2 w-80">
-        <label className="inline-flex text-inherit" htmlFor={id}>
-          Assign reviewers
-        </label>
-        <ComboboxChips ref={containerRef}>
-          <ComboboxValue>
-            {(value: DirectoryUser[]) => (
-              <React.Fragment>
-                {value.map((user) => (
-                  <ComboboxChip key={user.id} aria-label={user.name}>
-                    {user.name}
-                  </ComboboxChip>
-                ))}
-
-                <ComboboxInput
-                  id={id}
-                  placeholder={value.length > 0 ? "" : "e.g. Michael"}
-                  multiple
-                />
-              </React.Fragment>
-            )}
-          </ComboboxValue>
-        </ComboboxChips>
-      </div>
-
+      <ComboboxChips className="w-64" ref={containerRef}>
+        <ComboboxValue>
+          {(value: DirectoryUser[]) => (
+            <React.Fragment>
+              {value.length > 0 && (
+                <div className="flex flex-wrap gap-1 p-1.5">
+                  {value.map((user) => (
+                    <ComboboxChip key={user.id} aria-label={user.name}>
+                      {user.name}
+                    </ComboboxChip>
+                  ))}
+                </div>
+              )}
+              <ComboboxInputGroup
+                id={id}
+                placeholder={value.length > 0 ? "" : "e.g. Michael"}
+                variant="ghost"
+              />
+            </React.Fragment>
+          )}
+        </ComboboxValue>
+      </ComboboxChips>
       <ComboboxContent aria-busy={isPending || undefined} sideOffset={8}>
         <ComboboxStatus>{getStatus()}</ComboboxStatus>
         <ComboboxEmpty>{getEmptyMessage()}</ComboboxEmpty>
         <ComboboxList>
           {(user: DirectoryUser) => (
             <ComboboxItem key={user.id} value={user}>
-              <div className="col-start-2 flex flex-col gap-1">
+              <div className="flex flex-col gap-1">
                 <div className="font-medium">{user.name}</div>
-                <div className="flex flex-wrap gap-2 text-[0.8125rem] ">
+                <div className="flex flex-wrap gap-2 text-sm ">
                   <span className="opacity-80">@{user.username}</span>
                   <span>{user.title}</span>
                 </div>
@@ -268,19 +264,5 @@ const allUsers: DirectoryUser[] = [
     username: "michael",
     email: "michael.foster@example.com",
     title: "Engineering Manager",
-  },
-  {
-    id: "lindsay-walton",
-    name: "Lindsay Walton",
-    username: "lindsay",
-    email: "lindsay.walton@example.com",
-    title: "Product Designer",
-  },
-  {
-    id: "tom-cook",
-    name: "Tom Cook",
-    username: "tom",
-    email: "tom.cook@example.com",
-    title: "Frontend Engineer",
   },
 ];

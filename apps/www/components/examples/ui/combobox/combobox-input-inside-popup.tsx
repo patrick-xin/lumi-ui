@@ -1,7 +1,7 @@
 "use client";
 
+import { buttonVariants } from "@lumi-ui/ui/button";
 import { ChevronsUpDownIcon } from "lucide-react";
-import { Button } from "@/registry/ui/button";
 import {
   Combobox,
   ComboboxContent,
@@ -13,37 +13,30 @@ import {
   ComboboxTrigger,
   ComboboxValue,
 } from "@/registry/ui/combobox";
+import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupDemo() {
   return (
-    <Combobox items={countries} defaultValue={countries[0]}>
-      <div className="relative flex flex-col gap-2 w-64">
-        <label htmlFor="select-country">Select country</label>
-        <ComboboxTrigger
-          render={
-            <Button
-              variant="outline"
-              className="justify-between bg-input dark:bg-input/30 font-normal"
-            />
-          }
-        >
-          <ComboboxValue />
-          <ComboboxIcon className="flex">
-            <ChevronsUpDownIcon />
-          </ComboboxIcon>
-        </ComboboxTrigger>
-      </div>
+    <Combobox items={teamMembers} defaultValue={teamMembers[0]}>
+      <ComboboxTrigger
+        className={buttonVariants({
+          variant: "outline",
+          className: "justify-between px-3 w-64",
+        })}
+      >
+        <ComboboxValue />
+        <ComboboxIcon>
+          <ChevronsUpDownIcon />
+        </ComboboxIcon>
+      </ComboboxTrigger>
       <ComboboxContent>
-        <ComboboxInput
-          placeholder="e.g. United Kingdom"
-          className="p-2 m-2 w-[calc(100%-1rem)]"
-        />
-
-        <ComboboxEmpty>No countries found.</ComboboxEmpty>
+        <ComboboxInput placeholder="Find member..." variant="ghost" />
+        <Separator />
+        <ComboboxEmpty>No member found.</ComboboxEmpty>
         <ComboboxList>
-          {(country: Country) => (
-            <ComboboxItem key={country.code} value={country}>
-              {country.label ?? country.value}
+          {(member: TeamMember) => (
+            <ComboboxItem key={member.id} value={member}>
+              {member.label}
             </ComboboxItem>
           )}
         </ComboboxList>
@@ -52,18 +45,18 @@ export function ComboboxInputInsidePopupDemo() {
   );
 }
 
-interface Country {
-  code: string;
-  value: string | null;
-  continent: string;
+interface TeamMember {
+  id: string;
+  value: string;
+  role: string;
   label: string;
 }
 
-const countries: Country[] = [
-  { code: "", value: null, continent: "", label: "Select country" },
-  { code: "af", value: "afghanistan", label: "Afghanistan", continent: "Asia" },
-  { code: "al", value: "albania", label: "Albania", continent: "Europe" },
-  { code: "dz", value: "algeria", label: "Algeria", continent: "Africa" },
-  { code: "ad", value: "andorra", label: "Andorra", continent: "Europe" },
-  { code: "ao", value: "angola", label: "Angola", continent: "Africa" },
+const teamMembers: TeamMember[] = [
+  { id: "1", value: "alex.d", role: "Product", label: "Alex Davis" },
+  { id: "2", value: "sarah.k", role: "Engineering", label: "Sarah King" },
+  { id: "3", value: "james.w", role: "Design", label: "James Wilson" },
+  { id: "4", value: "maria.g", role: "Marketing", label: "Maria Garcia" },
+  { id: "5", value: "david.c", role: "Engineering", label: "David Chen" },
+  { id: "6", value: "emma.r", role: "Product", label: "Emma Roberts" },
 ];

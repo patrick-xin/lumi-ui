@@ -10,7 +10,7 @@ import {
   ComboboxChips,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInput,
+  ComboboxInputGroup,
   ComboboxItem,
   ComboboxList,
   ComboboxValue,
@@ -23,7 +23,6 @@ import {
   DialogTitle,
 } from "@/registry/ui/dialog";
 import { Input } from "@/registry/ui/input";
-import { Label } from "@/registry/ui/label";
 
 export function CreatableComboboxDemo() {
   const id = React.useId();
@@ -152,27 +151,30 @@ export function CreatableComboboxDemo() {
           }
         }}
       >
-        <div className="flex flex-col w-72 gap-2">
-          <Label htmlFor={id}>Labels</Label>
-          <ComboboxChips ref={containerRef}>
-            <ComboboxValue>
-              {(value: LabelItem[]) => (
-                <React.Fragment>
-                  {value.length > 0 && (
-                    <div className="flex flex-wrap gap-1 p-1">
-                      {value.map((label) => (
-                        <ComboboxChip key={label.id} aria-label={label.value}>
-                          {label.value}
-                        </ComboboxChip>
-                      ))}
-                    </div>
-                  )}
-                  <ComboboxInput id={id} placeholder="e.g. bug" multiple />
-                </React.Fragment>
-              )}
-            </ComboboxValue>
-          </ComboboxChips>
-        </div>
+        <ComboboxChips ref={containerRef} className="w-64">
+          <ComboboxValue>
+            {(value: LabelItem[]) => (
+              <React.Fragment>
+                {value.length > 0 && (
+                  <div className="flex flex-wrap gap-1 p-1.5">
+                    {value.map((label) => (
+                      <ComboboxChip key={label.id} aria-label={label.value}>
+                        {label.value}
+                      </ComboboxChip>
+                    ))}
+                  </div>
+                )}
+                <ComboboxInputGroup
+                  id={id}
+                  placeholder="e.g. bug"
+                  variant="ghost"
+                  showClear={false}
+                  showTrigger={false}
+                />
+              </React.Fragment>
+            )}
+          </ComboboxValue>
+        </ComboboxChips>
 
         <ComboboxContent ref={containerRef}>
           <ComboboxEmpty>No labels found.</ComboboxEmpty>

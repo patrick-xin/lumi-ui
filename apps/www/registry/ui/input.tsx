@@ -22,7 +22,7 @@ const inputVariants = cva(
       variant:{
         default:"bg-transparent dark:bg-input/30",
         transparent:"bg-transparent",
-        ghost: "border-transparent shadow-none focus-visible:border-ring focus-visible:shadow-xs",
+        ghost: "border-transparent shadow-none focus-visible:border-none focus-visible:ring-0",
       }
     },
     defaultVariants: {

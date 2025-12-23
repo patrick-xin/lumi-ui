@@ -70,7 +70,7 @@ function AutocompletePositioner({
 function AutocompletePopup({
   className,
   align = "start",
-  sideOffset = 4,
+  sideOffset = 6,
   matchAnchorWidth = true,
   children,
   ...props
@@ -89,9 +89,9 @@ function AutocompletePopup({
         <BaseAutocomplete.Popup
           data-slot="autocomplete-popup"
           className={cn(
-            "px-1 py-2 rounded-md bg-popover border border-input overflow-y-auto",
+            "bg-popover text-popover-foreground relative bg-clip-padding overflow-hidden rounded-md shadow-md overflow-y-auto",
             "max-h-[23rem] max-w-[var(--available-width)]",
-            "outline outline-border dark:-outline-offset-1",
+            "outline outline-border dark:-outline-offset-2",
             "animate-popup",
             matchAnchorWidth && "w-[var(--anchor-width)]",
             className,
@@ -125,7 +125,7 @@ function AutocompleteList({
     <BaseAutocomplete.List
       data-slot="autocomplete-list"
       className={cn(
-        "outline-0 overflow-y-auto scroll-py-[0.5rem] py-2 overscroll-contain max-h-[min(23rem,var(--available-height))] p-1 flex flex-col gap-1 overflow-y-auto outline-none data-[empty]:p-0",
+        "p-1 scroll-py-2 overscroll-contain max-h-[min(23rem,var(--available-height))] overflow-y-auto data-[empty]:p-0",
         className,
       )}
       {...props}
@@ -141,12 +141,14 @@ function AutocompleteItem({
     <BaseAutocomplete.Item
       data-slot="autocomplete-item"
       className={cn(
-        "relative flex items-center gap-2 rounded-sm cursor-default px-2 py-1 text-sm outline-none select-none",
-        "transition-[color,box-shadow]",
-        "[&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 px-2 text-sm select-none",
+        "outline-hidden transition-colors", 
+        "[&_svg:not([class*='text-'])]:text-muted-foreground",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "*:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
         "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-        className,
+        className
       )}
       {...props}
     />
@@ -181,7 +183,7 @@ function AutocompleteStatus({
     <BaseAutocomplete.Status
       data-slot="autocomplete-status"
       className={cn(
-        "px-2 py-1.5 text-sm text-muted-foreground empty:m-0 empty:p-0",
+        "px-3 py-1.5 text-sm text-muted-foreground empty:m-0 empty:p-0",
         className,
       )}
       {...props}
@@ -238,7 +240,6 @@ function AutocompleteGroup({
   return (
     <BaseAutocomplete.Group
       data-slot="autocomplete-group"
-      className="space-y-1.5"
       {...props}
     />
   );
@@ -255,7 +256,7 @@ function AutocompleteGroupLabel({
     <BaseAutocomplete.GroupLabel
       data-slot="autocomplete-group-label"
       className={cn(
-        "px-2 py-1.5 text-sm text-muted-foreground",
+        "px-2 py-1 text-xs text-muted-foreground",
         sticky && "sticky top-0 z-10 bg-popover",
         className,
       )}

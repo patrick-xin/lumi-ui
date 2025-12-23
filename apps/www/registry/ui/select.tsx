@@ -328,6 +328,7 @@ function SelectContent({
             "bg-popover text-popover-foreground relative bg-clip-padding overflow-hidden rounded-md shadow-md min-w-[var(--anchor-width)]",
             "outline outline-border dark:-outline-offset-2",
             "animate-popup",
+            // styles for "alignItemWithTrigger"
             "data-[side=none]:transition-none data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100 data-[side=none]:min-w-[calc(var(--anchor-width)+0.3rem)]",
             className,
           )}
@@ -359,11 +360,11 @@ function SelectItemContent({
       data-slot="select-item"
       className={cn(
         "relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 px-2 text-sm outline-hidden select-none",
-        "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
         "[&_svg:not([class*='text-'])]:text-muted-foreground",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "*:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         iconPlacement === "left" && "pl-7",
         className,
       )}

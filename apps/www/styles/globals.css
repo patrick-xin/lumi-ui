@@ -6,8 +6,8 @@
 
 
 @theme {
-  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
   --duration: 200ms;
   --duration-fast: 150ms;
 }
@@ -27,7 +27,7 @@
   }
 
   &[data-ending-style] {
-    transition-timing-function: var(--ease-in);
+    transition-timing-function: var(--ease-out);
     transition-duration: var(--duration-fast);
   }
   
@@ -56,7 +56,6 @@
   }
   
 }
-
 
 @utility animate-backdrop {
   transition-property: opacity, display, overlay;

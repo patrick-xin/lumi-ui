@@ -8,18 +8,17 @@ import {
   ComboboxItem,
   ComboboxList,
 } from "@/registry/ui/combobox";
-import { Label } from "@/registry/ui/label";
 
 export function ComboboxDemo() {
   return (
-    <Combobox items={fruits}>
-      <div className="relative flex flex-col gap-2">
-        <Label htmlFor="select-fruit">Select a fruit</Label>
-        <ComboboxInputGroup id="select-fruit" placeholder="e.g. Apple" />
-      </div>
-
+    <Combobox items={frameworks}>
+      <ComboboxInputGroup
+        id="select-framework"
+        placeholder="e.g. Next.js"
+        className="w-48"
+      />
       <ComboboxContent>
-        <ComboboxEmpty>No fruits found.</ComboboxEmpty>
+        <ComboboxEmpty>No framework found.</ComboboxEmpty>
         <ComboboxList>
           {(item: string) => (
             <ComboboxItem key={item} value={item}>
@@ -32,30 +31,15 @@ export function ComboboxDemo() {
   );
 }
 
-const fruits = [
-  "Apple",
-  "Banana",
-  "Orange",
-  "Pineapple",
-  "Grape",
-  "Mango",
-  "Strawberry",
-  "Blueberry",
-  "Raspberry",
-  "Blackberry",
-  "Cherry",
-  "Peach",
-  "Pear",
-  "Plum",
-  "Kiwi",
-  "Watermelon",
-  "Cantaloupe",
-  "Honeydew",
-  "Papaya",
-  "Guava",
-  "Lychee",
-  "Pomegranate",
-  "Apricot",
-  "Grapefruit",
-  "Passionfruit",
+const frameworks = [
+  "Next.js",
+  "React",
+  "Vue",
+  "Nuxt",
+  "Svelte",
+  "SvelteKit",
+  "Angular",
+  "Solid",
+  "Qwik",
+  "Remix",
 ];

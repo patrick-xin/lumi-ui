@@ -44,10 +44,10 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 <Steps>
   <Step title="Add CSS variables to your @theme block">
     ```css
-    --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
     --duration: 200ms;
-    --duration-end: 150ms;
+    --duration-fast: 150ms;
     ```
   </Step>
   <Step title="Add animation utilities to your main CSS file">
@@ -63,9 +63,10 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
         opacity: 0;
         scale: 0.95;
       }
+
       &[data-ending-style] {
-        transition-timing-function: var(--ease-in);
-        transition-duration: var(--duration-end);
+        transition-timing-function: var(--ease-out);
+        transition-duration: var(--duration-fast);
       }
 
       @media (prefers-reduced-motion: reduce) {

@@ -21,7 +21,6 @@ import {
   AutocompletePopup,
 } from "@/registry/ui/autocomplete";
 
-// --- Sample Data ---
 interface Command {
   id: string;
   label: string;
@@ -58,7 +57,7 @@ function groupCommands(items: Command[]) {
 
 const groupedCommands = groupCommands(commands);
 
-export function GroupedCommandDemo() {
+export function AutocompleteGroupedDemo() {
   return (
     <Autocomplete
       items={groupedCommands}

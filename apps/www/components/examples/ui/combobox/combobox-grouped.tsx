@@ -17,10 +17,7 @@ export default function ExampleGroupedCombobox() {
   const id = React.useId();
   return (
     <Combobox items={groupedProduce}>
-      <div className="relative flex flex-col gap-1 text-sm leading-5 font-medium ">
-        <label htmlFor={id}>Select produce</label>
-        <ComboboxInputGroup placeholder="Select produce" />
-      </div>
+      <ComboboxInputGroup placeholder="Select produce" className="w-64" />
 
       <ComboboxContent>
         <ComboboxEmpty>No produce found.</ComboboxEmpty>
