@@ -1814,6 +1814,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "custom-animation-example-fast": {
+    name: "custom-animation-example-fast",
+    description: "",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [{
+      path: "components/examples/ui/custom-animation-example-fast.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/custom-animation-example-fast");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "custom-animation-example-fast";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "custom-animation-example": {
     name: "custom-animation-example",
     description: "",

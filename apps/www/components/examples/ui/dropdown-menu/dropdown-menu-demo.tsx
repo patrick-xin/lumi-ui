@@ -51,7 +51,7 @@ export function MenuDemo() {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button variant="secondary" className="w-60">
+            <Button variant="glow" className="w-60 justify-between">
               View Options <ChevronDown />
             </Button>
           }

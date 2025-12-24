@@ -3,11 +3,11 @@
 import * as React from "react";
 import {
   Autocomplete,
+  AutocompleteContent,
   AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
   AutocompleteStatus,
   useAutoCompleteFilter,
 } from "@/registry/ui/autocomplete";
@@ -33,7 +33,7 @@ export default function ExampleAutocompleteLimit() {
       limit={limit}
     >
       <AutocompleteInput placeholder="e.g. component" />
-      <AutocompletePopup>
+      <AutocompleteContent>
         <AutocompleteEmpty>No results found for "{value}"</AutocompleteEmpty>
         <AutocompleteList>
           {(tag: Tag) => (
@@ -47,7 +47,7 @@ export default function ExampleAutocompleteLimit() {
             ? `Hiding ${moreCount} results (type a more specific query to narrow results)`
             : null}
         </AutocompleteStatus>
-      </AutocompletePopup>
+      </AutocompleteContent>
     </Autocomplete>
   );
 }

@@ -15,7 +15,8 @@ export function MyMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={<Button variant="outline">Open Menu</Button>}
+        className="w-56"
+        render={<Button variant="glow">Open Menu</Button>}
       />
       <DropdownMenuContent>
         <DropdownMenuGroup>

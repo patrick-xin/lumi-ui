@@ -10,7 +10,7 @@ import {
   ComboboxChips,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInput,
   ComboboxItem,
   ComboboxList,
   ComboboxValue,
@@ -151,7 +151,7 @@ export function CreatableComboboxDemo() {
           }
         }}
       >
-        <ComboboxChips ref={containerRef} className="w-64">
+        <ComboboxChips ref={containerRef} className="w-72">
           <ComboboxValue>
             {(value: LabelItem[]) => (
               <React.Fragment>
@@ -164,13 +164,7 @@ export function CreatableComboboxDemo() {
                     ))}
                   </div>
                 )}
-                <ComboboxInputGroup
-                  id={id}
-                  placeholder="e.g. bug"
-                  variant="ghost"
-                  showClear={false}
-                  showTrigger={false}
-                />
+                <ComboboxInput id={id} placeholder="e.g. bug" variant="ghost" />
               </React.Fragment>
             )}
           </ComboboxValue>

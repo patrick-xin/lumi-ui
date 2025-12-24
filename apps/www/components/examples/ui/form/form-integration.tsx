@@ -4,11 +4,11 @@ import { Minus, Plus } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import {
   Autocomplete,
+  AutocompleteContent,
   AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
 } from "@/registry/ui/autocomplete";
 import { Button } from "@/registry/ui/button";
 import { Checkbox } from "@/registry/ui/checkbox";
@@ -141,7 +141,7 @@ export function ProjectQuoteForm() {
             The core technology you want us to use.
           </FieldDescription>
 
-          <AutocompletePopup>
+          <AutocompleteContent>
             <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
             <AutocompleteList>
               {(fw: Framework) => (
@@ -157,7 +157,7 @@ export function ProjectQuoteForm() {
                 </AutocompleteItem>
               )}
             </AutocompleteList>
-          </AutocompletePopup>
+          </AutocompleteContent>
         </Autocomplete>
         <FieldError />
       </Field>

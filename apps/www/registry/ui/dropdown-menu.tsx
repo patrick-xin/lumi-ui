@@ -102,7 +102,8 @@ function DropdownMenuContent({
         <DropdownMenuPopup
           data-slot="dropdown-menu-content"
           className={cn(
-            "p-1 bg-popover text-popover-foreground rounded-md outline outline-border dark:-outline-offset-1 shadow-md",
+            "p-1 bg-popover text-popover-foreground rounded-md",
+            "shadow-md shadow-primary/10 outline dark:-outline-offset-1 outline-primary/10",
             "animate-popup",
             className,
           )}

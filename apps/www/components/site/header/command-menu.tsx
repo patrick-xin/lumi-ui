@@ -22,6 +22,7 @@ import { Button } from "@/registry/ui/button";
 import { Kbd, KbdGroup } from "@/registry/ui/kbd";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 import type { DocRoot, NavGroup, NavItem } from "@/types";
+import { Separator } from "../../../registry/ui/separator";
 
 export function CommandMenu({ tree }: { tree: DocRoot }) {
   const navGroups = getSearchGroups(tree);
@@ -106,7 +107,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
             <Autocomplete.Popup
               finalFocus={() => !isNavigatingRef.current}
               className={cn(
-                "relative px-4 pt-3 bg-background rounded-md border border-input",
+                "relative bg-background rounded-md border border-input",
                 "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
                 "data-[starting-style]:scale-90 data-[starting-style]:opacity-0 data-[ending-style]:scale-90 data-[ending-style]:opacity-0",
                 "pointer-events-auto w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
@@ -114,11 +115,13 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
               )}
             >
               <AutocompleteInput
-                className="focus-visible:border-none focus-visible:ring-0!"
                 placeholder="Search documentation..."
+                variant="ghost"
+                className="px-4"
               />
-              <ScrollArea noScrollBar className="mt-2 h-80">
-                <AutocompleteList className="max-h-full">
+              <Separator />
+              <ScrollArea noScrollBar className="mt-2 px-2 h-80">
+                <AutocompleteList className="max-h-full rounded-md">
                   {(group: NavGroup) => (
                     <AutocompleteGroup key={group.value} items={group.items}>
                       <AutocompleteGroupLabel className="text-muted-foreground text-sm mb-1">
@@ -154,7 +157,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                   No results found.
                 </AutocompleteEmpty>
               </ScrollArea>
-              <div className="absolute bottom-0 inset-x-0 border-t bg-background">
+              <div className="absolute bottom-0 inset-x-0 border-t bg-background rounded-b-md">
                 <div className="py-2 px-4 flex items-center gap-3">
                   <div className="inline-flex items-center gap-1">
                     <Kbd>

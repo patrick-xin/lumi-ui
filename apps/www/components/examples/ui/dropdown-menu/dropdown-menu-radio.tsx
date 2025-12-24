@@ -23,7 +23,7 @@ export function RadioItemsMenu() {
           </Button>
         }
       />
-      <DropdownMenuContent className="w-32">
+      <DropdownMenuContent>
         <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
           <DropdownMenuRadioItem value="date">Date</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>

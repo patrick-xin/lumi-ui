@@ -8,6 +8,10 @@ Lumi UI provides a streamlined animation system that uses **CSS Transitions** in
 
 ## Core Philosophy
 
+### Consistent across components 
+
+By centralizing animation logic into shared utility classes, your entire application maintains a unified motion language. This ensures that every popover, modal, and dropdown feels physically identical.
+
 ### Native Feel with CSS Transitions
 Unlike most libraries that use CSS Animations (which must complete once started), Lumi UI uses CSS Transitions that track element state. This means animations can smoothly reverse direction mid-way, preventing the "snapping" effect when users interact quickly.
 
@@ -41,78 +45,43 @@ See [Component Compatibility](#component-compatibility) below for details.
 
 If you installed [init](/docs/installation) command via CLI, you can skip this section. If you are installing manually, add the following to your CSS.
 
-<Steps>
-  <Step title="Add CSS variables to your @theme block">
-    ```css
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
-    --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
-    --duration: 200ms;
-    --duration-fast: 150ms;
-    ```
-  </Step>
-  <Step title="Add animation utilities to your main CSS file">
-    ```css
-    @utility animate-popup {
-      transform-origin: var(--transform-origin);
-      transition-property: opacity, scale, translate, display, overlay; 
-      transition-duration: var(--duration);
-      transition-timing-function: var(--ease-out);
+```css
+@utility animate-popup {
+  transform-origin: var(--transform-origin);
+  transition-property: opacity, scale, translate; 
+  transition-duration: 200ms;
 
-      &[data-starting-style],
-      &[data-ending-style] {
-        opacity: 0;
-        scale: 0.95;
-      }
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.95;
+  }
+}
 
-      &[data-ending-style] {
-        transition-timing-function: var(--ease-out);
-        transition-duration: var(--duration-fast);
-      }
+@utility animate-dialog {
+  transform-origin: top;
+  transition-property: all;
+  transition-duration: 150ms;
 
-      @media (prefers-reduced-motion: reduce) {
-        transition-duration: 0ms !important;
-        animation-duration: 0ms !important;
-      }
-    }
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.9;
+  }
+}
 
-    @utility animate-dialog {
-      transform-origin: top;
+@utility animate-backdrop {
+  transition-property: all;
+  transition-duration: 100ms;
+  transition-timing-function: linear; 
 
-      transition-property: opacity, scale, translate, display, overlay;
-      transition-duration: var(--duration-fast);
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
 
-      &[data-starting-style],
-      &[data-ending-style] {
-        opacity: 0;
-        scale: 0.9;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        transition-duration: 0ms !important;
-        animation-duration: 0ms !important;
-      }
-      
-    }
-
-    @utility animate-backdrop {
-      transition-property: opacity, display, overlay;
-      transition-duration: var(--duration-fast);
-      transition-timing-function: linear; 
-
-      &[data-starting-style],
-      &[data-ending-style] {
-        opacity: 0;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        transition-duration: 0ms !important;
-      }
-    }
-
-    ```
-  </Step>
-</Steps>
-
+```
 ## Customization
 
 ### Global Customization
@@ -142,25 +111,35 @@ For unique animation needs, override the utility class.
 
 <ComponentPreview name="custom-animation-example" />
 
-### Accessibility
-- Respects `prefers-reduced-motion` media query
-- Animations are disabled when users prefer reduced motion
-- Smooth transitions for users who enable animations
+<ComponentPreview name="custom-animation-example-fast" />
 
 ## Opting out
 
-Remove the utility class and use standard Tailwind classes for complete control:
+Remove the utility class `animate-popup`, `animate-dialog`, and `animate-backdrop` and use standard Tailwind classes for complete control:
 
 ```tsx
-<DialogPopup
-  className="transition-transform duration-[700ms] ease-[cubic-bezier(0.45,1.005,0,1.005)] data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 data-[ending-style]:duration-[350ms] data-[ending-style]:ease-[cubic-bezier(0.375,0.015,0.545,0.455)] motion-reduce:transition-none"
+<PopoverContent
+  className="data-[ending-style]:scale-90 data-[ending-style]:opacity-0 
+  data-[starting-style]:scale-90 data-[starting-style]:opacity-0 
+  origin-[var(--transform-origin)] transition-[transform,scale,opacity]"
 />
+```
+```tsx
+<DialogContent
+  className="transition-all duration-150 data-[ending-style]:scale-90 
+  data-[ending-style]:opacity-0 data-[starting-style]:scale-90 
+  data-[starting-style]:opacity-0"
+/>
+```
+```tsx
+<DialogBackdrop className="transition-all duration-100 
+data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
 ```
 
 ## Component Compatibility
 
 Uses `animate-popup`:
-- Form Input: [Autocomplete](/docs/components/form-input/autocomplete) | [Combobox](/docs/components/form-input/combobox) | [Select](/docs/components/form-input/select)
+- Form Input: [Combobox](/docs/components/form-input/combobox) | [Select](/docs/components/form-input/select)
 - Overlays & Dialogs: [ContextMenu](/docs/components/overlays-dialogs/context-menu) | [DropdownMenu](/docs/components/overlays-dialogs/dropdown-menu) | [Popover](/docs/components/overlays-dialogs/popover) | [PreviewCard](/docs/components/overlays-dialogs/preview-card) | [Tooltip](/docs/components/overlays-dialogs/tooltip)
 - Navigation: [Menubar](/docs/components/layout-nav/menubar)
 

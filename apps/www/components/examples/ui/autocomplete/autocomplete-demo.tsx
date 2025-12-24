@@ -2,11 +2,11 @@
 
 import {
   Autocomplete,
+  AutocompleteContent,
   AutocompleteEmpty,
-  AutocompleteInput,
+  AutocompleteInputGroup,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
 } from "@/registry/ui/autocomplete";
 import { Label } from "@/registry/ui/label";
 
@@ -15,10 +15,10 @@ export function AutocompleteDemo() {
     <Autocomplete items={tags}>
       <Label className="flex flex-col gap-2 items-start">
         Search tags
-        <AutocompleteInput placeholder="e.g. feature" />
+        <AutocompleteInputGroup placeholder="e.g. feature" />
       </Label>
 
-      <AutocompletePopup>
+      <AutocompleteContent>
         <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
         <AutocompleteList>
           {(tag: Tag) => (
@@ -27,7 +27,7 @@ export function AutocompleteDemo() {
             </AutocompleteItem>
           )}
         </AutocompleteList>
-      </AutocompletePopup>
+      </AutocompleteContent>
     </Autocomplete>
   );
 }

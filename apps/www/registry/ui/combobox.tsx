@@ -6,6 +6,7 @@ import { Check, ChevronDown, X } from "lucide-react";
 import type * as React from "react";
 import { cn } from "@/lib/utils";
 import { inputVariants } from "@/registry/ui/input";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 function Combobox<Value, Multiple extends boolean | undefined = false>({
   children,
@@ -51,6 +52,7 @@ function ComboboxClear({
 }: React.ComponentProps<typeof BaseCombobox.Clear>) {
   return (
     <BaseCombobox.Clear
+      data-slot="combobox-clear"
       className={cn(
         "outline-none p-1 rounded-md bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60 transition-all",
         "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
@@ -89,28 +91,49 @@ function ComboboxInputGroup({
   showClear?: boolean;
   variant?: VariantProps<typeof inputVariants>["variant"];
 }) {
+
+  const paddingClass = showTrigger && showClear 
+    ? "pr-14" 
+    : (showTrigger || showClear) 
+      ? "pr-8" 
+      : "pr-3";
+
   return (
     <div
-      className={cn(
-        "relative w-full min-w-12 [&_input]:pr-10 has-[data-slot=clear]:[&_input]:pr-8 has-[data-slot=trigger]:[&_input]:pr-8 has-[data-slot=clear]:has-[data-slot=trigger]:[&_input]:pr-14",
-        className,
-      )}
       data-slot="combobox-input-group"
+      className={cn(
+        "relative w-full min-w-12",
+        className
+      )}
     >
       <BaseCombobox.Input
-        className={cn(inputVariants({ variant }))}
+        data-slot="combobox-input"
+        className={cn(inputVariants({ variant }), paddingClass)} 
         {...props}
       />
+      
       <div className="absolute right-1 top-0 h-full flex items-center pr-1">
         {showClear && (
-          <ComboboxClear className="text-muted-foreground hover:text-foreground">
+          <BaseCombobox.Clear
+            data-slot="combobox-clear"
+            className={cn(
+              "outline-none p-1 rounded-md bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60 transition-all",
+              "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
+              "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+            )}
+          >
             <X />
-          </ComboboxClear>
+          </BaseCombobox.Clear>
         )}
         {showTrigger && (
-          <ComboboxTrigger className="text-muted-foreground hover:text-foreground">
+          <BaseCombobox.Trigger
+            data-slot="combobox-trigger"
+            className={cn(
+              "outline-none p-1 rounded-md bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60 transition-all pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+            )}
+          >
             <ChevronDown />
-          </ComboboxTrigger>
+          </BaseCombobox.Trigger>
         )}
       </div>
     </div>
@@ -126,7 +149,7 @@ function ComboboxChips({
       data-slot="combobox-chips"
       className={cn(
         "flex flex-wrap min-h-10 w-full items-center gap-1.5 rounded-md border border-input bg-transparent text-sm shadow-xs transition-[border-color,box-shadow] dark:bg-input/30",
-        "focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-2 focus-within:outline-none",
+         "focus-within:border-ring/30 focus-within:ring-1 focus-within:ring-ring/10 focus-within:ring-offset-1 focus-within:ring-offset-ring/5",
         "disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
@@ -175,16 +198,11 @@ function ComboboxChipRemove({
 }
 
 function ComboboxList({
-  className,
   ...props
 }: React.ComponentProps<typeof BaseCombobox.List>) {
   return (
     <BaseCombobox.List
       data-slot="combobox-list"
-      className={cn(
-        "max-h-[min(var(--available-height),24rem)] overflow-y-auto overflow-x-hidden p-1 empty:p-0",
-        className,
-      )}
       {...props}
     />
   );
@@ -209,15 +227,10 @@ function ComboboxPositioner({
 }
 
 function ComboboxPopup({
-  className,
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Popup>) {
   return (
     <BaseCombobox.Popup
-      className={cn(
-        "outline outline-border dark:-outline-offset-1",
-        className,
-      )}
       data-slot="combobox-popup"
       {...props}
     />
@@ -234,9 +247,12 @@ function ComboboxStatus({
   className,
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Status>) {
-  return <BaseCombobox.Status data-slot="combobox-status" className={cn(
-    "flex items-center gap-2 px-3 py-2 text-sm empty:hidden", className
-  )} {...props} />;
+  return <BaseCombobox.Status data-slot="combobox-status"
+        className={cn(
+          "px-2 py-2 text-sm text-muted-foreground empty:m-0 empty:p-0",
+          className,
+        )}
+  {...props} />;
 }
 
 function ComboboxEmpty({
@@ -246,7 +262,7 @@ function ComboboxEmpty({
   return (
     <BaseCombobox.Empty
       data-slot="combobox-empty"
-      className={cn("px-3 py-2 text-sm empty:hidden", className)}
+      className={cn("p-3 text-sm empty:m-0 empty:p-0", className)}
       {...props}
     />
   );
@@ -310,30 +326,36 @@ function ComboboxContent({
   children,
   sideOffset = 6,
   align = "start",
+  matchAnchorWidth = true,
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Popup> & {
   sideOffset?: number;
   align?: "start" | "center" | "end";
+  matchAnchorWidth?: boolean;
 }) {
   return (
     <BaseCombobox.Portal>
       <BaseCombobox.Positioner
         sideOffset={sideOffset}
         align={align}
-        className="z-50"
       >
         <BaseCombobox.Popup
           className={cn(
-            "bg-popover text-popover-foreground relative flex flex-col rounded-md shadow-md",
-            "outline outline-border dark:-outline-offset-1",
-            "w-[var(--anchor-width)] max-w-[var(--available-width)]",
-            "max-h-[min(var(--available-height),24rem)]",
+            "group bg-popover text-popover-foreground relative bg-clip-padding overflow-hidden rounded-md max-w-[var(--available-width)] p-1.5",
+            "shadow-md shadow-primary/10 outline dark:-outline-offset-1 outline-primary/10",
             "animate-popup",
+            matchAnchorWidth && "w-[var(--anchor-width)]",
             className,
           )}
           {...props}
         >
-          {children}
+          <ScrollArea
+            gradientScrollFade
+            noScrollBar
+            className="max-h-[min(23rem,var(--available-height))]"
+          >
+            {children}
+          </ScrollArea>
         </BaseCombobox.Popup>
       </BaseCombobox.Positioner>
     </BaseCombobox.Portal>
