@@ -18,7 +18,7 @@ function Checkbox({
         "border-input dark:bg-input/30",
         "data-checked:bg-primary data-checked:text-primary-foreground data-checked:border-primary",
         "data-indeterminate:bg-primary data-indeterminate:text-primary-foreground data-indeterminate:border-primary",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "focus-visible:border-primary/50 focus-visible:ring-[1.5px] focus-visible:ring-primary/20 focus-visible:ring-offset-1 focus-visible:ring-offset-primary/10",
         "data-invalid:ring-destructive/20 dark:data-invalid:ring-destructive/40 data-invalid:border-destructive",
         "data-disabled:cursor-not-allowed data-disabled:opacity-50",
         className

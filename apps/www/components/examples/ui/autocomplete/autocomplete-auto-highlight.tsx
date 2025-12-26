@@ -2,18 +2,18 @@
 
 import {
   Autocomplete,
+  AutocompleteContent,
   AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
 } from "@/registry/ui/autocomplete";
 
 export function AutocompleteAutoHighlightDemo() {
   return (
     <Autocomplete items={tags} autoHighlight>
       <AutocompleteInput placeholder="e.g. feature" />
-      <AutocompletePopup>
+      <AutocompleteContent>
         <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
         <AutocompleteList>
           {(tag: Tag) => (
@@ -22,7 +22,7 @@ export function AutocompleteAutoHighlightDemo() {
             </AutocompleteItem>
           )}
         </AutocompleteList>
-      </AutocompletePopup>
+      </AutocompleteContent>
     </Autocomplete>
   );
 }

@@ -12,13 +12,13 @@ import type * as React from "react";
 import {
   Autocomplete,
   AutocompleteCollection,
+  AutocompleteContent,
   AutocompleteEmpty,
   AutocompleteGroup,
   AutocompleteGroupLabel,
-  AutocompleteInput,
+  AutocompleteInputGroup,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
 } from "@/registry/ui/autocomplete";
 
 interface Command {
@@ -63,8 +63,11 @@ export function AutocompleteGroupedDemo() {
       items={groupedCommands}
       itemToStringValue={(item) => item.label}
     >
-      <AutocompleteInput placeholder="Type a command or search..." />
-      <AutocompletePopup>
+      <AutocompleteInputGroup
+        className="w-72"
+        placeholder="Type a command or search..."
+      />
+      <AutocompleteContent>
         <AutocompleteEmpty>No results found.</AutocompleteEmpty>
         <AutocompleteList>
           {(group: { value: string; items: Command[] }) => (
@@ -81,7 +84,7 @@ export function AutocompleteGroupedDemo() {
             </AutocompleteGroup>
           )}
         </AutocompleteList>
-      </AutocompletePopup>
+      </AutocompleteContent>
     </Autocomplete>
   );
 }

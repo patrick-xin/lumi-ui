@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import {
   Combobox,
@@ -6,18 +7,17 @@ import {
   ComboboxChips,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
-  ComboboxItem,
+  ComboboxInput,
+  ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
 } from "@/registry/ui/combobox";
 
 export function ComboboxMultipleSelectDemo() {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
-  const id = React.useId();
   return (
     <Combobox items={langs} multiple>
-      <ComboboxChips ref={containerRef} className="w-64">
+      <ComboboxChips ref={containerRef} className="max-w-60">
         <ComboboxValue>
           {(value: ProgrammingLanguage[]) => (
             <React.Fragment>
@@ -30,23 +30,21 @@ export function ComboboxMultipleSelectDemo() {
                   ))}
                 </div>
               )}
-              <ComboboxInputGroup
-                id={id}
+              <ComboboxInput
                 placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
                 variant="ghost"
-                showTrigger={false}
               />
             </React.Fragment>
           )}
         </ComboboxValue>
       </ComboboxChips>
-      <ComboboxContent sideOffset={8}>
+      <ComboboxContent sideOffset={4} positionerRef={containerRef}>
         <ComboboxEmpty>No languages found.</ComboboxEmpty>
         <ComboboxList>
           {(language: ProgrammingLanguage) => (
-            <ComboboxItem key={language.id} value={language}>
+            <ComboboxItemContent key={language.id} value={language}>
               {language.value}
-            </ComboboxItem>
+            </ComboboxItemContent>
           )}
         </ComboboxList>
       </ComboboxContent>

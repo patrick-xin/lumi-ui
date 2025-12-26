@@ -8,12 +8,11 @@ import {
   ComboboxEmpty,
   ComboboxIcon,
   ComboboxInput,
-  ComboboxItem,
+  ComboboxItemContent,
   ComboboxList,
   ComboboxTrigger,
   ComboboxValue,
 } from "@/registry/ui/combobox";
-import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupDemo() {
   return (
@@ -21,7 +20,8 @@ export function ComboboxInputInsidePopupDemo() {
       <ComboboxTrigger
         className={buttonVariants({
           variant: "outline",
-          className: "justify-between px-3 w-64",
+          className:
+            "justify-between px-3 w-64 data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent",
         })}
       >
         <ComboboxValue />
@@ -30,14 +30,18 @@ export function ComboboxInputInsidePopupDemo() {
         </ComboboxIcon>
       </ComboboxTrigger>
       <ComboboxContent>
-        <ComboboxInput placeholder="Find member..." variant="ghost" />
-        <Separator />
+        <ComboboxInput
+          placeholder="Find member..."
+          variant="ghost"
+          className="border-b! rounded-b-none!"
+        />
+
         <ComboboxEmpty>No member found.</ComboboxEmpty>
         <ComboboxList>
           {(member: TeamMember) => (
-            <ComboboxItem key={member.id} value={member}>
+            <ComboboxItemContent key={member.id} value={member}>
               {member.label}
-            </ComboboxItem>
+            </ComboboxItemContent>
           )}
         </ComboboxList>
       </ComboboxContent>

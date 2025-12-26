@@ -46,8 +46,7 @@ links:
      <Autocomplete>
        <AutocompleteInputGroup />
        <AutocompleteValue />
-       <AutocompletePopup>
-         <AutocompleteArrow />
+       <AutocompleteContent>
          <AutocompleteStatus />
          <AutocompleteEmpty />
          <AutocompleteList>
@@ -60,35 +59,40 @@ links:
            </AutocompleteGroup>
            <AutocompleteCollection />
          </AutocompleteList>
-       </AutocompletePopup>
+       </AutocompleteContent>
      </Autocomplete>
      ```
   </TabsPanel>
 
   <TabsPanel value="primitive">
     ```tsx
-<Autocomplete>
-  <AutocompleteInput />
-  <AutocompleteTrigger />
-  <AutocompleteIcon />
-  <AutocompleteClear />
-  <AutocompleteValue />
-  <AutocompletePopup>
-    <AutocompleteArrow />
-    <AutocompleteStatus />
-    <AutocompleteEmpty />
-    <AutocompleteList>
-      <AutocompleteRow>
-        <AutocompleteItem />
-      </AutocompleteRow>
-      <AutocompleteSeparator />
-      <AutocompleteGroup>
-        <AutocompleteGroupLabel />
-      </AutocompleteGroup>
-      <AutocompleteCollection />
-    </AutocompleteList>
-  </AutocompletePopup>
-</Autocomplete>
+  <Autocomplete>
+    <AutocompleteInput />
+    <AutocompleteTrigger />
+    <AutocompleteIcon />
+    <AutocompleteClear />
+    <AutocompleteValue />
+    <AutocompletePortal>
+      <AutocompleteBackdrop />
+      <AutocompletePositioner>
+        <AutocompletePopup>
+          <AutocompleteArrow />
+          <AutocompleteStatus />
+          <AutocompleteEmpty />
+          <AutocompleteList>
+            <AutocompleteRow>
+              <AutocompleteItem />
+            </AutocompleteRow>
+            <AutocompleteSeparator />
+            <AutocompleteGroup>
+              <AutocompleteGroupLabel />
+            </AutocompleteGroup>
+            <AutocompleteCollection />
+          </AutocompleteList>
+        </AutocompletePopup>
+      </AutocompletePositioner>
+    </AutocompletePortal>
+  </Autocomplete>
 ```
 
   </TabsPanel>

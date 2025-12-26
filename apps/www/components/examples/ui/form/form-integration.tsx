@@ -4,11 +4,11 @@ import { Minus, Plus } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import {
   Autocomplete,
+  AutocompleteContent,
   AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
 } from "@/registry/ui/autocomplete";
 import { Button } from "@/registry/ui/button";
 import { Checkbox } from "@/registry/ui/checkbox";
@@ -18,7 +18,7 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInputGroup,
-  ComboboxItem,
+  ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
 import {
@@ -118,9 +118,9 @@ export function ProjectQuoteForm() {
             <ComboboxEmpty>No location found</ComboboxEmpty>
             <ComboboxList>
               {(location: string) => (
-                <ComboboxItem key={location} value={location}>
+                <ComboboxItemContent key={location} value={location}>
                   {location}
-                </ComboboxItem>
+                </ComboboxItemContent>
               )}
             </ComboboxList>
           </ComboboxContent>
@@ -141,7 +141,7 @@ export function ProjectQuoteForm() {
             The core technology you want us to use.
           </FieldDescription>
 
-          <AutocompletePopup>
+          <AutocompleteContent>
             <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
             <AutocompleteList>
               {(fw: Framework) => (
@@ -157,7 +157,7 @@ export function ProjectQuoteForm() {
                 </AutocompleteItem>
               )}
             </AutocompleteList>
-          </AutocompletePopup>
+          </AutocompleteContent>
         </Autocomplete>
         <FieldError />
       </Field>

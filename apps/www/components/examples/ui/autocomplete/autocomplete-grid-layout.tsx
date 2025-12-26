@@ -3,18 +3,19 @@
 import * as React from "react";
 import {
   Autocomplete,
+  AutocompleteContent,
   AutocompleteEmpty,
   AutocompleteGroup,
   AutocompleteGroupLabel,
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
   AutocompleteRow,
   AutocompleteTrigger,
 } from "@/registry/ui/autocomplete";
 import { Button } from "@/registry/ui/button";
 import { Input } from "@/registry/ui/input";
+import { Separator } from "../../../../registry/ui/separator";
 
 export function EmojiPickerAutocompleteDemo() {
   const [pickerOpen, setPickerOpen] = React.useState(false);
@@ -82,14 +83,13 @@ export function EmojiPickerAutocompleteDemo() {
             aria-label="Choose emoji"
           />
 
-          <AutocompletePopup
+          <AutocompleteContent
             matchAnchorWidth={false}
             sideOffset={4}
             align="end"
           >
-            <div className="flex items-center justify-center">
-              <AutocompleteInput placeholder="Search emojis…" />
-            </div>
+            <AutocompleteInput variant="ghost" placeholder="Search emojis…" />
+            <Separator />
             <AutocompleteEmpty>No emojis found</AutocompleteEmpty>
             <AutocompleteList>
               {(group: EmojiGroup) => (
@@ -121,7 +121,7 @@ export function EmojiPickerAutocompleteDemo() {
                 </AutocompleteGroup>
               )}
             </AutocompleteList>
-          </AutocompletePopup>
+          </AutocompleteContent>
         </Autocomplete>
       </div>
     </div>

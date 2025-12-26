@@ -282,7 +282,7 @@ function SelectTriggerGroup({
       className="flex flex-1 items-center gap-2 truncate line-clamp-1 data-[placeholder]:text-muted-foreground data-[placeholder]:before:content-[attr(data-placeholder-text)]"
       >
       {children}
-    </BaseSelect.Value>
+      </BaseSelect.Value>
       {
         <BaseSelect.Icon
           data-slot="select-icon"
@@ -320,16 +320,15 @@ function SelectContent({
         sideOffset={sideOffset}
         alignOffset={alignOffset}
         alignItemWithTrigger={alignItemWithTrigger}
-        className="z-50 outline-none"
       >
         <BaseSelect.Popup
           data-slot="select-content"
           className={cn(
-            "bg-popover text-popover-foreground relative bg-clip-padding overflow-hidden rounded-md shadow-md min-w-[var(--anchor-width)]",
-            "outline outline-border dark:-outline-offset-2",
+            "bg-popover text-popover-foreground relative bg-clip-padding overflow-hidden rounded-md shadow-md",
+            "max-h-[var(--available-height)]  min-w-[var(--anchor-width)]",
+            "outline outline-border",
             "animate-popup",
-            // styles for "alignItemWithTrigger"
-            "data-[side=none]:transition-none data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100 data-[side=none]:min-w-[calc(var(--anchor-width)+0.3rem)]",
+            "data-[side=none]:data-[ending-style]:transition-none data-[side=none]:data-[starting-style]:transition-none data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100 data-[side=none]:min-w-[calc(var(--anchor-width)+0.3rem)]",
             className,
           )}
           {...props}

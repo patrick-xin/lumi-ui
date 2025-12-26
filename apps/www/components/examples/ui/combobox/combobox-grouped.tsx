@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import {
   Combobox,
   ComboboxCollection,
@@ -9,15 +8,18 @@ import {
   ComboboxGroup,
   ComboboxGroupLabel,
   ComboboxInputGroup,
-  ComboboxItem,
+  ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
 
-export default function ExampleGroupedCombobox() {
-  const id = React.useId();
+export function ExampleGroupedCombobox() {
   return (
     <Combobox items={groupedProduce}>
-      <ComboboxInputGroup placeholder="Select produce" className="w-64" />
+      <ComboboxInputGroup
+        showTrigger
+        placeholder="Select produce"
+        className="w-64"
+      />
 
       <ComboboxContent>
         <ComboboxEmpty>No produce found.</ComboboxEmpty>
@@ -27,9 +29,9 @@ export default function ExampleGroupedCombobox() {
               <ComboboxGroupLabel>{group.value}</ComboboxGroupLabel>
               <ComboboxCollection>
                 {(item: Produce) => (
-                  <ComboboxItem key={item.id} value={item}>
+                  <ComboboxItemContent key={item.id} value={item}>
                     {item.label}
-                  </ComboboxItem>
+                  </ComboboxItemContent>
                 )}
               </ComboboxCollection>
             </ComboboxGroup>

@@ -5,37 +5,38 @@ import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
+  DropdownMenuCheckboxItemContent,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 
-export function CheckboxItemsMenu() {
+export function DropdownMenuCheckboxDemo() {
   const [showMinimap, setShowMinimap] = React.useState(true);
   const [showSidebar, setShowSidebar] = React.useState(false);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
+        className="w-56 justify-between"
         render={
-          <Button variant="outline">
+          <Button variant="glow">
             Workspace <ChevronDownIcon className="size-4" />
           </Button>
         }
       />
       <DropdownMenuContent>
-        <DropdownMenuCheckboxItem
+        <DropdownMenuCheckboxItemContent
           checked={showMinimap}
           onCheckedChange={setShowMinimap}
         >
           Show Minimap
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
+        </DropdownMenuCheckboxItemContent>
+        <DropdownMenuCheckboxItemContent
           checked={showSidebar}
           onCheckedChange={setShowSidebar}
         >
           Show Sidebar
-        </DropdownMenuCheckboxItem>
+        </DropdownMenuCheckboxItemContent>
       </DropdownMenuContent>
     </DropdownMenu>
   );

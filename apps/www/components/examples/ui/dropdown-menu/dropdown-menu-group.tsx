@@ -5,12 +5,12 @@ import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
+  DropdownMenuCheckboxItemContent,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuGroupLabel,
   DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
+  DropdownMenuRadioItemContent,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
@@ -23,7 +23,7 @@ export function GroupedMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline">
+          <Button variant="outline" className="w-40 justify-between">
             View <ChevronDownIcon className="size-4" />
           </Button>
         }
@@ -32,19 +32,23 @@ export function GroupedMenu() {
         <DropdownMenuGroup>
           <DropdownMenuGroupLabel>Sort</DropdownMenuGroupLabel>
           <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
-            <DropdownMenuRadioItem value="date">Date</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
+            <DropdownMenuRadioItemContent value="date">
+              Date
+            </DropdownMenuRadioItemContent>
+            <DropdownMenuRadioItemContent value="name">
+              Name
+            </DropdownMenuRadioItemContent>
           </DropdownMenuRadioGroup>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuGroupLabel>Workspace</DropdownMenuGroupLabel>
-          <DropdownMenuCheckboxItem
+          <DropdownMenuCheckboxItemContent
             checked={showMinimap}
             onCheckedChange={setShowMinimap}
           >
             Show Minimap
-          </DropdownMenuCheckboxItem>
+          </DropdownMenuCheckboxItemContent>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -66,7 +66,7 @@ function PopoverArrow({ className, ...props }: BasePopover.Arrow.Props) {
       )}
       {...props}
     >
-      <ArrowSvg />
+      <ArrowSvg variant="popover"/>
     </BasePopover.Arrow>
   );
 }
@@ -142,7 +142,6 @@ function PopoverContent({
           data-slot="popover-popup"
           className={cn(
             "relative rounded-md bg-popover p-3 text-popover-foreground shadow-md outline outline-border dark:-outline-offset-1",
-            "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
             "animate-popup",
             className,
           )}

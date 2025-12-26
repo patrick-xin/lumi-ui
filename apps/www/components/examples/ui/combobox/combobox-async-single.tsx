@@ -5,15 +5,13 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInputGroup,
-  ComboboxItem,
+  ComboboxItemContent,
   ComboboxList,
   ComboboxStatus,
   useComboboxFilter,
 } from "@/registry/ui/combobox";
 
 export default function ExampleAsyncSingleCombobox() {
-  const id = React.useId();
-
   const [searchResults, setSearchResults] = React.useState<DirectoryUser[]>([]);
   const [selectedValue, setSelectedValue] =
     React.useState<DirectoryUser | null>(null);
@@ -129,18 +127,22 @@ export default function ExampleAsyncSingleCombobox() {
       <ComboboxInputGroup placeholder="Search..." className="w-64" />
 
       <ComboboxContent aria-busy={isPending || undefined}>
-        <ComboboxStatus>{getStatus()}</ComboboxStatus>
-        <ComboboxEmpty>{getEmptyMessage()}</ComboboxEmpty>
+        <ComboboxStatus className="p-2">{getStatus()}</ComboboxStatus>
+
+        <ComboboxEmpty className="p-2 text-left">
+          {getEmptyMessage()}
+        </ComboboxEmpty>
+
         <ComboboxList>
           {(user: DirectoryUser) => (
-            <ComboboxItem key={user.id} value={user}>
+            <ComboboxItemContent key={user.id} value={user}>
               <div className="flex flex-col gap-1">
                 <div className="font-medium">{user.name}</div>
                 <div className="flex flex-wrap gap-3">
                   <span className="opacity-80">@{user.username}</span>
                 </div>
               </div>
-            </ComboboxItem>
+            </ComboboxItemContent>
           )}
         </ComboboxList>
       </ComboboxContent>

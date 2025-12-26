@@ -7,7 +7,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
+  DropdownMenuRadioItemContent,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 
@@ -23,11 +23,17 @@ export function RadioItemsMenu() {
           </Button>
         }
       />
-      <DropdownMenuContent className="w-32">
+      <DropdownMenuContent>
         <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
-          <DropdownMenuRadioItem value="date">Date</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="type">Type</DropdownMenuRadioItem>
+          <DropdownMenuRadioItemContent value="date">
+            Date
+          </DropdownMenuRadioItemContent>
+          <DropdownMenuRadioItemContent value="name">
+            Name
+          </DropdownMenuRadioItemContent>
+          <DropdownMenuRadioItemContent value="type">
+            Type
+          </DropdownMenuRadioItemContent>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

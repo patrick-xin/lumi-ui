@@ -5,11 +5,11 @@ import * as React from "react";
 import {
   Autocomplete,
   AutocompleteClear,
+  AutocompleteContent,
   AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
   AutocompleteTrigger,
 } from "@/registry/ui/autocomplete";
 
@@ -46,7 +46,7 @@ export default function AutocompleteWithClearTrigger() {
             </AutocompleteTrigger>
           </div>
         </div>
-        <AutocompletePopup>
+        <AutocompleteContent>
           <AutocompleteEmpty>No movies found.</AutocompleteEmpty>
           <AutocompleteList>
             {(movie) => (
@@ -55,7 +55,7 @@ export default function AutocompleteWithClearTrigger() {
               </AutocompleteItem>
             )}
           </AutocompleteList>
-        </AutocompletePopup>
+        </AutocompleteContent>
       </Autocomplete>
     </div>
   );

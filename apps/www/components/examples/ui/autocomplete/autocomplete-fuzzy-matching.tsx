@@ -4,11 +4,11 @@ import { matchSorter } from "match-sorter";
 import type * as React from "react";
 import {
   Autocomplete,
+  AutocompleteContent,
   AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
   AutocompleteValue,
 } from "@/registry/ui/autocomplete";
 
@@ -20,7 +20,7 @@ export function FuzzyMatchingAutocompleteDemo() {
       itemToStringValue={(item) => item.title}
     >
       <AutocompleteInput placeholder="e.g. React" />
-      <AutocompletePopup>
+      <AutocompleteContent>
         <AutocompleteEmpty>
           No results found for "{<AutocompleteValue />}"
         </AutocompleteEmpty>
@@ -45,7 +45,7 @@ export function FuzzyMatchingAutocompleteDemo() {
             </AutocompleteItem>
           )}
         </AutocompleteList>
-      </AutocompletePopup>
+      </AutocompleteContent>
     </Autocomplete>
   );
 }

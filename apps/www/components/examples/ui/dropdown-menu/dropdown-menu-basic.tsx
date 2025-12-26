@@ -11,11 +11,12 @@ import {
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 
-export function MyMenu() {
+export function DropdownMenuDemo() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={<Button variant="outline">Open Menu</Button>}
+        className="w-56"
+        render={<Button variant="glow">Open Menu</Button>}
       />
       <DropdownMenuContent>
         <DropdownMenuGroup>

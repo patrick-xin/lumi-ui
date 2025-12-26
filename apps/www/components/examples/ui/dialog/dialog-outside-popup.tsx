@@ -26,8 +26,8 @@ export default function ExampleUncontainedDialog() {
                 </Button>
               }
             />
-            <div className="pointer-events-auto box-border h-full w-full max-w-[70rem] rounded-lg bg-popover p-6 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-[starting-style]/popup:scale-110">
-              Close button is outside
+            <div className="pointer-events-auto box-border h-full w-full max-w-[70rem] rounded-lg bg-popover p-6 transition-transform duration-500 group-data-[starting-style]/popup:scale-110 flex justify-center items-center">
+              <p className="font-bold text-lg">Close button is outside</p>
             </div>
           </DialogPopup>
         </DialogViewport>

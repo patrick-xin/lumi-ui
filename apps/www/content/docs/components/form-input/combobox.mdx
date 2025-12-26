@@ -31,30 +31,163 @@ links:
   </TabsPanel>
 </CodeTabs>
 
-## Recipes
 
-### Combobox with Input Inside Popup
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+     ```tsx
+     <Combobox>
+       <ComboboxTrigger />
+       <ComboboxInputGroup />
+
+       <ComboboxChips>
+         <ComboboxChip />
+       </ComboboxChips>
+
+       <ComboboxContent>
+         <ComboboxStatus />
+         <ComboboxEmpty />
+         <ComboboxList>
+           <ComboboxRow>
+             <ComboboxItemContent />
+           </ComboboxRow>
+           <ComboboxSeparator />
+           <ComboboxGroup>
+             <ComboboxGroupLabel />
+           </ComboboxGroup>
+           <ComboboxCollection />
+         </ComboboxList>
+       </ComboboxContent>
+     </Combobox>
+     ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+    ```tsx
+    <Combobox>
+      <ComboboxInput />
+      <ComboboxTrigger />
+      <ComboboxIcon />
+      <ComboboxClear />
+      <ComboboxValue />
+
+      <ComboboxChips>
+        <ComboboxChip>
+          <ComboboxChipRemove />
+        </ComboboxChip>
+      </ComboboxChips>
+
+      <ComboboxPortal>
+        <ComboboxBackdrop />
+        <ComboboxPositioner>
+          <ComboboxPopup>
+            <ComboboxArrow />
+
+            <ComboboxStatus />
+            <ComboboxEmpty />
+
+            <ComboboxList>
+              <ComboboxRow>
+                <ComboboxItem>
+                  <ComboboxItemIndicator />
+                </ComboboxItem>
+              </ComboboxRow>
+
+              <ComboboxSeparator />
+
+              <ComboboxGroup>
+                <ComboboxGroupLabel />
+              </ComboboxGroup>
+
+              <ComboboxCollection />
+            </ComboboxList>
+          </ComboboxPopup>
+        </ComboboxPositioner>
+      </ComboboxPortal>
+    </Combobox>
+    ```
+  </TabsPanel>
+</Tabs>
+
+## Features
+
+### With Clear and Trigger Button
+<ComponentPreview name="combobox-clear-trigger" />
+
+### Input Inside Popup
+
+Use `ComboboxTrigger` instead of `ComboboxInputGroup` to place the input inside the popup. Style `ComboboxInput` to remove the border.
 
 <ComponentPreview name="combobox-input-inside-popup" />
 
-### Combobox with Multiple Selection
-
-<ComponentPreview name="combobox-multiple" />
-
-### Combobox with Creatable Items
-
-<ComponentPreview name="combobox-creatable" />
-
-### Combobox with Grouped Items
-
+### Grouped
 <ComponentPreview name="combobox-grouped" />
 
-### Combobox with Async Items (Single)
+## Cookbook
 
+### Using Scroll Area
+<ComponentPreview name="combobox-scroll-area" />
+
+### Multiple Selection
+<ComponentPreview name="combobox-multiple" />
+
+### Creatable
+<ComponentPreview name="combobox-creatable" />
+
+### Async Items (Single)
 <ComponentPreview name="combobox-async-single" />
 
-### Combobox with Async Items (Multiple)
-
+### Async Items (Multiple)
 <ComponentPreview name="combobox-async-multiple" />
 
+## Customization
 
+<Callout title="Note" variant="info">
+Lumi UI exports all primitive components from Base UI to ensure maximum flexibility. Below is an example of how to compose a Linear-style combobox by mixing pre-assembled components with raw primitives.
+</Callout>
+
+<ComponentPreview name="combobox-customization" />
+
+## API Reference
+
+### ComboboxInputGroup
+
+A high-level input component that combines the `Input`, `Clear`, and `Trigger` into a single styled element.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `showTrigger` | `boolean` | `true` | Whether to show the trigger button. |
+| `showClear` | `boolean` | `true` | Whether to show the clear button. |
+| `variant` | `"ghost" \| "default" \| "transparent"` | `"default"` | The visual variant of the input group. |
+| `inputSize` | `"default" \| "sm" \| "lg"` | `"default"` | The size of the input. |
+| `className` | `string` | `-` | Additional CSS classes. |
+| `...props` | `BaseCombobox.InputProps` | `-` | Passes all other props to the underlying `BaseCombobox.InputProps`. |
+
+
+### ComboboxContent
+
+A high-level container component that combines the `Portal`, `Positioner`, `Popup`, and `ScrollArea` into a single styled element for the dropdown content.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `sideOffset` | `number` | `6` | The offset distance from the anchor. |
+| `align` | `"start" \| "center" \| "end"` | `"start"` | The alignment relative to the anchor. |
+| `matchAnchorWidth` | `boolean` | `true` | Whether the popup width matches the anchor width. |
+| `positionerRef` | `React.RefObject<HTMLDivElement>` | `null` | Ref passed to the positioner for custom anchoring. |
+| `className` | `string` | `-` | Additional CSS classes. |
+| `...props` | `BaseCombobox.PopupProps` | `-` | Passes all other props to the underlying `BaseCombobox.PopupProps`. |
+
+### ComboboxItemContent
+
+A high-level item component that combines the `Item` and `ItemIndicator` into a single styled element with a consistent layout.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `className` | `string` | `-` | Additional CSS classes. |
+| `...props` | `BaseCombobox.ItemProps` | `-` | Passes all other props to the underlying `BaseCombobox.ItemProps`. |

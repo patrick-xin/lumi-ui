@@ -2,11 +2,11 @@
 
 import {
   Autocomplete,
+  AutocompleteContent,
   AutocompleteEmpty,
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
 } from "@/registry/ui/autocomplete";
 import { Field, FieldDescription, FieldLabel } from "@/registry/ui/field";
 
@@ -27,7 +27,7 @@ export default function FieldAutocompleteDemo() {
           aria-label="Search items"
           placeholder="Search items…"
         />
-        <AutocompletePopup>
+        <AutocompleteContent>
           <AutocompleteEmpty>No items found.</AutocompleteEmpty>
           <AutocompleteList>
             {(item) => (
@@ -36,7 +36,7 @@ export default function FieldAutocompleteDemo() {
               </AutocompleteItem>
             )}
           </AutocompleteList>
-        </AutocompletePopup>
+        </AutocompleteContent>
       </Autocomplete>
       <FieldDescription>Choose your favourite fruit.</FieldDescription>
     </Field>

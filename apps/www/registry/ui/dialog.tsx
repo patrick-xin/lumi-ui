@@ -93,50 +93,6 @@ function DialogPopup({
   );
 }
 
-function DialogContent({
-  children,
-  className,
-  showCloseButton = false,
-  ...props
-}: React.ComponentProps<typeof BaseDialog.Popup> & {
-  showCloseButton?: boolean;
-}) {
-  return (
-    <DialogPortal>
-      <BaseDialog.Backdrop className="fixed inset-0 min-h-dvh bg-black/70 animate-backdrop supports-backdrop-filter:backdrop-blur-xs" />
-      <DialogViewport className="grid place-items-center">
-        <BaseDialog.Popup
-          className={cn(
-            "relative grid w-full max-w-[calc(100%-2rem)] gap-4 p-4",
-            "bg-background bg-clip-padding rounded-lg border shadow-lg overflow-hidden",
-            "min-h-0 max-h-full sm:max-w-lg sm:p-6 sm:rounded-md",
-            "animate-dialog",
-            "data-[nested-dialog-open]:scale-[calc(1-0.04*var(--nested-dialogs))] data-[nested-dialog-open]:translate-y-[calc(1rem*var(--nested-dialogs))]",
-            "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-[inherit] data-[nested-dialog-open]:after:bg-black/10 data-[nested-dialog-open]:after:content-['']",
-            className,
-          )}
-          {...props}
-        >
-          {children}
-          {showCloseButton && (
-            <BaseDialog.Close
-              className={cn(
-                "absolute top-2 right-2 rounded-xs opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none",
-                "focus:ring-2 focus:ring-offset-2 focus:outline-hidden ring-offset-background focus:ring-ring",
-                "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-                "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
-              )}
-            >
-              <XIcon />
-              <span className="sr-only">Close</span>
-            </BaseDialog.Close>
-          )}
-        </BaseDialog.Popup>
-      </DialogViewport>
-    </DialogPortal>
-  );
-}
-
 function DialogClose({ ...props }: BaseDialog.Close.Props) {
   return <BaseDialog.Close data-slot="dialog-close" {...props} />;
 }
@@ -200,6 +156,50 @@ function DialogScrollArea({ className, ...props }: React.ComponentProps<typeof S
       )}
       {...props}
     />
+  );
+}
+
+function DialogContent({
+  children,
+  className,
+  showCloseButton = false,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Popup> & {
+  showCloseButton?: boolean;
+}) {
+  return (
+    <DialogPortal>
+      <BaseDialog.Backdrop className="fixed inset-0 min-h-dvh bg-black/70 animate-backdrop" />
+      <DialogViewport className="grid place-items-center">
+        <BaseDialog.Popup
+          className={cn(
+            "relative grid w-full max-w-[calc(100%-2rem)] gap-4 p-4",
+            "bg-background bg-clip-padding rounded-lg border shadow-lg overflow-hidden",
+            "min-h-0 max-h-full sm:max-w-lg sm:p-6 sm:rounded-md",
+            "animate-dialog",
+            "data-[nested-dialog-open]:scale-[calc(1-0.04*var(--nested-dialogs))] data-[nested-dialog-open]:translate-y-[calc(0.75rem*var(--nested-dialogs))]",
+            "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-[inherit] data-[nested-dialog-open]:after:bg-black/20 data-[nested-dialog-open]:after:content-['']",
+            className,
+          )}
+          {...props}
+        >
+          {children}
+          {showCloseButton && (
+            <BaseDialog.Close
+              className={cn(
+                "absolute top-2 right-2 rounded-xs opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none",
+                "focus:ring-2 focus:ring-offset-2 focus:outline-hidden ring-offset-background focus:ring-ring",
+                "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+                "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
+              )}
+            >
+              <XIcon />
+              <span className="sr-only">Close</span>
+            </BaseDialog.Close>
+          )}
+        </BaseDialog.Popup>
+      </DialogViewport>
+    </DialogPortal>
   );
 }
 

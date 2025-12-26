@@ -5,14 +5,14 @@ import { Loader } from "lucide-react";
 import * as React from "react";
 import {
   Autocomplete,
+  AutocompleteContent,
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-  AutocompletePopup,
   AutocompleteStatus,
 } from "@/registry/ui/autocomplete";
 
-export function AsyncAutocompleteDemo() {
+export function AutocompleteAsyncDemo() {
   const [searchValue, setSearchValue] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [searchResults, setSearchResults] = React.useState<Movie[]>([]);
@@ -86,7 +86,7 @@ export function AsyncAutocompleteDemo() {
     >
       <AutocompleteInput placeholder="e.g. Pulp Fiction or 1994" />
       {shouldRenderPopup && (
-        <AutocompletePopup aria-busy={isLoading || undefined}>
+        <AutocompleteContent aria-busy={isLoading || undefined}>
           <AutocompleteStatus>{status}</AutocompleteStatus>
           <AutocompleteList>
             {(movie: Movie) => (
@@ -100,7 +100,7 @@ export function AsyncAutocompleteDemo() {
               </AutocompleteItem>
             )}
           </AutocompleteList>
-        </AutocompletePopup>
+        </AutocompleteContent>
       )}
     </Autocomplete>
   );
