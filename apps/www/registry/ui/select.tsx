@@ -282,7 +282,7 @@ function SelectTriggerGroup({
       className="flex flex-1 items-center gap-2 truncate line-clamp-1 data-[placeholder]:text-muted-foreground data-[placeholder]:before:content-[attr(data-placeholder-text)]"
       >
       {children}
-    </BaseSelect.Value>
+      </BaseSelect.Value>
       {
         <BaseSelect.Icon
           data-slot="select-icon"
@@ -324,7 +324,7 @@ function SelectContent({
         <BaseSelect.Popup
           data-slot="select-content"
           className={cn(
-            "bg-popover text-popover-foreground relative bg-clip-padding overflow-hidden rounded-md shadow-md origin-[var(--transform-origin)]",
+            "bg-popover text-popover-foreground relative bg-clip-padding overflow-hidden rounded-md shadow-md",
             "max-h-[var(--available-height)]  min-w-[var(--anchor-width)]",
             "outline outline-border",
             "animate-popup",

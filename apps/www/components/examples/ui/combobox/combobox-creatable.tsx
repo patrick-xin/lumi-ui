@@ -2,7 +2,6 @@
 
 import { Plus } from "lucide-react";
 import * as React from "react";
-
 import { Button } from "@/registry/ui/button";
 import {
   Combobox,
@@ -11,7 +10,7 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
-  ComboboxItem,
+  ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
 } from "@/registry/ui/combobox";
@@ -24,9 +23,7 @@ import {
 } from "@/registry/ui/dialog";
 import { Input } from "@/registry/ui/input";
 
-export function CreatableComboboxDemo() {
-  const id = React.useId();
-
+export function ComboboxCreatableDemo() {
   const [labels, setLabels] = React.useState<LabelItem[]>(initialLabels);
   const [selected, setSelected] = React.useState<LabelItem[]>([]);
   const [query, setQuery] = React.useState("");
@@ -164,7 +161,7 @@ export function CreatableComboboxDemo() {
                     ))}
                   </div>
                 )}
-                <ComboboxInput id={id} placeholder="e.g. bug" variant="ghost" />
+                <ComboboxInput placeholder="e.g. bug" variant="ghost" />
               </React.Fragment>
             )}
           </ComboboxValue>
@@ -175,14 +172,14 @@ export function CreatableComboboxDemo() {
           <ComboboxList>
             {(item: LabelItem) =>
               item.creatable ? (
-                <ComboboxItem key={item.id} value={item}>
+                <ComboboxItemContent key={item.id} value={item}>
                   <Plus className="size-4" />
                   <span>Create &quot;{item.creatable}&quot;</span>
-                </ComboboxItem>
+                </ComboboxItemContent>
               ) : (
-                <ComboboxItem key={item.id} value={item}>
+                <ComboboxItemContent key={item.id} value={item}>
                   {item.value}
-                </ComboboxItem>
+                </ComboboxItemContent>
               )
             }
           </ComboboxList>

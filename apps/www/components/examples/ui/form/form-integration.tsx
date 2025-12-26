@@ -18,7 +18,7 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInputGroup,
-  ComboboxItem,
+  ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
 import {
@@ -118,9 +118,9 @@ export function ProjectQuoteForm() {
             <ComboboxEmpty>No location found</ComboboxEmpty>
             <ComboboxList>
               {(location: string) => (
-                <ComboboxItem key={location} value={location}>
+                <ComboboxItemContent key={location} value={location}>
                   {location}
-                </ComboboxItem>
+                </ComboboxItemContent>
               )}
             </ComboboxList>
           </ComboboxContent>

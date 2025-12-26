@@ -29,7 +29,7 @@ const buttonVariants = cva(
         glow: [
           "bg-transparent border hover:bg-accent dark:hover:bg-accent/30",
           "shadow-md shadow-primary/30 dark:shadow-primary/10 dark:shadow-sm",
-        ],
+        ]
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

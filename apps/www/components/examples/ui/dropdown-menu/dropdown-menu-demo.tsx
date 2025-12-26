@@ -24,22 +24,22 @@ import {
 } from "@/registry/ui/dialog";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
+  DropdownMenuCheckboxItemContent,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuGroupLabel,
   DropdownMenuItem,
   DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
+  DropdownMenuRadioItemContent,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuSubMenu,
   DropdownMenuSubMenuContent,
-  DropdownMenuSubMenuTrigger,
+  DropdownMenuSubMenuTriggerGroup,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 
-export function MenuDemo() {
+export function DropdownMenuDemo() {
   const [showMinimap, setShowMinimap] = React.useState(true);
   const [showStatusBar, setShowStatusBar] = React.useState(true);
   const [wordWrap, setWordWrap] = React.useState(false);
@@ -56,17 +56,17 @@ export function MenuDemo() {
             </Button>
           }
         />
-        <DropdownMenuContent align="start">
+        <DropdownMenuContent align="start" showArrow>
           <DropdownMenuItem>
             <FilePlus className="size-4" />
             <span>New File</span>
             <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuSubMenu>
-            <DropdownMenuSubMenuTrigger>
+            <DropdownMenuSubMenuTriggerGroup>
               <Share2 className="size-4" />
               <span>Share</span>
-            </DropdownMenuSubMenuTrigger>
+            </DropdownMenuSubMenuTriggerGroup>
             <DropdownMenuSubMenuContent>
               <DropdownMenuItem>
                 <ClipboardIcon />
@@ -85,7 +85,7 @@ export function MenuDemo() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuGroupLabel>Editor Layout</DropdownMenuGroupLabel>
-            <DropdownMenuCheckboxItem
+            <DropdownMenuCheckboxItemContent
               checked={showMinimap}
               onCheckedChange={setShowMinimap}
             >
@@ -95,36 +95,36 @@ export function MenuDemo() {
                 <EyeOff className="size-4" />
               )}
               <span>Show Minimap</span>
-            </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem
+            </DropdownMenuCheckboxItemContent>
+            <DropdownMenuCheckboxItemContent
               checked={wordWrap}
               onCheckedChange={setWordWrap}
             >
               <WrapText className="size-4" />
               <span>Enable Word Wrap</span>
-            </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem
+            </DropdownMenuCheckboxItemContent>
+            <DropdownMenuCheckboxItemContent
               checked={showStatusBar}
               onCheckedChange={setShowStatusBar}
               disabled
             >
               <Eye className="size-4" />
               <span>Show Status Bar (Locked)</span>
-            </DropdownMenuCheckboxItem>
+            </DropdownMenuCheckboxItemContent>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuGroupLabel>Sort Files By</DropdownMenuGroupLabel>
             <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
-              <DropdownMenuRadioItem value="modified">
+              <DropdownMenuRadioItemContent value="modified">
                 Last Modified
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="created">
+              </DropdownMenuRadioItemContent>
+              <DropdownMenuRadioItemContent value="created">
                 Date Created
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="alpha">
+              </DropdownMenuRadioItemContent>
+              <DropdownMenuRadioItemContent value="alpha">
                 Alphabetical
-              </DropdownMenuRadioItem>
+              </DropdownMenuRadioItemContent>
             </DropdownMenuRadioGroup>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />

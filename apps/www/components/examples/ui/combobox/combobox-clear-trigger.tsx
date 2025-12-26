@@ -9,13 +9,15 @@ import {
   ComboboxList,
 } from "@/registry/ui/combobox";
 
-export function ComboboxDemo() {
+export function ComboboxClearTriggerDemo() {
   return (
     <Combobox items={frameworks}>
       <ComboboxInputGroup
         id="select-framework"
         placeholder="e.g. Next.js"
         className="w-48"
+        showTrigger
+        showClear
       />
       <ComboboxContent>
         <ComboboxEmpty>No framework found.</ComboboxEmpty>

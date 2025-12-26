@@ -18,8 +18,8 @@ export function NestedMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline">
-            Song <ChevronDownIcon className="size-4" />
+          <Button variant="outline" className="w-60 justify-between">
+            Song <ChevronDownIcon />
           </Button>
         }
       />

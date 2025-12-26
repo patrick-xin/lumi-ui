@@ -9,7 +9,7 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInputGroup,
-  ComboboxItem,
+  ComboboxItemContent,
   ComboboxList,
   ComboboxStatus,
   ComboboxValue,
@@ -176,11 +176,13 @@ export default function ExampleAsyncMultipleCombobox() {
         </ComboboxValue>
       </ComboboxChips>
       <ComboboxContent aria-busy={isPending || undefined} sideOffset={8}>
-        <ComboboxStatus>{getStatus()}</ComboboxStatus>
-        <ComboboxEmpty>{getEmptyMessage()}</ComboboxEmpty>
+        <ComboboxStatus className="p-2">{getStatus()}</ComboboxStatus>
+        <ComboboxEmpty className="text-left p-2">
+          {getEmptyMessage()}
+        </ComboboxEmpty>
         <ComboboxList>
           {(user: DirectoryUser) => (
-            <ComboboxItem key={user.id} value={user}>
+            <ComboboxItemContent key={user.id} value={user}>
               <div className="flex flex-col gap-1">
                 <div className="font-medium">{user.name}</div>
                 <div className="flex flex-wrap gap-2 text-sm ">
@@ -188,7 +190,7 @@ export default function ExampleAsyncMultipleCombobox() {
                   <span>{user.title}</span>
                 </div>
               </div>
-            </ComboboxItem>
+            </ComboboxItemContent>
           )}
         </ComboboxList>
       </ComboboxContent>

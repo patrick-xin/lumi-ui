@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 
-export function MyMenu() {
+export function DropdownMenuDemo() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger

@@ -5,12 +5,12 @@ import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
+  DropdownMenuCheckboxItemContent,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 
-export function CheckboxItemsMenu() {
+export function DropdownMenuCheckboxDemo() {
   const [showMinimap, setShowMinimap] = React.useState(true);
   const [showSidebar, setShowSidebar] = React.useState(false);
 
@@ -25,18 +25,18 @@ export function CheckboxItemsMenu() {
         }
       />
       <DropdownMenuContent>
-        <DropdownMenuCheckboxItem
+        <DropdownMenuCheckboxItemContent
           checked={showMinimap}
           onCheckedChange={setShowMinimap}
         >
           Show Minimap
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
+        </DropdownMenuCheckboxItemContent>
+        <DropdownMenuCheckboxItemContent
           checked={showSidebar}
           onCheckedChange={setShowSidebar}
         >
           Show Sidebar
-        </DropdownMenuCheckboxItem>
+        </DropdownMenuCheckboxItemContent>
       </DropdownMenuContent>
     </DropdownMenu>
   );

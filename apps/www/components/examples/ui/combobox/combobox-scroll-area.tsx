@@ -8,8 +8,9 @@ import {
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
-export function ComboboxDemo() {
+export function ComboboxScrollAreaDemo() {
   return (
     <Combobox items={frameworks}>
       <ComboboxInputGroup
@@ -18,14 +19,16 @@ export function ComboboxDemo() {
         className="w-48"
       />
       <ComboboxContent>
-        <ComboboxEmpty>No framework found.</ComboboxEmpty>
-        <ComboboxList>
-          {(item: string) => (
-            <ComboboxItemContent key={item} value={item}>
-              {item}
-            </ComboboxItemContent>
-          )}
-        </ComboboxList>
+        <ScrollArea gradientScrollFade noScrollBar className="max-h-32">
+          <ComboboxEmpty>No framework found.</ComboboxEmpty>
+          <ComboboxList>
+            {(item: string) => (
+              <ComboboxItemContent key={item} value={item}>
+                {item}
+              </ComboboxItemContent>
+            )}
+          </ComboboxList>
+        </ScrollArea>
       </ComboboxContent>
     </Combobox>
   );
