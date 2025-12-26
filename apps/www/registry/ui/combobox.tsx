@@ -297,8 +297,8 @@ function ComboboxSeparator({
 
 function ComboboxInputGroup({
   className,
-  showTrigger = true,
-  showClear = true,
+  showTrigger = false,
+  showClear = false,
   variant = "default",
   inputSize = "default",
   ...props

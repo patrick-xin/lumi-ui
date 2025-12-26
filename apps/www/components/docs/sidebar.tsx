@@ -29,8 +29,8 @@ export const DocsSidebar = ({ tree }: DocsSidebarProps) => {
   const items = normalizeSidebarTree(tree, pathname);
 
   return (
-    <aside className="fixed inset-y-0 left-[max(0px,calc(50%-var(--container-size)/2))] z-30 hidden w-[240px] flex-col bg-background md:flex top-[var(--header-height)]">
-      <ScrollArea gradientScrollFade noScrollBar className="px-2">
+    <aside className="fixed inset-y-0 left-[max(0px,calc(50%-var(--container-size)/2))] z-30 hidden w-[240px] flex-col  md:flex top-[var(--header-height)]">
+      <ScrollArea gradientScrollFade noScrollBar>
         <nav className="w-full space-y-6 pt-16 xl:pt-8 pb-48">
           {items.map((item, index) => (
             <SidebarSection key={String(index)} item={item} />
@@ -65,7 +65,7 @@ const SidebarTree = ({
   if (!items.length) return null;
 
   return (
-    <ul className={cn("grid gap-1", level > 0 && "pl-4 border-l ml-2")}>
+    <ul className={cn("grid gap-1 px-2", level > 0 && "pl-4 border-l ml-2")}>
       {items.map((item, index) => (
         <li key={index}>
           {item.type === "folder" ? (
@@ -139,9 +139,9 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
       variant="ghost"
       size="sm"
       className={cn(
-        "w-full justify-start h-8 px-2 text-sm font-normal text-muted-foreground transition-colors",
-        item.active && "bg-accent text-primary font-medium",
-        "hover:bg-accent/80 hover:text-accent-foreground",
+        "w-full justify-start h-8 px-2 text-sm font-normal text-muted-foreground",
+        item.active &&
+          "bg-accent text-primary hover:bg-accent! hover:text-primary",
       )}
       nativeButton={false}
       render={

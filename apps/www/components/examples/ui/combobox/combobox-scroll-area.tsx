@@ -19,7 +19,12 @@ export function ComboboxScrollAreaDemo() {
         className="w-48"
       />
       <ComboboxContent>
-        <ScrollArea gradientScrollFade noScrollBar className="max-h-32">
+        <ScrollArea
+          gradientScrollFade
+          noScrollBar
+          // add height constraint
+          className="max-h-32"
+        >
           <ComboboxEmpty>No framework found.</ComboboxEmpty>
           <ComboboxList>
             {(item: string) => (

@@ -16,7 +16,7 @@ import {
   useComboboxFilter,
 } from "@/registry/ui/combobox";
 
-export default function ExampleAsyncMultipleCombobox() {
+export function ComboboxAsyncMultipleDemo() {
   const id = React.useId();
 
   const containerRef = React.useRef<HTMLDivElement | null>(null);

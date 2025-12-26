@@ -12,7 +12,7 @@ import {
   ComboboxList,
 } from "@/registry/ui/combobox";
 
-export function ExampleGroupedCombobox() {
+export function ComboboxGroupedDemo() {
   return (
     <Combobox items={groupedProduce}>
       <ComboboxInputGroup

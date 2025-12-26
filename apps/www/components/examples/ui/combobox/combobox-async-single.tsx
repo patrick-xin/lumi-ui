@@ -11,7 +11,7 @@ import {
   useComboboxFilter,
 } from "@/registry/ui/combobox";
 
-export default function ExampleAsyncSingleCombobox() {
+export function ComboboxAsyncSingleDemo() {
   const [searchResults, setSearchResults] = React.useState<DirectoryUser[]>([]);
   const [selectedValue, setSelectedValue] =
     React.useState<DirectoryUser | null>(null);

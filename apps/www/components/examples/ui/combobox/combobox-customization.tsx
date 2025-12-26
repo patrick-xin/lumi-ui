@@ -77,7 +77,7 @@ export const statuses: ProjectStatus[] = [
 
 const projectStatusTooltipHandle = createTooltipHandle();
 
-export function ProjectStatusPicker() {
+export function ComboboxCustomizationDemo() {
   const [open, setOpen] = React.useState(false);
   const [projectStatus, setProjectStatus] =
     React.useState<ProjectStatus | null>(statuses[0]);
