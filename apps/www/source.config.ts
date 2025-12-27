@@ -1,4 +1,5 @@
 import {
+  defineCollections,
   defineConfig,
   defineDocs,
   frontmatterSchema,
@@ -43,4 +44,15 @@ export const docs = defineDocs({
       status: z.enum(["planned", "in-progress", "new"]).optional(),
     }),
   },
+});
+
+export const blog = defineCollections({
+  type: "doc",
+  dir: "content/blog",
+  schema: frontmatterSchema.extend({
+    author: z.string(),
+    date: z.iso.date().or(z.date()),
+    category: z.string(),
+    image: z.string(),
+  }),
 });

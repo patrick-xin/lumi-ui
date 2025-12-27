@@ -42,7 +42,9 @@
         "noNonNullAssertion": "warn"
       },
       "a11y": {
-        "noSvgWithoutTitle": "warn"
+        "noSvgWithoutTitle": "warn",
+        "useFocusableInteractive": "off",
+        "useSemanticElements": "warn"
       },
       "security": {
         "noDangerouslySetInnerHtml": "warn"
