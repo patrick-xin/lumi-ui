@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import {
   Combobox,
@@ -135,7 +136,11 @@ export function ComboboxAsyncSingleDemo() {
 
         <ComboboxList>
           {(user: DirectoryUser) => (
-            <ComboboxItemContent key={user.id} value={user}>
+            <ComboboxItemContent
+              key={user.id}
+              value={user}
+              className="items-start"
+            >
               <div className="flex flex-col gap-1">
                 <div className="font-medium">{user.name}</div>
                 <div className="flex flex-wrap gap-3">

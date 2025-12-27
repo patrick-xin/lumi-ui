@@ -29,7 +29,11 @@ export function ComboboxGroupedDemo() {
               <ComboboxGroupLabel>{group.value}</ComboboxGroupLabel>
               <ComboboxCollection>
                 {(item: Produce) => (
-                  <ComboboxItemContent key={item.id} value={item}>
+                  <ComboboxItemContent
+                    iconPosition="end"
+                    key={item.id}
+                    value={item}
+                  >
                     {item.label}
                   </ComboboxItemContent>
                 )}

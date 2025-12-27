@@ -106,7 +106,9 @@ function AutocompleteList({
   ...props
 }: React.ComponentProps<typeof BaseAutocomplete.List>) {
   return (
-    <BaseAutocomplete.List data-slot="autocomplete-list" {...props}>
+    <BaseAutocomplete.List data-slot="autocomplete-list" 
+    className={cn("outline-0", className)}
+    {...props}>
       {children}
     </BaseAutocomplete.List>
   );
@@ -120,12 +122,8 @@ function AutocompleteItem({
     <BaseAutocomplete.Item
       data-slot="autocomplete-item"
       className={cn(
-        "relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 px-2 text-sm select-none",
-        "outline-hidden transition-colors",
-        "[&_svg:not([class*='text-'])]:text-muted-foreground",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "*:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
-        "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+        "relative flex items-center gap-2 w-full cursor-default rounded-sm py-2 pr-8 pl-4 text-base select-none outline-none",
+        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-2 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-md data-[highlighted]:before:bg-accent",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
@@ -176,7 +174,7 @@ function AutocompleteBackdrop({
   return (
     <BaseAutocomplete.Backdrop
       data-slot="autocomplete-backdrop"
-      className={cn(className)}
+      className={cn("bg-black/60",className)}
       {...props}
     />
   );
@@ -250,14 +248,16 @@ export const useAutoCompleteFilter = BaseAutocomplete.useFilter;
 
 function AutocompleteInputGroup({
   className,
-  showTrigger = true,
-  showClear = true,
+  showTrigger = false,
+  showClear = false,
   variant="transparent",
+  inputSize="default",
   ...props
 }: React.ComponentProps<typeof BaseAutocomplete.Input> & {
   showTrigger?: boolean;
   showClear?: boolean;
   variant?: VariantProps<typeof inputVariants>["variant"];
+  inputSize?: VariantProps<typeof inputVariants>["inputSize"];
 }) {
   const paddingClass =
     showTrigger && showClear
@@ -273,7 +273,7 @@ function AutocompleteInputGroup({
     >
       <BaseAutocomplete.Input
         data-slot="autocomplete-input"
-        className={cn(inputVariants({ variant }), paddingClass)}
+        className={cn(inputVariants({ variant, inputSize }), paddingClass)}
         {...props}
       />
 

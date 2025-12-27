@@ -3,10 +3,10 @@
 import * as React from "react";
 import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
 import { Check, ChevronDown, X } from "lucide-react";
-import { inputVariants } from "@/registry/ui/input";
+import type { VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
-import type { VariantProps } from "class-variance-authority";
+import { inputVariants } from "@/registry/ui/input";
 
 function Combobox<Value, Multiple extends boolean | undefined = false>({
   children,
@@ -33,8 +33,8 @@ function ComboboxIcon({
 
 function ComboboxInput({
   className,
-  inputSize,
-  variant,
+  inputSize = "default",
+  variant = "default",
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Input> & {
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
@@ -56,7 +56,8 @@ function ComboboxClear({
   return (
     <BaseCombobox.Clear
       data-slot="combobox-clear"
-      className={cn(className)}
+      className={cn("outline-none", className)}
+      aria-label="Clear selection"
       {...props}
     />
   );
@@ -73,6 +74,7 @@ function ComboboxTrigger({
         "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
         className,
       )}
+      aria-label="Open popup"
       {...props}
     />
   );
@@ -86,7 +88,9 @@ function ComboboxChips({
     <BaseCombobox.Chips
       data-slot="combobox-chips"
       className={cn(
-        "flex flex-wrap min-h-10 w-full items-center gap-1.5 rounded-md border border-input bg-transparent text-sm shadow-xs transition-[border-color,box-shadow] dark:bg-input/30",
+        "dark:bg-input/30 border border-input",
+        "p-1 min-h-9 [&_[data-slot=combobox-input]]:h-6",
+        "flex flex-wrap items-center gap-1.5 rounded-md shadow-xs",
         "focus-within:border-ring/30 focus-within:ring-1 focus-within:ring-ring/10 focus-within:ring-offset-1 focus-within:ring-offset-ring/5",
         "disabled:cursor-not-allowed disabled:opacity-50",
         className,
@@ -105,34 +109,38 @@ function ComboboxChip({
     <BaseCombobox.Chip
       data-slot="combobox-chip"
       className={cn(
-        "inline-flex h-6 items-center gap-1.5 rounded-sm bg-secondary px-2 text-sm text-foreground transition-colors data-[highlighted]:bg-secondary/80",
+        "flex items-center gap-1 px-2 py-1 rounded-sm shadow-xs text-sm bg-secondary text-secondary-foreground outline-none cursor-default",
+        "focus-within:bg-secondary/80 focus-within:text-secondary-foreground/80",
+        "[@media(hover:hover)]:[&[data-highlighted]]:bg-secondary/80 [@media(hover:hover)]:[&[data-highlighted]]:text-secondary-foreground/80",
         className,
       )}
       {...props}
     >
       {children}
-      <ComboboxChipRemove aria-label="Remove" />
+      <ComboboxChipRemove />
     </BaseCombobox.Chip>
   );
 }
 
 function ComboboxChipRemove({
   className,
-  children,
+  icon = <X />,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.ChipRemove>) {
+}: React.ComponentProps<typeof BaseCombobox.ChipRemove> & {
+  icon?: React.ReactNode;
+}) {
   return (
     <BaseCombobox.ChipRemove
       data-slot="combobox-chip-remove"
       className={cn(
-        "flex size-5 p-0.5 items-center justify-center hover:bg-primary/10 rounded-md transition-colors",
-        "focus-visible:border-ring/30 focus-visible:ring-1 focus-visible:ring-ring/10 focus-visible:ring-offset-1 focus-visible:ring-offset-ring/5",
+        "p-1 inline-flex items-center justify-center bg-transparent hover:bg-accent text-inherit rounded-sm transition-colors",
         "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
         className,
       )}
+      aria-label="Remove"
       {...props}
     >
-      {children ?? <X className="size-3.5" />}
+      {icon}
     </BaseCombobox.ChipRemove>
   );
 }
@@ -144,7 +152,10 @@ function ComboboxList({
   return (
     <BaseCombobox.List
       data-slot="combobox-list"
-      className={cn("p-1 data-[empty]:p-0", className)}
+      className={cn(
+        "outline-0 py-1.5 overflow-y-auto scroll-py-2 overscroll-contain max-h-[min(23rem,var(--available-height))] data-[empty]:p-0",
+        className,
+      )}
       {...props}
     />
   );
@@ -163,9 +174,16 @@ function ComboboxBackdrop({
 }
 
 function ComboboxPositioner({
+  className,
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Positioner>) {
-  return <BaseCombobox.Positioner data-slot="combobox-positioner" {...props} />;
+  return (
+    <BaseCombobox.Positioner
+      data-slot="combobox-positioner"
+      className={cn("outline-none", className)}
+      {...props}
+    />
+  );
 }
 
 function ComboboxPopup({
@@ -232,8 +250,9 @@ function ComboboxItem({
     <BaseCombobox.Item
       data-slot="combobox-item"
       className={cn(
-        "relative flex w-full cursor-default gap-2 rounded-sm py-1.5 px-2 text-sm select-none outline-hidden transition-colors",
-        "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+        "flex gap-2 py-1.5 pl-3.5 pr-8 text-sm",
+        "select-none cursor-default outline-none",
+        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1.5 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
@@ -274,7 +293,7 @@ function ComboboxGroupLabel({
     <BaseCombobox.GroupLabel
       data-slot="combobox-group-label"
       className={cn(
-        "px-2 py-1 text-xs text-muted-foreground font-medium",
+        "px-3 py-1 text-xs text-muted-foreground font-medium uppercase",
         className,
       )}
       {...props}
@@ -318,7 +337,7 @@ function ComboboxInputGroup({
   return (
     <div
       data-slot="combobox-input-group"
-      className={cn("relative w-full min-w-12", className)}
+      className={cn("relative w-full", className)}
     >
       <BaseCombobox.Input
         data-slot="combobox-input"
@@ -329,6 +348,7 @@ function ComboboxInputGroup({
         {showClear && (
           <BaseCombobox.Clear
             data-slot="combobox-clear"
+            aria-label="Clear selection"
             className={cn(
               "outline-none p-1 rounded-md bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60 transition-all",
               "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
@@ -342,10 +362,16 @@ function ComboboxInputGroup({
           <BaseCombobox.Trigger
             data-slot="combobox-trigger"
             className={cn(
-              "outline-none p-1 rounded-md bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60 transition-all pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+              "outline-none p-1 rounded-md bg-transparent hover:bg-accent dark:hover:bg-accent/60 transition-colors",
+              "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
             )}
           >
-            <ChevronDown />
+            <BaseCombobox.Icon
+              data-slot="combobox-icon"
+              className="[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground"
+            >
+              <ChevronDown />
+            </BaseCombobox.Icon>
           </BaseCombobox.Trigger>
         )}
       </div>
@@ -359,26 +385,29 @@ function ComboboxContent({
   sideOffset = 6,
   align = "start",
   matchAnchorWidth = true,
-  positionerRef,
+  positionerAnchor,
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Popup> & {
   sideOffset?: BaseCombobox.Positioner.Props["sideOffset"];
   align?: BaseCombobox.Positioner.Props["align"];
   matchAnchorWidth?: boolean;
-  positionerRef?: React.RefObject<HTMLDivElement | null>;
+  positionerAnchor?: React.RefObject<HTMLDivElement | null>;
 }) {
   return (
-    <BaseCombobox.Portal>
+    <BaseCombobox.Portal data-slot="combobox-portal">
       <BaseCombobox.Positioner
+        data-slot="combobox-positioner"
         sideOffset={sideOffset}
         align={align}
-        anchor={positionerRef}
+        anchor={positionerAnchor}
       >
         <BaseCombobox.Popup
-          data-slot="combobox-content" 
+          data-slot="combobox-content"
           className={cn(
-            "group bg-popover text-popover-foreground relative bg-clip-padding overflow-hidden rounded-md max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))] overflow-y-auto",
-            "shadow-md shadow-primary/10 outline dark:-outline-offset-1 outline-primary/10",
+            "bg-popover text-popover-foreground rounded shadow-md",
+            "outline outline-1 outline-border dark:-outline-offset-1",
+            "overflow-hidden overflow-y-auto",
+            "max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))]",
             "animate-popup",
             matchAnchorWidth && "w-[var(--anchor-width)]",
             className,
@@ -392,29 +421,54 @@ function ComboboxContent({
   );
 }
 
+interface ComboboxItemContentProps
+  extends React.ComponentProps<typeof BaseCombobox.Item> {
+  iconPosition?: "start" | "end" | "none";
+  icon?: React.ReactNode;
+}
+
 function ComboboxItemContent({
   className,
   children,
+  iconPosition = "start",
+  icon = <Check />,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Item>) {
+}: ComboboxItemContentProps) {
   return (
     <BaseCombobox.Item
       data-slot="combobox-item-content"
       className={cn(
-        "relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 px-2 text-sm select-none outline-hidden transition-colors",
-        "*:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
-        "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+        "grid items-center gap-2 py-1.5 pl-3.5 text-sm",
+        "outline-none select-none cursor-default",
+        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1.5 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        iconPosition === "start" && "grid-cols-[1rem_1fr] pr-8",
+        iconPosition === "end" && "grid-cols-[1fr_1rem] pr-3",
+        iconPosition === "none" && "grid-cols-1",
         className,
       )}
       {...props}
     >
-      <span className="absolute right-2 flex size-4 items-center justify-center">
-        <BaseCombobox.ItemIndicator>
-          <Check className="size-4 text-muted-foreground" />
+      {iconPosition !== "none" && (
+        <BaseCombobox.ItemIndicator
+          data-slot="combobox-item-indicator"
+          className={cn(
+            "flex items-center justify-center row-start-1",
+            "[&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
+            iconPosition === "start" ? "col-start-1" : "col-start-2",
+          )}
+        >
+          {icon}
         </BaseCombobox.ItemIndicator>
-      </span>
-      {children}
+      )}
+      <div
+        className={cn(
+          "flex items-center gap-2 row-start-1",
+          iconPosition === "start" ? "col-start-2" : "col-start-1",
+        )}
+      >
+        {children}
+      </div>
     </BaseCombobox.Item>
   );
 }

@@ -44,7 +44,7 @@ links:
      ```tsx
      <Combobox>
        <ComboboxTrigger />
-       <ComboboxInputGroup />
+       <ComboboxInputGroup /> // or <ComboboxInput />
 
        <ComboboxChips>
          <ComboboxChip />
@@ -162,8 +162,8 @@ A high-level input component that combines the `Input`, `Clear`, and `Trigger` i
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `showTrigger` | `boolean` | `true` | Whether to show the trigger button. |
-| `showClear` | `boolean` | `true` | Whether to show the clear button. |
+| `showTrigger` | `boolean` | `false` | Whether to show the trigger icon. |
+| `showClear` | `boolean` | `false` | Whether to show the clear icon. |
 | `variant` | `"ghost" \| "default" \| "transparent"` | `"default"` | The visual variant of the input group. |
 | `inputSize` | `"default" \| "sm" \| "lg"` | `"default"` | The size of the input. |
 | `className` | `string` | `-` | Additional CSS classes. |
@@ -172,22 +172,41 @@ A high-level input component that combines the `Input`, `Clear`, and `Trigger` i
 
 ### ComboboxContent
 
-A high-level container component that combines the `Portal`, `Positioner`, `Popup`, and `ScrollArea` into a single styled element for the dropdown content.
+A high-level container component that combines the `Portal`, `Positioner`, and `Popup` into a single styled element for the dropdown content.
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `sideOffset` | `number` | `6` | The offset distance from the anchor. |
 | `align` | `"start" \| "center" \| "end"` | `"start"` | The alignment relative to the anchor. |
 | `matchAnchorWidth` | `boolean` | `true` | Whether the popup width matches the anchor width. |
-| `positionerRef` | `React.RefObject<HTMLDivElement>` | `null` | Ref passed to the positioner for custom anchoring. |
+| `positionerAnchor` | `React.RefObject<HTMLDivElement \| null>` | `-` | Ref passed to the positioner for custom anchoring. |
 | `className` | `string` | `-` | Additional CSS classes. |
 | `...props` | `BaseCombobox.PopupProps` | `-` | Passes all other props to the underlying `BaseCombobox.PopupProps`. |
 
 ### ComboboxItemContent
 
-A high-level item component that combines the `Item` and `ItemIndicator` into a single styled element with a consistent layout.
+A high-level item component that combines the `Item` and `ItemIndicator` into a single styled element with configurable icon positioning.
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
+| `iconPosition` | `"start" \| "end" \| "none"` | `"start"` | The position of the indicator icon relative to the content. |
+| `icon` | `React.ReactNode` | `<Check />` | The icon to render as the item indicator. |
 | `className` | `string` | `-` | Additional CSS classes. |
 | `...props` | `BaseCombobox.ItemProps` | `-` | Passes all other props to the underlying `BaseCombobox.ItemProps`. |
+
+## The "Hit-Test" Philosophy
+
+You might notice we use a pseudo-element (`before:`) to render the hover state, rather than styling the container directly. While simple margins can also create a "pill" shape, that approach creates a UX flaw: it shrinks the clickable area.
+
+By separating the **visual layer** (the pill) from the **interactive layer** (the full-width row), we achieve the best of both worlds:
+
+1.  **Forgiving Interactivity:** Users can hover or click anywhere across the full width of the menu item—even the empty whitespace—to trigger the selection.
+2.  **Refined Aesthetics:** The highlight remains visually tucked in and detached, mimicking the polished feel of native operating system menus (a pattern we adopted from the excellent **[Base UI](https://base-ui.com/react/components/combobox#)**).
+
+Feeling too complex? You can always replace pseudo-element with `data-[highlighted]:bg-accent` and `data-[highlighted]:text-accent-foreground`.
+
+<Callout title="Customization Note" variant="info">
+Because the background color lives on a pseudo-element, applying `rounded-*` classes directly to the component won't change the highlight's corners. To customize the radius, target the pseudo-element directly: `data-[highlighted]:before:rounded-lg`. 
+
+💡**Mind the gap**: If you increase the highlight inset `(inset-x-4)`, ensure you increase the item padding `(pl-6)` so text doesn't overflow the visual selection.
+</Callout>

@@ -12,16 +12,16 @@ import {
 export function ComboboxDemo() {
   return (
     <Combobox items={frameworks}>
-      <ComboboxInputGroup
-        id="select-framework"
-        placeholder="e.g. Next.js"
-        className="w-48"
-      />
+      <ComboboxInputGroup placeholder="e.g. Next.js" className="w-48" />
       <ComboboxContent>
         <ComboboxEmpty>No framework found.</ComboboxEmpty>
         <ComboboxList>
           {(item: string) => (
-            <ComboboxItemContent key={item} value={item}>
+            <ComboboxItemContent
+              key={item}
+              value={item}
+              disabled={item === "React"}
+            >
               {item}
             </ComboboxItemContent>
           )}

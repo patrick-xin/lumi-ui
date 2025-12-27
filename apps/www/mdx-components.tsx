@@ -23,7 +23,7 @@ import { ColorPallete } from "./components/docs/mdx/color-pallete";
 export const mdxComponents: MDXComponents = {
   p: ({ className, ...props }: React.ComponentProps<"p">) => (
     <p
-      className={cn("leading-relaxed [&:not(:first-child)]:mt-6", className)}
+      className={cn("leading-relaxed [&:not(:first-child)]:mt-4", className)}
       {...props}
     />
   ),

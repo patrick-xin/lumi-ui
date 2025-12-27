@@ -23,7 +23,7 @@ export function ComboboxScrollAreaDemo() {
           gradientScrollFade
           noScrollBar
           // add height constraint
-          className="max-h-32"
+          className="sm:max-h-32"
         >
           <ComboboxEmpty>No framework found.</ComboboxEmpty>
           <ComboboxList>

@@ -148,7 +148,7 @@ export function ComboboxCustomizationDemo() {
                 key={status.value}
                 value={status}
                 className={cn(
-                  "flex items-center justify-between rounded-sm text-sm",
+                  "flex items-center justify-between rounded-sm text-sm px-4",
                 )}
               >
                 <div className="flex items-center gap-3">

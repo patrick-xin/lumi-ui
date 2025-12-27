@@ -153,29 +153,32 @@ export function ComboboxAsyncMultipleDemo() {
         });
       }}
     >
-      <ComboboxChips className="w-64" ref={containerRef}>
+      <ComboboxChips ref={containerRef} className="w-[16rem] md:w-[20rem]">
         <ComboboxValue>
           {(value: DirectoryUser[]) => (
             <React.Fragment>
-              {value.length > 0 && (
-                <div className="flex flex-wrap gap-1 p-1.5">
-                  {value.map((user) => (
-                    <ComboboxChip key={user.id} aria-label={user.name}>
-                      {user.name}
-                    </ComboboxChip>
-                  ))}
-                </div>
-              )}
+              {value.length > 0 &&
+                value.map((user) => (
+                  <ComboboxChip key={user.id} aria-label={user.name}>
+                    {user.name}
+                  </ComboboxChip>
+                ))}
+
               <ComboboxInputGroup
                 id={id}
                 placeholder={value.length > 0 ? "" : "e.g. Michael"}
                 variant="ghost"
+                className="min-w-24"
               />
             </React.Fragment>
           )}
         </ComboboxValue>
       </ComboboxChips>
-      <ComboboxContent aria-busy={isPending || undefined} sideOffset={8}>
+      <ComboboxContent
+        aria-busy={isPending || undefined}
+        sideOffset={8}
+        positionerAnchor={containerRef}
+      >
         <ComboboxStatus className="p-2">{getStatus()}</ComboboxStatus>
         <ComboboxEmpty className="text-left p-2">
           {getEmptyMessage()}
