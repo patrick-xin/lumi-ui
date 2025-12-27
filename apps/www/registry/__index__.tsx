@@ -1688,42 +1688,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "a": {
-    name: "a",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["combobox"],
-    files: [{
-      path: "components/examples/ui/combobox/a.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/combobox/a");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "a";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "b": {
-    name: "b",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["combobox"],
-    files: [{
-      path: "components/examples/ui/combobox/b.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/combobox/b");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "b";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "combobox-async-multiple": {
     name: "combobox-async-multiple",
     description: "",
