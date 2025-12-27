@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import {
   Combobox,
@@ -11,7 +12,7 @@ import {
   useComboboxFilter,
 } from "@/registry/ui/combobox";
 
-export default function ExampleAsyncSingleCombobox() {
+export function ComboboxAsyncSingleDemo() {
   const [searchResults, setSearchResults] = React.useState<DirectoryUser[]>([]);
   const [selectedValue, setSelectedValue] =
     React.useState<DirectoryUser | null>(null);
@@ -135,7 +136,11 @@ export default function ExampleAsyncSingleCombobox() {
 
         <ComboboxList>
           {(user: DirectoryUser) => (
-            <ComboboxItemContent key={user.id} value={user}>
+            <ComboboxItemContent
+              key={user.id}
+              value={user}
+              className="items-start"
+            >
               <div className="flex flex-col gap-1">
                 <div className="font-medium">{user.name}</div>
                 <div className="flex flex-wrap gap-3">

@@ -35,7 +35,6 @@ export function ComboboxInputInsidePopupDemo() {
           variant="ghost"
           className="border-b! rounded-b-none!"
         />
-
         <ComboboxEmpty>No member found.</ComboboxEmpty>
         <ComboboxList>
           {(member: TeamMember) => (

@@ -7,7 +7,7 @@ import {
   ComboboxChips,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInput,
+  ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
@@ -17,32 +17,37 @@ export function ComboboxMultipleSelectDemo() {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   return (
     <Combobox items={langs} multiple>
-      <ComboboxChips ref={containerRef} className="max-w-60">
+      <ComboboxChips ref={containerRef} className="max-w-xl w-96">
         <ComboboxValue>
           {(value: ProgrammingLanguage[]) => (
             <React.Fragment>
-              {value.length > 0 && (
-                <div className="flex flex-wrap gap-1 p-1.5">
-                  {value.map((language) => (
-                    <ComboboxChip key={language.id} aria-label={language.value}>
-                      {language.value}
-                    </ComboboxChip>
-                  ))}
-                </div>
-              )}
-              <ComboboxInput
+              {value.map((language) => (
+                <ComboboxChip key={language.id} aria-label={language.value}>
+                  {language.value}
+                </ComboboxChip>
+              ))}
+
+              <ComboboxInputGroup
                 placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
                 variant="ghost"
+                // remove flex-1 will make input always appear in new line, see Async Items (Multiple) example below
+                className="flex-1"
+                showClear
+                showTrigger
               />
             </React.Fragment>
           )}
         </ComboboxValue>
       </ComboboxChips>
-      <ComboboxContent sideOffset={4} positionerRef={containerRef}>
+      <ComboboxContent sideOffset={4} positionerAnchor={containerRef}>
         <ComboboxEmpty>No languages found.</ComboboxEmpty>
         <ComboboxList>
           {(language: ProgrammingLanguage) => (
-            <ComboboxItemContent key={language.id} value={language}>
+            <ComboboxItemContent
+              key={language.id}
+              value={language}
+              iconPosition="end"
+            >
               {language.value}
             </ComboboxItemContent>
           )}

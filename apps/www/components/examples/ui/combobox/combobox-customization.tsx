@@ -77,7 +77,7 @@ export const statuses: ProjectStatus[] = [
 
 const projectStatusTooltipHandle = createTooltipHandle();
 
-export function ProjectStatusPicker() {
+export function ComboboxCustomizationDemo() {
   const [open, setOpen] = React.useState(false);
   const [projectStatus, setProjectStatus] =
     React.useState<ProjectStatus | null>(statuses[0]);
@@ -148,7 +148,7 @@ export function ProjectStatusPicker() {
                 key={status.value}
                 value={status}
                 className={cn(
-                  "flex items-center justify-between rounded-sm text-sm",
+                  "flex items-center justify-between rounded-sm text-sm px-4",
                 )}
               >
                 <div className="flex items-center gap-3">

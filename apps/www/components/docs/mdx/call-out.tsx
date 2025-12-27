@@ -65,7 +65,7 @@ export function Callout({
       <div className="flex flex-col gap-2">
         {title && <div className="font-medium leading-none">{title}</div>}
         {children && (
-          <div className="text-sm [&_p]:leading-relaxed text-foreground/80 w-full [&_code]:bg-primary/10">
+          <div className="text-sm [&_p]:leading-relaxed text-foreground/80 w-full [&_code]:bg-primary/10 [&_code]:text-xs">
             {children}
           </div>
         )}

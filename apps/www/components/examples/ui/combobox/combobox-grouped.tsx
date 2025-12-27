@@ -12,7 +12,7 @@ import {
   ComboboxList,
 } from "@/registry/ui/combobox";
 
-export function ExampleGroupedCombobox() {
+export function ComboboxGroupedDemo() {
   return (
     <Combobox items={groupedProduce}>
       <ComboboxInputGroup
@@ -29,7 +29,11 @@ export function ExampleGroupedCombobox() {
               <ComboboxGroupLabel>{group.value}</ComboboxGroupLabel>
               <ComboboxCollection>
                 {(item: Produce) => (
-                  <ComboboxItemContent key={item.id} value={item}>
+                  <ComboboxItemContent
+                    iconPosition="end"
+                    key={item.id}
+                    value={item}
+                  >
                     {item.label}
                   </ComboboxItemContent>
                 )}
