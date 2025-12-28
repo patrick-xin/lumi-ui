@@ -23,5 +23,8 @@
     "husky": "^9.1.7",
     "turbo": "latest"
   },
-  "packageManager": "bun@1.3.5"
+  "packageManager": "bun@1.3.5",
+  "dependencies": {
+    "next": "^16.1.1"
+  }
 }
