@@ -89,7 +89,7 @@ function ComboboxChips({
       data-slot="combobox-chips"
       className={cn(
         "dark:bg-input/30 border border-input",
-        "p-1 min-h-9 [&_[data-slot=combobox-input]]:h-6",
+        "p-1 min-h-8 [&_[data-slot=combobox-input]]:h-6",
         "flex flex-wrap items-center gap-1.5 rounded-md shadow-xs",
         "focus-within:border-ring/30 focus-within:ring-1 focus-within:ring-ring/10 focus-within:ring-offset-1 focus-within:ring-offset-ring/5",
         "disabled:cursor-not-allowed disabled:opacity-50",
@@ -153,7 +153,8 @@ function ComboboxList({
     <BaseCombobox.List
       data-slot="combobox-list"
       className={cn(
-        "outline-0 py-1.5 overflow-y-auto scroll-py-2 overscroll-contain max-h-[min(23rem,var(--available-height))] data-[empty]:p-0",
+        "outline-0 py-1.5 data-[empty]:p-0",
+        "overflow-y-auto scroll-py-2 overscroll-contain",
         className,
       )}
       {...props}
@@ -252,7 +253,6 @@ function ComboboxItem({
       className={cn(
         "flex gap-2 py-1.5 pl-3.5 pr-8 text-sm",
         "select-none cursor-default outline-none",
-        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1.5 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}

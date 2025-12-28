@@ -128,8 +128,7 @@ function TooltipContent({
       >
         <BaseTooltip.Popup
           className={cn(
-            "bg-foreground text-background z-50 w-fit rounded-md px-3 py-1.5 text-xs text-balance",
-            "animate-popup data-instant:transition-none",
+            "bg-foreground text-background w-fit rounded-md px-3 py-1.5 text-xs text-balance animate-popup data-instant:transition-none",
             className,
           )}
           {...props}

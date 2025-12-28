@@ -28,7 +28,9 @@ export function ComboboxMultipleSelectDemo() {
               ))}
 
               <ComboboxInputGroup
+                inputSize="lg"
                 placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
+                // variant="ghost" will strip out basic styles
                 variant="ghost"
                 // remove flex-1 will make input always appear in new line, see Async Items (Multiple) example below
                 className="flex-1"
