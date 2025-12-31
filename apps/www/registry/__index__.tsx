@@ -1796,6 +1796,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "combobox-form": {
+    name: "combobox-form",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [{
+      path: "components/examples/ui/combobox/combobox-form.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/combobox/combobox-form");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox-form";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "combobox-grouped": {
     name: "combobox-grouped",
     description: "",

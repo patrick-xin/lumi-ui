@@ -277,7 +277,7 @@ Note that there is no separate onTriggerIdChange prop. Instead, the onOpenChange
 | [`DialogBackdrop`](https://base-ui.com/react/components/dialog#backdrop) | An overlay displayed beneath the popup. Renders a `<div>` element. |
 | [`DialogViewport`](https://base-ui.com/react/components/dialog#viewport) | A positioning container for the dialog popup that can be made scrollable. Renders a `<div>` element. |
 | [`DialogPopup`](https://base-ui.com/react/components/dialog#popup) | A container for the dialog contents. Must be used inside `DialogPortal`. Renders a `<div>` element. |
-| `DialogContent` | Pre-assembled component that wraps `DialogPortal`, `DialogBackdrop`, `DialogViewport`, and `DialogPopup` with default styles. |
+| `DialogContent` | Composite component that wraps `DialogPortal`, `DialogBackdrop`, `DialogViewport`, and `DialogPopup` with default styles. |
 | `DialogHeader` | Styled container for convenience purpose. |
 | `DialogFooter` | Styled container for convenience purpose. |
 | `DialogScrollArea` | Scrollable container for the dialog contents. Renders [`<ScrollArea>`](https://www.lumiui.dev/docs/components/layout-nav/scroll-area).
@@ -358,5 +358,5 @@ Switch to using the `render` prop instead of `asChild`.
 
 <Callout variant="info" title="Info">
 `DialogContent` wraps the popup in a specific structure: Portal > Backdrop > Viewport > Popup.
-If you need a custom layout, simpler usage is to use the primitives directly instead of the pre-assembled `DialogContent`.
+If you need a custom layout, simpler usage is to use the primitives directly instead of the composite `DialogContent`.
 </Callout>

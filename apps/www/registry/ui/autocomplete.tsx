@@ -364,7 +364,7 @@ export {
   AutocompleteClear,
   AutocompleteArrow,
   AutocompleteSeparator,
-  // Pre-assembled components
+  // Composite components
   AutocompleteInputGroup,
   AutocompleteContent,
 };

@@ -199,7 +199,7 @@ export default function ExampleCreatableCombobox() {
                 <ComboboxItemContent
                   key={item.id}
                   value={item}
-                  iconPosition="none"
+                  indicatorPlacement="none"
                 >
                   <Plus className="size-4" />
                   <span>Create &quot;{item.creatable}&quot;</span>
@@ -208,7 +208,7 @@ export default function ExampleCreatableCombobox() {
                 <ComboboxItemContent
                   key={item.id}
                   value={item}
-                  iconPosition="end"
+                  indicatorPlacement="end"
                 >
                   {item.value}
                 </ComboboxItemContent>

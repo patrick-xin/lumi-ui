@@ -153,6 +153,6 @@ export {
   TooltipArrow,
   TooltipViewport,
   createTooltipHandle,
-  // Pre-assembled component
+  // Composite component
   TooltipContent,
 };

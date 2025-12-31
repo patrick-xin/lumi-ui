@@ -153,7 +153,7 @@ function ComboboxList({
     <BaseCombobox.List
       data-slot="combobox-list"
       className={cn(
-        "outline-0 py-1.5 data-[empty]:p-0",
+        "outline-0 py-1 data-[empty]:p-0",
         "overflow-y-auto scroll-py-2 overscroll-contain",
         className,
       )}
@@ -404,7 +404,7 @@ function ComboboxContent({
         <BaseCombobox.Popup
           data-slot="combobox-content"
           className={cn(
-            "bg-popover text-popover-foreground rounded shadow-md",
+            "bg-popover text-popover-foreground rounded-sm shadow-md",
             "outline outline-1 outline-border dark:-outline-offset-1",
             "overflow-hidden overflow-y-auto",
             "max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))]",
@@ -423,15 +423,15 @@ function ComboboxContent({
 
 interface ComboboxItemContentProps
   extends React.ComponentProps<typeof BaseCombobox.Item> {
-  iconPosition?: "start" | "end" | "none";
-  icon?: React.ReactNode;
+  indicatorPlacement?: "start" | "end" | "none";
+  indicatorIcon?: React.ReactNode;
 }
 
 function ComboboxItemContent({
   className,
   children,
-  iconPosition = "start",
-  icon = <Check />,
+  indicatorPlacement = "start",
+  indicatorIcon = <Check />,
   ...props
 }: ComboboxItemContentProps) {
   return (
@@ -440,31 +440,31 @@ function ComboboxItemContent({
       className={cn(
         "grid items-center gap-2 py-1.5 pl-3.5 text-sm",
         "outline-none select-none cursor-default",
-        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1.5 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
+        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-        iconPosition === "start" && "grid-cols-[1rem_1fr] pr-8",
-        iconPosition === "end" && "grid-cols-[1fr_1rem] pr-3",
-        iconPosition === "none" && "grid-cols-1",
+        indicatorPlacement === "start" && "grid-cols-[1rem_1fr] pr-8",
+        indicatorPlacement === "end" && "grid-cols-[1fr_1rem] pr-3",
+        indicatorPlacement === "none" && "grid-cols-1",
         className,
       )}
       {...props}
     >
-      {iconPosition !== "none" && (
+      {indicatorPlacement !== "none" && (
         <BaseCombobox.ItemIndicator
           data-slot="combobox-item-indicator"
           className={cn(
             "flex items-center justify-center row-start-1",
             "[&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
-            iconPosition === "start" ? "col-start-1" : "col-start-2",
+            indicatorPlacement === "start" ? "col-start-1" : "col-start-2",
           )}
         >
-          {icon}
+          {indicatorIcon}
         </BaseCombobox.ItemIndicator>
       )}
       <div
         className={cn(
           "flex items-center gap-2 row-start-1",
-          iconPosition === "start" ? "col-start-2" : "col-start-1",
+          indicatorPlacement === "start" ? "col-start-2" : "col-start-1",
         )}
       >
         {children}
@@ -501,7 +501,7 @@ export {
   ComboboxStatus,
   ComboboxCollection,
   useComboboxFilter,
-  // Pre-assembled components
+  // Composite components
   ComboboxInputGroup,
   ComboboxContent,
   ComboboxItemContent,

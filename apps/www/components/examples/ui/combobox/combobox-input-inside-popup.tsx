@@ -1,7 +1,7 @@
 "use client";
 
-import { buttonVariants } from "@lumi-ui/ui/button";
 import { ChevronsUpDownIcon } from "lucide-react";
+import { buttonVariants } from "@/registry/ui/button";
 import {
   Combobox,
   ComboboxContent,

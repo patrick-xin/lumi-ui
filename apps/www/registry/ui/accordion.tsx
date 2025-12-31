@@ -119,6 +119,6 @@ export {
   AccordionTrigger,
   AccordionPanel,
   AccordionHeader,
-  // Pre-assembled component
+  // Composite component
   AccordionSummary,
 };

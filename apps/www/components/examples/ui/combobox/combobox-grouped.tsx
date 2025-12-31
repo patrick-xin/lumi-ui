@@ -30,7 +30,7 @@ export function ComboboxGroupedDemo() {
               <ComboboxCollection>
                 {(item: Produce) => (
                   <ComboboxItemContent
-                    iconPosition="end"
+                    indicatorPlacement="end"
                     key={item.id}
                     value={item}
                   >
