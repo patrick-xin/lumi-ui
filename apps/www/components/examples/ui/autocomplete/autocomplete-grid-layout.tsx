@@ -15,7 +15,7 @@ import {
 } from "@/registry/ui/autocomplete";
 import { Button } from "@/registry/ui/button";
 import { Input } from "@/registry/ui/input";
-import { Separator } from "../../../../registry/ui/separator";
+import { Separator } from "@/registry/ui/separator";
 
 export function EmojiPickerAutocompleteDemo() {
   const [pickerOpen, setPickerOpen] = React.useState(false);
@@ -76,7 +76,7 @@ export function EmojiPickerAutocompleteDemo() {
         >
           <AutocompleteTrigger
             render={
-              <Button variant="outline" size="icon-sm">
+              <Button variant="outline" size="icon">
                 😀
               </Button>
             }
@@ -99,7 +99,7 @@ export function EmojiPickerAutocompleteDemo() {
                     {chunkArray(group.items, COLUMNS).map((row, rowIdx) => (
                       <AutocompleteRow
                         key={rowIdx}
-                        className="grid grid-cols-5"
+                        className="grid grid-cols-5 gap-2.5"
                       >
                         {row.map((rowItem) => (
                           <AutocompleteItem
@@ -109,8 +109,9 @@ export function EmojiPickerAutocompleteDemo() {
                               handleInsertEmoji(rowItem.emoji);
                               setPickerOpen(false);
                             }}
+                            className="p-2 items-center justify-center data-[highlighted]:before:rounded-md"
                           >
-                            <span className="mb-1 text-[1.5rem] leading-none">
+                            <span className="text-[1.5rem] leading-none">
                               {rowItem.emoji}
                             </span>
                           </AutocompleteItem>
