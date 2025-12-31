@@ -20,7 +20,7 @@ export function NavigationMenu() {
           </Button>
         }
       />
-      <DropdownMenuContent>
+      <DropdownMenuContent matchAnchorWidth={false}>
         <DropdownMenuItem
           render={
             <a

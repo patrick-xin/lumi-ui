@@ -48,7 +48,7 @@ export function ComboboxMultipleSelectDemo() {
             <ComboboxItemContent
               key={language.id}
               value={language}
-              iconPosition="end"
+              indicatorPlacement="end"
             >
               {language.value}
             </ComboboxItemContent>

@@ -181,6 +181,6 @@ export {
   AlertDialogDescription,
   AlertDialogClose,
   createAlertDialogHandle,
-  // Pre-assembled component
+  // Composite component
   AlertDialogContent,
 };

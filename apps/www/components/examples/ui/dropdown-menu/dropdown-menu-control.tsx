@@ -14,7 +14,7 @@ export function CloseOnClickMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline" className="w-48">
+          <Button variant="outline" className="w-48 justify-between">
             Options <ChevronDownIcon />
           </Button>
         }

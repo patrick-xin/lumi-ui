@@ -1,20 +1,21 @@
 "use client";
 
+import * as React from "react";
 import { Menu as BaseMenu } from "@base-ui/react/menu";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
-import type * as React from "react";
-import { cn } from "@/lib/utils";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
-function DropdownMenu({
+import { cn } from "@/lib/utils";
+
+function DropdownMenu<Payload>({
   ...props
-}: React.ComponentProps<typeof BaseMenu.Root>) {
+}: React.ComponentProps<typeof BaseMenu.Root<Payload>>) {
   return <BaseMenu.Root data-slot="dropdown-menu" {...props} />;
 }
 
-function DropdownMenuTrigger({
+function DropdownMenuTrigger<Payload>({
   ...props
-}: React.ComponentProps<typeof BaseMenu.Trigger>) {
+}: React.ComponentProps<typeof BaseMenu.Trigger<Payload>>) {
   return <BaseMenu.Trigger data-slot="dropdown-menu-trigger" {...props} />;
 }
 
@@ -36,7 +37,7 @@ function DropdownMenuPositioner({
 }: React.ComponentProps<typeof BaseMenu.Positioner>) {
   return (
     <BaseMenu.Positioner
-      className={cn(className)}
+      className={cn("relative", className)}
       data-slot="dropdown-menu-positioner"
       {...props}
     />
@@ -72,25 +73,27 @@ function DropdownMenuArrow({
 
 function DropdownMenuItem({
   className,
-  inset,
   variant = "default",
   ...props
 }: React.ComponentProps<typeof BaseMenu.Item> & {
-  inset?: boolean;
   variant?: "default" | "destructive";
 }) {
   return (
     <BaseMenu.Item
-      data-inset={inset}
       data-variant={variant}
       data-slot="dropdown-menu-item"
       className={cn(
-        "flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none cursor-default",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "focus:bg-accent focus:text-accent-foreground",
+        "flex items-center gap-2 py-1.5 px-3.5 text-sm",
+        "outline-none select-none cursor-default",
+        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
         "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
-        "data-[inset]:pl-8",
-        "data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "data-[variant=destructive]:text-destructive",
+        "data-[variant=destructive]:data-[highlighted]:text-destructive",
+        "data-[variant=destructive]:*:[svg]:!text-destructive",
+        "data-[variant=destructive]:data-[highlighted]:before:bg-destructive/10",
+        "dark:data-[variant=destructive]:data-[highlighted]:before:bg-destructive/20",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
         className,
       )}
       {...props}
@@ -105,7 +108,7 @@ function DropdownMenuSeparator({
   return (
     <BaseMenu.Separator
       data-slot="dropdown-menu-separator"
-      className={cn("bg-border -mx-1 my-1 h-px", className)}
+      className={cn("bg-border my-1 h-px", className)}
       {...props}
     />
   );
@@ -119,16 +122,12 @@ function DropdownMenuGroup({
 
 function DropdownMenuGroupLabel({
   className,
-  inset,
   ...props
-}: React.ComponentProps<typeof BaseMenu.GroupLabel> & {
-  inset?: boolean;
-}) {
+}: React.ComponentProps<typeof BaseMenu.GroupLabel>) {
   return (
     <BaseMenu.GroupLabel
-      data-inset={inset}
       className={cn(
-        "px-2 py-1.5 text-sm font-medium data-[inset]:pl-8 text-muted-foreground",
+        "px-3 py-1 text-xs text-muted-foreground font-medium",
         className,
       )}
       data-slot="dropdown-menu-group-label"
@@ -179,38 +178,22 @@ function DropdownMenuSubMenu({
 }
 
 function DropdownMenuSubMenuTrigger({
-  children,
   className,
-  inset,
   ...props
-}: React.ComponentProps<typeof BaseMenu.SubmenuTrigger> & {
-  inset?: boolean;
-}) {
+}: React.ComponentProps<typeof BaseMenu.SubmenuTrigger>) {
   return (
     <BaseMenu.SubmenuTrigger
       data-slot="dropdown-menu-sub-menu-trigger"
-      data-inset={inset}
-      className={cn(
-        "flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none cursor-default",
-        "focus:bg-accent focus:text-accent-foreground",
-        "[&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "data-[inset]:pl-8",
-        "data-[popup-open]:bg-accent data-[popup-open]:text-accent-foreground",
-        className,
-      )}
+      className={cn("outline-hidden select-none cursor-default", className)}
       {...props}
-    >
-      {children}
-      <ChevronRightIcon className="ml-auto size-4" />
-    </BaseMenu.SubmenuTrigger>
+    />
   );
 }
-
 
 function DropdownMenuSubMenuContent({
   align = "start",
   side = "right",
-  sideOffset = 0,
+  sideOffset = -4,
   alignOffset = 0,
   ...props
 }: DropdownMenuContentProps) {
@@ -223,34 +206,6 @@ function DropdownMenuSubMenuContent({
       data-slot="dropdown-menu-sub-menu-content"
       {...props}
     />
-  );
-}
-
-function DropdownMenuSubMenuTriggerGroup({
-  children,
-  className,
-  inset,
-  ...props
-}: React.ComponentProps<typeof BaseMenu.SubmenuTrigger> & {
-  inset?: boolean;
-}) {
-  return (
-    <BaseMenu.SubmenuTrigger
-      data-slot="dropdown-menu-sub-menu-trigger"
-      data-inset={inset}
-      className={cn(
-        "flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none cursor-default",
-        "focus:bg-accent focus:text-accent-foreground",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "data-[inset]:pl-8",
-        "data-[popup-open]:bg-accent data-[popup-open]:text-accent-foreground",
-        className,
-      )}
-      {...props}
-    >
-      {children}
-      <ChevronRightIcon className="ml-auto size-4" />
-    </BaseMenu.SubmenuTrigger>
   );
 }
 
@@ -267,6 +222,30 @@ function DropdownMenuShortcut({
       )}
       {...props}
     />
+  );
+}
+
+function DropdownMenuSubMenuTriggerGroup({
+  children,
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseMenu.SubmenuTrigger>) {
+  return (
+    <BaseMenu.SubmenuTrigger
+      data-slot="dropdown-menu-sub-menu-trigger"
+      className={cn(
+        "flex items-center gap-2 py-1.5 px-3.5 text-sm",
+        "outline-none select-none cursor-default",
+        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
+        "data-[popup-open]:relative data-[popup-open]:z-0 data-[popup-open]:before:bg-accent data-[popup-open]:text-accent-foreground data-[popup-open]:before:absolute data-[popup-open]:before:inset-x-1 data-[popup-open]:before:inset-y-0 data-[popup-open]:before:z-[-1] data-[popup-open]:before:rounded-sm",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronRightIcon className="ml-auto size-4" />
+    </BaseMenu.SubmenuTrigger>
   );
 }
 
@@ -292,7 +271,7 @@ function DropdownMenuContent({
 }: DropdownMenuContentProps) {
   return (
     <DropdownMenuPortal>
-      <DropdownMenuPositioner
+      <BaseMenu.Positioner
         sideOffset={sideOffset}
         align={align}
         alignOffset={alignOffset}
@@ -302,11 +281,11 @@ function DropdownMenuContent({
           "max-h-(--available-height)",
         )}
       >
-        <DropdownMenuPopup
+        <BaseMenu.Popup
           data-slot="dropdown-menu-content"
           className={cn(
-            "p-1 bg-popover text-popover-foreground rounded-md",
-            "shadow-md shadow-primary/10 outline dark:-outline-offset-1 outline-primary/10",
+            "bg-popover text-popover-foreground rounded-sm shadow-md py-1",
+            "outline outline-1 outline-border dark:-outline-offset-1",
             "animate-popup",
             className,
           )}
@@ -314,8 +293,8 @@ function DropdownMenuContent({
         >
           {showArrow && <DropdownMenuArrow />}
           {children}
-        </DropdownMenuPopup>
-      </DropdownMenuPositioner>
+        </BaseMenu.Popup>
+      </BaseMenu.Positioner>
     </DropdownMenuPortal>
   );
 }
@@ -330,17 +309,18 @@ function DropdownMenuCheckboxItemContent({
     <BaseMenu.CheckboxItem
       data-slot="dropdown-menu-checkbox-item-content"
       className={cn(
-        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
+        "outline-none select-none cursor-default",
+        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
+        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
       checked={checked}
       {...props}
     >
-      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
-        <BaseMenu.CheckboxItemIndicator>
-          <CheckIcon className="size-3.5" />
-        </BaseMenu.CheckboxItemIndicator>
-      </span>
+      <BaseMenu.CheckboxItemIndicator className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+        <CheckIcon className="size-4" />
+      </BaseMenu.CheckboxItemIndicator>
       {children}
     </BaseMenu.CheckboxItem>
   );
@@ -353,22 +333,25 @@ function DropdownMenuRadioItemContent({
 }: React.ComponentProps<typeof BaseMenu.RadioItem>) {
   return (
     <BaseMenu.RadioItem
+      data-slot="dropdown-menu-radio-item-content"
       className={cn(
-        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
+        "outline-none select-none cursor-default",
+        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
+        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
       {...props}
-      data-slot="dropdown-menu-radio-item-content"
     >
-      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
-        <BaseMenu.RadioItemIndicator>
-          <CircleIcon className="size-2 fill-current" />
-        </BaseMenu.RadioItemIndicator>
-      </span>
+      <BaseMenu.RadioItemIndicator className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+        <CircleIcon className="size-2.5 fill-current" />
+      </BaseMenu.RadioItemIndicator>
       {children}
     </BaseMenu.RadioItem>
   );
 }
+
+const createDropdownMenuHandle = BaseMenu.createHandle;
 
 export {
   DropdownMenu,
@@ -388,7 +371,8 @@ export {
   DropdownMenuSubMenu,
   DropdownMenuSubMenuTrigger,
   DropdownMenuShortcut,
-  //
+  createDropdownMenuHandle,
+  // Composite components
   DropdownMenuContent,
   DropdownMenuCheckboxItemContent,
   DropdownMenuRadioItemContent,

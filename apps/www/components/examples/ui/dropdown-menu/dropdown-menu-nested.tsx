@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuSubMenu,
   DropdownMenuSubMenuContent,
-  DropdownMenuSubMenuTrigger,
+  DropdownMenuSubMenuTriggerGroup,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 
@@ -26,9 +26,9 @@ export function NestedMenu() {
       <DropdownMenuContent>
         <DropdownMenuItem>Add to Library</DropdownMenuItem>
         <DropdownMenuSubMenu>
-          <DropdownMenuSubMenuTrigger>
+          <DropdownMenuSubMenuTriggerGroup>
             Add to Playlist
-          </DropdownMenuSubMenuTrigger>
+          </DropdownMenuSubMenuTriggerGroup>
           <DropdownMenuSubMenuContent>
             <DropdownMenuItem>Get Up!</DropdownMenuItem>
             <DropdownMenuItem>Inside Out</DropdownMenuItem>

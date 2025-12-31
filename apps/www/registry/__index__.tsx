@@ -1796,6 +1796,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "combobox-form": {
+    name: "combobox-form",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [{
+      path: "components/examples/ui/combobox/combobox-form.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/combobox/combobox-form");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox-form";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "combobox-grouped": {
     name: "combobox-grouped",
     description: "",
@@ -2156,24 +2174,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "dropdown-menu-custom": {
-    name: "dropdown-menu-custom",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["dropdown-menu"],
-    files: [{
-      path: "components/examples/ui/dropdown-menu/dropdown-menu-custom.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/dropdown-menu/dropdown-menu-custom");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dropdown-menu-custom";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "dropdown-menu-demo": {
     name: "dropdown-menu-demo",
     description: "",
@@ -2187,6 +2187,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/dropdown-menu/dropdown-menu-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dropdown-menu-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "dropdown-menu-detached-trigger": {
+    name: "dropdown-menu-detached-trigger",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["dropdown-menu"],
+    files: [{
+      path: "components/examples/ui/dropdown-menu/dropdown-menu-detached-trigger.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/dropdown-menu/dropdown-menu-detached-trigger");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dropdown-menu-detached-trigger";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -2241,6 +2259,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/dropdown-menu/dropdown-menu-match-anchor-width");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dropdown-menu-match-anchor-width";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "dropdown-menu-multiple-triggers": {
+    name: "dropdown-menu-multiple-triggers",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["dropdown-menu"],
+    files: [{
+      path: "components/examples/ui/dropdown-menu/dropdown-menu-multiple-triggers.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/dropdown-menu/dropdown-menu-multiple-triggers");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dropdown-menu-multiple-triggers";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -2313,6 +2349,42 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/dropdown-menu/dropdown-menu-radio");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dropdown-menu-radio";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "dropdown-menu-trigger-open": {
+    name: "dropdown-menu-trigger-open",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["dropdown-menu"],
+    files: [{
+      path: "components/examples/ui/dropdown-menu/dropdown-menu-trigger-open.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/dropdown-menu/dropdown-menu-trigger-open");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dropdown-menu-trigger-open";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "dropdown-menu-with-arrow": {
+    name: "dropdown-menu-with-arrow",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["dropdown-menu"],
+    files: [{
+      path: "components/examples/ui/dropdown-menu/dropdown-menu-with-arrow.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/dropdown-menu/dropdown-menu-with-arrow");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dropdown-menu-with-arrow";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

@@ -219,6 +219,6 @@ export {
   DialogTrigger,
   DialogViewport,
   DialogScrollArea,
-  // Pre-assembled component
+  // Composite component
   DialogContent,
 };

@@ -184,6 +184,6 @@ export {
   AlertDialogTitle,
   AlertDialogTrigger,
   createAlertDialogHandle,
-  // Pre-assembled component
+  // Composite component
   AlertDialogContent,
 };

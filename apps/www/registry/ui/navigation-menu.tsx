@@ -306,6 +306,6 @@ export {
   NavigationMenuPortal,
   NavigationMenuPopup,
   navigationMenuTriggerStyle,
-  // Pre-assembled component
+  // Composite component
   NavigationMenu,
 };

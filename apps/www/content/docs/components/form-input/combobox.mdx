@@ -149,7 +149,7 @@ Use `ComboboxTrigger` instead of `ComboboxInputGroup` to place the input inside 
 ## Customization
 
 <Callout title="Note" variant="info">
-Lumi UI exports all primitive components with minimal styles from Base UI to ensure maximum flexibility. Below is an example of how to compose Linear-style combobox by mixing pre-assembled components with raw primitives.
+Lumi UI exports all primitive components with minimal styles from Base UI to ensure maximum flexibility. Below is an example of how to compose Linear-style combobox by mixing Composite components with raw primitives.
 </Callout>
 
 <ComponentPreview name="combobox-customization" />
@@ -189,8 +189,8 @@ A high-level item component that combines the `Item` and `ItemIndicator` into a 
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `iconPosition` | `"start" \| "end" \| "none"` | `"start"` | The position of the indicator icon relative to the content. |
-| `icon` | `React.ReactNode` | `<Check />` | The icon to render as the item indicator. |
+| `indicatorPlacement` | `"start" \| "end" \| "none"` | `"start"` | The position of the indicator icon relative to the content. |
+| `indicatorIcon` | `React.ReactNode` | `<Check />` | The icon to render as the item indicator. |
 | `className` | `string` | `-` | Additional CSS classes. |
 | `...props` | `BaseCombobox.ItemProps` | `-` | Passes all other props to the underlying `BaseCombobox.ItemProps`. |
 

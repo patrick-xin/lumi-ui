@@ -9,7 +9,7 @@ import {
   AutocompleteItem,
   AutocompleteList,
   AutocompleteStatus,
-  useAutoCompleteFilter,
+  useAutocompleteFilter,
 } from "@/registry/ui/autocomplete";
 
 const limit = 8;
@@ -17,7 +17,7 @@ const limit = 8;
 export default function ExampleAutocompleteLimit() {
   const [value, setValue] = React.useState("");
 
-  const { contains } = useAutoCompleteFilter({ sensitivity: "base" });
+  const { contains } = useAutocompleteFilter({ sensitivity: "base" });
   const trimmed = value.trim();
   const totalMatches = trimmed
     ? tags.filter((t) => contains(t.value, trimmed)).length
@@ -42,7 +42,7 @@ export default function ExampleAutocompleteLimit() {
             </AutocompleteItem>
           )}
         </AutocompleteList>
-        <AutocompleteStatus>
+        <AutocompleteStatus className="text-start">
           {moreCount > 0
             ? `Hiding ${moreCount} results (type a more specific query to narrow results)`
             : null}

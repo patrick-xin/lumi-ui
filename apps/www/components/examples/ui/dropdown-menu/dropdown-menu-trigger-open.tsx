@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
@@ -6,16 +8,20 @@ import {
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 
-export function DropdownMenuMatchAnchorWidth() {
+export function DropdownMenuTriggerOpen() {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger
-          render={
-            <Button variant="outline" className="w-48">
+          render={(props, state) => (
+            <Button
+              variant={state.open ? "default" : "outline"}
+              className="w-48"
+              {...props}
+            >
               Actions
             </Button>
-          }
+          )}
         />
         <DropdownMenuContent matchAnchorWidth>
           <DropdownMenuItem>Edit</DropdownMenuItem>
@@ -23,16 +29,18 @@ export function DropdownMenuMatchAnchorWidth() {
           <DropdownMenuItem>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button variant="outline" className="w-48">
+            <Button
+              variant="outline"
+              className="w-48 data-[popup-open]:bg-accent dark:data-[popup-open]:bg-accent/60 data-[popup-open]:text-accent-foreground"
+            >
               Actions
             </Button>
           }
         />
-        <DropdownMenuContent matchAnchorWidth={false}>
+        <DropdownMenuContent matchAnchorWidth>
           <DropdownMenuItem>Edit</DropdownMenuItem>
           <DropdownMenuItem>Duplicate</DropdownMenuItem>
           <DropdownMenuItem>Delete</DropdownMenuItem>

@@ -47,7 +47,7 @@ export const SelectInputGroupDemo = () => {
             <SelectContent>
               {fruits.map((fruit) => (
                 <SelectItemContent
-                  iconPlacement="left"
+                  indicatorPlacement="start"
                   key={fruit.value}
                   value={fruit.value}
                 >
@@ -71,7 +71,7 @@ export const SelectInputGroupDemo = () => {
             <SelectContent alignItemWithTrigger>
               {fruits.map((fruit) => (
                 <SelectItemContent
-                  iconPlacement="left"
+                  indicatorPlacement="start"
                   key={fruit.value}
                   value={fruit.value}
                 >
@@ -92,7 +92,7 @@ export const SelectInputGroupDemo = () => {
                 <SelectItemContent
                   key={fruit.value}
                   value={fruit.value}
-                  icon={<CircleIcon />}
+                  indicatorIcon={<CircleIcon />}
                 >
                   {fruit.label}
                 </SelectItemContent>

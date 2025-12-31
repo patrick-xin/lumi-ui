@@ -12,7 +12,11 @@ import {
 export function ComboboxDemo() {
   return (
     <Combobox items={frameworks}>
-      <ComboboxInputGroup placeholder="e.g. Next.js" className="w-48" />
+      <ComboboxInputGroup
+        placeholder="e.g. Next.js"
+        className="w-48"
+        aria-label="Choose a framework"
+      />
       <ComboboxContent>
         <ComboboxEmpty>No framework found.</ComboboxEmpty>
         <ComboboxList>

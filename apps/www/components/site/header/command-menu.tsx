@@ -86,7 +86,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
         onOpenChangeComplete={(open) => !open && setInputValue("")}
       >
         <AutocompletePortal>
-          <AutocompleteBackdrop className="fixed inset-0" />
+          <AutocompleteBackdrop className="fixed inset-0 bg-black/50" />
           <AutocompletePositioner
             positionMethod="fixed"
             className="inset-0 z-0 bottom-0 pointer-events-none flex justify-center items-center"
@@ -97,6 +97,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                 "relative bg-popover text-popover-foreground rounded outline outline-input animate-popup",
                 "pointer-events-auto w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
                 "-translate-y-32 max-w-[var(--available-width)]",
+                "shadow-md shadow-primary/10 outline dark:-outline-offset-1 outline-primary/10",
               )}
             >
               <AutocompleteInputGroup
@@ -137,7 +138,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                               onClick={() => handleSelect(item)}
                               key={item.value}
                               value={item}
-                              className="font-medium flex items-center text-sm gap-3 data-[highlighted]:before:inset-x-1"
+                              className="font-medium flex items-center text-sm gap-3 data-[highlighted]:before:inset-x-1 data-[highlighted]:before:rounded-md py-2.5"
                             >
                               <Icon className="size-4 text-muted-foreground" />
                               {item.label}
