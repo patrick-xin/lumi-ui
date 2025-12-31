@@ -293,7 +293,7 @@ function ComboboxGroupLabel({
     <BaseCombobox.GroupLabel
       data-slot="combobox-group-label"
       className={cn(
-        "px-3 py-1 text-xs text-muted-foreground font-medium uppercase",
+        "px-3 py-1 text-xs text-muted-foreground font-medium",
         className,
       )}
       {...props}

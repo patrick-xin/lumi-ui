@@ -31,128 +31,53 @@ links:
   </TabsPanel>
 </CodeTabs>
 
-## Basic Usage
-
-<ComponentPreview name="dropdown-menu-basic" />
-
-## Recipes
-
-### Matching the Trigger Width
-
-By default, the `DropdownMenuContent`'s width automatically adapts to fit the widest menu item inside it. This provides great flexibility.
-
-However, for components like theme switchers or custom select inputs, you often want the menu to have the exact same width as its trigger to create a more seamless and polished look. For these scenarios, use the `matchAnchorWidth` prop on the `DropdownMenuContent` component.
-
-<ComponentPreview name="dropdown-menu-match-anchor-width" />
-
-### Open on hover
-
-To create a menu that opens on hover, add the `openOnHover` prop to `DropdownMenu`. You can additionally configure how quickly the menu opens on hover using the delay prop.
-<ComponentPreview name="dropdown-menu-open-on-hover" />
-
-### Checkbox items
-
-Use the `<DropdownMenuCheckboxItem>` part to create a menu item that can toggle a setting on or off.
-<ComponentPreview name="dropdown-menu-checkbox" />
-
-### Radio items
-
-Use the `<DropdownMenuRadioGroup>` and `<DropdownMenuRadioItem>` parts to create menu items that work like radio buttons.
-<ComponentPreview name="dropdown-menu-radio" />
-
-### Close on click
-
-Use the `closeOnClick` prop to change whether the menu closes when an item is clicked.
-<ComponentPreview name="dropdown-menu-control" />
-
-### Group labels
-
-Use the `<DropdownMenuGroupLabel>` part to add a label to a `<DropdownMenuGroup>`
-<ComponentPreview name="dropdown-menu-group" />
-
-### Nested menu
-
-To create a submenu, nest another menu inside the parent menu with `<DropdownMenuSubMenu>`. Use the `<DropdownMenuSubmenuTrigger>` part for the menu item that opens the nested menu.
-<ComponentPreview name="dropdown-menu-nested" />
-
-### Navigate to another page
-
-Use the `render` prop to compose a menu item with an anchor element.
-<ComponentPreview name="dropdown-menu-navigation" />
-
-
-### Open a dialog
-
-In order to open a dialog using a menu, control the dialog state and open it imperatively using the `onClick` handler on the menu item.
-<ComponentPreview name="dropdown-menu-dialog" />
-
-### Create your own
-
-<ComponentPreview name="dropdown-menu-custom" />
 
 ## Anatomy
 
-<Tabs defaultValue="basic" variant="ghost">
+<Tabs defaultValue="common">
   <TabsList>
-    <TabsTab value="basic">Basic Usage</TabsTab>
-    <TabsTab value="advanced">Advanced Usage</TabsTab>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
   </TabsList>
-  <TabsPanel value="basic">
-  For the vast majority of use cases, these are the only components you will need. They provide the best developer experience out of the box.
-  ```tsx
-  <DropdownMenu>
-    <DropdownMenuTrigger />
-    <DropdownMenuContent>
-      <DropdownMenuItem />
-      <DropdownMenuItem>
-        <DropdownMenuShortcut />
-      </DropdownMenuItem>
-      <DropdownMenuCheckboxItem />
-      <DropdownMenuSeparator />
-      <DropdownMenuGroup>
-        <DropdownMenuGroupLabel />
-      </DropdownMenuGroup>
-      <DropdownMenuRadioGroup>
-        <DropdownMenuRadioItem />
-      </DropdownMenuRadioGroup>
-      <DropdownMenuSubMenu>
-        <DropdownMenuSubMenuTrigger />
-        <DropdownMenuSubMenuContent>
-          {/* Submenu items  */}
-        </DropdownMenuSubMenuContent>
-      </DropdownMenuSubMenu>
-    </DropdownMenuContent>
-  </DropdownMenu>
-  ```
-    | Component | Role
-    | :--- | :--- |
-    | `DropdownMenu`  | The root component and context provider. It wraps the entire menu functionality but does not render a visible element itself.
-    | `DropdownMenuTrigger`  | The button that the user interacts with to open or close the menu. Use `render` prop to pass functionality to your own `Button`.
-    | `DropdownMenuContent`  |  Component that wraps the floating panel containing your menu items. It handles portaling, positioning, and animations.
-    | `DropdownMenuItem`  | The most common interactive element within a menu. Can contain text, icons, and a `DropdownMenuShortcut`. Use the `variant="destructive"` prop for dangerous actions.
-    | `DropdownMenuCheckboxItem`  | A menu item that functions as a toggle. It displays a checkmark when active. Use the `checked` and `onCheckedChange` props to control its state.
-    | `DropdownMenuRadioGroup`  | Wraps a set of `DropdownMenuRadioItem` components to create a group where only one item can be selected. Manages the group's state via the `value` and `onValueChange` props.
-    | `DropdownMenuRadioItem`  | A menu item within a `MenuRadioGroup` that represents a single choice. It displays an indicator when selected.
-    | `DropdownMenuGroup`  | A simple wrapper used to group related menu items, often used in conjunction with a `DropdownMenuGroupLabel`.
-    | `DropdownMenuGroupLabel`  | A non-interactive, styled label used to provide a title for a `DropdownMenuGroup`. Must use within `DropdownMenuGroup`.
-    | `DropdownMenuSubMenu`  | The root component for a nested menu.
-    | `DropdownMenuSubMenuTrigger`  | The specific `MenuItem` that, when hovered or clicked, will open its corresponding `DropdownMenuSubMenuPopup`. It automatically includes a right-facing chevron.
-    | `DropdownMenuSubMenuPopup`  | The floating panel that contains the items for a nested submenu.
-    | `DropdownMenuShortcut`  | A simple `<span>` styled to be right-aligned with muted text, perfect for displaying keyboard shortcuts like `⌘S`. It should be placed inside a MenuItem.
+
+  <TabsPanel value="common">
+     ```tsx
+     <Dropdown>
+       <DropdownMenuTrigger />
+       <DropdownMenuContent>
+          <DropdownMenuItem />
+          <DropdownMenuItem>
+            <DropdownMenuShortcut />
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuGroupLabel />
+          </DropdownMenuGroup>
+          <DropdownMenuRadioGroup>
+            <DropdownMenuRadioItemContent />
+          </DropdownMenuRadioGroup>
+          <DropdownMenuCheckboxItemContent />
+          <DropdownMenuSubMenu>
+            <DropdownMenuSubMenuTriggerGroup />
+            <DropdownMenuSubMenuContent>
+              {/* Submenu items  */}
+            </DropdownMenuSubMenuContent>
+          </DropdownMenuSubMenu>
+       </DropdownMenuContent>
+     </Dropdown>
+     ```
   </TabsPanel>
-  <TabsPanel value="advanced">
-    For advanced scenarios requiring custom layouts or escaping stacking contexts, you can use the underlying primitive components directly.
+
+  <TabsPanel value="primitive">
     ```tsx
     <DropdownMenu>
       <DropdownMenuTrigger />
       <DropdownMenuPortal>
+        <DropdownMenuBackdrop />
         <DropdownMenuPositioner>
           <DropdownMenuPopup>
+            <DropdownMenuArrow />
             <DropdownMenuItem />
-            <DropdownMenuItem>
-              <DropdownMenuShortcut />
-            </DropdownMenuItem>
-            <DropdownMenuCheckboxItem />
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuGroupLabel />
@@ -160,269 +85,74 @@ In order to open a dialog using a menu, control the dialog state and open it imp
             <DropdownMenuRadioGroup>
               <DropdownMenuRadioItem />
             </DropdownMenuRadioGroup>
-            <DropdownMenuSubMenu>
-              <DropdownMenuSubMenuTrigger />
-              <DropdownMenuPortal>
-                <DropdownMenuPositioner>
-                <DropdownMenuPopup>
-                  {/* Submenu items  */}
-                </DropdownMenuPopup>
-                </DropdownMenuPositioner>
-              </DropdownMenuPortal>
-            </DropdownMenuSubMenu>
+            <DropdownMenuCheckboxItem />
+            <DropdownMenuSubmenuRoot>
+              <DropdownMenuSubmenuTrigger />
+            </DropdownMenuSubmenuRoot>
           </DropdownMenuPopup>
         </DropdownMenuPositioner>
       </DropdownMenuPortal>
     </DropdownMenu>
-    ```
-    | Component | Role
-    | :--- | :--- |
-    | `DropdownMenu`  | The root component and context provider. It wraps the entire menu functionality but does not render a visible element itself.
-    | `DropdownMenuTrigger`  | The button that the user interacts with to open or close the menu. Use `render` prop to pass functionality to your own `Button`.
-    | `DropdownMenuPortal` | Renders the menu into a different part of the DOM.
-    | `DropdownMenuPositioner`  |  Component that positions the menu popup against the trigger. 
-    | `DropdownMenuPopup` | The unstyled wrapper for the floating panel. Use this to build a completely custom content container.
-    | `DropdownMenuItem`  | The most common interactive element within a menu. Can contain text, icons, and a `DropdownMenuShortcut`. Use the `variant="destructive"` prop for dangerous actions.
-    | `DropdownMenuCheckboxItem`  | A menu item that functions as a toggle. It displays a checkmark when active. Use the `checked` and `onCheckedChange` props to control its state.
-    | `DropdownMenuRadioGroup`  | Wraps a set of `DropdownMenuRadioItem` components to create a group where only one item can be selected. Manages the group's state via the `value` and `onValueChange` props.
-    | `DropdownMenuRadioItem`  | A menu item within a `MenuRadioGroup` that represents a single choice. It displays an indicator when selected.
-    | `DropdownMenuGroup`  | A simple wrapper used to group related menu items, often used in conjunction with a `DropdownMenuGroupLabel`.
-    | `DropdownMenuGroupLabel`  | A non-interactive, styled label used to provide a title for a `DropdownMenuGroup`. This is great for organizing complex menus. Must use inside `DropdownMenuGroup`.
-    | `DropdownMenuSubMenu`  | The root component for a nested menu. It wraps the trigger and the content of the submenu.
-    | `DropdownMenuSubMenuTrigger`  | The specific `MenuItem` that, when hovered or clicked, will open its corresponding `DropdownMenuSubMenuPopup`. It automatically includes a right-facing chevron.
-    | `DropdownMenuShortcut`  | A simple `<span>` styled to be right-aligned with muted text, perfect for displaying keyboard shortcuts like `⌘S`. It should be placed inside a MenuItem.
+```
+
   </TabsPanel>
 </Tabs>
 
 
+## Basic Usage
 
-## Migration from shadcn/ui
+<ComponentPreview name="dropdown-menu-basic" />
 
+## Features
 
-| shadcn/ui | lumi/ui | Change
-| :--- | :--- | :--- |
-| `DropdownMenuSub`  | `DropdownMenuSubMenu` | Renamed for explicitness.
-| `DropdownMenuSubTrigger`  | `DropdownMenuSubMenuTrigger` | Renamed to align with `DropdownMenuSubMenu`.
-| `DropdownMenuSubContent`  | `DropdownMenuSubMenuContent` | Renamed to align with `DropdownMenuSubMenu`.
-| `DropdownMenuLabel`  | `DropdownMenuGroupLabel` | Renamed and now has a required parent component.
+### Matching the Trigger Width
 
-### Structural Changes
+<ComponentPreview name="dropdown-menu-match-anchor-width" />
 
-`DropdownMenuGroupLabel` must be a direct child of `DropdownMenuGroup`. This enforces a more organized and accessible menu structure.
+### With Arrow
 
-| shadcn/ui | lumi/ui | Change
-| :--- | :--- | :--- |
-| `DropdownMenuLabel` could be a direct child of `DropdownMenuContent`.  | `DropdownMenuGroupLabel` must be nested inside `DropdownMenuGroup`. | Stricter, more semantic grouping.
+<ComponentPreview name="dropdown-menu-with-arrow" />
 
-- shadcn/ui:
-```tsx
-<DropdownMenuContent>
-  <DropdownMenuLabel>Section Title</DropdownMenuLabel>
-  <DropdownMenuItem>Item 1</DropdownMenuItem>
-</DropdownMenuContent>
-```
+### Group labels
 
-- lumi/ui:
-```tsx
-<DropdownMenuContent>
-  <DropdownMenuGroup>
-    <DropdownMenuGroupLabel>Section Title</DropdownMenuGroupLabel>
-    <DropdownMenuItem>Item 1</DropdownMenuItem>
-  </DropdownMenuGroup>
-</DropdownMenuContent>
-```
+<ComponentPreview name="dropdown-menu-group" />
 
-### Prop and Feature Changes
+### Nested menu
 
-`DropdownMenu` component introduces several enhancements for better positioning and styling, which are exposed as props on the `DropdownMenuContent` component.
+<ComponentPreview name="dropdown-menu-nested" />
 
-| Feature | lumi/ui | shadcn/ui
-| :--- | :--- | :--- |
-| **Positioning Props**  | `DropdownMenuContent` includes `side`, `sideOffset`, `align`, and `alignOffset` directly. | These props are inherited from the underlying Radix UI component but not explicitly defined.
-| **Arrow Display**  | `DropdownMenuContent` has a `showArrow` prop to display a pointer arrow. | No built-in arrow functionality.
-| **Width Matching**  | `DropdownMenuContent` has a `matchAnchorWidth` prop to match the trigger's width. | This behavior requires manual implementation.
-| **Animation**  | Animations are handled via `data-[starting-style]` and `data-[ending-style]` attributes for more direct CSS control. | Animations are handled via `data-[state=open]` and `data-[state=closed]` with Tailwind CSS animation classes.
+### Checkbox items
 
-### Migration Example
+<ComponentPreview name="dropdown-menu-checkbox" />
 
-<Tabs defaultValue="shadcn/ui">
-  <TabsList>
-    <TabsTab value="shadcn/ui">shadcn/ui</TabsTab>
-    <TabsTab value="lumi/ui">lumi/ui</TabsTab>
-  </TabsList>
-  <TabsPanel value="shadcn/ui">
-    ```tsx title="dropdown-menu-demo.tsx"
-    import { Button } from "@/components/ui/button"
-    import {
-      DropdownMenu,
-      DropdownMenuContent,
-      DropdownMenuGroup,
-      DropdownMenuItem,
-      DropdownMenuLabel,
-      DropdownMenuPortal,
-      DropdownMenuSeparator,
-      DropdownMenuShortcut,
-      DropdownMenuSub,
-      DropdownMenuSubContent,
-      DropdownMenuSubTrigger,
-      DropdownMenuTrigger,
-    } from "@/components/ui/dropdown-menu"
+### Radio items
 
-    export function DropdownMenuDemo() {
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">Open</Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="start">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                Profile
-                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Billing
-                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Settings
-                <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Keyboard shortcuts
-                <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuSub>
-                <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-                <DropdownMenuPortal>
-                  <DropdownMenuSubContent>
-                    <DropdownMenuItem>Email</DropdownMenuItem>
-                    <DropdownMenuItem>Message</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>More...</DropdownMenuItem>
-                  </DropdownMenuSubContent>
-                </DropdownMenuPortal>
-              </DropdownMenuSub>
-              <DropdownMenuItem>
-                New Team
-                <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>GitHub</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuItem disabled>API</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              Log out
-              <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    }
+<ComponentPreview name="dropdown-menu-radio" />
 
-    ```
- </TabsPanel>
-  <TabsPanel value="lumi/ui">
-    ```tsx title="dropdown-menu-demo.tsx" {6, 10-12, 22, 29-32, 38-39, 61}
-    import { Button } from "@/components/ui/button";
-    import {
-      DropdownMenu,
-      DropdownMenuContent,
-      DropdownMenuGroup,
-      DropdownMenuGroupLabel, // CHANGE: Renamed from DropdownMenuLabel
-      DropdownMenuItem,
-      DropdownMenuSeparator,
-      DropdownMenuShortcut,
-      DropdownMenuSubMenu, // CHANGE: Renamed from DropdownMenuSub
-      DropdownMenuSubMenuContent, // CHANGE: Renamed from DropdownMenuSubContent
-      DropdownMenuSubMenuTrigger, // CHANGE: Renamed from DropdownMenuSubTrigger
-      DropdownMenuTrigger,
-    } from "@/components/ui/dropdown-menu";
+## Cookbook
 
-    export function DropdownMenuDemo() {
-      return (
-        <DropdownMenu>
-          {/*
-            NEW FEATURE: Use `render` prop for rendering a styled button.
-          */}
-          <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
-          {/*
-            NEW FEATURE: Added `showArrow`, `matchAnchorWidth` prop for enhanced UI.
-            The `align="start"` prop works the same as before.
-          */}
-          <DropdownMenuContent
-            className="w-56"
-            align="start"
-            sideOffset={8}
-            showArrow
-            matchAnchorWidth
-          >
-            {/*
-              STRUCTURAL CHANGE: The label is now DropdownMenuGroupLabel and
-              MUST be nested inside the DropdownMenuGroup it pertains to.
-            */}
-            <DropdownMenuGroup>
-              <DropdownMenuGroupLabel>My Account</DropdownMenuGroupLabel>
-              <DropdownMenuItem>
-                Profile
-                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Billing
-                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Settings
-                <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Keyboard shortcuts
-                <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              {/* CHANGE: Sub-menu components are renamed for better clarity. */}
-              <DropdownMenuSubMenu>
-                <DropdownMenuSubMenuTrigger>
-                  Invite users
-                </DropdownMenuSubMenuTrigger>
-                <DropdownMenuSubMenuContent>
-                  <DropdownMenuItem>Email</DropdownMenuItem>
-                  <DropdownMenuItem>Message</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>More...</DropdownMenuItem>
-                </DropdownMenuSubMenuContent>
-              </DropdownMenuSubMenu>
-              <DropdownMenuItem>
-                New Team
-                <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>GitHub</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuItem disabled>API</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              Log out
-              <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-}
+### Style Trigger when open
+<ComponentPreview name="dropdown-menu-trigger-open" />
 
-```    
-  </TabsPanel>
-</Tabs>
+### Open on hover
+<ComponentPreview name="dropdown-menu-open-on-hover" />
 
-  
+### Close on click
+<ComponentPreview name="dropdown-menu-control" />
+
+### Navigate to another page
+Use the `render` prop to compose a menu item with an anchor element.
+<ComponentPreview name="dropdown-menu-navigation" />
+
+### Open a dialog
+
+Control the dialog state and open it imperatively using the `onClick` handler on the menu item.
+<ComponentPreview name="dropdown-menu-dialog" />
+
+### Detached triggers
+
+<ComponentPreview name="dropdown-menu-detached-trigger" />
+
+### Multiple triggers
+
+<ComponentPreview name="dropdown-menu-multiple-triggers" />

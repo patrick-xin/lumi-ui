@@ -1,11 +1,10 @@
 "use client";
 
-import * as React from "react";
 import { Select as BaseSelect } from "@base-ui/react/select";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
-import { ArrowSvg } from "@/registry/ui/arrow-svg";
-
+import type * as React from "react";
 import { cn } from "@/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 function Select<Value, Multiple extends boolean | undefined = false>(
   props: BaseSelect.Root.Props<Value, Multiple>,
@@ -18,10 +17,7 @@ function SelectTrigger({
   ...props
 }: React.ComponentProps<typeof BaseSelect.Trigger>) {
   return (
-    <BaseSelect.Trigger
-      data-slot="select-trigger"
-      {...props}
-    >
+    <BaseSelect.Trigger data-slot="select-trigger" {...props}>
       {children}
     </BaseSelect.Trigger>
   );
@@ -66,23 +62,13 @@ function SelectIcon({
 function SelectBackdrop({
   ...props
 }: React.ComponentProps<typeof BaseSelect.Backdrop>) {
-  return (
-    <BaseSelect.Backdrop
-      data-slot="select-backdrop"
-      {...props}
-    />
-  );
+  return <BaseSelect.Backdrop data-slot="select-backdrop" {...props} />;
 }
 
 function SelectPortal({
   ...props
 }: React.ComponentProps<typeof BaseSelect.Portal>) {
-  return (
-    <BaseSelect.Portal
-      data-slot="select-portal"
-      {...props}
-    />
-  );
+  return <BaseSelect.Portal data-slot="select-portal" {...props} />;
 }
 
 function SelectPositioner({
@@ -101,34 +87,21 @@ function SelectPositioner({
 function SelectPopup({
   ...props
 }: React.ComponentProps<typeof BaseSelect.Popup>) {
-  return (
-    <BaseSelect.Popup
-      data-slot="select-popup"
-      {...props}
-    />
-  );
+  return <BaseSelect.Popup data-slot="select-popup" {...props} />;
 }
 
 function SelectList({
   ...props
 }: React.ComponentProps<typeof BaseSelect.List>) {
-  return (
-    <BaseSelect.List
-      data-slot="select-list"
-      {...props}
-    />
-  );
+  return <BaseSelect.List data-slot="select-list" {...props} />;
 }
 
 function SelectArrow({
   ...props
 }: React.ComponentProps<typeof BaseSelect.Arrow>) {
   return (
-    <BaseSelect.Arrow
-      data-slot="select-arrow"
-      {...props}
-    >
-      <ArrowSvg variant="popover"/>
+    <BaseSelect.Arrow data-slot="select-arrow" {...props}>
+      <ArrowSvg variant="popover" />
     </BaseSelect.Arrow>
   );
 }
@@ -138,35 +111,23 @@ function SelectItem({
   ...props
 }: React.ComponentProps<typeof BaseSelect.Item>) {
   return (
-    <BaseSelect.Item
-      data-slot="select-item"
-      {...props}
-    >
-     {children}
+    <BaseSelect.Item data-slot="select-item" {...props}>
+      {children}
     </BaseSelect.Item>
   );
 }
 
-
 function SelectItemText({
   ...props
 }: React.ComponentProps<typeof BaseSelect.ItemText>) {
-  return (
-    <BaseSelect.ItemText
-      data-slot="select-item-text"
-      {...props}
-    />
-  );
+  return <BaseSelect.ItemText data-slot="select-item-text" {...props} />;
 }
 
 function SelectItemIndicator({
   ...props
 }: React.ComponentProps<typeof BaseSelect.ItemIndicator>) {
   return (
-    <BaseSelect.ItemIndicator
-      data-slot="select-item-indicator"
-      {...props}
-    />
+    <BaseSelect.ItemIndicator data-slot="select-item-indicator" {...props} />
   );
 }
 
@@ -262,8 +223,8 @@ function SelectTriggerGroup({
     <BaseSelect.Trigger
       data-size={size}
       className={cn(
-        "group flex items-center gap-2 min-w-40 dark:bg-input/30 dark:hover:bg-input/50 ",
-        "rounded-md border border-input bg-transparent py-2 text-sm shadow-xs transition-[color,box-shadow]",
+        "group flex items-center gap-2 min-w-40 bg-transparent dark:bg-input/30 dark:hover:bg-input/50 ",
+        "rounded-md border border-input py-2 text-sm shadow-xs transition-[color,box-shadow]",
         "outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50",
         "disabled:cursor-not-allowed disabled:opacity-50",
         "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
@@ -276,11 +237,11 @@ function SelectTriggerGroup({
       {...props}
     >
       <BaseSelect.Value
-      data-slot="select-value"
-      data-placeholder-text={placeholder}
-      className="flex flex-1 items-center gap-2 truncate line-clamp-1 data-[placeholder]:text-muted-foreground data-[placeholder]:before:content-[attr(data-placeholder-text)]"
+        data-slot="select-value"
+        data-placeholder-text={placeholder}
+        className="flex flex-1 items-center gap-2 truncate line-clamp-1 data-[placeholder]:text-muted-foreground data-[placeholder]:before:content-[attr(data-placeholder-text)]"
       >
-      {children}
+        {children}
       </BaseSelect.Value>
       {
         <BaseSelect.Icon
@@ -383,12 +344,14 @@ function SelectItemContent({
         {indicatorIcon}
       </BaseSelect.ItemIndicator>
 
-        <BaseSelect.ItemText    className={cn(
+      <BaseSelect.ItemText
+        className={cn(
           "flex items-center gap-2 row-start-1",
           indicatorPlacement === "start" ? "col-start-2" : "col-start-1",
-        )}>
-          {children}
-        </BaseSelect.ItemText>
+        )}
+      >
+        {children}
+      </BaseSelect.ItemText>
     </BaseSelect.Item>
   );
 }
@@ -415,5 +378,5 @@ export {
   // Composite components
   SelectTriggerGroup,
   SelectContent,
-  SelectItemContent
+  SelectItemContent,
 };

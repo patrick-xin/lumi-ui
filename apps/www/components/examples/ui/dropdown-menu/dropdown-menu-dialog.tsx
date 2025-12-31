@@ -20,7 +20,7 @@ import {
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 
-export function DialogTriggerMenu() {
+export function DropdownMenuDialogDemo() {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
 
   return (
