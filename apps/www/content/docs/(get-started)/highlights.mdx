@@ -1,0 +1,78 @@
+---
+title: Hit-Test & Highlights
+description: Understand Lumi UI's approach to interactive touch targets.
+icon: SquareMousePointer
+---
+
+Lumi UI prioritizes usability by strictly separating an element's **interactive hit area** from its **visual highlight**. This ensures that controls remain forgiving and easy to interact with, even when the visual design calls for inset or floating styles.
+
+## Core Philosophy
+
+### The "Fitts's Law" Problem
+In traditional UI development, if you want a dropdown item to look like a "floating bubble" (inset from the edges), you typically add `margin` to the item. 
+*   **The Issue:** Adding margin physically shrinks the element. This reduces the clickable (or hoverable) surface area, making the UI harder to use—especially for mouse users moving quickly or on touch devices.
+
+### The Pseudo-Element Solution
+Lumi UI keeps the interactive container full-width. We use CSS pseudo-elements (`::before`) to render the *visual* background.
+*   **Interactive Zone:** The list item remains `width: 100%` with `0 margin`. The mouse detects the hover at the very edge of the container.
+*   **Visual Zone:** The `::before` pseudo-element is absolutely positioned inside the item with insets (e.g., `inset-x-1`), creating the illusion of a floating selection without sacrificing usability.
+
+This demo compares two methods of implementing "inset" hover highlights in dropdown menus. While they look visually identical (pixel-perfect), they have different user experience implications:
+
+- Pseudo-element (Left): Uses absolute positioning for the background. The actual list item remains full-width, ensuring the user can click anywhere in the row (large hit area).
+- Margin (Right): Uses physical margins to indent the item. This creates "dead zones" on the far left and right edges where clicks will not register (constrained hit area).
+
+Click the **edges** of the dropdown item to see the difference.
+
+<ComponentPreview name="highlight-comparison" />
+
+
+## Installation & Setup
+
+If you used the CLI installer, this is pre-configured. For manual installation, add the following to your CSS.
+
+```css title="globals.css"
+@utility highlight-on-active {
+  @apply data-[highlighted]:relative data-[highlighted]:z-0;
+  
+  @apply data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm;
+
+  @apply data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground;
+}
+```
+
+<Callout variant="info" title="Customization Note">
+To customize these pseudo-element highlights (e.g., border-radius, inset), you need to target the `::before` pseudo-element directly using Tailwind's `before:` modifier.
+</Callout>
+
+## Opting Out
+
+You may prefer the traditional approach where the background is applied directly to the element. 
+
+**Note:** If you remove `highlight-on-active` and want to maintain the "inset" look, you need to manually add spacing (like `mx-1`) to the component. Be aware that this **reduces the hit area** by the amount of margin you add.
+
+```tsx
+<BaseSelect.Item
+  data-slot="select-item"
+  className={cn(
+    "...",
+    // 1. Remove the utility
+    // "highlight-on-active",
+    // 2. Adjust spacing/radius
+    "mx-1 rounded-sm", 
+    // 3. Apply active styles
+    "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+    className,
+  )}
+  {...props}
+>
+```
+
+Alternatively, you can modify the global `@utility highlight-on-active` definition to change the `inset` values if you want a global design change.
+
+
+## Component Compatibility
+
+Uses `highlight-on-active`:
+- **Form Input:** [Autocomplete](/docs/components/form-input/autocomplete) | [Combobox](/docs/components/form-input/combobox) | [Select](/docs/components/form-input/select)
+- **Overlays:** [DropdownMenu](/docs/components/overlays-dialogs/dropdown-menu)

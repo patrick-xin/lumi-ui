@@ -1,0 +1,236 @@
+---
+title: Philosophies
+description: The architectural decisions that make Lumi UI robust, accessible, and AI-friendly.
+icon: Scale
+---
+
+import { Layers, Zap, Cpu, FileText } from "lucide-react";
+
+This document explains the "why" behind Lumi UI's design. If you're evaluating the library, contributing code, or just curious about our trade-offs, this is for you.
+
+## The Dual Layer Architecture
+
+Most component libraries force a choice: either use opinionated components that are fast but inflexible, or use primitives that are powerful but slow to implement. We refuse that false dichotomy.
+
+### Why Two Layers?
+
+Development happens at different velocities:
+
+**During Prototyping:** You want to ship features fast. You don't care about custom layouts—you just need a working dropdown *now*. Bikeshedding about DOM structure is pure waste.
+
+**During Polishing:** You need pixel-perfect control. The standard layout doesn't work for your design. You're willing to trade speed for precision.
+
+Lumi UI accommodates both modes by offering two distinct APIs for every component:
+
+### Composites = Velocity
+Pre-assembled components that combine structure, styling, and logic into a single import. They handle boilerplate like portals, positioning, and default layouts.
+
+**Trade-off:** You accept our opinions about structure and styling in exchange for not thinking about them.
+
+**Best for:** MVPs, internal tools, maintaining consistency, and 80% of use cases.
+
+### Primitives = Control
+Thin wrappers around Base UI that provide state management, accessibility, and keyboard navigation—but enforce *zero visual layout*. You compose them however you want.
+
+**Trade-off:** You write more code but get complete control over DOM structure and styling.
+
+**Best for:** Unique designs, complex interactions, components that don't fit standard patterns.
+
+### Why Not Just One?
+
+We considered several alternatives:
+
+1. **Only Composites:** Limits creativity. Developers fork or abandon the library when they hit walls.
+2. **Only Primitives:** Slows down common tasks. Every dropdown requires 20+ lines of boilerplate.
+
+The dual-layer approach gives you an escape hatch without abandoning the fast path.
+
+## Designed for AI-Assisted Development
+
+Modern development is human + AI. We optimized Lumi UI's structure so that AI assistants generate correct, idiomatic code on the first attempt.
+
+### Flat Semantic Exports
+
+We flatten the export structure so every component is accessible at the root level:
+
+```tsx
+// AI-friendly
+import { ComboboxInput, ComboboxItem, ComboboxPortal } from '@/components/ui/combobox'
+
+// Nested namespaces - AI struggles
+import { Combobox } from '@base-ui/react/combobox'
+// AI must now infer: Combobox.Input? Combobox.Item? ComboboxInput?
+```
+
+**Why this matters:**
+- Reduces token usage in AI context windows
+- Makes component relationships explicit in import statements
+- Eliminates ambiguity in autocomplete suggestions
+- Keep your project structure clean and simple
+
+### Composites as Living Examples
+
+Our composite components serve as **executable documentation**. When an AI reads your codebase, it doesn't just see function signatures—it sees complete, working reference implementations.
+
+```tsx
+// This teaches AI agents: "This is how you use ComboboxPortal + ComboboxPositioner + ComboboxPopup"
+function ComboboxContent({
+  className,
+  children,
+  sideOffset = 6,
+  align = "start",
+  matchAnchorWidth = true,
+  positionerAnchor,
+  ...props
+}: React.ComponentProps<typeof BaseCombobox.Popup> & {
+  sideOffset?: BaseCombobox.Positioner.Props["sideOffset"];
+  align?: BaseCombobox.Positioner.Props["align"];
+  matchAnchorWidth?: boolean;
+  positionerAnchor?: React.RefObject<HTMLDivElement | null>;
+}) {
+  return (
+    <BaseCombobox.Portal data-slot="combobox-portal">
+      <BaseCombobox.Positioner
+        data-slot="combobox-positioner"
+        sideOffset={sideOffset}
+        align={align}
+        anchor={positionerAnchor}
+      >
+        <BaseCombobox.Popup
+          data-slot="combobox-content"
+          className={cn(
+            "bg-popover text-popover-foreground rounded-sm shadow-md",
+            "outline outline-1 outline-border dark:-outline-offset-1",
+            "overflow-hidden overflow-y-auto",
+            "max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))]",
+            "animate-popup",
+            matchAnchorWidth && "w-[var(--anchor-width)]",
+            className,
+          )}
+          {...props}
+        >
+          {children}
+        </BaseCombobox.Popup>
+      </BaseCombobox.Positioner>
+    </BaseCombobox.Portal>
+  );
+}
+```
+
+The AI effectively learns by example within your project context, reducing hallucination and improving first-try accuracy.
+
+### Immutable Logic Blocks
+
+We structure primitives to be **stable building blocks**. AI agents should use our primitives to build new features in *your application files*, not attempt to modify our core component logic.
+
+**The contract:** Our primitives handle the hard parts (accessibility, state, keyboard nav). Your code handles composition and styling. This boundary makes AI assistance more reliable.
+
+### Detailed Documentation
+
+We provide detailed documentation with practical examples for every component with `copy` button. Paste them into your favorite LLMs to get started. 
+
+## The Hit-Test Philosophy
+
+This is a specific UX pattern we use throughout Lumi UI to create "forgiving" interactive areas.
+
+### The Problem
+
+If a hover highlight (e.g., a background color) is applied directly to an item with padding, the clickable/hoverable area shrinks visually. This leads to a less forgiving UX.
+
+
+### The Solution
+
+We use **pseudo-elements** to separate the visual highlight from the interactive container:
+
+```css
+data-[highlighted]:relative data-[highlighted]:z-0
+data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm
+data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground
+```
+
+**Result:** The entire row is clickable (great UX), while the visual highlight is inset and rounded (great design). This pattern appears in `ComboboxItem`, `DropdownMenuItem`, `ListboxOption`, and similar components.
+
+Click the **edges** of the dropdown item to see the difference.
+
+<ComponentPreview name="highlight-comparison" />
+
+See [Hit-Test & Highlights](/docs/highlights) for implementation details and customization.
+
+## Unified Design Language
+
+Base UI provides the behavioral foundation, but we provide the visual consistency.
+
+### The Utility Pattern
+
+We use **utility** in Tailwind to provide consistent styling across components. This ensures that every component looks the same unless you explicitly override it.
+
+- **Animation:** All interactive elements use globally configured animation utilities (`animate-popup`, `animate-dialog`, `animate-backdrop`). This ensures transitions feel cohesive across your entire application—from simple tooltips to complex modals.
+
+- **Highlighted elements:** All interactive elements use globally configured highlight utility (`highlight-on-active`). 
+
+**Why global utilities?** Consistency by default. Every component animates and behaves the same way unless you explicitly override it. See [Animation Guide](/docs/animation-guide) and [Hit-Test & Highlights](/docs/highlights) for details.
+
+### Theme System
+
+We adopt the **[Shadcn/ui CSS variable approach](https://ui.shadcn.com/docs/theming)** for theming.
+
+### The Wrapper Pattern
+
+Every primitive follows this structure:
+
+```tsx
+function ComboboxTrigger({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseCombobox.Trigger>) {
+  return (
+    <BaseCombobox.Trigger
+      data-slot="combobox-trigger" // For global CSS targeting
+      className={cn(
+        "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
+        className, // Merge styles
+      )}
+      aria-label="Open popup"
+      {...props}   // Forward all Base UI props
+    />
+  );
+}
+```
+
+This pattern ensures:
+1. Full Base UI API compatibility
+2. Consistent styling hooks via `data-slot`
+3. Easy customization via `className`
+
+## Trade-Offs We Made
+
+### What We Optimized For
+- **Developer velocity** for common patterns
+- **Full control** when you need it
+- **AI-assisted coding** reliability
+- **Accessibility** without configuration
+- **Consistent UX** across components
+
+### What We Sacrificed
+- **Minimal bundle size:** We include both layers. If you only use composites, you have to manually delete the primitives that you don't use.
+- **Framework agnostic:** We're React-only. (Base UI is React-first, and we optimize for one ecosystem well.)
+- **More components to remember:** Composites have specific props and API.
+
+---
+
+## Ready to Build?
+
+Now that you understand our reasoning, see it in action:
+
+<div className="flex gap-4 mt-6">
+  <CTACard 
+    title="Installation" 
+    icon={<Zap className="size-4"/>} 
+    href="/docs/installation" 
+  />
+  <CTACard 
+    title="Components" 
+    icon={<Layers className="size-4"/>} 
+    href="/docs/components" 
+  />
+</div>

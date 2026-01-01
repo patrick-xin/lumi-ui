@@ -28,7 +28,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         glow: [
           "bg-transparent border hover:bg-accent dark:hover:bg-accent/30",
-          "shadow-md shadow-primary/30 dark:shadow-primary/10 dark:shadow-sm",
+          "shadow-md shadow-primary/10 dark:shadow-primary/10 dark:shadow-sm",
         ],
         unstyled: "bg-transparent hover:bg-transparent",
       },

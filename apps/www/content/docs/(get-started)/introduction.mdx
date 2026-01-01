@@ -4,90 +4,86 @@ description: A collection of composable React components built with Base UI and 
 icon: Book
 ---
 
-import { PlayIcon, DiamondIcon } from "lucide-react";
+import { PlayIcon, DiamondIcon, ScaleIcon } from "lucide-react";
 
-This guide outlines the core philosophies and architectural patterns behind Lumi UI. Understanding these choices will empower you to effectively use, customize, and extend the library.
+Lumi UI gives you accessible, customizable React components that you own completely. Built on [Base UI](https://base-ui.com/) for robust behavior and styled with Tailwind CSS for maximum flexibility.
 
-## Core Philosophy: The Dual Layer Headless UI
+## What You Get
 
-Lumi UI combines the robust accessibility of **Base UI** with the utility-first power of **Tailwind CSS**.
+Every Lumi UI component comes in **two flavors**, letting you choose between speed and control:
 
-*   **Base UI (Headless Foundation):** We leverage [Base UI](https://base-ui.com/) to handle complex logic, state management, keyboard navigation, and ARIA attributes out-of-the-box. This significantly reduces boilerplate and ensures high accessibility standards.
-*   **Tailwind CSS & Shadcn Variables:** For styling, we use TailwindCSS classes. We adopt the **shadcn/ui CSS variable system** for theme customization (colors, radius, shadows), ensuring that changing your theme variables cascades correctly through Lumi UI components.
+### Composite Components (Build Fast)
+Pre-assembled, production-ready components for common patterns. Use these when you want standard UI instantly.
 
-## The "Dual Layer" API
+<ComponentPreview name="combobox-input-inside-popup" />
 
-Each Lumi UI component exposes two consumption layers to cater to different development needs:
+**Use when:** Prototyping, building standard UIs, or maintaining consistency across your app.
 
-### The Primitive Layer (Maximum Control)
-Thin wrappers around Base UI components (e.g., `<ComboboxItem>`, `<ComboboxPortal>`).
-*   They provide essential logic and apply `data-slot` attributes for styling hooks.
-*   **Use when:** You need full control over DOM structure, positioning, or want to build highly custom layouts. This is akin to "ejecting" from a pre-assembled component.
+### Primitive Components (Build Custom)
+Granular building blocks that expose Base UI's full power. Use these when you need complete control over structure and layout. You can also mix and match primitives and composites to create unique layouts.
 
-### The Composite Layer (Rapid Development)
-Opinionated, pre-assembled components that combine multiple primitives into common patterns (e.g., `<ComboboxInputGroup>`, `<ComboboxContent>`).
-*   They handle boilerplate like portals, positioning, and default styles.
-*   **Use when:** You want to quickly implement a standard UI pattern without worrying about the underlying complexities.
+<ComponentPreview name="combobox-customization" />
 
-## Styling & Design Language
+**Use when:** Creating unique layouts, implementing custom interactions, or the composite doesn't fit your needs.
 
-### Utility-First & The `cn` Utility
-*   All visual styling is applied using TailwindCSS utility classes.
-*   We consistently use a `cn` utility for conditional styling and merging default classes with user-provided `className` props.
+> **Think of it this way:** Composites are finished furniture. Primitives are lumber and tools. Start with composites, drop down to primitives when you need more control.
 
-### The "Hit-Test" Philosophy
+## How It Works
 
-Some interactive elements (like `ComboboxItem` or `DropdownMenuItem`) employ a specific styling technique for an enhanced user experience:
+### Accessibility Built-In
+Base UI handles the complex stuff—keyboard navigation, focus management, ARIA attributes, and state management. You get enterprise-grade accessibility without writing any of it yourself.
 
-*   **Problem:** If a hover highlight (e.g., a background color) is applied directly to an item with padding, the clickable/hoverable area shrinks visually. This leads to a less forgiving UX.
-*   **Solution:** We often use **pseudo-elements (`::before` or `::after`)** to render the *visual* highlight, while the *interactive* container remains full-width and clickable.
-*   **Benefit:** This creates a "forgiving" interactive zone (the entire row is clickable) while allowing the visual highlight to be inset, rounded, or otherwise styled independently.
-*   **Example from Combobox:** 
-```css
-data-[highlighted]:before:bg-accent data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1.5 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm
-```
-*   **Customization Note:** To customize these pseudo-element highlights (e.g., border-radius, inset), you must target the `::before` or `::after` pseudo-element directly using Tailwind's `before:` or `after:` modifiers.
+### Style With Tailwind
+Every component accepts `className` for styling. We use the **shadcn/ui CSS variable system**, so changing your theme variables automatically updates all components.
 
-### Animation Strategy
-We utilize globally configured TailwindCSS animation utilities (e.g., `animate-popup`, `animate-dialog`) for consistent transitions. Refer to the [Animation Guide](/docs/animation-guide) for details.
+### Consistent Design Language
+- **Animations:** All components use shared utilities (`animate-popup`, `animate-dialog`) for cohesive transitions
+- **Interactions:** Components follow our "hit-test" pattern for forgiving, clickable areas
+- **Theming:** Pre-configured themes available in [Themes](/docs/themes/canopy)
 
-### Themes
-We provide several pre-configured themes that can be easily customized to match your design system. These themes are available in the [Themes](/docs/themes/canopy).
+## Customization Levels
 
-## Component Architecture & Development
+Lumi UI adapts to how much control you need:
 
-### Wrapper Pattern
-Every primitive component is a thin wrapper around its Base UI counterpart, forwarding all props to ensure full API compatibility.
+1. **Quick tweaks:** Add Tailwind classes via `className`
+2. **Theme changes:** Modify CSS variables in your `globals.css`
+3. **Full control:** Use primitives to build exactly what you need
+4. **Mix and match:** Use primitives and composites to create unique layouts
 
-```tsx
-function ComboboxInput({ className, ...props }) {
-  return (
-    <BaseCombobox.Input
-      data-slot="combobox-input" // Standard data-slot attribute
-      className={cn("default-styles", className)} // Merge styles
-      {...props} // Forward props
-    />
-  );
-}
-```
+## Key Conventions
 
-### Composing Composite Components
-Composite components (e.g., `<ComboboxInputGroup>`) are built by composing our own primitives. They may introduce opinionated props for common use cases (e.g., `showTrigger`) while still exposing `className` for styling and forwarding relevant props to the underlying Base UI primitives.
+**Naming Pattern:**
+- Root: `Combobox`, `Dialog`, `Dropdown`
+- Primitives: `ComboboxInput`, `ComboboxItem`, `DialogPopup`
+- Composites: `ComboboxInputGroup`, `ComboboxContent`, `DialogContent`
 
-## Naming Conventions
-*   **Root:** `ComponentName` (e.g., `Combobox`).
-*   **Primitives:** `ComponentNameSubComponent` (e.g., `ComboboxInput`).
-*   **Composites:** `ComponentNameCompositeComponent` (e.g., `ComboboxInputGroup`).
+**Props Pattern:**
+All primitives forward props to Base UI, so you get the full Base UI API plus our styling system.
 
-## Extensibility and Customization
-*   **Override with `className`:** The primary way to customize styling is via Tailwind classes.
-*   **Override with CSS Variables:** Modify theme variables in your `globals.css`.
-*   **Target `data-slot`:** Use `data-slot` attributes for global overrides.
-*   **Eject to Primitives:** If a composite component is too restrictive, compose the Base UI primitives directly for full control.
+---
 
-## Getting Started
+## Next Steps
 
 <div className="flex flex-col md:flex-row gap-4 md:justify-between">
-  <CTACard title="Installation Guide" icon={<PlayIcon className="size-4"/>} description="Get started in minutes" href="/docs/installation"/>
-  <CTACard title="Browse Components" icon={<DiamondIcon className="size-4"/>} href="/docs/components"/>
+  <CTACard 
+    title="Installation Guide" 
+    icon={<PlayIcon className="size-4"/>} 
+    description="Get set up in 5 minutes" 
+    href="/docs/installation"
+  />
+  <CTACard 
+    title="Browse Components" 
+    icon={<DiamondIcon className="size-4"/>} 
+    description="See all available components"
+    href="/docs/components"
+  />
+</div>
+
+<div className="mt-4">
+  <CTACard 
+    title="Why These Choices?" 
+    icon={<ScaleIcon className="size-4"/>}
+    description="Read about the architectural decisions behind Lumi UI"
+    href="/docs/philosophies"
+  />
 </div>

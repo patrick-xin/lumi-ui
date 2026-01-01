@@ -4,6 +4,7 @@ import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
 import { PaletteIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
@@ -11,6 +12,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
+
+const THEME_OPTIONS = [
+  {
+    id: "shadcn",
+    colorClass: "bg-[oklch(0.145_0_0)] dark:bg-[oklch(0.922_0_0)]",
+  },
+  { id: "celeste", colorClass: "bg-[oklch(0.72_0.14_265)]" },
+  { id: "orchid", colorClass: "bg-[oklch(0.71_0.08_302)]" },
+  { id: "lagoon", colorClass: "bg-[oklch(0.55_0.15_180)]" },
+  { id: "dune", colorClass: "bg-[oklch(0.66_0.197_36)]" },
+  { id: "canopy", colorClass: "bg-[oklch(0.72_0.18_128)]" },
+];
 
 export function ThemeSwitcher() {
   const { setTheme, resolvedTheme } = useTheme();
@@ -31,6 +44,7 @@ export function ThemeSwitcher() {
   const handleThemeSetChange = (newSet: string) => {
     setTheme(`${newSet}-${mode}`);
   };
+
   if (!mounted) {
     return null;
   }
@@ -39,55 +53,33 @@ export function ThemeSwitcher() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline" size="icon-sm" title="Switch theme">
+          <Button variant="glow" size="icon-sm" title="Switch theme">
             <PaletteIcon className="size-4 transition-transform" />
           </Button>
         }
       />
-      <DropdownMenuContent matchAnchorWidth={false}>
-        <div className="grid grid-cols-3 gap-1">
-          <DropdownMenuItem
-            onClick={() => handleThemeSetChange("shadcn")}
-            disabled={themeSet === "shadcn"}
-            className="w-full justify-start text-xs h-6 extend-touch-target"
-          >
-            <div className="size-2 bg-[oklch(0.145_0_0)] dark:bg-[oklch(0.922_0_0)] rounded-full" />
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => handleThemeSetChange("celeste")}
-            disabled={themeSet === "celeste"}
-            className="w-full justify-start text-xs h-6 extend-touch-target"
-          >
-            <div className="size-2 bg-[oklch(0.72_0.14_265)] rounded-full" />
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => handleThemeSetChange("orchid")}
-            disabled={themeSet === "orchid"}
-            className="w-full justify-start text-xs h-6 extend-touch-target"
-          >
-            <div className="size-2 bg-[oklch(0.71_0.08_302)] rounded-full" />
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => handleThemeSetChange("lagoon")}
-            disabled={themeSet === "lagoon"}
-            className="w-full justify-start text-xs h-6 extend-touch-target"
-          >
-            <div className="size-2 bg-[oklch(0.55_0.15_180)] rounded-full" />
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => handleThemeSetChange("dune")}
-            disabled={themeSet === "dune"}
-            className="w-full justify-start text-xs h-6 extend-touch-target"
-          >
-            <div className="size-2 bg-[oklch(0.66_0.197_36)] rounded-full" />
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => handleThemeSetChange("canopy")}
-            disabled={themeSet === "canopy"}
-            className="w-full justify-start text-xs h-6 extend-touch-target"
-          >
-            <div className="size-2 bg-[oklch(0.72_0.18_128)] rounded-full" />
-          </DropdownMenuItem>
+      <DropdownMenuContent
+        matchAnchorWidth={false}
+        className="shadow-md shadow-primary/10 outline dark:-outline-offset-1 outline-primary/10"
+      >
+        <div className="grid grid-cols-3 gap-y-1">
+          {THEME_OPTIONS.map(({ id, colorClass }) => (
+            <DropdownMenuItem
+              key={id}
+              onClick={() => handleThemeSetChange(id)}
+              disabled={themeSet === id}
+              className="extend-touch-target relative py-2"
+            >
+              <div
+                className={cn(
+                  "size-2 rounded-full",
+                  colorClass,
+                  themeSet === id &&
+                    "before:absolute before:inset-x-1 before:inset-y-0 before:z-[-1] before:rounded-sm before:bg-accent",
+                )}
+              />
+            </DropdownMenuItem>
+          ))}
         </div>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -6,6 +6,7 @@ import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 import { cn } from "@/lib/utils";
+import { cva, VariantProps } from "class-variance-authority";
 
 function DropdownMenu<Payload>({
   ...props
@@ -71,30 +72,49 @@ function DropdownMenuArrow({
   );
 }
 
+
+const dropdownMenuItemVariants = cva(
+  [
+    "flex items-center gap-2 py-1.5 px-3.5 text-sm",
+    "outline-none select-none cursor-default",
+    "highlight-on-active",
+    "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    "[&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
+  ],
+  {
+    variants: {
+      variant: {
+        default: "",
+        destructive: [
+          "text-destructive *:[svg]:!text-destructive",
+          "data-[highlighted]:text-destructive data-[highlighted]:before:bg-destructive/10 dark:data-[highlighted]:before:bg-destructive/20",
+        ],
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
+type DropdownMenuItemProps = React.ComponentProps<typeof BaseMenu.Item> &
+  VariantProps<typeof dropdownMenuItemVariants> & {
+    unstyled?: boolean;
+  };
+
 function DropdownMenuItem({
   className,
   variant = "default",
+  unstyled = false,
   ...props
-}: React.ComponentProps<typeof BaseMenu.Item> & {
-  variant?: "default" | "destructive";
-}) {
+}: DropdownMenuItemProps) {
   return (
     <BaseMenu.Item
-      data-variant={variant}
       data-slot="dropdown-menu-item"
-      className={cn(
-        "flex items-center gap-2 py-1.5 px-3.5 text-sm",
-        "outline-none select-none cursor-default",
-        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
-        "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "data-[variant=destructive]:text-destructive",
-        "data-[variant=destructive]:data-[highlighted]:text-destructive",
-        "data-[variant=destructive]:*:[svg]:!text-destructive",
-        "data-[variant=destructive]:data-[highlighted]:before:bg-destructive/10",
-        "dark:data-[variant=destructive]:data-[highlighted]:before:bg-destructive/20",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
-        className,
+       className={cn(
+        unstyled ? "" : dropdownMenuItemVariants({ variant }),
+        className
       )}
       {...props}
     />
@@ -236,7 +256,7 @@ function DropdownMenuSubMenuTriggerGroup({
       className={cn(
         "flex items-center gap-2 py-1.5 px-3.5 text-sm",
         "outline-none select-none cursor-default",
-        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
+        "highlight-on-active",
         "data-[popup-open]:relative data-[popup-open]:z-0 data-[popup-open]:before:bg-accent data-[popup-open]:text-accent-foreground data-[popup-open]:before:absolute data-[popup-open]:before:inset-x-1 data-[popup-open]:before:inset-y-0 data-[popup-open]:before:z-[-1] data-[popup-open]:before:rounded-sm",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
         className,
@@ -311,7 +331,7 @@ function DropdownMenuCheckboxItemContent({
       className={cn(
         "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
         "outline-none select-none cursor-default",
-        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
+        "highlight-on-active",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
@@ -337,7 +357,7 @@ function DropdownMenuRadioItemContent({
       className={cn(
         "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
         "outline-none select-none cursor-default",
-        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
+        "highlight-on-active",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
