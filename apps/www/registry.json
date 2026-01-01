@@ -409,24 +409,6 @@
       ]
     },
     {
-      "name": "toaster",
-      "type": "registry:ui",
-      "title": "Toaster",
-      "description": "Generates toast notifications.",
-      "dependencies": [
-        "@base-ui/react",
-        "lucide-react",
-        "class-variance-authority"
-      ],
-      "registryDependencies": ["toast", "utils"],
-      "files": [
-        {
-          "path": "registry/ui/toast.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "checkbox-group",
       "type": "registry:ui",
       "title": "Checkbox Group",

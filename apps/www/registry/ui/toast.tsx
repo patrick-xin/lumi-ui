@@ -1,180 +1,201 @@
 "use client";
 
-import * as React from "react";
-import { Toast as BaseToast } from "@base-ui/react/toast";
-import { cva, type VariantProps } from "class-variance-authority";
-import { X } from "lucide-react";
+import {
+  Toast as BaseToast,
+  type ToastManagerAddOptions,
+  type ToastRootProps,
+} from "@base-ui/react/toast";
+import { cva } from "class-variance-authority";
+import {
+  AlertCircle,
+  AlertTriangle,
+  CheckCircle2,
+  Info,
+  Loader2,
+  X,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/registry/ui/button";
+import { Button, buttonVariants } from "@/registry/ui/button";
 
-const ToastProvider = BaseToast.Provider;
+const toastManager = BaseToast.createToastManager();
 
-const ToastPortal = BaseToast.Portal;
+type ToastType =
+  | "success"
+  | "error"
+  | "warning"
+  | "info"
+  | "loading"
+  | "default";
 
-const toastViewportVariants = cva(
-  "fixed z-[100] flex w-[380px] max-w-[calc(100vw-2rem)] flex-col outline-none gap-2",
-  {
-    variants: {
-      position: {
-        "top-left": "top-4 left-4 sm:top-8 sm:left-8",
-        "top-center": "top-4 left-1/2 -translate-x-1/2 sm:top-8",
-        "top-right": "top-4 right-4 sm:top-8 sm:right-8",
-        "bottom-left": "bottom-4 left-4 sm:bottom-8 sm:left-8",
-        "bottom-center": "bottom-4 left-1/2 -translate-x-1/2 sm:bottom-8",
-        "bottom-right": "bottom-4 right-4 sm:bottom-8 sm:right-8",
-      },
-    },
-    defaultVariants: {
-      position: "bottom-right",
-    },
-  }
-);
+type ToasterProps = {
+  position?: ToastPosition;
+  swipeDirection?: SwipePosition;
+  limit?: number;
+};
 
-const ToastViewport = ({
-  className,
-  position,
-  ...props
-}: React.ComponentProps<typeof BaseToast.Viewport> & VariantProps<typeof toastViewportVariants>) => (
-  <BaseToast.Viewport
-    className={cn(
-      "[--gap:0.75rem] [--peek:0.75rem]",
-      toastViewportVariants({ position }),
-      className
-    )}
-    {...props}
-  />
-);
+type SwipePosition = ToastRootProps["swipeDirection"];
+type ToastPosition =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "bottom-right";
+
+interface ToastProps extends BaseToast.Root.Props {
+  type?: ToastType;
+}
+
+const Icons = {
+  success: CheckCircle2,
+  error: AlertCircle,
+  warning: AlertTriangle,
+  info: Info,
+  loading: Loader2,
+  default: null,
+};
 
 const toastVariants = cva(
-  "absolute w-full transition-all duration-300 ease-out flex flex-col rounded-lg border bg-background shadow-lg h-[var(--height)] z-[calc(100-var(--toast-index))]",
+  "toast-root absolute w-full rounded-sm p-4 outline outline-1 shadow-lg transition-all select-none bg-popover text-popover-foreground",
   {
     variants: {
-      stack: {
-        bottom: [
-          "bottom-0 origin-bottom",
-          "[--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))]",
-          "data-[starting-style]:translate-y-full", 
-          "data-[ending-style]:data-[swipe-direction=down]:translate-y-full",
-        ],
-        top: [
-          "top-0 origin-top",
-          "[--offset-y:calc(var(--toast-offset-y)+(var(--toast-index)*var(--gap))+var(--toast-swipe-movement-y))]",
-          "data-[starting-style]:-translate-y-full",
-          "data-[ending-style]:data-[swipe-direction=up]:-translate-y-full",
-        ],
+      type: {
+        default: "outline-border",
+        success:
+          "outline-green-500/40 bg-green-50 text-green-900 dark:bg-green-950 dark:text-green-50",
+        error:
+          "outline-red-500/40 bg-red-50 text-red-900 dark:bg-red-950 dark:text-red-50",
+        warning:
+          "outline-yellow-500/40 bg-yellow-50 text-yellow-900 dark:bg-yellow-950 dark:text-yellow-50",
+        info: "outline-blue-500/40 bg-blue-50 text-blue-900 dark:bg-blue-950 dark:text-blue-50",
+        loading: "outline-accent",
       },
     },
     defaultVariants: {
-      stack: "bottom",
+      type: "default",
     },
-  }
+  },
 );
 
-const Toast = ({
-  className,
-  stack,
-  ...props
-}: React.ComponentProps<typeof BaseToast.Root> & VariantProps<typeof toastVariants>) => {
+export const toast = {
+  add: (props: ToastManagerAddOptions<ToastProps>) => toastManager.add(props),
+  success: (options?: ToastManagerAddOptions<ToastProps>) =>
+    toastManager.add({ ...options, type: "success" }),
+  error: (options?: ToastManagerAddOptions<ToastProps>) =>
+    toastManager.add({ ...options, type: "error" }),
+  warning: (options?: ToastManagerAddOptions<ToastProps>) =>
+    toastManager.add({ ...options, type: "warning" }),
+  info: (options?: ToastManagerAddOptions<ToastProps>) =>
+    toastManager.add({ ...options, type: "info" }),
+  promise: toastManager.promise,
+  dismiss: toastManager.close,
+  update: toastManager.update,
+};
+
+function Toaster({
+  position = "bottom-right",
+  swipeDirection = ["down", "right"],
+  limit = 1,
+}: ToasterProps) {
   return (
-    <BaseToast.Root
-      className={cn(
-        "[--scale:calc(max(0,1-(var(--toast-index)*0.1)))]",
-        "[--shrink:calc(1-var(--scale))]",
-        "[--height:var(--toast-frontmost-height,var(--toast-height))]",
-        "after:absolute after:top-full after:left-0 after:w-full after:content-['']",
-        "after:h-[calc(var(--gap)+1px)]",
-        "translate-x-[var(--toast-swipe-movement-x)] translate-y-[calc(var(--toast-swipe-movement-y)-(var(--toast-index)*var(--peek))-(var(--shrink)*var(--height)))] scale-[var(--scale)]",
-        "data-[expanded]:translate-y-[var(--offset-y)] data-[expanded]:scale-100",
-        "data-[expanded]:h-[var(--toast-height)]",
-        "data-[starting-style]:opacity-0",
-        "data-[ending-style]:opacity-0 data-[ending-style]:scale-90",
-        "data-[ending-style]:data-[swipe-direction=right]:translate-x-full",
-        "data-[starting-style]:opacity-0",
-        "data-[ending-style]:opacity-0 data-[ending-style]:scale-90",
-        "data-[ending-style]:data-[swipe-direction=right]:translate-x-full",
-        "data-[ending-style]:data-[swipe-direction=left]:-translate-x-full",
-        toastVariants({ stack }),
-        className
-      )}
-      {...props}
-    />
+    <BaseToast.Provider toastManager={toastManager} limit={limit}>
+      <Toast position={position} swipeDirection={swipeDirection} />
+    </BaseToast.Provider>
   );
-};
+}
 
-const ToastContent = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseToast.Content>) => (
-  <BaseToast.Content
-    className={cn(
-      "overflow-hidden transition-opacity duration-200",
-      "data-[behind]:pointer-events-none data-[behind]:opacity-0",
-      "data-[expanded]:pointer-events-auto data-[expanded]:opacity-100",
-      "flex w-full items-start gap-3 p-4",
-      className
-    )}
-    {...props}
-  />
-);
+function Toast({
+  position,
+  swipeDirection,
+}: {
+  position: ToastPosition;
+  swipeDirection: SwipePosition;
+}) {
+  const { toasts } = BaseToast.useToastManager();
 
-const ToastTitle = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseToast.Title>) => (
-  <BaseToast.Title
-    className={cn("text-sm font-semibold leading-none tracking-tight", className)}
-    {...props}
-  />
-);
+  return (
+    <BaseToast.Portal>
+      <BaseToast.Viewport
+        data-position={position}
+        className={cn(
+          "toast-viewport fixed z-10 flex flex-col w-[var(--toast-width)]",
+          position.includes("right") && "items-end right-[var(--toast-inset)]",
+          position.includes("left") && "items-start left-[var(--toast-inset)]",
+          position.includes("center") &&
+            "items-center left-1/2 -translate-x-1/2",
+          position.includes("top") && "top-[var(--toast-inset)]",
+          position.includes("bottom") && "bottom-[var(--toast-inset)]",
+        )}
+      >
+        {toasts.map((toast) => {
+          const type = (toast.type as ToastType) || "default";
+          const Icon = Icons[type];
 
-const ToastDescription = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseToast.Description>) => (
-  <BaseToast.Description
-    className={cn("text-sm opacity-90 leading-relaxed", className)}
-    {...props}
-  />
-);
+          return (
+            <BaseToast.Root
+              key={toast.id}
+              toast={toast}
+              data-position={position}
+              swipeDirection={swipeDirection}
+              className={cn(toastVariants({ type }))}
+            >
+              <BaseToast.Content className="flex items-start gap-3 overflow-hidden transition-opacity duration-250 data-[behind]:pointer-events-none data-[behind]:opacity-0 data-[expanded]:pointer-events-auto data-[expanded]:opacity-100">
+                {Icon && (
+                  <Icon
+                    className={cn(
+                      "size-5 mt-1 shrink-0",
+                      type === "loading" && "animate-spin mt-0.5",
+                    )}
+                  />
+                )}
+                <div className="grid gap-1 flex-1">
+                  {toast.title && (
+                    <BaseToast.Title className="text-[0.975rem] font-semibold">
+                      {toast.title}
+                    </BaseToast.Title>
+                  )}
+                  {toast.description && (
+                    <BaseToast.Description className="text-[0.925rem]">
+                      {toast.description}
+                    </BaseToast.Description>
+                  )}
 
-const ToastAction = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseToast.Action>) => (
-  <BaseToast.Action
-    className={cn(
-      buttonVariants({ variant: "outline", size: "sm" }),
-      "shrink-0 h-7 px-3 text-xs font-medium transition-colors hover:bg-secondary focus:outline-none disabled:pointer-events-none disabled:opacity-50",
-      className
-    )}
-    {...props}
-  />
-);
+                  {toast.actionProps && (
+                    <BaseToast.Action
+                      className={cn(
+                        buttonVariants({ size: "sm" }),
+                        "mt-2.5 w-fit",
+                      )}
+                    >
+                      {toast.actionProps.children}
+                    </BaseToast.Action>
+                  )}
+                </div>
+                <BaseToast.Close
+                  aria-label="Close"
+                  render={
+                    <Button
+                      className={cn(
+                        "absolute top-1 right-1",
+                        type === "error" && "hover:bg-red-500/20",
+                        type === "success" && "hover:bg-green-500/20",
+                        type === "warning" && "hover:bg-yellow-500/20",
+                        type === "info" && "hover:bg-blue-500/20",
+                      )}
+                      variant={type === "default" ? "ghost" : "unstyled"}
+                      size="icon-sm"
+                    >
+                      <X className="size-4" />
+                    </Button>
+                  }
+                />
+              </BaseToast.Content>
+            </BaseToast.Root>
+          );
+        })}
+      </BaseToast.Viewport>
+    </BaseToast.Portal>
+  );
+}
 
-const ToastClose = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseToast.Close>) => (
-  <BaseToast.Close
-    aria-label="Close"
-    className={cn(
-      "absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100",
-      className
-    )}
-    {...props}
-  >
-    <X className="size-4" />
-  </BaseToast.Close>
-);
-
-export {
-  ToastProvider,
-  ToastPortal,
-  ToastViewport,
-  Toast,
-  ToastContent,
-  ToastTitle,
-  ToastDescription,
-  ToastAction,
-  ToastClose,
-};
+export { Toaster };

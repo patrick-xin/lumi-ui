@@ -1,7 +1,6 @@
 "use client";
 
 import { Minus, Plus } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
 import {
   Autocomplete,
   AutocompleteContent,
@@ -55,6 +54,7 @@ import {
   SliderValue,
 } from "@/registry/ui/slider";
 import { Switch } from "@/registry/ui/switch";
+import { toast } from "@/registry/ui/toast";
 
 export function ProjectQuoteForm() {
   return (
@@ -62,28 +62,11 @@ export function ProjectQuoteForm() {
       aria-label="Request project quote"
       className="flex w-full max-w-lg flex-col gap-6 rounded-md border bg-card p-8 shadow-md"
       onFormSubmit={(formValues) => {
-        toast({
+        toast.success({
           title: "Quote Request Sent",
-          description: "We have received your project details:",
-          data: {
-            content: (
-              <div className="mt-2 rounded-md bg-muted p-4 text-sm">
-                {Object.entries(formValues).map(([key, value]) => (
-                  <div
-                    key={key}
-                    className="flex justify-between py-1 border-b border-white/10 last:border-0"
-                  >
-                    <span className="opacity-70 capitalize">
-                      {key.replace(/([A-Z])/g, " $1").trim()}
-                    </span>
-                    <span className="font-semibold text-right truncate max-w-[150px]">
-                      {String(value)}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ),
-          },
+          description: `We have received your project details: ${JSON.stringify(
+            formValues,
+          )}`,
         });
       }}
     >

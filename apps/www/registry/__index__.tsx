@@ -568,26 +568,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "toaster": {
-    name: "toaster",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
-    files:     [
-          {
-                "path": "registry/ui/toast.tsx",
-                "type": "registry:ui",
-                "target": ""
-          }
-    ],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/ui/toaster");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toaster";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "checkbox-group": {
     name: "checkbox-group",
     description: "",

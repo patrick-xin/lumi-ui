@@ -1,10 +1,10 @@
 "use client";
 
-import { toast } from "@/hooks/use-toast";
 import { Button } from "@/registry/ui/button";
 import { Checkbox } from "@/registry/ui/checkbox";
 import { Field, FieldLabel } from "@/registry/ui/field";
 import { Form } from "@/registry/ui/form";
+import { toast } from "@/registry/ui/toast";
 
 export function CheckboxFormDemo() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -12,8 +12,7 @@ export function CheckboxFormDemo() {
     const formData = new FormData(event.currentTarget);
     const isAgreed = formData.get("terms") === "on";
 
-    toast({
-      type: isAgreed ? "success" : "error",
+    toast.add({
       title: isAgreed ? "Agreed to terms" : "Did not agree",
       description: isAgreed
         ? "You have agreed to the terms and conditions."
