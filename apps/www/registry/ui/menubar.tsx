@@ -4,8 +4,10 @@ import * as React from "react";
 import { Menu as BaseMenu } from "@base-ui/react/menu";
 import { Menubar as BaseMenubar } from "@base-ui/react/menubar";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 import { cn } from "@/lib/utils";
+import { cva, VariantProps } from "class-variance-authority";
 
 function Menubar({
   className,
@@ -27,22 +29,16 @@ function MenubarMenu({ ...props }: React.ComponentProps<typeof BaseMenu.Root>) {
   return <BaseMenu.Root data-slot="menubar-menu" {...props} />;
 }
 
-function MenubarGroup({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Group>) {
-  return <BaseMenu.Group data-slot="menubar-group" {...props} />;
-}
-
 function MenubarPortal({
   ...props
 }: React.ComponentProps<typeof BaseMenu.Portal>) {
   return <BaseMenu.Portal data-slot="menubar-portal" {...props} />;
 }
 
-function MenubarRadioGroup({
+function MenubarBackdrop({
   ...props
-}: React.ComponentProps<typeof BaseMenu.RadioGroup>) {
-  return <BaseMenu.RadioGroup data-slot="menubar-radio-group" {...props} />;
+}: React.ComponentProps<typeof BaseMenu.Backdrop>) {
+  return <BaseMenu.Backdrop data-slot="menubar-backdrop" {...props} />;
 }
 
 function MenubarTrigger({
@@ -53,9 +49,10 @@ function MenubarTrigger({
     <BaseMenu.Trigger
       data-slot="menubar-trigger"
       className={cn(
-        "flex items-center rounded-sm px-2 py-1 text-sm font-medium data-[disabled]:opacity-50",
-        "focus-visible:bg-accent select-none outline-none",
+        "flex items-center rounded-sm px-2 py-1 text-sm font-medium outline-none select-none",
+        "focus-visible:bg-accent focus-visible:text-accent-foreground",
         "data-[popup-open]:bg-accent data-[popup-open]:text-accent-foreground",
+        "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
         className,
       )}
       {...props}
@@ -63,145 +60,88 @@ function MenubarTrigger({
   );
 }
 
-type MenuPopupProps = React.ComponentProps<typeof BaseMenu.Popup> & {
-  side?: React.ComponentProps<typeof BaseMenu.Positioner>["side"];
-  sideOffset?: React.ComponentProps<typeof BaseMenu.Positioner>["sideOffset"];
-  align?: React.ComponentProps<typeof BaseMenu.Positioner>["align"];
-  alignOffset?: React.ComponentProps<typeof BaseMenu.Positioner>["alignOffset"];
-  /**
-   * Whether to display the arrow pointing to the trigger.
-   * @default false
-   */
-  showArrow?: boolean;
-  /**
-   * Whether the menu's width should match the trigger's width.
-   * @default false
-   */
-  matchAnchorWidth?: boolean;
-};
+function MenubarPositioner({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseMenu.Positioner>) {
+  return (
+    <BaseMenu.Positioner
+      className={cn("relative", className)}
+      data-slot="menubar-positioner"
+      {...props}
+    />
+  );
+}
 
 function MenubarPopup({
   className,
-  align = "start",
-  alignOffset = -4,
-  sideOffset = 8,
   ...props
-}: MenuPopupProps) {
+}: React.ComponentProps<typeof BaseMenu.Popup>) {
   return (
-    <MenubarPortal>
-      <BaseMenu.Positioner
-        sideOffset={sideOffset}
-        align={align}
-        alignOffset={alignOffset}
-      >
-        <BaseMenu.Popup
-          data-slot="menubar-popup"
-          className={cn(
-            "p-1 min-w-40 bg-popover text-popover-foreground rounded-md outline outline-border dark:-outline-offset-1 shadow-md",
-            "animate-popup",
-            "data-[instant]:transition-none",
-            className,
-          )}
-          {...props}
-        />
-      </BaseMenu.Positioner>
-    </MenubarPortal>
-  );
-}
-
-function MenubarItem({
-  className,
-  inset,
-  variant = "default",
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Item> & {
-  inset?: boolean;
-  variant?: "default" | "destructive";
-}) {
-  return (
-    <BaseMenu.Item
-      data-slot="menubar-item"
-      data-inset={inset}
-      data-variant={variant}
-      className={cn(
-        "relative flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm",
-        "cursor-default outline-hidden select-none",
-        "focus:bg-accent focus:text-accent-foreground",
-        "data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "data-[inset]:pl-8",
-        className,
-      )}
+    <BaseMenu.Popup
+      className={cn("relative", className)}
+      data-slot="menubar-popup"
       {...props}
     />
   );
 }
 
-function MenubarCheckboxItem({
-  className,
-  children,
-  checked,
+function MenubarArrow({
   ...props
-}: React.ComponentProps<typeof BaseMenu.CheckboxItem>) {
+}: React.ComponentProps<typeof BaseMenu.Arrow>) {
   return (
-    <BaseMenu.CheckboxItem
-      data-slot="menubar-checkbox-item"
-      className={cn(
-        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-xs py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        className,
-      )}
-      checked={checked}
+    <BaseMenu.Arrow
+      data-slot="menubar-arrow"
+      className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180"
       {...props}
     >
-      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
-        <BaseMenu.CheckboxItemIndicator>
-          <CheckIcon className="size-4" />
-        </BaseMenu.CheckboxItemIndicator>
-      </span>
-      {children}
-    </BaseMenu.CheckboxItem>
+      <ArrowSvg />
+    </BaseMenu.Arrow>
   );
 }
 
-function MenubarRadioItem({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof BaseMenu.RadioItem>) {
-  return (
-    <BaseMenu.RadioItem
-      data-slot="menubar-radio-item"
-      className={cn(
-        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-xs py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        className,
-      )}
-      {...props}
-    >
-      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
-        <BaseMenu.RadioItemIndicator>
-          <CircleIcon className="size-2 fill-current" />
-        </BaseMenu.RadioItemIndicator>
-      </span>
-      {children}
-    </BaseMenu.RadioItem>
-  );
-}
+const menubarItemVariants = cva(
+  [
+    "flex items-center gap-2 py-1.5 px-3.5 text-sm",
+    "outline-none select-none cursor-default",
+    "highlight-on-active",
+    "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    "[&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
+  ],
+  {
+    variants: {
+      variant: {
+        default: "",
+        destructive: [
+          "text-destructive *:[svg]:!text-destructive",
+          "data-[highlighted]:text-destructive data-[highlighted]:before:bg-destructive/10 dark:data-[highlighted]:before:bg-destructive/20",
+        ],
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
 
-function MenubarLabel({
+type MenubarItemProps = React.ComponentProps<typeof BaseMenu.Item> &
+  VariantProps<typeof menubarItemVariants> & {
+    unstyled?: boolean;
+  };
+
+function MenubarItem({
   className,
-  inset,
+  variant = "default",
+  unstyled = false,
   ...props
-}: React.ComponentProps<typeof BaseMenu.GroupLabel> & {
-  inset?: boolean;
-}) {
+}: MenubarItemProps) {
   return (
-    <BaseMenu.GroupLabel
-      data-slot="menubar-label"
-      data-inset={inset}
+    <BaseMenu.Item
+      data-slot="menubar-item"
       className={cn(
-        "px-2 py-1.5 text-sm font-medium data-[inset]:pl-8",
-        className,
+        unstyled ? "" : menubarItemVariants({ variant }),
+        className
       )}
       {...props}
     />
@@ -215,9 +155,97 @@ function MenubarSeparator({
   return (
     <BaseMenu.Separator
       data-slot="menubar-separator"
-      className={cn("bg-border -mx-1 my-1 h-px", className)}
+      className={cn("bg-border my-1 h-px", className)}
       {...props}
     />
+  );
+}
+
+function MenubarGroup({
+  ...props
+}: React.ComponentProps<typeof BaseMenu.Group>) {
+  return <BaseMenu.Group data-slot="menubar-group" {...props} />;
+}
+
+function MenubarGroupLabel({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseMenu.GroupLabel>) {
+  return (
+    <BaseMenu.GroupLabel
+      data-slot="menubar-group-label"
+      className={cn(
+        "px-3 py-1 text-xs text-muted-foreground font-medium",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function MenubarRadioGroup({
+  ...props
+}: React.ComponentProps<typeof BaseMenu.RadioGroup>) {
+  return (
+    <BaseMenu.RadioGroup data-slot="menubar-radio-group" {...props} />
+  );
+}
+
+function MenubarRadioItem({
+  children,
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseMenu.RadioItem>) {
+  return (
+    <BaseMenu.RadioItem
+      data-slot="menubar-radio-item"
+      className={cn(className)}
+      {...props}
+    />
+  );
+}
+
+function MenubarCheckboxItem({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseMenu.CheckboxItem>) {
+  return (
+    <BaseMenu.CheckboxItem
+      data-slot="menubar-checkbox-item"
+      className={cn(className)}
+      {...props}
+    />
+  );
+}
+
+function MenubarSubMenu({
+  ...props
+}: React.ComponentProps<typeof BaseMenu.SubmenuRoot>) {
+  return <BaseMenu.SubmenuRoot data-slot="menubar-sub-menu" {...props} />;
+}
+
+function MenubarSubMenuTrigger({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof BaseMenu.SubmenuTrigger>) {
+  return (
+    <BaseMenu.SubmenuTrigger
+      data-slot="menubar-sub-menu-trigger"
+      className={cn(
+        "flex items-center gap-2 py-1.5 px-3.5 text-sm",
+        "outline-none select-none cursor-default",
+        "highlight-on-active",
+        "data-[popup-open]:relative data-[popup-open]:z-0 data-[popup-open]:before:bg-accent data-[popup-open]:text-accent-foreground data-[popup-open]:before:absolute data-[popup-open]:before:inset-x-1 data-[popup-open]:before:inset-y-0 data-[popup-open]:before:z-[-1] data-[popup-open]:before:rounded-sm",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
+        "data-[inset]:pl-8",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronRightIcon className="ml-auto size-4" />
+    </BaseMenu.SubmenuTrigger>
   );
 }
 
@@ -237,87 +265,151 @@ function MenubarShortcut({
   );
 }
 
-function MenubarSubMenu({
-  disabled,
+type MenubarContentProps = React.ComponentProps<typeof BaseMenu.Popup> & {
+  side?: BaseMenu.Positioner.Props["side"];
+  sideOffset?: BaseMenu.Positioner.Props["sideOffset"];
+  align?: BaseMenu.Positioner.Props["align"];
+  alignOffset?: BaseMenu.Positioner.Props["alignOffset"];
+  showArrow?: boolean;
+  matchAnchorWidth?: boolean;
+};
+
+
+function MenubarContent({
+  children,
+  className,
+  align = "start",
+  alignOffset = -4,
+  side = "bottom",
+  sideOffset = 8,
+  showArrow = false,
+  matchAnchorWidth = false,
   ...props
-}: React.ComponentProps<typeof BaseMenu.SubmenuRoot>) {
+}: MenubarContentProps) {
   return (
-    <BaseMenu.SubmenuRoot
-      disabled={disabled}
-      data-slot="menubar-sub"
-      {...props}
-    />
+    <MenubarPortal>
+      <BaseMenu.Positioner
+        sideOffset={sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        side={side}
+        className={cn(
+          matchAnchorWidth && "w-[var(--anchor-width)]",
+          "max-h-(--available-height)",
+        )}
+      >
+        <BaseMenu.Popup
+          data-slot="menubar-content"
+          className={cn(
+            "bg-popover text-popover-foreground rounded-sm shadow-md py-1",
+            "outline outline-1 outline-border dark:-outline-offset-1",
+            "animate-popup",
+            "min-w-48",
+            className,
+          )}
+          {...props}
+        >
+          {showArrow && <MenubarArrow />}
+          {children}
+        </BaseMenu.Popup>
+      </BaseMenu.Positioner>
+    </MenubarPortal>
   );
 }
 
-function MenubarSubMenuPopup({
+function MenubarSubMenuContent({
   align = "start",
   side = "right",
-  sideOffset = 8,
-  alignOffset = -4,
+  sideOffset = -4,
+  alignOffset = 0,
   ...props
-}: React.ComponentProps<typeof BaseMenu.Popup> & {
-  side?: React.ComponentProps<typeof BaseMenu.Positioner>["side"];
-  sideOffset?: React.ComponentProps<typeof BaseMenu.Positioner>["sideOffset"];
-  align?: React.ComponentProps<typeof BaseMenu.Positioner>["align"];
-  alignOffset?: React.ComponentProps<typeof BaseMenu.Positioner>["alignOffset"];
-}) {
+}: MenubarContentProps) {
   return (
-    <MenubarPopup
+    <MenubarContent
       side={side}
       sideOffset={sideOffset}
       align={align}
       alignOffset={alignOffset}
-      data-slot="menu-submenu-popup"
+      data-slot="menubar-sub-menu-content"
       {...props}
     />
   );
 }
 
-function MenubarSubMenuTrigger({
+function MenubarCheckboxItemContent({
   className,
-  inset,
   children,
+  checked,
   ...props
-}: React.ComponentProps<typeof BaseMenu.SubmenuTrigger> & {
-  inset?: boolean;
-}) {
+}: React.ComponentProps<typeof BaseMenu.CheckboxItem>) {
   return (
-    <BaseMenu.SubmenuTrigger
-      data-slot="menubar-sub-trigger"
-      data-inset={inset}
+    <BaseMenu.CheckboxItem
+      data-slot="menubar-checkbox-item-content"
       className={cn(
-        "flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none cursor-default",
-        "focus:bg-accent focus:text-accent-foreground",
-        "[&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "data-[inset]:pl-8",
-        "data-[popup-open]:bg-accent data-[popup-open]:text-accent-foreground",
+        "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
+        "outline-none select-none cursor-default",
+        "highlight-on-active",
+        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        className,
+      )}
+      checked={checked}
+      {...props}
+    >
+      <BaseMenu.CheckboxItemIndicator className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+        <CheckIcon className="size-4" />
+      </BaseMenu.CheckboxItemIndicator>
+      {children}
+    </BaseMenu.CheckboxItem>
+  );
+}
+
+function MenubarRadioItemContent({
+  children,
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseMenu.RadioItem>) {
+  return (
+    <BaseMenu.RadioItem
+      data-slot="menubar-radio-item-content"
+      className={cn(
+        "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
+        "outline-none select-none cursor-default",
+        "highlight-on-active",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
       {...props}
     >
+      <BaseMenu.RadioItemIndicator className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+        <CircleIcon className="size-2.5 fill-current" />
+      </BaseMenu.RadioItemIndicator>
       {children}
-      <ChevronRightIcon className="ml-auto h-4 w-4" />
-    </BaseMenu.SubmenuTrigger>
+    </BaseMenu.RadioItem>
   );
 }
 
 export {
   Menubar,
-  MenubarPortal,
   MenubarMenu,
   MenubarTrigger,
+  MenubarPortal,
+  MenubarBackdrop,
+  MenubarPositioner,
   MenubarPopup,
-  MenubarGroup,
-  MenubarSeparator,
-  MenubarLabel,
+  MenubarArrow,
   MenubarItem,
-  MenubarShortcut,
-  MenubarCheckboxItem,
+  MenubarSeparator,
+  MenubarGroup,
+  MenubarGroupLabel,
   MenubarRadioGroup,
   MenubarRadioItem,
+  MenubarCheckboxItem,
   MenubarSubMenu,
   MenubarSubMenuTrigger,
-  MenubarSubMenuPopup,
+  MenubarShortcut,
+  // Composite components
+  MenubarContent,
+  MenubarSubMenuContent,
+  MenubarCheckboxItemContent,
+  MenubarRadioItemContent,
 };

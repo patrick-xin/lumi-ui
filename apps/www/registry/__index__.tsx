@@ -2840,6 +2840,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "menubar-checkbox-group": {
+    name: "menubar-checkbox-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    files: [{
+      path: "components/examples/ui/menubar/menubar-checkbox-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/menubar/menubar-checkbox-group");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar-checkbox-group";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "menubar-demo": {
     name: "menubar-demo",
     description: "",
@@ -2853,6 +2871,60 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/menubar/menubar-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-nested-menus": {
+    name: "menubar-nested-menus",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    files: [{
+      path: "components/examples/ui/menubar/menubar-nested-menus.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/menubar/menubar-nested-menus");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar-nested-menus";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-style": {
+    name: "menubar-style",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    files: [{
+      path: "components/examples/ui/menubar/menubar-style.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/menubar/menubar-style");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar-style";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-with-group": {
+    name: "menubar-with-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    files: [{
+      path: "components/examples/ui/menubar/menubar-with-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/menubar/menubar-with-group");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar-with-group";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

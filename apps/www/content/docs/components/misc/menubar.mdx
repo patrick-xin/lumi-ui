@@ -1,0 +1,121 @@
+---
+title: Menubar
+description: A menu bar providing commands and options for your application.
+links:
+  doc: https://base-ui.com/react/components/menubar
+  api: https://base-ui.com/react/components/menubar#api-reference
+---
+
+<ComponentPreview name="menubar-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/menubar
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="menubar" title="menubar.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+     ```tsx
+  <Menubar>
+      <MenubarMenu>
+        <MenubarMenuTrigger />
+        <MenubarMenuContent>
+          <MenubarMenuItem />
+          <MenubarMenuItem>
+            <MenubarMenuShortcut />
+          </MenubarMenuItem>
+          <MenubarMenuSeparator />
+          <MenubarMenuGroup>
+            <MenubarMenuGroupLabel />
+          </MenubarMenuGroup>
+          <MenubarMenuRadioGroup>
+            <MenubarMenuRadioItemContent />
+          </MenubarMenuRadioGroup>
+          <MenubarMenuCheckboxItemContent />
+          <MenubarMenuSubMenu>
+            <MenubarMenuSubMenuTriggerGroup />
+            <MenubarMenuSubMenuContent>
+              {/* Submenu items */}
+            </MenubarMenuSubMenuContent>
+          </MenubarMenuSubMenu>
+        </MenubarMenuContent>
+      </MenubarMenu>
+  </Menubar>
+
+     ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+    ```tsx
+    <Menubar>
+      <MenubarMenuTrigger />
+      <MenubarMenuPortal>
+        <MenubarMenuBackdrop />
+        <MenubarMenuPositioner>
+          <MenubarMenuPopup>
+            <MenubarMenuArrow />
+            <MenubarMenuItem />
+            <MenubarMenuSeparator />
+            <MenubarMenuGroup>
+              <MenubarMenuGroupLabel />
+            </MenubarMenuGroup>
+            <MenubarMenuRadioGroup>
+              <MenubarMenuRadioItem />
+            </MenubarMenuRadioGroup>
+            <MenubarMenuCheckboxItem />
+            <MenubarMenuSubmenuRoot>
+              <MenubarMenuSubmenuTrigger />
+            </MenubarMenuSubmenuRoot>
+          </MenubarMenuPopup>
+        </MenubarMenuPositioner>
+      </MenubarMenuPortal>
+    </Menubar>
+
+```
+  </TabsPanel>
+</Tabs>
+
+## Features
+
+### With Group
+
+<ComponentPreview name="menubar-with-group" />
+
+### Nested Menus
+
+<ComponentPreview name="menubar-nested-menus" />
+
+### With Checkbox and Radio Group
+
+<ComponentPreview name="menubar-checkbox-group" />
+
+## Cookbook
+
+### Style Menubar
+
+<ComponentPreview name="menubar-style" />
