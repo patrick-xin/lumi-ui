@@ -8,22 +8,17 @@
 
 
 @utility animate-popup {
-  transform-origin: var(--transform-origin);
-  transition-property: opacity, scale, translate; 
-  transition-duration: 200ms;
+  @apply origin-[var(--transform-origin)] transition-[opacity,scale,translate] duration-200;
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
     scale: 0.95;
   }
-
 }
 
 @utility animate-dialog {
-  transform-origin: top;
-  transition-property: all;
-  transition-duration: 150ms;
+  @apply transition-all duration-150;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -33,9 +28,7 @@
 }
 
 @utility animate-backdrop {
-  transition-property: all;
-  transition-duration: 100ms;
-  transition-timing-function: linear; 
+  @apply transition-all duration-100;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -43,6 +36,13 @@
   }
 }
 
+@utility highlight-on-active {
+  @apply data-[highlighted]:relative data-[highlighted]:z-0;
+  
+  @apply data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm;
+
+  @apply data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground;
+}
 
 @utility container {
   @apply 3xl:max-w-screen-2xl mx-auto max-w-[1400px] px-4 lg:px-8;

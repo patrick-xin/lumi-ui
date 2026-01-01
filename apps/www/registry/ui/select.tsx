@@ -325,7 +325,7 @@ function SelectItemContent({
       className={cn(
         "grid items-center gap-2 py-1.5 pl-3.5 text-sm",
         "outline-none select-none cursor-default",
-        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
+        "highlight-on-active",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         indicatorPlacement === "start" && "grid-cols-[1rem_1fr] pr-8",
         indicatorPlacement === "end" && "grid-cols-[1fr_1rem] pr-3",

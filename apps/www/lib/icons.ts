@@ -7,6 +7,8 @@ import {
   type LucideProps,
   Palette,
   Play,
+  Scale,
+  SquareMousePointer,
 } from "lucide-react";
 
 export const IconMap: Record<string, React.ComponentType<LucideProps>> = {
@@ -16,6 +18,8 @@ export const IconMap: Record<string, React.ComponentType<LucideProps>> = {
   Diamond,
   Palette,
   Activity,
+  Scale,
+  SquareMousePointer,
   "Get Started": Book,
   Components: Diamond,
   "Form & Input": Diamond,

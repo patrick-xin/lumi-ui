@@ -94,10 +94,9 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
             <AutocompletePopup
               finalFocus={() => !isNavigatingRef.current}
               className={cn(
-                "relative bg-popover text-popover-foreground rounded outline outline-input animate-popup",
+                "relative bg-popover text-popover-foreground rounded outline outline-input animate-dialog",
                 "pointer-events-auto w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
                 "-translate-y-32 max-w-[var(--available-width)]",
-                "shadow-md shadow-primary/10 outline dark:-outline-offset-1 outline-primary/10",
               )}
             >
               <AutocompleteInputGroup
@@ -171,9 +170,9 @@ const CommandMenuTriggerButton = ({
   return (
     <Button
       onClick={handleOpenChange}
-      variant="outline"
+      variant="glow"
       className={cn(
-        "relative h-8 w-full justify-start font-medium shadow-none sm:pr-12 md:w-48 lg:w-56 xl:w-64",
+        "relative h-8 w-full justify-start sm:pr-12 md:w-48 lg:w-56 xl:w-64",
       )}
     >
       <span className="hidden lg:inline-flex text-muted-foreground">

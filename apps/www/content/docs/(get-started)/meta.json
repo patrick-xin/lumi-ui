@@ -3,9 +3,10 @@
   "defaultOpen": true,
   "pages": [
     "introduction",
+    "philosophies",
     "installation",
-    "composition",
     "animation-guide",
+    "highlights",
     "components"
   ]
 }

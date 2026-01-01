@@ -192,7 +192,7 @@ function AutocompleteItem({
       className={cn(
         "flex gap-2 py-1.5 pl-3.5 pr-8 text-sm",
         "select-none cursor-default outline-none",
-        "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
+        "highlight-on-active",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,

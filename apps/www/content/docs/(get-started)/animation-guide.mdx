@@ -37,7 +37,7 @@ Lumi UI approach:
 | :--- | :--- |
 | `animate-popup` | Used for Popovers, Dropdowns, Selects etc... |
 | `animate-dialog` | Used for Modals and Dialogs. |
-| `animate-backdrop` | Used for Overlays. |
+| `animate-backdrop` | Used for Backdrops. |
 
 See [Component Compatibility](#component-compatibility) below for details.
 
@@ -47,9 +47,7 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 
 ```css
 @utility animate-popup {
-  transform-origin: var(--transform-origin);
-  transition-property: opacity, scale, translate; 
-  transition-duration: 200ms;
+  @apply origin-[var(--transform-origin)] transition-[opacity,scale,translate] duration-200;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -59,9 +57,7 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 }
 
 @utility animate-dialog {
-  transform-origin: top;
-  transition-property: all;
-  transition-duration: 150ms;
+  @apply transition-all duration-150;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -71,47 +67,19 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 }
 
 @utility animate-backdrop {
-  transition-property: all;
-  transition-duration: 100ms;
-  transition-timing-function: linear; 
+  @apply transition-all duration-100;
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
   }
 }
-
 ```
-## Customization
-
-### Global Customization
-
-Control animations across your entire app by modifying CSS variables:
-
-```css
-@theme {
-  /* How long the open animation takes */
-  --duration: 200ms;
-  
-  /* How long the close animation takes (usually faster feels snappier) */
-  --duration-end: 100ms;
-
-  /* The "bounciness" of the opening (Ease Out) */
-  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
-  
-  /* The "speed" of the closing (Ease In) */
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
-}
-```
-
-Read more about customizations in [Tailwind CSS](https://tailwindcss.com/docs/transition-property).
 
 ### Component-Specific Overrides
 For unique animation needs, override the utility class.
 
 <ComponentPreview name="custom-animation-example" />
-
-<ComponentPreview name="custom-animation-example-fast" />
 
 ## Opting out
 
