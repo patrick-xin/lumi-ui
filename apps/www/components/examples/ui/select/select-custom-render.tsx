@@ -53,7 +53,7 @@ export function SelectCustomRenderDemo() {
   return (
     <Select items={statuses}>
       <SelectTriggerGroup
-        icon={<ChevronsUpDownIcon />}
+        indicatorIcon={<ChevronsUpDownIcon />}
         placeholder="Select a status"
       >
         {(val) => {

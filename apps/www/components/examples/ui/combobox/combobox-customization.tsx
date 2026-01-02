@@ -109,6 +109,7 @@ function ProjectStatusPicker() {
   return (
     <>
       <Combobox
+        autoHighlight
         items={statuses}
         itemToStringLabel={(status: ProjectStatus) => status.label}
         value={projectStatus}
@@ -394,6 +395,7 @@ function ProjectPriorityPicker() {
   return (
     <>
       <Combobox
+        autoHighlight
         items={priorities}
         itemToStringLabel={(priority) => priority.label}
         value={selectedPriority}

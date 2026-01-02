@@ -41,8 +41,8 @@ export const SelectInputGroupDemo = () => {
           <Select items={fruits}>
             <SelectTriggerGroup
               placeholder="Select a fruit"
-              iconPlacement="left"
-              icon={<ChevronsUpDownIcon />}
+              indicatorPlacement="start"
+              indicatorIcon={<ChevronsUpDownIcon />}
             />
             <SelectContent>
               {fruits.map((fruit) => (
@@ -66,7 +66,7 @@ export const SelectInputGroupDemo = () => {
           <Select items={fruits}>
             <SelectTriggerGroup
               placeholder="Select a fruit"
-              iconPlacement="left"
+              indicatorPlacement="start"
             />
             <SelectContent alignItemWithTrigger>
               {fruits.map((fruit) => (

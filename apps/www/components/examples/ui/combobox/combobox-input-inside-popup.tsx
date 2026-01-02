@@ -13,6 +13,7 @@ import {
   ComboboxTrigger,
   ComboboxValue,
 } from "@/registry/ui/combobox";
+import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupDemo() {
   return (
@@ -30,15 +31,16 @@ export function ComboboxInputInsidePopupDemo() {
         </ComboboxIcon>
       </ComboboxTrigger>
       <ComboboxContent>
-        <ComboboxInput
-          placeholder="Find member..."
-          variant="ghost"
-          className="border-b! rounded-b-none!"
-        />
+        <ComboboxInput placeholder="Find member..." variant="ghost" />
+        <Separator />
         <ComboboxEmpty>No member found.</ComboboxEmpty>
         <ComboboxList>
           {(member: TeamMember) => (
-            <ComboboxItemContent key={member.id} value={member}>
+            <ComboboxItemContent
+              indicatorPlacement="end"
+              key={member.id}
+              value={member}
+            >
               {member.label}
             </ComboboxItemContent>
           )}

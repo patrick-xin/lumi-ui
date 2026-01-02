@@ -204,8 +204,8 @@ type SelectTriggerGroupProps = Omit<
   "children"
 > & {
   size?: "default" | "sm";
-  icon?: React.ReactNode;
-  iconPlacement?: "left" | "right";
+  indicatorIcon?: React.ReactNode;
+  indicatorPlacement?: "start" | "end";
   placeholder?: string;
   children?: React.ComponentProps<typeof BaseSelect.Value>["children"];
 };
@@ -214,8 +214,8 @@ function SelectTriggerGroup({
   className,
   children,
   size = "default",
-  icon,
-  iconPlacement = "right",
+  indicatorIcon,
+  indicatorPlacement = "end",
   placeholder,
   ...props
 }: SelectTriggerGroupProps) {
@@ -231,7 +231,7 @@ function SelectTriggerGroup({
         "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
         "dark:data-[popup-open]:bg-input/50",
         "data-[size=default]:h-9 data-[size=sm]:h-8",
-        iconPlacement === "left" ? "px-2" : "px-3",
+        indicatorPlacement === "start" ? "px-2" : "px-3",
         className,
       )}
       {...props}
@@ -249,10 +249,10 @@ function SelectTriggerGroup({
           className={cn(
             "flex-none shrink-0 pointer-events-none",
             "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:opacity-50 [&_svg]:transition-all",
-            iconPlacement === "left" && "-order-1",
+            indicatorPlacement === "start" && "-order-1",
           )}
         >
-          {icon || <ChevronDownIcon />}
+          {indicatorIcon || <ChevronDownIcon />}
         </BaseSelect.Icon>
       }
     </BaseSelect.Trigger>
