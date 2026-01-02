@@ -5,7 +5,7 @@ import { toast } from "@/registry/ui/toast";
 
 export function ToastVariantDemo() {
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2">
       <Button
         onClick={() =>
           toast.add({
@@ -17,6 +17,7 @@ export function ToastVariantDemo() {
         Default
       </Button>
       <Button
+        variant="outline"
         onClick={() =>
           toast.success({
             title: "Event Created",
@@ -38,6 +39,7 @@ export function ToastVariantDemo() {
         Error
       </Button>
       <Button
+        variant="secondary"
         onClick={() =>
           toast.warning({
             title: "Your connection to the server is unstable",
@@ -47,6 +49,7 @@ export function ToastVariantDemo() {
         Warning
       </Button>
       <Button
+        variant="glow"
         onClick={() =>
           toast.info({
             title: "Event reminder",

@@ -4,13 +4,13 @@ import type * as React from "react";
 import { cn } from "@/lib/utils";
 
 const inputVariants = cva(
-  [
-    "bg-transparent w-full min-w-0 rounded-md shadow-xs border border-input transition-[color,box-shadow] outline-none",
-    "focus-visible:border-ring/30 focus-visible:ring-1 focus-visible:ring-ring/10 focus-visible:ring-offset-1 focus-visible:ring-offset-ring/5",
-    "placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground",
-    "disabled:cursor-not-allowed disabled:opacity-50",
-    "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-    "file:text-foreground file:inline-flex file:items-center file:h-full file:border-0 file:bg-transparent file:text-sm file:font-medium",
+[
+  "bg-transparent w-full min-w-0 rounded-md shadow-xs border border-input transition-[color,box-shadow] outline-none",
+  "focus-visible:border-ring/30 focus-visible:ring-1 focus-visible:ring-ring/10 focus-visible:ring-offset-1 focus-visible:ring-offset-ring/5",
+  "placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground",
+  "disabled:cursor-not-allowed disabled:opacity-50",
+  "aria-invalid:border-destructive/30 aria-invalid:ring-1 aria-invalid:ring-destructive/10 aria-invalid:ring-offset-1 aria-invalid:ring-offset-destructive/5",
+  "file:text-foreground file:inline-flex file:items-center file:h-full file:border-0 file:bg-transparent file:text-sm file:font-medium",
 ],
   {
     variants: {
@@ -22,7 +22,7 @@ const inputVariants = cva(
       variant:{
         default:"dark:bg-input/30",
         transparent:"bg-transparent",
-        ghost: "border-transparent shadow-none focus-visible:border-0 focus-visible:ring-0 transition-none focus-visible:ring-offset-0",
+        ghost: "border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 transition-none focus-visible:ring-offset-0",
       }
     },
     defaultVariants: {

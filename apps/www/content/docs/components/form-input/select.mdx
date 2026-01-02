@@ -161,8 +161,8 @@ A high-level trigger component that combines the `Trigger`, `Value`, and `Icon` 
 | :--- | :--- | :--- | :--- |
 | `size` | `"default" \| "sm"` | `"default"` | Controls the height and padding of the trigger. |
 | `placeholder` | `string` | `-` | Text to display when no value is selected. |
-| `icon` | `React.ReactNode` | `<ChevronDownIcon />` | The indicator icon. If not provided, defaults to a chevron. |
-| `iconPlacement` | `"left" \| "right"` | `"right"` | Positions the icon either at the start or end of the trigger. |
+| `indicatorIcon` | `React.ReactNode` | `<ChevronDownIcon />` | The indicator icon. If not provided, defaults to a chevron. |
+| `indicatorPlacement` | `"start" \| "end"` | `"end"` | Positions the indicator icon either at the start or end of the trigger. |
 | `children` | `ReactNode` | `-` | The selected value content (usually passed automatically by the Root). |
 | `className` | `string` | `-` | Additional CSS classes. |
 | `...props` | `BaseSelect.Trigger` | `-` | Passes all other props to the underlying `BaseSelect.Trigger`. |
@@ -194,8 +194,8 @@ A convenience component for list items. It combines the `Item`, `ItemText`, and 
 | :--- | :--- | :--- | :--- |
 | `value` | `string` | **Required** | The value of the item to be submitted when selected. |
 | `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the item. |
-| `icon` | `React.ReactNode` | `<CheckIcon />` | Custom icon to show when the item is selected. |
-| `iconPlacement` | `"left" \| "right"` | `"right"` | Positions the selection indicator icon. |
+| `indicatorIcon` | `React.ReactNode` | `<CheckIcon />` | Custom icon to show when the item is selected. |
+| `indicatorPlacement` | `"start" \| "end"` | `"end"` | Positions the selection indicator icon. |
 | `children` | `ReactNode` | `-` | The text label of the item. |
 | `className` | `string` | `-` | Additional CSS classes. |
 | `...props` | `BaseSelect.Item` | `-` | Passes all other props to the underlying `BaseSelect.Item`. |
