@@ -16,29 +16,6 @@ export function ToastDemo() {
       >
         Default
       </Button>
-      <Button
-        variant="destructive"
-        onClick={() =>
-          toast.error({
-            title: "Deleted",
-            description: "File permanently removed",
-          })
-        }
-      >
-        Delete
-      </Button>
-      <Button
-        variant="outline"
-        onClick={() =>
-          toast.promise(new Promise((resolve) => setTimeout(resolve, 2000)), {
-            loading: "Saving...",
-            success: "Saved successfully",
-            error: "Could not save",
-          })
-        }
-      >
-        Promise
-      </Button>
     </div>
   );
 }

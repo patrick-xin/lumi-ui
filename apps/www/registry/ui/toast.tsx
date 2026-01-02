@@ -56,7 +56,7 @@ const Icons = {
 };
 
 const toastVariants = cva(
-  "toast-root absolute w-full rounded-sm p-4 outline outline-1 shadow-lg transition-all select-none bg-popover text-popover-foreground",
+  "toast-root absolute w-full rounded-sm p-4 outline outline-1 shadow-lg transition-all select-none bg-popover text-popover-foreground dark:-outline-offset-1",
   {
     variants: {
       type: {
@@ -67,8 +67,8 @@ const toastVariants = cva(
           "outline-red-500/40 bg-red-50 text-red-900 dark:bg-red-950 dark:text-red-50",
         warning:
           "outline-yellow-500/40 bg-yellow-50 text-yellow-900 dark:bg-yellow-950 dark:text-yellow-50",
-        info: "outline-blue-500/40 bg-blue-50 text-blue-900 dark:bg-blue-950 dark:text-blue-50",
-        loading: "outline-accent",
+        info: "outline-sky-500/40 bg-sky-50 text-sky-900 dark:bg-sky-950 dark:text-sky-50",
+        loading: "outline-border",
       },
     },
     defaultVariants: {
@@ -90,12 +90,13 @@ export const toast = {
   promise: toastManager.promise,
   dismiss: toastManager.close,
   update: toastManager.update,
+  close: toastManager.close,
 };
 
 function Toaster({
   position = "bottom-right",
   swipeDirection = ["down", "right"],
-  limit = 1,
+  limit = 5,
 }: ToasterProps) {
   return (
     <BaseToast.Provider toastManager={toastManager} limit={limit}>
