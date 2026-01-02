@@ -1,6 +1,5 @@
 "use client";
 
-import { toast } from "@/hooks/use-toast";
 import { Button } from "@/registry/ui/button";
 import {
   Field,
@@ -9,14 +8,12 @@ import {
   FieldLabel,
 } from "@/registry/ui/field";
 import { Form } from "@/registry/ui/form";
+import { toast } from "@/registry/ui/toast";
 
 export default function OnFormSubmitForm() {
   const handleSubmit = (formValues: Record<string, string>) => {
-    // 1. NO need to call event.preventDefault() (handled by Base UI)
     const values = formValues;
-
-    // 2. Data is already an object
-    toast({
+    toast.success({
       title: "Success",
       description: `${JSON.stringify(values)} has been submitted!`,
     });

@@ -568,26 +568,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "toaster": {
-    name: "toaster",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
-    files:     [
-          {
-                "path": "registry/ui/toast.tsx",
-                "type": "registry:ui",
-                "target": ""
-          }
-    ],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/ui/toaster");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toaster";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "checkbox-group": {
     name: "checkbox-group",
     description: "",
@@ -1904,24 +1884,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "custom-animation-example-fast": {
-    name: "custom-animation-example-fast",
-    description: "",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [{
-      path: "components/examples/ui/custom-animation-example-fast.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/custom-animation-example-fast");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "custom-animation-example-fast";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "custom-animation-example": {
     name: "custom-animation-example",
     description: "",
@@ -2840,6 +2802,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "menubar-checkbox-group": {
+    name: "menubar-checkbox-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    files: [{
+      path: "components/examples/ui/menubar/menubar-checkbox-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/menubar/menubar-checkbox-group");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar-checkbox-group";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "menubar-demo": {
     name: "menubar-demo",
     description: "",
@@ -2853,6 +2833,60 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/menubar/menubar-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-nested-menus": {
+    name: "menubar-nested-menus",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    files: [{
+      path: "components/examples/ui/menubar/menubar-nested-menus.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/menubar/menubar-nested-menus");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar-nested-menus";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-style": {
+    name: "menubar-style",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    files: [{
+      path: "components/examples/ui/menubar/menubar-style.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/menubar/menubar-style");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar-style";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "menubar-with-group": {
+    name: "menubar-with-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["menubar"],
+    files: [{
+      path: "components/examples/ui/menubar/menubar-with-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/menubar/menubar-with-group");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar-with-group";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -3771,6 +3805,78 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/toast/toast-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toast-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "toast-height": {
+    name: "toast-height",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toast"],
+    files: [{
+      path: "components/examples/ui/toast/toast-height.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/toast/toast-height");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toast-height";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "toast-promise": {
+    name: "toast-promise",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toast"],
+    files: [{
+      path: "components/examples/ui/toast/toast-promise.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/toast/toast-promise");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toast-promise";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "toast-undo": {
+    name: "toast-undo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toast"],
+    files: [{
+      path: "components/examples/ui/toast/toast-undo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/toast/toast-undo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toast-undo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "toast-variant": {
+    name: "toast-variant",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toast"],
+    files: [{
+      path: "components/examples/ui/toast/toast-variant.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/toast/toast-variant");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toast-variant";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

@@ -81,4 +81,211 @@
 	}
 }
 
+@layer utilities {
+  /* -------------------------------------------------------------------------
+   * Viewport Configuration
+   * Defines global variables for sizing/spacing and responsive width.
+   * ----------------------------------------------------------------------- */
+  .toast-viewport {
+    --viewport-padding: 1rem;
+    --toast-width: 356px;
+    --toast-gap: 0.75rem;
+    --toast-peek: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .toast-viewport {
+      --viewport-padding: 2rem;
+      max-width: var(--toast-width);
+    }
+  }
+
+  /* -------------------------------------------------------------------------
+   * Viewport Positioning
+   * ----------------------------------------------------------------------- */
+  /* Bottom-Right */
+  .toast-viewport[data-position*="bottom"][data-position*="right"] {
+    bottom: var(--viewport-padding);
+    right: var(--viewport-padding);
+    left: auto;
+  }
+
+  /* Bottom-Left */
+  .toast-viewport[data-position*="bottom"][data-position*="left"] {
+    bottom: var(--viewport-padding);
+    left: var(--viewport-padding);
+    right: auto;
+  }
+
+  /* Top-Right */
+  .toast-viewport[data-position*="top"][data-position*="right"] {
+    top: var(--viewport-padding);
+    right: var(--viewport-padding);
+    left: auto;
+  }
+
+  /* Top-Left */
+  .toast-viewport[data-position*="top"][data-position*="left"] {
+    top: var(--viewport-padding);
+    left: var(--viewport-padding);
+    right: auto;
+  }
+
+ /* -------------------------------------------------------------------------
+   * Toast Root
+   * Core dimensions, transitions, z-index, and the height-clamping logic.
+   * ----------------------------------------------------------------------- */
+  .toast-root {    
+    /* Calculate stack visual params */
+    --toast-calc-height: var(--toast-frontmost-height, var(--toast-height));
+    --toast-scale: calc(max(0, 1 - (var(--toast-index) * 0.1)));
+    --toast-shrink: calc(1 - var(--toast-scale));
+    
+    /* Layout & Layering */
+    z-index: calc(1000 - var(--toast-index));
+    /* CRITICAL FIX: Clamp height to the frontmost toast so the stack looks clean */
+    height: var(--toast-calc-height); 
+
+    /* Animation config */
+    transition: 
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+      height 0.15s ease-out;
+  }
+
+  /* -------------------------------------------------------------------------
+   * Bottom
+   * Handles stacking math, entry/exit animations, and expansion for Bottom toasts.
+   * ----------------------------------------------------------------------- */
+  .toast-root[data-position*="bottom"] {
+    bottom: 0;
+    transform-origin: bottom center;
+
+    /* Stack Y calculation: moves down based on index, peek, and shrinking */
+    --transform-y: calc(
+      var(--toast-swipe-movement-y) - 
+      (var(--toast-index) * var(--toast-peek)) - 
+      (var(--toast-shrink) * var(--toast-calc-height))
+    );
+    
+    /* Expanded Y calculation: spreads out with full gaps */
+    --expanded-offset-y: calc(
+      (var(--toast-offset-y) * -1) - 
+      (var(--toast-index) * var(--toast-gap)) + 
+      var(--toast-swipe-movement-y)
+    );
+
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--transform-y)) scale(var(--toast-scale));
+  }
+
+  /* Bottom: Expanded State */
+  .toast-root[data-position*="bottom"][data-expanded] {
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--expanded-offset-y));
+    height: var(--toast-height); /* Reset height to show full content */
+  }
+
+  /* Bottom: Entry Animation */
+  .toast-root[data-position*="bottom"][data-starting-style] {
+    transform: translateY(150%);
+    opacity: 0;
+  }
+
+  /* Bottom: Exit Animation */
+  .toast-root[data-position*="bottom"][data-ending-style]:not([data-limited]):not([data-swipe-direction]) {
+    transform: translateY(150%);
+    opacity: 0;
+  }
+
+  /* -------------------------------------------------------------------------
+   * Top
+   * Handles stacking math, entry/exit animations, and expansion for Top toasts.
+   * ----------------------------------------------------------------------- */
+  .toast-root[data-position*="top"] {
+    top: 0;
+    transform-origin: top center;
+
+    /* Stack Y calculation: moves up based on index */
+    --transform-y: calc(
+      var(--toast-swipe-movement-y) + 
+      (var(--toast-index) * var(--toast-peek)) + 
+      (var(--toast-shrink) * var(--toast-calc-height))
+    );
+
+    /* Expanded Y calculation */
+    --expanded-offset-y: calc(
+      var(--toast-offset-y) + 
+      (var(--toast-index) * var(--toast-gap)) + 
+      var(--toast-swipe-movement-y)
+    );
+
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--transform-y)) scale(var(--toast-scale));
+  }
+
+  /* Top: Expanded State */
+  .toast-root[data-position*="top"][data-expanded] {
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--expanded-offset-y));
+    height: var(--toast-height); /* Reset height to show full content */
+  }
+
+  /* Top: Entry Animation */
+  .toast-root[data-position*="top"][data-starting-style] {
+    transform: translateY(-150%);
+    opacity: 0;
+  }
+
+  /* Top: Exit Animation (Natural Expiry) */
+  .toast-root[data-position*="top"][data-ending-style]:not([data-limited]):not([data-swipe-direction]) {
+    transform: translateY(-150%);
+    opacity: 0;
+  }
+
+  /* -------------------------------------------------------------------------
+   * Shared States & Swipe Gestures
+   * Handles opacity limits and swipe-to-dismiss transforms.
+   * ----------------------------------------------------------------------- */
+  .toast-root[data-limited],
+  .toast-root[data-ending-style] {
+    opacity: 0;
+  }
+
+  /* Swipe Vertical */
+  .toast-root[data-ending-style][data-swipe-direction="up"] {
+    transform: translateY(calc(var(--toast-swipe-movement-y) - 150%));
+  }
+  .toast-root[data-ending-style][data-swipe-direction="down"] {
+    transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
+  }
+
+  /* Swipe Horizontal (Collapsed Stack) */
+  .toast-root[data-ending-style][data-swipe-direction="left"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--transform-y));
+  }
+  .toast-root[data-ending-style][data-swipe-direction="right"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--transform-y));
+  }
+
+  /* Swipe Horizontal (Expanded Stack - Uses different Y offset) */
+  .toast-root[data-expanded][data-ending-style][data-swipe-direction="left"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--expanded-offset-y));
+  }
+  .toast-root[data-expanded][data-ending-style][data-swipe-direction="right"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--expanded-offset-y));
+  }
+
+  /* -------------------------------------------------------------------------
+   * Interaction Shim
+   * Creates an invisible gap filler to prevent hovering dead-zones between toasts.
+   * ----------------------------------------------------------------------- */
+  .toast-root::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: calc(var(--toast-gap) + 1px);
+    background: transparent;
+  }
+  .toast-root[data-position*="bottom"]::after { top: 100%; }
+  .toast-root[data-position*="top"]::after { bottom: 100%; } 
+
+}
 

@@ -1,7 +1,6 @@
 "use client";
 
 import type * as React from "react";
-import { toast } from "@/hooks/use-toast";
 import { Button } from "@/registry/ui/button";
 import {
   Field,
@@ -10,19 +9,15 @@ import {
   FieldLabel,
 } from "@/registry/ui/field";
 import { Form } from "@/registry/ui/form";
+import { toast } from "@/registry/ui/toast";
 
 export default function NativeSubmitForm() {
   const handleNativeSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    // 1. MUST prevent default browser reload
     event.preventDefault();
-
-    // 2. Extract data using FormData
     const formData = new FormData(event.currentTarget);
-
-    // 3. Convert to object manually to view it
     const values = Object.fromEntries(formData);
 
-    toast({
+    toast.success({
       title: "Success",
       description: `${values.username} has been submitted!`,
     });
