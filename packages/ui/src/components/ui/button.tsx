@@ -7,7 +7,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 const buttonVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 text-sm font-medium rounded-md whitespace-nowrap transition-all outline-none",
-    "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-2",
+    "focus-visible:border-ring/30 focus-visible:ring-2 focus-visible:ring-ring/10 focus-visible:ring-offset-1 focus-visible:ring-offset-ring/5",
     "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
     "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0",
     "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
@@ -25,6 +25,11 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        glow: [
+          "bg-transparent border hover:bg-accent dark:hover:bg-accent/30",
+          "shadow-md shadow-primary/10 dark:shadow-primary/10 dark:shadow-sm",
+        ],
+        unstyled: "bg-transparent hover:bg-transparent",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

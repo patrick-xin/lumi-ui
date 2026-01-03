@@ -1,0 +1,210 @@
+/* Popup */
+@utility animate-popup {
+  @apply origin-[var(--transform-origin)] transition-[opacity,scale,translate] duration-200;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.95;
+  }
+}
+
+/* Dialog */
+@utility animate-dialog {
+  @apply transition-all duration-150;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.9;
+  }
+}
+
+/* Backdrop */
+@utility animate-backdrop {
+  @apply transition-all duration-100;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+
+/* Active Highlight */
+@utility highlight-on-active {
+  @apply data-[highlighted]:relative data-[highlighted]:z-0;
+  
+  @apply data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm;
+
+  @apply data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground;
+}
+
+/* Toast */
+@layer utilities {
+  .toast-viewport {
+    --viewport-padding: 1rem;
+    --toast-width: 356px;
+    --toast-gap: 0.75rem;
+    --toast-peek: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .toast-viewport {
+      --viewport-padding: 2rem;
+      max-width: var(--toast-width);
+    }
+  }
+
+  /* Positions */
+  .toast-viewport[data-position*="bottom"][data-position*="right"] {
+    bottom: var(--viewport-padding);
+    right: var(--viewport-padding);
+    left: auto;
+  }
+  .toast-viewport[data-position*="top"][data-position*="right"] {
+    top: var(--viewport-padding);
+    right: var(--viewport-padding);
+    left: auto;
+  }
+  .toast-viewport[data-position*="bottom"][data-position*="left"] {
+    bottom: var(--viewport-padding);
+    left: var(--viewport-padding);
+    right: auto;
+  }
+  .toast-viewport[data-position*="top"][data-position*="left"] {
+    top: var(--viewport-padding);
+    left: var(--viewport-padding);
+    right: auto;
+  }
+  .toast-viewport[data-position*="bottom"][data-position*="center"] {
+    @apply mx-auto;
+    bottom: var(--viewport-padding);
+  }
+
+  .toast-viewport[data-position*="top"][data-position*="center"] {
+    @apply mx-auto;
+    top: var(--viewport-padding);
+  }
+
+  /* 
+     TOAST ROOT
+  */
+  .toast-root {    
+    --toast-calc-height: var(--toast-frontmost-height, var(--toast-height));
+    --toast-scale: calc(max(0, 1 - (var(--toast-index) * 0.1)));
+    --toast-shrink: calc(1 - var(--toast-scale));
+  
+    height: var(--toast-calc-height); 
+
+    transition: 
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+      height 0.15s ease-out;
+
+    z-index: calc(1000 - var(--toast-index));
+  }
+
+  /* Bottom */
+  .toast-root[data-position*="bottom"] {
+    bottom: 0;
+    transform-origin: bottom center;
+
+    --transform-y: calc(
+      var(--toast-swipe-movement-y) - 
+      (var(--toast-index) * var(--toast-peek)) - 
+      (var(--toast-shrink) * var(--toast-calc-height))
+    );
+    
+    --expanded-offset-y: calc(
+      (var(--toast-offset-y) * -1) - 
+      (var(--toast-index) * var(--toast-gap)) + 
+      var(--toast-swipe-movement-y)
+    );
+
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--transform-y)) scale(var(--toast-scale));
+  }
+
+  /* Bottom Expanded */
+  .toast-root[data-position*="bottom"][data-expanded] {
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--expanded-offset-y));
+    height: var(--toast-height); 
+  }
+
+  /* Top */
+  .toast-root[data-position*="top"] {
+    top: 0;
+    transform-origin: top center;
+
+    --transform-y: calc(
+      var(--toast-swipe-movement-y) + 
+      (var(--toast-index) * var(--toast-peek)) + 
+      (var(--toast-shrink) * var(--toast-calc-height))
+    );
+
+    --expanded-offset-y: calc(
+      var(--toast-offset-y) + 
+      (var(--toast-index) * var(--toast-gap)) + 
+      var(--toast-swipe-movement-y)
+    );
+
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--transform-y)) scale(var(--toast-scale));
+  }
+
+  /* Top: Expanded */
+  .toast-root[data-position*="top"][data-expanded] {
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--expanded-offset-y));
+    height: var(--toast-height); /* Reset height on expand */
+  }
+
+  /* Animations & Swipe */
+  .toast-root[data-position*="bottom"][data-starting-style],
+  .toast-root[data-position*="bottom"][data-ending-style]:not([data-limited]):not([data-swipe-direction]) {
+    transform: translateY(150%);
+    opacity: 0;
+  }
+
+  .toast-root[data-position*="top"][data-starting-style],
+  .toast-root[data-position*="top"][data-ending-style]:not([data-limited]):not([data-swipe-direction]) {
+    transform: translateY(-150%);
+    opacity: 0;
+  }
+
+  .toast-root[data-limited],
+  .toast-root[data-ending-style] {
+   opacity: 0;
+  }
+
+  .toast-root[data-ending-style][data-swipe-direction="up"] {
+    transform: translateY(calc(var(--toast-swipe-movement-y) - 150%));
+  }
+  .toast-root[data-ending-style][data-swipe-direction="down"] {
+    transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
+  }
+  .toast-root[data-ending-style][data-swipe-direction="left"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--transform-y));
+  }
+  .toast-root[data-ending-style][data-swipe-direction="right"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--transform-y));
+  }
+
+  /* Expanded Swipe */
+  .toast-root[data-expanded][data-ending-style][data-swipe-direction="left"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--expanded-offset-y));
+  }
+  .toast-root[data-expanded][data-ending-style][data-swipe-direction="right"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--expanded-offset-y));
+  }
+
+  /* Ghost element for hover interaction area */
+  .toast-root::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: calc(var(--toast-gap) + 1px);
+    background: transparent;
+  }
+  .toast-root[data-position*="bottom"]::after { top: 100%; }
+  .toast-root[data-position*="top"]::after { bottom: 100%; }
+}
+

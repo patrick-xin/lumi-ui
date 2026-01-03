@@ -106,7 +106,7 @@ export function HeroSection() {
                 <Button
                   size="lg"
                   nativeButton={false}
-                  variant="ghost"
+                  variant="glow"
                   render={
                     <Link href="/docs/components">
                       <span className="text-nowrap">Browser components</span>

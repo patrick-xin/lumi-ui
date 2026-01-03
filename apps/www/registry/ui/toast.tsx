@@ -111,25 +111,51 @@ const toast = {
     stackedManager.add({ ...getOptions(options), type: "warning" }),
   info: (options?: ToastOptions) =>
     stackedManager.add({ ...getOptions(options), type: "info" }),
-  promise: stackedManager.promise,
-  dismiss: stackedManager.close,
+  promise: <Value,>(
+    promise: Promise<Value>, 
+    options: {
+      loading: ToastOptions | string;
+      success: ToastOptions | string | ((value: Value) => ToastOptions | string);
+      error: ToastOptions | string | ((error: Error) => ToastOptions | string);
+    }
+  ) => {
+    const normalize = (opt: ToastOptions | string) => 
+      typeof opt === "string" ? { title: opt } : getOptions(opt);
+
+    return stackedManager.promise(promise, {
+      loading: normalize(options.loading),
+      success: (val) => {
+        const resolved = typeof options.success === "function" ? options.success(val) : options.success;
+        return normalize(resolved);
+      },
+      error: (err) => {
+        const resolved = typeof options.error === "function" ? options.error(err) : options.error;
+        return normalize(resolved);
+      }
+    });
+  },
   update: (id: string, options?: ToastUpdateOptions) =>
     stackedManager.update(id, getOptions(options)),
-  close: stackedManager.close,
+  close: (id: string) => {
+    stackedManager.close(id);
+    anchoredManager.close(id);
+  },
   anchor: (
     anchor: HTMLElement | null,
-    options?: Omit<ToastManagerAddOptions<ToastProps>, "positionerProps"> & {
+    options?: Omit<ToastOptions, "positionerProps"> & {
       sideOffset?: TooltipPositionerProps["sideOffset"];
       side?: TooltipPositionerProps["side"];
     },
   ) => {
-    if (!anchor) return;
-    anchoredManager.add({
-      ...options,
+    if (!anchor) return "";
+    const { sideOffset, side, ...rest } = options || {};
+    const normalized = getOptions(rest);
+    return anchoredManager.add({
+      ...normalized,
       positionerProps: {
         anchor,
-        sideOffset: options?.sideOffset ?? 8,
-        side: options?.side ?? "bottom",
+        sideOffset: sideOffset ?? 8,
+        side: side ?? "bottom",
       },
     });
   },
@@ -201,15 +227,15 @@ const ToastArrow = (props: BaseToast.Arrow.Props) => {
 const Toaster = ({
   position = "bottom-right",
   swipeDirection = ["down", "right"],
-  limit = 5,
+  limit = 3,
 }: ToasterProps) => {
   return (
     <>
-      <BaseToast.Provider toastManager={anchoredManager}>
-        <AnchoredToast />
-      </BaseToast.Provider>
       <BaseToast.Provider toastManager={stackedManager} limit={limit}>
         <StackedToast position={position} swipeDirection={swipeDirection} />
+      </BaseToast.Provider>
+      <BaseToast.Provider toastManager={anchoredManager}>
+        <AnchoredToast />
       </BaseToast.Provider>
     </>
   );
@@ -282,7 +308,6 @@ const StackedToast = ({
                           </ToastDescription>
                         )}
                       </div>
-
                       {toast.actionProps && (
                         <ToastAction
                           className={cn(
@@ -293,7 +318,6 @@ const StackedToast = ({
                           {toast.actionProps.children}
                         </ToastAction>
                       )}
-
                       {toast.data?.closable && (
                         <ToastClose
                           className={cn(
@@ -331,6 +355,7 @@ const AnchoredToast = () => {
     <BaseToast.Portal>
       <ToastViewport className="fixed inset-0 pointer-events-none">
         {toasts.map((toast) => {
+          const isCustomContent = toast.data?.customContent;
           return (
             <BaseToast.Positioner
               data-slot="toast-positioner"
@@ -342,20 +367,23 @@ const AnchoredToast = () => {
                 data-slot="toast-root"
                 toast={toast}
                 className={cn(
-                  toastVariants({ type: "default" }),
-                  "w-max pointer-events-auto py-2 px-3 text-sm flex items-center gap-2",
-                  "data-[starting-style]:opacity-0 data-[starting-style]:scale-95",
-                  "data-[ending-style]:opacity-0 data-[ending-style]:scale-95",
-                  "transition-all duration-200",
+                  !isCustomContent && toastVariants({ type: "default" }),
+                  "pointer-events-auto animate-popup",
                 )}
               >
-                <ToastArrow />
-                <ToastContent className="flex flex-col gap-1">
-                  {toast.title && <ToastTitle>{toast.title}</ToastTitle>}
-                  {toast.description && (
-                    <ToastDescription>{toast.description}</ToastDescription>
-                  )}
-                </ToastContent>
+                {isCustomContent ? (
+                  toast.data.customContent
+                ) : (
+                  <>
+                    <ToastArrow />
+                    <ToastContent className="flex flex-col py-2 px-3 gap-2">
+                      {toast.title && <ToastTitle>{toast.title}</ToastTitle>}
+                      {toast.description && (
+                        <ToastDescription>{toast.description}</ToastDescription>
+                      )}
+                    </ToastContent>
+                  </>
+                )}
               </BaseToast.Root>
             </BaseToast.Positioner>
           );
@@ -371,5 +399,6 @@ export {
   ToastDescription,
   ToastTitle,
   ToastAction,
+  ToastArrow,
   toast,
 };

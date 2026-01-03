@@ -48,7 +48,7 @@ const buttonVariants = cva(
   },
 );
 
-type ButtonProps = BaseButton.Props &
+type ButtonProps = React.ComponentProps<typeof BaseButton> &
   VariantProps<typeof buttonVariants> & {
     isLoading?: boolean;
   };

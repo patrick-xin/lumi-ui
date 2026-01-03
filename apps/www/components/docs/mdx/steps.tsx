@@ -13,8 +13,9 @@ export function Steps({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-interface StepProps extends React.HTMLAttributes<HTMLDivElement> {
-  title: string;
+interface StepProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  title: React.ReactNode;
 }
 
 export function Step({ title, className, children, ...props }: StepProps) {

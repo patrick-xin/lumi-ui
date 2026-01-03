@@ -64,7 +64,7 @@ export function ToastCustomDemo() {
                         </div>
                       ),
                     });
-                    toast.dismiss(id);
+                    toast.close(id);
                   }}
                 >
                   No, thanks!
