@@ -1,5 +1,7 @@
 import { findNeighbour } from "fumadocs-core/page-tree";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
+import { use } from "react";
 import { DocsAritcleFooter } from "@/components/docs/docs-article-footer";
 import { DocsAritcleHeader } from "@/components/docs/docs-article-header";
 import { Callout } from "@/components/docs/mdx/call-out";
@@ -7,13 +9,14 @@ import { DocsToc } from "@/components/docs/toc";
 import { source } from "@/lib/source";
 import { absoluteUrl } from "@/lib/utils";
 import { mdxComponents } from "@/mdx-components";
-
 export const revalidate = false;
-export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return source.generateParams();
+  return source.generateParams().map((param) => ({
+    slug: param.slug,
+    locale: param.lang,
+  }));
 }
 
 export async function generateMetadata(props: {
@@ -65,13 +68,13 @@ export async function generateMetadata(props: {
 }
 
 interface PageProps {
-  params: Promise<{ slug?: string[] }>;
+  params: Promise<{ locale: string; slug?: string[] }>;
 }
 
-export default async function Page(props: PageProps) {
-  const params = await props.params;
-  const page = source.getPage(params.slug);
-
+export default function Page(props: PageProps) {
+  const params = use(props.params);
+  setRequestLocale(params.locale);
+  const page = source.getPage(params.slug, params.locale);
   if (!page) {
     notFound();
   }
@@ -79,7 +82,9 @@ export default async function Page(props: PageProps) {
   const doc = page.data;
   const MDX = doc.body;
   const links = doc.links;
-  const neighbours = findNeighbour(source.pageTree, page.url, {
+  const tree = source.getPageTree(params.locale);
+
+  const neighbours = findNeighbour(tree, page.url, {
     separateRoot: true,
   });
 

@@ -1,0 +1,115 @@
+---
+title: 动画系统
+description: 了解 Lumi UI 的动画系统。
+icon: Activity
+---
+
+Lumi UI 提供了一套流畅的动画系统，我们沿用了[Base UI](https://base-ui.com/react/handbook/animation) 的动画系统，使用 **CSS 过渡（Transitions）** 而非传统的 CSS 动画（Keyframes），从而创造出更灵敏、更接近原生体验的效果，同时保持代码的简洁与可维护性。
+
+## 核心理念
+
+### 跨组件的一致性
+通过将动画逻辑集中到共享的`@utility`中，你的整个应用能够保持统一的动效语言。这确保了每一个弹出框、模态框和下拉菜单在动效感受上都物理一致。
+
+### 利用 CSS 过渡实现原生感
+与大多数使用 CSS 动画（一旦开始就必须播放完成）的库不同，Lumi UI 使用了能追踪元素状态的 CSS 过渡。这意味着动画可以在播放中途平滑地反转方向，从而避免用户在快速交互时感受到“生硬跳变”。
+
+### 简洁、极简的代码
+用单一的`utility`替代冗长的动画类：
+
+传统方式：
+```tsx
+<PopoverPrimitive.Popup 
+  className="data-[state=open]:animate-in data-[state=closed]:animate-out 
+    data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 
+    data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 ..." />
+```
+
+Lumi UI 方式：
+```tsx
+<BasePopover.Popup className="animate-popup ..." />
+```
+
+## 可用的动画类
+
+| 类名 | 用途 |
+| :--- | :--- |
+| `animate-popup` | 用于弹出框、下拉菜单、选择器等。 |
+| `animate-dialog` | 用于模态框和对话框。 |
+| `animate-backdrop` | 用于背景遮罩层。 |
+
+详情见下文[组件兼容性](#组件兼容性)部分。
+
+## 安装与设置
+
+如果你已通过 CLI 安装了 [init](/docs/installation) 命令，可以跳过本节。如果是手动安装，请将以下 CSS 添加到你的项目中。
+
+```css
+@utility animate-popup {
+  @apply origin-[var(--transform-origin)] transition-[opacity,scale,translate] duration-200;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.95;
+  }
+}
+
+@utility animate-dialog {
+  @apply transition-all duration-150;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.9;
+  }
+}
+
+@utility animate-backdrop {
+  @apply transition-all duration-100;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+```
+
+### 组件级覆盖
+如果有独特的动画需求，你可以直接覆盖这些工具类。
+
+<ComponentPreview name="custom-animation-example" />
+
+## 如何不使用默认动画
+
+移除 `animate-popup`、`animate-dialog` 或 `animate-backdrop` 工具类，并使用标准的 Tailwind 类来获得完全的控制权：
+
+```tsx
+<PopoverContent
+  className="data-[ending-style]:scale-90 data-[ending-style]:opacity-0 
+  data-[starting-style]:scale-90 data-[starting-style]:opacity-0 
+  origin-[var(--transform-origin)] transition-[transform,scale,opacity]"
+/>
+```
+```tsx
+<DialogContent
+  className="transition-all duration-150 data-[ending-style]:scale-90 
+  data-[ending-style]:opacity-0 data-[starting-style]:scale-90 
+  data-[starting-style]:opacity-0"
+/>
+```
+```tsx
+<DialogBackdrop className="transition-all duration-100 
+data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
+```
+
+## 组件兼容性
+
+使用 `animate-popup` 的组件：
+- 表单输入：[组合框](/docs/components/form-input/combobox) | [选择器](/docs/components/form-input/select)
+- 浮层与对话框：[上下文菜单](/docs/components/overlays-dialogs/context-menu) | [下拉菜单](/docs/components/overlays-dialogs/dropdown-menu) | [弹出框](/docs/components/overlays-dialogs/popover) | [预览卡片](/docs/components/overlays-dialogs/preview-card) | [工具提示](/docs/components/overlays-dialogs/tooltip)
+- 导航：[菜单栏](/docs/components/layout-nav/menubar)
+
+---
+
+使用 `animate-dialog` 和 `animate-backdrop` 的组件：[对话框](/docs/components/overlays-dialogs/dialog) | [警示对话框](/docs/components/overlays-dialogs/alert-dialog)

@@ -1,0 +1,47 @@
+---
+title: 安装指南
+description: Lumi UI 使用 `shadcn/ui` CLI 来管理依赖和安装组件。
+icon: Play
+---
+
+<Steps>
+  <Step title="初始化项目并安装基础主题">
+    在你的终端中运行以下命令：
+
+    ```bash
+    npx shadcn@latest init https://lumiui.dev/r/init.json
+    ```
+
+    这条命令会初始化你的项目，安装必要的依赖，并设置 Lumi UI 的基础主题。它还会在你的全局样式中配置一个必要的 CSS 隔离规则（例如 `root:isolate`）。
+  </Step>
+
+  <Step title="配置 Lumi UI 组件源">
+    更新你的 `component.json` 文件，加入 Lumi UI 的组件源配置。这样你就能通过 `npx shadcn-ui add` 命令来添加 Lumi UI 组件了。
+
+    在配置中添加以下内容：
+
+    ```json title="component.json" {3-5}
+    {
+      // ... 其他配置
+      "registries": {
+        "@lumi-ui": "https://lumiui.dev/r/{name}.json"
+      }
+      // ...
+    }
+    ```
+  </Step>
+
+  <Step title="添加根布局包装器">
+    为了让第一步中配置的样式作用域和隔离规则正确生效，你需要用一个带有 `root` 类名的 `div` 包裹住应用的主要内容。
+
+    更新你的主布局文件（例如 `layout.tsx` 或类似文件），如下所示：
+
+    ```tsx title="layout.tsx" {2}
+      <body>
+        <div className="root">{children}</div>
+      </body>
+    ```
+
+    这一步确保了所有 Lumi UI 的样式都能被正确地限定作用域，并与你的应用其他部分隔离。更多细节可以参考 Base UI 关于 [Portals](https://base-ui.com/react/overview/quick-start#portals) 的文档。
+  </Step>
+</Steps>

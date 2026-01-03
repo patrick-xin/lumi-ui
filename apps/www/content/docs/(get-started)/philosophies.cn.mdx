@@ -1,0 +1,235 @@
+---
+title: 设计理念
+description: 这些架构决策让 Lumi UI 变得可靠、易访问，并且对 AI 友好。
+icon: Scale
+---
+
+import { Layers, Zap, Cpu, FileText } from "lucide-react";
+
+本文档旨在解释 Lumi UI 设计背后的“为什么”。无论你是在评估这个库、打算贡献代码，还是单纯对我们的设计取舍感到好奇，这里都有你想要的答案。
+
+## 双层次架构
+
+大多数组件库都强迫你做一个选择：要么使用开箱即用但不够灵活的高阶组件，要么使用功能强大但上手缓慢的基础组件。我们拒绝这种非此即彼的困局。
+
+### 为什么需要两个层次？
+
+开发工作流本身就存在不同的节奏：
+
+**原型阶段：** 你追求极速交付功能。此时你并不关心布局细节——你只想要一个 *马上能用的下拉框*。纠结于 DOM 结构纯粹是浪费时间。
+
+**打磨阶段：** 你需要像素级的精确控制。标准布局无法满足你的设计。这时你愿意用速度换取精度。
+
+Lumi UI 通过为每个组件提供两套不同的 API 来同时适应这两种模式：
+
+### 组合组件 = 追求速度
+预先组装好的组件，将结构、样式和逻辑打包成一个导入。它们帮你处理了诸如传送门（portals）、定位和默认布局等样板代码。
+
+**代价：** 你接受我们在结构和样式上的“预设方案”，以换取不必思考这些问题的自由。
+
+**最适合：** MVP（最小可行产品）、内部工具、保持一致性，以及 80% 的常见使用场景。
+
+### 基础组件 = 追求控制
+它们是 Base UI 的轻量封装，提供状态管理、无障碍访问和键盘导航——但**不强制任何视觉布局**。你可以随心所欲地组合它们。
+
+**代价：** 你需要编写更多代码，但能获得对 DOM 结构和样式的完全控制权。
+
+**最适合：** 独特的设计、复杂的交互，以及所有不符合标准模式的组件。
+
+### 为什么不是二选一？
+
+我们考虑过几种替代方案：
+
+1.  **只提供组合组件：** 这会限制创造力。当开发者遇到瓶颈时，他们只能 fork 代码或放弃使用这个库。
+2.  **只提供基础组件：** 这会拖慢常规任务的进度。每个下拉菜单都需要 20 多行样板代码。
+
+双层次架构为你提供了一个“逃生舱口”，同时又不必放弃快速通道。
+
+## 为 AI 协同开发而设计
+
+现代开发是人机协作。我们优化了 Lumi UI 的结构，让人工智能助手能在第一次尝试时就生成正确且符合习惯的代码。
+
+### 扁平的语义化导出
+
+我们扁平化了导出结构，确保每个组件都可以在根级别直接访问：
+
+```tsx
+// AI 友好型
+import { ComboboxInput, ComboboxItem, ComboboxPortal } from '@/components/ui/combobox'
+
+// 嵌套命名空间 - AI 容易困惑
+import { Combobox } from '@base-ui/react/combobox'
+// AI 现在需要猜测：是 Combobox.Input？Combobox.Item？还是 ComboboxInput？
+```
+
+**为什么这很重要：**
+- 减少 AI 上下文窗口中的令牌（token）消耗
+- 让组件关系在导入语句中一目了然
+- 消除自动补全建议的歧义
+- 保持你的项目结构清晰简单
+
+### 组合组件即活文档
+
+我们的组合组件本身就是**可执行的文档**。当 AI 阅读你的代码库时，它看到的不仅是函数签名——它能看到完整、可运行的参考实现。
+
+```tsx
+// 这段代码教会 AI：“这就是 ComboboxPortal、ComboboxPositioner 和 ComboboxPopup 的组合用法”
+function ComboboxContent({
+  className,
+  children,
+  sideOffset = 6,
+  align = "start",
+  matchAnchorWidth = true,
+  positionerAnchor,
+  ...props
+}: React.ComponentProps<typeof BaseCombobox.Popup> & {
+  sideOffset?: BaseCombobox.Positioner.Props["sideOffset"];
+  align?: BaseCombobox.Positioner.Props["align"];
+  matchAnchorWidth?: boolean;
+  positionerAnchor?: React.RefObject<HTMLDivElement | null>;
+}) {
+  return (
+    <BaseCombobox.Portal data-slot="combobox-portal">
+      <BaseCombobox.Positioner
+        data-slot="combobox-positioner"
+        sideOffset={sideOffset}
+        align={align}
+        anchor={positionerAnchor}
+      >
+        <BaseCombobox.Popup
+          data-slot="combobox-content"
+          className={cn(
+            "bg-popover text-popover-foreground rounded-sm shadow-md",
+            "outline outline-1 outline-border dark:-outline-offset-1",
+            "overflow-hidden overflow-y-auto",
+            "max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))]",
+            "animate-popup",
+            matchAnchorWidth && "w-[var(--anchor-width)]",
+            className,
+          )}
+          {...props}
+        >
+          {children}
+        </BaseCombobox.Popup>
+      </BaseCombobox.Positioner>
+    </BaseCombobox.Portal>
+  );
+}
+```
+
+AI 实际上是在你的项目上下文中通过示例学习，这减少了其“幻觉”（胡编乱造）并提高了首次尝试的准确率。
+
+### 稳固的逻辑模块
+
+我们将基础组件设计为**稳定的构建块**。AI 助手应该使用我们的基础组件在你的应用文件中构建新功能，而不是试图修改我们的核心组件逻辑。
+
+**我们的约定：** 我们的基础组件处理复杂部分（无障碍、状态、键盘导航）。你的代码负责组合与样式。这种清晰的边界让人机协作更加可靠。
+
+### 详尽的文档
+
+我们为每个组件都提供了带有实用示例的详细文档和 `复制` 按钮。你可以将它们直接粘贴到你喜欢的 LLM 中开始对话。
+
+## “命中测试”哲学
+
+这是我们贯穿 Lumi UI 的一个特定 UX 模式，旨在创建“容错性”更高的交互区域。
+
+### 问题所在
+
+如果将悬停高亮（例如背景色）直接应用到带有内边距（padding）的项目上，可点击/可悬停的区域在视觉上就会缩小。这会带来不够友好的用户体验。
+
+### 我们的解决方案
+
+我们使用**伪元素**来分离视觉高亮层和交互容器：
+
+```css
+data-[highlighted]:relative data-[highlighted]:z-0
+data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm
+data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground
+```
+
+**结果：** 整行都是可点击的（优秀的 UX），同时视觉高亮层是内嵌且有圆角的（优秀的设计）。这个模式出现在 `ComboboxItem`、`DropdownMenuItem`、`ListboxOption` 等类似的组件中。
+
+点击下拉项**边缘**看看效果差异。
+
+<ComponentPreview name="highlight-comparison" />
+
+有关实现细节和定制方法，请参阅 [命中测试与高亮](/docs/highlights)。
+
+## 统一的设计语言
+
+Base UI 提供了行为基础，而我们提供了视觉一致性。
+
+### 工具类模式
+
+我们在 Tailwind 中使用**通用工具类**，以确保跨组件的样式一致性。这意味着除非你显式覆盖，否则每个组件看起来都一样。
+
+- **动画：** 所有交互元素都使用全局配置的动画工具类（`animate-popup`、`animate-dialog`、`animate-backdrop`）。这确保了从简单的工具提示到复杂的模态框，整个应用中的过渡动画都具有协调感。
+
+- **高亮元素：** 所有交互元素都使用全局配置的高亮工具类（`highlight-on-active`）。
+
+**为什么使用全局工具类？** 默认即一致。除非你显式覆盖，否则每个组件的动画和行为方式都相同。详见 [动画指南](/docs/animation-guide) 和 [命中测试与高亮](/docs/highlights)。
+
+### 主题系统
+
+我们采用了 **[Shadcn/ui 的 CSS 变量方案](https://ui.shadcn.com/docs/theming)** 来实现主题。
+
+### 封装器模式
+
+每个基础组件都遵循以下结构：
+
+```tsx
+function ComboboxTrigger({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseCombobox.Trigger>) {
+  return (
+    <BaseCombobox.Trigger
+      data-slot="combobox-trigger" // 用于全局 CSS 定位
+      className={cn(
+        "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
+        className, // 合并样式
+      )}
+      aria-label="打开弹窗"
+      {...props}   // 透传所有 Base UI 的属性
+    />
+  );
+}
+```
+
+这种模式确保了：
+1. 完整的 Base UI API 兼容性
+2. 通过 `data-slot` 提供一致的样式挂钩
+3. 通过 `className` 轻松定制
+
+## 我们做出的权衡
+
+### 我们优先考虑什么
+- **开发速度**，针对常见模式
+- **完全的控制权**，在你需要的时候
+- **AI 辅助编码**的可靠性
+- **开箱即用的无障碍访问**
+- **跨组件的一致性**用户体验
+
+### 我们牺牲了什么
+- **极致的包体积：** 我们同时包含两个层次。如果你只使用组合组件，需要手动删除未使用的基础组件。
+- **框架无关性：** 我们专为 React 打造。（Base UI 是 React 优先的，我们选择在一个生态系统中做到最好。）
+- **更多的组件记忆成本：** 组合组件有特定的属性和 API。
+
+---
+
+## 准备好开始构建了吗？
+
+了解了背后的思考，现在就去亲手体验吧：
+
+<div className="flex gap-4 mt-6">
+  <CTACard 
+    title="安装指南" 
+    icon={<Zap className="size-4"/>} 
+    href="/docs/installation" 
+  />
+  <CTACard 
+    title="所有组件" 
+    icon={<Layers className="size-4"/>} 
+    href="/docs/components" 
+  />
+</div>

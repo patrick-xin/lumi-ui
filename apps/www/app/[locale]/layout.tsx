@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import "@/styles/globals.css";
+import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/lib/config";
 import { fontVariables } from "@/lib/fonts";
+import { routing } from "@/lib/i18n/routing";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/registry/ui/toast";
 
@@ -66,23 +70,33 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+  setRequestLocale(locale);
+  const messages = await getMessages();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className={cn("font-sans antialiased", fontVariables)}>
         <ThemeProvider>
-          <div className="root">
-            {children}
-            <Toaster
-              position="bottom-right"
-              swipeDirection={["right", "down"]}
-              limit={3}
-            />
-          </div>
+          <NextIntlClientProvider messages={messages}>
+            <div className="root">
+              {children}
+              <Toaster
+                position="bottom-right"
+                swipeDirection={["right", "down"]}
+                limit={3}
+              />
+            </div>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

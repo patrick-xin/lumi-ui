@@ -26,6 +26,7 @@ interface DocsSidebarProps {
 
 export const DocsSidebar = ({ tree }: DocsSidebarProps) => {
   const pathname = usePathname();
+
   const items = normalizeSidebarTree(tree, pathname);
 
   return (
