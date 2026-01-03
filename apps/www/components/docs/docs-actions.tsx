@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronDownIcon, MessageCircle } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { CopyPageButton } from "@/components/docs/copy-page-button";
 import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
@@ -21,7 +22,7 @@ Help me understand how to use it. Be ready to explain concepts, give examples, o
 }
 
 const menuItems = {
-  markdown: (url: string) => (
+  markdown: (url: string, content: string) => (
     <a
       href={`${url}.md`}
       target="_blank"
@@ -29,10 +30,10 @@ const menuItems = {
       className="w-full inline-flex items-center justify-start gap-3"
     >
       <Icons.markdown className="size-4" />
-      <span>View as Markdown</span>
+      <span>{content}</span>
     </a>
   ),
-  v0: (url: string) => (
+  v0: (url: string, content: string) => (
     <a
       className="w-full inline-flex items-center justify-start gap-3"
       href={getPromptUrl("https://v0.dev", url)}
@@ -40,10 +41,10 @@ const menuItems = {
       rel="noopener noreferrer"
     >
       <Icons.v0 className="size-4" />
-      <span>Open in v0</span>
+      <span>{content}</span>
     </a>
   ),
-  chatgpt: (url: string) => (
+  chatgpt: (url: string, content: string) => (
     <a
       className="w-full inline-flex items-center justify-start gap-3"
       href={getPromptUrl("https://chatgpt.com", url)}
@@ -51,10 +52,10 @@ const menuItems = {
       rel="noopener noreferrer"
     >
       <Icons.openai className="size-4" />
-      <span>Open in ChatGPT</span>
+      <span>{content}</span>
     </a>
   ),
-  claude: (url: string) => (
+  claude: (url: string, content: string) => (
     <a
       className="w-full inline-flex items-center justify-start gap-3"
       href={getPromptUrl("https://claude.ai/new", url)}
@@ -62,23 +63,13 @@ const menuItems = {
       rel="noopener noreferrer"
     >
       <Icons.claude className="size-4" />
-      <span>Open in Claude</span>
-    </a>
-  ),
-  t3: (url: string) => (
-    <a
-      className="w-full inline-flex items-center justify-start gap-3"
-      href={getPromptUrl("https://t3.chat/new", url)}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <MessageCircle className="size-4" />
-      <span>Open in T3</span>
+      <span>{content}</span>
     </a>
   ),
 };
 
 export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
+  const t = useTranslations("DocPage");
   return (
     <div className="flex items-center">
       <CopyPageButton
@@ -89,7 +80,7 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
         <DropdownMenuTrigger
           render={
             <Button
-              variant="outline"
+              variant="glow"
               size="sm"
               className={cn(
                 "h-8 rounded-l-none border-l data-[popup-open]:[&_svg]:rotate-180 max-md:[&_svg]:rotate-180 max-md:data-[popup-open]:[&_svg]:rotate-0",
@@ -100,14 +91,11 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
           }
         />
 
-        <DropdownMenuContent
-          className="w-44 bg-background/40 backdrop-blur-md -translate-x-28"
-          // alignOffset={-120}
-        >
+        <DropdownMenuContent className="w-44 bg-background/40 backdrop-blur-md -translate-x-28">
           {Object.entries(menuItems).map(([key, value]) => (
             <DropdownMenuItem
               className="text-xs"
-              render={value(url)}
+              render={value(url, t(`docActions.${key}`))}
               key={key}
             />
           ))}

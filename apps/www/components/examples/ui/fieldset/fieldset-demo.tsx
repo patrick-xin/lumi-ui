@@ -7,7 +7,7 @@ import {
 
 export function FieldsetExample() {
   return (
-    <Field>
+    <Field className="w-80 mx-auto">
       <Fieldset>
         <FieldsetLegend>Personal Information</FieldsetLegend>
         <Field>

@@ -10,7 +10,7 @@ import {
 
 export default function EditorToolbar() {
   return (
-    <Toolbar>
+    <Toolbar className="w-96">
       <ToolbarGroup>
         <ToolbarButton aria-label="Bold" render={<Toggle />}>
           <BoldIcon />

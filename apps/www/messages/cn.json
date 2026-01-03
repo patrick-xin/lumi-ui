@@ -4,5 +4,21 @@
     "description": "基于 Base UI 和 Tailwind CSS 的可组合 React 组件 — 快速构建，随心定制。",
     "viewDocs": "查看文档",
     "browseComponents": "浏览组件"
+  },
+  "DocPage": {
+    "onThisPage": "在本页",
+    "docActions": {
+      "copyPage": "复制本页",
+      "markdown": "以 Markdown 查看",
+      "v0": "在 v0 中打开",
+      "chatgpt": "在 ChatGPT 中打开",
+      "claude": "在 Claude 中打开"
+    }
+  },
+  "CommandMenu": {
+    "placeholder": "搜索文档...",
+    "noResults": "未找到结果。",
+    "navigation": "导航",
+    "goToPage": "跳转到页面"
   }
 }
