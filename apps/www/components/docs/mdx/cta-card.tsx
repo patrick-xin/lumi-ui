@@ -35,15 +35,15 @@ export function CTACard({ title, description, icon, href }: CTACardProps) {
 
   if (href) {
     return (
-      <Link href={href} className={className}>
-        <CardContent title={title} description={description} icon={icon} />
+      <Link className={className} href={href}>
+        <CardContent description={description} icon={icon} title={title} />
       </Link>
     );
   }
 
   return (
     <div className={className}>
-      <CardContent title={title} description={description} icon={icon} />
+      <CardContent description={description} icon={icon} title={title} />
     </div>
   );
 }

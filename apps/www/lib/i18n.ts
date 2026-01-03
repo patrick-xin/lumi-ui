@@ -1,8 +1,8 @@
-import { defineI18n } from 'fumadocs-core/i18n';
+import { defineI18n } from "fumadocs-core/i18n";
 
 export const i18n = defineI18n({
-  defaultLanguage: 'en',
-  languages: ['en', 'cn'],
-  hideLocale: 'default-locale',
-  fallbackLanguage: 'en',
+  defaultLanguage: "en",
+  fallbackLanguage: "en",
+  hideLocale: "default-locale",
+  languages: ["en", "cn"],
 });

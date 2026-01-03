@@ -23,20 +23,20 @@ export const useInstallationConfigStore = create<installationConfigStore>()(
   persist(
     (set) => ({
       config: {
-        packageManager: "pnpm",
         installationType: "cli",
+        packageManager: "pnpm",
       },
       setInstallationConfig: (newConfig) =>
         set((state) => ({
           config: { ...state.config, ...newConfig },
         })),
-      setPackageManager: (packageManager) =>
-        set((state) => ({
-          config: { ...state.config, packageManager },
-        })),
       setInstallationType: (installationType) =>
         set((state) => ({
           config: { ...state.config, installationType },
+        })),
+      setPackageManager: (packageManager) =>
+        set((state) => ({
+          config: { ...state.config, packageManager },
         })),
     }),
     {

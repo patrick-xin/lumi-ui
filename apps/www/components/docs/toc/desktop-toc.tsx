@@ -59,7 +59,7 @@ function TOCThumb({
         const activeItem = toc.find((item) => item.url === `#${activeHeading}`);
         const left = activeItem ? getLineOffset(activeItem.depth) : 0;
 
-        setPosition({ top, height, left });
+        setPosition({ height, left, top });
       }
     };
 
@@ -81,9 +81,9 @@ function TOCThumb({
     <div
       className="absolute w-0.5 bg-primary rounded-sm transition-all duration-200 ease-out"
       style={{
-        top: `${position.top}px`,
         height: `${position.height}px`,
         left: `${position.left}px`,
+        top: `${position.top}px`,
       }}
     />
   );
@@ -132,9 +132,9 @@ export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
       }
 
       setSvg({
+        height: h,
         path: d.join(" "),
         width: w + 1,
-        height: h,
       });
     }
 
@@ -166,21 +166,21 @@ export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
           <div
             className="absolute left-0 top-0"
             style={{
-              width: svg.width,
               height: svg.height,
               maskImage: `url("data:image/svg+xml,${encodeURIComponent(
                 `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${svg.width} ${svg.height}"><path d="${svg.path}" stroke="black" stroke-width="1" fill="current" /></svg>`,
               )}")`,
+              width: svg.width,
             }}
           >
             <TOCThumb
-              containerRef={containerRef}
               activeHeading={activeHeading}
+              containerRef={containerRef}
               toc={toc}
             />
           </div>
         )}
-        <div ref={containerRef} className="flex flex-col">
+        <div className="flex flex-col" ref={containerRef}>
           {toc.map((item, index) => {
             const isActive = item.url === `#${activeHeading}`;
             const upper = index > 0 ? toc[index - 1]?.depth : item.depth;
@@ -193,31 +193,31 @@ export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
 
             return (
               <a
-                key={item.url}
-                href={item.url}
-                data-active={isActive}
-                style={{
-                  paddingLeft: `${getItemOffset(item.depth)}px`,
-                }}
                 className={cn(
                   "relative inline-flex py-1.5 text-sm text-muted-foreground transition-colors w-fit first:pt-0 last:pb-0 hover:text-primary focus-state",
                   "data-[active=true]:text-primary",
                 )}
+                data-active={isActive}
+                href={item.url}
+                key={item.url}
+                style={{
+                  paddingLeft: `${getItemOffset(item.depth)}px`,
+                }}
               >
                 {offset !== upperOffset && (
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
                     className="absolute -top-1.5 left-0 size-4"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <title>Active link</title>
                     <line
-                      x1={upperOffset}
-                      y1="0"
-                      x2={offset}
-                      y2="12"
                       className="stroke-foreground/10"
                       strokeWidth="1"
+                      x1={upperOffset}
+                      x2={offset}
+                      y1="0"
+                      y2="12"
                     />
                   </svg>
                 )}

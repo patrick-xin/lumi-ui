@@ -19,10 +19,10 @@ export const DocsReferences = ({ links }: DocsReferenceProps) => {
       {links.doc && (
         <Badge variant="outline">
           <Link
-            href={links.doc}
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center gap-1"
+            href={links.doc}
+            rel="noopener noreferrer"
+            target="_blank"
           >
             Docs
             <ArrowUpRight className="h-3 w-3" />
@@ -32,10 +32,10 @@ export const DocsReferences = ({ links }: DocsReferenceProps) => {
       {links.api && (
         <Badge variant="outline">
           <Link
-            href={links.api}
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center gap-1"
+            href={links.api}
+            rel="noopener noreferrer"
+            target="_blank"
           >
             API Reference
             <ArrowUpRight className="h-3 w-3" />

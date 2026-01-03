@@ -33,12 +33,12 @@ export async function ComponentSourceCode({
   const code = rewriteRegistryImports(originalCode);
 
   if (!collapsible) {
-    return <CodeBlock code={code} title={title || `${name}.tsx`} lang={lang} />;
+    return <CodeBlock code={code} lang={lang} title={title || `${name}.tsx`} />;
   }
 
   return (
     <CodeCollapsibleWrapper className={className}>
-      <CodeBlock code={code} title={title || `${name}.tsx`} lang={lang} />
+      <CodeBlock code={code} lang={lang} title={title || `${name}.tsx`} />
     </CodeCollapsibleWrapper>
   );
 }

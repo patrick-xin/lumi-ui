@@ -11,8 +11,8 @@ export function getTreeWithStatus(tree: Root): DocRoot {
 
       return {
         ...node,
-        status: page?.data.status,
         icon: page?.data.icon,
+        status: page?.data.status,
       };
     }
     if (node.type === "folder") {
@@ -64,19 +64,19 @@ export function transformNavigation(lang: string): NavGroup[] {
             if (!pageLabel) return null;
 
             return {
-              value: page.url.split("/").pop() as string,
-              label: pageLabel,
-              url: page.url,
               folderName: folderName,
+              label: pageLabel,
               status: page.status,
+              url: page.url,
+              value: page.url.split("/").pop() as string,
             };
           })
           .filter((item): item is NavItem => item !== null);
 
         if (items.length > 0) {
           groups.push({
-            value: folderName,
             items,
+            value: folderName,
           });
         }
       }

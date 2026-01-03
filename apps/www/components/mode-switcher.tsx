@@ -31,51 +31,51 @@ export function ModeSwitcher() {
 
   return (
     <Button
-      variant="glow"
-      size="icon"
       className="group/toggle extend-touch-target size-8"
       onClick={toggleMode}
+      size="icon"
       title="Toggle theme"
+      variant="glow"
     >
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence initial={false} mode="wait">
         {currentMode === "dark" ? (
           <motion.svg
-            key="moon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            className="size-4.5"
+            exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
             fill="none"
+            height="20"
+            initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+            key="moon"
             stroke="currentColor"
-            strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="size-4.5"
-            initial={{ rotate: -90, opacity: 0, scale: 0.8 }}
-            animate={{ rotate: 0, opacity: 1, scale: 1 }}
-            exit={{ rotate: 90, opacity: 0, scale: 0.8 }}
+            strokeWidth="1.8"
             transition={{ duration: 0.35, ease: "easeInOut" }}
+            viewBox="0 0 24 24"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <title>moon icon</title>
             <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
           </motion.svg>
         ) : (
           <motion.svg
-            key="sun"
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            className="size-4.5"
+            exit={{ opacity: 0, rotate: -90, scale: 0.8 }}
             fill="none"
+            height="20"
+            initial={{ opacity: 0, rotate: 90, scale: 0.8 }}
+            key="sun"
             stroke="currentColor"
-            strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="size-4.5"
-            initial={{ rotate: 90, opacity: 0, scale: 0.8 }}
-            animate={{ rotate: 0, opacity: 1, scale: 1 }}
-            exit={{ rotate: -90, opacity: 0, scale: 0.8 }}
+            strokeWidth="1.8"
             transition={{ duration: 0.35, ease: "easeInOut" }}
+            viewBox="0 0 24 24"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <title>sun icon</title>
             <circle cx="12" cy="12" r="5" />

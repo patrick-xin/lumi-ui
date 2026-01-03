@@ -29,31 +29,31 @@ export const DocsAritcleFooter = ({ neighbours }: DocsAritcleFooterProps) => {
       >
         {neighbours.previous && (
           <Button
-            nativeButton={false}
-            variant="outline"
-            size="sm"
             className="justify-end"
+            nativeButton={false}
             render={
               <Link href={neighbours.previous.url}>
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 <span className="truncate">{neighbours.previous.name}</span>
               </Link>
             }
+            size="sm"
+            variant="outline"
           />
         )}
 
         {neighbours.next && (
           <Button
-            nativeButton={false}
-            variant="outline"
-            size="sm"
             className="justify-end"
+            nativeButton={false}
             render={
               <Link href={neighbours.next.url}>
                 <span className="truncate">{neighbours.next.name}</span>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             }
+            size="sm"
+            variant="outline"
           />
         )}
       </nav>

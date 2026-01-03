@@ -33,6 +33,8 @@ export function ComboboxFormDemo() {
   const [errors, setErrors] = React.useState({});
   return (
     <Form
+      className="w-64 flex flex-col gap-4"
+      errors={errors}
       onFormSubmit={async (formValues) => {
         const result = schema.safeParse(formValues);
 
@@ -42,10 +44,8 @@ export function ComboboxFormDemo() {
         }
 
         setErrors({});
-        console.log("Success:", result.data);
+        alert("Success: " + JSON.stringify(result.data));
       }}
-      errors={errors}
-      className="w-64 flex flex-col gap-4"
     >
       <Field name="framework">
         <FieldLabel>Framework</FieldLabel>
@@ -56,9 +56,9 @@ export function ComboboxFormDemo() {
             <ComboboxList>
               {(item: string) => (
                 <ComboboxItemContent
+                  className="data-[highlighted]:before:inset-x-4 pl-5"
                   key={item}
                   value={item}
-                  className="data-[highlighted]:before:inset-x-4 pl-5"
                 >
                   {item}
                 </ComboboxItemContent>

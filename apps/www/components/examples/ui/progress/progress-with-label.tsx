@@ -74,7 +74,7 @@ export default function ProgressDemo() {
   return (
     <div className="w-full max-w-md p-6">
       <div className="space-y-4">
-        <ProgressRoot value={value} className="grid grid-cols-2 gap-y-2">
+        <ProgressRoot className="grid grid-cols-2 gap-y-2" value={value}>
           <ProgressLabel className="flex items-center gap-2">
             <Upload className="h-4 w-4" />
             {getStatusText()}
@@ -86,7 +86,7 @@ export default function ProgressDemo() {
         </ProgressRoot>
         <div className="flex gap-2">
           {!isUploading ? (
-            <Button onClick={startUpload} disabled={isComplete}>
+            <Button disabled={isComplete} onClick={startUpload}>
               <Play />
               {value > 0 && !isComplete ? "Resume" : "Start Upload"}
             </Button>
@@ -98,9 +98,9 @@ export default function ProgressDemo() {
           )}
 
           <Button
+            disabled={value === 0 && !isUploading}
             onClick={resetUpload}
             variant="outline"
-            disabled={value === 0 && !isUploading}
           >
             <RotateCcw />
             Reset

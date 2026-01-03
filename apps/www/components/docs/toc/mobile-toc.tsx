@@ -14,13 +14,13 @@ import {
   DialogTrigger,
 } from "@/registry/ui/dialog";
 
+const tocHandle = createDialogHandle();
+
 function TocTrigger({
-  handle,
   open,
   items,
   activeHeading,
 }: {
-  handle: any;
   open: boolean;
   items: TOCItemType[];
   activeHeading: string | null;
@@ -31,15 +31,15 @@ function TocTrigger({
 
   return (
     <DialogTrigger
-      handle={handle}
+      handle={tocHandle}
       render={
         <Button
-          variant="ghost"
           className={cn(
             "flex h-10 w-full items-center justify-between gap-2.5 rounded-none px-4 py-2.5 text-xs sm:text-sm",
             "text-muted-foreground hover:text-primary hover:bg-transparent transition-colors shadow-none",
             "focus-visible:outline-none focus-visible:ring-0 md:px-6",
           )}
+          variant="ghost"
         >
           <span className="flex-1 truncate text-left">
             {!open && activeItem ? activeItem.title : "Table of Contents"}
@@ -71,16 +71,16 @@ function TocContent({
         const isActive = item.url === `#${activeHeading}`;
         return (
           <a
-            key={item.url}
-            href={item.url}
-            data-active={isActive}
-            onClick={() => setOpen(false)}
             className={cn(
               "border-l py-2 transition-colors text-xs hover:text-primary",
               isActive
                 ? "text-primary border-primary"
                 : "text-muted-foreground",
             )}
+            data-active={isActive}
+            href={item.url}
+            key={item.url}
+            onClick={() => setOpen(false)}
             style={{
               paddingLeft: `${12 * Math.max(item.depth - 1, 0) + 12}px`,
             }}
@@ -99,7 +99,7 @@ export interface PageTOCPopoverProps extends ComponentProps<"div"> {
 
 export function MobileToc({ items, className, ...props }: PageTOCPopoverProps) {
   const [open, setOpen] = useState(false);
-  const [tocHandle] = useState(() => createDialogHandle());
+
   const itemIds = items.map((item) => item.url.slice(1));
   const activeHeading = useTocActiveItem(itemIds);
 
@@ -112,13 +112,8 @@ export function MobileToc({ items, className, ...props }: PageTOCPopoverProps) {
         className,
       )}
     >
-      <TocTrigger
-        handle={tocHandle}
-        open={open}
-        items={items}
-        activeHeading={activeHeading}
-      />
-      <Dialog handle={tocHandle} open={open} onOpenChange={setOpen}>
+      <TocTrigger activeHeading={activeHeading} items={items} open={open} />
+      <Dialog handle={tocHandle} onOpenChange={setOpen} open={open}>
         <DialogPortal>
           <DialogPopup
             className={cn(
@@ -126,8 +121,8 @@ export function MobileToc({ items, className, ...props }: PageTOCPopoverProps) {
             )}
           >
             <TocContent
-              items={items}
               activeHeading={activeHeading}
+              items={items}
               setOpen={setOpen}
             />
           </DialogPopup>

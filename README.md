@@ -2,7 +2,9 @@
 
 A collection of accessible, customizable React components built on Base UI and styled with Tailwind CSS. Own your components, control your design system.
 
-![Lumi UI](https://www.lumiui.dev/images/lumi-landing.png)
+<a href="https://www.lumiui.dev/">
+  <img alt="Lumi UI" src="https://github.com/patrick-xin/lumi-ui/blob/main/apps/www/public/images/lumi-landing.png">
+</a>
 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

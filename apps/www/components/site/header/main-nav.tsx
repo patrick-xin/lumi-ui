@@ -15,12 +15,12 @@ export function MainNav({
     <nav className={cn("flex items-center gap-2 h-full", className)} {...props}>
       {items.map((item) => (
         <Link
-          key={item.href}
-          href={item.href}
           className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
+            buttonVariants({ size: "sm", variant: "ghost" }),
             "hover:bg-transparent hover:text-primary",
           )}
+          href={item.href}
+          key={item.href}
         >
           {item.label}
         </Link>

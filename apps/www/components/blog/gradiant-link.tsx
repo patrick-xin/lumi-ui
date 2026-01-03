@@ -28,10 +28,10 @@ export const GradiantLink = ({
         {
           "bg-purple-400/20 hover:bg-purple-500/20 hover:text-gray-50 text-gray-100":
             isActive,
-          uppercase: isUppercase,
           "justify-center": !icon,
-          "w-full": fullWith,
           "text-center": center,
+          uppercase: isUppercase,
+          "w-full": fullWith,
         },
       )}
       href={href}

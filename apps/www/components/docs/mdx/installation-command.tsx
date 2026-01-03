@@ -28,14 +28,14 @@ export async function InstallationCommand(props: InstallationCommandProps) {
 
   return (
     <InstallationCommandClient
-      npm={npmHighlighted}
-      yarn={yarnHighlighted}
-      pnpm={pnpmHighlighted}
       bun={bunHighlighted}
-      npmCode={props.__npm__}
-      yarnCode={props.__yarn__}
-      pnpmCode={props.__pnpm__}
       bunCode={props.__bun__}
+      npm={npmHighlighted}
+      npmCode={props.__npm__}
+      pnpm={pnpmHighlighted}
+      pnpmCode={props.__pnpm__}
+      yarn={yarnHighlighted}
+      yarnCode={props.__yarn__}
     />
   );
 }

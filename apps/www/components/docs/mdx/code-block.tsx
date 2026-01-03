@@ -21,22 +21,22 @@ export async function CodeBlock({
 
   return (
     <figure
-      data-rehype-pretty-code-figure=""
       className={cn(className, hideLineNumbers && "hide-line-numbers")}
+      data-rehype-pretty-code-figure=""
     >
       {title && (
         <figcaption
-          data-rehype-pretty-code-title=""
           className="text-code-foreground [&_svg]:text-code-foreground flex items-center gap-2 [&_svg]:size-4 [&_svg]:opacity-70"
           data-language={"tsx"}
+          data-rehype-pretty-code-title=""
         >
           {title}
         </figcaption>
       )}
       <CopyButton
-        variant="glow"
         className="absolute top-1.5 right-2"
         code={code}
+        variant="glow"
       />
       {highlightedCode}
     </figure>

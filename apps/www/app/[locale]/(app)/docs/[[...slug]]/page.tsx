@@ -14,8 +14,8 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   return source.generateParams().map((param) => ({
-    slug: param.slug,
     locale: param.lang,
+    slug: param.slug,
   }));
 }
 
@@ -36,24 +36,24 @@ export async function generateMetadata(props: {
   }
 
   return {
-    title: doc.title,
     description: doc.description,
     openGraph: {
-      title: doc.title,
       description: doc.description,
+      images: [
+        {
+          url: `/og?title=${encodeURIComponent(
+            doc.title,
+          )}&description=${encodeURIComponent(doc.description)}`,
+        },
+      ],
+      title: doc.title,
       type: "article",
       url: absoluteUrl(page.url),
-      images: [
-        {
-          url: `/og?title=${encodeURIComponent(
-            doc.title,
-          )}&description=${encodeURIComponent(doc.description)}`,
-        },
-      ],
     },
+    title: doc.title,
     twitter: {
       card: "summary_large_image",
-      title: doc.title,
+      creator: "@alpesdream",
       description: doc.description,
       images: [
         {
@@ -62,7 +62,7 @@ export async function generateMetadata(props: {
           )}&description=${encodeURIComponent(doc.description)}`,
         },
       ],
-      creator: "@alpesdream",
+      title: doc.title,
     },
   };
 }
@@ -96,12 +96,12 @@ export default function Page(props: PageProps) {
             description={doc.description}
             links={links}
             neighbours={neighbours}
-            title={doc.title}
             slug={params.slug}
+            title={doc.title}
             url={page.url}
           />
           {doc.status === "in-progress" && (
-            <Callout variant="warning" className="[&_p]:m-0">
+            <Callout className="[&_p]:m-0" variant="warning">
               This component is currently in progress. The API and
               implementation details may change.
             </Callout>

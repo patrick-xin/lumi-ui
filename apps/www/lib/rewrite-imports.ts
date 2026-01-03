@@ -10,11 +10,11 @@ export function rewriteImports(
 ): string {
   // Create an in-memory TypeScript project
   const project = new Project({
-    useInMemoryFileSystem: true,
     compilerOptions: {
-      jsx: JsxEmit.React,
       allowJs: true,
+      jsx: JsxEmit.React,
     },
+    useInMemoryFileSystem: true,
   });
 
   // Create a source file in memory
@@ -74,8 +74,8 @@ export function rewriteImports(
  */
 export function rewriteRegistryImports(sourceCode: string): string {
   return rewriteImports(sourceCode, {
-    "@/registry/ui/": "@/components/ui/",
-    "@/registry/lib/": "@/lib/",
     "@/registry/hooks/": "@/hooks/",
+    "@/registry/lib/": "@/lib/",
+    "@/registry/ui/": "@/components/ui/",
   });
 }

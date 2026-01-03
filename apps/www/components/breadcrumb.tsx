@@ -8,8 +8,8 @@ function Breadcrumb({ className, ...props }: React.ComponentProps<"nav">) {
   return (
     <nav
       aria-label="breadcrumb"
-      data-slot="breadcrumb"
       className={cn("cn-breadcrumb", className)}
+      data-slot="breadcrumb"
       {...props}
     />
   );
@@ -18,11 +18,11 @@ function Breadcrumb({ className, ...props }: React.ComponentProps<"nav">) {
 function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
   return (
     <ol
-      data-slot="breadcrumb-list"
       className={cn(
         "text-muted-foreground gap-1.5 text-xs flex flex-wrap items-center break-words",
         className,
       )}
+      data-slot="breadcrumb-list"
       {...props}
     />
   );
@@ -31,8 +31,8 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<"ol">) {
 function BreadcrumbItem({ className, ...props }: React.ComponentProps<"li">) {
   return (
     <li
-      data-slot="breadcrumb-item"
       className={cn("gap-1 inline-flex items-center", className)}
+      data-slot="breadcrumb-item"
       {...props}
     />
   );
@@ -61,11 +61,11 @@ function BreadcrumbLink({
 function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
+      aria-current="page"
+      aria-disabled="true"
+      className={cn("text-foreground font-normal", className)}
       data-slot="breadcrumb-page"
       role="link"
-      aria-disabled="true"
-      aria-current="page"
-      className={cn("text-foreground font-normal", className)}
       {...props}
     />
   );
@@ -78,10 +78,10 @@ function BreadcrumbSeparator({
 }: React.ComponentProps<"li">) {
   return (
     <li
-      data-slot="breadcrumb-separator"
-      role="presentation"
       aria-hidden="true"
       className={cn("[&>svg]:size-3", className)}
+      data-slot="breadcrumb-separator"
+      role="presentation"
       {...props}
     >
       {children ?? <SlashIcon className="-rotate-[30deg]" />}
@@ -95,13 +95,13 @@ function BreadcrumbEllipsis({
 }: React.ComponentProps<"span">) {
   return (
     <span
-      data-slot="breadcrumb-ellipsis"
-      role="presentation"
       aria-hidden="true"
       className={cn(
         "size-5 [&>svg]:size-3 flex items-center justify-center",
         className,
       )}
+      data-slot="breadcrumb-ellipsis"
+      role="presentation"
       {...props}
     >
       <SlashIcon className="-rotate-[30deg]" />

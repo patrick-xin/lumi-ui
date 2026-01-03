@@ -24,15 +24,15 @@ export function MobileNav({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger
         render={
           <Button
-            variant="ghost"
             className={cn(
-              "extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent",
+              "extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 p-0! hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent",
               className,
             )}
+            variant="ghost"
           >
             <MenuIcon open={open} />
           </Button>
@@ -87,7 +87,7 @@ function TreeNavigation({
     <div className="flex flex-col gap-8 my-6">
       {navGroups?.map((group) => {
         return (
-          <div key={group.value} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4" key={group.value}>
             <div className="text-muted-foreground text-sm font-medium">
               {group.value}
             </div>
@@ -95,8 +95,8 @@ function TreeNavigation({
               {group.items.map((item) => {
                 return (
                   <MobileLink
-                    key={item.url}
                     href={item.url}
+                    key={item.url}
                     onOpenChange={onNavigate}
                   >
                     {item.label}
@@ -126,12 +126,12 @@ function MobileLink({
 
   return (
     <Link
+      className={cn("text-xl font-medium", className)}
       href={href}
       onClick={() => {
         router.push(href.toString());
         onOpenChange?.();
       }}
-      className={cn("text-xl font-medium", className)}
       {...props}
     >
       {children}

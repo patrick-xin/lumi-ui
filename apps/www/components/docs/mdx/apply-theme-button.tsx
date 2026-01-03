@@ -32,16 +32,16 @@ export const ApplyThemeButton = ({
   return (
     <div className="flex items-center justify-between">
       <ColorPallete
-        primary={primary}
-        secondary={secondary}
         accent={accent}
         borderRadius={borderRadius}
+        primary={primary}
+        secondary={secondary}
       />
       <Button
         disabled={resolvedTheme === `${themeSet}-${mode}`}
-        style={{ backgroundColor: primary, color: "var(--foreground)" }}
-        size="sm"
         onClick={() => setTheme(`${themeSet}-${mode}`)}
+        size="sm"
+        style={{ backgroundColor: primary, color: "var(--foreground)" }}
       >
         <PaletteIcon />
         Try it out

@@ -27,7 +27,7 @@ export function CodeCollapsibleWrapper({
           <div className="absolute top-1 right-8 z-10 flex items-center">
             <Collapsible.Trigger
               className={cn(
-                buttonVariants({ variant: "ghost", size: "sm" }),
+                buttonVariants({ size: "sm", variant: "ghost" }),
                 "text-muted-foreground text-xs",
               )}
             >
@@ -39,26 +39,26 @@ export function CodeCollapsibleWrapper({
             keepMounted
             render={
               <motion.div
+                animate={{ height: state.open ? "auto" : 256 }}
+                className="relative mt-6 h-full overflow-hidden [&>figure]:mt-0 [&>figure]:md:mx-0"
                 hidden={false}
                 initial={false}
-                animate={{ height: state.open ? "auto" : 256 }}
                 transition={{ ease: [0.16, 1, 0.3, 1] }}
-                className="relative mt-6 h-full overflow-hidden [&>figure]:mt-0 [&>figure]:md:mx-0"
               >
                 {children}
 
                 <AnimatePresence>
                   {!state.open && (
                     <motion.div
-                      initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
                       className="text-muted-foreground absolute inset-x-0 -bottom-2 flex h-24 items-center justify-center bg-gradient-to-b from-code/70 to-code"
+                      exit={{ opacity: 0 }}
+                      initial={{ opacity: 0 }}
                     >
                       <Collapsible.Trigger
                         className={buttonVariants({
-                          variant: "secondary",
                           size: "icon-sm",
+                          variant: "secondary",
                         })}
                       >
                         <ChevronDown />
