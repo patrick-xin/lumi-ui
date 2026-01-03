@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useLocale } from "next-intl";
 import { FOLDERS_WITH_STATUS, NON_CLICKABLE_STATUSES } from "@/lib/constants";
 import { getTreeWithStatus } from "@/lib/get-tree-with-status";
 import { source } from "@/lib/source";
@@ -6,7 +7,9 @@ import { cn } from "@/lib/utils";
 import type { DocFolderNode, DocNode, DocPageNode } from "@/types";
 
 export function ComponentList() {
-  const treeWithStatus = getTreeWithStatus(source.pageTree);
+  const locale = useLocale();
+  const tree = source.getPageTree(locale);
+  const treeWithStatus = getTreeWithStatus(tree);
   const componentsNode = treeWithStatus.children.find(
     (node) => node.name === "Components",
   );

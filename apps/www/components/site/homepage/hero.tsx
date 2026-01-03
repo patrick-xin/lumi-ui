@@ -1,7 +1,11 @@
+"use client";
 import { Button } from "@lumi-ui/ui/button";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/lib/i18n/navigation";
+import { cn } from "../../../lib/utils";
 
 export function HeroSection() {
+  const t = useTranslations("HomePage");
   return (
     <div className="overflow-hidden">
       <div
@@ -19,81 +23,20 @@ export function HeroSection() {
             <div className="flex flex-col justify-center">
               <div className="relative mx-auto">
                 {/* Corner gradients - Top Left */}
-                <div
-                  aria-hidden
-                  className="absolute -top-4 -left-4 w-16 h-px opacity-50"
-                >
-                  <div
-                    className="h-full w-full"
-                    style={{
-                      background: `linear-gradient(to right, var(--primary), transparent)`,
-                    }}
-                  />
-                </div>
-                <div
-                  aria-hidden
-                  className="absolute -top-4 -left-4 w-px h-16 opacity-50"
-                >
-                  <div
-                    className="h-full w-full"
-                    style={{
-                      background: `linear-gradient(to bottom, var(--primary), transparent)`,
-                    }}
-                  />
-                </div>
-                <div
-                  aria-hidden
-                  className="absolute -bottom-4 -right-4 w-16 h-px opacity-50"
-                >
-                  <div
-                    className="h-full w-full"
-                    style={{
-                      background: `linear-gradient(to left, var(--primary), transparent)`,
-                    }}
-                  />
-                </div>
-                <div
-                  aria-hidden
-                  className="absolute -bottom-4 -right-4 w-px h-16 opacity-50"
-                >
-                  <div
-                    className="h-full w-full"
-                    style={{
-                      background: `linear-gradient(to top, var(--primary), transparent)`,
-                    }}
-                  />
-                </div>
+                <CornerGradients />
 
-                <h1 className="text-center text-5xl font-bold tracking-tighter md:text-7xl">
+                <h1
+                  className={cn(
+                    "text-center text-5xl font-bold tracking-tight md:text-7xl",
+                  )}
+                >
                   <span className="relative inline-block overflow-hidden text-transparent bg-clip-text bg-gradient-to-b from-zinc-200 to-zinc-500">
-                    Illuminate your interface
+                    {t("title")}
                   </span>
                 </h1>
               </div>
               <p className="mt-8  text-pretty text-lg text-muted-foreground mx-auto xl:mt-12">
-                Composable React components powered by{" "}
-                <span>
-                  <a
-                    href="https://base-ui.com/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-primary underline"
-                  >
-                    Base UI
-                  </a>
-                </span>{" "}
-                and{" "}
-                <span>
-                  <a
-                    href="https://tailwindcss.com/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-primary underline"
-                  >
-                    Tailwind CSS
-                  </a>
-                </span>{" "}
-                — Build fast, customize everything.
+                {t("description")}
               </p>
               <div className="mt-12 flex items-center gap-4 mx-auto xl:mt-16">
                 <Button
@@ -101,7 +44,7 @@ export function HeroSection() {
                   nativeButton={false}
                   render={
                     <Link href="/docs/introduction">
-                      <span className="text-nowrap">View docs</span>
+                      <span className="text-nowrap">{t("viewDocs")}</span>
                     </Link>
                   }
                 />
@@ -111,7 +54,9 @@ export function HeroSection() {
                   variant="glow"
                   render={
                     <Link href="/docs/components">
-                      <span className="text-nowrap">Browser components</span>
+                      <span className="text-nowrap">
+                        {t("browseComponents")}
+                      </span>
                     </Link>
                   }
                 />
@@ -123,3 +68,48 @@ export function HeroSection() {
     </div>
   );
 }
+
+const CornerGradients = () => {
+  return (
+    <>
+      <div aria-hidden className="absolute -top-4 -left-4 w-16 h-px opacity-50">
+        <div
+          className="h-full w-full"
+          style={{
+            background: `linear-gradient(to right, var(--primary), transparent)`,
+          }}
+        />
+      </div>
+      <div aria-hidden className="absolute -top-4 -left-4 w-px h-16 opacity-50">
+        <div
+          className="h-full w-full"
+          style={{
+            background: `linear-gradient(to bottom, var(--primary), transparent)`,
+          }}
+        />
+      </div>
+      <div
+        aria-hidden
+        className="absolute -bottom-4 -right-4 w-16 h-px opacity-50"
+      >
+        <div
+          className="h-full w-full"
+          style={{
+            background: `linear-gradient(to left, var(--primary), transparent)`,
+          }}
+        />
+      </div>
+      <div
+        aria-hidden
+        className="absolute -bottom-4 -right-4 w-px h-16 opacity-50"
+      >
+        <div
+          className="h-full w-full"
+          style={{
+            background: `linear-gradient(to top, var(--primary), transparent)`,
+          }}
+        />
+      </div>
+    </>
+  );
+};

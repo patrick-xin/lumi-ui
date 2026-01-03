@@ -1,0 +1,76 @@
+---
+title: 命中测试与高亮效果
+description: 了解 Lumi UI 如何处理交互式点击区域。
+icon: SquareMousePointer
+---
+
+Lumi UI 严格区分元素的**交互命中区域**和其**视觉高亮效果**，将可用性放在首位。这确保了控件即使为了实现内嵌或浮动等视觉设计，也依然保持宽容且易于交互。
+
+## 核心理念
+
+### 传统“费茨定律”难题
+在传统的 UI 开发中，如果你想让一个下拉菜单项看起来像“浮动气泡”（从边缘向内缩进），通常会给该项添加 `margin`。
+*   **问题所在：** 添加 margin 会实际缩小元素的物理尺寸。这减少了可点击（或可悬停）的表面积，使得 UI 更难使用——特别是对于快速移动鼠标的用户或在使用触摸设备时。
+
+### 伪元素解决方案
+Lumi UI 保持交互容器的宽度为 100%。我们使用 CSS 伪元素 (`::before`) 来渲染*视觉*背景。
+*   **交互区域：** 列表项保持 `width: 100%` 且 `margin` 为 0。鼠标在容器的最边缘就能检测到悬停。
+*   **视觉区域：** `::before` 伪元素通过绝对定位（例如 `inset-x-1`）放置在列表项内部，从而创造出浮动选择效果的错觉，而不会牺牲可用性。
+
+下面这个演示比较了下拉菜单中实现“内嵌”悬停高亮的两种方法。虽然它们看起来完全一样（像素级一致），但对用户体验的影响却不同：
+
+- 伪元素方案（左侧）：使用绝对定位实现背景。实际的列表项保持全宽，确保用户可以点击行内任意位置（命中区域大）。
+- 外边距方案（右侧）：使用物理外边距来缩进列表项。这在最左和最右边缘产生了点击无效的“死角”（命中区域受限）。
+
+点击下拉项的**边缘**来感受其中的差异。
+
+<ComponentPreview name="highlight-comparison" />
+
+## 安装与设置
+
+如果你使用了 CLI 安装器，那么这已经预先配置好了。对于手动安装，请将以下代码添加到你的 CSS 中。
+
+```css title="globals.css"
+@utility highlight-on-active {
+  @apply data-[highlighted]:relative data-[highlighted]:z-0;
+  
+  @apply data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm;
+
+  @apply data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground;
+}
+```
+
+<Callout variant="info" title="定制提示">
+要定制这些伪元素高亮效果（例如，圆角大小、缩进距离），你需要使用 Tailwind 的 `before:` 修饰符来直接定位 `::before` 伪元素。
+</Callout>
+
+## 如何退出此方案
+
+你可能更喜欢传统的、将背景直接应用到元素本身的方式。
+
+**请注意：** 如果你移除了 `highlight-on-active` 工具类，又想保持“内嵌”外观，则需要手动为组件添加间距（例如 `mx-1`）。但要注意，这**会减少命中区域**，减少的尺寸等于你添加的外边距大小。
+
+```tsx
+<BaseSelect.Item
+  data-slot="select-item"
+  className={cn(
+    "...",
+    // 1. 移除 highlight-on-active
+    // "highlight-on-active",
+    // 2. 调整间距/圆角
+    "mx-1 rounded-sm", 
+    // 3. 应用激活状态样式
+    "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+    className,
+  )}
+  {...props}
+>
+```
+
+或者，如果你想全局调整设计，可以直接修改全局 `@utility highlight-on-active` 定义中的 `inset` 值。
+
+## 适用组件
+
+以下组件使用了 `highlight-on-active`：
+- **表单输入：** [自动完成框](/docs/components/form-input/autocomplete) | [组合框](/docs/components/form-input/combobox) | [选择器](/docs/components/form-input/select)
+- **浮层面板：** [下拉菜单](/docs/components/overlays-dialogs/dropdown-menu)

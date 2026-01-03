@@ -40,8 +40,9 @@ function getNodeNameAsString(name: React.ReactNode): string | null {
   return null;
 }
 
-export function transformNavigation(): NavGroup[] {
-  const docRoot = getTreeWithStatus(source.pageTree);
+export function transformNavigation(lang: string): NavGroup[] {
+  const tree = source.getPageTree(lang);
+  const docRoot = getTreeWithStatus(tree);
   const groups: NavGroup[] = [];
 
   // Recursive function to traverse folders

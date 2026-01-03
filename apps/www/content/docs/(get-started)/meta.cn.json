@@ -1,0 +1,12 @@
+{
+  "title": "开始使用",
+  "defaultOpen": true,
+  "pages": [
+    "introduction",
+    "installation",
+    "philosophies",
+    "highlights",
+    "animation-guide",
+    "components"
+  ]
+}

@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { source } from "@/lib/source";
 
-export function ComponentsList() {
-  const components = source.pageTree.children.find(
-    (page) => page.$id === "components",
-  );
+export function ComponentsList({ locale = "en" }: { locale?: string }) {
+  const tree = source.getPageTree(locale);
+  const components = tree.children.find((page) => page.$id === "components");
 
   if (components?.type !== "folder") {
     return;

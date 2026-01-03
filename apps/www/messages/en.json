@@ -1,0 +1,8 @@
+{
+  "HomePage": {
+    "title": "Illuminate your interface",
+    "description": "Composable React components powered by Base UI and Tailwind CSS — Build fast, customize everything.",
+    "viewDocs": "View docs",
+    "browseComponents": "Browse components"
+  }
+}

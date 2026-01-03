@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LanguageSelector } from "@/components/language-selector";
 import { Logo } from "@/components/logo";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { CommandMenu } from "@/components/site/header/command-menu";
@@ -12,9 +13,9 @@ import {
 import { source } from "@/lib/source";
 import { GitHubLink } from "./github-link";
 
-export function SiteHeader() {
-  const navGroups = transformNavigation();
-  const tree = getTreeWithStatus(source.pageTree);
+export function SiteHeader({ locale }: { locale: string }) {
+  const navGroups = transformNavigation(locale);
+  const tree = getTreeWithStatus(source.getPageTree(locale));
   return (
     <header className="sticky top-0 z-50 w-full h-[var(--header-height)] transition-colors duration-300 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[color-mix(in_oklab,var(--color-foreground)_7.5%,transparent)] via-50% to-transparent" />
@@ -30,6 +31,7 @@ export function SiteHeader() {
 
           <div className="flex items-center justify-end gap-3">
             <CommandMenu tree={tree} />
+            <LanguageSelector />
             <ThemeSwitcher />
             <ModeSwitcher />
             <GitHubLink />
@@ -41,6 +43,7 @@ export function SiteHeader() {
             <MobileNav navGroups={navGroups} />
           </div>
           <div className="flex items-center gap-2">
+            <LanguageSelector />
             <ThemeSwitcher />
             <ModeSwitcher />
             <GitHubLink />
