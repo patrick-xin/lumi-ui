@@ -1,73 +1,70 @@
 # Lumi UI
 
-**A collection of composable React components built with Base UI and Tailwind CSS, designed for clarity, speed, and complete code ownership. Inspired by Shadcn.**
+A collection of accessible, customizable React components built on Base UI and styled with Tailwind CSS. Own your components, control your design system.
+
+![Lumi UI](https://www.lumiui.dev/images/lumi-landing.png)
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-## ✨ What is Lumi UI?
+## What is Lumi UI?
 
-Lumi UI is a collection of beautifully designed, accessible React components built with Base UI primitives and styled with Tailwind CSS. It's not a component library — it's a collection of components that you can copy into your apps and customize to your needs.
+Lumi UI gives you production-ready React components with a unique twist: every component comes in two flavors.
 
-## 🎯 Key Features
+- **Composites** - Pre-assembled components for rapid development
+- **Primitives** - Granular building blocks for complete control
 
-- **🎭 shadcn-Compatible**: If you're familiar with shadcn/ui, you'll feel right at home with Lumi UI's API patterns.
-- **🎨 Copy & Paste Integration**: Seamlessly integrate components into your project by copying them directly.
-- **♿ Accessible by Default**: Built on Base UI's WCAG-compliant primitives, ensuring accessibility is a core feature.
-- **🎛️ Fully Customizable**: Take complete ownership of your code. Modify and adapt components without the need to eject or fork.
-- **🔧 Native TypeScript Support**: Enjoy the benefits of strict typing and an excellent developer experience from the start.
+Start fast with composites, drop down to primitives when you need custom layouts. No compromises.
 
-## 🎯 Our Philosophy
+## Why Lumi UI?
 
-### Own Your Code
-
-Every component is yours to shape. There's no need to navigate complex abstraction layers—simply edit the files directly to match your vision.
-
-### Optimized Developer Experience
-
-With polished preset designs, customization is straightforward and intuitive, allowing you to focus on what matters most.
-
-### Accessibility First
-
-Leveraging Base UI's accessible primitives, Lumi UI components come with ARIA attributes, keyboard navigation, and screen reader support built-in.
+- Accessibility built-in - ARIA, keyboard navigation, and focus management handled by Base UI
+- Complete code ownership - Copy components into your project, modify freely
+- Dual-layer architecture - Choose between speed (composites) and control (primitives)
+- AI-friendly - Flat exports and clear patterns optimize for AI-assisted development
+- Themeable - Uses shadcn/ui's CSS variable system for easy customization
+- TypeScript - Fully typed with excellent IntelliSense support
 
 ## Documentation
 
-For detailed information and usage guidelines, please visit the [Lumi UI website](https://www.lumiui.dev/).
+- 📚 [Full Documentation](https://www.lumiui.dev/docs/introduction)
+- 🧩 [Component Gallery](https://www.lumiui.dev/docs/components)
+- 🎨 [Themes](https://www.lumiui.dev/docs/themes/canopy)
+- 🏗️ [Architecture & Philosophy](https://www.lumiui.dev/docs/philosophies)
+- 📦 [Installation Guide](https://www.lumiui.dev/docs/installation)
 
-## 🛠️ Development
+## Key Concepts
 
-### Prerequisites
+### The Hit-Test Philosophy
 
-- Node.js version 18 or higher
-- pnpm (recommended package manager)
+Interactive areas are forgiving. We use pseudo-elements to separate visual highlights from clickable regions, creating a more natural UX.
 
-### Setup
+### AI-Assisted Development
 
-```bash
-git clone https://github.com/patrick-xin/lumi-ui
-cd lumi-ui
-pnpm install
-pnpm dev
-```
+Flat semantic exports and composites as living examples help AI assistants generate correct, idiomatic code on the first try.
 
-### Available Scripts
+### Unified Design Language
 
-- `pnpm dev`: Starts the development server.
-- `pnpm build`: Builds the project for production.
-- `pnpm registry:build`: Builds the shadcn registry.
-- `pnpm registry:sync`: Syncs the source code and examples.
+Shared animation utilities and consistent interaction patterns across all components.
 
-## 🙏 Acknowledgments
+## Contributing
+
+We welcome contributions! Whether it's:
+
+- 🐛 Bug reports and fixes
+- 💡 Feature requests and implementations
+- 📖 Documentation improvements
+- 🎨 New themes or component variants
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+### Acknowledgments
 
 - **[Base UI](https://base-ui.com/)**: For providing the accessible and unstyled component primitives that form the foundation of Lumi UI.
 - **[shadcn/ui](https://ui.shadcn.com/)**: For the inspiration behind the architectural patterns and developer experience.
 - **[Fumadocs](https://fumadocs.dev/)**: For the exceptional documentation framework that powers our website.
 
-## 🤝 Contributing
-
-We welcome and encourage contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details on how to get involved.
-
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Ready to build? Get started with the [installation guide](https://www.lumiui.dev/docs/installation).

@@ -10,7 +10,6 @@ import {
   transformNavigation,
 } from "@/lib/get-tree-with-status";
 import { source } from "@/lib/source";
-import { Badge } from "@/registry/ui/badge";
 import { GitHubLink } from "./github-link";
 
 export function SiteHeader() {
@@ -27,9 +26,6 @@ export function SiteHeader() {
               <Logo />
               <span className="sr-only">{siteConfig.name}</span>
             </Link>
-            <Badge variant="outline" className="text-[10px] text-primary">
-              Beta
-            </Badge>
           </div>
 
           <div className="flex items-center justify-end gap-3">

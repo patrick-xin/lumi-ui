@@ -41,7 +41,6 @@ export function HeroSection() {
                     }}
                   />
                 </div>
-
                 <div
                   aria-hidden
                   className="absolute -bottom-4 -right-4 w-16 h-px opacity-50"
@@ -64,11 +63,14 @@ export function HeroSection() {
                     }}
                   />
                 </div>
-                <h1 className="text-balance tracking-tight text-5xl font-bold md:text-6xl relative">
-                  Illuminate your interface
+
+                <h1 className="text-center text-5xl font-bold tracking-tighter md:text-7xl">
+                  <span className="relative inline-block overflow-hidden text-transparent bg-clip-text bg-gradient-to-b from-zinc-200 to-zinc-500">
+                    Illuminate your interface
+                  </span>
                 </h1>
               </div>
-              <p className="mt-8 max-w-2xl text-pretty text-lg text-muted-foreground mx-auto xl:mt-12">
+              <p className="mt-8  text-pretty text-lg text-muted-foreground mx-auto xl:mt-12">
                 Composable React components powered by{" "}
                 <span>
                   <a
@@ -91,7 +93,7 @@ export function HeroSection() {
                     Tailwind CSS
                   </a>
                 </span>{" "}
-                — built for clarity, speed, and total code ownership.
+                — Build fast, customize everything.
               </p>
               <div className="mt-12 flex items-center gap-4 mx-auto xl:mt-16">
                 <Button
