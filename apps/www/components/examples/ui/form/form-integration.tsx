@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsUpDownIcon, Minus, Plus } from "lucide-react";
+import { BookHeart, ChevronsUpDownIcon, Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import {
   Autocomplete,
@@ -89,12 +89,17 @@ export function ProjectQuoteForm() {
 
             <Field name="projectName">
               <FieldLabel>Project Title</FieldLabel>
-              <FieldControl
-                defaultValue=""
-                placeholder="e.g. SaaS Dashboard Redesign"
-                required
-                minLength={5}
-              />
+              <div className="relative">
+                <BookHeart className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
+                <FieldControl
+                  defaultValue=""
+                  placeholder="e.g. SaaS Dashboard Redesign"
+                  required
+                  className="pl-9"
+                  minLength={5}
+                />
+              </div>
+
               <FieldDescription>A short name for this project</FieldDescription>
               <FieldError />
             </Field>

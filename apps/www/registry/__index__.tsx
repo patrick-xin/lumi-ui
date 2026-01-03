@@ -328,26 +328,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "alert": {
-    name: "alert",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["class-variance-authority"],
-    files:     [
-          {
-                "path": "registry/ui/alert.tsx",
-                "type": "registry:ui",
-                "target": ""
-          }
-    ],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/ui/alert");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "alert";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "collapsible": {
     name: "collapsible",
     description: "",
@@ -907,24 +887,6 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/accordion/accordion-single");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "accordion-single";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "alert-demo": {
-    name: "alert-demo",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["alert"],
-    files: [{
-      path: "components/examples/ui/alert/alert-demo.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/alert/alert-demo");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "alert-demo";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -3805,6 +3767,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/tabs/tabs-underline");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-underline";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "toast-anchored-custom": {
+    name: "toast-anchored-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toast"],
+    files: [{
+      path: "components/examples/ui/toast/toast-anchored-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/toast/toast-anchored-custom");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toast-anchored-custom";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

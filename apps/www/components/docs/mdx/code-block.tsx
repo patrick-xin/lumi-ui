@@ -33,7 +33,11 @@ export async function CodeBlock({
           {title}
         </figcaption>
       )}
-      <CopyButton className="absolute top-1.5 right-2" code={code} />
+      <CopyButton
+        variant="glow"
+        className="absolute top-1.5 right-2"
+        code={code}
+      />
       {highlightedCode}
     </figure>
   );

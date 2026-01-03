@@ -237,6 +237,7 @@ export const mdxComponents: MDXComponents = {
         {__raw__ && (
           <CopyButton
             className="absolute top-1.5 right-2 z-10"
+            variant="glow"
             code={__raw__}
           />
         )}

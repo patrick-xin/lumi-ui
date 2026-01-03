@@ -31,6 +31,217 @@ links:
   </TabsPanel>
 </CodeTabs>
 
+<Steps>
+<Step title={<>Render the <code>Toaster</code> component once in your root layout.</>}>
+   ```tsx title="app/layout.tsx"
+  export default function RootLayout({
+    children,
+  }: Readonly<{
+    children: React.ReactNode;
+  }>) {
+    return (  
+      <html>
+        <body>
+          <div className="root">
+            {children}
+            <Toaster
+              position="bottom-right"
+              swipeDirection={["right", "down"]}
+              limit={3}
+            />
+          </div>
+        </body>
+      </html>
+    );
+  }
+```
+</Step>
+<Step title={<>Add the following css into your global CSS file.</>}>
+```css title="globals.css"
+@layer utilities {
+  .toast-viewport {
+    --viewport-padding: 1rem;
+    --toast-width: 356px;
+    --toast-gap: 0.75rem;
+    --toast-peek: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .toast-viewport {
+      --viewport-padding: 2rem;
+      max-width: var(--toast-width);
+    }
+  }
+
+  /* Positions */
+  .toast-viewport[data-position*="bottom"][data-position*="right"] {
+    bottom: var(--viewport-padding);
+    right: var(--viewport-padding);
+    left: auto;
+  }
+  .toast-viewport[data-position*="top"][data-position*="right"] {
+    top: var(--viewport-padding);
+    right: var(--viewport-padding);
+    left: auto;
+  }
+  .toast-viewport[data-position*="bottom"][data-position*="left"] {
+    bottom: var(--viewport-padding);
+    left: var(--viewport-padding);
+    right: auto;
+  }
+  .toast-viewport[data-position*="top"][data-position*="left"] {
+    top: var(--viewport-padding);
+    left: var(--viewport-padding);
+    right: auto;
+  }
+  .toast-viewport[data-position*="bottom"][data-position*="center"] {
+    @apply mx-auto;
+    bottom: var(--viewport-padding);
+  }
+
+  .toast-viewport[data-position*="top"][data-position*="center"] {
+    @apply mx-auto;
+    top: var(--viewport-padding);
+  }
+
+  /* 
+     TOAST ROOT
+  */
+  .toast-root {    
+    --toast-calc-height: var(--toast-frontmost-height, var(--toast-height));
+    --toast-scale: calc(max(0, 1 - (var(--toast-index) * 0.1)));
+    --toast-shrink: calc(1 - var(--toast-scale));
+  
+    height: var(--toast-calc-height); 
+
+    transition: 
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+      height 0.15s ease-out;
+
+    z-index: calc(1000 - var(--toast-index));
+  }
+
+  /* Bottom */
+  .toast-root[data-position*="bottom"] {
+    bottom: 0;
+    transform-origin: bottom center;
+
+    --transform-y: calc(
+      var(--toast-swipe-movement-y) - 
+      (var(--toast-index) * var(--toast-peek)) - 
+      (var(--toast-shrink) * var(--toast-calc-height))
+    );
+    
+    --expanded-offset-y: calc(
+      (var(--toast-offset-y) * -1) - 
+      (var(--toast-index) * var(--toast-gap)) + 
+      var(--toast-swipe-movement-y)
+    );
+
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--transform-y)) scale(var(--toast-scale));
+  }
+
+  /* Bottom Expanded */
+  .toast-root[data-position*="bottom"][data-expanded] {
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--expanded-offset-y));
+    height: var(--toast-height); 
+  }
+
+  /* Top */
+  .toast-root[data-position*="top"] {
+    top: 0;
+    transform-origin: top center;
+
+    --transform-y: calc(
+      var(--toast-swipe-movement-y) + 
+      (var(--toast-index) * var(--toast-peek)) + 
+      (var(--toast-shrink) * var(--toast-calc-height))
+    );
+
+    --expanded-offset-y: calc(
+      var(--toast-offset-y) + 
+      (var(--toast-index) * var(--toast-gap)) + 
+      var(--toast-swipe-movement-y)
+    );
+
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--transform-y)) scale(var(--toast-scale));
+  }
+
+  /* Top: Expanded */
+  .toast-root[data-position*="top"][data-expanded] {
+    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--expanded-offset-y));
+    height: var(--toast-height); /* Reset height on expand */
+  }
+
+  /* Animations & Swipe */
+  .toast-root[data-position*="bottom"][data-starting-style],
+  .toast-root[data-position*="bottom"][data-ending-style]:not([data-limited]):not([data-swipe-direction]) {
+    transform: translateY(150%);
+    opacity: 0;
+  }
+
+  .toast-root[data-position*="top"][data-starting-style],
+  .toast-root[data-position*="top"][data-ending-style]:not([data-limited]):not([data-swipe-direction]) {
+    transform: translateY(-150%);
+    opacity: 0;
+  }
+
+  .toast-root[data-limited],
+  .toast-root[data-ending-style] {
+   opacity: 0;
+  }
+
+  .toast-root[data-ending-style][data-swipe-direction="up"] {
+    transform: translateY(calc(var(--toast-swipe-movement-y) - 150%));
+  }
+  .toast-root[data-ending-style][data-swipe-direction="down"] {
+    transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
+  }
+  .toast-root[data-ending-style][data-swipe-direction="left"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--transform-y));
+  }
+  .toast-root[data-ending-style][data-swipe-direction="right"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--transform-y));
+  }
+
+  /* Expanded Swipe */
+  .toast-root[data-expanded][data-ending-style][data-swipe-direction="left"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--expanded-offset-y));
+  }
+  .toast-root[data-expanded][data-ending-style][data-swipe-direction="right"] {
+    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--expanded-offset-y));
+  }
+
+  /* Ghost element for hover interaction area */
+  .toast-root::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: calc(var(--toast-gap) + 1px);
+    background: transparent;
+  }
+  .toast-root[data-position*="bottom"]::after { top: 100%; }
+  .toast-root[data-position*="top"]::after { bottom: 100%; }
+}
+```
+</Step>
+
+<Step title={<>Use the <code>toast</code> object to trigger notifications from anywhere in your app.</>}>
+```tsx
+import { toast } from "@/components/ui/toast"
+
+toast.add({ title: "Event Created", description: "Monday at 9:00am" })
+
+// Semantic Variants
+toast.success({ title: "Success", description: "Your event has been created" })
+toast.error({ title: "Error occurred", description: "Please try again" })
+```
+</Step>
+
+</Steps>
+
 
 ## Features
 
@@ -67,5 +278,111 @@ links:
 ### Custom content
 
 <ComponentPreview name="toast-custom" />
+
+### Custom anchored toasts
+
+<ComponentPreview name="toast-anchored-custom" />
+
+## Customization
+
+Since you own the code, you can tweak the internal logic to fit your design system.
+
+### Styling (Variants)
+
+We use cva to handle variants. Modify the `toastVariants` definition to change colors or borders.
+
+```tsx title="toast.tsx"
+const toastVariants = cva(
+  "rounded-sm outline ...", // Base styles
+  {
+    variants: {
+      type: {
+        // Add new types or modify existing color schemes here
+        purple: "bg-purple-50 text-purple-900 border-purple-200", 
+      }
+    }
+  }
+)
+```
+
+### Icons
+
+The icons are mapped in the Icons constant. You can swap these for a different icon library or custom SVGs.
+
+```tsx title="toast.tsx"
+const Icons = {
+  success: CheckCircle2, // Replace with your own icon
+  error: AlertCircle,
+  // ...
+};
+```
+
+### Layout Structure
+If you want to change the layout (e.g., move the action button below the text instead of to the right), modify the JSX inside StackedToast -> ToastContent.
+
+```tsx title="toast.tsx"
+<div className="flex flex-col gap-2"> {/* Changed to column */}
+   <ToastTitle>{toast.title}</ToastTitle>
+   {/* ... */}
+</div>
+```
+### Anchored Toasts
+The `toast.anchor()` method is useful for "Copied!" tooltips or context-specific errors. It uses a separate `BaseToast.Provider` internally. You can customize the `AnchoredToast` component if you need different layout or use `toast.anchor` to create a unique design that fits your use case.
+
+### Animation
+Animations are handled via CSS/Tailwind classes. By default, we support all toast positions and directions of swipe dismiss. Feel free to modify the CSS to fit your design system.
+
+<Callout title="Note" variant="info">
+  `AnchoredToast` uses utilities classes `animate-popup` for animations. Replace it with the following snippet in `BaseToast.Root` if you choose to opt out:
+</Callout>
+
+```tsx title="toast.tsx"
+<BaseToast.Root
+  data-slot="toast-root"
+  toast={toast}
+  className={cn(
+    !isCustomContent && toastVariants({ type: "default" }),
+    "w-max pointer-events-auto",
+    "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 ",
+    "data-[ending-style]:opacity-0 data-[ending-style]:scale-95 ",
+    "transition-all duration-200"
+  )}
+>
+```
+
+
+## API Reference
+
+### `<Toaster />`
+The provider component that renders the viewport.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `position` | `ToastPosition` | `"bottom-right"` | Where the stack appears. Options: `top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, `bottom-right`. |
+| `swipeDirection` | `SwipeDirection` | `["down", "right"]` | Direction users can swipe to dismiss. |
+| `limit` | `number` | `3` | Maximum number of toasts visible at once. |
+
+### `toast`
+The main interface for managing toasts. Extends Base UI's [`useToastManager`](https://base-ui.com/react/components/toast#usetoastmanager).
+
+| Method | Arguments | Description |
+| :--- | :--- | :--- |
+| `success` | `options` | preset `type: "success"` |
+| `error` | `options` | preset `type: "error"` |
+| `warning` | `options` | preset `type: "warning"` |
+| `info` | `options` | preset `type: "info"` |
+| `anchor` | `element, options` | Spawns a toast physically attached to a DOM element (popover style). |
+
+
+### `options`
+Extends Base UI's [`Method options`](https://base-ui.com/react/components/toast#method-options) with custom data fields.
+
+| Property | Type | Description |
+| :--- | :--- | :--- |
+| `closable` | `boolean` | If `true`, renders a close button. |
+| `customContent` | `ReactNode` | Overrides the default internal structure of the toast (including the arrow if it's AnchoredToast). |
+
+
+
 
 

@@ -22,6 +22,7 @@ export function ToastPromiseDemo() {
           return {
             title: `Success: ${data}`,
             description: "Operation completed successfully",
+            closable: true,
           };
         },
         error: (err: Error) => {

@@ -75,8 +75,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn("font-sans antialiased", fontVariables)}>
         <ThemeProvider>
-          <div className="root">{children}</div>
-          <Toaster position="bottom-right" />
+          <div className="root">
+            {children}
+            <Toaster
+              position="bottom-right"
+              swipeDirection={["right", "down"]}
+              limit={3}
+            />
+          </div>
         </ThemeProvider>
       </body>
     </html>
