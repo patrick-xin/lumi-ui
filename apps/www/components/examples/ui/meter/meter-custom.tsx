@@ -8,7 +8,7 @@ import {
 
 export default function ExampleMeterCustom() {
   return (
-    <Meter value={24} className="grid grid-cols-2 gap-y-2">
+    <Meter value={24} className="grid grid-cols-2 gap-y-2 w-72">
       <MeterLabel>Storage Used</MeterLabel>
       <MeterValue className="text-right" />
       <MeterTrack className="col-span-2">

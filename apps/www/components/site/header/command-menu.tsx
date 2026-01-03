@@ -4,6 +4,7 @@ import { useIsMac } from "@lumi-ui/ui/hooks/use-is-mac";
 import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
 import { ArrowDown, ArrowUp, CornerDownLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 import { IconMap } from "@/lib/icons";
 import { getSearchGroups } from "@/lib/sidebar-utils";
@@ -33,7 +34,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
   const router = useRouter();
-
+  const t = useTranslations("CommandMenu");
   const isMounted = useMounted();
   const isNavigatingRef = React.useRef(false);
 
@@ -100,7 +101,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
               )}
             >
               <AutocompleteInputGroup
-                placeholder="Search documentation..."
+                placeholder={t("placeholder")}
                 variant="ghost"
                 className="caret-primary"
                 inputSize="lg"
@@ -113,7 +114,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                 className="h-96 pt-2 pb-12"
               >
                 <AutocompleteEmpty className="text-center text-base py-12 text-muted-foreground">
-                  No results found.
+                  {t("noResults")}
                 </AutocompleteEmpty>
                 <AutocompleteList>
                   {(group: NavGroup) => (
@@ -166,6 +167,7 @@ const CommandMenuTriggerButton = ({
 }: {
   handleOpenChange: () => void;
 }) => {
+  const t = useTranslations("CommandMenu");
   const isMac = useIsMac();
   return (
     <Button
@@ -176,7 +178,7 @@ const CommandMenuTriggerButton = ({
       )}
     >
       <span className="hidden lg:inline-flex text-muted-foreground">
-        Search documentation...
+        {t("placeholder")}
       </span>
       <span className="inline-flex lg:hidden">Search...</span>
       <div className="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
@@ -190,6 +192,7 @@ const CommandMenuTriggerButton = ({
 };
 
 const CommandMenuBottomBar = () => {
+  const t = useTranslations("CommandMenu");
   return (
     <div className="absolute h-10 bottom-0 inset-x-0 border-t bg-popover text-popover-foreground rounded-b-md">
       <div className="py-2 px-4 flex items-center gap-3">
@@ -200,13 +203,15 @@ const CommandMenuBottomBar = () => {
           <Kbd>
             <ArrowDown />
           </Kbd>
-          <span className="text-xs text-muted-foreground">Navigate</span>
+          <span className="text-xs text-muted-foreground">
+            {t("navigation")}
+          </span>
         </div>
         <div className="inline-flex items-center gap-1">
           <Kbd>
             <CornerDownLeftIcon />
           </Kbd>
-          <span className="text-xs text-muted-foreground">Go to Page</span>
+          <span className="text-xs text-muted-foreground">{t("goToPage")}</span>
         </div>
       </div>
     </div>

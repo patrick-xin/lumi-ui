@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, Copy, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/registry/ui/button";
 
@@ -12,6 +13,7 @@ interface CopyPageButtonProps {
 const contentCache = new Map<string, string>();
 
 export function CopyPageButton({ slug, className }: CopyPageButtonProps) {
+  const t = useTranslations("DocPage");
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -45,8 +47,6 @@ export function CopyPageButton({ slug, className }: CopyPageButtonProps) {
         ]);
         setCopied(true);
       }
-
-      // Reset copied state after 2 seconds
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       console.error("Failed to copy content:", error);
@@ -57,8 +57,8 @@ export function CopyPageButton({ slug, className }: CopyPageButtonProps) {
 
   return (
     <Button
-      size={"sm"}
-      variant={"outline"}
+      size="sm"
+      variant="glow"
       onClick={handleCopy}
       className={className}
       disabled={isLoading}
@@ -71,7 +71,7 @@ export function CopyPageButton({ slug, className }: CopyPageButtonProps) {
       ) : (
         <Copy className="size-4" />
       )}
-      <span className="ml-2">Copy Page</span>
+      <span className="ml-2">{t("docActions.copyPage")}</span>
     </Button>
   );
 }

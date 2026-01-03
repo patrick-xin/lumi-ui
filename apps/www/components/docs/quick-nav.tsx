@@ -16,7 +16,7 @@ export const DocsQuickNav = ({ neighbours }: DocsQuickNavProps) => {
       {neighbours.previous && (
         <Button
           nativeButton={false}
-          variant="secondary"
+          variant="glow"
           size="icon-sm"
           render={
             <Link href={neighbours.previous.url}>
@@ -29,7 +29,7 @@ export const DocsQuickNav = ({ neighbours }: DocsQuickNavProps) => {
       {neighbours.next && (
         <Button
           nativeButton={false}
-          variant="secondary"
+          variant="glow"
           size="icon-sm"
           render={
             <Link href={neighbours.next.url}>

@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import { siteConfig } from "@/lib/config";
-import { Separator } from "@/registry/ui/separator";
 
 export function SiteFooter() {
   return (
@@ -15,8 +13,6 @@ export function SiteFooter() {
               </Link>
               <span>© {new Date().getFullYear()}</span>
             </span>
-            <Separator orientation="vertical" className="h-4!" />
-            <span>{siteConfig.slogan}</span>
           </span>
         </div>
       </div>

@@ -4,5 +4,21 @@
     "description": "Composable React components powered by Base UI and Tailwind CSS — Build fast, customize everything.",
     "viewDocs": "View docs",
     "browseComponents": "Browse components"
+  },
+  "DocPage": {
+    "onThisPage": "On this page",
+    "docActions": {
+      "copyPage": "Copy page",
+      "markdown": "View as Markdown",
+      "v0": "Open in v0",
+      "chatgpt": "Open in ChatGPT",
+      "claude": "Open in Claude"
+    }
+  },
+  "CommandMenu": {
+    "placeholder": "Search documentation...",
+    "noResults": "No results found.",
+    "navigation": "Navigate",
+    "goToPage": "Go to page"
   }
 }

@@ -2,6 +2,7 @@
 
 import type { TOCItemType } from "fumadocs-core/toc";
 import { TextAlignStartIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useTocActiveItem } from "@/hooks/use-toc-active-Item";
 import { cn } from "@/lib/utils";
@@ -89,6 +90,7 @@ function TOCThumb({
 }
 
 export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
+  const t = useTranslations("DocPage");
   const containerRef = React.useRef<HTMLDivElement>(null);
   const itemIds = toc.map((item) => item.url.replace("#", ""));
   const activeHeading = useTocActiveItem(itemIds);
@@ -157,7 +159,7 @@ export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
         <span className="inline-block">
           <TextAlignStartIcon className="size-4 text-muted-foreground" />
         </span>
-        On this page
+        {t("onThisPage")}
       </p>
       <div className="relative">
         {svg && (
