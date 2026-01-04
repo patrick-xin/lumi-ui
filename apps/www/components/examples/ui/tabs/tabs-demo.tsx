@@ -1,15 +1,15 @@
 import { Button } from "@/registry/ui/button";
 import { Input } from "@/registry/ui/input";
 import { Label } from "@/registry/ui/label";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
+import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
 export function TabsDemo() {
   return (
     <Tabs className="w-86" defaultValue="account">
-      <TabsList>
+      <TabsListContent className="rounded-sm bg-accent dark:bg-accent/50 text-accent-foreground data-[orientation=vertical]:h-48">
         <TabsTab value="account">Account</TabsTab>
         <TabsTab value="password">Password</TabsTab>
-      </TabsList>
+      </TabsListContent>
       <TabsPanel value="account">
         <div className="p-4 bg-card space-y-4 rounded-md outline outline-1 outline-border dark:-outline-offset-1">
           <div className="space-y-2">

@@ -1,8 +1,8 @@
 "use client";
 
 import type * as React from "react";
+import { Tabs } from "@/components/docs/doc-code-tabs";
 import { useInstallationConfigStore } from "@/hooks/use-config";
-import { Tabs } from "@/registry/ui/tabs";
 
 export function CodeTabs({
   children,
@@ -15,8 +15,6 @@ export function CodeTabs({
 
   return (
     <Tabs
-      variant="ghost"
-      {...props}
       defaultValue={defaultValue}
       onValueChange={(value) =>
         setInstallationConfig({
@@ -25,6 +23,8 @@ export function CodeTabs({
         })
       }
       value={installationType}
+      variant="ghost"
+      {...props}
     >
       {children}
     </Tabs>

@@ -1,6 +1,12 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { CopyButton } from "@/components/docs/copy-button";
+import {
+  Tabs,
+  TabsList,
+  TabsPanel,
+  TabsTab,
+} from "@/components/docs/doc-code-tabs";
 import { Callout } from "@/components/docs/mdx/call-out";
 import { CodeTabs } from "@/components/docs/mdx/code-tabs";
 import { ComponentList } from "@/components/docs/mdx/component-list";
@@ -16,17 +22,128 @@ import {
   TableRow,
 } from "@/components/docs/mdx/tables";
 import { cn } from "@/lib/utils";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 import { ApplyThemeButton } from "./components/docs/mdx/apply-theme-button";
 import { ColorPallete } from "./components/docs/mdx/color-pallete";
 
 export const mdxComponents: MDXComponents = {
-  p: ({ className, ...props }: React.ComponentProps<"p">) => (
-    <p
-      className={cn("leading-relaxed [&:not(:first-child)]:mt-4", className)}
+  ApplyThemeButton,
+  a: ({ ...props }): React.AnchorHTMLAttributes<HTMLAnchorElement> => {
+    if (props.href.startsWith("https")) {
+      return (
+        <a
+          className="relative inline-block font-medium text-primary underline underline-offset-4 transition-colors ease-linear"
+          rel="noopener noreferrer"
+          target="_blank"
+          {...props}
+        />
+      );
+    }
+
+    return (
+      <Link
+        className="inline-flex items-center justify-center text-primary underline-offset-4 hover:underline transition-colors ease-linear"
+        href={props.href}
+      >
+        {props.children}
+      </Link>
+    );
+  },
+  blockquote: ({ className, ...props }: React.ComponentProps<"blockquote">) => (
+    <blockquote
+      className={cn("mt-6 border-l-2 pl-6 italic", className)}
       {...props}
     />
   ),
+  Callout,
+  CodeTabs,
+  ColorPallete,
+  ComponentList,
+  ComponentPreview,
+  ComponentSourceCode,
+  CTACard,
+  code: ({
+    className,
+    __raw__,
+    __npm__,
+    __yarn__,
+    __pnpm__,
+    __src__,
+    __bun__,
+    ...props
+  }: React.ComponentProps<"code"> & {
+    __raw__?: string;
+    __src__?: string;
+    __npm__?: string;
+    __yarn__?: string;
+    __pnpm__?: string;
+    __bun__?: string;
+  }) => {
+    if (typeof props.children === "string") {
+      return (
+        <code
+          className={cn(
+            "text-code-foreground bg-code relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-sm break-words outline-none",
+            className,
+          )}
+          {...props}
+        />
+      );
+    }
+
+    const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__;
+    if (isNpmCommand) {
+      return (
+        <InstallationCommand
+          __bun__={__bun__}
+          __npm__={__npm__}
+          __pnpm__={__pnpm__}
+          __raw__={__raw__}
+          __yarn__={__yarn__}
+        />
+      );
+    }
+
+    return (
+      <>
+        {__raw__ && (
+          <CopyButton
+            className="absolute top-1.5 right-2 z-10"
+            code={__raw__}
+            variant="glow"
+          />
+        )}
+        <code {...props} />
+      </>
+    );
+  },
+  figcaption: ({
+    className,
+    children,
+    ...props
+  }: React.ComponentProps<"figcaption">) => {
+    return (
+      <figcaption
+        className={cn(
+          "text-code-foreground flex items-center gap-2",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </figcaption>
+    );
+  },
+  figure: ({ className, ...props }: React.ComponentProps<"figure">) => {
+    return (
+      <figure
+        className={cn(
+          "[&:not(:first-child)]:mt-4 max-h-[550px] overflow-y-auto no-scrollbar",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
   h1: ({ children, className, ...props }: React.ComponentProps<"h1">) => (
     <h1
       className={cn(
@@ -101,14 +218,11 @@ export const mdxComponents: MDXComponents = {
       {children}
     </h6>
   ),
-  strong: ({ className, ...props }: React.ComponentProps<"strong">) => (
-    <strong className={cn("font-semibold", className)} {...props} />
+  hr: ({ ...props }: React.ComponentProps<"hr">) => (
+    <hr className="my-4 md:my-8" {...props} />
   ),
-  ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
-    <ul
-      className={cn("my-6 ml-6 list-disc marker:text-primary", className)}
-      {...props}
-    />
+  li: ({ className, ...props }: React.ComponentProps<"li">) => (
+    <li className={cn("mt-2", className)} {...props} />
   ),
   ol: ({ className, ...props }: React.ComponentProps<"ol">) => (
     <ol
@@ -116,67 +230,12 @@ export const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
-  li: ({ className, ...props }: React.ComponentProps<"li">) => (
-    <li className={cn("mt-2", className)} {...props} />
-  ),
-  blockquote: ({ className, ...props }: React.ComponentProps<"blockquote">) => (
-    <blockquote
-      className={cn("mt-6 border-l-2 pl-6 italic", className)}
+  p: ({ className, ...props }: React.ComponentProps<"p">) => (
+    <p
+      className={cn("leading-relaxed [&:not(:first-child)]:mt-4", className)}
       {...props}
     />
   ),
-  hr: ({ ...props }: React.ComponentProps<"hr">) => (
-    <hr className="my-4 md:my-8" {...props} />
-  ),
-  a: ({ ...props }): React.AnchorHTMLAttributes<HTMLAnchorElement> => {
-    if (props.href.startsWith("https")) {
-      return (
-        <a
-          className="relative inline-block font-medium text-primary underline underline-offset-4 transition-colors ease-linear"
-          target="_blank"
-          rel="noopener noreferrer"
-          {...props}
-        />
-      );
-    }
-
-    return (
-      <Link
-        className="inline-flex items-center justify-center text-primary underline-offset-4 hover:underline transition-colors ease-linear"
-        href={props.href}
-      >
-        {props.children}
-      </Link>
-    );
-  },
-  figure: ({ className, ...props }: React.ComponentProps<"figure">) => {
-    return (
-      <figure
-        className={cn(
-          "[&:not(:first-child)]:mt-4 max-h-[550px] overflow-y-auto no-scrollbar",
-          className,
-        )}
-        {...props}
-      />
-    );
-  },
-  figcaption: ({
-    className,
-    children,
-    ...props
-  }: React.ComponentProps<"figcaption">) => {
-    return (
-      <figcaption
-        className={cn(
-          "text-code-foreground flex items-center gap-2",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </figcaption>
-    );
-  },
   pre: ({ className, children, ...props }: React.ComponentProps<"pre">) => {
     return (
       <pre
@@ -190,77 +249,23 @@ export const mdxComponents: MDXComponents = {
       </pre>
     );
   },
-  code: ({
-    className,
-    __raw__,
-    __npm__,
-    __yarn__,
-    __pnpm__,
-    __src__,
-    __bun__,
-    ...props
-  }: React.ComponentProps<"code"> & {
-    __raw__?: string;
-    __src__?: string;
-    __npm__?: string;
-    __yarn__?: string;
-    __pnpm__?: string;
-    __bun__?: string;
-  }) => {
-    if (typeof props.children === "string") {
-      return (
-        <code
-          className={cn(
-            "text-code-foreground bg-code relative rounded-md px-[0.3rem] py-[0.2rem] font-mono text-sm break-words outline-none",
-            className,
-          )}
-          {...props}
-        />
-      );
-    }
-
-    const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__;
-    if (isNpmCommand) {
-      return (
-        <InstallationCommand
-          __raw__={__raw__}
-          __npm__={__npm__}
-          __yarn__={__yarn__}
-          __pnpm__={__pnpm__}
-          __bun__={__bun__}
-        />
-      );
-    }
-
-    return (
-      <>
-        {__raw__ && (
-          <CopyButton
-            className="absolute top-1.5 right-2 z-10"
-            variant="glow"
-            code={__raw__}
-          />
-        )}
-        <code {...props} />
-      </>
-    );
-  },
   Step,
   Steps,
-  CodeTabs,
-  TabsList,
-  TabsTab,
-  TabsPanel,
-  table: Table,
-  tr: TableRow,
-  th: TableHeader,
-  td: TableCell,
-  ComponentPreview,
-  ComponentSourceCode,
+  strong: ({ className, ...props }: React.ComponentProps<"strong">) => (
+    <strong className={cn("font-semibold", className)} {...props} />
+  ),
   Tabs,
-  ComponentList,
-  CTACard,
-  Callout,
-  ApplyThemeButton,
-  ColorPallete,
+  TabsList,
+  TabsPanel,
+  TabsTab,
+  table: Table,
+  td: TableCell,
+  th: TableHeader,
+  tr: TableRow,
+  ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
+    <ul
+      className={cn("my-6 ml-6 list-disc marker:text-primary", className)}
+      {...props}
+    />
+  ),
 };
