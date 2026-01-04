@@ -33,5 +33,5 @@ export function useCopyToClipboard({
     }, console.error);
   };
 
-  return { isCopied, copyToClipboard };
+  return { copyToClipboard, isCopied, setIsCopied };
 }
