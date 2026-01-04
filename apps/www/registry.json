@@ -321,16 +321,16 @@
     },
     {
       "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.",
+      "description": "An easily stylable radio button component.",
       "files": [
         {
-          "path": "registry/ui/radio-group.tsx",
+          "path": "registry/ui/radio.tsx",
           "type": "registry:ui"
         }
       ],
-      "name": "radio-group",
-      "registryDependencies": ["radio", "utils"],
-      "title": "Radio Group",
+      "name": "radio",
+      "registryDependencies": ["utils"],
+      "title": "Radio",
       "type": "registry:ui"
     },
     {

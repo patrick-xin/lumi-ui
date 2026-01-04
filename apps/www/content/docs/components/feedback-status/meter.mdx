@@ -39,29 +39,42 @@ import { Meter } from "@/components/ui/meter";
 
 ```tsx
 export default function ExampleMeter() {
-  return (
-    <Meter value={75}>
-      <MeterTrack>
-        <MeterIndicator />
-      </MeterTrack>
-    </Meter>
-  );
+  return <Meter value={75} />;
 }
 ```
 
 ## Anatomy
-```tsx
-<Meter>
-  <MeterLabel />
-  <MeterTrack>
-    <MeterIndicator />
-  </MeterTrack>
-  <MeterValue />
-</Meter>
-```
 
-## Recipes
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
 
-### With Label and Value
+  <TabsPanel value="common">
+   ```tsx
+    <Meter />
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <MeterRoot>
+      <MeterLabel />
+      <MeterTrack>
+        <MeterIndicator />
+      </MeterTrack>
+      <MeterValue />
+    </MeterRoot>
+   ```
+  </TabsPanel>
+</Tabs>
+
+
+## With Label and Value
+
+<ComponentPreview name="meter-with-label-value" />
+
+## With Slider
 
 <ComponentPreview name="meter-custom" />

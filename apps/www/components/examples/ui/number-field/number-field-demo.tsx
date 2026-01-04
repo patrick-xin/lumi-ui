@@ -1,23 +1,11 @@
 import { Field, FieldLabel } from "@/registry/ui/field";
-import {
-  NumberField,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput,
-} from "@/registry/ui/number-field";
+import { NumberField } from "@/registry/ui/number-field";
 
 export function NumberFieldDemo() {
   return (
     <Field className="w-32">
       <FieldLabel>Quantity</FieldLabel>
-      <NumberField defaultValue={10} min={0} max={99}>
-        <NumberFieldGroup>
-          <NumberFieldDecrement />
-          <NumberFieldInput />
-          <NumberFieldIncrement />
-        </NumberFieldGroup>
-      </NumberField>
+      <NumberField defaultValue={10} max={99} min={0} />
     </Field>
   );
 }

@@ -6,18 +6,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const url = siteConfig.url;
 
   const docs = source.getPages().map((page) => ({
-    url: `${url}${page.url}`,
-    lastModified: new Date(),
     changeFrequency: "weekly" as const,
+    lastModified: new Date(),
     priority: 0.8,
+    url: `${url}${page.url}`,
   }));
 
   return [
     {
-      url: url,
-      lastModified: new Date(),
       changeFrequency: "monthly",
+      lastModified: new Date(),
       priority: 1,
+      url: url,
     },
     ...docs,
   ];
