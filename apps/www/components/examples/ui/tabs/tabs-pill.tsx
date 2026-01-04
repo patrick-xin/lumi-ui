@@ -1,9 +1,9 @@
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
-export function TabsGhostDemo() {
+export function TabsPill() {
   return (
     <Tabs className="w-86" defaultValue="1">
-      <TabsList className="gap-3 bg-transparent">
+      <TabsList>
         <TabsTab value="1">Tab One</TabsTab>
         <TabsTab value="2">Tab Two</TabsTab>
       </TabsList>
@@ -13,7 +13,7 @@ export function TabsGhostDemo() {
         </div>
       </TabsPanel>
       <TabsPanel value="2">
-        <div className="bg-secondary p-4">
+        <div className="bg-accent p-4">
           <p>Tab Two</p>
         </div>
       </TabsPanel>

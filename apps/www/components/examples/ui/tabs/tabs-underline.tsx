@@ -1,100 +1,48 @@
-import { Button } from "@/registry/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/registry/ui/card";
-import { Input } from "@/registry/ui/input";
-import { Label } from "@/registry/ui/label";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
+  TabIndicator,
+  Tabs,
+  TabsList,
+  TabsPanel,
+  TabsTab,
+} from "@/registry/ui/tabs";
 
-export function TabsUnderlineDemo() {
+export function TabsUnderline() {
   return (
-    <Tabs
-      defaultValue="account"
-      variant="underline"
-      className="gap-6 [&>[data-slot='tabs-panel']]:mx-8 w-full"
-    >
-      <TabsList className="w-full">
-        <TabsTab value="account">Account</TabsTab>
-        <TabsTab value="password">Password</TabsTab>
-        <TabsTab value="contact">Contact us</TabsTab>
-      </TabsList>
-      <TabsPanel value="account">
-        <Card>
-          <CardHeader>
-            <CardTitle>Account</CardTitle>
-            <CardDescription>
-              Make changes to your account here. Click save when you&apos;re
-              done.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-6">
-            <div className="grid gap-3">
-              <Label htmlFor="tabs-demo-name">Name</Label>
-              <Input id="tabs-demo-name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="tabs-demo-username">Username</Label>
-              <Input id="tabs-demo-username" defaultValue="@peduarte" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Save changes</Button>
-          </CardFooter>
-        </Card>
-      </TabsPanel>
-      <TabsPanel value="password">
-        <Card>
-          <CardHeader>
-            <CardTitle>Password</CardTitle>
-            <CardDescription>
-              Change your password here. After saving, you&apos;ll be logged
-              out.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-6">
-            <div className="grid gap-3">
-              <Label htmlFor="tabs-demo-current">Current password</Label>
-              <Input id="tabs-demo-current" type="password" />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="tabs-demo-new">New password</Label>
-              <Input id="tabs-demo-new" type="password" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Save password</Button>
-          </CardFooter>
-        </Card>
-      </TabsPanel>
-      <TabsPanel value="contact">
-        <Card>
-          <CardHeader>
-            <CardTitle>We're here to help!</CardTitle>
-            <CardDescription>Submit your request</CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-6">
-            <div className="grid gap-3">
-              <Label htmlFor="tabs-demo-subject">Subject</Label>
-              <Input id="tabs-demo-subject" placeholder="e.g. Billing issue" />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="tabs-demo-message">Message</Label>
-              <Input
-                id="tabs-demo-message"
-                placeholder="Please describe your issue in detail."
-              />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Submit</Button>
-          </CardFooter>
-        </Card>
-      </TabsPanel>
-    </Tabs>
+    <div className="flex gap-2">
+      <Tabs className="w-86" defaultValue="1">
+        <TabsList className="w-full gap-4 p-0 bg-transparent border-b data-[orientation=vertical]:border-b-0 data-[orientation=vertical]:border-l">
+          <TabsTab value="1">Tab One</TabsTab>
+          <TabsTab value="2">Tab Two</TabsTab>
+          <TabIndicator className="bg-foreground bottom-0 left-0 h-0.5 translate-x-(--active-tab-left) data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:left-0 data-[orientation=vertical]:h-(--active-tab-height) data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:translate-x-0 data-[orientation=vertical]:top-(--active-tab-top) data-[orientation=vertical]:translate-y-0 data-[orientation=vertical]:-start-[calc(--spacing(1)-0.5px)]" />
+        </TabsList>
+        <TabsPanel value="1">
+          <div className="bg-accent p-4">
+            <p>Tab One</p>
+          </div>
+        </TabsPanel>
+        <TabsPanel value="2">
+          <div className="bg-secondary p-4">
+            <p>Tab Two</p>
+          </div>
+        </TabsPanel>
+      </Tabs>
+      <Tabs className="w-86" defaultValue="1" orientation="vertical">
+        <TabsList className="gap-4 p-0 bg-transparent border-b data-[orientation=vertical]:border-b-0 data-[orientation=vertical]:border-l">
+          <TabsTab value="1">Tab One</TabsTab>
+          <TabsTab value="2">Tab Two</TabsTab>
+          <TabIndicator className="bg-foreground bottom-0 left-0 h-0.5 translate-x-(--active-tab-left) data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:left-0 data-[orientation=vertical]:h-(--active-tab-height) data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:translate-x-0 data-[orientation=vertical]:top-(--active-tab-top) data-[orientation=vertical]:translate-y-0 data-[orientation=vertical]:-start-[calc(--spacing(1)-0px)]" />
+        </TabsList>
+        <TabsPanel value="1">
+          <div className="bg-accent p-4 h-full">
+            <p>Tab One</p>
+          </div>
+        </TabsPanel>
+        <TabsPanel value="2">
+          <div className="bg-secondary p-4 h-full">
+            <p>Tab Two</p>
+          </div>
+        </TabsPanel>
+      </Tabs>
+    </div>
   );
 }

@@ -15,12 +15,12 @@ export default function Page(): React.ReactElement {
       <BlogBanner />
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {posts.map((post) => (
-          <Link key={post.url} href={post.url}>
+          <Link href={post.url} key={post.url}>
             <BlogCard
+              category={post.data.category}
+              publishDate={post.data.date as string}
               src={post.data.image}
               title={post.data.title}
-              publishDate={post.data.date as string}
-              category={post.data.category}
             />
           </Link>
         ))}

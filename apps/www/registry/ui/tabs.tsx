@@ -7,7 +7,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const tabsListVariants = cva(
-  "relative p-[3px] z-0 flex w-fit h-full items-center justify-center text-muted-foreground data-[orientation=vertical]:flex-col",
+  "relative p-[3px] z-0 flex w-fit h-full items-center justify-center text-muted-foreground",
   {
     variants: {
       variant: {
@@ -45,21 +45,7 @@ const tabIndicatorVariants = cva(
   },
 );
 
-type TabsContextValue = {
-  variant: VariantProps<typeof tabsListVariants>["variant"];
-};
 
-const TabsContext = React.createContext<TabsContextValue | undefined>(
-  undefined,
-);
-
-function useTabsContext() {
-  const context = React.useContext(TabsContext);
-  if (!context) {
-    throw new Error("Tabs components must be used within <Tabs>");
-  }
-  return context;
-}
 
 function Tabs({
   className,
@@ -71,7 +57,6 @@ function Tabs({
     orientation?: "horizontal" | "vertical";
   }) {
   return (
-    <TabsContext.Provider value={{ variant }}>
       <BaseTabs.Root
         data-slot="tabs"
         orientation={orientation}
@@ -81,7 +66,6 @@ function Tabs({
         )}
         {...props}
       />
-    </TabsContext.Provider>
   );
 }
 
@@ -90,20 +74,18 @@ function TabsList({
   children,
   ...props
 }: React.ComponentProps<typeof BaseTabs.List>) {
-  const { variant } = useTabsContext();
-
   return (
     <BaseTabs.List
       data-slot="tabs-list"
       className={cn(
-        tabsListVariants({ variant }),
-        "data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col",
+       // tabsListVariants({ variant: "pill" }),
+        "relative z-0 flex w-fit h-full items-center justify-center" 
+        ,"data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col",
         className,
       )}
       {...props}
     >
       {children}
-      <TabIndicator />
     </BaseTabs.List>
   );
 }
@@ -112,8 +94,6 @@ function TabsTab({
   className,
   ...props
 }: React.ComponentProps<typeof BaseTabs.Tab>) {
-  const { variant } = useTabsContext();
-
   return (
     <BaseTabs.Tab
       data-slot="tabs-tab"
@@ -127,8 +107,7 @@ function TabsTab({
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "data-[orientation=horizontal]:flex-1 data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
-        variant === "solid" && "hover:bg-accent data-[active]:bg-accent/70",
-        variant === "ghost" && "data-[active]:text-foreground",
+       // variant === "solid" && "hover:bg-accent data-[active]:bg-accent/70",
         className,
       )}
       {...props}
@@ -140,12 +119,10 @@ function TabIndicator({
   className,
   ...props
 }: React.ComponentProps<typeof BaseTabs.Indicator>) {
-  const { variant } = useTabsContext();
-
   return (
     <BaseTabs.Indicator
       data-slot="tab-indicator"
-      className={cn(tabIndicatorVariants({ variant }), className)}
+      className={cn("absolute z-0 w-(--active-tab-width) h-(--active-tab-height) transition-all duration-300 ease-in-out translate-x-(--active-tab-left) -translate-y-(--active-tab-bottom)", className)}
       {...props}
     />
   );
@@ -164,4 +141,4 @@ function TabsPanel({
   );
 }
 
-export { Tabs, TabsList, TabsTab, TabsPanel };
+export { Tabs, TabsList, TabsTab, TabsPanel,TabIndicator };

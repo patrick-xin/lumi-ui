@@ -2,6 +2,7 @@
 
 import { useIsMac } from "@lumi-ui/ui/hooks/use-is-mac";
 import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
+import { Kbd, KbdGroup } from "@lumi-ui/ui/kbd";
 import { ArrowDown, ArrowUp, CornerDownLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -24,7 +25,6 @@ import {
   AutocompletePositioner,
 } from "@/registry/ui/autocomplete";
 import { Button } from "@/registry/ui/button";
-import { Kbd, KbdGroup } from "@/registry/ui/kbd";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Separator } from "@/registry/ui/separator";
 import type { DocRoot, NavGroup, NavItem } from "@/types";
@@ -76,42 +76,42 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
     <>
       <CommandMenuTriggerButton handleOpenChange={handleOpenChange} />
       <Autocomplete
-        modal
         autoHighlight
-        open={isOpen}
-        onOpenChange={setIsOpen}
         items={navGroups}
-        value={inputValue}
-        onValueChange={handleValueChange}
         itemToStringValue={(item) => item.label}
+        modal
+        onOpenChange={setIsOpen}
         onOpenChangeComplete={(open) => !open && setInputValue("")}
+        onValueChange={handleValueChange}
+        open={isOpen}
+        value={inputValue}
       >
         <AutocompletePortal>
           <AutocompleteBackdrop className="fixed inset-0 bg-black/50" />
           <AutocompletePositioner
-            positionMethod="fixed"
             className="inset-0 z-0 bottom-0 pointer-events-none flex justify-center items-center"
+            positionMethod="fixed"
           >
             <AutocompletePopup
-              finalFocus={() => !isNavigatingRef.current}
               className={cn(
                 "relative bg-popover text-popover-foreground rounded outline outline-input animate-dialog",
                 "pointer-events-auto w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
                 "-translate-y-32 max-w-[var(--available-width)]",
               )}
+              finalFocus={() => !isNavigatingRef.current}
             >
               <AutocompleteInputGroup
-                placeholder={t("placeholder")}
-                variant="ghost"
                 className="caret-primary"
                 inputSize="lg"
+                placeholder={t("placeholder")}
                 showClear
+                variant="ghost"
               />
               <Separator />
               <ScrollArea
-                noScrollBar
-                gradientScrollFade
                 className="h-96 pt-2 pb-12"
+                gradientScrollFade
+                noScrollBar
               >
                 <AutocompleteEmpty className="text-center text-base py-12 text-muted-foreground">
                   {t("noResults")}
@@ -119,9 +119,9 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                 <AutocompleteList>
                   {(group: NavGroup) => (
                     <AutocompleteGroup
-                      key={group.value}
-                      items={group.items}
                       className="my-2 first:mt-0 last:mb-0"
+                      items={group.items}
+                      key={group.value}
                     >
                       <AutocompleteGroupLabel className="ml-1 mb-1 font-semibold uppercase">
                         {group.value}
@@ -135,10 +135,10 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
 
                           return (
                             <AutocompleteItem
-                              onClick={() => handleSelect(item)}
-                              key={item.value}
-                              value={item}
                               className="font-medium flex items-center text-sm gap-3 data-[highlighted]:before:inset-x-1 data-[highlighted]:before:rounded-md py-2.5"
+                              key={item.value}
+                              onClick={() => handleSelect(item)}
+                              value={item}
                             >
                               <Icon className="size-4 text-muted-foreground" />
                               {item.label}
@@ -171,11 +171,11 @@ const CommandMenuTriggerButton = ({
   const isMac = useIsMac();
   return (
     <Button
-      onClick={handleOpenChange}
-      variant="glow"
       className={cn(
         "relative h-8 w-full justify-start sm:pr-12 md:w-48 lg:w-56 xl:w-64",
       )}
+      onClick={handleOpenChange}
+      variant="glow"
     >
       <span className="hidden lg:inline-flex text-muted-foreground">
         {t("placeholder")}

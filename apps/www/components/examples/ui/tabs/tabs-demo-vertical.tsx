@@ -1,57 +1,49 @@
 import { Button } from "@/registry/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/registry/ui/card";
 import { Input } from "@/registry/ui/input";
 import { Label } from "@/registry/ui/label";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
 export function TabsVerticalDemo() {
   return (
-    <Tabs defaultValue="account" orientation="vertical" className="w-full">
+    <Tabs className="w-full" defaultValue="account" orientation="vertical">
       <TabsList>
         <TabsTab value="account">Account</TabsTab>
         <TabsTab value="password">Password</TabsTab>
       </TabsList>
       <TabsPanel value="account">
-        <Card>
-          <CardHeader>
-            <CardTitle>Account</CardTitle>
-            <CardDescription>
+        <div>
+          <div>
+            <div>Account</div>
+            <p>
               Make changes to your account here. Click save when you&apos;re
               done.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-6">
+            </p>
+          </div>
+          <div className="grid gap-6">
             <div className="grid gap-3">
               <Label htmlFor="tabs-demo-name">Name</Label>
-              <Input id="tabs-demo-name" defaultValue="Pedro Duarte" />
+              <Input defaultValue="Pedro Duarte" id="tabs-demo-name" />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="tabs-demo-username">Username</Label>
-              <Input id="tabs-demo-username" defaultValue="@peduarte" />
+              <Input defaultValue="@peduarte" id="tabs-demo-username" />
             </div>
-          </CardContent>
-          <CardFooter>
+          </div>
+          <div>
             <Button>Save changes</Button>
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
       </TabsPanel>
       <TabsPanel value="password">
-        <Card>
-          <CardHeader>
-            <CardTitle>Password</CardTitle>
-            <CardDescription>
+        <div>
+          <div>
+            <div>Password</div>
+            <p>
               Change your password here. After saving, you&apos;ll be logged
               out.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-6">
+            </p>
+          </div>
+          <div className="grid gap-6">
             <div className="grid gap-3">
               <Label htmlFor="tabs-demo-current">Current password</Label>
               <Input id="tabs-demo-current" type="password" />
@@ -60,11 +52,11 @@ export function TabsVerticalDemo() {
               <Label htmlFor="tabs-demo-new">New password</Label>
               <Input id="tabs-demo-new" type="password" />
             </div>
-          </CardContent>
-          <CardFooter>
+          </div>
+          <div>
             <Button>Save password</Button>
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
       </TabsPanel>
     </Tabs>
   );
