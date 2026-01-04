@@ -42,7 +42,7 @@ const tickVariants = {
 export function CopyButton({
   code,
   className,
-  variant = "ghost",
+  variant = "glow",
   ...props
 }: React.ComponentProps<typeof Button> & {
   code: string;
