@@ -21,13 +21,13 @@ export function normalizeSidebarTree(
     .map((node) => {
       if (node.type === "folder") {
         return {
-          type: "header",
-          label: node.name,
           items: transformChildren(
             node.children,
             pathname,
             node.name as string,
           ),
+          label: node.name,
+          type: "header",
         } as SidebarItem;
       }
       return null;
@@ -48,14 +48,14 @@ function transformChildren(
       // Handle Folders
       if (node.type === "folder") {
         return {
-          type: "folder",
-          label: node.name,
           defaultOpen: node.defaultOpen,
           items: transformChildren(
             (node as DocFolderNode).children,
             pathname,
             rootSectionName,
           ),
+          label: node.name,
+          type: "folder",
         } as SidebarItem;
       }
 
@@ -65,15 +65,15 @@ function transformChildren(
         const shouldShowStatus = FOLDERS_WITH_STATUS.includes(rootSectionName);
 
         return {
-          type: "link",
-          label: page.name,
-          href: page.url,
           active: isActive(page.url, pathname),
+          disabled: page.status === "planned",
+          href: page.url,
           icon: page.icon
             ? IconMap[page.icon as keyof typeof icons]
             : undefined,
+          label: page.name,
           status: shouldShowStatus ? page.status : undefined,
-          disabled: page.status === "planned",
+          type: "link",
         } as SidebarItem;
       }
 
@@ -105,12 +105,12 @@ export function getSearchGroups(tree: DocRoot): NavGroup[] {
     items.forEach((item) => {
       if (item.type === "link") {
         currentGroupItems.push({
-          value: item.href,
-          label: item.label,
-          url: item.href,
-          status: item.status,
           folderName: currentContext,
           icon: item.icon,
+          label: item.label,
+          status: item.status,
+          url: item.href,
+          value: item.href,
         });
       } else if (item.type === "folder") {
         flatten(item.items, item.label);
@@ -122,13 +122,12 @@ export function getSearchGroups(tree: DocRoot): NavGroup[] {
     // Only add the group if it actually has direct link children
     if (currentGroupItems.length > 0) {
       groups.push({
-        value: currentContext,
         items: currentGroupItems,
+        value: currentContext,
       });
     }
   };
 
-  // Start flattening
   flatten(sidebarItems, "General");
 
   return groups;

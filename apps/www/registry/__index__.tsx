@@ -16,8 +16,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/lib/utils.ts",
-                "type": "registry:lib",
-                "target": ""
+                "target": "",
+                "type": "registry:lib"
           }
     ],
     component: React.lazy(async () => {
@@ -36,8 +36,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/accordion.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -56,8 +56,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/avatar.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -76,8 +76,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/alert-dialog.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -96,8 +96,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/dialog.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -116,8 +116,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/tabs.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -136,8 +136,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/scroll-area.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -156,8 +156,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/popover.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -176,8 +176,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/dropdown-menu.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -196,8 +196,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/autocomplete.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -216,8 +216,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/input.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -236,8 +236,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/button.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -256,8 +256,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/checkbox.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -276,8 +276,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/switch.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -296,8 +296,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/select.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -316,8 +316,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/navigation-menu.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -336,8 +336,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/collapsible.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -356,8 +356,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/preview-card.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -376,8 +376,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/progress.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -396,8 +396,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/field.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -416,8 +416,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/fieldset.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -436,8 +436,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/form.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -456,8 +456,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/radio-group.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -476,8 +476,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/tooltip.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -496,8 +496,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/toggle.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -516,8 +516,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/toggle-group.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -536,8 +536,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/toast.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -556,8 +556,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/checkbox-group.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -576,8 +576,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/slider.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -596,8 +596,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/separator.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -616,8 +616,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/number-field.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -636,8 +636,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/meter.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -656,8 +656,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/toolbar.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -676,8 +676,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/context-menu.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -696,8 +696,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/combobox.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -716,8 +716,8 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/menubar.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
@@ -736,13 +736,33 @@ export const components: ComponentRegistry = {
     files:     [
           {
                 "path": "registry/ui/arrow-svg.tsx",
-                "type": "registry:ui",
-                "target": ""
+                "target": "",
+                "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
       const mod = await import("@/registry/ui/arrow-svg");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "arrow-svg";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea": {
+    name: "textarea",
+    description: "",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    files:     [
+          {
+                "path": "registry/ui/textarea.tsx",
+                "target": "",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/ui/textarea");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "textarea";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -2368,6 +2388,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "field-combobox": {
+    name: "field-combobox",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["field"],
+    files: [{
+      path: "components/examples/ui/field/field-combobox.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/field/field-combobox");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "field-combobox";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "field-demo": {
     name: "field-demo",
     description: "",
@@ -2525,6 +2563,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/fieldset/fieldset-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "fieldset-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "fieldset-with-description-label": {
+    name: "fieldset-with-description-label",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["fieldset"],
+    files: [{
+      path: "components/examples/ui/fieldset/fieldset-with-description-label.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/fieldset/fieldset-with-description-label");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "fieldset-with-description-label";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -3520,6 +3576,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "slider-custom": {
+    name: "slider-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["slider"],
+    files: [{
+      path: "components/examples/ui/slider/slider-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/slider/slider-custom");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "slider-custom";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "slider-demo": {
     name: "slider-demo",
     description: "",
@@ -3767,6 +3841,60 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/tabs/tabs-underline");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-underline";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea-demo": {
+    name: "textarea-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["textarea"],
+    files: [{
+      path: "components/examples/ui/textarea/textarea-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/textarea/textarea-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "textarea-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea-error": {
+    name: "textarea-error",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["textarea"],
+    files: [{
+      path: "components/examples/ui/textarea/textarea-error.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/textarea/textarea-error");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "textarea-error";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "textarea-variants": {
+    name: "textarea-variants",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["textarea"],
+    files: [{
+      path: "components/examples/ui/textarea/textarea-variants.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/textarea/textarea-variants");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "textarea-variants";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

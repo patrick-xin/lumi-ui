@@ -9,8 +9,8 @@ export async function GET(
   { params }: RouteContext<"/llms/[[...slug]]">,
 ) {
   const { slug } = await params;
-
   const page = source.getPage(slug);
+
   if (!page) notFound();
 
   return new Response(await getLLMText(page), {

@@ -1,19 +1,6 @@
 {
-  "name": "lumi-ui",
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo run lint --",
-    "format": "biome format --write .",
-    "prepare": "husky",
-    "changeset": "changeset",
-    "version-packages": "changeset version",
-    "release": "changeset publish"
+  "dependencies": {
+    "next": "^16.1.1"
   },
   "devDependencies": {
     "@biomejs/biome": "latest",
@@ -23,8 +10,21 @@
     "husky": "^9.1.7",
     "turbo": "^2.7.2"
   },
+  "name": "lumi-ui",
   "packageManager": "bun@1.3.5",
-  "dependencies": {
-    "next": "^16.1.1"
-  }
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "changeset": "changeset",
+    "dev": "turbo dev",
+    "format": "biome format --write .",
+    "lint": "turbo run lint --",
+    "prepare": "husky",
+    "release": "changeset publish",
+    "version-packages": "changeset version"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

@@ -14,8 +14,8 @@ import { cn } from "../lib/utils";
 import { buttonVariants } from "../registry/ui/button";
 
 const languages = [
-  { value: "en", label: "English" },
-  { value: "cn", label: "中文" },
+  { label: "English", value: "en" },
+  { label: "中文", value: "cn" },
 ];
 
 export function LanguageSelector() {
@@ -28,7 +28,6 @@ export function LanguageSelector() {
     <Select
       disabled={isPending}
       items={languages}
-      value={value}
       onValueChange={(value) => {
         setValue(value as string);
         startTransition(() => {
@@ -36,14 +35,15 @@ export function LanguageSelector() {
             // @ts-expect-error -- TypeScript will validate that only known params
             // are used in combination with a given pathname. Since the two will
             // always match for the current route, we can skip runtime checks.
-            { pathname, params },
+            { params, pathname },
             { locale: value },
           );
         });
       }}
+      value={value}
     >
       <SelectTrigger
-        className={cn(buttonVariants({ variant: "glow", size: "icon-sm" }))}
+        className={cn(buttonVariants({ size: "icon-sm", variant: "glow" }))}
       >
         <LanguagesIcon />
       </SelectTrigger>
@@ -54,11 +54,11 @@ export function LanguageSelector() {
       >
         {languages.map((language) => (
           <SelectItemContent
+            className="text-xs font-medium text-primary"
             disabled={language.value === value}
+            indicatorIcon={null}
             key={language.value}
             value={language.value}
-            indicatorIcon={null}
-            className="text-xs font-medium text-primary"
           >
             {language.label}
           </SelectItemContent>

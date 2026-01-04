@@ -9,7 +9,7 @@ export function ComponentPreviewTabs({
   source: React.ReactNode;
 }) {
   return (
-    <Tabs variant="ghost" defaultValue="preview">
+    <Tabs defaultValue="preview" variant="ghost">
       <TabsList>
         <TabsTab value="preview">Preview</TabsTab>
         <TabsTab value="code">Code</TabsTab>
@@ -19,15 +19,15 @@ export function ComponentPreviewTabs({
         value="preview"
       >
         <GradientBorders
-          colorVar="--primary"
           baseOpacity={40}
+          colorVar="--primary"
           enableHover={false}
         />
         <div className="w-full min-h-[420px] flex justify-center items-center p-10 has-[[data-slot='accordion']]:items-start has-[[data-slot='menu-trigger']]:items-start [&_input]:max-w-xs">
           {component}
         </div>
       </TabsPanel>
-      <TabsPanel value="code" className="relative h-[420px]">
+      <TabsPanel className="relative h-[420px]" value="code">
         <div className="*:[figure]:h-[420px] *:[figure]:overflow-scroll *:[figure]:no-scrollbar">
           {source}
         </div>

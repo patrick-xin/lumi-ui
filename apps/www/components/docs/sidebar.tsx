@@ -34,7 +34,7 @@ export const DocsSidebar = ({ tree }: DocsSidebarProps) => {
       <ScrollArea gradientScrollFade noScrollBar>
         <nav className="w-full space-y-6 pt-16 xl:pt-8 pb-48">
           {items.map((item, index) => (
-            <SidebarSection key={String(index)} item={item} />
+            <SidebarSection item={item} key={String(index)} />
           ))}
         </nav>
       </ScrollArea>
@@ -91,16 +91,16 @@ const SidebarFolder = ({
   const isActiveFolder = hasActiveChild(item.items);
 
   return (
-    <Collapsible defaultOpen={true} className="group/collapsible">
+    <Collapsible className="group/collapsible" defaultOpen={true}>
       <CollapsibleTrigger
         render={
           <Button
-            variant="ghost"
-            size="sm"
             className={cn(
               "w-full justify-between h-8 px-2 text-sm font-semibold",
               isActiveFolder && "text-primary",
             )}
+            size="sm"
+            variant="ghost"
           >
             {item.label}
             <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-data-[open]/collapsible:rotate-90" />
@@ -125,8 +125,8 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
         {item.label}
         {item.status === "planned" && (
           <Badge
-            variant="outline"
             className="ml-auto text-[9px] font-medium text-muted-foreground/50"
+            variant="outline"
           >
             Planned
           </Badge>
@@ -137,8 +137,6 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
 
   return (
     <Button
-      variant="ghost"
-      size="sm"
       className={cn(
         "w-full justify-start h-8 px-2 text-sm font-normal text-muted-foreground",
         item.active &&
@@ -164,6 +162,8 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
           )}
         </Link>
       }
+      size="sm"
+      variant="ghost"
     />
   );
 };

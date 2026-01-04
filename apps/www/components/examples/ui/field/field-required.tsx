@@ -9,8 +9,8 @@ export function FieldRequiredDemo() {
   return (
     <Field>
       <FieldLabel>Password</FieldLabel>
+      <FieldControl placeholder="••••••••" required type="password" />
       <FieldDescription>Must be at least 8 characters long.</FieldDescription>
-      <FieldControl required type="password" placeholder="••••••••" />
     </Field>
   );
 }

@@ -60,37 +60,37 @@ export default function DropdownMenuMultipleTriggersDemo() {
       <div className="flex flex-wrap items-center gap-2">
         <DropdownMenuTrigger
           handle={demoMenu}
-          payload={"library" as const}
           id="menu-trigger-1"
+          payload={"library" as const}
           render={<Button variant="outline">Library</Button>}
         />
         <DropdownMenuTrigger
           handle={demoMenu}
-          payload={"playback" as const}
           id="menu-trigger-2"
+          payload={"playback" as const}
           render={<Button variant="outline">Playback</Button>}
         />
         <DropdownMenuTrigger
           handle={demoMenu}
-          payload={"share" as const}
           id="menu-trigger-3"
+          payload={"share" as const}
           render={<Button variant="outline">Share</Button>}
         />
         <Button
-          type="button"
           onClick={() => {
             setActiveTrigger("menu-trigger-2");
             setOpen(true);
           }}
+          type="button"
         >
           Open playback (controlled)
         </Button>
       </div>
       <DropdownMenu
         handle={demoMenu}
+        onOpenChange={handleOpenChange}
         open={open}
         triggerId={activeTrigger}
-        onOpenChange={handleOpenChange}
       >
         {({ payload }) => (
           <DropdownMenuContent matchAnchorWidth={false} showArrow>

@@ -19,6 +19,7 @@ type DocsAritcleHeaderProps = {
         api?: string | undefined;
       }
     | undefined;
+  locale: string;
 };
 
 export function DocsAritcleHeader({
@@ -28,6 +29,7 @@ export function DocsAritcleHeader({
   slug,
   url,
   links,
+  locale,
 }: DocsAritcleHeaderProps) {
   return (
     <header className="space-y-4">
@@ -36,7 +38,7 @@ export function DocsAritcleHeader({
           {title}
         </h1>
         <div className="bg-background/80 border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center justify-between gap-2 border-t px-6 py-4 backdrop-blur-sm sm:static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:backdrop-blur-none sm:justify-between">
-          <DocsActions slug={slug} url={absoluteUrl(url)} />
+          <DocsActions locale={locale} slug={slug} url={absoluteUrl(url)} />
           <DocsQuickNav neighbours={neighbours} />
         </div>
       </div>

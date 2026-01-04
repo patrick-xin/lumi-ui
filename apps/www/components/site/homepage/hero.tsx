@@ -40,18 +40,16 @@ export function HeroSection() {
               </p>
               <div className="mt-12 flex items-center gap-4 mx-auto xl:mt-16">
                 <Button
-                  size="lg"
                   nativeButton={false}
                   render={
                     <Link href="/docs/introduction">
                       <span className="text-nowrap">{t("viewDocs")}</span>
                     </Link>
                   }
+                  size="lg"
                 />
                 <Button
-                  size="lg"
                   nativeButton={false}
-                  variant="glow"
                   render={
                     <Link href="/docs/components">
                       <span className="text-nowrap">
@@ -59,6 +57,8 @@ export function HeroSection() {
                       </span>
                     </Link>
                   }
+                  size="lg"
+                  variant="glow"
                 />
               </div>
             </div>

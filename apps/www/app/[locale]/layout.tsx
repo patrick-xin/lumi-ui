@@ -11,22 +11,9 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "@/registry/ui/toast";
 
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+  alternates: {
+    canonical: "./",
   },
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://www.lumiui.dev",
-  ),
-  description: siteConfig.description,
-  keywords: [
-    "Next.js",
-    "React",
-    "Tailwind CSS",
-    "Components",
-    "Base UI",
-    "lumi-ui",
-  ],
   authors: [
     {
       name: "lumi-ui",
@@ -34,39 +21,55 @@ export const metadata: Metadata = {
     },
   ],
   creator: "lumi-ui",
+  description: siteConfig.description,
+  icons: {
+    apple: "/apple-touch-icon.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+  },
+  keywords: [
+    "Next.js",
+    "React",
+    "Tailwind CSS",
+    "Components",
+    "Base UI",
+    "lumi-ui",
+    "AI",
+    "Agent Experience",
+    "Agentic Coding",
+  ],
+  manifest: `${siteConfig.url}/site.webmanifest`,
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL || "https://www.lumiui.dev",
+  ),
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: process.env.NEXT_PUBLIC_APP_URL || "https://lumiui.dev",
-    title: siteConfig.name,
     description: siteConfig.description,
-    siteName: siteConfig.name,
     images: [
       {
+        alt: siteConfig.name,
+        height: 630,
         url: `${process.env.NEXT_PUBLIC_APP_URL || "https://lumiui.dev"}/opengraph-image.png`,
         width: 1200,
-        height: 630,
-        alt: siteConfig.name,
       },
     ],
+    locale: "en_US",
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    type: "website",
+    url: process.env.NEXT_PUBLIC_APP_URL || "https://lumiui.dev",
+  },
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    creator: "@alpesdream",
     description: siteConfig.description,
     images: [
       `${process.env.NEXT_PUBLIC_APP_URL || "https://lumiui.dev"}/opengraph-image.png`,
     ],
-    creator: "@alpesdream",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
-  manifest: `${siteConfig.url}/site.webmanifest`,
-  alternates: {
-    canonical: "./",
+    title: siteConfig.name,
   },
 };
 
@@ -91,9 +94,9 @@ export default async function RootLayout({
             <div className="root">
               {children}
               <Toaster
+                limit={3}
                 position="bottom-right"
                 swipeDirection={["right", "down"]}
-                limit={3}
               />
             </div>
           </NextIntlClientProvider>

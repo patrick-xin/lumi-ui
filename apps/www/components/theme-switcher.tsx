@@ -15,14 +15,14 @@ import {
 
 const THEME_OPTIONS = [
   {
-    id: "shadcn",
     colorClass: "bg-[oklch(0.145_0_0)] dark:bg-[oklch(0.922_0_0)]",
+    id: "shadcn",
   },
-  { id: "celeste", colorClass: "bg-[oklch(0.72_0.14_265)]" },
-  { id: "orchid", colorClass: "bg-[oklch(0.71_0.08_302)]" },
-  { id: "lagoon", colorClass: "bg-[oklch(0.55_0.15_180)]" },
-  { id: "dune", colorClass: "bg-[oklch(0.66_0.197_36)]" },
-  { id: "canopy", colorClass: "bg-[oklch(0.72_0.18_128)]" },
+  { colorClass: "bg-[oklch(0.72_0.14_265)]", id: "celeste" },
+  { colorClass: "bg-[oklch(0.71_0.08_302)]", id: "orchid" },
+  { colorClass: "bg-[oklch(0.55_0.15_180)]", id: "lagoon" },
+  { colorClass: "bg-[oklch(0.66_0.197_36)]", id: "dune" },
+  { colorClass: "bg-[oklch(0.72_0.18_128)]", id: "canopy" },
 ];
 
 export function ThemeSwitcher() {
@@ -53,22 +53,22 @@ export function ThemeSwitcher() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="glow" size="icon-sm" title="Switch theme">
+          <Button size="icon-sm" title="Switch theme" variant="glow">
             <PaletteIcon className="size-4 transition-transform" />
           </Button>
         }
       />
       <DropdownMenuContent
-        matchAnchorWidth={false}
         className="shadow-md shadow-primary/10 outline dark:-outline-offset-1 outline-primary/10"
+        matchAnchorWidth={false}
       >
         <div className="grid grid-cols-3 gap-y-1">
           {THEME_OPTIONS.map(({ id, colorClass }) => (
             <DropdownMenuItem
+              className="extend-touch-target relative py-2"
+              disabled={themeSet === id}
               key={id}
               onClick={() => handleThemeSetChange(id)}
-              disabled={themeSet === id}
-              className="extend-touch-target relative py-2"
             >
               <div
                 className={cn(

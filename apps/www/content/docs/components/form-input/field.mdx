@@ -41,8 +41,13 @@ links:
   <FieldItem />
   <FieldError />
   <FieldValidity />
-</FieldRoot>
+</Field>
 ```
+
+<Callout variant="warning" title="Warning">
+  Form controls must have an accessible name in order to be recognized by assistive technologies. `<FieldLabel>` and `<FieldDescription>` automatically assign the accessible name and description to their associated control.
+</Callout>
+
 
 ## State and Validation
 
@@ -57,15 +62,17 @@ links:
 
 ## Use with other form controls
 
-<Callout variant="warning" title="Warning">
-  Form controls must have an accessible name in order to be recognized by assistive technologies. `<FieldLabel>` and `<FieldDescription>` automatically assign the accessible name and description to their associated control.
-</Callout>
-
 ### Select
 <ComponentPreview name="field-select" />
 
+### Autocomplete
+<ComponentPreview name="field-autocomplete" />
+
+### Combobox
+<ComponentPreview name="field-combobox" />
+
 <Callout variant="success" title="Note">
-  You can implicitly label [`<Checkbox>`](https://www.lumiui.dev/docs/components/form-input/checkbox), [`<Radio>`](https://www.lumiui.dev/docs/components/form-input/radio-group) and [`<Switch>`](https://www.lumiui.dev/docs/components/form-input/switch) components by enclosing them with `<FieldLabel>`. See example below. 
+  You can implicitly label [`<Checkbox>`](/docs/components/form-input/checkbox), [`<Radio>`](/docs/components/form-input/radio-group) and [`<Switch>`](/docs/components/form-input/switch) components by enclosing them with `<FieldLabel>`. See example below. 
 </Callout>
 
 ### Checkbox
@@ -77,8 +84,6 @@ links:
 ### Radio Group
 <ComponentPreview name="field-radio" />
 
-### Autocomplete
-<ComponentPreview name="field-autocomplete" />
 
 
 ## API Reference

@@ -138,10 +138,10 @@ function getExistingDemoFiles(): DemoFile[] {
             const fullPath = `components/examples/${relativePath}.tsx`;
 
             demoFiles.push({
-              name,
               folder: folderName,
-              relativePath,
               fullPath,
+              name,
+              relativePath,
             });
           }
         } else if (entry.name.endsWith(".tsx") && entry.name.includes("-")) {
@@ -151,10 +151,10 @@ function getExistingDemoFiles(): DemoFile[] {
           const fullPath = `components/examples/${relativePath}.tsx`;
 
           demoFiles.push({
-            name,
             folder: prefix,
-            relativePath,
             fullPath,
+            name,
+            relativePath,
           });
         }
       }
@@ -252,7 +252,7 @@ function validateRegistry(
     }
   }
 
-  return { warnings, errors, componentsWithDemos };
+  return { componentsWithDemos, errors, warnings };
 }
 
 function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
@@ -263,8 +263,8 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
     const registryFiles =
       item.files?.map((file) => ({
         path: file.path,
-        type: file.type,
         target: "",
+        type: file.type,
       })) || [];
 
     let componentLazyLoad = "";

@@ -30,7 +30,7 @@ export async function ComponentPreview({
       className={className}
       component={<Component />}
       source={
-        <ComponentSourceCode name={name} collapsible={collapsible} lang="tsx" />
+        <ComponentSourceCode collapsible={collapsible} lang="tsx" name={name} />
       }
     />
   );

@@ -30,23 +30,23 @@ export function InstallationCommandClient({
   const packageManager = config.packageManager || "pnpm";
 
   const tabs = {
-    pnpm: { highlighted: pnpm, code: pnpmCode },
-    npm: { highlighted: npm, code: npmCode },
-    yarn: { highlighted: yarn, code: yarnCode },
-    bun: { highlighted: bun, code: bunCode },
+    bun: { code: bunCode, highlighted: bun },
+    npm: { code: npmCode, highlighted: npm },
+    pnpm: { code: pnpmCode, highlighted: pnpm },
+    yarn: { code: yarnCode, highlighted: yarn },
   };
 
   return (
     <Tabs
-      variant={"underline"}
-      value={packageManager}
+      className="gap-0"
       onValueChange={(value) =>
         setInstallationConfig({
           ...config,
           packageManager: value,
         })
       }
-      className="gap-0"
+      value={packageManager}
+      variant={"underline"}
     >
       <TabsList className="w-full justify-start pl-2 h-12">
         <div className="w-fit">

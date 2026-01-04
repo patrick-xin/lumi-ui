@@ -1,17 +1,16 @@
 import Link from "next/link";
-import { useLocale } from "next-intl";
 import { FOLDERS_WITH_STATUS, NON_CLICKABLE_STATUSES } from "@/lib/constants";
 import { getTreeWithStatus } from "@/lib/get-tree-with-status";
 import { source } from "@/lib/source";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/registry/ui/separator";
 import type { DocFolderNode, DocNode, DocPageNode } from "@/types";
 
-export function ComponentList() {
-  const locale = useLocale();
+export function ComponentList({ locale }: { locale: "en" | "cn" }) {
   const tree = source.getPageTree(locale);
   const treeWithStatus = getTreeWithStatus(tree);
   const componentsNode = treeWithStatus.children.find(
-    (node) => node.name === "Components",
+    (node) => node.name === "Components" || node.name === "组件",
   );
 
   if (!componentsNode || componentsNode.type !== "folder") return null;
@@ -34,11 +33,12 @@ export function ComponentList() {
         <ComponentGrid items={directPages} showStatus={showStatus} />
       )}
       {categories.map((category) => (
-        <div key={category.$id} className="space-y-6">
+        <div className="space-y-6" key={category.$id}>
           <h2 className="text-lg lg:text-xl font-semibold tracking-tight text-foreground">
             {category.name}
           </h2>
           <ComponentGrid items={category.children} showStatus={showStatus} />
+          <Separator />
         </div>
       ))}
     </div>
@@ -61,7 +61,7 @@ function ComponentGrid({
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-8">
       {pageNodes.map((page) => (
-        <NavItem key={page.$id} child={page} shouldShowStatus={showStatus} />
+        <NavItem child={page} key={page.$id} shouldShowStatus={showStatus} />
       ))}
     </div>
   );
@@ -94,12 +94,12 @@ function NavItem({ child, shouldShowStatus }: NavItemProps) {
 
   return (
     <Link
-      href={child.url}
       className={cn(
         "group relative inline-flex items-center justify-between px-4 py-2 text-sm font-medium transition-all duration-200",
         "rounded-md bg-background text-muted-foreground",
         "hover:text-foreground",
       )}
+      href={child.url}
     >
       <span>{child.name}</span>
       {shouldShowStatus && status === "new" && (

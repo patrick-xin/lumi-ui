@@ -17,14 +17,14 @@ export function CodeTabs({
     <Tabs
       variant="ghost"
       {...props}
-      value={installationType}
+      defaultValue={defaultValue}
       onValueChange={(value) =>
         setInstallationConfig({
           ...config,
           installationType: value as "cli" | "manual",
         })
       }
-      defaultValue={defaultValue}
+      value={installationType}
     >
       {children}
     </Tabs>

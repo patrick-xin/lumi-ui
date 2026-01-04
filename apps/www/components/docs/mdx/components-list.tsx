@@ -17,9 +17,9 @@ export function ComponentsList({ locale = "en" }: { locale?: string }) {
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-x-8 lg:gap-x-16 lg:gap-y-6 xl:gap-x-20">
       {list.map((component) => (
         <Link
-          key={component.$id}
-          href={component.url}
           className="text-lg font-medium underline-offset-4 hover:underline md:text-base"
+          href={component.url}
+          key={component.$id}
         >
           {component.name}
         </Link>

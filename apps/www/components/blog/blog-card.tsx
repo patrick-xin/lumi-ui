@@ -18,9 +18,9 @@ export default function BlogCard({
   className,
 }: BlogCardProps) {
   const formattedDate = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
     day: "numeric",
+    month: "long",
+    year: "numeric",
   }).format(new Date(publishDate));
 
   return (
@@ -32,11 +32,11 @@ export default function BlogCard({
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden">
         <Image
-          src={src}
           alt={title}
-          fill
           className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+          fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          src={src}
         />
       </div>
 

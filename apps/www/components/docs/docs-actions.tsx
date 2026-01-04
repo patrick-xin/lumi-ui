@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronDownIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { CopyPageButton } from "@/components/docs/copy-page-button";
@@ -24,23 +22,12 @@ Help me understand how to use it. Be ready to explain concepts, give examples, o
 const menuItems = {
   markdown: (url: string, content: string) => (
     <a
-      href={`${url}.md`}
-      target="_blank"
-      rel="noopener noreferrer"
       className="w-full inline-flex items-center justify-start gap-3"
+      href={`${url}.md`}
+      rel="noopener noreferrer"
+      target="_blank"
     >
       <Icons.markdown className="size-4" />
-      <span>{content}</span>
-    </a>
-  ),
-  v0: (url: string, content: string) => (
-    <a
-      className="w-full inline-flex items-center justify-start gap-3"
-      href={getPromptUrl("https://v0.dev", url)}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <Icons.v0 className="size-4" />
       <span>{content}</span>
     </a>
   ),
@@ -48,8 +35,8 @@ const menuItems = {
     <a
       className="w-full inline-flex items-center justify-start gap-3"
       href={getPromptUrl("https://chatgpt.com", url)}
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
     >
       <Icons.openai className="size-4" />
       <span>{content}</span>
@@ -59,44 +46,67 @@ const menuItems = {
     <a
       className="w-full inline-flex items-center justify-start gap-3"
       href={getPromptUrl("https://claude.ai/new", url)}
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
     >
       <Icons.claude className="size-4" />
       <span>{content}</span>
     </a>
   ),
+  v0: (url: string, content: string) => (
+    <a
+      className="w-full inline-flex items-center justify-start gap-3"
+      href={getPromptUrl("https://v0.dev", url)}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <Icons.v0 className="size-4" />
+      <span>{content}</span>
+    </a>
+  ),
 };
 
-export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
+export function DocsActions({
+  locale,
+  slug,
+  url,
+}: {
+  locale: string;
+  slug?: string[];
+  url: string;
+}) {
   const t = useTranslations("DocPage");
   return (
     <div className="flex items-center">
       <CopyPageButton
-        slug={slug}
         className="rounded-r-none border-r-0 text-xs"
+        slug={slug}
       />
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
             <Button
-              variant="glow"
-              size="sm"
               className={cn(
                 "h-8 rounded-l-none border-l data-[popup-open]:[&_svg]:rotate-180 max-md:[&_svg]:rotate-180 max-md:data-[popup-open]:[&_svg]:rotate-0",
               )}
+              size="sm"
+              variant="glow"
             >
               <ChevronDownIcon className="size-3.5 transition-transform" />
             </Button>
           }
         />
-
-        <DropdownMenuContent className="w-44 bg-background/40 backdrop-blur-md -translate-x-28">
+        <DropdownMenuContent
+          className={cn(
+            "w-42 bg-background/40 backdrop-blur-md -translate-x-28",
+            locale === "cn" && "-translate-x-25",
+          )}
+        >
           {Object.entries(menuItems).map(([key, value]) => (
             <DropdownMenuItem
-              className="text-xs"
-              render={value(url, t(`docActions.${key}`))}
+              className="text-[13px]"
               key={key}
+              render={value(url, t(`docActions.${key}`))}
             />
           ))}
         </DropdownMenuContent>

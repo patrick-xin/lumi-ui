@@ -32,4 +32,44 @@ links:
   </TabsPanel>
 </CodeTabs>
 
+## Basic Usage
 
+```tsx
+import { Switch } from "@/components/ui/switch"
+```
+
+```tsx
+<Switch />
+```
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <Switch />
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <SwitchRoot>
+      <SwitchThumb />
+    </SwitchRoot>
+   ```
+  </TabsPanel>
+</Tabs>
+
+
+<Callout variant="warning" title="Warning">
+Form controls must have an accessible name. Prefer using [`<Field>`](/docs/components/form-input/field) to provide a visible text label and description, or use the aria-label attribute as an alternative. 
+</Callout>
+
+## Integration with Form
+
+See [Form Integration](/docs/components/form-input/form#integration-with-other-components) for more information.

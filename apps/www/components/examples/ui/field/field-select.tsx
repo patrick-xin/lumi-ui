@@ -2,17 +2,16 @@ import { Field, FieldDescription, FieldLabel } from "@/registry/ui/field";
 import {
   Select,
   SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  SelectItemContent,
+  SelectTriggerGroup,
 } from "@/registry/ui/select";
 
 const fruits = [
-  { value: "apple", label: "Apple" },
-  { value: "banana", label: "Banana" },
-  { value: "blueberry", label: "Blueberry" },
-  { value: "grapes", label: "Grapes" },
-  { value: "pineapple", label: "Pineapple" },
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+  { label: "Blueberry", value: "blueberry" },
+  { label: "Grapes", value: "grapes" },
+  { label: "Pineapple", value: "pineapple" },
 ];
 
 export function FieldSelectDemo() {
@@ -20,14 +19,15 @@ export function FieldSelectDemo() {
     <Field>
       <FieldLabel>Fruit</FieldLabel>
       <Select items={fruits}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a fruit" />
-        </SelectTrigger>
+        <SelectTriggerGroup
+          className="w-[180px]"
+          placeholder="Select a fruit"
+        />
         <SelectContent>
           {fruits.map((fruit) => (
-            <SelectItem key={fruit.value} value={fruit.value}>
+            <SelectItemContent key={fruit.value} value={fruit.value}>
               {fruit.label}
-            </SelectItem>
+            </SelectItemContent>
           ))}
         </SelectContent>
       </Select>

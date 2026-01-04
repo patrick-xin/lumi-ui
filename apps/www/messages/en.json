@@ -1,24 +1,24 @@
 {
-  "HomePage": {
-    "title": "Illuminate your interface",
-    "description": "Composable React components powered by Base UI and Tailwind CSS — Build fast, customize everything.",
-    "viewDocs": "View docs",
-    "browseComponents": "Browse components"
+  "CommandMenu": {
+    "goToPage": "Go to page",
+    "navigation": "Navigate",
+    "noResults": "No results found.",
+    "placeholder": "Search documentation..."
   },
   "DocPage": {
-    "onThisPage": "On this page",
     "docActions": {
+      "chatgpt": "Open in ChatGPT",
+      "claude": "Open in Claude",
       "copyPage": "Copy page",
       "markdown": "View as Markdown",
-      "v0": "Open in v0",
-      "chatgpt": "Open in ChatGPT",
-      "claude": "Open in Claude"
-    }
+      "v0": "Open in v0"
+    },
+    "onThisPage": "On this page"
   },
-  "CommandMenu": {
-    "placeholder": "Search documentation...",
-    "noResults": "No results found.",
-    "navigation": "Navigate",
-    "goToPage": "Go to page"
+  "HomePage": {
+    "browseComponents": "Browse components",
+    "description": "Composable React components powered by Base UI and Tailwind CSS — Build fast, customize everything.",
+    "title": "Illuminate your interface",
+    "viewDocs": "View docs"
   }
 }
