@@ -13,8 +13,8 @@ import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
 export function TabsDemo() {
   return (
-    <Tabs defaultValue="account" className="w-full">
-      <TabsList>
+    <Tabs className="w-80" defaultValue="account">
+      <TabsList className="w-full">
         <TabsTab value="account">Account</TabsTab>
         <TabsTab value="password">Password</TabsTab>
       </TabsList>
@@ -30,11 +30,11 @@ export function TabsDemo() {
           <CardContent className="grid gap-6">
             <div className="grid gap-3">
               <Label htmlFor="tabs-demo-name">Name</Label>
-              <Input id="tabs-demo-name" defaultValue="Pedro Duarte" />
+              <Input defaultValue="Pedro Duarte" id="tabs-demo-name" />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="tabs-demo-username">Username</Label>
-              <Input id="tabs-demo-username" defaultValue="@peduarte" />
+              <Input defaultValue="@peduarte" id="tabs-demo-username" />
             </div>
           </CardContent>
           <CardFooter>
