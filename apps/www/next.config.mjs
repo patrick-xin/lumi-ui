@@ -5,32 +5,36 @@ const withMDX = createMDX({});
 
 /** @type {import('next').NextConfig} */
 const config = {
-  reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "avatar.vercel.sh",
-      },
-    ],
-  },
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: "avatars.githubusercontent.com",
+        protocol: "https",
+      },
+      {
+        hostname: "images.unsplash.com",
+        protocol: "https",
+      },
+      {
+        hostname: "avatar.vercel.sh",
+        protocol: "https",
+      },
+    ],
+  },
   reactCompiler: true,
+  reactStrictMode: true,
   async rewrites() {
     return [
       {
-        source: "/docs/:path*.md",
+        destination: "/llms/:locale/:path*",
+        source: "/:locale/docs/:path*.md",
+      },
+      {
         destination: "/llms/:path*",
+        source: "/docs/:path*.md",
       },
     ];
   },

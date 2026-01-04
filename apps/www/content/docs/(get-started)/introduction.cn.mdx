@@ -1,64 +1,76 @@
 ---
 title: 欢迎来到 Lumi UI
-description: 一套基于 Base UI 与 Tailwind CSS 构建的可自由组合的 React 组件库。清晰的代码、极快的速度，以及 100% 的代码所有权。
+description: 一套基于 Base UI 和 Tailwind CSS 构建的 React 组件库。它不仅提供了无障碍、高度可定制的组件，更重要的是——代码所有权完全属于你。
 icon: Book
 ---
 
 import { PlayIcon, DiamondIcon, ScaleIcon } from "lucide-react";
 
-Lumi UI 为你提供一系列**开箱即用、高度可定制**的 React 组件，并且你能**完整地看到并拥有所有代码**。它的底层由强大可靠的 **[Base UI](https://base-ui.com/)** 驱动，而样式则交给灵活的 **Tailwind CSS** 处理。
+我们设计的初衷是为了**清晰**、**高效**以及**完全的代码掌控**。
 
-## 两种选择，一种自由
+## 你将得到什么 
 
-每个 Lumi UI 组件都提供**两种形态**，让你在“快速上手”和“深度定制”之间轻松切换：
+每一个 Lumi UI 组件都提供两种形态，让你可以在**快速交付**和**极致定制**之间自由选择： 
 
-### 组合组件 (拿来即用)
-它们是预先组装好的“完全体”，覆盖了最常见的交互模式。当你需要快速实现一个标准功能时，直接用它就对了。
+### 复合组件 —— 像用精装家具一样快
+预装好的、生产就绪的组件，涵盖了常见的 UI 模式。当你需要快速搭建标准界面时，直接复制粘贴即可。 
 
 <ComponentPreview name="combobox-input-inside-popup" />
 
-**适合场景：** 快速搭建原型、开发标准功能，或者需要在整个项目中保持统一的视觉风格。
+**适合场景：**
+- 原型验证（Prototyping）
+- 搭建标准化界面
+- 维护全站的 UI 一致性
 
-### 基础组件 (随心搭建)
-它们是更原始的“积木块”，将 Base UI 的所有能力都直接暴露给你。当你需要完全掌控组件的结构和交互细节时，它们就是你的最佳搭档。你甚至可以把基础组件和组合组件混搭，创造出独一无二的设计。
+
+### 基础组件 —— 像用 Lego 搭建一样自由
+这是 Base UI 的底层积木。当你需要完全掌控结构、布局，或者实现独一无二的自定义交互时，它们是你的最佳选择。当然，你也可以混用**原始组件**和**复合组件**来创造独特的布局。 
 
 <ComponentPreview name="combobox-customization" />
 
-**适合场景：** 实现独特复杂的布局、打造自定义交互，或者现有的组合组件无法满足你的需求。
+**适合场景：**
+- 构建独特、非标准的布局
+- 实现高度定制的交互逻辑（如复杂的快捷键操作）
+- 当复合组件无法满足你的特定需求时
 
-> **打个比方：** 组合组件就像精装修的房子，拎包入住；基础组件则是毛坯房和全套工具，任你发挥。建议从组合组件开始，当需要更多自由时，再切换到基础组件。
+> **打个比方：** 复合组件是“精装家具”，买来就能用，省时省力。
+原始组件是“木材和工具”，你需要自己动手，但能造出独一无二的艺术品。
+建议：先用“家具”把架子搭起来，当需要“定制细节”时，再拿起工具深入底层。
 
 ## Lumi是如何设计的
 
 ### 无障碍访问？已内置
-所有复杂的键盘导航、焦点管理、ARIA 属性和状态逻辑，Base UI 都已为你妥善处理。你无需编写一行相关代码，就能获得出色的无障碍体验。
+所有复杂的键盘导航、焦点管理、ARIA 属性和状态逻辑，Base UI 都已为你妥善处理。你无需成为无障碍专家，也能写出符合 WCAG 标准的企业级应用。
 
-### 用 Tailwind 轻松改样式
-每个组件都支持标准的 `className` 属性。我们沿用了 **shadcn/ui 的 CSS 变量系统**，这意味着你只需要在 `globals.css` 里修改几个变量，就能让所有组件的风格焕然一新。
+### 用 Tailwind CSS 自由定义
+每个组件都支持标准的 `className` 属性。我们沿用了 **shadcn/ui 的 CSS 变量系统**，这意味着你只需要修改全局的主题变量，就能一键更新所有组件的样式。
 
 ### 统一的设计语言
-- **动画：** 所有组件使用统一的工具类（如 `animate-popup`, `animate-dialog`），保证交互动画协调一致。
-- **交互：** 采用宽松的“点击检测”模式，让可点击区域更大、更友好。
-- **主题：** 内置多款精心调配的主题，点击 [主题](/docs/themes/canopy) 即可查看。
+- **动画体系：** [部分组件](/docs/animation-guide)共享统一的动画工具（如 `animate-popup`, `animate-dialog`），确保过渡效果丝滑一致。
+- **交互体验：** 组件遵循我们的[点击测试](/docs/highlights)模式，确保可点击区域足够大且宽容。
+- **主题系统：** 我们在[主题](/docs/themes/canopy)中提供了预配置的主题方案，开箱即用。
 
-## 从微调到重构，随你掌控
+## 定制的四种深度
 
 你可以根据需求，选择任意层级的定制方式：
 
-1.  **快速换肤：** 通过 `className` 添加或覆盖 Tailwind 工具类。
-2.  **切换主题：** 修改全局 CSS 变量，一键换色。
-3.  **深度定制：** 使用基础组件，从零搭建你想要的任何样式。
-4.  **混合创作：** 将基础组件和组合组件像乐高一样拼装起来。
+1.  **微调：** 修改复合组件的样式和布局，或者直接通过 `className` 添加 Tailwind 类名。
+2.  **换肤：** 在 `globals.css` 中修改 CSS 变量。
+3.  **完全掌控：** 使用原始组件从零开始构建你想要的任何东西。
+4.  **混合创作：** 同时使用原始组件和复合组件，创造独特的组合。
 
-## 一些重要的约定
+## 核心约定
+
+为了保持代码的清晰和可预测性，我们遵循以下命名约定： 
 
 **命名规律：**
 - 根组件：`Combobox`, `Dialog`, `Dropdown`
 - 基础组件：`ComboboxInput`, `ComboboxItem`, `DialogPopup`
-- 组合组件：`ComboboxInputGroup`, `ComboboxContent`, `DialogContent`
+- 复合组件：`ComboboxInputGroup`, `ComboboxContent`, `DialogContent`。
+- 复合组件以`// Composite components`标注。
 
-**属性传递：**
-所有基础组件都会将其属性（Props）完整地传递给底层的 Base UI 组件，这意味着你可以直接使用 Base UI 的所有功能，同时享受我们为你准备好的样式系统。
+**Props 透传模式：**
+所有的原始组件都会将 Props 透传给底层的 Base UI，这意味着你在使用 Lumi UI 组件时，拥有完整的 Base UI API 能力，再加上我们的样式系统。
 
 ---
 
@@ -66,24 +78,24 @@ Lumi UI 为你提供一系列**开箱即用、高度可定制**的 React 组件�
 
 <div className="flex flex-col md:flex-row gap-4 md:justify-between">
   <CTACard 
-    title="开始安装" 
+    title="安装指南" 
     icon={<PlayIcon className="size-4"/>} 
-    description="只需 5 分钟即可跑起来" 
+    description="只需 5 分钟即可完成配置" 
     href="/docs/installation"
   />
   <CTACard 
-    title="查看组件" 
+    title="浏览组件" 
     icon={<DiamondIcon className="size-4"/>} 
-    description="浏览完整的组件画廊"
+    description="查看所有可用的组件"
     href="/docs/components"
   />
 </div>
 
 <div className="mt-4">
   <CTACard 
-    title="了解设计理念" 
+    title="为什么这样设计？" 
     icon={<ScaleIcon className="size-4"/>}
-    description="我们为什么这样设计？"
+    description="了解 Lumi UI 背后的架构决策与设计哲学"
     href="/docs/philosophies"
   />
 </div>
