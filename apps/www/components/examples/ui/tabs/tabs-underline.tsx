@@ -13,18 +13,14 @@ import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
 export function TabsUnderlineDemo() {
   return (
-    <Tabs
-      defaultValue="account"
-      variant="underline"
-      className="gap-6 [&>[data-slot='tabs-panel']]:mx-8 w-full"
-    >
+    <Tabs className="gap-6 w-full" defaultValue="account" variant="underline">
       <TabsList className="w-full">
         <TabsTab value="account">Account</TabsTab>
         <TabsTab value="password">Password</TabsTab>
         <TabsTab value="contact">Contact us</TabsTab>
       </TabsList>
-      <TabsPanel value="account">
-        <Card>
+      <TabsPanel className="flex" value="account">
+        <Card className="w-full">
           <CardHeader>
             <CardTitle>Account</CardTitle>
             <CardDescription>
@@ -35,11 +31,11 @@ export function TabsUnderlineDemo() {
           <CardContent className="grid gap-6">
             <div className="grid gap-3">
               <Label htmlFor="tabs-demo-name">Name</Label>
-              <Input id="tabs-demo-name" defaultValue="Pedro Duarte" />
+              <Input defaultValue="Pedro Duarte" id="tabs-demo-name" />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="tabs-demo-username">Username</Label>
-              <Input id="tabs-demo-username" defaultValue="@peduarte" />
+              <Input defaultValue="@peduarte" id="tabs-demo-username" />
             </div>
           </CardContent>
           <CardFooter>

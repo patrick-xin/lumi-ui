@@ -3810,24 +3810,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "tabs-shadcn": {
-    name: "tabs-shadcn",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["tabs"],
-    files: [{
-      path: "components/examples/ui/tabs/tabs-shadcn.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/tabs/tabs-shadcn");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-shadcn";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "tabs-solid-vertical": {
     name: "tabs-solid-vertical",
     description: "",
