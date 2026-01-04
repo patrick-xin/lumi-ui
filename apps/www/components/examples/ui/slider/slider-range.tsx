@@ -1,4 +1,4 @@
-import { Slider } from "@/registry/ui/slider";
+import { Slider, SliderValue } from "@/registry/ui/slider";
 
 export function RangeSliderDemo() {
   return (
@@ -8,7 +8,9 @@ export function RangeSliderDemo() {
         defaultValue={[25, 45]}
         max={100}
         step={1}
-      />
+      >
+        <SliderValue />
+      </Slider>
     </div>
   );
 }

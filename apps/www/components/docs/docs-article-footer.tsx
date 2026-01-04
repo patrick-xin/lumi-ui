@@ -38,7 +38,7 @@ export const DocsAritcleFooter = ({ neighbours }: DocsAritcleFooterProps) => {
               </Link>
             }
             size="sm"
-            variant="outline"
+            variant="glow"
           />
         )}
 
@@ -53,7 +53,7 @@ export const DocsAritcleFooter = ({ neighbours }: DocsAritcleFooterProps) => {
               </Link>
             }
             size="sm"
-            variant="outline"
+            variant="glow"
           />
         )}
       </nav>

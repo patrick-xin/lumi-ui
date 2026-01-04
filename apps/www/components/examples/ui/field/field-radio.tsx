@@ -4,7 +4,7 @@ import {
   FieldsetDescription,
   FieldsetLegend,
 } from "@/registry/ui/fieldset";
-import { RadioGroup, RadioGroupItem } from "@/registry/ui/radio-group";
+import { Radio, RadioGroup } from "@/registry/ui/radio";
 
 export function FieldRadioGroupDemo() {
   return (
@@ -13,11 +13,11 @@ export function FieldRadioGroupDemo() {
         <FieldsetLegend>Best apple</FieldsetLegend>
         <FieldsetDescription>Choose your favourite apple.</FieldsetDescription>
         <FieldItem>
-          <RadioGroupItem value="fuji-apple" />
+          <Radio value="fuji-apple" />
           <FieldLabel className="font-normal">Fuji</FieldLabel>
         </FieldItem>
         <FieldItem>
-          <RadioGroupItem value="gala-apple" />
+          <Radio value="gala-apple" />
           <FieldLabel className="font-normal">Gala</FieldLabel>
         </FieldItem>
       </Fieldset>

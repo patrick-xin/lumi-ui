@@ -1,6 +1,6 @@
 "use client";
 
-import { BookHeart, ChevronsUpDownIcon, Minus, Plus } from "lucide-react";
+import { BookHeart, ChevronsUpDownIcon } from "lucide-react";
 import { useState } from "react";
 import {
   Autocomplete,
@@ -31,14 +31,8 @@ import {
 } from "@/registry/ui/field";
 import { Fieldset, FieldsetLegend } from "@/registry/ui/fieldset";
 import { Form } from "@/registry/ui/form";
-import {
-  NumberField,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput,
-} from "@/registry/ui/number-field";
-import { RadioGroup, RadioGroupItem } from "@/registry/ui/radio-group";
+import { NumberField } from "@/registry/ui/number-field";
+import { Radio, RadioGroup } from "@/registry/ui/radio";
 import {
   Select,
   SelectContent,
@@ -46,14 +40,7 @@ import {
   SelectTriggerGroup,
 } from "@/registry/ui/select";
 import { Separator } from "@/registry/ui/separator";
-import {
-  SliderControl,
-  SliderIndicator,
-  SliderRoot,
-  SliderThumb,
-  SliderTrack,
-  SliderValue,
-} from "@/registry/ui/slider";
+import { Slider, SliderValue } from "@/registry/ui/slider";
 import { Switch } from "@/registry/ui/switch";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
@@ -62,10 +49,10 @@ export function ProjectQuoteForm() {
   const [formValues, setFormValues] = useState({});
   return (
     <div className="mx-auto w-[500px]">
-      <Tabs value={value} onValueChange={setValue}>
+      <Tabs onValueChange={setValue} value={value}>
         <TabsList>
           <TabsTab value="form">Form</TabsTab>
-          <TabsTab value="values" disabled={value === "form"}>
+          <TabsTab disabled={value === "form"} value="values">
             Values
           </TabsTab>
         </TabsList>
@@ -86,30 +73,27 @@ export function ProjectQuoteForm() {
                 Tell us about your idea to get an estimated quote.
               </p>
             </div>
-
             <Field name="projectName">
               <FieldLabel>Project Title</FieldLabel>
               <div className="relative">
                 <BookHeart className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
                 <FieldControl
+                  className="pl-9"
                   defaultValue=""
+                  minLength={5}
                   placeholder="e.g. SaaS Dashboard Redesign"
                   required
-                  className="pl-9"
-                  minLength={5}
                 />
               </div>
-
               <FieldDescription>A short name for this project</FieldDescription>
               <FieldError />
             </Field>
-
             <Field name="clientLocation">
               <Combobox items={LOCATIONS} required>
                 <FieldLabel>Headquarters Location</FieldLabel>
                 <ComboboxInputGroup
-                  placeholder="Select major city..."
                   className="w-80"
+                  placeholder="Select major city..."
                   showClear
                 />
                 <ComboboxContent>
@@ -125,24 +109,22 @@ export function ProjectQuoteForm() {
               </Combobox>
               <FieldError />
             </Field>
-
             <Field name="primaryTechStack">
               <Autocomplete
                 items={FRAMEWORKS}
-                mode="both"
                 itemToStringValue={(item: Framework) => item.name}
+                mode="both"
                 required
               >
                 <FieldLabel>Preferred Framework</FieldLabel>
                 <AutocompleteInputGroup
                   className="w-80"
-                  showClear
                   placeholder="e.g. Next.js"
+                  showClear
                 />
                 <FieldDescription>
                   The core technology you want us to use.
                 </FieldDescription>
-
                 <AutocompleteContent>
                   <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
                   <AutocompleteList>
@@ -165,15 +147,14 @@ export function ProjectQuoteForm() {
             </Field>
             <Separator />
             <div className="grid grid-cols-3 gap-8">
-              <Field name="projectType" className="col-span-2">
+              <Field className="col-span-2" name="projectType">
                 <FieldLabel>Type</FieldLabel>
                 <Select items={PROJECT_TYPES} required>
                   <SelectTriggerGroup
                     className="w-full"
-                    placeholder="Marketing Website"
                     indicatorIcon={<ChevronsUpDownIcon />}
+                    placeholder="Marketing Website"
                   />
-
                   <SelectContent>
                     {PROJECT_TYPES.map(({ label, value }) => (
                       <SelectItemContent key={value} value={value}>
@@ -184,51 +165,35 @@ export function ProjectQuoteForm() {
                 </Select>
                 <FieldError />
               </Field>
-
-              <Field name="timelineWeeks" className="col-span-1">
+              <Field className="col-span-1" name="timelineWeeks">
                 <FieldLabel>Timeline (Weeks)</FieldLabel>
-                <NumberField defaultValue={4} min={1} max={52} required>
-                  <NumberFieldGroup>
-                    <NumberFieldDecrement>
-                      <Minus className="size-3.5" />
-                    </NumberFieldDecrement>
-                    <NumberFieldInput />
-                    <NumberFieldIncrement>
-                      <Plus className="size-3.5" />
-                    </NumberFieldIncrement>
-                  </NumberFieldGroup>
-                </NumberField>
+                <NumberField defaultValue={4} max={52} min={1} required />
                 <FieldError />
               </Field>
             </div>
-
             <Field name="budgetRange">
-              <Fieldset
-                className="w-full gap-y-3 grid grid-cols-2 items-center"
-                render={
-                  <SliderRoot
-                    defaultValue={[5, 20]}
-                    thumbAlignment="edge"
-                    min={1}
-                    max={100}
-                    step={1}
-                    format={{
-                      style: "currency",
-                      currency: "USD",
-                      maximumFractionDigits: 0,
+              <Fieldset>
+                <FieldsetLegend>Budget Range</FieldsetLegend>
+                <Slider
+                  className="pt-2 w-full"
+                  defaultValue={[5, 20]}
+                  max={100}
+                  min={1}
+                  step={1}
+                  thumbAlignment="edge"
+                >
+                  <SliderValue className="text-muted-foreground">
+                    {(_, values) => {
+                      const [min, max] = values;
+                      const formatter = new Intl.NumberFormat("en-US", {
+                        currency: "USD",
+                        maximumFractionDigits: 0,
+                        style: "currency",
+                      });
+                      return `${formatter.format(min * 1000)} – ${formatter.format(max * 1000)}`;
                     }}
-                  />
-                }
-              >
-                <FieldsetLegend>Budget Range (Thousands)</FieldsetLegend>
-                <SliderValue className="text-end col-start-2 text-sm font-mono text-muted-foreground" />
-                <SliderControl className="col-span-2 pt-2">
-                  <SliderTrack className="h-2">
-                    <SliderIndicator />
-                    <SliderThumb index={0} />
-                    <SliderThumb index={1} />
-                  </SliderTrack>
-                </SliderControl>
+                  </SliderValue>
+                </Slider>
               </Fieldset>
             </Field>
             <Separator />
@@ -250,7 +215,7 @@ export function ProjectQuoteForm() {
                   ].map((item) => (
                     <FieldItem key={item.id}>
                       <FieldLabel>
-                        <RadioGroupItem value={item.id} />
+                        <Radio value={item.id} />
                         {item.label}
                       </FieldLabel>
                     </FieldItem>
@@ -258,7 +223,6 @@ export function ProjectQuoteForm() {
                 </div>
               </Fieldset>
             </Field>
-
             <Field name="additionalServices">
               <Fieldset render={<CheckboxGroup defaultValue={["design"]} />}>
                 <FieldsetLegend>Included Services</FieldsetLegend>
@@ -279,7 +243,6 @@ export function ProjectQuoteForm() {
                 </div>
               </Fieldset>
             </Field>
-
             <Field name="requireNda">
               <FieldLabel className="flex w-full justify-between items-center rounded-lg border p-3 shadow-sm">
                 <span className="flex flex-col gap-0.5">
@@ -291,7 +254,7 @@ export function ProjectQuoteForm() {
                 <Switch />
               </FieldLabel>
             </Field>
-            <Button type="submit" size="lg" className="mt-4 w-full">
+            <Button className="mt-4 w-full" size="lg" type="submit">
               Calculate Estimate
             </Button>
           </Form>
@@ -313,6 +276,7 @@ const LOCATIONS = [
   "London, UK",
   "Berlin, DE",
   "Toronto, CA",
+  "Shanghai, CN",
   "Singapore, SG",
   "Sydney, AU",
   "Remote (Worldwide)",
@@ -325,12 +289,12 @@ interface Framework {
 }
 
 const FRAMEWORKS: Framework[] = [
-  { id: "react", name: "React", description: "Standard UI Library" },
-  { id: "nextjs", name: "Next.js", description: "Full-stack React Framework" },
-  { id: "vue", name: "Vue.js", description: "Progressive Framework" },
-  { id: "svelte", name: "Svelte", description: "Cybernetically enhanced apps" },
-  { id: "angular", name: "Angular", description: "Enterprise-ready platform" },
-  { id: "astro", name: "Astro", description: "Content-focused websites" },
+  { description: "Standard UI Library", id: "react", name: "React" },
+  { description: "Full-stack React Framework", id: "nextjs", name: "Next.js" },
+  { description: "Progressive Framework", id: "vue", name: "Vue.js" },
+  { description: "Cybernetically enhanced apps", id: "svelte", name: "Svelte" },
+  { description: "Enterprise-ready platform", id: "angular", name: "Angular" },
+  { description: "Content-focused websites", id: "astro", name: "Astro" },
 ];
 
 const PROJECT_TYPES = [

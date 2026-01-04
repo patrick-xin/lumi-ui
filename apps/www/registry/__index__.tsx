@@ -448,21 +448,21 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "radio-group": {
-    name: "radio-group",
+  "radio": {
+    name: "radio",
     description: "",
     type: "registry:ui",
     registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
-                "path": "registry/ui/radio-group.tsx",
+                "path": "registry/ui/radio.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/ui/radio-group");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "radio-group";
+      const mod = await import("@/registry/ui/radio");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "radio";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -2964,6 +2964,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "meter-with-label-value": {
+    name: "meter-with-label-value",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["meter"],
+    files: [{
+      path: "components/examples/ui/meter/meter-with-label-value.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/meter/meter-with-label-value");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "meter-with-label-value";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "navigation-menu-demo": {
     name: "navigation-menu-demo",
     description: "",
@@ -2995,6 +3013,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/number-field/number-field-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "number-field-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "number-field-scrubarea": {
+    name: "number-field-scrubarea",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["number-field"],
+    files: [{
+      path: "components/examples/ui/number-field/number-field-scrubarea.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/number-field/number-field-scrubarea");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "number-field-scrubarea";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -3216,37 +3252,55 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "radio-group-demo": {
-    name: "radio-group-demo",
+  "radio-custom": {
+    name: "radio-custom",
     description: "",
     type: "registry:example",
-    registryDependencies: ["radio-group"],
+    registryDependencies: ["radio"],
     files: [{
-      path: "components/examples/ui/radio-group/radio-group-demo.tsx",
+      path: "components/examples/ui/radio/radio-custom.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/radio-group/radio-group-demo");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "radio-group-demo";
+      const mod = await import("@/components/examples/ui/radio/radio-custom");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "radio-custom";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
     meta: undefined,
   },
-  "radio-group-with-field": {
-    name: "radio-group-with-field",
+  "radio-demo": {
+    name: "radio-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["radio-group"],
+    registryDependencies: ["radio"],
     files: [{
-      path: "components/examples/ui/radio-group/radio-group-with-field.tsx",
+      path: "components/examples/ui/radio/radio-demo.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/radio-group/radio-group-with-field");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "radio-group-with-field";
+      const mod = await import("@/components/examples/ui/radio/radio-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "radio-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "radio-with-fieldset-field": {
+    name: "radio-with-fieldset-field",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["radio"],
+    files: [{
+      path: "components/examples/ui/radio/radio-with-fieldset-field.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/radio/radio-with-fieldset-field");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "radio-with-fieldset-field";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

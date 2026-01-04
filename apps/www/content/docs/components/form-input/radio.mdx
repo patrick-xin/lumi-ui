@@ -1,0 +1,92 @@
+---
+title: Radio
+description: An easily stylable radio button component.
+links:
+  doc: https://base-ui.com/react/components/radio
+  api: https://base-ui.com/react/components/radio#api-reference
+---
+
+<ComponentPreview name="radio-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/radio
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="radio" title="radio.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## Basic Usage
+
+```tsx
+import { RadioGroup, Radio } from "@/components/ui/radio"
+```
+
+```tsx
+<RadioGroup>
+  <Radio />
+  <Radio />
+</RadioGroup>
+```
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <RadioGroup>
+      <Radio />
+    </RadioGroup>
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <RadioGroup>
+      <RadioRoot>
+        <RadioIndicator />
+      </RadioRoot>
+    </RadioGroup>
+   ```
+  </TabsPanel>
+</Tabs>
+
+<Callout variant="info" title="Note">
+`Radio` is always placed within `RadioGroup`.
+</Callout>
+
+
+## Usage with Fieldset and Field
+<ComponentPreview name="radio-with-fieldset-field" />
+
+<Callout variant="warning" title="Warning">
+Form controls must have an accessible name. Prefer using [`<Fieldset>`](/docs/components/form-input/fieldset) and [`<Field>`](/docs/components/form-input/field) to provide a visible text label and description, or use the aria-label attribute as an alternative. 
+</Callout>
+
+## Customization
+
+<ComponentPreview name="radio-custom" />
+
+## Integration with Form
+
+See [Form Integration](/docs/components/form-input/form#integration-with-other-components) for more information.
