@@ -80,6 +80,7 @@ export function DocsActions({
     <div className="flex items-center">
       <CopyPageButton
         className="rounded-r-none border-r-0 text-xs"
+        locale={locale}
         slug={slug}
       />
       <DropdownMenu>

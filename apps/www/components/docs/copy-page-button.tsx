@@ -8,11 +8,16 @@ import { Button } from "@/registry/ui/button";
 interface CopyPageButtonProps {
   slug?: string[];
   className?: string;
+  locale?: string;
 }
 
 const contentCache = new Map<string, string>();
 
-export function CopyPageButton({ slug, className }: CopyPageButtonProps) {
+export function CopyPageButton({
+  slug,
+  className,
+  locale,
+}: CopyPageButtonProps) {
   const t = useTranslations("DocPage");
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -20,7 +25,7 @@ export function CopyPageButton({ slug, className }: CopyPageButtonProps) {
   const handleCopy = async () => {
     setIsLoading(true);
 
-    const url = `/llms/${slug?.join("/")}`;
+    const url = `/llms/${locale && locale !== "en" ? `${locale}/` : ""}${slug?.join("/")}`;
 
     try {
       const cached = contentCache.get(url);
@@ -57,12 +62,12 @@ export function CopyPageButton({ slug, className }: CopyPageButtonProps) {
 
   return (
     <Button
-      size="sm"
-      variant="glow"
-      onClick={handleCopy}
+      aria-label="Copy page content as MDX"
       className={className}
       disabled={isLoading}
-      aria-label="Copy page content as MDX"
+      onClick={handleCopy}
+      size="sm"
+      variant="glow"
     >
       {isLoading ? (
         <Loader2 className="size-4 animate-spin" />
