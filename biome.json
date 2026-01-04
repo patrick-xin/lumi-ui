@@ -65,6 +65,18 @@
       }
     }
   },
+  "overrides": [
+    {
+      "assist": {
+        "actions": {
+          "source": {
+            "useSortedKeys": "off"
+          }
+        }
+      },
+      "includes": ["apps/www/components/docs/docs-actions.tsx"]
+    }
+  ],
   "vcs": {
     "clientKind": "git",
     "enabled": true,

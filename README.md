@@ -1,17 +1,15 @@
-# Lumi UI
+<a href="https://www.lumiui.dev/">
+  <img alt="Lumi UI" src="https://raw.githubusercontent.com/patrick-xin/lumi-ui/refs/heads/main/apps/www/public/images/lumi-landing.png">
+</a>
 
 A collection of accessible, customizable React components built on Base UI and styled with Tailwind CSS. Own your components, control your design system.
 
-<a href="https://www.lumiui.dev/">
-  <img alt="Lumi UI" src="https://github.com/patrick-xin/lumi-ui/blob/main/apps/www/public/images/lumi-landing.png">
-</a>
-
+**English** | [简体中文](./README.zh-CN.md) | [Official Website](https://www.lumiui.dev)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
 ## What is Lumi UI?
-
 Lumi UI gives you production-ready React components with a unique twist: every component comes in two flavors.
 
 - **Composites** - Pre-assembled components for rapid development
@@ -20,7 +18,6 @@ Lumi UI gives you production-ready React components with a unique twist: every c
 Start fast with composites, drop down to primitives when you need custom layouts. No compromises.
 
 ## Why Lumi UI?
-
 - Accessibility built-in - ARIA, keyboard navigation, and focus management handled by Base UI
 - Complete code ownership - Copy components into your project, modify freely
 - Dual-layer architecture - Choose between speed (composites) and control (primitives)
@@ -28,30 +25,26 @@ Start fast with composites, drop down to primitives when you need custom layouts
 - Themeable - Uses shadcn/ui's CSS variable system for easy customization
 - TypeScript - Fully typed with excellent IntelliSense support
 
-## Documentation
+## Key Concepts
 
+### The Hit-Test Philosophy
+Interactive areas are forgiving. We use pseudo-elements to separate visual highlights from clickable regions, creating a more natural UX.
+
+### AI-Assisted Development
+Flat semantic exports and composites as living examples help AI assistants generate correct, idiomatic code on the first try.
+
+### Unified Design Language
+Shared animation utilities and consistent interaction patterns across all components.
+
+## Documentation
 - 📚 [Full Documentation](https://www.lumiui.dev/docs/introduction)
 - 🧩 [Component Gallery](https://www.lumiui.dev/docs/components)
 - 🎨 [Themes](https://www.lumiui.dev/docs/themes/canopy)
 - 🏗️ [Architecture & Philosophy](https://www.lumiui.dev/docs/philosophies)
 - 📦 [Installation Guide](https://www.lumiui.dev/docs/installation)
 
-## Key Concepts
-
-### The Hit-Test Philosophy
-
-Interactive areas are forgiving. We use pseudo-elements to separate visual highlights from clickable regions, creating a more natural UX.
-
-### AI-Assisted Development
-
-Flat semantic exports and composites as living examples help AI assistants generate correct, idiomatic code on the first try.
-
-### Unified Design Language
-
-Shared animation utilities and consistent interaction patterns across all components.
 
 ## Contributing
-
 We welcome contributions! Whether it's:
 
 - 🐛 Bug reports and fixes
@@ -60,7 +53,6 @@ We welcome contributions! Whether it's:
 - 🎨 New themes or component variants
 
 ## License
-
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ### Acknowledgments

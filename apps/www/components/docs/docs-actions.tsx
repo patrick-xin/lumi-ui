@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronDownIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { CopyPageButton } from "@/components/docs/copy-page-button";
@@ -22,6 +20,17 @@ Help me understand how to use it. Be ready to explain concepts, give examples, o
 }
 
 const menuItems = {
+  markdown: (url: string, content: string) => (
+    <a
+      className="w-full inline-flex items-center justify-start gap-3"
+      href={`${url}.md`}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <Icons.markdown className="size-4" />
+      <span>{content}</span>
+    </a>
+  ),
   chatgpt: (url: string, content: string) => (
     <a
       className="w-full inline-flex items-center justify-start gap-3"
@@ -44,17 +53,6 @@ const menuItems = {
       <span>{content}</span>
     </a>
   ),
-  markdown: (url: string, content: string) => (
-    <a
-      className="w-full inline-flex items-center justify-start gap-3"
-      href={`${url}.md`}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <Icons.markdown className="size-4" />
-      <span>{content}</span>
-    </a>
-  ),
   v0: (url: string, content: string) => (
     <a
       className="w-full inline-flex items-center justify-start gap-3"
@@ -68,7 +66,15 @@ const menuItems = {
   ),
 };
 
-export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
+export function DocsActions({
+  locale,
+  slug,
+  url,
+}: {
+  locale: string;
+  slug?: string[];
+  url: string;
+}) {
   const t = useTranslations("DocPage");
   return (
     <div className="flex items-center">
@@ -90,11 +96,15 @@ export function DocsActions({ slug, url }: { url: string; slug?: string[] }) {
             </Button>
           }
         />
-
-        <DropdownMenuContent className="w-44 bg-background/40 backdrop-blur-md -translate-x-28">
+        <DropdownMenuContent
+          className={cn(
+            "w-42 bg-background/40 backdrop-blur-md -translate-x-28",
+            locale === "cn" && "-translate-x-25",
+          )}
+        >
           {Object.entries(menuItems).map(([key, value]) => (
             <DropdownMenuItem
-              className="text-xs"
+              className="text-[13px]"
               key={key}
               render={value(url, t(`docActions.${key}`))}
             />

@@ -1,7 +1,7 @@
 "use client";
 
-import { Slider as BaseSlider } from "@base-ui/react/slider";
 import * as React from "react";
+import { Slider as BaseSlider } from "@base-ui/react/slider";
 
 import { cn } from "@/lib/utils";
 
@@ -11,13 +11,8 @@ function SliderRoot({
 }: React.ComponentProps<typeof BaseSlider.Root>) {
   return (
     <BaseSlider.Root
+      className={cn("touch-none select-none", className)}
       data-slot="slider"
-      className={cn(
-        "relative w-full touch-none select-none",
-        "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col",
-        "data-[disabled]:opacity-50",
-        className,
-      )}
       {...props}
     />
   );
@@ -29,13 +24,8 @@ function SliderControl({
 }: React.ComponentProps<typeof BaseSlider.Control>) {
   return (
     <BaseSlider.Control
+      className={cn("touch-none select-none", className)}
       data-slot="slider-control"
-      className={cn(
-        "flex w-full items-center py-2",
-        "touch-none select-none",
-        "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:px-2 data-[orientation=vertical]:py-0",
-        className,
-      )}
       {...props}
     />
   );
@@ -47,12 +37,8 @@ function SliderTrack({
 }: React.ComponentProps<typeof BaseSlider.Track>) {
   return (
     <BaseSlider.Track
+      className={cn("rounded-full select-none", className)}
       data-slot="slider-track"
-      className={cn(
-        "bg-secondary relative h-2 w-full grow rounded-full select-none",
-        "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2",
-        className,
-      )}
       {...props}
     />
   );
@@ -64,11 +50,8 @@ function SliderValue({
 }: React.ComponentProps<typeof BaseSlider.Value>) {
   return (
     <BaseSlider.Value
+      className={cn("text-sm font-medium", className)}
       data-slot="slider-value"
-      className={cn(
-        "text-sm font-medium",
-        className,
-      )}
       {...props}
     />
   );
@@ -80,11 +63,8 @@ function SliderIndicator({
 }: React.ComponentProps<typeof BaseSlider.Indicator>) {
   return (
     <BaseSlider.Indicator
+      className={cn("select-none")}
       data-slot="slider-indicator"
-      className={cn(
-        "bg-primary absolute h-full rounded-full select-none",
-        "data-[orientation=vertical]:w-full",
-      )}
       {...props}
     />
   );
@@ -96,12 +76,11 @@ function SliderThumb({
 }: React.ComponentProps<typeof BaseSlider.Thumb>) {
   return (
     <BaseSlider.Thumb
-      data-slot="slider-thumb"
       className={cn(
-        "border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
-        "has-[:focus-visible]:outline",
+        "disabled:pointer-events-none disabled:opacity-50",
         className,
       )}
+      data-slot="slider-thumb"
       {...props}
     />
   );
@@ -122,33 +101,62 @@ function Slider({
   }, [value, defaultValue]);
 
   return (
-    <SliderRoot
+    <BaseSlider.Root
+      className="relative w-full touch-none select-none data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[disabled]:opacity-50"
       data-slot="slider"
       defaultValue={defaultValue}
-      value={value}
-      min={min}
       max={max}
-      className="flex items-center"
+      min={min}
+      value={value}
       {...props}
     >
-      <SliderControl>
-        <SliderTrack>
-          <SliderIndicator />
+      <BaseSlider.Control
+        data-slot="slider-control"
+        className={cn(
+          "flex w-full items-center py-2",
+          "touch-none select-none",
+          "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:px-2 data-[orientation=vertical]:py-0",
+          className,
+        )}
+      >
+        <BaseSlider.Track
+          data-slot="slider-track"
+          className={cn(
+            "bg-input relative h-2 w-full grow rounded-full select-none",
+            "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2"
+          )}
+        >
+          <BaseSlider.Indicator
+            data-slot="slider-indicator"
+            className={cn(
+              "bg-primary/50 absolute h-full rounded-full select-none",
+              "data-[orientation=vertical]:w-full",
+            )}
+          />
           {Array.from({ length: thumbCount }, (_, i) => (
-            <SliderThumb key={i} index={i} />
+            <BaseSlider.Thumb
+              data-slot="slider-thumb"
+              className={cn(
+                "border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-primary shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
+                "has-[:focus-visible]:outline"
+              )}
+              index={i}
+              key={i}
+            />
           ))}
-        </SliderTrack>
-      </SliderControl>
-    </SliderRoot>
+        </BaseSlider.Track>
+      </BaseSlider.Control>
+    </BaseSlider.Root>
   );
 }
 
 export {
-  Slider,
   SliderRoot,
   SliderControl,
   SliderTrack,
   SliderIndicator,
   SliderThumb,
-  SliderValue
+  SliderValue,
+  // Composite component
+  Slider,
 };

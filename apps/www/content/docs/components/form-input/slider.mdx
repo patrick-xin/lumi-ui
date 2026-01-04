@@ -32,13 +32,58 @@ links:
   </TabsPanel>
 </CodeTabs>
 
-## Recipes
+## Basic Usage
+
+```tsx
+import { Slider } from "@/components/ui/slider"
+```
+
+```tsx
+<Slider />
+```
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <Slider />
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <SliderRoot>
+      <SliderValue />
+      <SliderControl>
+        <SliderTrack>
+          <SliderIndicator />
+          <SliderThumb />
+        </SliderTrack>
+      </SliderControl>
+    </SliderRoot>
+   ```
+  </TabsPanel>
+</Tabs>
+
+## Features
 
 ### Range Slider
 <ComponentPreview name="slider-range" />
 
+### Vertical Slider
+<ComponentPreview name="slider-vertical" />
+
 ### Edge Aligned Thumbs
+
+<Callout variant="info" title="Note">
 By default, the slider thumb is centered on the value. This means at 0% and 100%, half of the thumb hangs outside the track's bounds.
+</Callout>
 
 Use `thumbAlignment="edge"` to keep the entire thumb **contained inside the track boundaries**. This is useful when:
 1.  The slider is flush against a screen edge or container wall.
@@ -51,5 +96,15 @@ Use `thumbAlignment="edge"` to keep the entire thumb **contained inside the trac
 
 <ComponentPreview name="slider-edge" />
 
-### Vertical Slider
-<ComponentPreview name="slider-vertical" />
+<Callout variant="warning" title="Warning">
+Form controls must have an accessible name. Prefer using [`<Field>`](/docs/components/form-input/field) to provide a visible text label and description, or use the aria-label attribute as an alternative. 
+</Callout>
+
+## Recipes
+
+### Custom Slider
+<ComponentPreview name="slider-custom" />
+
+## Integration with Form
+
+See [Form Integration](/docs/components/form-input/form#integration-with-other-components) for more information.

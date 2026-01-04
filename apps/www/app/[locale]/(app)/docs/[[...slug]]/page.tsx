@@ -95,6 +95,7 @@ export default function Page(props: PageProps) {
           <DocsAritcleHeader
             description={doc.description}
             links={links}
+            locale={params.locale}
             neighbours={neighbours}
             slug={params.slug}
             title={doc.title}

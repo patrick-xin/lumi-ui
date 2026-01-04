@@ -13,18 +13,18 @@ export function ComboboxDemo() {
   return (
     <Combobox items={frameworks}>
       <ComboboxInputGroup
-        placeholder="e.g. Next.js"
-        className="w-48"
         aria-label="Choose a framework"
+        className="w-48"
+        placeholder="e.g. Next.js"
       />
       <ComboboxContent>
         <ComboboxEmpty>No framework found.</ComboboxEmpty>
         <ComboboxList>
           {(item: string) => (
             <ComboboxItemContent
+              disabled={item === "React"}
               key={item}
               value={item}
-              disabled={item === "React"}
             >
               {item}
             </ComboboxItemContent>
