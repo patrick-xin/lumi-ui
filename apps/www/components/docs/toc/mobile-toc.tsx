@@ -5,7 +5,6 @@ import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { useTocActiveItem } from "@/hooks/use-toc-active-Item";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
 import {
   createDialogHandle,
   Dialog,
@@ -32,30 +31,19 @@ function TocTrigger({
 
   return (
     <DialogTrigger
+      className="flex h-10 w-full items-center justify-between gap-2.5 px-4 md:px-6 py-2.5 text-xs text-muted-foreground sm:text-sm"
       handle={tocHandle}
-      render={
-        <Button
-          className={cn(
-            "flex h-10 w-full items-center justify-between gap-2.5 rounded-none px-4 py-2.5 text-xs sm:text-sm",
-            "text-muted-foreground shadow-none",
-            "focus-visible:outline-none focus-visible:ring-0 md:px-6",
-            "fixed z-50 h-10 w-full top-(--header-height) inset-x-0 bg-background backdrop-blur-md border-b supports-[backdrop-filter]:bg-background/80",
-            open && "border-0",
-          )}
-          variant="unstyled"
-        >
-          <span className="flex-1 truncate text-left">
-            {!open && activeItem ? activeItem.title : "Table of Contents"}
-          </span>
-          <ChevronDown
-            className={cn(
-              "size-4 shrink-0 transition-transform",
-              open && "rotate-180",
-            )}
-          />
-        </Button>
-      }
-    />
+    >
+      <span className="flex-1 truncate text-left">
+        {!open && activeItem ? activeItem.title : "Table of Contents"}
+      </span>
+      <ChevronDown
+        className={cn(
+          "size-4 shrink-0 transition-transform",
+          open && "rotate-180",
+        )}
+      />
+    </DialogTrigger>
   );
 }
 
@@ -69,30 +57,33 @@ function TocContent({
   setOpen: (open: boolean) => void;
 }) {
   return (
-    <div className="flex flex-col p-4">
+    <ul className="flex flex-col p-4">
       {items.map((item) => {
         const isActive = item.url === `#${activeHeading}`;
         return (
-          <a
+          <li
             className={cn(
               "border-l py-2 transition-colors text-xs sm:text-sm lg:text-base hover:text-primary",
               isActive
                 ? "text-primary border-primary"
                 : "text-muted-foreground",
             )}
-            data-active={isActive}
-            href={item.url}
             key={item.url}
-            onClick={() => setOpen(false)}
-            style={{
-              paddingLeft: `${12 * Math.max(item.depth - 1, 0) + 12}px`,
-            }}
           >
-            {item.title}
-          </a>
+            <a
+              data-active={isActive}
+              href={item.url}
+              onClick={() => setOpen(false)}
+              style={{
+                paddingLeft: `${12 * Math.max(item.depth - 1, 0) + 12}px`,
+              }}
+            >
+              {item.title}
+            </a>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }
 
@@ -109,7 +100,12 @@ export function MobileToc({
   const activeHeading = useTocActiveItem(itemIds);
 
   return (
-    <div className={className}>
+    <div
+      className={cn(
+        "fixed inset-x-0 top-(--header-height) backdrop-blur-md supports-[backdrop-filter]:bg-background/80 border-primary/20 border-t border-b",
+        className,
+      )}
+    >
       <TocTrigger activeHeading={activeHeading} items={items} open={open} />
       <Dialog handle={tocHandle} onOpenChange={setOpen} open={open}>
         <DialogPortal>

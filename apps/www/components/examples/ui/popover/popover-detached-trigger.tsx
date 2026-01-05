@@ -18,7 +18,7 @@ export default function PopoverDetachedTriggerDemo() {
   return (
     <React.Fragment>
       <PopoverTrigger
-        className={buttonVariants({ variant: "outline", size: "icon-sm" })}
+        className={buttonVariants({ size: "icon-sm", variant: "outline" })}
         handle={demoPopover}
       >
         <BellIcon />

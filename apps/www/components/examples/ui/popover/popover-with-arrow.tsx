@@ -10,11 +10,11 @@ import {
   PopoverTrigger,
 } from "@/registry/ui/popover";
 
-export default function PopoverWithArrowDemo() {
+export function PopoverWithArrowDemo() {
   return (
     <Popover>
       <PopoverTrigger
-        className={buttonVariants({ variant: "outline", size: "icon-sm" })}
+        className={buttonVariants({ size: "icon-sm", variant: "outline" })}
       >
         <BellIcon />
       </PopoverTrigger>

@@ -37,9 +37,17 @@ export function SiteHeader({ locale }: { locale: string }) {
           </div>
         </div>
         {/* Mobile */}
-        <div className="flex md:hidden items-center justify-between gap-3 w-full">
+        <div className="grid grid-cols-3 md:hidden items-center gap-3 w-full">
           <MobileNav navGroups={navGroups} />
-          <div className="flex items-center gap-2">
+
+          <div className="flex justify-center">
+            <Link className="flex items-center focus-state" href="/">
+              <Logo />
+              <span className="sr-only">{siteConfig.name}</span>
+            </Link>
+          </div>
+
+          <div className="flex items-center justify-end gap-2">
             <CommandMenu tree={tree} />
             <LanguageSelector />
           </div>

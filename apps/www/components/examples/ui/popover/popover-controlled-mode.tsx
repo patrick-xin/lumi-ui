@@ -15,7 +15,7 @@ import {
 
 const demoPopover = createPopoverHandle<{ text: string }>();
 
-export default function PopoverControlledModeDemo() {
+export function PopoverControlledModeDemo() {
   const [open, setOpen] = React.useState(false);
   const [triggerId, setTriggerId] = React.useState<string | null>(null);
 
@@ -31,21 +31,21 @@ export default function PopoverControlledModeDemo() {
     <React.Fragment>
       <div className="flex gap-4 flex-wrap justify-center">
         <PopoverTrigger
-          className={buttonVariants({ variant: "outline", size: "icon-sm" })}
+          className={buttonVariants({ size: "icon-sm", variant: "outline" })}
           handle={demoPopover}
           id="trigger-1"
         >
           <BellIcon aria-label="Notifications" />
         </PopoverTrigger>
         <PopoverTrigger
-          className={buttonVariants({ variant: "secondary", size: "icon-sm" })}
+          className={buttonVariants({ size: "icon-sm", variant: "secondary" })}
           handle={demoPopover}
           id="trigger-2"
         >
           <BellIcon aria-label="Notifications" />
         </PopoverTrigger>
         <PopoverTrigger
-          className={buttonVariants({ variant: "outline", size: "icon-sm" })}
+          className={buttonVariants({ size: "icon-sm", variant: "outline" })}
           handle={demoPopover}
           id="trigger-3"
         >
@@ -62,8 +62,8 @@ export default function PopoverControlledModeDemo() {
       </div>
       <Popover
         handle={demoPopover}
-        open={open}
         onOpenChange={handleOpenChange}
+        open={open}
         triggerId={triggerId}
       >
         <PopoverContent showArrow>
