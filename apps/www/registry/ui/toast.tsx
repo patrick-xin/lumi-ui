@@ -72,6 +72,7 @@ const Icons = {
 };
 
 const toastVariants = cva(
+  // Custom styles, change the look of the toast
   "rounded-sm outline outline-1 shadow-lg transition-all select-none bg-popover text-popover-foreground dark:-outline-offset-1",
   {
     variants: {
@@ -253,15 +254,7 @@ const StackedToast = ({
     <BaseToast.Portal>
       <ToastViewport
         data-position={position}
-        className={cn(
-          "toast-viewport fixed flex flex-col w-[var(--toast-width)] outline-none",
-          position.includes("right") && "items-end right-[var(--toast-inset)]",
-          position.includes("left") && "items-start left-[var(--toast-inset)]",
-          position.includes("center") &&
-            "items-center left-1/2 -translate-x-1/2",
-          position.includes("top") && "top-[var(--toast-inset)]",
-          position.includes("bottom") && "bottom-[var(--toast-inset)]",
-        )}
+        className="toast-viewport"
       >
         {toasts.map((toast) => {
           const toastType = (toast.type as ToastType) || "default";
@@ -276,7 +269,7 @@ const StackedToast = ({
               data-position={position}
               swipeDirection={swipeDirection}
               className={cn(
-                "toast-root absolute w-full",
+                "toast-root",
                 !isCustomContent && toastVariants({ type: toastType }),
               )}
             >
@@ -368,7 +361,7 @@ const AnchoredToast = () => {
                 toast={toast}
                 className={cn(
                   !isCustomContent && toastVariants({ type: "default" }),
-                  "pointer-events-auto animate-popup",
+                  "animate-popup",
                 )}
               >
                 {isCustomContent ? (

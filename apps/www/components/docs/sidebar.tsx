@@ -1,11 +1,11 @@
 "use client";
 
+import { Badge } from "@lumi-ui/ui/badge";
 import { ChevronRight, ExternalLink, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { hasActiveChild, normalizeSidebarTree } from "@/lib/sidebar-utils";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/registry/ui/badge";
 import { Button } from "@/registry/ui/button";
 import {
   Collapsible,

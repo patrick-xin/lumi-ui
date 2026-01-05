@@ -3738,24 +3738,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "tabs-demo-vertical": {
-    name: "tabs-demo-vertical",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["tabs"],
-    files: [{
-      path: "components/examples/ui/tabs/tabs-demo-vertical.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/tabs/tabs-demo-vertical");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-demo-vertical";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "tabs-demo": {
     name: "tabs-demo",
     description: "",
@@ -3769,24 +3751,6 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/tabs/tabs-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-demo";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "tabs-ghost-vertical": {
-    name: "tabs-ghost-vertical",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["tabs"],
-    files: [{
-      path: "components/examples/ui/tabs/tabs-ghost-vertical.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/tabs/tabs-ghost-vertical");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-ghost-vertical";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -3810,55 +3774,19 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "tabs-solid-vertical": {
-    name: "tabs-solid-vertical",
+  "tabs-pill": {
+    name: "tabs-pill",
     description: "",
     type: "registry:example",
     registryDependencies: ["tabs"],
     files: [{
-      path: "components/examples/ui/tabs/tabs-solid-vertical.tsx",
+      path: "components/examples/ui/tabs/tabs-pill.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/tabs/tabs-solid-vertical");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-solid-vertical";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "tabs-solid": {
-    name: "tabs-solid",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["tabs"],
-    files: [{
-      path: "components/examples/ui/tabs/tabs-solid.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/tabs/tabs-solid");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-solid";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "tabs-underline-vertical": {
-    name: "tabs-underline-vertical",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["tabs"],
-    files: [{
-      path: "components/examples/ui/tabs/tabs-underline-vertical.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/tabs/tabs-underline-vertical");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-underline-vertical";
+      const mod = await import("@/components/examples/ui/tabs/tabs-pill");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs-pill";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

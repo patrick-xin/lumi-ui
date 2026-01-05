@@ -2,8 +2,13 @@
 
 import type * as React from "react";
 import { CopyButton } from "@/components/docs/copy-button";
+import {
+  Tabs,
+  TabsList,
+  TabsPanel,
+  TabsTab,
+} from "@/components/docs/doc-code-tabs";
 import { useInstallationConfigStore } from "@/hooks/use-config";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
 interface InstallationCommandClientProps {
   npm: React.ReactNode;
@@ -46,7 +51,7 @@ export function InstallationCommandClient({
         })
       }
       value={packageManager}
-      variant={"underline"}
+      variant="underline"
     >
       <TabsList className="w-full justify-start pl-2 h-12">
         <div className="w-fit">

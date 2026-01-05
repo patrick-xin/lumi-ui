@@ -1,6 +1,6 @@
+import { Badge } from "@lumi-ui/ui/badge";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "@/registry/ui/badge";
 
 interface DocsReferenceProps {
   links?: {

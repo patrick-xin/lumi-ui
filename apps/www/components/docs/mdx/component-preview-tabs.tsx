@@ -1,5 +1,10 @@
+import {
+  Tabs,
+  TabsList,
+  TabsPanel,
+  TabsTab,
+} from "@/components/docs/doc-code-tabs";
 import { GradientBorders } from "@/components/gradient-borders";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
 export function ComponentPreviewTabs({
   component,

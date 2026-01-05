@@ -57,178 +57,179 @@ status: new
   }
 ```
 </Step>
-<Step title={<>Add the following css into your global CSS file.</>}>
+<Step title={<>Add global CSS variables to the <code>@theme</code> block of your global CSS file.</>}>
 ```css title="globals.css"
+  /* Spacing around window */
+  --toast-viewport-padding: 2rem;
+  /* Toast width */
+  --toast-width: 22rem;
+  /* Spacing between toasts */
+  --toast-gap: 0.75rem;
+  /* Spacing between stacked toast */
+  --toast-peek: 0.75rem;
+  /* Mobile vs Desktop Widths */
+  --toast-max-width-mobile: 80%; 
+  --toast-max-width-desktop: var(--toast-width);
+```
+</Step>
+<Step title={<>Paste the following code into your global CSS file. Which handles both the viewport and toast styles and animations.</>}>
+```css title="globals.css"
+/* 
+   Toast Viewport
+*/
 @layer utilities {
   .toast-viewport {
-    --viewport-padding: 1rem;
-    --toast-width: 356px;
-    --toast-gap: 0.75rem;
-    --toast-peek: 0.75rem;
+    @apply fixed flex flex-col w-[var(--toast-max-width-mobile)] lg:w-[var(--toast-max-width-desktop)] outline-none pointer-events-none;
   }
+  /* Viewport Positioning */
+  .toast-viewport[data-position^="top"] { top: var(--toast-viewport-padding); bottom: auto; }
+  .toast-viewport[data-position^="bottom"] { bottom: var(--toast-viewport-padding); top: auto; }
+  .toast-viewport[data-position$="left"] { left: var(--toast-viewport-padding); right: auto; }
+  .toast-viewport[data-position$="right"] { right: var(--toast-viewport-padding); left: auto; }
+  .toast-viewport[data-position$="center"] { 
+    @apply left-1/2 right-auto -translate-x-1/2;
+  }
+}
 
-  @media (min-width: 640px) {
-    .toast-viewport {
-      --viewport-padding: 2rem;
-      max-width: var(--toast-width);
-    }
-  }
-
-  /* Positions */
-  .toast-viewport[data-position*="bottom"][data-position*="right"] {
-    bottom: var(--viewport-padding);
-    right: var(--viewport-padding);
-    left: auto;
-  }
-  .toast-viewport[data-position*="top"][data-position*="right"] {
-    top: var(--viewport-padding);
-    right: var(--viewport-padding);
-    left: auto;
-  }
-  .toast-viewport[data-position*="bottom"][data-position*="left"] {
-    bottom: var(--viewport-padding);
-    left: var(--viewport-padding);
-    right: auto;
-  }
-  .toast-viewport[data-position*="top"][data-position*="left"] {
-    top: var(--viewport-padding);
-    left: var(--viewport-padding);
-    right: auto;
-  }
-  .toast-viewport[data-position*="bottom"][data-position*="center"] {
-    @apply mx-auto;
-    bottom: var(--viewport-padding);
-  }
-
-  .toast-viewport[data-position*="top"][data-position*="center"] {
-    @apply mx-auto;
-    top: var(--viewport-padding);
-  }
-
-  /* 
-     TOAST ROOT
-  */
-  .toast-root {    
-    --toast-calc-height: var(--toast-frontmost-height, var(--toast-height));
-    --toast-scale: calc(max(0, 1 - (var(--toast-index) * 0.1)));
-    --toast-shrink: calc(1 - var(--toast-scale));
-  
-    height: var(--toast-calc-height); 
-
+/* 
+   Toast Root
+*/
+@layer utilities {
+  .toast-root {
+    @apply absolute w-full pointer-events-auto;
+    /* Stacking */
+    --toast-index: 0; /* Default fallback */
+    z-index: calc(1000 - var(--toast-index));
+    
+    /* Transitions */
     transition: 
       transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
       opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
       height 0.15s ease-out;
-
-    z-index: calc(1000 - var(--toast-index));
+    
+    /* Height Calculation */
+    height: var(--toast-frontmost-height, var(--toast-height));
+    
+    /* Common Ghost Element (for hit areas) */
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: calc(var(--toast-gap) + 1px);
+      background: transparent;
+    }
+    
+    /* Math for collapsed stacking (shrinking effect) */
+    --toast-scale: calc(max(0, 1 - (var(--toast-index) * 0.1)));
+    --toast-shrink: calc(1 - var(--toast-scale));
+    --toast-height-approx: var(--toast-frontmost-height, var(--toast-height));
   }
-
+  /* 
+    Positions
+  */
   /* Bottom */
-  .toast-root[data-position*="bottom"] {
-    bottom: 0;
+  .toast-root[data-position^="bottom"] {
+    @apply bottom-0 top-auto;
     transform-origin: bottom center;
 
-    --transform-y: calc(
-      var(--toast-swipe-movement-y) - 
-      (var(--toast-index) * var(--toast-peek)) - 
-      (var(--toast-shrink) * var(--toast-calc-height))
+    /* Direction Multipliers: Bottom is "Positive" direction for entering from below */
+    --dir-y: 1; 
+    
+    /* Calculate Offsets */
+    --collapsed-offset-y: calc(
+      (var(--toast-index) * var(--toast-peek) * -1) - /* Stack peek upwards */
+      (var(--toast-shrink) * var(--toast-height-approx)) /* Shrink upwards */
     );
     
     --expanded-offset-y: calc(
-      (var(--toast-offset-y) * -1) - 
-      (var(--toast-index) * var(--toast-gap)) + 
-      var(--toast-swipe-movement-y)
+      (var(--toast-offset-y) * -1) - /* Move up based on total stack height */
+      (var(--toast-index) * var(--toast-gap))
     );
 
-    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--transform-y)) scale(var(--toast-scale));
-  }
-
-  /* Bottom Expanded */
-  .toast-root[data-position*="bottom"][data-expanded] {
-    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--expanded-offset-y));
-    height: var(--toast-height); 
+    /* Default Transform: Collapsed + Swipe Handling */
+    transform: 
+      translateX(var(--toast-swipe-movement-x, 0px)) 
+      translateY(calc(var(--toast-swipe-movement-y, 0px) + var(--collapsed-offset-y))) 
+      scale(var(--toast-scale));
   }
 
   /* Top */
-  .toast-root[data-position*="top"] {
-    top: 0;
+  .toast-root[data-position^="top"] {
+    @apply top-0 bottom-auto;
     transform-origin: top center;
 
-    --transform-y: calc(
-      var(--toast-swipe-movement-y) + 
-      (var(--toast-index) * var(--toast-peek)) + 
-      (var(--toast-shrink) * var(--toast-calc-height))
-    );
+    /* Direction Multipliers: Top is "Negative" direction for entering from above */
+    --dir-y: -1;
 
+    /* Calculate Offsets (Signs flipped from Bottom) */
+    --collapsed-offset-y: calc(
+      (var(--toast-index) * var(--toast-peek)) + /* Stack peek downwards */
+      (var(--toast-shrink) * var(--toast-height-approx)) /* Shrink downwards */
+    );
+    
     --expanded-offset-y: calc(
       var(--toast-offset-y) + 
-      (var(--toast-index) * var(--toast-gap)) + 
-      var(--toast-swipe-movement-y)
+      (var(--toast-index) * var(--toast-gap))
     );
 
-    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--transform-y)) scale(var(--toast-scale));
+    /* Default Transform: Collapsed + Swipe Handling */
+    transform: 
+      translateX(var(--toast-swipe-movement-x, 0px)) 
+      translateY(calc(var(--toast-swipe-movement-y, 0px) + var(--collapsed-offset-y))) 
+      scale(var(--toast-scale));
   }
-
-  /* Top: Expanded */
-  .toast-root[data-position*="top"][data-expanded] {
-    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--expanded-offset-y));
-    height: var(--toast-height); /* Reset height on expand */
+  
+  /* 
+    State Modifiers
+  */
+  /* Expanded State */
+  .toast-root[data-expanded] {
+    height: var(--toast-height);
+    transform: 
+      translateX(var(--toast-swipe-movement-x, 0px)) 
+      translateY(var(--expanded-offset-y)) 
+      scale(1);
   }
-
-  /* Animations & Swipe */
-  .toast-root[data-position*="bottom"][data-starting-style],
-  .toast-root[data-position*="bottom"][data-ending-style]:not([data-limited]):not([data-swipe-direction]) {
-    transform: translateY(150%);
+  /* Entering Animation */
+  .toast-root[data-starting-style] {
     opacity: 0;
+    transform: translateY(calc(var(--dir-y) * 150%));
   }
-
-  .toast-root[data-position*="top"][data-starting-style],
-  .toast-root[data-position*="top"][data-ending-style]:not([data-limited]):not([data-swipe-direction]) {
-    transform: translateY(-150%);
-    opacity: 0;
-  }
-
-  .toast-root[data-limited],
+  /* Exiting Animation */
   .toast-root[data-ending-style] {
-   opacity: 0;
+    opacity: 0;
+    /* Default Exit */
+    &:not([data-swipe-direction]) {
+      transform: translateY(calc(var(--dir-y) * 150%));
+    }
+    /* Swipe Up/Down */
+    &[data-swipe-direction="up"] {
+      transform: translateY(calc(var(--toast-swipe-movement-y) - 150%));
+    }
+    &[data-swipe-direction="down"] {
+      transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
+    }
+    /* Swipe Left/Right */
+    &[data-swipe-direction="left"] {
+      transform: 
+        translateX(calc(var(--toast-swipe-movement-x) - 150%)) 
+        translateY(var(--expanded-offset-y));
+    }
+    &[data-swipe-direction="right"] {
+      transform: 
+        translateX(calc(var(--toast-swipe-movement-x) + 150%)) 
+        translateY(var(--expanded-offset-y));
+    }
   }
-
-  .toast-root[data-ending-style][data-swipe-direction="up"] {
-    transform: translateY(calc(var(--toast-swipe-movement-y) - 150%));
+  /* Limited State */
+  .toast-root[data-limited] {
+    opacity: 0;
+    transform: scale(0.9);
   }
-  .toast-root[data-ending-style][data-swipe-direction="down"] {
-    transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
-  }
-  .toast-root[data-ending-style][data-swipe-direction="left"] {
-    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--transform-y));
-  }
-  .toast-root[data-ending-style][data-swipe-direction="right"] {
-    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--transform-y));
-  }
-
-  /* Expanded Swipe */
-  .toast-root[data-expanded][data-ending-style][data-swipe-direction="left"] {
-    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--expanded-offset-y));
-  }
-  .toast-root[data-expanded][data-ending-style][data-swipe-direction="right"] {
-    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--expanded-offset-y));
-  }
-
-  /* Ghost element for hover interaction area */
-  .toast-root::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: calc(var(--toast-gap) + 1px);
-    background: transparent;
-  }
-  .toast-root[data-position*="bottom"]::after { top: 100%; }
-  .toast-root[data-position*="top"]::after { bottom: 100%; }
 }
 ```
 </Step>
-
 <Step title={<>Use the <code>toast</code> object to trigger notifications from anywhere in your app.</>}>
 ```tsx
 import { toast } from "@/components/ui/toast"
@@ -343,7 +344,6 @@ Animations are handled via CSS/Tailwind classes. By default, we support all toas
   toast={toast}
   className={cn(
     !isCustomContent && toastVariants({ type: "default" }),
-    "w-max pointer-events-auto",
     "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 ",
     "data-[ending-style]:opacity-0 data-[ending-style]:scale-95 ",
     "transition-all duration-200"
@@ -354,7 +354,7 @@ Animations are handled via CSS/Tailwind classes. By default, we support all toas
 
 ## API Reference
 
-### `<Toaster />`
+### Toaster
 The provider component that renders the viewport.
 
 | Prop | Type | Default | Description |
@@ -363,7 +363,7 @@ The provider component that renders the viewport.
 | `swipeDirection` | `SwipeDirection` | `["down", "right"]` | Direction users can swipe to dismiss. |
 | `limit` | `number` | `3` | Maximum number of toasts visible at once. |
 
-### `toast`
+### toast
 The main interface for managing toasts. Extends Base UI's [`useToastManager`](https://base-ui.com/react/components/toast#usetoastmanager).
 
 | Method | Arguments | Description |
@@ -375,7 +375,7 @@ The main interface for managing toasts. Extends Base UI's [`useToastManager`](ht
 | `anchor` | `element, options` | Spawns a toast physically attached to a DOM element (popover style). |
 
 
-### `options`
+### options
 Extends Base UI's [`Method options`](https://base-ui.com/react/components/toast#method-options) with custom data fields.
 
 | Property | Type | Description |

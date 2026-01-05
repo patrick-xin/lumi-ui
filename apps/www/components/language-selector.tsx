@@ -4,14 +4,14 @@ import { LanguagesIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import { usePathname, useRouter } from "@/lib/i18n/navigation";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/registry/ui/button";
 import {
   Select,
   SelectContent,
   SelectItemContent,
   SelectTrigger,
 } from "@/registry/ui/select";
-import { cn } from "../lib/utils";
-import { buttonVariants } from "../registry/ui/button";
 
 const languages = [
   { label: "English", value: "en" },
@@ -54,7 +54,7 @@ export function LanguageSelector() {
       >
         {languages.map((language) => (
           <SelectItemContent
-            className="text-xs font-medium text-primary"
+            className="text-xs font-medium"
             disabled={language.value === value}
             indicatorIcon={null}
             key={language.value}

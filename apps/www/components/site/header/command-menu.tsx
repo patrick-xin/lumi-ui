@@ -2,7 +2,8 @@
 
 import { useIsMac } from "@lumi-ui/ui/hooks/use-is-mac";
 import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
-import { ArrowDown, ArrowUp, CornerDownLeftIcon } from "lucide-react";
+import { Kbd, KbdGroup } from "@lumi-ui/ui/kbd";
+import { ArrowDown, ArrowUp, CornerDownLeftIcon, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import * as React from "react";
@@ -24,7 +25,6 @@ import {
   AutocompletePositioner,
 } from "@/registry/ui/autocomplete";
 import { Button } from "@/registry/ui/button";
-import { Kbd, KbdGroup } from "@/registry/ui/kbd";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Separator } from "@/registry/ui/separator";
 import type { DocRoot, NavGroup, NavItem } from "@/types";
@@ -76,42 +76,43 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
     <>
       <CommandMenuTriggerButton handleOpenChange={handleOpenChange} />
       <Autocomplete
-        modal
         autoHighlight
-        open={isOpen}
-        onOpenChange={setIsOpen}
         items={navGroups}
-        value={inputValue}
-        onValueChange={handleValueChange}
         itemToStringValue={(item) => item.label}
+        modal
+        onOpenChange={setIsOpen}
         onOpenChangeComplete={(open) => !open && setInputValue("")}
+        onValueChange={handleValueChange}
+        open={isOpen}
+        value={inputValue}
       >
         <AutocompletePortal>
           <AutocompleteBackdrop className="fixed inset-0 bg-black/50" />
           <AutocompletePositioner
-            positionMethod="fixed"
             className="inset-0 z-0 bottom-0 pointer-events-none flex justify-center items-center"
+            positionMethod="fixed"
           >
             <AutocompletePopup
-              finalFocus={() => !isNavigatingRef.current}
               className={cn(
                 "relative bg-popover text-popover-foreground rounded outline outline-input animate-dialog",
                 "pointer-events-auto w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
-                "-translate-y-32 max-w-[var(--available-width)]",
+                "-translate-y-16 sm:-translate-y-32 max-w-[var(--available-width)]",
+                "mx-4",
               )}
+              finalFocus={() => !isNavigatingRef.current}
             >
               <AutocompleteInputGroup
-                placeholder={t("placeholder")}
-                variant="ghost"
                 className="caret-primary"
                 inputSize="lg"
+                placeholder={t("placeholder")}
                 showClear
+                variant="ghost"
               />
               <Separator />
               <ScrollArea
-                noScrollBar
+                className="h-96 pt-2 sm:pb-12"
                 gradientScrollFade
-                className="h-96 pt-2 pb-12"
+                noScrollBar
               >
                 <AutocompleteEmpty className="text-center text-base py-12 text-muted-foreground">
                   {t("noResults")}
@@ -119,9 +120,9 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                 <AutocompleteList>
                   {(group: NavGroup) => (
                     <AutocompleteGroup
-                      key={group.value}
-                      items={group.items}
                       className="my-2 first:mt-0 last:mb-0"
+                      items={group.items}
+                      key={group.value}
                     >
                       <AutocompleteGroupLabel className="ml-1 mb-1 font-semibold uppercase">
                         {group.value}
@@ -135,10 +136,10 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
 
                           return (
                             <AutocompleteItem
-                              onClick={() => handleSelect(item)}
-                              key={item.value}
-                              value={item}
                               className="font-medium flex items-center text-sm gap-3 data-[highlighted]:before:inset-x-1 data-[highlighted]:before:rounded-md py-2.5"
+                              key={item.value}
+                              onClick={() => handleSelect(item)}
+                              value={item}
                             >
                               <Icon className="size-4 text-muted-foreground" />
                               {item.label}
@@ -171,16 +172,18 @@ const CommandMenuTriggerButton = ({
   const isMac = useIsMac();
   return (
     <Button
+      className={cn(
+        "relative h-8 px-2 md:px-4 justify-start md:w-48 lg:w-56 xl:w-64",
+      )}
       onClick={handleOpenChange}
       variant="glow"
-      className={cn(
-        "relative h-8 w-full justify-start sm:pr-12 md:w-48 lg:w-56 xl:w-64",
-      )}
     >
       <span className="hidden lg:inline-flex text-muted-foreground">
         {t("placeholder")}
       </span>
-      <span className="inline-flex lg:hidden">Search...</span>
+      <span className="inline-flex lg:hidden">
+        <Search className="size-4" />
+      </span>
       <div className="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
         <KbdGroup>
           <Kbd className="border">{isMac ? "⌘" : "Ctrl"}</Kbd>
@@ -194,7 +197,7 @@ const CommandMenuTriggerButton = ({
 const CommandMenuBottomBar = () => {
   const t = useTranslations("CommandMenu");
   return (
-    <div className="absolute h-10 bottom-0 inset-x-0 border-t bg-popover text-popover-foreground rounded-b-md">
+    <div className="hidden sm:block absolute h-10 bottom-0 inset-x-0 border-t bg-popover text-popover-foreground rounded-b-md">
       <div className="py-2 px-4 flex items-center gap-3">
         <div className="inline-flex items-center gap-1">
           <Kbd>

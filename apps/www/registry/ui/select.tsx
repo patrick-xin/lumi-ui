@@ -223,7 +223,7 @@ function SelectTriggerGroup({
     <BaseSelect.Trigger
       data-size={size}
       className={cn(
-        "group flex items-center gap-2 min-w-40 bg-transparent dark:bg-input/30 dark:hover:bg-input/50 ",
+        "group flex items-center gap-2 min-w-32 bg-transparent dark:bg-input/30 dark:hover:bg-input/50 ",
         "rounded-md border border-input py-2 text-sm shadow-xs transition-[color,box-shadow]",
         "outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50",
         "disabled:cursor-not-allowed disabled:opacity-50",

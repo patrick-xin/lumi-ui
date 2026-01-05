@@ -32,43 +32,87 @@ links:
 </CodeTabs>
 
 
-## Anatomy
+## Basic Usage
 
 ```tsx
- <Tabs>
-  <TabsList>
-    <TabsTab/>
-  </TabsList>
-  <TabsPanel/>
- </Tabs>
+import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 ```
 
-## Variants
+```tsx
+<Tabs>
+  <TabsListContent>
+    <TabsTab>Tab 1</TabsTab>
+    <TabsTab>Tab 2</TabsTab>
+  </TabsListContent>
+  <TabsPanel>Content 1</TabsPanel>
+  <TabsPanel>Content 2</TabsPanel>
+</Tabs>
+```
 
-### Pill
-<ComponentPreview name="tabs-demo" />
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <Tabs>
+      <TabsListContent>
+        <TabsTab/>
+      </TabsListContent>
+      <TabsPanel/>
+    </Tabs>
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <Tabs>
+      <TabsList>
+        <TabsTab/>
+        <TabsIndicator/>
+      </TabsList>
+      <TabsPanel/>
+    </Tabs>
+   ```
+  </TabsPanel>
+</Tabs>
+
+## Cookbook
+
+<Callout title="Note" variant="info">
+  We've added css variables to handle vertical tabs by default. If your app does not need vertical tabs, you can delete all the `data-[orientation=vertical]` styles.
+</Callout>
 
 ### Underline
 <ComponentPreview name="tabs-underline" />
 
 ### Ghost
+Ignore the `TabsIndicator` if you're only styling text.
 <ComponentPreview name="tabs-ghost" />
 
-### Solid
-<ComponentPreview name="tabs-solid" />
+<Callout title="Note" variant="success">
+  The `TabsListContent` component is a composite component for common usage that has default "pill" like indicator. Tweaking the styles of `TabIndicator` to fit your design system.
+</Callout>
 
+## API Reference
 
-## Orientation
+### Primitives
 
-### Pill Vertical
-<ComponentPreview name="tabs-demo-vertical" />
+| Component | Description
+| :--- | :--- |
+| [`Tabs`](https://base-ui.com/react/components/tabs#root)  | Groups the tabs and the corresponding panels. Renders a `<div>` element.
+| [`TabsList`](https://base-ui.com/react/components/tabs#list)  | Groups the individual tab buttons. Renders a `<div>` element.
+| [`TabsTab`](https://base-ui.com/react/components/tabs#tab)  | An individual interactive tab button that toggles the corresponding panel. Renders a `<button>` element.
+| [`TabsIndicator`](https://base-ui.com/react/components/tabs#indicator)  | A visual indicator that can be styled to match the position of the currently active tab. Renders a `<span>` element.
+| [`TabsPanel`](https://base-ui.com/react/components/tabs#panel) | A panel displayed when the corresponding tab is active. Renders a `<div>` element.
 
-### Underline Vertical
-<ComponentPreview name="tabs-underline-vertical" />
+### Composite Component
 
-### Solid Vertical
-<ComponentPreview name="tabs-solid-vertical" />
-
-### Ghost Vertical
-<ComponentPreview name="tabs-ghost-vertical" />
+| Component | Description
+| :--- | :--- |
+| `TabsListContent`  | A composite component that wraps the `TabsList` and `TabsIndicator` components. Default `"pill"` like styles.
 
