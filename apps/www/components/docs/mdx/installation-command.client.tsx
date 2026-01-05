@@ -51,6 +51,7 @@ export function InstallationCommandClient({
         })
       }
       value={packageManager}
+      variant="underline"
     >
       <TabsList className="w-full justify-start pl-2 h-12">
         <div className="w-fit">

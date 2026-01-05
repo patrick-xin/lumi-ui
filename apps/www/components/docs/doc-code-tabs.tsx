@@ -39,7 +39,7 @@ const tabIndicatorVariants = cva(
         solid:
           "hidden pointer-events-none w-0 h-0 translate-x-0 -translate-y-0",
         underline:
-          "bg-foreground bottom-0 left-0 h-0.5 translate-x-(--active-tab-left) data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:left-0 data-[orientation=vertical]:h-(--active-tab-height) data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:translate-x-0 data-[orientation=vertical]:top-(--active-tab-top) data-[orientation=vertical]:translate-y-0 data-[orientation=vertical]:-start-[calc(--spacing(1)-0.5px)]",
+          "bg-foreground bottom-0 left-0 h-0.5 translate-x-(--active-tab-left) translate-y-0 data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:left-0 data-[orientation=vertical]:h-(--active-tab-height) data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:translate-x-0 data-[orientation=vertical]:top-(--active-tab-top) data-[orientation=vertical]:translate-y-0 data-[orientation=vertical]:-start-[calc(--spacing(1)-0.5px)]",
       },
     },
   },

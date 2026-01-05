@@ -1,0 +1,117 @@
+---
+title: 标签页
+description: 用于在同一页面切换相关内容面板的组件。
+links:
+  doc: https://base-ui.com/react/components/tabs
+  api: https://base-ui.com/react/components/tabs#api-reference
+---
+
+<ComponentPreview name="tabs-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/tabs
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="tabs" title="tabs.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## 基本用法
+
+```tsx
+import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
+```
+
+```tsx
+<Tabs>
+  <TabsListContent>
+    <TabsTab>标签 1</TabsTab>
+    <TabsTab>标签 2</TabsTab>
+  </TabsListContent>
+  <TabsPanel>内容 1</TabsPanel>
+  <TabsPanel>内容 2</TabsPanel>
+</Tabs>
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">复合组件用法</TabsTab>
+    <TabsTab value="primitive">基础组件用法</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <Tabs>
+      <TabsListContent>
+        <TabsTab/>
+      </TabsListContent>
+      <TabsPanel/>
+    </Tabs>
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <Tabs>
+      <TabsList>
+        <TabsTab/>
+        <TabsIndicator/>
+      </TabsList>
+      <TabsPanel/>
+    </Tabs>
+   ```
+  </TabsPanel>
+</Tabs>
+
+## 实用示例
+
+<Callout title="注意" variant="info">
+  我们已经默认添加了 CSS 变量来处理垂直标签页。如果你的应用不需要垂直标签页，可以删除所有 `data-[orientation=vertical]` 相关的样式。
+</Callout>
+
+### 下划线样式
+<ComponentPreview name="tabs-underline" />
+
+### 幽灵样式
+如果只对文字进行样式设计，可以忽略 `TabsIndicator` 组件。
+<ComponentPreview name="tabs-ghost" />
+
+<Callout title="提示" variant="success">
+  `TabsListContent` 是一个针对常见用法的复合组件，它有一个默认的类似“胶囊”的指示器。你可以根据你的设计系统调整 `TabIndicator`的样式。
+</Callout>
+
+## API 参考
+
+### 基础组件
+
+| 组件 | 描述 |
+| :--- | :--- |
+| [`Tabs`](https://base-ui.com/react/components/tabs#root)  | 将标签按钮组和对应的内容面板组合在一起。渲染一个 `<div>` 元素。
+| [`TabsList`](https://base-ui.com/react/components/tabs#list)  | 将各个标签按钮组合在一起。渲染一个 `<div>` 元素。
+| [`TabsTab`](https://base-ui.com/react/components/tabs#tab)  | 一个独立的交互式标签按钮，用于切换对应的内容面板。渲染一个 `<button>` 元素。
+| [`TabsIndicator`](https://base-ui.com/react/components/tabs#indicator)  | 一个视觉指示器，可以设置样式以匹配当前选中标签的位置。渲染一个 `<span>` 元素。
+| [`TabsPanel`](https://base-ui.com/react/components/tabs#panel) | 当对应的标签被选中时显示的面板。渲染一个 `<div>` 元素。
+
+### 复合组件
+
+| 组件 | 描述 |
+| :--- | :--- |
+| `TabsListContent`  | 一个包装了 `TabsList` 和 `TabsIndicator` 组件的复合组件。提供默认的类似“胶囊”的样式。

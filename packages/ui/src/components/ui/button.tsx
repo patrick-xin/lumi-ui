@@ -13,36 +13,36 @@ const buttonVariants = cva(
     "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
   ],
   {
+    defaultVariants: {
+      size: "default",
+      variant: "default",
+    },
     variants: {
+      size: {
+        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        icon: "size-9",
+        "icon-lg": "size-10",
+        "icon-sm": "size-8",
+        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
+      },
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline:
-          "border shadow-xs bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
         glow: [
           "bg-transparent border hover:bg-accent dark:hover:bg-accent/30",
           "shadow-md shadow-primary/10 dark:shadow-primary/10 dark:shadow-sm",
         ],
+        link: "text-primary underline-offset-4 hover:underline",
+        outline:
+          "border shadow-xs bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         unstyled: "bg-transparent hover:bg-transparent",
       },
-      size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
-        "icon-sm": "size-8",
-        "icon-lg": "size-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
     },
   },
 );
@@ -63,7 +63,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <BaseButton
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ className, size, variant }))}
       disabled={disabled || isLoading}
       focusableWhenDisabled={focusableWhenDisabled || isLoading}
       {...props}

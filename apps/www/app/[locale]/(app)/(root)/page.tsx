@@ -1,9 +1,9 @@
-import { TabsUnderline } from "../../../../components/examples/ui/tabs/tabs-underline";
+import { TabsDemo } from "../../../../components/examples/ui/tabs/tabs-demo";
 
 export default function Home() {
   return (
     <div className="flex h-[calc(100dvh-12rem)] justify-center items-center">
-      <TabsUnderline />
+      <TabsDemo />
     </div>
   );
 }

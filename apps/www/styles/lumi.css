@@ -43,9 +43,9 @@
 @layer utilities {
   .toast-viewport {
     --viewport-padding: 1rem;
-    --toast-width: 356px;
-    --toast-gap: 0.75rem;
-    --toast-peek: 0.75rem;
+    --toast-width: 22rem;
+    --toast-gap: 0.5rem;
+    --toast-peek: 0.5rem;
   }
 
   @media (min-width: 640px) {
@@ -181,10 +181,10 @@
     transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
   }
   .toast-root[data-ending-style][data-swipe-direction="left"] {
-    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--transform-y));
+    transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--expanded-offset-y));
   }
   .toast-root[data-ending-style][data-swipe-direction="right"] {
-    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--transform-y));
+    transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--expanded-offset-y));
   }
 
   /* Expanded Swipe */

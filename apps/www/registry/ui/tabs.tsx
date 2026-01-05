@@ -31,7 +31,7 @@ function TabsList({
   return (
     <BaseTabs.List
       className={cn(
-        "relative z-0 inline-flex p-1",
+        "relative z-0 inline-flex min-h-10",
         "data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col",
         className,
       )}
@@ -42,30 +42,6 @@ function TabsList({
     </BaseTabs.List>
   );
 }
-
-function TabsTab({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseTabs.Tab>) {
-  return (
-    <BaseTabs.Tab
-      className={cn(
-        "relative flex z-1 items-center justify-center gap-1.5 outline-none select-none",
-        "break-keep whitespace-nowrap",
-        "rounded-md px-2 py-1",
-        "text-sm font-medium text-muted-foreground data-[active]:text-foreground",
-        "transition-colors duration-200 ease-in",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        "data-[orientation=horizontal]:flex-1 data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
-        className,
-      )}
-      data-slot="tabs-tab"
-      {...props}
-    />
-  );
-}
-
 function TabIndicator({
   className,
   ...props
@@ -82,6 +58,31 @@ function TabIndicator({
   );
 }
 
+function TabsTab({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseTabs.Tab>) {
+  return (
+    <BaseTabs.Tab
+      className={cn(
+        "relative flex z-1 items-center justify-center gap-1.5 outline-none select-none",
+        "break-keep whitespace-nowrap h-[calc(100%-1px)]",
+        "rounded-md px-2 py-1.5",
+        "text-sm font-medium text-muted-foreground data-[active]:text-foreground",
+        "transition-colors duration-200 ease-in",
+        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "data-[orientation=horizontal]:flex-1 data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
+        "relative before:absolute before:inset-x-0 before:inset-y-1.5 before:rounded-sm",
+        "focus-visible:before:ring-1 focus-visible:before:ring-ring/10 focus-visible:before:ring-offset-2 focus-visible:before:ring-offset-ring/45",
+        className,
+      )}
+      data-slot="tabs-tab"
+      {...props}
+    />
+  );
+}
+
 function TabsPanel({
   className,
   ...props
@@ -89,8 +90,8 @@ function TabsPanel({
   return (
     <BaseTabs.Panel
       className={cn(
-        "flex-1 outline-none",
-        "focus-visible:border-ring/30 focus-visible:ring-2 focus-visible:ring-ring/10 focus-visible:ring-offset-2 focus-visible:ring-offset-ring/45",
+        "flex-1 outline-none rounded-sm",
+        "focus-visible:ring-2 focus-visible:ring-ring/10 focus-visible:ring-offset-2 focus-visible:ring-offset-ring/45",
         className,
       )}
       data-slot="tabs-panel"
@@ -107,18 +108,33 @@ function TabsListContent({
   return (
     <BaseTabs.List
       className={cn(
-        "relative z-0 inline-flex p-1",
-        "data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col",
-        "rounded-sm bg-accent dark:bg-accent/50 text-accent-foreground data-[orientation=vertical]:h-48",
+        "relative z-0 inline-flex rounded-sm gap-1 px-1.5 bg-muted text-muted-foreground",
+        "data-[orientation=horizontal]:flex-row",
+        "data-[orientation=vertical]:flex-col data-[orientation=vertical]:h-fit data-[orientation=vertical]:py-1.5",
         className,
       )}
       data-slot="tabs-list"
       {...props}
     >
       {children}
-     <TabIndicator data-slot="tab-indicator"  className="rounded-sm bg-primary/60 top-1/2 -translate-y-1/2 left-0 data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)"/> 
+      <TabIndicator
+        className={cn(
+          "rounded-md bg-background dark:bg-primary/30  shadow-sm dark:border-input",
+          "top-1/2 -translate-y-1/2 left-0 data-[orientation=horizontal]:h-[calc(100%-8px)]",
+          "data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
+        )}
+        data-slot="tab-indicator"
+      />
     </BaseTabs.List>
   );
 }
 
-export { Tabs, TabsList, TabsTab, TabsPanel, TabIndicator,TabsListContent };
+export {
+  Tabs,
+  TabsList,
+  TabsTab,
+  TabsPanel,
+  TabIndicator,
+  // Composite component
+  TabsListContent,
+};

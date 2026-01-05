@@ -254,7 +254,7 @@ const StackedToast = ({
       <ToastViewport
         data-position={position}
         className={cn(
-          "toast-viewport fixed flex flex-col w-[var(--toast-width)] outline-none",
+          "toast-viewport fixed flex flex-col w-[var(--toast-width)] max-w-[var(--toast-width)] outline-none",
           position.includes("right") && "items-end right-[var(--toast-inset)]",
           position.includes("left") && "items-start left-[var(--toast-inset)]",
           position.includes("center") &&

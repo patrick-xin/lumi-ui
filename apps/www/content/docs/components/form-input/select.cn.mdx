@@ -1,0 +1,208 @@
+---
+title: 选择器
+description: 一个常见的表单组件，用于在下拉菜单中选择预定义的值。
+links:
+  doc: https://base-ui.com/react/components/select
+  api: https://base-ui.com/react/components/select#api-reference
+---
+
+<ComponentPreview name="select-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/select
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="select" title="select.tsx" collapsible/>
+      </Step>
+      <Step title="根据你的项目设置，更新导入路径。"/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 基本用法
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItemContent,
+  SelectTriggerGroup,
+} from "@/components/ui/select";
+```
+
+```tsx
+<Select>
+  <SelectTriggerGroup placeholder="请选择一个水果" />
+  <SelectContent>
+    <SelectItemContent value="apple">苹果</SelectItemContent>
+    <SelectItemContent value="banana">香蕉</SelectItemContent>
+  </SelectContent>
+</Select>
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+```tsx
+<Select>   
+  <SelectTriggerGroup />
+  <SelectContent>
+    <SelectGroup>
+      <SelectGroupLabel />
+      <SelectItemContent />
+    </SelectGroup>
+  </SelectContent> 
+</Select>
+```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+```tsx
+<Select>
+  <SelectTrigger>
+    <SelectValue />
+    <SelectIcon />
+  </SelectTrigger>
+  <SelectPortal>
+    <SelectBackdrop />
+    <SelectPositioner>
+      <SelectScrollUpArrow />
+      <SelectPopup>
+        <SelectArrow />
+        <SelectList>
+          <SelectItem>
+            <SelectItemText />
+            <SelectItemIndicator />
+          </SelectItem>
+          <SelectSeparator />
+          <SelectGroup>
+            <SelectGroupLabel />
+          </SelectGroup>
+        </SelectList>
+      </SelectPopup>
+      <SelectScrollDownArrow />
+    </SelectPositioner>
+  </SelectPortal>
+</Select>
+```
+  </TabsPanel>
+</Tabs>
+
+## 功能特性
+
+### 自定义样式
+<ComponentPreview name="select-input-group" />
+
+### 对齐方式
+<ComponentPreview name="select-aligned" />
+
+### 支持滚动
+<ComponentPreview name="select-scrollable" />
+
+### 多选
+为 `<Select>` 根组件添加 `multiple` 属性以启用多选功能。
+<ComponentPreview name="select-multiple" />
+
+### 分组
+使用 `SelectGroup` 和 `SelectGroupLabel` 将选项组织成不同的区域。
+<ComponentPreview name="select-grouped" />
+
+<Callout variant="info" title="提示">
+  此组件使用了 `animate-popup` 工具类，以确保与其他浮层组件的动画一致性。你可以在 CSS 文件中自定义过渡效果、缓动函数和持续时间。详见 [动画指南](/docs/animation)。
+</Callout>
+
+## 状态
+
+### 禁用状态
+<ComponentPreview name="select-disabled" />
+
+### 错误状态
+<ComponentPreview name="select-invalid" />
+
+## 实用示例
+
+### 自定义渲染
+你可以在使用 `items` 属性保障无障碍的同时，自定义渲染的内容。
+<ComponentPreview name="select-custom-render" />
+
+### 受控模式
+通过编程方式控制选择器的值。
+<ComponentPreview name="select-controlled" />
+
+### 追踪状态
+你可以追踪选择器的状态，并利用它来显示额外信息。
+<ComponentPreview name="select-track-state" />
+
+## API 参考
+
+### 基础组件
+
+[Base Select API 参考](https://base-ui.com/react/components/select#api-reference)
+
+### 复合组件
+
+#### SelectTriggerGroup
+
+一个高阶的触发按钮组件，它将 `Trigger`、`Value` 和 `Icon` 组合成一个带样式的单一元素。它会自动处理尺寸、图标和占位符文本。
+
+| 属性 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `size` | `"default" \| "sm"` | `"default"` | 控制触发按钮的高度和内边距。 |
+| `placeholder` | `string` | `-` | 未选择任何值时显示的文本。 |
+| `indicatorIcon` | `React.ReactNode` | `<ChevronDownIcon />` | 指示器图标。如果不提供，则默认使用向下箭头。 |
+| `indicatorPlacement` | `"start" \| "end"` | `"end"` | 将指示器图标定位在触发按钮的起始或末尾。 |
+| `children` | `ReactNode` | `-` | 已选值的显示内容（通常由根组件自动传递）。 |
+| `className` | `string` | `-` | 额外的 CSS 类名。 |
+| `...props` | `BaseSelect.Trigger` | `-` | 将所有其他属性传递给底层的 `BaseSelect.Trigger`。 |
+
+---
+
+#### SelectContent
+
+一个复合组件，包装了 `Portal`、`Positioner`、`Popup`、`List` 和滚动按钮。
+
+| 属性 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | 希望在下拉内容相对于触发按钮的哪一侧显示。 |
+| `align` | `"start" \| "center" \| "end"` | `"start"` | 希望下拉内容相对于触发按钮的对齐方式。 |
+| `sideOffset` | `number` | `4` | 距离触发按钮的像素值。 |
+| `alignOffset` | `number` | `0` | 从 `align` 指定边缘的像素偏移量。 |
+| `alignItemWithTrigger` | `boolean` | `false` | 是否将已选项与触发按钮的文本对齐。 |
+| `children` | `ReactNode` | `-` | 选项列表（`SelectItem` 或 `SelectItemContent`）。 |
+| `className` | `string` | `-` | 用于弹窗容器的额外 CSS 类名。 |
+| `...props` | `BaseSelect.Popup` | `-` | 将所有其他属性传递给底层的 `BaseSelect.Popup`。 |
+
+---
+
+#### SelectItemContent
+
+一个便捷的列表项组件。它将 `Item`、`ItemText` 和 `ItemIndicator`（选中图标）组合成单个组件，并管理选中状态的样式和布局。
+
+| 属性 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `value` | `string` | **必填** | 选项被选中时要提交的值。 |
+| `disabled` | `boolean` | `false` | 为 `true` 时，阻止用户与此选项交互。 |
+| `indicatorIcon` | `React.ReactNode` | `<CheckIcon />` | 选项被选中时显示的自定义图标。 |
+| `indicatorPlacement` | `"start" \| "end"` | `"end"` | 选择指示器图标的位置。 |
+| `children` | `ReactNode` | `-` | 选项的文本标签。 |
+| `className` | `string` | `-` | 额外的 CSS 类名。 |
+| `...props` | `BaseSelect.Item` | `-` | 将所有其他属性传递给底层的 `BaseSelect.Item`。 |
