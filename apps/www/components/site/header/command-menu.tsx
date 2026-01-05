@@ -3,7 +3,7 @@
 import { useIsMac } from "@lumi-ui/ui/hooks/use-is-mac";
 import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
 import { Kbd, KbdGroup } from "@lumi-ui/ui/kbd";
-import { ArrowDown, ArrowUp, CornerDownLeftIcon } from "lucide-react";
+import { ArrowDown, ArrowUp, CornerDownLeftIcon, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import * as React from "react";
@@ -96,7 +96,8 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
               className={cn(
                 "relative bg-popover text-popover-foreground rounded outline outline-input animate-dialog",
                 "pointer-events-auto w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
-                "-translate-y-32 max-w-[var(--available-width)]",
+                "-translate-y-16 sm:-translate-y-32 max-w-[var(--available-width)]",
+                "mx-4",
               )}
               finalFocus={() => !isNavigatingRef.current}
             >
@@ -109,7 +110,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
               />
               <Separator />
               <ScrollArea
-                className="h-96 pt-2 pb-12"
+                className="h-96 pt-2 sm:pb-12"
                 gradientScrollFade
                 noScrollBar
               >
@@ -172,7 +173,7 @@ const CommandMenuTriggerButton = ({
   return (
     <Button
       className={cn(
-        "relative h-8 w-full justify-start sm:pr-12 md:w-48 lg:w-56 xl:w-64",
+        "relative h-8 px-2 md:px-4 justify-start md:w-48 lg:w-56 xl:w-64",
       )}
       onClick={handleOpenChange}
       variant="glow"
@@ -180,7 +181,9 @@ const CommandMenuTriggerButton = ({
       <span className="hidden lg:inline-flex text-muted-foreground">
         {t("placeholder")}
       </span>
-      <span className="inline-flex lg:hidden">Search...</span>
+      <span className="inline-flex lg:hidden">
+        <Search className="size-4" />
+      </span>
       <div className="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
         <KbdGroup>
           <Kbd className="border">{isMac ? "⌘" : "Ctrl"}</Kbd>
@@ -194,7 +197,7 @@ const CommandMenuTriggerButton = ({
 const CommandMenuBottomBar = () => {
   const t = useTranslations("CommandMenu");
   return (
-    <div className="absolute h-10 bottom-0 inset-x-0 border-t bg-popover text-popover-foreground rounded-b-md">
+    <div className="hidden sm:block absolute h-10 bottom-0 inset-x-0 border-t bg-popover text-popover-foreground rounded-b-md">
       <div className="py-2 px-4 flex items-center gap-3">
         <div className="inline-flex items-center gap-1">
           <Kbd>

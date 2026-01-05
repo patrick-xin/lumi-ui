@@ -43,6 +43,18 @@
 
   --radius: 0.625rem;
   --header-height: 4rem;
+
+  /* Spacing around window */
+  --toast-viewport-padding: 2rem;
+  /* Toast width */
+  --toast-width: 22rem;
+  /* Spacing between toasts */
+  --toast-gap: 0.75rem;
+  /* Spacing between stacked toast */
+  --toast-peek: 0.75rem;
+  /* Mobile vs Desktop Widths */
+  --toast-max-width-mobile: 80%; 
+  --toast-max-width-desktop: var(--toast-width);
 }
 
 @layer base {

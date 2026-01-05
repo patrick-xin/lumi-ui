@@ -3,6 +3,9 @@
 import Link, { type LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
+import { Logo } from "@/components/logo";
+import { ModeSwitcher } from "@/components/mode-switcher";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
@@ -13,6 +16,7 @@ import {
 } from "@/registry/ui/dialog";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 import type { NavGroup } from "@/types";
+import { GitHubLink } from "./github-link";
 
 export function MobileNav({
   navGroups,
@@ -40,14 +44,25 @@ export function MobileNav({
       />
       <DialogPortal>
         <DialogPopup className="top-16 bg-background/80 backdrop-blur-md h-[calc(100dvh-4rem)] fixed w-screen py-0">
-          <nav className="flex h-full flex-col gap-12">
+          <div className="flex h-full flex-col gap-4">
             <ScrollArea gradientScrollFade noScrollBar>
-              <TreeNavigation
-                navGroups={navGroups}
-                onNavigate={() => setOpen(false)}
-              />
+              <nav>
+                <TreeNavigation
+                  navGroups={navGroups}
+                  onNavigate={() => setOpen(false)}
+                />
+              </nav>
             </ScrollArea>
-          </nav>
+
+            <div className="flex items-center justify-between pb-4">
+              <Logo />
+              <div className="flex items-center gap-2">
+                <ThemeSwitcher />
+                <ModeSwitcher />
+                <GitHubLink />
+              </div>
+            </div>
+          </div>
         </DialogPopup>
       </DialogPortal>
     </Dialog>
