@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui/react";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 import { XIcon } from "lucide-react";
+import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
-import { ScrollArea } from "./scroll-area";
-import { cva } from "class-variance-authority";
 
 function Dialog<Payload>({
   ...props

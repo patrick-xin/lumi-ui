@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Button } from "@/registry/ui/button";
 import {
   createDropdownMenuHandle,
   DropdownMenu,
@@ -9,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import { Button } from "../../../../registry/ui/button";
 
 const demoMenu = createDropdownMenuHandle();
 
@@ -17,8 +17,8 @@ export function DropdownMenuDetachedTriggerDemo() {
   return (
     <React.Fragment>
       <DropdownMenuTrigger
-        handle={demoMenu}
         aria-label="Project actions"
+        handle={demoMenu}
         render={<Button>Actions</Button>}
       />
       <DropdownMenu handle={demoMenu}>
