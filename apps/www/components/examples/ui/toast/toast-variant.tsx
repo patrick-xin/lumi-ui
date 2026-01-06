@@ -9,51 +9,50 @@ export function ToastVariantDemo() {
       <Button
         onClick={() =>
           toast.add({
-            title: "Event Created",
             description: "Monday, January 3rd at 6:00pm",
+            title: "Event Created",
           })
         }
       >
         Default
       </Button>
       <Button
-        variant="outline"
         onClick={() =>
           toast.success({
-            title: "Event Created",
             description: "Monday, January 3rd at 6:00pm",
+            title: "Event Created",
           })
         }
+        variant="outline"
       >
         Success
       </Button>
       <Button
-        variant="destructive"
         onClick={() =>
           toast.error({
-            title: "Error creating event",
             description: "Something went wrong",
+            title: "Error creating event",
           })
         }
+        variant="destructive"
       >
         Error
       </Button>
       <Button
-        variant="secondary"
         onClick={() =>
           toast.warning({
             title: "Your connection to the server is unstable",
           })
         }
+        variant="secondary"
       >
         Warning
       </Button>
       <Button
-        variant="glow"
         onClick={() =>
           toast.info({
-            title: "Event reminder",
             description: "Don't forget to attend the event!",
+            title: "Event reminder",
           })
         }
       >

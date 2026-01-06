@@ -32,9 +32,7 @@ export function ProjectPopover() {
 
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant="glow" />}>
-        Project Settings
-      </PopoverTrigger>
+      <PopoverTrigger render={<Button />}>Project Settings</PopoverTrigger>
 
       <PopoverContent align="center" className="w-80">
         {view === "default" && (

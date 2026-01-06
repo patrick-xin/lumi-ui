@@ -51,7 +51,7 @@ export function DropdownMenuDemo() {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button variant="glow" className="w-60 justify-between">
+            <Button className="w-60 justify-between">
               View Options <ChevronDown />
             </Button>
           }
@@ -74,7 +74,7 @@ export function DropdownMenuDemo() {
               </DropdownMenuItem>
               <DropdownMenuItem
                 render={
-                  <Link href="/settings/sharing" className="w-full">
+                  <Link className="w-full" href="/settings/sharing">
                     <Settings className="size-4" />
                     <span>Sharing Settings...</span>
                   </Link>
@@ -105,8 +105,8 @@ export function DropdownMenuDemo() {
             </DropdownMenuCheckboxItemContent>
             <DropdownMenuCheckboxItemContent
               checked={showStatusBar}
-              onCheckedChange={setShowStatusBar}
               disabled
+              onCheckedChange={setShowStatusBar}
             >
               <Eye className="size-4" />
               <span>Show Status Bar (Locked)</span>
@@ -115,7 +115,7 @@ export function DropdownMenuDemo() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuGroupLabel>Sort Files By</DropdownMenuGroupLabel>
-            <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
+            <DropdownMenuRadioGroup onValueChange={setSortBy} value={sortBy}>
               <DropdownMenuRadioItemContent value="modified">
                 Last Modified
               </DropdownMenuRadioItemContent>
@@ -129,15 +129,15 @@ export function DropdownMenuDemo() {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            variant="destructive"
             onClick={() => setDeleteDialogOpen(true)}
+            variant="destructive"
           >
             <Trash2 className="size-4" />
             <span>Delete Workspace...</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Dialog open={isDeleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+      <Dialog onOpenChange={setDeleteDialogOpen} open={isDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Are you absolutely sure?</DialogTitle>
@@ -148,16 +148,16 @@ export function DropdownMenuDemo() {
           </DialogHeader>
           <DialogFooter>
             <Button
-              variant="outline"
               onClick={() => setDeleteDialogOpen(false)}
+              variant="outline"
             >
               Cancel
             </Button>
             <Button
-              variant="destructive"
               onClick={() => {
                 setDeleteDialogOpen(false);
               }}
+              variant="destructive"
             >
               Yes, delete workspace
             </Button>

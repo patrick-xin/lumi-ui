@@ -17,32 +17,28 @@ export function ToastPromiseDemo() {
         }, 2000);
       }),
       {
-        loading: { title: "Loading data..." },
-        success: (data: string) => {
-          return {
-            title: `Success: ${data}`,
-            description: "Operation completed successfully",
-            closable: true,
-          };
-        },
         error: (err: Error) => {
           return {
-            title: `Error: ${err.message}`,
             actionProps: {
               children: "Contact support",
               onClick() {
                 alert("Contact support");
               },
             },
+            title: `Error: ${err.message}`,
+          };
+        },
+        loading: { title: "Loading data..." },
+        success: (data: string) => {
+          return {
+            closable: true,
+            description: "Operation completed successfully",
+            title: `Success: ${data}`,
           };
         },
       },
     );
   }
 
-  return (
-    <Button variant="glow" onClick={runPromise}>
-      Promise
-    </Button>
-  );
+  return <Button onClick={runPromise}>Promise</Button>;
 }

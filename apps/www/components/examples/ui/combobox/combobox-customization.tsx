@@ -40,39 +40,39 @@ export type ProjectStatus = {
 
 export const statuses: ProjectStatus[] = [
   {
-    value: "backlog",
-    label: "Backlog",
-    icon: CircleDashed,
     color: "text-orange-500",
     count: 1,
+    icon: CircleDashed,
+    label: "Backlog",
+    value: "backlog",
   },
   {
-    value: "planned",
-    label: "Planned",
-    icon: Circle,
     color: "text-zinc-500",
     count: 2,
+    icon: Circle,
+    label: "Planned",
+    value: "planned",
   },
   {
-    value: "in-progress",
-    label: "In Progress",
-    icon: CircleDot,
     color: "text-yellow-500",
     count: 3,
+    icon: CircleDot,
+    label: "In Progress",
+    value: "in-progress",
   },
   {
-    value: "completed",
-    label: "Completed",
-    icon: CheckCircle2,
     color: "text-blue-500",
     count: 4,
+    icon: CheckCircle2,
+    label: "Completed",
+    value: "completed",
   },
   {
-    value: "canceled",
-    label: "Canceled",
-    icon: XCircle,
     color: "text-zinc-500",
     count: 5,
+    icon: XCircle,
+    label: "Canceled",
+    value: "canceled",
   },
 ];
 
@@ -112,12 +112,12 @@ function ProjectStatusPicker() {
         autoHighlight
         items={statuses}
         itemToStringLabel={(status: ProjectStatus) => status.label}
-        value={projectStatus}
+        onOpenChange={setOpen}
         onValueChange={(val) => {
           setProjectStatus(val);
         }}
         open={open}
-        onOpenChange={setOpen}
+        value={projectStatus}
       >
         <ComboboxTrigger
           render={
@@ -125,9 +125,8 @@ function ProjectStatusPicker() {
               handle={projectStatusTooltipHandle}
               render={
                 <Button
-                  size="sm"
-                  variant="glow"
                   className="text-xs data-popup-open:bg-accent dark:data-popup-open:bg-accent/30 min-w-24 rounded-sm"
+                  size="sm"
                 >
                   <ComboboxValue>
                     {(item) => {
@@ -146,25 +145,25 @@ function ProjectStatusPicker() {
             />
           }
         />
-        <ComboboxContent matchAnchorWidth={false} className="rounded-sm">
+        <ComboboxContent className="rounded-sm" matchAnchorWidth={false}>
           <ComboboxInput
+            className="px-3 placeholder:text-xs caret-primary"
+            inputSize="sm"
+            onKeyDown={handleInputKeyDown}
             placeholder="Press 1-5 to change status"
             variant="ghost"
-            inputSize="sm"
-            className="px-3 placeholder:text-xs caret-primary"
-            onKeyDown={handleInputKeyDown}
           />
           <Separator />
           <ComboboxEmpty>No matching statuses.</ComboboxEmpty>
           <ComboboxList>
             {(status: ProjectStatus) => (
               <ComboboxItem
-                key={status.value}
-                value={status}
                 className={cn(
                   "flex items-center justify-between text-sm px-4",
                   "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1.5 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
                 )}
+                key={status.value}
+                value={status}
               >
                 <div className="flex items-center gap-3">
                   <status.icon className={cn("size-3.5", status.color)} />
@@ -184,15 +183,15 @@ function ProjectStatusPicker() {
         </ComboboxContent>
       </Combobox>
       <Tooltip
-        handle={projectStatusTooltipHandle}
-        disableHoverablePopup
         disabled={open}
+        disableHoverablePopup
+        handle={projectStatusTooltipHandle}
       >
         <TooltipContent
-          sideOffset={6}
-          side="bottom"
-          showArrow={false}
           className="bg-accent text-accent-foreground border border-primary/10 rounded-sm"
+          showArrow={false}
+          side="bottom"
+          sideOffset={6}
         >
           <p>Change project status</p>
         </TooltipContent>
@@ -213,40 +212,40 @@ const NoPriorityIcon = ({ className }: { className?: string }) => {
     <svg
       aria-label="No Priority"
       className={cn("fill-current text-muted-foreground", className)}
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      role="img"
       focusable="false"
+      height="16"
+      role="img"
+      viewBox="0 0 16 16"
+      width="16"
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* Added fill="currentColor" to the rects so they react to color changes */}
       <rect
+        fill="currentColor"
+        height="1.5"
+        opacity="0.9"
+        rx="0.5"
+        width="3"
         x="1.5"
         y="7.25"
-        width="3"
-        height="1.5"
-        rx="0.5"
-        opacity="0.9"
-        fill="currentColor"
       ></rect>
       <rect
+        fill="currentColor"
+        height="1.5"
+        opacity="0.9"
+        rx="0.5"
+        width="3"
         x="6.5"
         y="7.25"
-        width="3"
-        height="1.5"
-        rx="0.5"
-        opacity="0.9"
-        fill="currentColor"
       ></rect>
       <rect
+        fill="currentColor"
+        height="1.5"
+        opacity="0.9"
+        rx="0.5"
+        width="3"
         x="11.5"
         y="7.25"
-        width="3"
-        height="1.5"
-        rx="0.5"
-        opacity="0.9"
-        fill="currentColor"
       ></rect>
     </svg>
   );
@@ -257,16 +256,16 @@ const HighPriorityIcon = ({ className }: { className?: string }) => {
     <svg
       aria-label="High Priority"
       className={cn("fill-current text-muted-foreground", className)}
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      role="img"
       focusable="false"
+      height="16"
+      role="img"
+      viewBox="0 0 16 16"
+      width="16"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect x="1.5" y="8" width="3" height="6" rx="1"></rect>
-      <rect x="6.5" y="5" width="3" height="9" rx="1"></rect>
-      <rect x="11.5" y="2" width="3" height="12" rx="1"></rect>
+      <rect height="6" rx="1" width="3" x="1.5" y="8"></rect>
+      <rect height="9" rx="1" width="3" x="6.5" y="5"></rect>
+      <rect height="12" rx="1" width="3" x="11.5" y="2"></rect>
     </svg>
   );
 };
@@ -276,22 +275,22 @@ const MediumPriorityIcon = ({ className }: { className?: string }) => {
     <svg
       aria-label="Medium Priority"
       className={cn("fill-current text-muted-foreground", className)}
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      role="img"
       focusable="false"
+      height="16"
+      role="img"
+      viewBox="0 0 16 16"
+      width="16"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect x="1.5" y="8" width="3" height="6" rx="1"></rect>
-      <rect x="6.5" y="5" width="3" height="9" rx="1"></rect>
+      <rect height="6" rx="1" width="3" x="1.5" y="8"></rect>
+      <rect height="9" rx="1" width="3" x="6.5" y="5"></rect>
       <rect
-        x="11.5"
-        y="2"
-        width="3"
+        fillOpacity="0.4"
         height="12"
         rx="1"
-        fillOpacity="0.4"
+        width="3"
+        x="11.5"
+        y="2"
       ></rect>
     </svg>
   );
@@ -302,22 +301,22 @@ const LowPriorityIcon = ({ className }: { className?: string }) => {
     <svg
       aria-label="Low Priority"
       className={cn("fill-current text-muted-foreground", className)}
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      role="img"
       focusable="false"
+      height="16"
+      role="img"
+      viewBox="0 0 16 16"
+      width="16"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect x="1.5" y="8" width="3" height="6" rx="1"></rect>
-      <rect x="6.5" y="5" width="3" height="9" rx="1" fillOpacity="0.4"></rect>
+      <rect height="6" rx="1" width="3" x="1.5" y="8"></rect>
+      <rect fillOpacity="0.4" height="9" rx="1" width="3" x="6.5" y="5"></rect>
       <rect
-        x="11.5"
-        y="2"
-        width="3"
+        fillOpacity="0.4"
         height="12"
         rx="1"
-        fillOpacity="0.4"
+        width="3"
+        x="11.5"
+        y="2"
       ></rect>
     </svg>
   );
@@ -328,12 +327,12 @@ const UrgentPriorityIcon = ({ className }: { className?: string }) => {
     <svg
       aria-label="Urgent Priority"
       className={cn("fill-current text-muted-foreground", className)}
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
       fill="currentColor"
-      role="img"
       focusable="false"
+      height="16"
+      role="img"
+      viewBox="0 0 16 16"
+      width="16"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M3 1C1.91067 1 1 1.91067 1 3V13C1 14.0893 1.91067 15 3 15H13C14.0893 15 15 14.0893 15 13V3C15 1.91067 14.0893 1 13 1H3ZM7 4L9 4L8.75391 8.99836H7.25L7 4ZM9 11C9 11.5523 8.55228 12 8 12C7.44772 12 7 11.5523 7 11C7 10.4477 7.44772 10 8 10C8.55228 10 9 10.4477 9 11Z"></path>
@@ -343,34 +342,34 @@ const UrgentPriorityIcon = ({ className }: { className?: string }) => {
 
 const priorities: ProjectPriority[] = [
   {
-    value: "no-priority",
-    label: "No Priority",
-    icon: NoPriorityIcon,
     count: 0,
+    icon: NoPriorityIcon,
+    label: "No Priority",
+    value: "no-priority",
   },
   {
-    value: "urgent",
-    label: "Urgent",
-    icon: UrgentPriorityIcon,
     count: 1,
+    icon: UrgentPriorityIcon,
+    label: "Urgent",
+    value: "urgent",
   },
   {
-    value: "high",
-    label: "High",
-    icon: HighPriorityIcon,
     count: 2,
+    icon: HighPriorityIcon,
+    label: "High",
+    value: "high",
   },
   {
-    value: "medium",
-    label: "Medium",
-    icon: MediumPriorityIcon,
     count: 3,
+    icon: MediumPriorityIcon,
+    label: "Medium",
+    value: "medium",
   },
   {
-    value: "low",
-    label: "Low",
-    icon: LowPriorityIcon,
     count: 4,
+    icon: LowPriorityIcon,
+    label: "Low",
+    value: "low",
   },
 ];
 
@@ -398,10 +397,10 @@ function ProjectPriorityPicker() {
         autoHighlight
         items={priorities}
         itemToStringLabel={(priority) => priority.label}
-        value={selectedPriority}
+        onOpenChange={setOpen}
         onValueChange={setSelectedPriority}
         open={open}
-        onOpenChange={setOpen}
+        value={selectedPriority}
       >
         <ComboboxTrigger
           render={
@@ -409,11 +408,10 @@ function ProjectPriorityPicker() {
               handle={projectPriorityTooltip}
               render={
                 <Button
-                  size="sm"
-                  variant="glow"
                   className={cn(
                     "text-xs data-popup-open:bg-accent dark:data-popup-open:bg-accent/30",
                   )}
+                  size="sm"
                 >
                   <ComboboxValue>
                     {(item) => {
@@ -439,23 +437,23 @@ function ProjectPriorityPicker() {
         />
         <ComboboxContent matchAnchorWidth={false}>
           <ComboboxInput
+            className="px-3 placeholder:text-xs caret-primary"
+            inputSize="sm"
+            onKeyDown={handleInputKeyDown}
             placeholder="Change priority..."
             variant="ghost"
-            inputSize="sm"
-            className="px-3 placeholder:text-xs caret-primary"
-            onKeyDown={handleInputKeyDown}
           />
           <Separator />
           <ComboboxEmpty>No matching priorities.</ComboboxEmpty>
           <ComboboxList>
             {(priority: ProjectPriority) => (
               <ComboboxItem
-                key={priority.value}
-                value={priority}
                 className={cn(
                   "group/item flex items-center justify-between text-sm px-4",
                   "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1.5 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm",
                 )}
+                key={priority.value}
+                value={priority}
               >
                 <div className="flex items-center gap-3">
                   <priority.icon
@@ -477,15 +475,15 @@ function ProjectPriorityPicker() {
         </ComboboxContent>
       </Combobox>
       <Tooltip
-        handle={projectPriorityTooltip}
-        disableHoverablePopup
         disabled={open}
+        disableHoverablePopup
+        handle={projectPriorityTooltip}
       >
         <TooltipContent
-          sideOffset={6}
-          side="bottom"
-          showArrow={false}
           className="bg-accent text-accent-foreground border border-primary/10 rounded-sm"
+          showArrow={false}
+          side="bottom"
+          sideOffset={6}
         >
           <p>Change project priority</p>
         </TooltipContent>

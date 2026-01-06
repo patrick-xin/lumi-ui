@@ -110,7 +110,6 @@ export function MobileToc({
       <Dialog handle={tocHandle} onOpenChange={setOpen} open={open}>
         <DialogPortal>
           <DialogPopup
-            animation="none"
             className={cn(
               "fixed top-[calc(var(--header-height)+2.5rem)] h-full w-screen p-0 z-50 overflow-y-auto transition-opacity min-h-[calc(100vh-var(--header-height)-2.5rem)] pb-32",
             )}

@@ -2,19 +2,19 @@ import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
-  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogStackedContent,
   DialogTitle,
   DialogTrigger,
 } from "@/registry/ui/dialog";
 
-export default function ExampleDialog() {
+export function DialogNestedDemo() {
   return (
     <Dialog>
       <DialogTrigger render={<Button>View notifications</Button>} />
-      <DialogContent>
+      <DialogStackedContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Notifications</DialogTitle>
           <DialogDescription>
@@ -22,29 +22,27 @@ export default function ExampleDialog() {
           </DialogDescription>
         </DialogHeader>
         <div className="flex items-center justify-end gap-4">
-          <div className="mr-auto flex">
-            <Dialog>
-              <DialogTrigger render={<Button>Customize</Button>} />
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Customize notification</DialogTitle>
-                  <DialogDescription>
-                    Review your settings here.
-                  </DialogDescription>
-                </DialogHeader>
-                <DialogFooter>
-                  <DialogClose
-                    render={<Button variant="outline">Close</Button>}
-                  />
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </div>
+          <Dialog>
+            <DialogTrigger render={<Button>Customize</Button>} />
+            <DialogStackedContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle>Customize notification</DialogTitle>
+                <DialogDescription>
+                  Review your settings here.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose
+                  render={<Button variant="outline">Close</Button>}
+                />
+              </DialogFooter>
+            </DialogStackedContent>
+          </Dialog>
           <DialogFooter>
             <DialogClose render={<Button variant="outline">Close</Button>} />
           </DialogFooter>
         </div>
-      </DialogContent>
+      </DialogStackedContent>
     </Dialog>
   );
 }

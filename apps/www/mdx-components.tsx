@@ -41,7 +41,7 @@ export const mdxComponents: MDXComponents = {
 
     return (
       <Link
-        className="inline-flex items-center justify-center text-primary underline-offset-4 hover:underline transition-colors ease-linear"
+        className="inline-flex items-center justify-center text-primary underline-offset-4 underline transition-colors ease-linear"
         href={props.href}
       >
         {props.children}

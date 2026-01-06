@@ -1,7 +1,9 @@
 "use client";
 
+import { Button } from "@lumi-ui/ui/button";
+import { useScrollToTop } from "@lumi-ui/ui/hooks/use-scroll-to-top";
 import type { TOCItemType } from "fumadocs-core/toc";
-import { TextAlignStartIcon } from "lucide-react";
+import { ArrowUpIcon, TextAlignStartIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useTocActiveItem } from "@/hooks/use-toc-active-Item";
@@ -91,6 +93,7 @@ function TOCThumb({
 
 export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
   const t = useTranslations("DocPage");
+  const { visible, scrollToTop } = useScrollToTop({ top: 20 });
   const containerRef = React.useRef<HTMLDivElement>(null);
   const itemIds = toc.map((item) => item.url.replace("#", ""));
   const activeHeading = useTocActiveItem(itemIds);
@@ -155,12 +158,18 @@ export function DesktopToc({ toc, className }: DocsTableOfContentsProps) {
     <aside
       className={cn("relative flex flex-col gap-2 p-4 pt-0 text-sm", className)}
     >
-      <p className="h-6 text-xs items-center flex gap-1.5 mb-3">
-        <span className="inline-block">
+      <div className="h-8 text-xs items-center flex gap-4 mb-3">
+        <span className="inline-flex items-center gap-1">
           <TextAlignStartIcon className="size-4 text-muted-foreground" />
+          {t("onThisPage")}
         </span>
-        {t("onThisPage")}
-      </p>
+        {visible && (
+          <Button onClick={scrollToTop} size="icon-xs" variant="glow">
+            <ArrowUpIcon className="size-4 text-muted-foreground" />
+          </Button>
+        )}
+      </div>
+
       <div className="relative">
         {svg && (
           <div

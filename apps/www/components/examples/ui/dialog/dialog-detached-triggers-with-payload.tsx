@@ -34,8 +34,8 @@ export default function UserList() {
       <div className="flex gap-2">
         {USERS.map((user) => (
           <DialogTrigger
-            key={user.id}
             handle={editUserDialogHandle}
+            key={user.id}
             payload={user}
             render={<Button>Edit {user.name}</Button>}
           />
@@ -47,9 +47,9 @@ export default function UserList() {
             <DialogHeader>
               <DialogTitle>Delete {payload?.name}?</DialogTitle>
               <DialogDescription>
-                Are you sure you want to delete item ID:{" "}
+                Are you sure you want to delete{" "}
                 <span className="font-semibold text-primary">
-                  {payload?.id}
+                  {payload?.name}
                 </span>
                 ? This action cannot be undone.
               </DialogDescription>

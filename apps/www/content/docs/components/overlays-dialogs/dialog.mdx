@@ -32,7 +32,6 @@ links:
 </CodeTabs>
 
 ## Basic Usage
-
 ```tsx
 import {
   Dialog,
@@ -116,31 +115,11 @@ export function DialogDemo() {
   </TabsPanel>
 </Tabs>
 
-<Callout title="Note" variant="info">
-Lumi UI supplies foundational styling for Base UI primitives. When you use the primitives directly, you are responsible for implementing additional styling and animations.
-</Callout>
-
 ## Cookbook
 
-### Controlled Dialog
+### Controlled dialog
 
-By default, Dialog is an **uncontrolled** component that manages its own state.
-
-```tsx title="Uncontrolled dialog"
-<Dialog>
-  <DialogTrigger>Open</DialogTrigger>
-  <DialogContent>
-   <DialogHeader>
-      <DialogTitle>Example dialog</DialogTitle>
-   </DialogHeader>
-   <DialogFooter>
-      <DialogClose>Close</DialogClose>
-   </DialogFooter>
-  </DialogContent>
-</Dialog>
-```
-
-Use `open` and `onOpenChange` props if you need to access or control the state of the dialog. For example, you can control the dialog state in order to open it imperatively from another place in your app.
+By default, Dialog is an **uncontrolled** component that manages its own state. Use the `open` and `onOpenChange` props to control the dialog state. This is useful when triggering the dialog from external events or performing async actions before closing.
 
 ```tsx title="Controlled dialog"
 const [open, setOpen] = React.useState(false);
@@ -179,48 +158,37 @@ It’s also common to use `onOpenChange` if your app needs to do something when 
 ```
 
 ### Open from Dropdown menu
-In order to open a dialog using a menu, control the dialog state and open it imperatively using the `onClick` handler on `DropdownMenuItem`.
+To open a dialog from a [`DropdownMenu`](/docs/components/overlays-dialogs/dropdown-menu), use the controlled state pattern. The Dialog should be placed outside the `DropdownMenu` to avoid nesting issues.
 
 <ComponentPreview name="dialog-from-menu" />
 
 ### Nested dialogs
-
-You can nest dialogs within one another normally.
+When opening a dialog on top of another, use the `DialogStackedContent` component. This component includes specific CSS logic to create a visual "stacking" scale effect, allowing the parent dialog to recede slightly when the child opens.
 
 <ComponentPreview name="dialog-nested" />
 
 ### Close confirmation
-
-This example shows a nested confirmation dialog that opens if the text entered in the parent dialog is going to be discarded.
-
-To implement this, both dialogs should be controlled. The confirmation dialog may be opened when `onOpenChange` callback of the parent dialog receives a request to close. This way, the confirmation is automatically shown when the user clicks the backdrop, presses the Esc key, or clicks a close button.
+This example demonstrates a nested confirmation dialog that triggers if the user attempts to discard unsaved input. To achieve the correct visual stacking effect where the parent form recedes into the background, use `DialogStackedContent` and [`AlertDialogStackedContent`](/docs/components/overlays-dialogs/alert-dialog#composite-component).
 
 <ComponentPreview name="dialog-close-confirmation" />
 
-### Inside scroll dialog
-
-Use `<DialogScrollArea>` inside `<DialogContent>` to make an inner container scrollable while the popup stays fully on screen.
+### Inside scroll
+Use `DialogScrollableContent` combined with `DialogScrollArea`. This layout fixes the header and footer in place while allowing the inner content body to scroll independently, ensuring the modal never exceeds the viewport height.
 
 <ComponentPreview name="dialog-with-scroll-area" />
 
-### Outside scroll dialog
-
-The dialog can be made scrollable by using `<DialogViewport>` as an outer scrollable container for `<DialogPopup>` while the popup can extend past the bottom edge. The scrollable area uses the `Scroll Area` component to provide custom scrollbars.
+### Outside scroll
+To allow the entire dialog—including the header and footer—to scroll with the page, use `DialogViewport` as the scrolling container. This approach is useful for very long content where internal scrolling is not desired.
 
 <ComponentPreview name="dialog-outside-scroll" />
 
 ### Placing elements outside the popup
-When adding elements that should appear “outside” the colored popup area, continue to place them inside `<DialogPopup>`, but create a child element that has the popup styles. This ensures they are kept in the tab order and announced correctly by screen readers.
-
-`<DialogPopup>` has `pointer-events: none`, while inner content (the colored popup and close button) has `pointer-events: auto` so clicks on the backdrop continue to be registered.
+To visually place elements (like a close button) outside the main popup surface while keeping them accessible and within the focus trap, nest them inside `DialogPopup`. The `DialogPopup` container has `pointer-events: none` by default, while the inner content wrapper has `pointer-events: auto`. You must explicitly apply `pointer-events-auto` to any detached elements to make them interactive.
 
 <ComponentPreview name="dialog-outside-popup" />
 
-### Detached triggers
-
-A dialog can be controlled by a trigger located either inside or outside the `<Dialog>` component. For simple, one-off interactions, place the `<DialogTrigger>` inside `<Dialog>`, as shown in the demo example at the top of this page.
-
-However, if defining the dialog’s content next to its trigger is not practical, you can use a detached trigger. This involves placing the `<DialogTrigger>` outside of `<Dialog>` and linking them with a handle created by the `createDialogHandle` function.
+### Detached Triggers
+If you need to trigger a dialog from a completely different part of the component tree, or if nesting the trigger inside the root is impractical, use `createDialogHandle` to link a `DialogTrigger` to a `Dialog` remotely.
 
 ```tsx title="Detached trigger"
 import { createDialogHandle } from "@/components/ui/dialog"
@@ -235,8 +203,8 @@ const demoDialog = createDialogHandle();
 ```
 <ComponentPreview name="dialog-detached-trigger" />
 
-### Multiple triggers
-A single dialog can be opened by multiple trigger elements. You can achieve this by using the same handle for several detached triggers, or by placing multiple `<DialogTrigger>` components inside a single `<Dialog>`.
+### Multiple triggers & payloads
+A single dialog can serve multiple triggers. You can pass a payload from the trigger to the dialog to render dynamic content based on which element opened it. This is highly effective for list views where every item needs an "Edit" or "Delete" modal without rendering a separate dialog instance for each row.
 
 ```tsx title="Multiple triggers within the Root part"
 <Dialog>
@@ -255,19 +223,18 @@ const demoDialog = createDialogHandle();
 </Dialog>
 ```
 
-The dialog can render different content depending on which trigger opened it. This is achieved by passing a payload to the `<DialogTrigger>` and using the function-as-a-child pattern in `<Dialog>`.
+The dialog can render different content depending on which trigger opened it. This is achieved by passing a payload to the `<DialogTrigger>` and using the `function-as-a-child` pattern in `<Dialog>`.
 
 <ComponentPreview name="dialog-detached-triggers-with-payload" />
 
 ### Controlled mode with multiple triggers
-
-You can control the dialog’s open state externally using the open and onOpenChange props on `<Dialog>`. This allows you to manage the dialog’s visibility based on your application’s state. When using multiple triggers, you have to manage which trigger is active with the triggerId prop on `<Dialog>` and the id prop on each `<DialogTrigger>`. 
-
-Note that there is no separate onTriggerIdChange prop. Instead, the onOpenChange callback receives an additional argument, eventDetails, which contains the trigger element that initiated the state change.
+When controlling a multi-trigger dialog externally, you must manage both the open state and the triggerId. The `onOpenChange` event provides `eventDetails` containing the ID of the trigger that initiated the action.
 
 <ComponentPreview name="dialog-controlled-mode-with-multiple-triggers" />
 
-## API Reference
+## API reference
+
+### Primitives
 
 | Component | Description |
 | :--- | :--- |
@@ -277,11 +244,17 @@ Note that there is no separate onTriggerIdChange prop. Instead, the onOpenChange
 | [`DialogBackdrop`](https://base-ui.com/react/components/dialog#backdrop) | An overlay displayed beneath the popup. Renders a `<div>` element. |
 | [`DialogViewport`](https://base-ui.com/react/components/dialog#viewport) | A positioning container for the dialog popup that can be made scrollable. Renders a `<div>` element. |
 | [`DialogPopup`](https://base-ui.com/react/components/dialog#popup) | A container for the dialog contents. Must be used inside `DialogPortal`. Renders a `<div>` element. |
-| `DialogContent` | Composite component that wraps `DialogPortal`, `DialogBackdrop`, `DialogViewport`, and `DialogPopup` with default styles. |
-| `DialogHeader` | Styled container for convenience purpose. |
-| `DialogFooter` | Styled container for convenience purpose. |
-| `DialogScrollArea` | Scrollable container for the dialog contents. Renders [`<ScrollArea>`](/docs/components/layout-nav/scroll-area).
 | [`DialogTitle`](https://base-ui.com/react/components/dialog#title) | A heading that labels the dialog. Renders an `<h2>` element. |
 | [`DialogDescription`](https://base-ui.com/react/components/dialog#description) | A paragraph with additional information about the dialog. Renders a `<p>` element. |
 | [`DialogClose`](https://base-ui.com/react/components/dialog#close) | A button that closes the dialog. Renders a `<button>` element.|
+| `DialogHeader` | Styled container for convenience purpose. Renders a `<div>` element. |
+| `DialogFooter` | Styled container for convenience purpose. Renders a `<div>` element. |
+| `DialogScrollArea` | Scrollable container for the dialog contents. Renders [`<ScrollArea>`](/docs/components/layout-nav/scroll-area).
 
+### Composite components
+
+| Component | Description |
+| :--- | :--- |
+| `DialogContent` | **Recommended**. Wraps Portal, Backdrop, Viewport, and Popup with standard centered styling. |
+| `DialogStackedContent` | Wraps Portal, Backdrop, Viewport and Popup with animation logic for nested "stacking" effects. | 
+| `DialogScrollableContent` | Wraps Portal, Viewport, and Popup with layout logic for fixed headers/footers and scrollable content. |

@@ -4,45 +4,48 @@ import * as React from "react";
 import {
   AlertDialog,
   AlertDialogClose,
-  AlertDialogContent,
   AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogStackedContent,
   AlertDialogTitle,
 } from "@/registry/ui/alert-dialog";
 import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
-  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogStackedContent,
   DialogTitle,
   DialogTrigger,
 } from "@/registry/ui/dialog";
 import { Textarea } from "@/registry/ui/textarea";
 
-export default function AlertDialogCloseConfirmationDemo() {
+export function DialogCloseConfirmationDemo() {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [confirmationOpen, setConfirmationOpen] = React.useState(false);
   const [textareaValue, setTextareaValue] = React.useState("");
 
   return (
     <Dialog
-      open={dialogOpen}
       onOpenChange={(open) => {
         // Show the close confirmation if there’s text in the textarea
         if (!open && textareaValue) {
           setConfirmationOpen(true);
         } else {
-          // Reset the text area value
           setTextareaValue("");
           // Open or close the dialog normally
           setDialogOpen(open);
         }
       }}
+      open={dialogOpen}
     >
-      <DialogTrigger render={<Button variant="outline">Tweet</Button>} />
-      <DialogContent>
-        <DialogTitle className="-mt-1.5 mb-1 text-lg font-medium">
-          New tweet
-        </DialogTitle>
+      <DialogTrigger render={<Button>Tweet</Button>} />
+      <DialogStackedContent className="sm:max-w-96">
+        <DialogHeader>
+          <DialogTitle>New tweet</DialogTitle>
+        </DialogHeader>
         <form
           className="mt-4 flex flex-col gap-6"
           onSubmit={(event) => {
@@ -52,41 +55,41 @@ export default function AlertDialogCloseConfirmationDemo() {
           }}
         >
           <Textarea
-            required
-            placeholder="What’s on your mind?"
-            value={textareaValue}
+            className="min-h-48"
             onChange={(event) => setTextareaValue(event.target.value)}
+            placeholder="What’s on your mind?"
+            required
+            value={textareaValue}
           />
-          <div className="flex justify-end gap-4">
+          <DialogFooter>
             <DialogClose render={<Button variant="outline">Cancel</Button>} />
-
             <Button type="submit">Tweet</Button>
-          </div>
+          </DialogFooter>
         </form>
-      </DialogContent>
+      </DialogStackedContent>
 
       {/* Confirmation dialog */}
-      <AlertDialog open={confirmationOpen} onOpenChange={setConfirmationOpen}>
-        <AlertDialogContent>
-          <AlertDialogTitle className="-mt-1.5 mb-1 text-lg font-medium">
-            Discard tweet?
-          </AlertDialogTitle>
-          <AlertDialogDescription className="mb-6">
-            Your tweet will be lost.
-          </AlertDialogDescription>
-          <div className="flex items-center justify-end gap-4">
-            <AlertDialogClose variant="outline">Go back</AlertDialogClose>
+      <AlertDialog onOpenChange={setConfirmationOpen} open={confirmationOpen}>
+        <AlertDialogStackedContent className="sm:max-w-md">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Discard tweet?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Your tweet will be lost.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogClose render={<Button>Go back</Button>} />
             <Button
-              type="button"
               onClick={() => {
                 setConfirmationOpen(false);
                 setDialogOpen(false);
               }}
+              variant="destructive"
             >
               Discard
             </Button>
-          </div>
-        </AlertDialogContent>
+          </AlertDialogFooter>
+        </AlertDialogStackedContent>
       </AlertDialog>
     </Dialog>
   );

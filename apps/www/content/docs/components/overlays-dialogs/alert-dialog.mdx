@@ -100,10 +100,14 @@ export function AlertDialogDemo() {
     <AlertDialogPortal>     
       <AlertDialogBackdrop />     
       <AlertDialogViewport>       
-        <AlertDialogPopup>         
-          <AlertDialogTitle />         
-          <AlertDialogDescription />         
-          <AlertDialogClose />       
+        <AlertDialogPopup>
+          <AlertDialogHeader>         
+            <AlertDialogTitle />         
+            <AlertDialogDescription />         
+          </AlertDialogHeader>         
+          <AlertDialogFooter>         
+            <AlertDialogClose />       
+          </AlertDialogFooter>       
         </AlertDialogPopup>     
       </AlertDialogViewport>   
     </AlertDialogPortal> 
@@ -116,24 +120,17 @@ export function AlertDialogDemo() {
 ## Cookbook
 
 ### Open from dropdown menu
-
 Control the dialog state and open it imperatively using the `onClick` handler on the `DropdownMenuItem`.
 
 <ComponentPreview name="alert-dialog-open-from-menu" />
 
 ### Close confirmation
-
-This example shows a nested confirmation dialog that opens if the text entered in the parent dialog is going to be discarded.
-
-To implement this, both dialogs should be controlled. The confirmation dialog may be opened when `onOpenChange` callback of the parent dialog receives a request to close. This way, the confirmation is automatically shown when the user clicks the backdrop, presses the Esc key, or clicks a close button.
+This example demonstrates a nested confirmation dialog that triggers if the user attempts to discard unsaved input. To achieve the correct visual stacking effect where the parent form recedes into the background, use [`DialogStackedContent`](/docs/components/overlays-dialogs/dialog#composite-component) and `AlertDialogStackedContent`.
 
 <ComponentPreview name="alert-dialog-close-confirmation" />
 
 ### Detached triggers
-
-An alert dialog can be controlled by a trigger located either inside or outside the `<AlertDialog>` component. For simple, one-off interactions, place the `<AlertDialogTrigger>` inside `<AlertDialog>`, as shown in the demo example.
-
-However, if defining the alert dialog’s content next to its trigger is not practical, you can use a detached trigger. This involves placing the `<AlertDialogTrigger>` outside of `<AlertDialog>` and linking them with a handle created by the `createAlertDialogHandle` function.
+If you need to trigger an alert dialog from a completely different part of the component tree, or if nesting the trigger inside the root is impractical, use `createAlertDialogHandle` to link a `AlertDialogTrigger` to a `AlertDialog` remotely.
 
 ```tsx
 const deleteAlertHandle = createAlertDialogHandle();
@@ -176,18 +173,9 @@ Note that there is no separate onTriggerIdChange prop. Instead, the `onOpenChang
 
 <ComponentPreview name="alert-dialog-controlled-mode" />
 
-## Create your own
-
-Most of the time, you can use `AlertDialogContent` directly, which wraps `AlertDialogPortal`, `AlertDialogViewport`, `AlertDialogBackdrop` and `AlertDialogPopup`. However, you can also customize your own by using the primitives to give a unique look that fits your design, all styles can be overwritten.
-
-<Callout title="Note" variant="warning">
-  `AlertDialogPopup` requires `AlertDialogPortal` to be its parent.
-</Callout>
-
-<ComponentPreview name="alert-dialog-custom" />
-
-
 ## API Reference
+
+### Primitives
 
 | Component | Description |
 | :--- | :--- |
@@ -197,10 +185,15 @@ Most of the time, you can use `AlertDialogContent` directly, which wraps `AlertD
 | [`AlertDialogViewport`](https://base-ui.com/react/components/alert-dialog#viewport) | A positioning container for the dialog popup that can be made scrollable. Renders a `<div>` element. |
 | [`AlertDialogPopup`](https://base-ui.com/react/components/alert-dialog#popup) | A container for the alert dialog contents. Must be used inside `AlertDialogPortal`. Renders a `<div>` element. |
 | [`AlertDialogBackdrop`](https://base-ui.com/react/components/alert-dialog#backdrop) | An overlay displayed beneath the popup.  Renders a `<div>` element. |
-| `AlertDialogContent` | Pre assembled component that wraps `AlertDialogPortal`, `AlertDialogBackdrop`, `AlertDialogViewport` and `AlertDialogPopup` with default styles. |
-| `AlertDialogHeader` | Styled container for convenience purpose. |
-| `AlertDialogFooter` | Styled container for convenience purpose. |
 | [`AlertDialogTitle`](https://base-ui.com/react/components/alert-dialog#title) | A heading that labels the dialog. Renders an `<h2>` element. |
 | [`AlertDialogDescription`](https://base-ui.com/react/components/alert-dialog#description) | A paragraph with additional information about the alert dialog. Renders a `<p>` element. |
 | [`AlertDialogClose`](https://base-ui.com/react/components/alert-dialog#close) | A button that closes the alert dialog. Renders a `<button>` element. Renders a `<button>` element. |
+| `AlertDialogHeader` | Styled container for convenience purpose. Renders a `<div>` element. |
+| `AlertDialogFooter` | Styled container for convenience purpose. Renders a `<div>` element. |
 
+### Composite components
+
+| Component | Description |
+| :--- | :--- |
+| `AlertDialogContent` | Pre assembled component that wraps `AlertDialogPortal`, `AlertDialogBackdrop`, `AlertDialogViewport` and `AlertDialogPopup` with default styles. |
+| `AlertDialogStackedContent` | Wraps Portal, Backdrop, Viewport and Popup with animation logic for nested "stacking" effects. |
