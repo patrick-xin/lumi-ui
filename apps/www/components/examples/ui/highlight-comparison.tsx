@@ -11,27 +11,27 @@ import {
 
 export function HighlightComparison() {
   return (
-    <div className="flex gap-4">
-      <DropdownMenu open={true} modal={false} onOpenChange={() => {}}>
+    <div className="flex gap-20 items-center flex-wrap justify-center">
+      <DropdownMenu modal={false} onOpenChange={() => {}} open={true}>
         <DropdownMenuTrigger
           className="w-56"
           render={<Button variant="glow">Pseudo-element</Button>}
         />
         <DropdownMenuContent>
           <DropdownMenuItem
-            unstyled
             className={cn(
               BaseStyle,
               "pl-6",
               "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-3 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground",
             )}
             onClick={() => alert("Profile item clicked")}
+            unstyled
           >
             <span>Profile</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DropdownMenu open={true} modal={false} onOpenChange={() => {}}>
+      <DropdownMenu modal={false} onOpenChange={() => {}} open={true}>
         <DropdownMenuTrigger
           className="w-56"
           render={<Button variant="glow">Margin or Padding</Button>}
@@ -41,13 +41,13 @@ export function HighlightComparison() {
         //className="px-3"
         >
           <DropdownMenuItem
-            unstyled
             className={cn(
               BaseStyle,
               "mx-3",
               "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
             )}
             onClick={() => alert("Profile item clicked")}
+            unstyled
           >
             <span>Profile</span>
           </DropdownMenuItem>
