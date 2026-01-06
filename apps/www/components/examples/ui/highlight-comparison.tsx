@@ -15,7 +15,7 @@ export function HighlightComparison() {
       <DropdownMenu modal={false} onOpenChange={() => {}} open={true}>
         <DropdownMenuTrigger
           className="w-56"
-          render={<Button variant="glow">Pseudo-element</Button>}
+          render={<Button>Pseudo-element</Button>}
         />
         <DropdownMenuContent>
           <DropdownMenuItem
@@ -34,7 +34,7 @@ export function HighlightComparison() {
       <DropdownMenu modal={false} onOpenChange={() => {}} open={true}>
         <DropdownMenuTrigger
           className="w-56"
-          render={<Button variant="glow">Margin or Padding</Button>}
+          render={<Button>Margin or Padding</Button>}
         />
         <DropdownMenuContent
         // Or style parent container

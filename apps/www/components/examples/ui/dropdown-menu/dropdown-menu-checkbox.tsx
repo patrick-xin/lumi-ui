@@ -19,7 +19,7 @@ export function DropdownMenuCheckboxDemo() {
       <DropdownMenuTrigger
         className="w-56 justify-between"
         render={
-          <Button variant="glow">
+          <Button>
             Workspace <ChevronDownIcon className="size-4" />
           </Button>
         }

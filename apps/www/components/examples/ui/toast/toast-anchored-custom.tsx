@@ -25,9 +25,9 @@ export function CustomToastAnchoredDemo() {
       toast.close(activeToastId.current);
     }
     const newId = toast.anchor(buttonRef.current, {
-      timeout: 3000,
-      side: targetSide,
       customContent: <CustomContent />,
+      side: targetSide,
+      timeout: 3000,
     });
     if (newId) activeToastId.current = newId;
   }
@@ -43,38 +43,34 @@ export function CustomToastAnchoredDemo() {
 
   return (
     <div className="flex gap-2 items-center">
-      <Button variant="glow" ref={buttonRef} onClick={handleClick}>
+      <Button onClick={handleClick} ref={buttonRef}>
         Show Custom Toast
       </Button>
       <Button
-        size="icon-sm"
         disabled={side === "top"}
-        variant="glow"
         onClick={() => handleSideChange("top")}
+        size="icon-sm"
       >
         <ArrowUp className="size-4" />
       </Button>
       <Button
-        size="icon-sm"
         disabled={side === "bottom"}
-        variant="glow"
         onClick={() => handleSideChange("bottom")}
+        size="icon-sm"
       >
         <ArrowDown className="size-4" />
       </Button>
       <Button
-        size="icon-sm"
         disabled={side === "left"}
-        variant="glow"
         onClick={() => handleSideChange("left")}
+        size="icon-sm"
       >
         <ArrowLeft className="size-4" />
       </Button>
       <Button
-        size="icon-sm"
         disabled={side === "right"}
-        variant="glow"
         onClick={() => handleSideChange("right")}
+        size="icon-sm"
       >
         <ArrowRight className="size-4" />
       </Button>
@@ -100,8 +96,8 @@ const CustomContent = () => {
         <ToastClose
           render={
             <Button
-              variant="unstyled"
               className="bg-white/20 hover:bg-white/30 size-6 rounded-full flex items-center justify-center"
+              variant="unstyled"
             />
           }
         >

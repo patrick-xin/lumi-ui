@@ -1,12 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui/react";
-import { ScrollArea } from "@/registry/ui/scroll-area";
 import { XIcon } from "lucide-react";
-import { cva } from "class-variance-authority";
-
+import type * as React from "react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/registry/ui/button";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 function Dialog<Payload>({
   ...props
@@ -32,8 +31,8 @@ function DialogViewport({
 }: React.ComponentProps<typeof BaseDialog.Viewport>) {
   return (
     <BaseDialog.Viewport
-      data-slot="dialog-viewport"
       className={cn("fixed inset-0 outline-none", className)}
+      data-slot="dialog-viewport"
       {...props}
     />
   );
@@ -45,47 +44,29 @@ function DialogBackdrop({
 }: React.ComponentProps<typeof BaseDialog.Backdrop>) {
   return (
     <BaseDialog.Backdrop
-      data-slot="dialog-backdrop"
       className={cn(
-        "fixed inset-0 min-h-dvh bg-black/70",
+        "fixed inset-0 min-h-dvh bg-black/70 animate-backdrop",
         "supports-[-webkit-touch-callout:none]:absolute",
         className,
       )}
+      data-slot="dialog-backdrop"
       {...props}
     />
   );
 }
 
-
-const panelVariants = cva("overflow-hidden", {
-  variants: {
-    animation: {
-      css: "transition-all duration-150 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
-      none: "",
-    },
-  },
-  defaultVariants: {
-    animation: "css",
-  },
-})
-
-
 function DialogPopup({
   className,
   children,
-  animation = "css",
   ...props
-}: React.ComponentProps<typeof BaseDialog.Popup> & {
-  animation?: "css" | "none";
-}) {
+}: React.ComponentProps<typeof BaseDialog.Popup>) {
   return (
     <BaseDialog.Popup
-      data-slot="dialog-popup"
       className={cn(
-        "bg-background p-4 sm:p-6",
-        panelVariants({ animation }),
+        "bg-background rounded p-4 sm:p-6",
         className,
       )}
+      data-slot="dialog-popup"
       {...props}
     >
       {children}
@@ -94,7 +75,9 @@ function DialogPopup({
 }
 
 function DialogClose({ ...props }: BaseDialog.Close.Props) {
-  return <BaseDialog.Close data-slot="dialog-close" {...props} />;
+  return (
+    <BaseDialog.Close aria-label="Close" data-slot="dialog-close" {...props} />
+  );
 }
 
 function DialogTitle({
@@ -103,8 +86,8 @@ function DialogTitle({
 }: React.ComponentProps<typeof BaseDialog.Title>) {
   return (
     <BaseDialog.Title
-      data-slot="dialog-title"
       className={cn("text-lg leading-none font-semibold", className)}
+      data-slot="dialog-title"
       {...props}
     />
   );
@@ -116,8 +99,8 @@ function DialogDescription({
 }: React.ComponentProps<typeof BaseDialog.Description>) {
   return (
     <BaseDialog.Description
-      data-slot="dialog-description"
       className={cn("text-muted-foreground text-sm", className)}
+      data-slot="dialog-description"
       {...props}
     />
   );
@@ -126,8 +109,8 @@ function DialogDescription({
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="dialog-header"
       className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
+      data-slot="dialog-header"
       {...props}
     />
   );
@@ -136,24 +119,24 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
 function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="dialog-footer"
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
         className,
       )}
+      data-slot="dialog-footer"
       {...props}
     />
   );
 }
 
-function DialogScrollArea({ className, ...props }: React.ComponentProps<typeof ScrollArea>) {
+function DialogScrollArea({
+  className,
+  ...props
+}: React.ComponentProps<typeof ScrollArea>) {
   return (
     <ScrollArea
+      className={cn("flex-1 min-h-0 w-full pr-4", className)}
       data-slot="dialog-scroll-area"
-      className={cn(
-        "flex-1 min-h-0 w-full pr-4",
-        className,
-      )}
       {...props}
     />
   );
@@ -169,35 +152,83 @@ function DialogContent({
 }) {
   return (
     <DialogPortal>
-      <BaseDialog.Backdrop className="fixed inset-0 min-h-dvh bg-black/70 animate-backdrop" />
+      <DialogBackdrop />
       <DialogViewport className="grid place-items-center">
-        <BaseDialog.Popup
+        <DialogPopup
           className={cn(
-            "relative grid w-full max-w-[calc(100%-2rem)] gap-4 p-4",
-            "bg-background bg-clip-padding rounded-lg border shadow-lg overflow-hidden",
-            "min-h-0 max-h-full sm:max-w-lg sm:p-6 sm:rounded-md",
-            "animate-dialog",
-            "data-[nested-dialog-open]:scale-[calc(1-0.04*var(--nested-dialogs))] data-[nested-dialog-open]:translate-y-[calc(0.75rem*var(--nested-dialogs))]",
-            "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-[inherit] data-[nested-dialog-open]:after:bg-black/20 data-[nested-dialog-open]:after:content-['']",
+            "grid gap-4 w-full max-w-[calc(100vw-2rem)] sm:max-w-lg bg-background rounded animate-dialog",
+            "outline outline-1 outline-border dark:-outline-offset-1",
             className,
           )}
+          data-slot="dialog-content"
           {...props}
         >
           {children}
           {showCloseButton && (
-            <BaseDialog.Close
-              className={cn(
-                "absolute top-2 right-2 rounded-xs opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none",
-                "focus:ring-2 focus:ring-offset-2 focus:outline-hidden ring-offset-background focus:ring-ring",
-                "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-                "pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11",
-              )}
-            >
-              <XIcon />
-              <span className="sr-only">Close</span>
-            </BaseDialog.Close>
+            <DialogClose
+              render={
+                <Button size="icon-sm" variant="outline">
+                  <XIcon />
+                  <span className="sr-only">Close</span>
+                </Button>
+              }
+            />
           )}
-        </BaseDialog.Popup>
+        </DialogPopup>
+      </DialogViewport>
+    </DialogPortal>
+  );
+}
+
+function DialogStackedContent({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Popup>) {
+  return (
+    <DialogPortal>
+      <DialogBackdrop />
+      <DialogPopup
+        className={cn(
+          "fixed left-1/2 -translate-x-1/2 -translate-y-1/2",
+          "grid gap-4 w-full max-w-[calc(100vw-2rem)] sm:max-w-lg bg-background rounded animate-dialog",
+          "outline outline-1 outline-border dark:-outline-offset-1",
+          "top-[calc(50%+1.25rem*var(--nested-dialogs))] scale-[calc(1-0.1*var(--nested-dialogs))]",
+          "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-[inherit] data-[nested-dialog-open]:after:bg-black/20",
+          className,
+        )}
+        data-slot="dialog-stacked-content"
+        {...props}
+      />
+    </DialogPortal>
+  );
+}
+
+function DialogScrollableContent({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof BaseDialog.Popup>) {
+  return (
+    <DialogPortal>
+      <DialogBackdrop />
+      <DialogViewport
+        className={cn(
+          "flex items-center justify-center overflow-hidden",
+          "py-6 [@media(min-height:600px)]:pb-12 [@media(min-height:600px)]:pt-8",
+        )}
+      >
+        <DialogPopup
+          className={cn(
+            "flex flex-col gap-6 overflow-hidden",
+            "min-h-0 max-h-full max-w-full w-[min(40rem,calc(100vw-2rem))]",
+            "rounded-md outline outline-border dark:-outline-offset-1 animate-dialog",
+            className,
+          )}
+          data-slot="dialog-scrollable-content"
+          {...props}
+        >
+          {children}
+        </DialogPopup>
       </DialogViewport>
     </DialogPortal>
   );
@@ -206,7 +237,6 @@ function DialogContent({
 const createDialogHandle = BaseDialog.createHandle;
 
 export {
-  createDialogHandle,
   Dialog,
   DialogBackdrop,
   DialogClose,
@@ -219,6 +249,9 @@ export {
   DialogTrigger,
   DialogViewport,
   DialogScrollArea,
+  createDialogHandle,
   // Composite component
   DialogContent,
+  DialogStackedContent,
+  DialogScrollableContent,
 };

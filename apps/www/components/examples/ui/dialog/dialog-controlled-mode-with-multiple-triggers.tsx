@@ -16,7 +16,7 @@ import {
 
 const demoDialog = createDialogHandle<number>();
 
-export default function DialogDetachedTriggersControlledDemo() {
+export function DialogDetachedTriggersControlledDemo() {
   const [open, setOpen] = React.useState(false);
   const [triggerId, setTriggerId] = React.useState<string | null>(null);
 
@@ -32,37 +32,37 @@ export default function DialogDetachedTriggersControlledDemo() {
     <React.Fragment>
       <div className="flex gap-2 flex-wrap justify-center">
         <DialogTrigger
-          render={<Button>Open 1</Button>}
           handle={demoDialog}
           id="trigger-1"
           payload={1}
+          render={<Button>Open 1</Button>}
         />
         <DialogTrigger
-          render={<Button>Open 2</Button>}
           handle={demoDialog}
           id="trigger-2"
           payload={2}
+          render={<Button>Open 2</Button>}
         />
         <DialogTrigger
-          render={<Button>Open 3</Button>}
           handle={demoDialog}
           id="trigger-3"
           payload={3}
+          render={<Button>Open 3</Button>}
         />
         <Button
-          variant="outline"
           onClick={() => {
             setTriggerId("trigger-2");
             setOpen(true);
           }}
+          variant="outline"
         >
           Open programmatically (Dialog 2)
         </Button>
       </div>
       <Dialog
         handle={demoDialog}
-        open={open}
         onOpenChange={handleOpenChange}
+        open={open}
         triggerId={triggerId}
       >
         {({ payload }) => (
@@ -70,7 +70,6 @@ export default function DialogDetachedTriggersControlledDemo() {
             <DialogHeader>
               <DialogTitle>Dialog {payload}</DialogTitle>
             </DialogHeader>
-
             <DialogFooter>
               <DialogClose render={<Button>Close</Button>} />
             </DialogFooter>

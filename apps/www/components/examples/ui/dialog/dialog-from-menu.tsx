@@ -23,16 +23,14 @@ export function DialogFromMenuDemo() {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button variant="outline" />}>
-          Open menu
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger render={<Button />}>Open menu</DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem onClick={() => setDialogOpen(true)}>
             Open dialog
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog onOpenChange={setDialogOpen} open={dialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Settings</DialogTitle>

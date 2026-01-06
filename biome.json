@@ -50,6 +50,9 @@
       "complexity": {
         "useLiteralKeys": "off"
       },
+      "correctness": {
+        "useExhaustiveDependencies": "warn"
+      },
       "recommended": true,
       "security": {
         "noDangerouslySetInnerHtml": "warn"

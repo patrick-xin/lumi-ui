@@ -2,7 +2,7 @@
 import { Button } from "@lumi-ui/ui/button";
 import { useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
-import { cn } from "../../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export function HeroSection() {
   const t = useTranslations("HomePage");

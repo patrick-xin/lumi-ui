@@ -29,17 +29,16 @@ export function ToastCustomDemo() {
                 <ToastDescription className="text-white/90">
                   🌟 Star{" "}
                   <a
-                    href="https://github.com/patrick-xin/lumi-ui"
-                    target="_blank"
-                    rel="noreferrer"
                     className="underline font-semibold"
+                    href="https://github.com/patrick-xin/lumi-ui"
+                    rel="noreferrer"
+                    target="_blank"
                   >
                     Lumi UI
                   </a>{" "}
                   on GitHub!
                 </ToastDescription>
                 <Button
-                  size="sm"
                   onClick={() => {
                     toast.update(id, {
                       customContent: (
@@ -66,6 +65,7 @@ export function ToastCustomDemo() {
                     });
                     toast.close(id);
                   }}
+                  size="sm"
                 >
                   No, thanks!
                 </Button>
@@ -76,9 +76,5 @@ export function ToastCustomDemo() {
       ),
     });
   };
-  return (
-    <Button onClick={createToast} variant="glow">
-      Unlock Achievement
-    </Button>
-  );
+  return <Button onClick={createToast}>Unlock Achievement</Button>;
 }

@@ -16,12 +16,12 @@ import {
 
 const demoDialogHandle = createDialogHandle();
 
-export default function DialogDetachedTriggersSimpleDemo() {
+export function DialogDetachedTriggersSimpleDemo() {
   return (
     <React.Fragment>
       <DialogTrigger
-        render={<Button>View notifications</Button>}
         handle={demoDialogHandle}
+        render={<Button>View notifications</Button>}
       />
       <Dialog handle={demoDialogHandle}>
         <DialogContent>

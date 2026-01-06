@@ -10,16 +10,12 @@ export function ToastVeryingHeightsDemo() {
     setCount((prev) => prev + 1);
     const description = TEXTS[Math.floor(Math.random() * TEXTS.length)];
     toast.add({
-      title: `Toast ${count + 1} created`,
       description,
+      title: `Toast ${count + 1} created`,
     });
   }
 
-  return (
-    <Button variant="glow" onClick={createToast}>
-      Create toast
-    </Button>
-  );
+  return <Button onClick={createToast}>Create toast</Button>;
 }
 
 const TEXTS = [

@@ -4,46 +4,45 @@ import * as React from "react";
 import {
   AlertDialog,
   AlertDialogClose,
-  AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogStackedContent,
   AlertDialogTitle,
 } from "@/registry/ui/alert-dialog";
 import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
-  DialogContent,
   DialogFooter,
   DialogHeader,
+  DialogStackedContent,
   DialogTitle,
   DialogTrigger,
 } from "@/registry/ui/dialog";
 import { Textarea } from "@/registry/ui/textarea";
 
-export default function ExampleDialog() {
+export function DialogCloseConfirmationDemo() {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [confirmationOpen, setConfirmationOpen] = React.useState(false);
   const [textareaValue, setTextareaValue] = React.useState("");
 
   return (
     <Dialog
-      open={dialogOpen}
       onOpenChange={(open) => {
         // Show the close confirmation if there’s text in the textarea
         if (!open && textareaValue) {
           setConfirmationOpen(true);
         } else {
-          // Reset the text area value
           setTextareaValue("");
           // Open or close the dialog normally
           setDialogOpen(open);
         }
       }}
+      open={dialogOpen}
     >
       <DialogTrigger render={<Button>Tweet</Button>} />
-      <DialogContent>
+      <DialogStackedContent className="sm:max-w-96">
         <DialogHeader>
           <DialogTitle>New tweet</DialogTitle>
         </DialogHeader>
@@ -56,21 +55,22 @@ export default function ExampleDialog() {
           }}
         >
           <Textarea
-            required
-            placeholder="What’s on your mind?"
-            value={textareaValue}
+            className="min-h-48"
             onChange={(event) => setTextareaValue(event.target.value)}
+            placeholder="What’s on your mind?"
+            required
+            value={textareaValue}
           />
           <DialogFooter>
             <DialogClose render={<Button variant="outline">Cancel</Button>} />
             <Button type="submit">Tweet</Button>
           </DialogFooter>
         </form>
-      </DialogContent>
+      </DialogStackedContent>
 
       {/* Confirmation dialog */}
-      <AlertDialog open={confirmationOpen} onOpenChange={setConfirmationOpen}>
-        <AlertDialogContent>
+      <AlertDialog onOpenChange={setConfirmationOpen} open={confirmationOpen}>
+        <AlertDialogStackedContent className="sm:max-w-md">
           <AlertDialogHeader>
             <AlertDialogTitle>Discard tweet?</AlertDialogTitle>
             <AlertDialogDescription>
@@ -80,16 +80,16 @@ export default function ExampleDialog() {
           <AlertDialogFooter>
             <AlertDialogClose render={<Button>Go back</Button>} />
             <Button
-              variant="destructive"
               onClick={() => {
                 setConfirmationOpen(false);
                 setDialogOpen(false);
               }}
+              variant="destructive"
             >
               Discard
             </Button>
           </AlertDialogFooter>
-        </AlertDialogContent>
+        </AlertDialogStackedContent>
       </AlertDialog>
     </Dialog>
   );
