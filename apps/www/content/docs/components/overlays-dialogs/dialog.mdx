@@ -78,7 +78,7 @@ export function DialogDemo() {
 ```tsx
 <Dialog>   
   <DialogTrigger />
-  <DialogContent>     
+  <DialogContent>      
     <DialogHeader>     
       <DialogTitle />     
       <DialogDescription />     
@@ -91,7 +91,6 @@ export function DialogDemo() {
 </Dialog>
 ```
   </TabsPanel>
-
   <TabsPanel value="primitive">
 ```tsx
 <Dialog>
@@ -114,6 +113,10 @@ export function DialogDemo() {
 ```
   </TabsPanel>
 </Tabs>
+
+## Variants
+
+<ComponentPreview name="dialog-variants" />
 
 ## Cookbook
 
@@ -161,11 +164,6 @@ It’s also common to use `onOpenChange` if your app needs to do something when 
 To open a dialog from a [`DropdownMenu`](/docs/components/overlays-dialogs/dropdown-menu), use the controlled state pattern. The Dialog should be placed outside the `DropdownMenu` to avoid nesting issues.
 
 <ComponentPreview name="dialog-from-menu" />
-
-### Nested dialogs
-When opening a dialog on top of another, use the `DialogStackedContent` component. This component includes specific CSS logic to create a visual "stacking" scale effect, allowing the parent dialog to recede slightly when the child opens.
-
-<ComponentPreview name="dialog-nested" />
 
 ### Close confirmation
 This example demonstrates a nested confirmation dialog that triggers if the user attempts to discard unsaved input. To achieve the correct visual stacking effect where the parent form recedes into the background, use `DialogStackedContent` and [`AlertDialogStackedContent`](/docs/components/overlays-dialogs/alert-dialog#composite-component).

@@ -16,7 +16,7 @@ export function DialogDemo() {
   return (
     <Dialog>
       <DialogTrigger render={<Button>Show Dialog</Button>} />
-      <DialogContent>
+      <DialogContent layout="sheet">
         <DialogHeader>
           <DialogTitle>Notifications</DialogTitle>
           <DialogDescription>

@@ -1758,24 +1758,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "combobox-form": {
-    name: "combobox-form",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["combobox"],
-    files: [{
-      path: "components/examples/ui/combobox/combobox-form.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/combobox/combobox-form");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox-form";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "combobox-grouped": {
     name: "combobox-grouped",
     description: "",
@@ -2041,6 +2023,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/dialog/dialog-outside-scroll");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-outside-scroll";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "dialog-variants": {
+    name: "dialog-variants",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["dialog"],
+    files: [{
+      path: "components/examples/ui/dialog/dialog-variants.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/dialog/dialog-variants");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-variants";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

@@ -72,17 +72,17 @@ const DialogOutsideScrollContent = ({
   const popupRef = React.useRef<HTMLDivElement>(null);
   return (
     <DialogPortal>
-      <DialogBackdrop className="bg-black/70 animate-backdrop" />
+      <DialogBackdrop />
       <DialogViewport className="group/dialog">
         <ScrollAreaRoot
-          className="h-full overscroll-contain group-data-[ending-style]/dialog:pointer-events-none"
+          className="h-full overscroll-contain group-data-ending-style/dialog:pointer-events-none"
           style={{ position: undefined }}
         >
-          <ScrollAreaViewport className="h-full overscroll-contain group-data-[ending-style]/dialog:pointer-events-none">
+          <ScrollAreaViewport className="h-full overscroll-contain group-data-ending-style/dialog:pointer-events-none">
             <ScrollAreaContent className="flex min-h-full items-center justify-center">
               <DialogPopup
                 className={cn(
-                  "relative mx-auto my-18 w-[min(40rem,calc(100vw-2rem))] rounded-lg animate-dialog",
+                  "relative mx-auto my-18 w-[min(40rem,calc(100vw-2rem))] rounded-lg animate-dialog bg-popover",
                   className,
                 )}
                 initialFocus={popupRef}
