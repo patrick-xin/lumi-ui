@@ -17,38 +17,38 @@ export function ComboboxMultipleSelectDemo() {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   return (
     <Combobox items={langs} multiple>
-      <ComboboxChips ref={containerRef} className="max-w-xl w-96">
+      <ComboboxChips className="max-w-xl w-96" ref={containerRef}>
         <ComboboxValue>
           {(value: ProgrammingLanguage[]) => (
             <React.Fragment>
               {value.map((language) => (
-                <ComboboxChip key={language.id} aria-label={language.value}>
+                <ComboboxChip aria-label={language.value} key={language.id}>
                   {language.value}
                 </ComboboxChip>
               ))}
 
               <ComboboxInputGroup
-                inputSize="lg"
-                placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
-                // variant="ghost" will strip out basic styles
-                variant="ghost"
-                // remove flex-1 will make input always appear in new line, see Async Items (Multiple) example below
                 className="flex-1"
+                inputSize="lg"
+                // variant="ghost" will strip out basic styles
+                placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
+                // remove flex-1 will make input always appear in new line, see Async Items (Multiple) example below
                 showClear
                 showTrigger
+                variant="ghost"
               />
             </React.Fragment>
           )}
         </ComboboxValue>
       </ComboboxChips>
-      <ComboboxContent sideOffset={4} positionerAnchor={containerRef}>
+      <ComboboxContent positionerAnchor={containerRef} sideOffset={4}>
         <ComboboxEmpty>No languages found.</ComboboxEmpty>
         <ComboboxList>
           {(language: ProgrammingLanguage) => (
             <ComboboxItemContent
+              indicatorPlacement="end"
               key={language.id}
               value={language}
-              indicatorPlacement="end"
             >
               {language.value}
             </ComboboxItemContent>

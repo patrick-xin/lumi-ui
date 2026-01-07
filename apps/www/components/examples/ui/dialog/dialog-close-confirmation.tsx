@@ -42,7 +42,7 @@ export function DialogCloseConfirmationDemo() {
       open={dialogOpen}
     >
       <DialogTrigger render={<Button>Tweet</Button>} />
-      <DialogStackedContent className="sm:max-w-96">
+      <DialogStackedContent className="sm:max-w-96" showCloseButton>
         <DialogHeader>
           <DialogTitle>New tweet</DialogTitle>
         </DialogHeader>

@@ -41,17 +41,6 @@ export function ComponentList({ locale }: { locale: "en" | "cn" }) {
           <Separator />
         </div>
       ))}
-      <code>
-        <pre className="p-4 whitespace-pre-wrap">
-          {JSON.stringify(
-            categories.map((c) => ({
-              children: c.children.map((child) => child.name),
-              name: c.name,
-              url: c.$id,
-            })),
-          )}
-        </pre>
-      </code>
     </div>
   );
 }

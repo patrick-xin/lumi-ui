@@ -1,10 +1,11 @@
 "use client";
 
-import { AlertDialog as BaseAlertDialog } from "@base-ui/react/alert-dialog";
-import type { VariantProps } from "class-variance-authority";
-import type * as React from "react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/registry/ui/button";
+import { AlertDialog as BaseAlertDialog } from "@base-ui/react/alert-dialog";
+import { type VariantProps } from "class-variance-authority";
+import type * as React from "react";
+import { popupVariants, viewportVariants } from "./dialog";
 
 function AlertDialog<Payload>({
   ...props
@@ -38,7 +39,7 @@ function AlertDialogBackdrop({
       className={cn(
         "fixed inset-0 min-h-dvh supports-[-webkit-touch-callout:none]:absolute",
         "bg-black/70 animate-backdrop",
-        className,
+        className
       )}
       data-slot="alert-dialog-backdrop"
       {...props}
@@ -65,7 +66,7 @@ function AlertDialogPopup({
 }: React.ComponentProps<typeof BaseAlertDialog.Popup>) {
   return (
     <BaseAlertDialog.Popup
-      className={cn("w-full p-4 sm:p-6", className)}
+      className={cn("bg-background w-full p-4 sm:p-6", className)}
       data-slot="alert-dialog-popup"
       {...props}
     />
@@ -119,7 +120,7 @@ function AlertDialogFooter({
     <div
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className,
+        className
       )}
       data-slot="alert-dialog-footer"
       {...props}
@@ -142,23 +143,28 @@ function AlertDialogClose({
   );
 }
 
+interface AlertDialogContentProps
+  extends React.ComponentProps<typeof BaseAlertDialog.Popup>,
+    VariantProps<typeof popupVariants> {}
+
 function AlertDialogContent({
   className,
+  layout = "center",
+  intent = "default",
+  children,
   ...props
-}: React.ComponentProps<typeof BaseAlertDialog.Popup>) {
+}: AlertDialogContentProps) {
   return (
     <AlertDialogPortal>
       <AlertDialogBackdrop />
-      <AlertDialogViewport className="grid place-items-center">
+      <AlertDialogViewport className={viewportVariants({ layout })}>
         <AlertDialogPopup
-          className={cn(
-            "grid gap-4 w-full max-w-[calc(100vw-2rem)] sm:max-w-lg bg-background rounded animate-dialog",
-            "outline outline-1 outline-border dark:-outline-offset-1",
-            className,
-          )}
+          className={cn(popupVariants({ layout, intent }), className)}
           data-slot="alert-dialog-content"
           {...props}
-        />
+        >
+          {children}
+        </AlertDialogPopup>
       </AlertDialogViewport>
     </AlertDialogPortal>
   );
@@ -166,15 +172,12 @@ function AlertDialogContent({
 
 function AlertDialogStackedContent({
   className,
+  intent = "default",
   ...props
-}: React.ComponentProps<typeof BaseAlertDialog.Popup>) {
+}: Omit<AlertDialogContentProps, "layout">) {
   return (
     <AlertDialogContent
-      className={cn(
-        "top-[calc(50%+1.25rem*var(--nested-dialogs))] scale-[calc(1-0.1*var(--nested-dialogs))]",
-        "data-[nested-dialog-open]:after:absolute data-[nested-dialog-open]:after:inset-0 data-[nested-dialog-open]:after:rounded-[inherit] data-[nested-dialog-open]:after:bg-black/20",
-        className,
-      )}
+      className={cn(popupVariants({ layout: "stacked", intent }), className)}
       data-slot="alert-dialog-stacked-content"
       {...props}
     />
@@ -187,8 +190,8 @@ export {
   AlertDialog,
   AlertDialogTrigger,
   AlertDialogPortal,
-  AlertDialogBackdrop,
   AlertDialogViewport,
+  AlertDialogBackdrop,
   AlertDialogPopup,
   AlertDialogHeader,
   AlertDialogTitle,
