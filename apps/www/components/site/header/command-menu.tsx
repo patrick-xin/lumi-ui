@@ -87,14 +87,14 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
         value={inputValue}
       >
         <AutocompletePortal>
-          <AutocompleteBackdrop className="fixed inset-0 bg-black/50" />
+          <AutocompleteBackdrop className="fixed inset-0 bg-black/20 backdrop-blur-xs animate-fade" />
           <AutocompletePositioner
             className="inset-0 z-0 bottom-0 pointer-events-none flex justify-center items-center"
             positionMethod="fixed"
           >
             <AutocompletePopup
               className={cn(
-                "relative bg-popover text-popover-foreground rounded outline outline-input animate-dialog",
+                "relative bg-popover text-popover-foreground rounded outline outline-input animate-fade",
                 "pointer-events-auto w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
                 "-translate-y-16 sm:-translate-y-32 max-w-[var(--available-width)]",
                 "mx-4",

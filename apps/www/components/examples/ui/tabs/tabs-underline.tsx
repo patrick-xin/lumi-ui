@@ -15,7 +15,7 @@ import { Textarea } from "@/registry/ui/textarea";
 
 export function TabsUnderline() {
   const [orientation, setOrientation] = useState<"vertical" | "horizontal">(
-    "vertical",
+    "horizontal",
   );
   return (
     <div className="flex flex-col gap-4">
@@ -34,7 +34,7 @@ export function TabsUnderline() {
         defaultValue="profile"
         orientation={orientation}
       >
-        <TabsList className="gap-4 bg-transparent py-2 border-b data-[orientation=vertical]:border-b-0 data-[orientation=vertical]:border-l data-[orientation=vertical]:h-fit data-[orientation=vertical]:py-0">
+        <TabsList className="gap-4 bg-transparent py-2 border-b data-[orientation=vertical]:border-b-0 data-[orientation=vertical]:h-fit data-[orientation=vertical]:py-0 data-[orientation=vertical]:pt-3">
           <TabsTab value="profile">Profile</TabsTab>
           <TabsTab value="billing">Billing</TabsTab>
           <TabIndicator

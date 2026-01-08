@@ -108,7 +108,7 @@ function TabsListContent({
   return (
     <BaseTabs.List
       className={cn(
-        "relative z-0 inline-flex rounded-sm gap-1 px-1.5 bg-muted text-muted-foreground",
+        "relative z-0 inline-flex items-center rounded-sm gap-1 px-1.5 bg-muted text-muted-foreground min-h-9",
         "data-[orientation=horizontal]:flex-row",
         "data-[orientation=vertical]:flex-col data-[orientation=vertical]:h-fit data-[orientation=vertical]:py-1.5",
         className,
@@ -119,7 +119,7 @@ function TabsListContent({
       {children}
       <TabIndicator
         className={cn(
-          "rounded-md bg-background dark:bg-primary/30  shadow-sm dark:border-input",
+          "rounded-md bg-background dark:bg-accent",
           "top-1/2 -translate-y-1/2 left-0 data-[orientation=horizontal]:h-[calc(100%-8px)]",
           "data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
         )}

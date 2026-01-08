@@ -4,19 +4,19 @@ import * as React from "react";
 import {
   AlertDialog,
   AlertDialogClose,
+  AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogStackedContent,
   AlertDialogTitle,
 } from "@/registry/ui/alert-dialog";
 import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
+  DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogStackedContent,
   DialogTitle,
   DialogTrigger,
 } from "@/registry/ui/dialog";
@@ -42,7 +42,7 @@ export function DialogCloseConfirmationDemo() {
       open={dialogOpen}
     >
       <DialogTrigger render={<Button>Tweet</Button>} />
-      <DialogStackedContent className="sm:max-w-96">
+      <DialogContent className="sm:max-w-96" layout="stacked">
         <DialogHeader>
           <DialogTitle>New tweet</DialogTitle>
         </DialogHeader>
@@ -66,11 +66,11 @@ export function DialogCloseConfirmationDemo() {
             <Button type="submit">Tweet</Button>
           </DialogFooter>
         </form>
-      </DialogStackedContent>
+      </DialogContent>
 
       {/* Confirmation dialog */}
       <AlertDialog onOpenChange={setConfirmationOpen} open={confirmationOpen}>
-        <AlertDialogStackedContent className="sm:max-w-md">
+        <AlertDialogContent className="sm:max-w-md" layout="stacked">
           <AlertDialogHeader>
             <AlertDialogTitle>Discard tweet?</AlertDialogTitle>
             <AlertDialogDescription>
@@ -89,7 +89,7 @@ export function DialogCloseConfirmationDemo() {
               Discard
             </Button>
           </AlertDialogFooter>
-        </AlertDialogStackedContent>
+        </AlertDialogContent>
       </AlertDialog>
     </Dialog>
   );

@@ -1,3 +1,4 @@
+import { BellIcon, CreditCardIcon, UserIcon } from "lucide-react";
 import { Button } from "@/registry/ui/button";
 import { Input } from "@/registry/ui/input";
 import { Label } from "@/registry/ui/label";
@@ -13,12 +14,17 @@ import { Textarea } from "@/registry/ui/textarea";
 
 export function TabsDemo() {
   return (
-    <Tabs className="w-96 max-w-[400px] min-h-[520px]" defaultValue="profile">
+    <Tabs className="w-100 max-w-[400px] min-h-[520px]" defaultValue="profile">
       <TabsListContent>
-        <TabsTab value="profile">Profile</TabsTab>
-        <TabsTab value="account">Account</TabsTab>
-        <TabsTab value="notifications">Notifications</TabsTab>
-        <TabsTab value="billing">Billing</TabsTab>
+        <TabsTab value="profile">
+          <UserIcon /> Profile
+        </TabsTab>
+        <TabsTab value="notifications">
+          <BellIcon /> Notifications
+        </TabsTab>
+        <TabsTab value="billing">
+          <CreditCardIcon /> Billing
+        </TabsTab>
       </TabsListContent>
 
       <TabsPanel value="profile">
@@ -62,49 +68,6 @@ export function TabsDemo() {
           <Button className="self-end">Save changes</Button>
         </div>
       </TabsPanel>
-
-      <TabsPanel value="account">
-        <div className="p-4 space-y-4 rounded-md outline outline-1 outline-border dark:-outline-offset-1">
-          <div className="space-y-2">
-            <div className="font-semibold">Account Security</div>
-            <p className="text-muted-foreground text-sm">
-              Manage your email and password settings.
-            </p>
-          </div>
-          <div className="grid gap-4">
-            <div className="grid gap-3">
-              <Label htmlFor="email">Email Address</Label>
-              <Input
-                defaultValue="alex@example.com"
-                id="email"
-                inputSize="sm"
-                type="email"
-                variant="transparent"
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="current-password">Current Password</Label>
-              <Input
-                id="current-password"
-                inputSize="sm"
-                type="password"
-                variant="transparent"
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="new-password">New Password</Label>
-              <Input
-                id="new-password"
-                inputSize="sm"
-                type="password"
-                variant="transparent"
-              />
-            </div>
-          </div>
-          <Button>Update account</Button>
-        </div>
-      </TabsPanel>
-
       <TabsPanel value="notifications">
         <div className="p-4 space-y-4 rounded-md outline outline-1 outline-border dark:-outline-offset-1">
           <div className="space-y-2">
