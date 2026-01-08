@@ -6,7 +6,7 @@ import {
 } from "fumadocs-mdx/config";
 import rehypePrettyCode from "rehype-pretty-code";
 import { z } from "zod";
-import { transformers } from "@/lib/highlight-code";
+import { npmTransformer } from "@/lib/highlight-code";
 
 export default defineConfig({
   mdxOptions: {
@@ -19,7 +19,7 @@ export default defineConfig({
               dark: "catppuccin-frappe",
               light: "catppuccin-latte",
             },
-            transformers: transformers,
+            transformers: [npmTransformer],
           }),
       ]);
 
@@ -37,8 +37,8 @@ export const docs = defineDocs({
     schema: frontmatterSchema.extend({
       links: z
         .object({
-          doc: z.string().optional(),
           api: z.string().optional(),
+          doc: z.string().optional(),
         })
         .optional(),
       status: z.enum(["planned", "in-progress", "new"]).optional(),
@@ -47,12 +47,12 @@ export const docs = defineDocs({
 });
 
 export const blog = defineCollections({
-  type: "doc",
   dir: "content/blog",
   schema: frontmatterSchema.extend({
     author: z.string(),
-    date: z.iso.date().or(z.date()),
     category: z.string(),
+    date: z.iso.date().or(z.date()),
     image: z.string(),
   }),
+  type: "doc",
 });

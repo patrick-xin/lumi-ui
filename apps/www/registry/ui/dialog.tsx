@@ -1,12 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
-import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Dialog as BaseDialog } from "@base-ui/react";
-import { cva, VariantProps } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 import { XIcon } from "lucide-react";
 import type * as React from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/registry/ui/button";
 
 function Dialog<Payload>({
   ...props
@@ -46,9 +45,9 @@ function DialogBackdrop({
   return (
     <BaseDialog.Backdrop
       className={cn(
-        "fixed inset-0 min-h-dvh bg-black/70 backdrop-blur-xs supports-backdrop-filter:bg-background/80 animate-backdrop",
+        "fixed inset-0 min-h-dvh bg-black/20 backdrop-blur-xs animate-fade",
         "supports-[-webkit-touch-callout:none]:absolute",
-        className
+        className,
       )}
       data-slot="dialog-backdrop"
       {...props}
@@ -63,7 +62,7 @@ function DialogPopup({
 }: React.ComponentProps<typeof BaseDialog.Popup>) {
   return (
     <BaseDialog.Popup
-      className={cn("bg-background rounded p-4 sm:p-6 shadow-md", className)}
+      className={cn("bg-background rounded p-4 sm:p-6", className)}
       data-slot="dialog-popup"
       {...props}
     >
@@ -117,7 +116,7 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className
+        className,
       )}
       data-slot="dialog-footer"
       {...props}
@@ -125,64 +124,60 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function DialogScrollArea({
-  className,
-  ...props
-}: React.ComponentProps<typeof ScrollArea>) {
-  return (
-    <ScrollArea
-      className={cn("flex-1 min-h-0 w-full pr-4", className)}
-      data-slot="dialog-scroll-area"
-      {...props}
-    />
-  );
-}
-
 const viewportVariants = cva("fixed inset-0", {
+  defaultVariants: {
+    layout: "center",
+  },
   variants: {
     layout: {
       center: "grid place-items-center p-4",
-      optical: "grid grid-rows-[1fr_auto_3fr] justify-items-center p-4",
-      sheet: "flex items-end sm:items-center justify-center sm:p-4 animate-fade-up sm:animate-dialog",
-      stacked: "contents", 
-      scrollable: "flex items-center justify-center overflow-hidden py-6 [@media(min-height:600px)]:pb-12 [@media(min-height:600px)]:pt-8",
+      "element-outside": cn(
+        "flex flex-col items-center justify-center",
+        // padding between viewport and content
+        "px-4 py-12 sm:py-20",
+      ),
+      responsive: "flex items-end sm:items-center justify-center sm:p-4",
+      scrollable: cn(
+        "flex items-center justify-center overflow-hidden",
+        // padding between viewport and content
+        "py-6 [@media(min-height:600px)]:pb-12 [@media(min-height:600px)]:pt-8",
+      ),
+      stacked: "contents",
+      top: cn(
+        "grid grid-rows-[1fr_auto_3fr] justify-items-center",
+        // padding between viewport and content
+        "p-4",
+      ),
     },
-  },
-  defaultVariants: {
-    layout: "optical",
   },
 });
 
 const popupVariants = cva(
-  "bg-background", 
+  "bg-background rounded outline-1 outline-border dark:-outline-offset-1 p-4 sm:p-6",
   {
-    variants: {
-      layout: {
-        center: "relative grid w-full gap-4 shadow-lg max-w-lg rounded-lg border animate-dialog",
-        optical: "grid w-full gap-4 shadow-xl max-w-lg rounded-xl border ",
-        sheet: "relative grid gap-4 shadow-lg w-full rounded-t-[1.25rem] rounded-b-none border-t px-6 pb-8 pt-6 sm:max-w-lg sm:rounded-lg sm:border sm:px-6 sm:pb-6 sm:pt-6",
-        stacked: cn(
-          "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
-          "grid gap-4 w-full max-w-[calc(100vw-2rem)] sm:max-w-lg rounded animate-dialog",
-          "top-[calc(50%+1.25rem*var(--nested-dialogs))] scale-[calc(1-0.05*var(--nested-dialogs))]",
-          "data-nested-dialog-open:after:absolute data-nested-dialog-open:after:inset-0 data-nested-dialog-open:after:rounded-[inherit] data-nested-dialog-open:after:bg-black/5"
-        ),
-        scrollable: cn(
-          "relative flex flex-col gap-6 overflow-hidden",
-          "min-h-0 max-h-full max-w-full w-[min(40rem,calc(100vw-2rem))]",
-          "rounded-md outline animate-dialog"
-        ),
-      },
-      intent: {
-        default: "outline-1 outline-border dark:-outline-offset-1",
-        destructive: "outline-2 outline-destructive/20 border-destructive/50",
-      }
-    },
     defaultVariants: {
       layout: "center",
-      intent: "default",
     },
-  }
+    variants: {
+      layout: {
+        center:
+          "relative grid w-full gap-4 shadow-lg max-w-lg rounded-lg animate-fade-up",
+        "element-outside":
+          "flex h-full w-full justify-center pointer-events-none p-0! bg-transparent outline-0 animate-fade",
+        responsive:
+          "relative grid gap-4 shadow-lg w-full rounded-t-[1.25rem] rounded-b-none border-t px-6 pb-8 pt-6 sm:max-w-lg sm:rounded-lg sm:px-6 sm:pb-6 sm:pt-6 animate-fade-up",
+        scrollable:
+          "relative flex flex-col gap-6 overflow-hidden min-h-0 max-h-full max-w-full w-[min(40rem,calc(100vw-2rem))] rounded-md animate-fade-zoom",
+        stacked: cn(
+          "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
+          "grid gap-4 w-full max-w-[calc(100vw-2rem)] sm:max-w-lg rounded animate-fade",
+          "top-[calc(50%+1.25rem*var(--nested-dialogs))] scale-[calc(1-0.05*var(--nested-dialogs))]",
+          "data-nested-dialog-open:after:absolute data-nested-dialog-open:after:inset-0 data-nested-dialog-open:after:rounded-[inherit] data-nested-dialog-open:after:bg-black/5",
+        ),
+        top: "relative grid w-full gap-4 shadow-xl max-w-lg rounded-xl animate-fade-down",
+      },
+    },
+  },
 );
 
 interface DialogContentProps
@@ -195,16 +190,15 @@ function DialogContent({
   children,
   className,
   showCloseButton = false,
-  layout = "sheet",
-  intent = "default",
+  layout = "responsive",
   ...props
 }: DialogContentProps) {
   return (
     <DialogPortal>
       <DialogBackdrop />
-      <DialogViewport className={viewportVariants({ layout })}>
-        <DialogPopup
-          className={cn(popupVariants({ layout, intent }), className)}
+      <BaseDialog.Viewport className={viewportVariants({ layout })}>
+        <BaseDialog.Popup
+          className={cn(popupVariants({ layout }), className)}
           data-slot="dialog-content"
           {...props}
         >
@@ -213,12 +207,12 @@ function DialogContent({
             <DialogClose
               render={
                 <Button
-                  size="icon-sm"
-                  variant="outline"
                   className={cn(
                     "absolute right-2 top-2",
-                    layout === "sheet" && "max-sm:top-5 max-sm:right-5"
+                    layout === "responsive" && "max-sm:top-5 max-sm:right-5",
                   )}
+                  size="icon-sm"
+                  variant="outline"
                 >
                   <XIcon className="size-4" />
                   <span className="sr-only">Close</span>
@@ -226,19 +220,30 @@ function DialogContent({
               }
             />
           )}
-        </DialogPopup>
-      </DialogViewport>
+        </BaseDialog.Popup>
+      </BaseDialog.Viewport>
     </DialogPortal>
   );
 }
 
-const DialogStackedContent = (props: Omit<DialogContentProps, "layout">) => (
-  <DialogContent layout="stacked" {...props} />
-);
-
-const DialogScrollableContent = (props: Omit<DialogContentProps, "layout">) => (
-  <DialogContent layout="scrollable" {...props} />
-);
+const DialogElementOutsideContent = ({
+  className,
+  children,
+  ...props
+}: Omit<DialogContentProps, "layout" | "showCloseButton">) => {
+  return (
+    <DialogContent layout="element-outside" {...props}>
+      <div
+        className={cn(
+          "pointer-events-auto h-full w-full flex flex-col shadow-md rounded bg-background",
+          className,
+        )}
+      >
+        {children}
+      </div>
+    </DialogContent>
+  );
+};
 
 const createDialogHandle = BaseDialog.createHandle;
 
@@ -252,7 +257,6 @@ export {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-  DialogScrollArea,
   DialogFooter,
   DialogClose,
   createDialogHandle,
@@ -260,6 +264,5 @@ export {
   viewportVariants,
   // Composite component
   DialogContent,
-  DialogScrollableContent,
-  DialogStackedContent,
+  DialogElementOutsideContent,
 };

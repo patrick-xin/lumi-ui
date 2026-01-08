@@ -2,10 +2,10 @@ import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
+  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogStackedContent,
   DialogTitle,
   DialogTrigger,
 } from "@/registry/ui/dialog";
@@ -14,7 +14,7 @@ export function DialogNestedDemo() {
   return (
     <Dialog>
       <DialogTrigger render={<Button>View notifications</Button>} />
-      <DialogStackedContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md" layout="stacked">
         <DialogHeader>
           <DialogTitle>Notifications</DialogTitle>
           <DialogDescription>
@@ -24,7 +24,7 @@ export function DialogNestedDemo() {
         <div className="flex items-center justify-end gap-4">
           <Dialog>
             <DialogTrigger render={<Button>Customize</Button>} />
-            <DialogStackedContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md" layout="stacked">
               <DialogHeader>
                 <DialogTitle>Customize notification</DialogTitle>
                 <DialogDescription>
@@ -36,13 +36,13 @@ export function DialogNestedDemo() {
                   render={<Button variant="outline">Close</Button>}
                 />
               </DialogFooter>
-            </DialogStackedContent>
+            </DialogContent>
           </Dialog>
           <DialogFooter>
             <DialogClose render={<Button variant="outline">Close</Button>} />
           </DialogFooter>
         </div>
-      </DialogStackedContent>
+      </DialogContent>
     </Dialog>
   );
 }

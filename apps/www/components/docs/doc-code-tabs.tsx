@@ -35,7 +35,7 @@ const tabIndicatorVariants = cva(
       variant: {
         ghost:
           "bg-transparent top-1/2 -translate-y-1/2 left-0 translate-x-(--active-tab-left) data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
-        pill: "rounded-md border border-ring/70 bg-primary/60 shadow-sm dark:border-input top-1/2 -translate-y-1/2 left-0 data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
+        pill: "rounded-md bg-background dark:bg-accent top-1/2 -translate-y-1/2 left-0 data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
         solid:
           "hidden pointer-events-none w-0 h-0 translate-x-0 -translate-y-0",
         underline:

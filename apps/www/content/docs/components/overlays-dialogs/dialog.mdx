@@ -31,6 +31,51 @@ links:
   </TabsPanel>
 </CodeTabs>
 
+Add following utilities to your `globals.css`:
+
+```css
+@utility animate-fade-up {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.96;
+    translate: 0 0.75rem;
+  }
+}
+
+@utility animate-fade-down {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.96;
+    translate: 0 -0.75rem;
+  }
+}
+
+@utility animate-fade-zoom {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+@utility animate-fade {
+  @apply transition-all duration-100;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+```
+
 ## Basic Usage
 ```tsx
 import {
@@ -120,8 +165,30 @@ export function DialogDemo() {
 
 ## Cookbook
 
-### Controlled dialog
+### Scrolling
 
+#### Inside scroll
+Set `DialogContent` variant to `layout="scrollable"`, use `ScrollArea` as the scrolling container or add `overflow-y-auto` to the content. Adding any content above or below scrollable content will make them fixed.
+
+<ComponentPreview name="dialog-inside-scroll" />
+
+#### Placing elements outside the popup
+Set `DialogContent` variant to `element-outside`. Adjust `padding` in `viewportVariants` fit your design needs.
+
+<ComponentPreview name="dialog-elements-outside" />
+
+#### Outside scroll
+To allow the entire dialog—including the header and footer—to scroll with the page, use `DialogViewport` as the scrolling container. This approach is useful for very long content where internal scrolling is not desired.
+
+<ComponentPreview name="dialog-outside-scroll" />
+
+### Close confirmation
+Use `<DialogContent layout="stacked"/>` and [`<AlertDialogContent layout="stacked" />`](/docs/components/overlays-dialogs/alert-dialog#composite-component). Nest `<AlertDialogContent />` inside `<Dialog />`.
+
+<ComponentPreview name="dialog-close-confirmation" />
+
+
+### Controlled dialog
 By default, Dialog is an **uncontrolled** component that manages its own state. Use the `open` and `onOpenChange` props to control the dialog state. This is useful when triggering the dialog from external events or performing async actions before closing.
 
 ```tsx title="Controlled dialog"
@@ -160,30 +227,12 @@ It’s also common to use `onOpenChange` if your app needs to do something when 
 >
 ```
 
-### Open from Dropdown menu
+#### Open from Dropdown menu
 To open a dialog from a [`DropdownMenu`](/docs/components/overlays-dialogs/dropdown-menu), use the controlled state pattern. The Dialog should be placed outside the `DropdownMenu` to avoid nesting issues.
 
 <ComponentPreview name="dialog-from-menu" />
 
-### Close confirmation
-This example demonstrates a nested confirmation dialog that triggers if the user attempts to discard unsaved input. To achieve the correct visual stacking effect where the parent form recedes into the background, use `DialogStackedContent` and [`AlertDialogStackedContent`](/docs/components/overlays-dialogs/alert-dialog#composite-component).
 
-<ComponentPreview name="dialog-close-confirmation" />
-
-### Inside scroll
-Use `DialogScrollableContent` combined with `DialogScrollArea`. This layout fixes the header and footer in place while allowing the inner content body to scroll independently, ensuring the modal never exceeds the viewport height.
-
-<ComponentPreview name="dialog-with-scroll-area" />
-
-### Outside scroll
-To allow the entire dialog—including the header and footer—to scroll with the page, use `DialogViewport` as the scrolling container. This approach is useful for very long content where internal scrolling is not desired.
-
-<ComponentPreview name="dialog-outside-scroll" />
-
-### Placing elements outside the popup
-To visually place elements (like a close button) outside the main popup surface while keeping them accessible and within the focus trap, nest them inside `DialogPopup`. The `DialogPopup` container has `pointer-events: none` by default, while the inner content wrapper has `pointer-events: auto`. You must explicitly apply `pointer-events-auto` to any detached elements to make them interactive.
-
-<ComponentPreview name="dialog-outside-popup" />
 
 ### Detached Triggers
 If you need to trigger a dialog from a completely different part of the component tree, or if nesting the trigger inside the root is impractical, use `createDialogHandle` to link a `DialogTrigger` to a `Dialog` remotely.
@@ -242,17 +291,15 @@ When controlling a multi-trigger dialog externally, you must manage both the ope
 | [`DialogBackdrop`](https://base-ui.com/react/components/dialog#backdrop) | An overlay displayed beneath the popup. Renders a `<div>` element. |
 | [`DialogViewport`](https://base-ui.com/react/components/dialog#viewport) | A positioning container for the dialog popup that can be made scrollable. Renders a `<div>` element. |
 | [`DialogPopup`](https://base-ui.com/react/components/dialog#popup) | A container for the dialog contents. Must be used inside `DialogPortal`. Renders a `<div>` element. |
+| `DialogHeader` | Styled container for convenience purpose. Renders a `<div>` element. |
 | [`DialogTitle`](https://base-ui.com/react/components/dialog#title) | A heading that labels the dialog. Renders an `<h2>` element. |
 | [`DialogDescription`](https://base-ui.com/react/components/dialog#description) | A paragraph with additional information about the dialog. Renders a `<p>` element. |
-| [`DialogClose`](https://base-ui.com/react/components/dialog#close) | A button that closes the dialog. Renders a `<button>` element.|
-| `DialogHeader` | Styled container for convenience purpose. Renders a `<div>` element. |
 | `DialogFooter` | Styled container for convenience purpose. Renders a `<div>` element. |
-| `DialogScrollArea` | Scrollable container for the dialog contents. Renders [`<ScrollArea>`](/docs/components/layout-nav/scroll-area).
+| [`DialogClose`](https://base-ui.com/react/components/dialog#close) | A button that closes the dialog. Renders a `<button>` element.|
 
 ### Composite components
 
 | Component | Description |
 | :--- | :--- |
-| `DialogContent` | **Recommended**. Wraps Portal, Backdrop, Viewport, and Popup with standard centered styling. |
-| `DialogStackedContent` | Wraps Portal, Backdrop, Viewport and Popup with animation logic for nested "stacking" effects. | 
-| `DialogScrollableContent` | Wraps Portal, Viewport, and Popup with layout logic for fixed headers/footers and scrollable content. |
+| `DialogContent` | **For common usage**. Wraps Portal, Backdrop, Viewport, and Popup with standard centered styling. |
+| `DialogElementOutsideContent` | Wraps Portal, Viewport, Popup and a `div` with `pointer-events-auto` class to handle dialog interactions. |

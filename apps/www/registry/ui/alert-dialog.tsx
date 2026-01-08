@@ -37,8 +37,8 @@ function AlertDialogBackdrop({
   return (
     <BaseAlertDialog.Backdrop
       className={cn(
-        "fixed inset-0 min-h-dvh supports-[-webkit-touch-callout:none]:absolute",
-        "bg-black/70 animate-backdrop",
+        "fixed inset-0 min-h-dvh bg-black/20 backdrop-blur-xs animate-fade",
+        "supports-[-webkit-touch-callout:none]:absolute",
         className
       )}
       data-slot="alert-dialog-backdrop"
@@ -150,7 +150,6 @@ interface AlertDialogContentProps
 function AlertDialogContent({
   className,
   layout = "center",
-  intent = "default",
   children,
   ...props
 }: AlertDialogContentProps) {
@@ -159,7 +158,7 @@ function AlertDialogContent({
       <AlertDialogBackdrop />
       <AlertDialogViewport className={viewportVariants({ layout })}>
         <AlertDialogPopup
-          className={cn(popupVariants({ layout, intent }), className)}
+          className={cn(popupVariants({ layout }), className)}
           data-slot="alert-dialog-content"
           {...props}
         >
@@ -170,19 +169,6 @@ function AlertDialogContent({
   );
 }
 
-function AlertDialogStackedContent({
-  className,
-  intent = "default",
-  ...props
-}: Omit<AlertDialogContentProps, "layout">) {
-  return (
-    <AlertDialogContent
-      className={cn(popupVariants({ layout: "stacked", intent }), className)}
-      data-slot="alert-dialog-stacked-content"
-      {...props}
-    />
-  );
-}
 
 const createAlertDialogHandle = BaseAlertDialog.createHandle;
 
@@ -201,5 +187,4 @@ export {
   createAlertDialogHandle,
   // Composite component
   AlertDialogContent,
-  AlertDialogStackedContent,
 };

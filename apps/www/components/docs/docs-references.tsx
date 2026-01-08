@@ -1,4 +1,4 @@
-import { Badge } from "@lumi-ui/ui/badge";
+import { Button } from "@lumi-ui/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
@@ -17,30 +17,40 @@ export const DocsReferences = ({ links }: DocsReferenceProps) => {
   return (
     <div className="flex items-center gap-2">
       {links.doc && (
-        <Badge variant="outline">
-          <Link
-            className="inline-flex items-center gap-1"
-            href={links.doc}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Docs
-            <ArrowUpRight className="h-3 w-3" />
-          </Link>
-        </Badge>
+        <Button
+          className="h-5.5 justify-between text-xs text-muted-foreground"
+          nativeButton={false}
+          render={
+            <Link
+              className="inline-flex items-center gap-1"
+              href={links.doc}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Docs
+              <ArrowUpRight className="h-3 w-3" />
+            </Link>
+          }
+          variant="glow"
+        />
       )}
       {links.api && (
-        <Badge variant="outline">
-          <Link
-            className="inline-flex items-center gap-1"
-            href={links.api}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            API Reference
-            <ArrowUpRight className="h-3 w-3" />
-          </Link>
-        </Badge>
+        <Button
+          className="h-5.5 justify-between text-muted-foreground text-xs"
+          nativeButton={false}
+          render={
+            <Link
+              className="inline-flex items-center gap-1"
+              href={links.api}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              API Reference
+              <ArrowUpRight className="h-3 w-3" />
+            </Link>
+          }
+          variant="glow"
+        />
       )}
     </div>
   );
