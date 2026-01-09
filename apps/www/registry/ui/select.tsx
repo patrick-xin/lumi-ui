@@ -225,9 +225,9 @@ function SelectTriggerGroup({
       className={cn(
         "group flex items-center gap-2 min-w-32 bg-transparent dark:bg-input/30 dark:hover:bg-input/50 ",
         "rounded-md border border-input py-2 text-sm shadow-xs transition-[color,box-shadow]",
-        "outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50",
-        "disabled:cursor-not-allowed disabled:opacity-50",
-        "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
+        "outline-none focus-visible:border-ring/30 focus-visible:ring-1 focus-visible:ring-ring/10 focus-visible:ring-offset-1 focus-visible:ring-offset-ring/20",
+        "data-popup-open:border-ring/30 data-popup-open:ring-1 data-popup-open:ring-ring/10 data-popup-open:ring-offset-1 data-popup-open:ring-offset-ring/20",
+        "data-[invalid]:border-destructive data-[invalid]:ring-destructive/20 dark:data-[invalid]:ring-destructive/40",
         "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
         "dark:data-[popup-open]:bg-input/50",
         "data-[size=default]:h-9 data-[size=sm]:h-8",

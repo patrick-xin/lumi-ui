@@ -12,7 +12,7 @@ function Textarea({ className, variant = "default", ...props }: TextareaProps) {
       data-slot="textarea"
       className={cn(
         "bg-transparent w-full min-w-0 rounded-md shadow-xs border border-input transition-[color,box-shadow] outline-none",
-        "focus-visible:border-ring/30 focus-visible:ring-1 focus-visible:ring-ring/10 focus-visible:ring-offset-1 focus-visible:ring-offset-ring/5",
+        "focus-visible:border-ring/30 focus-visible:ring-1 focus-visible:ring-ring/10 focus-visible:ring-offset-1 focus-visible:ring-offset-ring/20",
         "placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground",
         "disabled:cursor-not-allowed disabled:opacity-50",
         "aria-invalid:border-destructive/30 aria-invalid:ring-1 aria-invalid:ring-destructive/10 aria-invalid:ring-offset-1 aria-invalid:ring-offset-destructive/5",

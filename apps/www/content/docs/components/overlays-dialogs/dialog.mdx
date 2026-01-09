@@ -4,6 +4,7 @@ description: A popup that opens on top of the entire page.
 links:
   doc: https://base-ui.com/react/components/dialog
   api: https://base-ui.com/react/components/dialog#api-reference
+status: new
 ---
 
 <ComponentPreview name="dialog-demo" />
@@ -31,38 +32,38 @@ links:
   </TabsPanel>
 </CodeTabs>
 
-Add following utilities to your `globals.css`:
+Add the following utilities to your `globals.css`:
 
 ```css
 @utility animate-fade-up {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.96;
-    translate: 0 0.75rem;
+    scale: 0.98;
+    translate: 0 0.5rem;
   }
 }
 
 @utility animate-fade-down {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.96;
-    translate: 0 -0.75rem;
+    scale: 0.98;
+    translate: 0 -0.5rem;
   }
 }
 
 @utility animate-fade-zoom {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.96;
+    scale: 0.94;
   }
 }
 
@@ -121,18 +122,18 @@ export function DialogDemo() {
 
   <TabsPanel value="common">
 ```tsx
-<Dialog>   
+<Dialog>
   <DialogTrigger />
-  <DialogContent>      
-    <DialogHeader>     
-      <DialogTitle />     
-      <DialogDescription />     
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle />
+      <DialogDescription />
     </DialogHeader>
-    <DialogScrollArea />     
-    <DialogFooter>     
-      <DialogClose />     
-    </DialogFooter>   
-  </DialogContent> 
+    {/* Content */}
+    <DialogFooter>
+      <DialogClose />
+    </DialogFooter>
+  </DialogContent>
 </Dialog>
 ```
   </TabsPanel>
@@ -161,35 +162,46 @@ export function DialogDemo() {
 
 ## Variants
 
+The `DialogContent` layout determines the visual style and entry animation:
+
+- `responsive` (default): Bottom sheet on mobile, centered modal on desktop.
+- `center`: Centered modal with fade-up animation.
+- `top`: Top-aligned modal with fade-down animation.
+- `scrollable`: Optimized for containers with internal scrolling.
+- `stacked`: Shifts and scales for clean nested dialog flows.
+- `element-outside`: For UIs with elements positioned outside the main container.
+
 <ComponentPreview name="dialog-variants" />
 
 ## Cookbook
 
 ### Scrolling
 
-#### Inside scroll
-Set `DialogContent` variant to `layout="scrollable"`, use `ScrollArea` as the scrolling container or add `overflow-y-auto` to the content. Adding any content above or below scrollable content will make them fixed.
+#### Internal Scrolling
+Set `DialogContent` to `layout="scrollable"`. Use `ScrollArea` or `overflow-y-auto` for the content. Elements outside the scrollable area remain fixed.
 
 <ComponentPreview name="dialog-inside-scroll" />
 
-#### Placing elements outside the popup
-Set `DialogContent` variant to `element-outside`. Adjust `padding` in `viewportVariants` fit your design needs.
+#### Elements Outside
+Use `layout="element-outside"` for designs where controls should live outside the popup.
 
 <ComponentPreview name="dialog-elements-outside" />
 
-#### Outside scroll
-To allow the entire dialog—including the header and footer—to scroll with the page, use `DialogViewport` as the scrolling container. This approach is useful for very long content where internal scrolling is not desired.
+#### Viewport Scrolling
+For very long content, use `DialogViewport` as the scrolling container. This allows the entire dialog to scroll with the page.
 
 <ComponentPreview name="dialog-outside-scroll" />
 
-### Close confirmation
-Use `<DialogContent layout="stacked"/>` and [`<AlertDialogContent layout="stacked" />`](/docs/components/overlays-dialogs/alert-dialog#composite-component). Nest `<AlertDialogContent />` inside `<Dialog />`.
+#### Custom Implementation
+<ComponentPreview name="dialog-custom" />
+
+### Close Confirmation
+Use `layout="stacked"` for both `DialogContent` and [`AlertDialogContent`](/docs/components/overlays-dialogs/alert-dialog#composite-component) to handle nested confirmation flows gracefully.
 
 <ComponentPreview name="dialog-close-confirmation" />
 
-
-### Controlled dialog
-By default, Dialog is an **uncontrolled** component that manages its own state. Use the `open` and `onOpenChange` props to control the dialog state. This is useful when triggering the dialog from external events or performing async actions before closing.
+### Controlled State
+Manage the `open` state manually for external triggers or async closing logic.
 
 ```tsx title="Controlled dialog"
 const [open, setOpen] = React.useState(false);
@@ -197,85 +209,39 @@ const [open, setOpen] = React.useState(false);
 <Dialog open={open} onOpenChange={setOpen}>
   <DialogTrigger>Open</DialogTrigger>
   <DialogContent>
-    <form 
-      // Close the dialog once the form data is submitted           
-      onSubmit={
-        async () => {             
-          await submitData();             
-          setOpen(false);   
-        }
-      }
-    >
+    <form onSubmit={async () => {             
+      await submitData();             
+      setOpen(false);   
+    }}>
       ...
     </form>
   </DialogContent>
 </Dialog>
 ```
-It’s also common to use `onOpenChange` if your app needs to do something when the dialog is closed or opened. This is recommended over `useEffect` when reacting to state changes.
 
-```tsx title="Running code when dialog state changes"
-<Dialog
-  open={open}
-  onOpenChange={(open) => {
-    // Do stuff when the dialog is closed
-    if (!open) {
-      doStuff();
-    }
-    // Set the new state
-    setOpen(open);
-  }}
->
-```
-
-#### Open from Dropdown menu
-To open a dialog from a [`DropdownMenu`](/docs/components/overlays-dialogs/dropdown-menu), use the controlled state pattern. The Dialog should be placed outside the `DropdownMenu` to avoid nesting issues.
+#### From Dropdown Menu
+Use the controlled state when opening a dialog from a [`DropdownMenu`](/docs/components/overlays-dialogs/dropdown-menu) to avoid focus and nesting issues.
 
 <ComponentPreview name="dialog-from-menu" />
 
-
-
-### Detached Triggers
-If you need to trigger a dialog from a completely different part of the component tree, or if nesting the trigger inside the root is impractical, use `createDialogHandle` to link a `DialogTrigger` to a `Dialog` remotely.
+### Detached Triggers & Payloads
+Use `createDialogHandle` to link a `DialogTrigger` to a `Dialog` when they cannot be nested within the same root.
 
 ```tsx title="Detached trigger"
-import { createDialogHandle } from "@/components/ui/dialog"
-
 const demoDialog = createDialogHandle();
 
 <DialogTrigger handle={demoDialog}>Open</DialogTrigger>
-
-<Dialog handle={demoDialog}>
-  ...
-</Dialog>
+<Dialog handle={demoDialog}>...</Dialog>
 ```
 <ComponentPreview name="dialog-detached-trigger" />
 
-### Multiple triggers & payloads
-A single dialog can serve multiple triggers. You can pass a payload from the trigger to the dialog to render dynamic content based on which element opened it. This is highly effective for list views where every item needs an "Edit" or "Delete" modal without rendering a separate dialog instance for each row.
-
-```tsx title="Multiple triggers within the Root part"
-<Dialog>
-  <DialogTrigger>Trigger 1</DialogTrigger>
-  <DialogTrigger>Trigger 2</DialogTrigger>
-  ...
-</Dialog>
-```
-```tsx title="multiple detached triggers"
-const demoDialog = createDialogHandle();
-
-<DialogTrigger handle={demoDialog}>Trigger 1</DialogTrigger>
-<DialogTrigger handle={demoDialog}>Trigger 2</DialogTrigger>
-<Dialog handle={demoDialog}>
-  ...
-</Dialog>
-```
-
-The dialog can render different content depending on which trigger opened it. This is achieved by passing a payload to the `<DialogTrigger>` and using the `function-as-a-child` pattern in `<Dialog>`.
+#### Dynamic Content
+A single dialog can handle multiple triggers and render content dynamically based on a payload.
 
 <ComponentPreview name="dialog-detached-triggers-with-payload" />
 
-### Controlled mode with multiple triggers
-When controlling a multi-trigger dialog externally, you must manage both the open state and the triggerId. The `onOpenChange` event provides `eventDetails` containing the ID of the trigger that initiated the action.
+#### Controlled Multi-Trigger
+When controlling multiple triggers externally, use `eventDetails.source` in `onOpenChange` to identify the active trigger.
 
 <ComponentPreview name="dialog-controlled-mode-with-multiple-triggers" />
 
@@ -297,9 +263,20 @@ When controlling a multi-trigger dialog externally, you must manage both the ope
 | `DialogFooter` | Styled container for convenience purpose. Renders a `<div>` element. |
 | [`DialogClose`](https://base-ui.com/react/components/dialog#close) | A button that closes the dialog. Renders a `<button>` element.|
 
-### Composite components
+### Composite Components
 
 | Component | Description |
 | :--- | :--- |
-| `DialogContent` | **For common usage**. Wraps Portal, Backdrop, Viewport, and Popup with standard centered styling. |
-| `DialogElementOutsideContent` | Wraps Portal, Viewport, Popup and a `div` with `pointer-events-auto` class to handle dialog interactions. |
+| `DialogContent` | **Standard usage**. Groups Portal, Backdrop, Viewport, and Popup. |
+| `DialogElementOutsideContent` | Extension of `DialogContent` for UIs with elements outside the popup. |
+
+### DialogContent Layout Variants
+
+| Variant | Description |
+| :--- | :--- |
+| `responsive` | Mobile bottom sheet; Desktop centered modal. |
+| `center` | Centered modal with fade-up transition. |
+| `top` | Top-aligned modal with fade-down transition. |
+| `scrollable` | Fixed header/footer layout for internal scrolling. |
+| `stacked` | Scaling and offset support for nested dialogs. |
+| `element-outside` | Supports interactive elements outside the popup box. |

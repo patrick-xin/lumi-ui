@@ -35,8 +35,10 @@ Lumi UI 方式：
 | 类名 | 用途 |
 | :--- | :--- |
 | `animate-popup` | 用于弹出框、下拉菜单、选择器等。 |
-| `animate-dialog` | 用于模态框和对话框。 |
-| `animate-backdrop` | 用于背景遮罩层。 |
+| `animate-fade-up` | 用于模态框和对话框。 |
+| `animate-fade-zoom` | 用于模态框和对话框。 |
+| `animate-fade-down` | 用于模态框和对话框。 |
+| `animate-fade` | 用于背景遮罩层。 |
 
 详情见下文[组件兼容性](#组件兼容性)部分。
 
@@ -55,17 +57,39 @@ Lumi UI 方式：
   }
 }
 
-@utility animate-dialog {
-  @apply transition-all duration-150;
+@utility animate-fade-up {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.9;
+    scale: 0.98;
+    translate: 0 0.5rem;
   }
 }
 
-@utility animate-backdrop {
+@utility animate-fade-down {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 -0.5rem;
+  }
+}
+
+@utility animate-fade-zoom {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+@utility animate-fade {
   @apply transition-all duration-100;
 
   &[data-starting-style],
@@ -82,7 +106,7 @@ Lumi UI 方式：
 
 ## 如何不使用默认动画
 
-移除 `animate-popup`、`animate-dialog` 或 `animate-backdrop` 工具类，并使用标准的 Tailwind 类来获得完全的控制权：
+移除 `animate-popup`、`animate-fade-up`、`animate-fade-zoom`、`animate-fade-down`、`animate-fade` 工具类，并使用标准的 Tailwind 类来获得完全的控制权：
 
 ```tsx
 <PopoverContent
@@ -112,4 +136,4 @@ data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
 
 ---
 
-使用 `animate-dialog` 和 `animate-backdrop` 的组件：[对话框](/docs/components/overlays-dialogs/dialog) | [警示对话框](/docs/components/overlays-dialogs/alert-dialog)
+使用 `animate-fade-up`、`animate-fade-zoom`、`animate-fade-down`、`animate-fade` 的组件：[对话框](/docs/components/overlays-dialogs/dialog) | [警示对话框](/docs/components/overlays-dialogs/alert-dialog)

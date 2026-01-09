@@ -1,0 +1,282 @@
+---
+title: 对话框
+description: 一个覆盖在整个页面之上的弹出层。
+links:
+  doc: https://base-ui.com/react/components/dialog
+  api: https://base-ui.com/react/components/dialog#api-reference
+status: new
+---
+
+<ComponentPreview name="dialog-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/dialog
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="dialog" title="dialog.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+将以下工具类添加到你的 `globals.css` 中：
+
+```css
+@utility animate-fade-up {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.96;
+    translate: 0 0.75rem;
+  }
+}
+
+@utility animate-fade-down {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.96;
+    translate: 0 -0.75rem;
+  }
+}
+
+@utility animate-fade-zoom {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+@utility animate-fade {
+  @apply transition-all duration-100;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+```
+
+## 基本用法
+
+```tsx
+import {
+  Dialog,
+  DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+export function DialogDemo() {
+  return (
+    <Dialog>
+      <DialogTrigger>打开对话框</DialogTrigger>
+      <DialogContent showCloseButton>
+        <DialogHeader>
+          <DialogTitle>确定要执行此操作吗？</DialogTitle>
+          <DialogDescription>
+            此操作无法撤销。这将永久删除你的账户，并从我们的服务器中移除你的数据。
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose>取消</DialogClose>
+          <DialogClose>继续</DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+```tsx
+<Dialog>
+  <DialogTrigger />
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle />
+      <DialogDescription />
+    </DialogHeader>
+    {/* 内容 */}
+    <DialogFooter>
+      <DialogClose />
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+  </TabsPanel>
+  <TabsPanel value="primitive">
+```tsx
+<Dialog>
+  <DialogTrigger />
+  <DialogPortal>
+    <DialogBackdrop />
+    <DialogViewport>
+      <DialogPopup>
+        <DialogHeader>
+          <DialogTitle />
+          <DialogDescription />
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose />
+        </DialogFooter>
+      </DialogPopup>
+    </DialogViewport>
+  </DialogPortal>
+</Dialog>
+```
+  </TabsPanel>
+</Tabs>
+
+## 样式变体
+
+`DialogContent` 的布局属性决定了视觉样式和进场动画：
+
+- `responsive` (默认)：移动端为底部抽屉，桌面端为居中模态框。
+- `center`：带向上淡入动画的居中模态框。
+- `top`：带向下淡入动画的顶部对齐模态框。
+- `scrollable`：针对内容内部滚动的容器优化。
+- `stacked`：位移和缩放，用于处理嵌套对话框流程。
+- `element-outside`：用于 UI 元素位于主容器之外的情况。
+
+<ComponentPreview name="dialog-variants" />
+
+## 实用示例
+
+### 滚动处理
+
+#### 内部滚动
+将 `DialogContent` 设置为 `layout="scrollable"`。使用 `ScrollArea` 或 `overflow-y-auto` 处理内容。滚动区域之外的元素保持固定。
+
+<ComponentPreview name="dialog-inside-scroll" />
+
+#### 元素在外部
+当控件应位于弹出层之外时，使用 `layout="element-outside"`。
+
+<ComponentPreview name="dialog-elements-outside" />
+
+#### 视口滚动
+对于非常长的内容，使用 `DialogViewport` 作为滚动容器。这允许整个对话框随页面滚动。
+
+<ComponentPreview name="dialog-outside-scroll" />
+
+#### 自定义实现
+<ComponentPreview name="dialog-custom" />
+
+### 关闭确认
+对 `DialogContent` 和 [`AlertDialogContent`](/docs/components/overlays-dialogs/alert-dialog#composite-component) 使用 `layout="stacked"`，以优雅地处理嵌套确认流程。
+
+<ComponentPreview name="dialog-close-confirmation" />
+
+### 受控模式
+手动管理 `open` 状态，适用于外部触发器或异步关闭逻辑。
+
+```tsx title="受控对话框"
+const [open, setOpen] = React.useState(false);
+
+<Dialog open={open} onOpenChange={setOpen}>
+  <DialogTrigger>打开</DialogTrigger>
+  <DialogContent>
+    <form onSubmit={async () => {             
+      await submitData();             
+      setOpen(false);   
+    }}>
+      ...
+    </form>
+  </DialogContent>
+</Dialog>
+```
+
+#### 从下拉菜单触发
+从 [`DropdownMenu`](/docs/components/overlays-dialogs/dropdown-menu) 打开对话框时，请使用受控状态，以避免焦点管理和嵌套问题。
+
+<ComponentPreview name="dialog-from-menu" />
+
+### 分离的触发器与载荷
+当 `DialogTrigger` 和 `Dialog` 无法嵌套在同一个根节点下时，使用 `createDialogHandle` 将它们链接起来。
+
+```tsx title="分离的触发器"
+const demoDialog = createDialogHandle();
+
+<DialogTrigger handle={demoDialog}>打开</DialogTrigger>
+<Dialog handle={demoDialog}>...</Dialog>
+```
+<ComponentPreview name="dialog-detached-trigger" />
+
+#### 动态内容
+单个对话框可以处理多个触发器，并根据载荷动态渲染内容。
+
+<ComponentPreview name="dialog-detached-triggers-with-payload" />
+
+#### 受控多触发器
+当外部控制多个触发器时，在 `onOpenChange` 中使用 `eventDetails.source` 来识别当前活动的触发器。
+
+<ComponentPreview name="dialog-controlled-mode-with-multiple-triggers" />
+
+## API 参考
+
+### 基础组件
+
+| 组件 | 描述 |
+| :--- | :--- |
+| [`Dialog`](https://base-ui.com/react/components/dialog#root) | 组合对话框的所有部分。不渲染自己的 HTML 元素。 |
+| [`DialogTrigger`](https://base-ui.com/react/components/dialog#trigger) | 用于打开对话框的按钮。 |
+| [`DialogPortal`](https://base-ui.com/react/components/dialog#portal) | 将弹出层移动到 DOM 不同位置的传送门元素。渲染 `<div>` 元素。|
+| [`DialogBackdrop`](https://base-ui.com/react/components/dialog#backdrop) | 显示在弹出层下方的遮罩层。渲染 `<div>` 元素。 |
+| [`DialogViewport`](https://base-ui.com/react/components/dialog#viewport) | 对话框弹出层的定位容器，可设为可滚动。渲染 `<div>` 元素。 |
+| [`DialogPopup`](https://base-ui.com/react/components/dialog#popup) | 对话框内容的容器。必须在 `DialogPortal` 内使用。渲染 `<div>` 元素。 |
+| `DialogHeader` | 用于便捷布局的样式化容器。渲染 `<div>` 元素。 |
+| [`DialogTitle`](https://base-ui.com/react/components/dialog#title) | 标记对话框的标题。渲染 `<h2>` 元素。 |
+| [`DialogDescription`](https://base-ui.com/react/components/dialog#description) | 包含对话框附加信息的段落。渲染 `<p>` 元素。 |
+| `DialogFooter` | 用于便捷布局的样式化容器。渲染 `<div>` 元素。 |
+| [`DialogClose`](https://base-ui.com/react/components/dialog#close) | 用于关闭对话框的按钮。渲染 `<button>` 元素。|
+
+### 复合组件
+
+| 组件 | 描述 |
+| :--- | :--- |
+| `DialogContent` | **标准用法**。组合 Portal、Backdrop、Viewport 和 Popup。 |
+| `DialogElementOutsideContent` | `DialogContent` 的扩展，适用于弹出层外部存在元素的 UI。 |
+
+### DialogContent 布局变体
+
+| 变体 | 描述 |
+| :--- | :--- |
+| `responsive` | 移动端底部抽屉；桌面端居中模态框。 |
+| `center` | 带向上淡入过渡的居中模态框。 |
+| `top` | 带向下淡入过渡的顶部对齐模态框。 |
+| `scrollable` | 用于内部滚动的固定页头/页脚布局。 |
+| `stacked` | 支持嵌套对话框的缩放和偏移。 |
+| `element-outside` | 支持弹出框外的交互元素。 |

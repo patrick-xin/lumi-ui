@@ -36,8 +36,10 @@ Lumi UI approach:
 | Class | Usage |
 | :--- | :--- |
 | `animate-popup` | Used for Popovers, Dropdowns, Selects etc... |
-| `animate-dialog` | Used for Modals and Dialogs. |
-| `animate-backdrop` | Used for Backdrops. |
+| `animate-fade-up` | Used for Dialogs. |
+| `animate-fade-zoom` | Used for Dialogs. |
+| `animate-fade-down` | Used for Dialogs. |
+| `animate-fade` | Used for Backdrops. |
 
 See [Component Compatibility](#component-compatibility) below for details.
 
@@ -56,17 +58,39 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
   }
 }
 
-@utility animate-dialog {
-  @apply transition-all duration-150;
+@utility animate-fade-up {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.9;
+    scale: 0.98;
+    translate: 0 0.5rem;
   }
 }
 
-@utility animate-backdrop {
+@utility animate-fade-down {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 -0.5rem;
+  }
+}
+
+@utility animate-fade-zoom {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+@utility animate-fade {
   @apply transition-all duration-100;
 
   &[data-starting-style],
@@ -83,7 +107,7 @@ For unique animation needs, override the utility class.
 
 ## Opting out
 
-Remove the utility class `animate-popup`, `animate-dialog`, and `animate-backdrop` and use standard Tailwind classes for complete control:
+Remove the utility class `animate-popup`, `animate-fade-up`, `animate-fade-zoom`, `animate-fade-down` and use standard Tailwind classes for complete control:
 
 ```tsx
 <PopoverContent
@@ -113,7 +137,7 @@ Uses `animate-popup`:
 
 ---
 
-Uses `animate-dialog` & `animate-backdrop`: [Dialog](/docs/components/overlays-dialogs/dialog) | [AlertDialog](/docs/components/overlays-dialogs/alert-dialog)
+Uses `animate-fade-up`, `animate-fade-zoom`, `animate-fade-down`, `animate-fade`: [Dialog](/docs/components/overlays-dialogs/dialog) | [AlertDialog](/docs/components/overlays-dialogs/alert-dialog)
 
 
 

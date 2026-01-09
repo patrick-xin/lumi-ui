@@ -43,7 +43,7 @@ export function MobileNav({
         }
       />
       <DialogPortal>
-        <DialogPopup className="top-16 bg-background/80 backdrop-blur-md h-[calc(100dvh-4rem)] fixed w-screen py-0">
+        <DialogPopup className="top-16 bg-background/80 backdrop-blur-md h-[calc(100dvh-4rem)] fixed w-screen py-0 px-4">
           <div className="flex h-full flex-col gap-4">
             <ScrollArea gradientScrollFade noScrollBar>
               <nav>

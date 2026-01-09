@@ -31,6 +31,51 @@ links:
   </TabsPanel>
 </CodeTabs>
 
+Add the following utilities to your `globals.css`:
+
+```css
+@utility animate-fade-up {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 0.5rem;
+  }
+}
+
+@utility animate-fade-down {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 -0.5rem;
+  }
+}
+
+@utility animate-fade-zoom {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+@utility animate-fade {
+  @apply transition-all duration-100;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+```
+
 ## Basic Usage
 
 ```tsx
@@ -196,3 +241,15 @@ Note that there is no separate onTriggerIdChange prop. Instead, the `onOpenChang
 | Component | Description |
 | :--- | :--- |
 | `AlertDialogContent` | Pre assembled component that wraps `AlertDialogPortal`, `AlertDialogBackdrop`, `AlertDialogViewport` and `AlertDialogPopup` with default styles. |
+
+
+### AlertDialogContent Layout Variants
+
+| Variant | Description |
+| :--- | :--- |
+| `responsive` | Mobile bottom sheet; Desktop centered modal. |
+| `center` | Centered modal with fade-up transition. |
+| `top` | Top-aligned modal with fade-down transition. |
+| `scrollable` | Fixed header/footer layout for internal scrolling. |
+| `stacked` | Scaling and offset support for nested dialogs. |
+| `element-outside` | Supports interactive elements outside the popup box. |
