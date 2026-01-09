@@ -164,8 +164,8 @@ function ContextMenuContent({
 function ContextMenuSubContent({
   align = "start",
   side = "right",
-  sideOffset = 8,
-  alignOffset = -4,
+  sideOffset = -4,
+  alignOffset = 0,
   ...props
 }: ContextMenuContentProps) {
   return (

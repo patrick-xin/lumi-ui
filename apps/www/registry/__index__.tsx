@@ -1902,6 +1902,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "dialog-custom": {
+    name: "dialog-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["dialog"],
+    files: [{
+      path: "components/examples/ui/dialog/dialog-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/dialog/dialog-custom");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-custom";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "dialog-demo": {
     name: "dialog-demo",
     description: "",

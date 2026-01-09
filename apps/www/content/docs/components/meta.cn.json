@@ -1,5 +1,4 @@
 {
-  "title": "组件",
   "pages": [
     "form-input",
     "layout-nav",
@@ -7,5 +6,6 @@
     "feedback-status",
     "display-media",
     "misc"
-  ]
+  ],
+  "title": "组件"
 }

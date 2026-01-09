@@ -26,7 +26,6 @@ interface DocsSidebarProps {
 
 export const DocsSidebar = ({ tree }: DocsSidebarProps) => {
   const pathname = usePathname();
-
   const items = normalizeSidebarTree(tree, pathname);
 
   return (
@@ -66,9 +65,11 @@ const SidebarTree = ({
   if (!items.length) return null;
 
   return (
-    <ul className={cn("grid gap-1 px-2", level > 0 && "pl-4 border-l ml-2")}>
-      {items.map((item, index) => (
-        <li key={index}>
+    <ul
+      className={cn("grid gap-1 px-2 pt-1", level > 0 && "pl-4 border-l ml-2")}
+    >
+      {items.map((item) => (
+        <li key={item.label}>
           {item.type === "folder" ? (
             <SidebarFolder item={item} level={level} />
           ) : item.type === "link" ? (
@@ -108,9 +109,7 @@ const SidebarFolder = ({
         }
       />
       <CollapsiblePanel>
-        <div className="pt-1">
-          <SidebarTree items={item.items} level={level + 1} />
-        </div>
+        <SidebarTree items={item.items} level={level + 1} />
       </CollapsiblePanel>
     </Collapsible>
   );

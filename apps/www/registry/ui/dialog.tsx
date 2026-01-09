@@ -62,7 +62,7 @@ function DialogPopup({
 }: React.ComponentProps<typeof BaseDialog.Popup>) {
   return (
     <BaseDialog.Popup
-      className={cn("bg-background rounded p-4 sm:p-6", className)}
+      className={cn("bg-background", className)}
       data-slot="dialog-popup"
       {...props}
     >
@@ -134,7 +134,7 @@ const viewportVariants = cva("fixed inset-0", {
       "element-outside": cn(
         "flex flex-col items-center justify-center",
         // padding between viewport and content
-        "px-4 py-12 sm:py-20",
+        "px-4 py-12 sm:py-16",
       ),
       responsive: "flex items-end sm:items-center justify-center sm:p-4",
       scrollable: cn(
@@ -153,7 +153,7 @@ const viewportVariants = cva("fixed inset-0", {
 });
 
 const popupVariants = cva(
-  "bg-background rounded outline-1 outline-border dark:-outline-offset-1 p-4 sm:p-6",
+  "bg-background rounded-sm outline-1 outline-border dark:-outline-offset-1 p-4 sm:p-6 shadow-md dark:shadow-xs",
   {
     defaultVariants: {
       layout: "center",
@@ -172,7 +172,7 @@ const popupVariants = cva(
           "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
           "grid gap-4 w-full max-w-[calc(100vw-2rem)] sm:max-w-lg rounded animate-fade",
           "top-[calc(50%+1.25rem*var(--nested-dialogs))] scale-[calc(1-0.05*var(--nested-dialogs))]",
-          "data-nested-dialog-open:after:absolute data-nested-dialog-open:after:inset-0 data-nested-dialog-open:after:rounded-[inherit] data-nested-dialog-open:after:bg-black/5",
+          "data-nested-dialog-open:after:absolute data-nested-dialog-open:after:inset-0 data-nested-dialog-open:after:rounded-[inherit] data-nested-dialog-open:after:bg-black/5"
         ),
         top: "relative grid w-full gap-4 shadow-xl max-w-lg rounded-xl animate-fade-down",
       },

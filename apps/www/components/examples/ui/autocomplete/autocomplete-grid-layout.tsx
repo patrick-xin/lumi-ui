@@ -54,62 +54,62 @@ export function EmojiPickerAutocompleteDemo() {
     <div className="mx-auto w-[16rem]">
       <div className="flex items-center gap-2">
         <Input
+          onChange={(event) => setTextValue(event.target.value)}
+          placeholder="iMessage"
           ref={textInputRef}
           type="text"
-          placeholder="iMessage"
           value={textValue}
-          onChange={(event) => setTextValue(event.target.value)}
         />
 
         <Autocomplete
-          items={emojiGroups}
           grid
-          open={pickerOpen}
+          items={emojiGroups}
           onOpenChange={setPickerOpen}
           onOpenChangeComplete={() => setSearchValue("")}
-          value={searchValue}
           onValueChange={(value, details) => {
             if (details.reason !== "item-press") {
               setSearchValue(value);
             }
           }}
+          open={pickerOpen}
+          value={searchValue}
         >
           <AutocompleteTrigger
+            aria-label="Choose emoji"
             render={
-              <Button variant="outline" size="icon">
+              <Button size="icon" variant="outline">
                 😀
               </Button>
             }
-            aria-label="Choose emoji"
           />
 
           <AutocompleteContent
+            align="end"
             matchAnchorWidth={false}
             sideOffset={4}
-            align="end"
           >
-            <AutocompleteInput variant="ghost" placeholder="Search emojis…" />
+            <AutocompleteInput placeholder="Search emojis…" variant="ghost" />
             <Separator />
             <AutocompleteEmpty>No emojis found</AutocompleteEmpty>
             <AutocompleteList>
               {(group: EmojiGroup) => (
-                <AutocompleteGroup key={group.value} items={group.items}>
+                <AutocompleteGroup items={group.items} key={group.value}>
                   <AutocompleteGroupLabel>{group.label}</AutocompleteGroupLabel>
                   <div className="p-1" role="presentation">
                     {chunkArray(group.items, COLUMNS).map((row, rowIdx) => (
                       <AutocompleteRow
-                        key={rowIdx}
                         className="grid grid-cols-5 gap-2.5"
+                        key={String(rowIdx)}
                       >
                         {row.map((rowItem) => (
                           <AutocompleteItem
+                            className="p-2 items-center justify-center data-[highlighted]:before:rounded-md"
                             key={rowItem.emoji}
-                            value={rowItem}
                             onClick={() => {
                               handleInsertEmoji(rowItem.emoji);
                               setPickerOpen(false);
                             }}
-                            className="p-2 items-center justify-center data-[highlighted]:before:rounded-md"
+                            value={rowItem}
                           >
                             <span className="text-[1.5rem] leading-none">
                               {rowItem.emoji}
@@ -153,7 +153,6 @@ interface EmojiGroup {
 
 export const emojiCategories = [
   {
-    label: "Smileys & Emotion",
     emojis: [
       { emoji: "😀", name: "grinning face" },
       { emoji: "😃", name: "grinning face with big eyes" },
@@ -186,9 +185,9 @@ export const emojiCategories = [
       { emoji: "🤗", name: "hugging face" },
       { emoji: "🤭", name: "face with hand over mouth" },
     ],
+    label: "Smileys & Emotion",
   },
   {
-    label: "Animals & Nature",
     emojis: [
       { emoji: "🐶", name: "dog face" },
       { emoji: "🐱", name: "cat face" },
@@ -221,9 +220,9 @@ export const emojiCategories = [
       { emoji: "🦉", name: "owl" },
       { emoji: "🦇", name: "bat" },
     ],
+    label: "Animals & Nature",
   },
   {
-    label: "Food & Drink",
     emojis: [
       { emoji: "🍎", name: "red apple" },
       { emoji: "🍏", name: "green apple" },
@@ -256,14 +255,15 @@ export const emojiCategories = [
       { emoji: "🧅", name: "onion" },
       { emoji: "🥔", name: "potato" },
     ],
+    label: "Food & Drink",
   },
 ];
 
 const emojiGroups: EmojiGroup[] = emojiCategories.map((category) => ({
-  value: category.label,
-  label: category.label,
   items: category.emojis.map((emoji) => ({
     ...emoji,
     value: emoji.name.toLowerCase(),
   })),
+  label: category.label,
+  value: category.label,
 }));
