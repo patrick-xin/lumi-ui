@@ -76,7 +76,6 @@ export function ProjectQuoteForm() {
           <BookHeart className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
           <FieldControl
             className="pl-9"
-            defaultValue=""
             minLength={5}
             placeholder="e.g. SaaS Dashboard Redesign"
             required

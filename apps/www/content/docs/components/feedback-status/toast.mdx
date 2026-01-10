@@ -79,7 +79,7 @@ status: new
 */
 @layer utilities {
   .toast-viewport {
-    @apply fixed flex flex-col w-[var(--toast-max-width-mobile)] lg:w-[var(--toast-max-width-desktop)] outline-none pointer-events-none;
+    @apply fixed z-10 flex flex-col w-[var(--toast-max-width-mobile)] lg:w-[var(--toast-max-width-desktop)] outline-none pointer-events-none;
   }
   /* Viewport Positioning */
   .toast-viewport[data-position^="top"] { top: var(--toast-viewport-padding); bottom: auto; }
