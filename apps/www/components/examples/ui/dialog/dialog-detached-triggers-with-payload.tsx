@@ -12,23 +12,25 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/registry/ui/dialog";
+import { Input } from "@/registry/ui/input";
+import { Label } from "@/registry/ui/label";
 
 type User = {
   id: number;
   name: string;
-  role: string;
+  email: string;
 };
 
 // The payload can be strongly typed by providing a type argument to the `createDialogHandle()` function.
 const editUserDialogHandle = createDialogHandle<User>();
 
 const USERS: User[] = [
-  { id: 1, name: "Alice", role: "Admin" },
-  { id: 2, name: "Bob", role: "Editor" },
-  { id: 3, name: "Charlie", role: "Viewer" },
+  { email: "alice@company.com", id: 1, name: "Alice Smith" },
+  { email: "bob@company.com", id: 2, name: "Bob Jones" },
+  { email: "charlie@company.com", id: 3, name: "Charlie Day" },
 ];
 
-export default function UserList() {
+export default function UserManagementDemo() {
   return (
     <div>
       <div className="flex gap-2">
@@ -37,7 +39,7 @@ export default function UserList() {
             handle={editUserDialogHandle}
             key={user.id}
             payload={user}
-            render={<Button>Edit {user.name}</Button>}
+            render={<Button variant="outline">Edit {user.name}</Button>}
           />
         ))}
       </div>
@@ -45,18 +47,28 @@ export default function UserList() {
         {({ payload }) => (
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Delete {payload?.name}?</DialogTitle>
+              <DialogTitle>Edit User</DialogTitle>
               <DialogDescription>
-                Are you sure you want to delete{" "}
+                Update profile details for{" "}
                 <span className="font-semibold text-primary">
                   {payload?.name}
                 </span>
-                ? This action cannot be undone.
+                .
               </DialogDescription>
             </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input defaultValue={payload?.name} id="name" />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email Address</Label>
+                <Input defaultValue={payload?.email} id="email" />
+              </div>
+            </div>
             <DialogFooter>
               <DialogClose render={<Button variant="outline">Cancel</Button>} />
-              <DialogClose render={<Button>Yes, Delete</Button>} />
+              <DialogClose render={<Button>Save Changes</Button>} />
             </DialogFooter>
           </DialogContent>
         )}

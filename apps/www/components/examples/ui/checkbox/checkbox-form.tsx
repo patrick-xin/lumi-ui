@@ -13,10 +13,10 @@ export function CheckboxFormDemo() {
     const isAgreed = formData.get("terms") === "on";
 
     toast.add({
-      title: isAgreed ? "Agreed to terms" : "Did not agree",
       description: isAgreed
         ? "You have agreed to the terms and conditions."
         : "You have not agreed to the terms and conditions.",
+      title: isAgreed ? "Agreed to terms" : "Did not agree",
     });
   };
   return (

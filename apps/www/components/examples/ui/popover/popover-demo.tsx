@@ -5,6 +5,7 @@ import {
   CalendarIcon,
   CheckIcon,
   PlusIcon,
+  Settings,
   XIcon,
 } from "lucide-react";
 import React from "react";
@@ -32,7 +33,9 @@ export function ProjectPopover() {
 
   return (
     <Popover>
-      <PopoverTrigger render={<Button />}>Project Settings</PopoverTrigger>
+      <PopoverTrigger render={<Button />}>
+        <Settings /> Project Settings
+      </PopoverTrigger>
 
       <PopoverContent align="center" className="w-80">
         {view === "default" && (

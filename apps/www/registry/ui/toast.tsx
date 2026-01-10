@@ -73,7 +73,7 @@ const Icons = {
 
 const toastVariants = cva(
   // Custom styles, change the look of the toast
-  "rounded-sm outline outline-1 shadow-lg transition-all select-none bg-popover text-popover-foreground dark:-outline-offset-1",
+  "rounded-md outline outline-1 shadow-lg transition-all select-none bg-popover text-popover-foreground dark:-outline-offset-1",
   {
     variants: {
       type: {

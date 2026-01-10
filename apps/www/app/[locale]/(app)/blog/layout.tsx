@@ -8,9 +8,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Grain />
       <Image
         alt="bg-image"
-        src="/images/bg.svg"
         className="fixed inset-0 -z-50"
         height={1000}
+        src="/images/bg.svg"
         width={1000}
       />
     </main>

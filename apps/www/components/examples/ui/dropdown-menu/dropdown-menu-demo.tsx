@@ -74,7 +74,7 @@ export function DropdownMenuDemo() {
               </DropdownMenuItem>
               <DropdownMenuItem
                 render={
-                  <Link className="w-full" href="/settings/sharing">
+                  <Link className="w-full" href="/">
                     <Settings className="size-4" />
                     <span>Sharing Settings...</span>
                   </Link>

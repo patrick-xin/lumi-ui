@@ -60,7 +60,7 @@
 @utility highlight-on-active {
   @apply data-[highlighted]:relative data-[highlighted]:z-0;
   
-  @apply data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-sm;
+  @apply data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-md;
 
   @apply data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground;
 }
@@ -70,7 +70,7 @@
 */
 @layer utilities {
   .toast-viewport {
-    @apply fixed flex flex-col w-[var(--toast-max-width-mobile)] lg:w-[var(--toast-max-width-desktop)] outline-none pointer-events-none z-1000;
+    @apply fixed z-10 flex flex-col w-[var(--toast-max-width-mobile)] lg:w-[var(--toast-max-width-desktop)] outline-none pointer-events-none;
   }
   /* Viewport Positioning */
   .toast-viewport[data-position^="top"] { top: var(--toast-viewport-padding); bottom: auto; }
@@ -88,10 +88,7 @@
 */
 @layer utilities {
   .toast-root {
-    @apply absolute w-full pointer-events-auto;
-    /* Stacking */
-    --toast-index: 0; /* Default fallback */
-    z-index: calc(1000 - var(--toast-index));
+    @apply absolute w-full pointer-events-auto z-[calc(1000-var(--toast-index))];
     
     /* Transitions */
     transition: 

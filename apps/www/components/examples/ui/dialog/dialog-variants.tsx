@@ -15,7 +15,16 @@ import {
   DialogTrigger,
   type popupVariants,
 } from "@/registry/ui/dialog";
+import { Input } from "@/registry/ui/input";
+import { Label } from "@/registry/ui/label";
 import { ScrollArea } from "@/registry/ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectItemContent,
+  SelectTriggerGroup,
+} from "@/registry/ui/select";
+import { Textarea } from "@/registry/ui/textarea";
 
 type DialogLayout = VariantProps<typeof popupVariants>["layout"];
 
@@ -40,54 +49,118 @@ export function DialogVariantsDemo() {
             <DialogTrigger
               handle={mainDialogHandle}
               payload={{
-                actionLabel: "Dismiss",
+                actionLabel: "Send Invite",
                 body: (
-                  <div className="py-4 space-y-3">
-                    {[1, 2].map((i) => (
-                      <div
-                        className="flex items-center gap-4 p-3 border border-dashed rounded-lg"
-                        key={i}
-                      >
-                        <div className="size-8 rounded-full" />
-                        <div className="text-sm">
-                          <div className="font-medium">Update {i}</div>
-                          <div className="text-muted-foreground text-xs">
-                            System update completed.
+                  <div className="py-4 space-y-4">
+                    <div className="flex flex-col gap-2">
+                      <Label htmlFor="email">Email address</Label>
+                      <Input id="email" placeholder="colleague@company.com" />
+                    </div>
+                    <div className="flex flex-col gap-3 pt-2">
+                      <Label className="text-xs text-muted-foreground uppercase tracking-wider">
+                        People with access
+                      </Label>
+                      {[
+                        {
+                          initials: "OM",
+                          name: "Olivia Martin",
+                          role: "Admin",
+                        },
+                        {
+                          initials: "IN",
+                          name: "Isabella Nguyen",
+                          role: "Member",
+                        },
+                      ].map((user) => (
+                        <div
+                          className="flex items-center justify-between"
+                          key={user.name}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="flex items-center justify-center size-8 rounded-full bg-muted text-xs font-medium">
+                              {user.initials}
+                            </div>
+                            <div className="text-sm">
+                              <div className="font-medium leading-none">
+                                {user.name}
+                              </div>
+                              <div className="text-muted-foreground text-xs mt-1">
+                                {user.role}
+                              </div>
+                            </div>
                           </div>
+                          <Button
+                            className="text-muted-foreground h-8"
+                            size="sm"
+                            variant="ghost"
+                          >
+                            Remove
+                          </Button>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 ),
-                description: "You are all caught up.",
+                description:
+                  "Invite team members to collaborate on this project.",
                 layout: "responsive",
-                showCancel: false,
-                title: "Notifications",
+                showCancel: true,
+                title: "Share Project",
               }}
               render={<Button>Responsive</Button>}
             />
             <DialogTrigger
               handle={mainDialogHandle}
               payload={{
-                actionLabel: "Save Changes",
+                actionLabel: "Submit Feedback",
                 body: (
-                  <div className="h-32 rounded-md grid place-items-center text-sm text-muted-foreground border border-dashed">
-                    Form Inputs Go Here
-                  </div>
+                  <Textarea
+                    className="h-32"
+                    placeholder="Enter your feedback"
+                  />
                 ),
-                description: "Make changes to your profile here.",
+                description: "Let us know what went wrong.",
                 layout: "top",
-                title: "Edit Profile",
+                title: "Report an Issue",
               }}
               render={<Button>Top</Button>}
             />
+
             <DialogTrigger
               handle={mainDialogHandle}
               payload={{
-                actionLabel: "Close",
-                description: "You are all caught up.",
+                actionLabel: "Save Changes",
+                body: (
+                  <div className="py-2 space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="category">Category</Label>
+                      <Select items={categories}>
+                        <SelectTriggerGroup placeholder="Select a category" />
+                        <SelectContent className="w-32">
+                          {categories.map((category) => (
+                            <SelectItemContent
+                              key={category.value}
+                              value={category.value}
+                            >
+                              {category.label}
+                            </SelectItemContent>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="message">Message</Label>
+                      <Textarea
+                        className="min-h-[100px]"
+                        id="message"
+                        placeholder="Describe the issue in detail..."
+                      />
+                    </div>
+                  </div>
+                ),
+                description: "Help us improve by sending your feedback.",
                 layout: "center",
-                title: "Notifications",
+                title: "Contact Support",
               }}
               render={<Button>Center</Button>}
             />
@@ -99,43 +172,42 @@ export function DialogVariantsDemo() {
             <DialogTrigger
               handle={mainDialogHandle}
               payload={{
-                actionLabel: "Accept",
+                actionLabel: "Accept Terms",
                 body: (
                   <div className="space-y-4">
                     {Array.from({ length: 15 }).map((_, i) => (
                       <div
-                        className="flex h-32 w-full shrink-0 items-center justify-center rounded-md bg-accent/30 border"
+                        className="flex h-32 w-full shrink-0 items-center justify-center rounded-md bg-muted/50 border border-dashed"
                         key={i}
                       >
                         <span className="font-medium text-sm text-muted-foreground">
-                          Clause {i + 1}
+                          Agreement Section {i + 1}
                         </span>
                       </div>
                     ))}
                   </div>
                 ),
-                description: "Please read carefully before proceeding.",
+                description: "Please read the updated terms of service.",
                 layout: "scrollable",
-                title: "Terms of Service",
+                title: "Terms & Conditions",
               }}
               render={<Button>Scrollable</Button>}
             />
             <DialogTrigger
               handle={mainDialogHandle}
               payload={{
-                actionLabel: "Complete",
+                actionLabel: "Done",
                 body: <NestedDialog />,
-                description:
-                  "This is the parent dialog. Interaction with it is active until you open the child.",
+                description: "Manage your active third-party integrations.",
                 layout: "stacked",
-                title: "Level 1: Configuration",
+                showCancel: false,
+                title: "Integrations",
               }}
               render={<Button>Stacked</Button>}
             />
           </div>
         </div>
       </div>
-
       <Dialog handle={mainDialogHandle}>
         {({ payload }) => {
           if (!payload) return null;
@@ -199,22 +271,55 @@ export function DialogVariantsDemo() {
 function NestedDialog() {
   return (
     <Dialog>
-      <DialogTrigger
-        render={
-          <Button className="w-fit" variant="secondary">
-            Open Level 2 (Nested)
-          </Button>
-        }
-      />
+      <div className="flex flex-col gap-3 py-2">
+        {["GitHub", "Slack", "Linear"].map((app) => (
+          <div
+            className="flex items-center justify-between p-3 border rounded-lg bg-card"
+            key={app}
+          >
+            <div className="flex items-center gap-3">
+              <div className="size-8 rounded bg-primary/10 grid place-items-center">
+                <span className="text-xs font-bold text-primary">{app[0]}</span>
+              </div>
+              <div className="text-sm font-medium">{app}</div>
+            </div>
+            <DialogTrigger
+              render={
+                <Button size="sm" variant="outline">
+                  Configure
+                </Button>
+              }
+            />
+          </div>
+        ))}
+      </div>
       <DialogContent layout="stacked">
         <DialogHeader>
-          <DialogTitle>Level 2: Confirmation</DialogTitle>
+          <DialogTitle>Configure Integration</DialogTitle>
+          <DialogDescription>
+            Enter your API key to connect this service.
+          </DialogDescription>
         </DialogHeader>
-        <div>The parent dialog scales down behind this one.</div>
+        <div className="grid gap-2 py-2">
+          <Label htmlFor="api-key">API Key</Label>
+          <Input
+            id="api-key"
+            readOnly
+            type="password"
+            value="sk_test_123456789"
+          />
+        </div>
         <DialogFooter>
-          <DialogClose render={<Button>Close Level 2</Button>} />
+          <DialogClose render={<Button variant="outline">Back</Button>} />
+          <DialogClose render={<Button>Save Configuration</Button>} />
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 }
+
+const categories = [
+  { label: "Bug Report", value: "bug-report" },
+  { label: "Feature Request", value: "feature-request" },
+  { label: "Billing Issue", value: "billing-issue" },
+];

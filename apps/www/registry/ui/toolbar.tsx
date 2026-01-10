@@ -79,7 +79,7 @@ function ToolbarLink({
     <BaseToolbar.Link
       data-slot="toolbar-link"
       className={cn(
-        "text-muted-foreground hover:text-foreground inline-flex items-center justify-center gap-2 rounded-sm px-2.5 py-1.5 text-sm font-medium underline-offset-4 outline-none transition-colors hover:underline",
+        "text-muted-foreground hover:text-foreground inline-flex items-center justify-center gap-2 rounded-md px-2.5 py-1.5 text-sm font-medium underline-offset-4 outline-none transition-colors hover:underline",
         "focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className

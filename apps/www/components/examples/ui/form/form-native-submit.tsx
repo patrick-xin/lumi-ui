@@ -18,23 +18,23 @@ export default function NativeSubmitForm() {
     const values = Object.fromEntries(formData);
 
     toast.success({
-      title: "Success",
       description: `${values.username} has been submitted!`,
+      title: "Success",
     });
   };
 
   return (
     <Form
-      onSubmit={handleNativeSubmit}
       className="flex w-full max-w-64 flex-col gap-4"
+      onSubmit={handleNativeSubmit}
     >
       <Field name="username">
         <FieldLabel>Username</FieldLabel>
         <FieldControl
-          type="username"
-          required
           defaultValue="admin"
           placeholder="e.g. alice132"
+          required
+          type="username"
         />
         <FieldError />
       </Field>

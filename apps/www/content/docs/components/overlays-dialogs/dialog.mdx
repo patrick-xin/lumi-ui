@@ -129,7 +129,6 @@ export function DialogDemo() {
       <DialogTitle />
       <DialogDescription />
     </DialogHeader>
-    {/* Content */}
     <DialogFooter>
       <DialogClose />
     </DialogFooter>
@@ -161,16 +160,6 @@ export function DialogDemo() {
 </Tabs>
 
 ## Variants
-
-The `DialogContent` layout determines the visual style and entry animation:
-
-- `responsive` (default): Bottom sheet on mobile, centered modal on desktop.
-- `center`: Centered modal with fade-up animation.
-- `top`: Top-aligned modal with fade-down animation.
-- `scrollable`: Optimized for containers with internal scrolling.
-- `stacked`: Shifts and scales for clean nested dialog flows.
-- `element-outside`: For UIs with elements positioned outside the main container.
-
 <ComponentPreview name="dialog-variants" />
 
 ## Cookbook
@@ -274,9 +263,9 @@ When controlling multiple triggers externally, use `eventDetails.source` in `onO
 
 | Variant | Description |
 | :--- | :--- |
-| `responsive` | Mobile bottom sheet; Desktop centered modal. |
+| `responsive` (default) | Mobile bottom sheet; Desktop centered modal. |
 | `center` | Centered modal with fade-up transition. |
 | `top` | Top-aligned modal with fade-down transition. |
-| `scrollable` | Fixed header/footer layout for internal scrolling. |
+| `scrollable` | Optimized for containers with internal scrolling.
 | `stacked` | Scaling and offset support for nested dialogs. |
 | `element-outside` | Supports interactive elements outside the popup box. |

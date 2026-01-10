@@ -257,7 +257,6 @@ function DropdownMenuSubMenuTriggerGroup({
         "flex items-center gap-2 py-1.5 px-3.5 text-sm",
         "outline-none select-none cursor-default",
         "highlight-on-active",
-        "data-[popup-open]:relative data-[popup-open]:z-0 data-[popup-open]:before:bg-accent data-[popup-open]:text-accent-foreground data-[popup-open]:before:absolute data-[popup-open]:before:inset-x-1 data-[popup-open]:before:inset-y-0 data-[popup-open]:before:z-[-1] data-[popup-open]:before:rounded-sm",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
         className,
       )}
@@ -304,7 +303,7 @@ function DropdownMenuContent({
         <BaseMenu.Popup
           data-slot="dropdown-menu-content"
           className={cn(
-            "bg-popover text-popover-foreground rounded-sm shadow-md py-1",
+            "bg-popover text-popover-foreground rounded-md shadow-md py-1",
             "outline outline-1 outline-border dark:-outline-offset-1",
             "animate-popup",
             className,
