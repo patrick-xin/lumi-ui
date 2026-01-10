@@ -334,11 +334,10 @@ function AutocompleteContent({
         <BaseAutocomplete.Popup
           data-slot="autocomplete-content"
           className={cn(
-            "bg-popover text-popover-foreground rounded-sm shadow-md",
+            "bg-popover text-popover-foreground rounded-md shadow-md",
             "outline outline-1 outline-border dark:-outline-offset-1",
             "overflow-hidden overflow-y-auto",
             "max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))]",
-            "animate-popup",
             matchAnchorWidth && "w-[var(--anchor-width)]",
             className,
           )}

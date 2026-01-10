@@ -34,17 +34,17 @@ export function DialogCloseConfirmationDemo() {
         if (!open && textareaValue) {
           setConfirmationOpen(true);
         } else {
+          // Reset text when opening or closing normally
           setTextareaValue("");
-          // Open or close the dialog normally
           setDialogOpen(open);
         }
       }}
       open={dialogOpen}
     >
-      <DialogTrigger render={<Button>Tweet</Button>} />
+      <DialogTrigger render={<Button>Report Issue</Button>} />
       <DialogContent className="sm:max-w-96" layout="stacked" showCloseButton>
         <DialogHeader>
-          <DialogTitle>New tweet</DialogTitle>
+          <DialogTitle>Report an Issue</DialogTitle>
         </DialogHeader>
         <form
           className="mt-4 flex flex-col gap-6"
@@ -55,30 +55,29 @@ export function DialogCloseConfirmationDemo() {
           }}
         >
           <Textarea
-            className="min-h-48"
+            className="min-h-48 resize-none"
             onChange={(event) => setTextareaValue(event.target.value)}
-            placeholder="What’s on your mind?"
+            placeholder="Please describe the bug or issue you are experiencing..."
             required
             value={textareaValue}
           />
           <DialogFooter>
             <DialogClose render={<Button variant="outline">Cancel</Button>} />
-            <Button type="submit">Tweet</Button>
+            <Button type="submit">Submit Report</Button>
           </DialogFooter>
         </form>
       </DialogContent>
-
-      {/* Confirmation dialog */}
       <AlertDialog onOpenChange={setConfirmationOpen} open={confirmationOpen}>
         <AlertDialogContent className="sm:max-w-md" layout="stacked">
           <AlertDialogHeader>
-            <AlertDialogTitle>Discard tweet?</AlertDialogTitle>
+            <AlertDialogTitle>Discard changes?</AlertDialogTitle>
             <AlertDialogDescription>
-              Your tweet will be lost.
+              You have unsaved changes. Are you sure you want to discard this
+              report?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogClose variant="outline">Go back</AlertDialogClose>
+            <AlertDialogClose variant="outline">Keep Editing</AlertDialogClose>
             <Button
               onClick={() => {
                 setConfirmationOpen(false);

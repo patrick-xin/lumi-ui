@@ -49,7 +49,7 @@ function PreviewCardContent({
         <BasePreviewCard.Popup
           data-slot="preview-card-content"
           className={cn(
-            "bg-popover text-popover-foreground z-50 w-64 rounded-md p-4 shadow-md outline outline-border dark:-outline-offset-1",
+            "bg-popover text-popover-foreground w-64 rounded-md p-4 shadow-md outline outline-border dark:-outline-offset-1",
             "animate-popup",
             className,
           )}

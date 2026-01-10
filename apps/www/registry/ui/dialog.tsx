@@ -1,11 +1,12 @@
 "use client";
 
+import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui/react";
+import { Button } from "@/registry/ui/button";
 import { cva, type VariantProps } from "class-variance-authority";
 import { XIcon } from "lucide-react";
-import type * as React from "react";
+
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
 
 function Dialog<Payload>({
   ...props
@@ -153,7 +154,7 @@ const viewportVariants = cva("fixed inset-0", {
 });
 
 const popupVariants = cva(
-  "bg-background rounded-sm outline-1 outline-border dark:-outline-offset-1 p-4 sm:p-6 shadow-md dark:shadow-xs",
+  "bg-background rounded-md outline-1 outline-border dark:-outline-offset-1 p-4 sm:p-6 shadow-md dark:shadow-xs",
   {
     defaultVariants: {
       layout: "center",
@@ -163,16 +164,20 @@ const popupVariants = cva(
         center:
           "relative grid w-full gap-4 shadow-lg max-w-lg rounded-lg animate-fade-up",
         "element-outside":
-          "flex h-full w-full justify-center pointer-events-none p-0! bg-transparent outline-0 animate-fade",
-        responsive:
-          "relative grid gap-4 shadow-lg w-full rounded-t-[1.25rem] rounded-b-none border-t px-6 pb-8 pt-6 sm:max-w-lg sm:rounded-lg sm:px-6 sm:pb-6 sm:pt-6 animate-fade-up",
-        scrollable:
-          "relative flex flex-col gap-6 overflow-hidden min-h-0 max-h-full max-w-full w-[min(40rem,calc(100vw-2rem))] rounded-md animate-fade-zoom",
+          "flex h-full w-full justify-center pointer-events-none p-0 bg-transparent outline-0 animate-fade",
+        responsive: cn(
+          "relative grid gap-4 shadow-lg w-full rounded-t-[1.25rem] rounded-b-none border-t",
+          "px-6 pb-8 pt-6 sm:max-w-lg sm:rounded-lg sm:px-6 sm:pb-6 sm:pt-6 animate-fade",
+        ),
+        scrollable: cn(
+          "relative overflow-hidden min-h-0 max-h-full max-w-full",
+          "flex flex-col gap-6 w-[min(40rem,calc(100vw-2rem))] rounded-md animate-fade-zoom",
+        ),
         stacked: cn(
           "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
           "grid gap-4 w-full max-w-[calc(100vw-2rem)] sm:max-w-lg rounded animate-fade",
           "top-[calc(50%+1.25rem*var(--nested-dialogs))] scale-[calc(1-0.05*var(--nested-dialogs))]",
-          "data-nested-dialog-open:after:absolute data-nested-dialog-open:after:inset-0 data-nested-dialog-open:after:rounded-[inherit] data-nested-dialog-open:after:bg-black/5"
+          "data-nested-dialog-open:after:absolute data-nested-dialog-open:after:inset-0 data-nested-dialog-open:after:rounded-[inherit] data-nested-dialog-open:after:bg-black/5",
         ),
         top: "relative grid w-full gap-4 shadow-xl max-w-lg rounded-xl animate-fade-down",
       },
@@ -235,7 +240,8 @@ const DialogElementOutsideContent = ({
     <DialogContent layout="element-outside" {...props}>
       <div
         className={cn(
-          "pointer-events-auto h-full w-full flex flex-col shadow-md rounded bg-background",
+          "pointer-events-auto h-full w-full flex flex-col", 
+          "shadow-md rounded bg-background",
           className,
         )}
       >

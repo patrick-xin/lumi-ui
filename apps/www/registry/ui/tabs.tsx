@@ -73,7 +73,7 @@ function TabsTab({
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "data-[orientation=horizontal]:flex-1 data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
-        "relative before:absolute before:inset-x-0 before:inset-y-1.5 before:rounded-sm",
+        "relative before:absolute before:inset-x-0 before:inset-y-1.5 before:rounded-md",
         "focus-visible:before:ring-1 focus-visible:before:ring-ring/10 focus-visible:before:ring-offset-2 focus-visible:before:ring-offset-ring/45",
         className,
       )}
@@ -90,7 +90,7 @@ function TabsPanel({
   return (
     <BaseTabs.Panel
       className={cn(
-        "flex-1 outline-none rounded-sm",
+        "flex-1 outline-none rounded-md",
         "focus-visible:ring-2 focus-visible:ring-ring/10 focus-visible:ring-offset-2 focus-visible:ring-offset-ring/45",
         className,
       )}
@@ -108,7 +108,7 @@ function TabsListContent({
   return (
     <BaseTabs.List
       className={cn(
-        "relative z-0 inline-flex items-center rounded-sm gap-1 px-1.5 bg-muted text-muted-foreground min-h-9",
+        "relative z-0 inline-flex items-center rounded-md gap-1 px-1.5 bg-muted text-muted-foreground min-h-9",
         "data-[orientation=horizontal]:flex-row",
         "data-[orientation=vertical]:flex-col data-[orientation=vertical]:h-fit data-[orientation=vertical]:py-1.5",
         className,

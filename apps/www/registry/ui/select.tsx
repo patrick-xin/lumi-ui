@@ -285,7 +285,7 @@ function SelectContent({
         <BaseSelect.Popup
           data-slot="select-content"
           className={cn(
-            "bg-popover text-popover-foreground rounded-sm shadow-md",
+            "bg-popover text-popover-foreground rounded-md shadow-md",
             "overflow-hidden",
             "outline outline-1 outline-border dark:-outline-offset-1",
             "max-h-[var(--available-height)]  min-w-[var(--anchor-width)]",

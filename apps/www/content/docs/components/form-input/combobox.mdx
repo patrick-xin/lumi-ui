@@ -193,20 +193,3 @@ A high-level item component that combines the `Item` and `ItemIndicator` into a 
 | `indicatorIcon` | `React.ReactNode` | `<Check />` | The icon to render as the item indicator. |
 | `className` | `string` | `-` | Additional CSS classes. |
 | `...props` | `BaseCombobox.ItemProps` | `-` | Passes all other props to the underlying `BaseCombobox.ItemProps`. |
-
-## The "Hit-Test" Philosophy
-
-You might notice we use a pseudo-element (`before:`) to render the hover state, rather than styling the container directly. While simple margins can also create a "pill" shape, that approach creates a UX flaw: it shrinks the clickable area.
-
-By separating the **visual layer** (the pill) from the **interactive layer** (the full-width row), we achieve the best of both worlds:
-
-1.  **Forgiving Interactivity:** Users can hover or click anywhere across the full width of the menu item—even the empty whitespace—to trigger the selection.
-2.  **Refined Aesthetics:** The highlight remains visually tucked in and detached, mimicking the polished feel of native operating system menus (a pattern we adopted from the excellent **[Base UI](https://base-ui.com/react/components/combobox#)**).
-
-Feeling too complex? You can always replace pseudo-element with `data-[highlighted]:bg-accent` and `data-[highlighted]:text-accent-foreground`.
-
-<Callout title="Customization Note" variant="info">
-Because the background color lives on a pseudo-element, applying `rounded-*` classes directly to the component won't change the highlight's corners. To customize the radius, target the pseudo-element directly: `data-[highlighted]:before:rounded-lg`. 
-
-💡**Mind the gap**: If you increase the highlight inset `(inset-x-4)`, ensure you increase the item padding `(pl-6)` so text doesn't overflow the visual selection.
-</Callout>

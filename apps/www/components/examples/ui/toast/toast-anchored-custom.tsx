@@ -50,6 +50,7 @@ export function CustomToastAnchoredDemo() {
         disabled={side === "top"}
         onClick={() => handleSideChange("top")}
         size="icon-sm"
+        variant="outline"
       >
         <ArrowUp className="size-4" />
       </Button>
@@ -57,6 +58,7 @@ export function CustomToastAnchoredDemo() {
         disabled={side === "bottom"}
         onClick={() => handleSideChange("bottom")}
         size="icon-sm"
+        variant="outline"
       >
         <ArrowDown className="size-4" />
       </Button>
@@ -64,6 +66,7 @@ export function CustomToastAnchoredDemo() {
         disabled={side === "left"}
         onClick={() => handleSideChange("left")}
         size="icon-sm"
+        variant="outline"
       >
         <ArrowLeft className="size-4" />
       </Button>
@@ -71,6 +74,7 @@ export function CustomToastAnchoredDemo() {
         disabled={side === "right"}
         onClick={() => handleSideChange("right")}
         size="icon-sm"
+        variant="outline"
       >
         <ArrowRight className="size-4" />
       </Button>
@@ -80,7 +84,7 @@ export function CustomToastAnchoredDemo() {
 
 const CustomContent = () => {
   return (
-    <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-purple-500 to-pink-600 rounded-md shadow-lg">
+    <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-purple-500 to-pink-600 rounded-md shadow-lg pointer-events-auto">
       <div className="shrink-0 w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
         <Sparkles className="w-5 h-5 text-white" />
       </div>

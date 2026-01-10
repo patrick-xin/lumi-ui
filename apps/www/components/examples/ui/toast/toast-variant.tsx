@@ -23,7 +23,6 @@ export function ToastVariantDemo() {
             title: "Event Created",
           })
         }
-        variant="outline"
       >
         Success
       </Button>
@@ -34,7 +33,6 @@ export function ToastVariantDemo() {
             title: "Error creating event",
           })
         }
-        variant="destructive"
       >
         Error
       </Button>
@@ -44,7 +42,6 @@ export function ToastVariantDemo() {
             title: "Your connection to the server is unstable",
           })
         }
-        variant="secondary"
       >
         Warning
       </Button>

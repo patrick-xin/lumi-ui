@@ -108,7 +108,7 @@ function ComboboxChip({
     <BaseCombobox.Chip
       data-slot="combobox-chip"
       className={cn(
-        "flex items-center gap-1 px-2 py-1 rounded-sm shadow-xs text-sm bg-secondary text-secondary-foreground outline-none cursor-default",
+        "flex items-center gap-1 px-2 py-1 rounded-md shadow-xs text-sm bg-secondary text-secondary-foreground outline-none cursor-default",
         "focus-within:bg-secondary/80 focus-within:text-secondary-foreground/80",
         "[@media(hover:hover)]:[&[data-highlighted]]:bg-secondary/80 [@media(hover:hover)]:[&[data-highlighted]]:text-secondary-foreground/80",
         className,
@@ -132,7 +132,7 @@ function ComboboxChipRemove({
     <BaseCombobox.ChipRemove
       data-slot="combobox-chip-remove"
       className={cn(
-        "p-1 inline-flex items-center justify-center bg-transparent hover:bg-accent text-inherit rounded-sm transition-colors",
+        "p-1 inline-flex items-center justify-center bg-transparent hover:bg-accent text-inherit rounded-md transition-colors",
         "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
         className,
       )}
@@ -403,8 +403,8 @@ function ComboboxContent({
         <BaseCombobox.Popup
           data-slot="combobox-content"
           className={cn(
-            "bg-popover text-popover-foreground rounded-sm shadow-md",
-            "outline outline-1 outline-border dark:-outline-offset-1",
+            "bg-popover text-popover-foreground rounded-md shadow-md",
+            "outline-1 outline-border dark:-outline-offset-1",
             "overflow-hidden overflow-y-auto",
             "max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))]",
             "animate-popup",

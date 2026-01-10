@@ -22,33 +22,33 @@ export default function TooltipAnimationDemo() {
     <TooltipProvider>
       <div className="flex gap-2">
         <TooltipTrigger
+          handle={demoTooltip}
+          payload={InfoContent}
           render={
-            <Button variant={"outline"} size={"icon"}>
+            <Button size={"icon"} variant={"outline"}>
               <InfoIcon aria-label="Information" className="size-5" />
             </Button>
           }
-          handle={demoTooltip}
-          payload={InfoContent}
         />
 
         <TooltipTrigger
+          handle={demoTooltip}
+          payload={HelpContent}
           render={
-            <Button variant={"outline"} size={"icon"}>
+            <Button size={"icon"} variant={"outline"}>
               <HelpCircleIcon aria-label="Help" className="size-5" />
             </Button>
           }
-          handle={demoTooltip}
-          payload={HelpContent}
         />
 
         <TooltipTrigger
+          handle={demoTooltip}
+          payload={AlertContent}
           render={
-            <Button variant={"outline"} size={"icon"}>
+            <Button size={"icon"} variant={"outline"}>
               <OctagonAlert aria-label="Alert" className="size-5" />
             </Button>
           }
-          handle={demoTooltip}
-          payload={AlertContent}
         />
       </div>
 
@@ -56,7 +56,6 @@ export default function TooltipAnimationDemo() {
         {({ payload: Payload }) => (
           <TooltipPortal>
             <TooltipPositioner
-              sideOffset={10}
               className="
                 h-(--positioner-height) w-(--positioner-width)
                 max-w-(--available-width)
@@ -64,10 +63,11 @@ export default function TooltipAnimationDemo() {
                 duration-[0.35s]
                 ease-[cubic-bezier(0.22,1,0.36,1)]
                 data-instant:transition-none"
+              sideOffset={10}
             >
               <TooltipPopup
                 className="
-                  relative bg-foreground text-background z-50
+                  relative bg-foreground text-background
                   h-(--popup-height,auto) w-(--popup-width,auto)
                   max-w-[500px]
                   rounded-md

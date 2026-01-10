@@ -135,7 +135,7 @@ function NavigationMenuLink({
     <BaseNavigationMenu.Link
       data-slot="navigation-menu-link"
       className={cn(
-        "flex flex-col gap-1 rounded-sm p-2 text-sm",
+        "flex flex-col gap-1 rounded-md p-2 text-sm",
         "outline-none transition-all",
         "[&_svg:not([class*='text-'])]:text-muted-foreground",
         "[&_svg:not([class*='size-'])]:size-4",

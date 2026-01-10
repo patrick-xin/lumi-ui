@@ -96,29 +96,10 @@ export function ComboboxAsyncMultipleDemo() {
 
   return (
     <Combobox
+      filter={null}
       items={items}
       itemToStringLabel={(user: DirectoryUser) => user.name}
       multiple
-      filter={null}
-      onOpenChangeComplete={(open) => {
-        if (!open) {
-          setSearchResults(selectedValuesRef.current);
-          setBlockStartStatus(false);
-        }
-      }}
-      onValueChange={(nextSelectedValues) => {
-        selectedValuesRef.current = nextSelectedValues;
-        setSelectedValues(nextSelectedValues);
-        setSearchValue("");
-        setError(null);
-
-        if (nextSelectedValues.length === 0) {
-          setSearchResults([]);
-          setBlockStartStatus(false);
-        } else {
-          setBlockStartStatus(true);
-        }
-      }}
       onInputValueChange={(nextSearchValue, { reason }) => {
         setSearchValue(nextSearchValue);
 
@@ -152,23 +133,42 @@ export function ComboboxAsyncMultipleDemo() {
           });
         });
       }}
+      onOpenChangeComplete={(open) => {
+        if (!open) {
+          setSearchResults(selectedValuesRef.current);
+          setBlockStartStatus(false);
+        }
+      }}
+      onValueChange={(nextSelectedValues) => {
+        selectedValuesRef.current = nextSelectedValues;
+        setSelectedValues(nextSelectedValues);
+        setSearchValue("");
+        setError(null);
+
+        if (nextSelectedValues.length === 0) {
+          setSearchResults([]);
+          setBlockStartStatus(false);
+        } else {
+          setBlockStartStatus(true);
+        }
+      }}
     >
-      <ComboboxChips ref={containerRef} className="w-[16rem] md:w-[20rem]">
+      <ComboboxChips className="w-[16rem] md:w-[20rem]" ref={containerRef}>
         <ComboboxValue>
           {(value: DirectoryUser[]) => (
             <React.Fragment>
               {value.length > 0 &&
                 value.map((user) => (
-                  <ComboboxChip key={user.id} aria-label={user.name}>
+                  <ComboboxChip aria-label={user.name} key={user.id}>
                     {user.name}
                   </ComboboxChip>
                 ))}
 
               <ComboboxInputGroup
+                className="min-w-24"
                 id={id}
                 placeholder={value.length > 0 ? "" : "e.g. Michael"}
                 variant="ghost"
-                className="min-w-24"
               />
             </React.Fragment>
           )}
@@ -176,8 +176,8 @@ export function ComboboxAsyncMultipleDemo() {
       </ComboboxChips>
       <ComboboxContent
         aria-busy={isPending || undefined}
-        sideOffset={8}
         positionerAnchor={containerRef}
+        sideOffset={8}
       >
         <ComboboxStatus className="p-2">{getStatus()}</ComboboxStatus>
         <ComboboxEmpty className="text-left p-2">
@@ -221,8 +221,8 @@ async function searchUsers(
   // Simulate occasional network errors (1% chance)
   if (Math.random() < 0.01 || query === "will_error") {
     return {
-      users: [],
       error: "Failed to fetch people. Please try again.",
+      users: [],
     };
   }
 
@@ -236,38 +236,38 @@ async function searchUsers(
   });
 
   return {
-    users,
     error: null,
+    users,
   };
 }
 
 const allUsers: DirectoryUser[] = [
   {
+    email: "leslie.alexander@example.com",
     id: "leslie-alexander",
     name: "Leslie Alexander",
-    username: "leslie",
-    email: "leslie.alexander@example.com",
     title: "Product Manager",
+    username: "leslie",
   },
   {
+    email: "kathryn.murphy@example.com",
     id: "kathryn-murphy",
     name: "Kathryn Murphy",
-    username: "kathryn",
-    email: "kathryn.murphy@example.com",
     title: "Marketing Lead",
+    username: "kathryn",
   },
   {
+    email: "courtney.henry@example.com",
     id: "courtney-henry",
     name: "Courtney Henry",
-    username: "courtney",
-    email: "courtney.henry@example.com",
     title: "Design Systems",
+    username: "courtney",
   },
   {
+    email: "michael.foster@example.com",
     id: "michael-foster",
     name: "Michael Foster",
-    username: "michael",
-    email: "michael.foster@example.com",
     title: "Engineering Manager",
+    username: "michael",
   },
 ];
