@@ -16,39 +16,39 @@ import {
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: "Alert Dialog",
-    href: "/docs/components/alert-dialog",
     description:
       "A modal dialog that interrupts the user with important content and expects a response.",
+    href: "/docs/components/alert-dialog",
+    title: "Alert Dialog",
   },
   {
-    title: "Hover Card",
-    href: "/docs/components/hover-card",
     description:
       "For sighted users to preview content available behind a link.",
+    href: "/docs/components/hover-card",
+    title: "Hover Card",
   },
   {
-    title: "Progress",
-    href: "/docs/components/progress",
     description:
       "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    href: "/docs/components/progress",
+    title: "Progress",
   },
   {
-    title: "Scroll-area",
-    href: "/docs/components/scroll-area",
     description: "Visually or semantically separates content.",
+    href: "/docs/components/scroll-area",
+    title: "Scroll-area",
   },
   {
-    title: "Tabs",
-    href: "/docs/components/tabs",
     description:
       "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+    href: "/docs/components/tabs",
+    title: "Tabs",
   },
   {
-    title: "Tooltip",
-    href: "/docs/components/tooltip",
     description:
       "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+    href: "/docs/components/tooltip",
+    title: "Tooltip",
   },
 ];
 
@@ -91,9 +91,9 @@ export function NavigationMenuDemo() {
             <ul className="grid gap-2 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]">
               {components.map((component) => (
                 <ListItem
+                  href={component.href}
                   key={component.title}
                   title={component.title}
-                  href={component.href}
                 >
                   {component.description}
                 </ListItem>
@@ -103,8 +103,8 @@ export function NavigationMenuDemo() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink
-            render={<Link href="/docs">Docs</Link>}
             className={navigationMenuTriggerStyle()}
+            render={<Link href="/docs">Docs</Link>}
           />
         </NavigationMenuItem>
         <NavigationMenuItem className="hidden md:block">
@@ -167,7 +167,7 @@ export function NavigationMenuDemo() {
               <li>
                 <NavigationMenuLink
                   render={
-                    <Link href="#" className="flex-row items-center gap-2">
+                    <Link className="flex-row items-center gap-2" href="#">
                       <CircleHelpIcon />
                       Backlog
                     </Link>
@@ -175,7 +175,7 @@ export function NavigationMenuDemo() {
                 />
                 <NavigationMenuLink
                   render={
-                    <Link href="#" className="flex-row items-center gap-2">
+                    <Link className="flex-row items-center gap-2" href="#">
                       <CircleIcon />
                       To Do
                     </Link>
@@ -183,7 +183,7 @@ export function NavigationMenuDemo() {
                 />
                 <NavigationMenuLink
                   render={
-                    <Link href="#" className="flex-row items-center gap-2">
+                    <Link className="flex-row items-center gap-2" href="#">
                       <CircleCheckIcon />
                       Done
                     </Link>

@@ -112,10 +112,7 @@ function NavigationMenuContent({
       data-slot="navigation-menu-content"
       className={cn(
         "w-full p-2 md:w-auto",
-        "transition-[opacity,transform,translate] duration-[var(--duration)] ease-[var(--easing)]",
-        // control opacity when content show/hide
-        "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
-        // slide interactions 
+        "animate-fade",
         "data-[starting-style]:data-[activation-direction=left]:translate-x-[-20%]",
         "data-[starting-style]:data-[activation-direction=right]:translate-x-[20%]",
         "data-[ending-style]:data-[activation-direction=left]:translate-x-[20%]",
@@ -167,8 +164,7 @@ function NavigationMenuBackdrop({
     <BaseNavigationMenu.Backdrop
       data-slot="navigation-menu-backdrop"
       className={cn(
-        "fixed inset-0 z-40 bg-black/50 transition-opacity duration-200",
-        "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
+        "fixed inset-0 bg-black/50 animate-fade",
         className,
       )}
       {...props}
@@ -185,12 +181,10 @@ function NavigationMenuPositioner({
     <BaseNavigationMenu.Positioner
       data-slot="navigation-menu-positioner"
       className={cn(
-        "box-border",
         "h-[var(--positioner-height)] w-[var(--positioner-width)] max-w-[var(--available-width)]",
         "transition-[top,left,right,bottom]",
         "data-[instant]:transition-none",
         "before:absolute before:content-['']",
-        // bridge gap between menu and trigger when hovering
         "data-[side=bottom]:before:top-[-10px] data-[side=bottom]:before:right-0 data-[side=bottom]:before:left-0 data-[side=bottom]:before:h-2.5 data-[side=left]:before:top-0 data-[side=left]:before:right-[-10px] data-[side=left]:before:bottom-0 data-[side=left]:before:w-2.5 data-[side=right]:before:top-0 data-[side=right]:before:bottom-0 data-[side=right]:before:left-[-10px] data-[side=right]:before:w-2.5 data-[side=top]:before:right-0 data-[side=top]:before:bottom-[-10px] data-[side=top]:before:left-0 data-[side=top]:before:h-2.5",
         className,
       )}
@@ -209,13 +203,8 @@ function NavigationMenuPopup(
       data-slot="navigation-menu-popup"
       className={cn(
         "h-[var(--popup-height)] w-[var(--popup-width)] xs:w-[var(--popup-width)]",
-        "transition-[opacity,transform,width,height,scale,translate]",
-        // consume css variables defined in positioner
-        "duration-[var(--duration)] ease-[var(--easing)] origin-[var(--transform-origin)] ",
-        "data-[starting-style]:scale-90 data-[starting-style]:opacity-0",
-        "data-[ending-style]:ease-in-out data-[ending-style]:scale-90 data-[ending-style]:opacity-0 data-[ending-style]:duration-150 ",
+        "animate-fade"
       )}
-
       {...props}
     />
   );
@@ -229,7 +218,6 @@ function NavigationMenuArrow({
     <BaseNavigationMenu.Arrow
       data-slot="navigation-menu-arrow"
       className={cn(
-        // consume css variables defined in positioner
         "duration-[var(--duration)] ease-[var(--easing)]",
         "data-[side=bottom]:top-[-9px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180",
         className,
@@ -274,14 +262,11 @@ function NavigationMenu({
           sideOffset={10}
           collisionPadding={{ top: 5, bottom: 5, left: 20, right: 20 }}
           collisionAvoidance={{ side: "none" }}
-          // define css variables here so that nested components can use them
-          style={{
-            ["--duration" as string]: "0.4s",
-            ["--easing" as string]: "cubic-bezier(0.22, 1, 0.36, 1)",
-          }}
         >
           <NavigationMenuPopup 
-            className={cn("relative rounded shadow border bg-popover text-popover-foreground", className)}>
+            className={cn("relative rounded-md bg-popover text-popover-foreground",
+             "outline outline-border dark:-outline-offset-1",
+            className)}>
             {showArrow && <NavigationMenuArrow className="flex transition-[left]" />}
             <NavigationMenuViewport />
           </NavigationMenuPopup>

@@ -36,39 +36,39 @@ status: new
 
 ```css
 @utility animate-fade-up {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.96;
-    translate: 0 0.75rem;
+    scale: 0.98;
+    translate: 0 0.5rem;
   }
 }
 
 @utility animate-fade-down {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.96;
-    translate: 0 -0.75rem;
+    scale: 0.98;
+    translate: 0 -0.5rem;
   }
 }
 
 @utility animate-fade-zoom {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.96;
+    scale: 0.94;
   }
 }
 
 @utility animate-fade {
-  @apply transition-all duration-100;
+  @apply transition-all duration-200;
 
   &[data-starting-style],
   &[data-ending-style] {

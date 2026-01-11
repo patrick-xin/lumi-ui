@@ -91,7 +91,7 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 }
 
 @utility animate-fade {
-  @apply transition-all duration-100;
+  @apply transition-all duration-200;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -118,13 +118,13 @@ Remove the utility class `animate-popup`, `animate-fade-up`, `animate-fade-zoom`
 ```
 ```tsx
 <DialogContent
-  className="transition-all duration-150 data-[ending-style]:scale-90 
+  className="transition-all duration-200 data-[ending-style]:scale-90 
   data-[ending-style]:opacity-0 data-[starting-style]:scale-90 
   data-[starting-style]:opacity-0"
 />
 ```
 ```tsx
-<DialogBackdrop className="transition-all duration-100 
+<DialogBackdrop className="transition-all duration-200 
 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
 ```
 
