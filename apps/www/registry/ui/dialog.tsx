@@ -176,7 +176,7 @@ const popupVariants = cva(
         stacked: cn(
           "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
           "grid gap-4 w-full max-w-[calc(100vw-2rem)] sm:max-w-lg rounded animate-fade",
-          "top-[calc(50%+1.25rem*var(--nested-dialogs))] scale-[calc(1-0.05*var(--nested-dialogs))]",
+          "top-[calc(50%+0.75rem*var(--nested-dialogs))] scale-[calc(1-0.1*var(--nested-dialogs))]",
           "data-nested-dialog-open:after:absolute data-nested-dialog-open:after:inset-0 data-nested-dialog-open:after:rounded-[inherit] data-nested-dialog-open:after:bg-black/5",
         ),
         top: "relative grid w-full gap-4 shadow-xl max-w-lg rounded-xl animate-fade-down",

@@ -41,20 +41,13 @@
 }
 
 @utility animate-fade {
-  @apply transition-all duration-100;
+  @apply transition-all duration-200;
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
   }
 }
-
-
-
-
-
-
-
 
 /* Active Highlight */
 @utility highlight-on-active {
