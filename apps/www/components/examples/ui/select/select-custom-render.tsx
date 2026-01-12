@@ -16,39 +16,6 @@ import {
   SelectTriggerGroup,
 } from "@/registry/ui/select";
 
-const statuses = [
-  {
-    value: "backlog",
-    label: "Backlog",
-    icon: CircleDashed,
-    color: "text-muted-foreground",
-  },
-  {
-    value: "todo",
-    label: "Todo",
-    icon: Circle,
-    color: "text-muted-foreground",
-  },
-  {
-    value: "in-progress",
-    label: "In Progress",
-    icon: HelpCircle,
-    color: "text-blue-500",
-  },
-  {
-    value: "done",
-    label: "Done",
-    icon: CheckCircle2,
-    color: "text-green-500",
-  },
-  {
-    value: "canceled",
-    label: "Canceled",
-    icon: XCircle,
-    color: "text-red-500",
-  },
-];
-
 export function SelectCustomRenderDemo() {
   return (
     <Select items={statuses}>
@@ -82,3 +49,36 @@ export function SelectCustomRenderDemo() {
     </Select>
   );
 }
+
+const statuses = [
+  {
+    color: "text-muted-foreground",
+    icon: CircleDashed,
+    label: "Backlog",
+    value: "backlog",
+  },
+  {
+    color: "text-muted-foreground",
+    icon: Circle,
+    label: "Todo",
+    value: "todo",
+  },
+  {
+    color: "text-blue-500",
+    icon: HelpCircle,
+    label: "In Progress",
+    value: "in-progress",
+  },
+  {
+    color: "text-green-500",
+    icon: CheckCircle2,
+    label: "Done",
+    value: "done",
+  },
+  {
+    color: "text-red-500",
+    icon: XCircle,
+    label: "Canceled",
+    value: "canceled",
+  },
+];

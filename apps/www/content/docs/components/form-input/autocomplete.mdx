@@ -133,5 +133,31 @@ The prop can be combined with the `keepHighlight` and `highlightItemOnHover` pro
 Display items in a grid layout, wrapping each `row` in `<AutocompleteRow>` components.
 <ComponentPreview name="autocomplete-grid-layout" />
 
-### Create your own with trigger and clear
-<ComponentPreview name="autocomplete-with-clear-trigger" />
+## API Reference
+
+### AutocompleteInputGroup
+
+A composite component that combines the `AutocompleteInput`, `Icon` ,`AutocompleteClear`, and `AutocompleteTrigger` into a single styled element.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `showTrigger` | `boolean` | Whether to show the trigger icon. |
+| `showClear` | `boolean` | Whether to show the clear icon. |
+| `addonIcon` | `React.ReactNode` | Whether to show the addon icon. |
+| `variant` | `"ghost" \| "default" \| "transparent"` | The visual variant of the input group. |
+| `inputSize` | `"default" \| "sm" \| "lg"` | The size of the input. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `AutocompleteInput.Props` | Passes all other props to the underlying `AutocompleteInput.Props`. |
+
+### AutocompleteContent
+
+A composite component that combines the `AutocompletePortal`, `AutocompletePositioner`, and `AutocompletePopup` into a single styled element for the dropdown content.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `sideOffset` | `number` | The offset distance from the anchor. |
+| `align` | `"start" \| "center" \| "end"` | The alignment relative to the anchor. |
+| `matchAnchorWidth` | `boolean` | Whether the popup width matches the anchor width. |
+| `positionerAnchor` | `React.RefObject<HTMLDivElement \| null>` | Ref passed to the positioner for custom anchoring. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `AutocompletePopup.Props` | Passes all other props to the underlying `AutocompletePopup.Props`. |

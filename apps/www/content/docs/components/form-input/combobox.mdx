@@ -44,7 +44,7 @@ links:
      ```tsx
      <Combobox>
        <ComboboxTrigger />
-       <ComboboxInputGroup /> // or <ComboboxInput />
+       <ComboboxInputGroup />
 
        <ComboboxChips>
          <ComboboxChip />
@@ -117,14 +117,16 @@ links:
 
 ## Features
 
-### With Clear and Trigger Button
+### With Clear Button, Trigger Button and Icon
 <ComponentPreview name="combobox-clear-trigger" />
 
 ### Input Inside Popup
-
-Use `ComboboxTrigger` instead of `ComboboxInputGroup` to place the input inside the popup. Style `ComboboxInput` to remove the border.
+Use `ComboboxTrigger` instead of `ComboboxInputGroup` to place the input inside the popup. Apply `variant="ghost"` on `ComboboxInput` to remove the border and focus state.
 
 <ComponentPreview name="combobox-input-inside-popup" />
+
+### Change Indicator Icon and Position
+<ComponentPreview name="combobox-indicator" />
 
 ### Grouped
 <ComponentPreview name="combobox-grouped" />
@@ -147,49 +149,45 @@ Use `ComboboxTrigger` instead of `ComboboxInputGroup` to place the input inside 
 <ComponentPreview name="combobox-async-multiple" />
 
 ## Customization
-
-<Callout title="Note" variant="info">
-Lumi UI exports all primitive components with minimal styles from Base UI to ensure maximum flexibility. Below is an example of how to compose Linear-style combobox by mixing Composite components with raw primitives.
-</Callout>
-
 <ComponentPreview name="combobox-customization" />
 
 ## API Reference
 
 ### ComboboxInputGroup
 
-A high-level input component that combines the `Input`, `Clear`, and `Trigger` into a single styled element.
+A high-level input component that combines the `ComboboxInput`, `Icon` ,`ComboboxClear`, and `ComboboxTrigger` into a single styled element.
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `showTrigger` | `boolean` | `false` | Whether to show the trigger icon. |
-| `showClear` | `boolean` | `false` | Whether to show the clear icon. |
-| `variant` | `"ghost" \| "default" \| "transparent"` | `"default"` | The visual variant of the input group. |
-| `inputSize` | `"default" \| "sm" \| "lg"` | `"default"` | The size of the input. |
-| `className` | `string` | `-` | Additional CSS classes. |
-| `...props` | `BaseCombobox.InputProps` | `-` | Passes all other props to the underlying `BaseCombobox.InputProps`. |
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `showTrigger` | `boolean` | Whether to show the trigger icon. |
+| `showClear` | `boolean` | Whether to show the clear icon. |
+| `addonIcon` | `React.ReactNode` | Whether to show the addon icon. |
+| `variant` | `"ghost" \| "default" \| "transparent"` | The visual variant of the input group. |
+| `inputSize` | `"default" \| "sm" \| "lg"` | The size of the input. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `ComboboxInput.Props` | Passes all other props to the underlying `ComboboxInput.Props`. |
 
 
 ### ComboboxContent
 
-A high-level container component that combines the `Portal`, `Positioner`, and `Popup` into a single styled element for the dropdown content.
+A high-level container component that combines the `ComboboxPortal`, `ComboboxPositioner`, and `ComboboxPopup` into a single styled element for the dropdown content.
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `sideOffset` | `number` | `6` | The offset distance from the anchor. |
-| `align` | `"start" \| "center" \| "end"` | `"start"` | The alignment relative to the anchor. |
-| `matchAnchorWidth` | `boolean` | `true` | Whether the popup width matches the anchor width. |
-| `positionerAnchor` | `React.RefObject<HTMLDivElement \| null>` | `-` | Ref passed to the positioner for custom anchoring. |
-| `className` | `string` | `-` | Additional CSS classes. |
-| `...props` | `BaseCombobox.PopupProps` | `-` | Passes all other props to the underlying `BaseCombobox.PopupProps`. |
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `sideOffset` | `number` | The offset distance from the anchor. |
+| `align` | `"start" \| "center" \| "end"` | The alignment relative to the anchor. |
+| `matchAnchorWidth` | `boolean` | Whether the popup width matches the anchor width. |
+| `positionerAnchor` | `React.RefObject<HTMLDivElement \| null>` | Ref passed to the positioner for custom anchoring. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `ComboboxPopup.Props` | Passes all other props to the underlying `ComboboxPopup.Props`. |
 
 ### ComboboxItemContent
 
 A high-level item component that combines the `Item` and `ItemIndicator` into a single styled element with configurable icon positioning.
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `indicatorPlacement` | `"start" \| "end" \| "none"` | `"start"` | The position of the indicator icon relative to the content. |
-| `indicatorIcon` | `React.ReactNode` | `<Check />` | The icon to render as the item indicator. |
-| `className` | `string` | `-` | Additional CSS classes. |
-| `...props` | `BaseCombobox.ItemProps` | `-` | Passes all other props to the underlying `BaseCombobox.ItemProps`. |
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `indicatorPlacement` | `"start" \| "end" \| "none"` | The position of the indicator icon relative to the content. |
+| `indicatorIcon` | `React.ReactNode` | The icon to render as the item indicator. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `ComboboxItem.Props` | Passes all other props to the underlying `ComboboxItem.Props`. |

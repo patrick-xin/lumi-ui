@@ -8,26 +8,18 @@ import {
   SelectTriggerGroup,
 } from "@/registry/ui/select";
 
-const fruits = [
-  { value: "apple", label: "Apple" },
-  { value: "banana", label: "Banana" },
-  { value: "blueberry", label: "Blueberry" },
-  { value: "grapes", label: "Grapes" },
-  { value: "pineapple", label: "Pineapple" },
-];
-
 export const SelectInputGroupDemo = () => {
   return (
-    <div className="grid grid-cols-2 gap-6 [&_span]:text-muted-foreground [&_span]:font-semibold [&_span]:text-xs">
+    <div className="grid grid-cols-2 gap-6">
       <div className="space-y-4">
         <div className="flex flex-col gap-2">
-          <span>Animate icon</span>
+          <span className="text-xs font-semibold">Animate icon</span>
           <Select items={fruits}>
             <SelectTriggerGroup
-              placeholder="Select a fruit"
               className="data-[popup-open]:[&_svg]:rotate-180"
+              placeholder="Select a fruit"
             />
-            <SelectContent>
+            <SelectContent alignItemWithTrigger>
               {fruits.map((fruit) => (
                 <SelectItemContent key={fruit.value} value={fruit.value}>
                   {fruit.label}
@@ -37,12 +29,12 @@ export const SelectInputGroupDemo = () => {
           </Select>
         </div>
         <div className="flex flex-col gap-2">
-          <span>Icon placement</span>
+          <span className="text-xs font-semibold">Icon placement</span>
           <Select items={fruits}>
             <SelectTriggerGroup
-              placeholder="Select a fruit"
-              indicatorPlacement="start"
               indicatorIcon={<ChevronsUpDownIcon />}
+              indicatorPlacement="start"
+              placeholder="Select a fruit"
             />
             <SelectContent>
               {fruits.map((fruit) => (
@@ -65,8 +57,8 @@ export const SelectInputGroupDemo = () => {
           </span>
           <Select items={fruits}>
             <SelectTriggerGroup
-              placeholder="Select a fruit"
               indicatorPlacement="start"
+              placeholder="Select a fruit"
             />
             <SelectContent alignItemWithTrigger>
               {fruits.map((fruit) => (
@@ -90,9 +82,9 @@ export const SelectInputGroupDemo = () => {
             <SelectContent alignItemWithTrigger>
               {fruits.map((fruit) => (
                 <SelectItemContent
+                  indicatorIcon={<CircleIcon />}
                   key={fruit.value}
                   value={fruit.value}
-                  indicatorIcon={<CircleIcon />}
                 >
                   {fruit.label}
                 </SelectItemContent>
@@ -104,3 +96,11 @@ export const SelectInputGroupDemo = () => {
     </div>
   );
 };
+
+const fruits = [
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+  { label: "Blueberry", value: "blueberry" },
+  { label: "Grapes", value: "grapes" },
+  { label: "Pineapple", value: "pineapple" },
+];

@@ -1,13 +1,13 @@
 "use client";
 
-import { ChevronsUpDownIcon } from "lucide-react";
+import { ChevronsUpDownIcon, SearchIcon } from "lucide-react";
 import { buttonVariants } from "@/registry/ui/button";
 import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
   ComboboxIcon,
-  ComboboxInput,
+  ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
   ComboboxTrigger,
@@ -17,12 +17,12 @@ import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupDemo() {
   return (
-    <Combobox items={teamMembers} defaultValue={teamMembers[0]}>
+    <Combobox defaultValue={teamMembers[0]} items={teamMembers}>
       <ComboboxTrigger
         className={buttonVariants({
-          variant: "outline",
           className:
             "justify-between px-3 w-64 data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent",
+          variant: "outline",
         })}
       >
         <ComboboxValue />
@@ -31,16 +31,16 @@ export function ComboboxInputInsidePopupDemo() {
         </ComboboxIcon>
       </ComboboxTrigger>
       <ComboboxContent>
-        <ComboboxInput placeholder="Find member..." variant="ghost" />
+        <ComboboxInputGroup
+          addonIcon={<SearchIcon />}
+          placeholder="Find member..."
+          variant="ghost"
+        />
         <Separator />
         <ComboboxEmpty>No member found.</ComboboxEmpty>
         <ComboboxList>
           {(member: TeamMember) => (
-            <ComboboxItemContent
-              indicatorPlacement="end"
-              key={member.id}
-              value={member}
-            >
+            <ComboboxItemContent key={member.id} value={member}>
               {member.label}
             </ComboboxItemContent>
           )}
@@ -58,10 +58,10 @@ interface TeamMember {
 }
 
 const teamMembers: TeamMember[] = [
-  { id: "1", value: "alex.d", role: "Product", label: "Alex Davis" },
-  { id: "2", value: "sarah.k", role: "Engineering", label: "Sarah King" },
-  { id: "3", value: "james.w", role: "Design", label: "James Wilson" },
-  { id: "4", value: "maria.g", role: "Marketing", label: "Maria Garcia" },
-  { id: "5", value: "david.c", role: "Engineering", label: "David Chen" },
-  { id: "6", value: "emma.r", role: "Product", label: "Emma Roberts" },
+  { id: "1", label: "Alex Davis", role: "Product", value: "alex.d" },
+  { id: "2", label: "Sarah King", role: "Engineering", value: "sarah.k" },
+  { id: "3", label: "James Wilson", role: "Design", value: "james.w" },
+  { id: "4", label: "Maria Garcia", role: "Marketing", value: "maria.g" },
+  { id: "5", label: "David Chen", role: "Engineering", value: "david.c" },
+  { id: "6", label: "Emma Roberts", role: "Product", value: "emma.r" },
 ];

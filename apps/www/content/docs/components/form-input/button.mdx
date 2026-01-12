@@ -41,32 +41,10 @@ import { Button } from "@/components/ui/button"
 ```
 
 ## Variants
+<ComponentPreview name="button-variants" />
 
-### Default
-<ComponentPreview name="button-default" />
-
-### Outline
-<ComponentPreview name="button-outline" />
-
-### Secondary
-<ComponentPreview name="button-secondary" />
-
-### Glow
-<ComponentPreview name="button-glow" />
-
-### Ghost
-<ComponentPreview name="button-ghost" />
-
-### Destructive
-<ComponentPreview name="button-destructive" />
-
-### Link
-<ComponentPreview name="button-link" />
-
-## Size
-<ComponentPreview name="button-size" />
-
-<ComponentPreview name="button-icon" />
+## Sizes
+<ComponentPreview name="button-sizes" />
 
 ## Rounded
 
@@ -75,10 +53,21 @@ Use the `rounded-full` class to make the button rounded.
 <ComponentPreview name="button-rounded" />
 
 ## With Icon
-
 The spacing between the icon and the text is automatically adjusted based on the size of the button. You do not need any margin on the icon.
 
 <ComponentPreview name="button-with-icon" />
+
+## State
+
+### Focus
+<ComponentPreview name="button-focus" />
+
+### Disabled
+<ComponentPreview name="button-disabled" />
+
+### Loading
+<ComponentPreview name="button-loading" />
+
 
 ## Cookbook
 
@@ -135,58 +124,13 @@ If you want to keep the `cursor: pointer` behavior, add the following code to yo
 }
 ```
 
-
-
 ## API Reference
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `variant` | `default` \| `destructive` \| `outline` \| `secondary` \| `ghost` \| `link` | `default` | The visual style of the button. |
-| `size` | `default` \| `sm` \| `lg` \| `icon` \| `icon-sm` \| `icon-lg` | `default` | The size of the button. `icon-*` variants are square. |
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `variant` | `default` \| `destructive` \| `outline` \| `secondary` \| `ghost` \| `link` \| `glow` \| `undstyled` | The visual style of the button. |
+| `size` | `default` \| `sm` \| `lg` \| `icon` \| `icon-sm` \| `icon-lg` \| `icon-xs` | The size of the button. `icon-*` variants are square. |
 | `isLoading` | `boolean` | `false` | Sets the button to a visual loading state, disables interaction, but maintains keyboard focusability. |
-| `className` | `string` | - | **Strict string only.** Function-based class names are disabled to ensure compatibility with Tailwind merge utilities. |
-| [`render`](https://base-ui.com/react/components/button#Button-render) | `ReactElement` | - | Replaces the underlying HTML element. |
-|  [`nativeButton`](https://base-ui.com/react/components/button#Button-nativeButton) | `boolean` | `true` | When `false`, the button will be rendered as another tag. |
-|  [`focusableWhenDisabled`](https://base-ui.com/react/components/button#Button-focusableWhenDisabled) | `boolean` | `false` | Whether the button should be focusable when disabled. |
-
-
-## Migration Example
-
-<Tabs defaultValue="shadcn/ui">
-  <TabsList>
-    <TabsTab value="shadcn/ui">shadcn/ui</TabsTab>
-    <TabsTab value="lumi/ui">lumi/ui</TabsTab>
-  </TabsList>
-
-  <TabsPanel value="shadcn/ui">
-    ```tsx title="button-demo.tsx"
-    import Link from "next/link"
-    import {
-      Button,
-    } from "@/components/ui/button"
-
-    function ButtonDemo() {
-      return (
-        <Button asChild>
-          <Link href="/login">Login</Link>
-        </Button>
-      );
-    }
-  ```
-  </TabsPanel>
-
-  <TabsPanel value="lumi/ui">
-  ```tsx title="button-demo.tsx" {6}
-  import Link from "next/link";
-  import { Button } from "@/components/ui/button";
-
-  function ButtonDemo() {
-    return (
-      <Button render={<Link href="/login" />} nativeButton={false}>
-        Login
-      </Button>
-    );
-  }
-  ```
-  </TabsPanel>
-</Tabs>
+| [`render`](https://base-ui.com/react/components/button#Button-render) | `ReactElement` | Replaces the underlying HTML element. |
+|  [`nativeButton`](https://base-ui.com/react/components/button#Button-nativeButton) | `boolean` | When `false`, the button will be rendered as another tag. |
+|  [`focusableWhenDisabled`](https://base-ui.com/react/components/button#Button-focusableWhenDisabled) | `boolean` | Whether the button should be focusable when disabled. |

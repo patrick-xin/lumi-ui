@@ -26,13 +26,11 @@ export function ComboboxMultipleSelectDemo() {
                   {language.value}
                 </ComboboxChip>
               ))}
-
               <ComboboxInputGroup
+                // remove flex-1 will make input always appear in new line, see Async Items (Multiple) example below
                 className="flex-1"
                 inputSize="lg"
-                // variant="ghost" will strip out basic styles
                 placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
-                // remove flex-1 will make input always appear in new line, see Async Items (Multiple) example below
                 showClear
                 showTrigger
                 variant="ghost"

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
+import { Button } from "@/registry/ui/button";
 
 export function SiteFooter() {
   return (
@@ -8,9 +9,13 @@ export function SiteFooter() {
         <div className="flex flex-wrap justify-center items-center gap-6 text-muted-foreground">
           <span className="gap-2 flex items-center text-center text-xs">
             <span className="inline-flex items-center gap-2">
-              <Link href="/">
+              <Button
+                nativeButton={false}
+                render={<Link href="/" />}
+                variant={"unstyled"}
+              >
                 <Logo className="size-10" />
-              </Link>
+              </Button>
               <span>© {new Date().getFullYear()}</span>
             </span>
           </span>

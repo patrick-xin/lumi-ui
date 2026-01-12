@@ -1,6 +1,6 @@
 "use client";
 
-import { SearchIcon } from "lucide-react";
+import { CheckCheckIcon } from "lucide-react";
 import {
   Combobox,
   ComboboxContent,
@@ -10,22 +10,24 @@ import {
   ComboboxList,
 } from "@/registry/ui/combobox";
 
-export function ComboboxClearTriggerDemo() {
+export function ComboboxIndicatorDemo() {
   return (
     <Combobox items={frameworks}>
       <ComboboxInputGroup
-        addonIcon={<SearchIcon />}
-        className="w-48"
-        id="select-framework"
+        aria-label="Choose a framework"
+        className="w-52"
         placeholder="e.g. Next.js"
-        showClear
-        showTrigger
       />
       <ComboboxContent>
         <ComboboxEmpty>No framework found.</ComboboxEmpty>
         <ComboboxList>
           {(item: string) => (
-            <ComboboxItemContent key={item} value={item}>
+            <ComboboxItemContent
+              indicatorIcon={<CheckCheckIcon className="text-green-700" />}
+              indicatorPlacement="end"
+              key={item}
+              value={item}
+            >
               {item}
             </ComboboxItemContent>
           )}
