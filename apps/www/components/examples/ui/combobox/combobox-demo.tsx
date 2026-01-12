@@ -1,5 +1,6 @@
 "use client";
 
+import { CircleAlert } from "lucide-react";
 import {
   Combobox,
   ComboboxContent,
@@ -14,7 +15,7 @@ export function ComboboxDemo() {
     <Combobox items={frameworks}>
       <ComboboxInputGroup
         aria-label="Choose a framework"
-        className="w-48"
+        className="w-52"
         placeholder="e.g. Next.js"
       />
       <ComboboxContent>
@@ -22,7 +23,8 @@ export function ComboboxDemo() {
         <ComboboxList>
           {(item: string) => (
             <ComboboxItemContent
-              disabled={item === "React"}
+              indicatorIcon={<CircleAlert />}
+              indicatorPlacement="end"
               key={item}
               value={item}
             >

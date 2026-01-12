@@ -1,11 +1,12 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/registry/ui/button";
+import * as React from "react";
 import { AlertDialog as BaseAlertDialog } from "@base-ui/react/alert-dialog";
+import { popupVariants, viewportVariants } from "@/registry/ui/dialog";
+import { buttonVariants } from "@/registry/ui/button";
+
+import { cn } from "@/lib/utils";
 import { type VariantProps } from "class-variance-authority";
-import type * as React from "react";
-import { popupVariants, viewportVariants } from "./dialog";
 
 function AlertDialog<Payload>({
   ...props

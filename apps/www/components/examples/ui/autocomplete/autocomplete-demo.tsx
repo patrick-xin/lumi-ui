@@ -1,5 +1,6 @@
 "use client";
 
+import { SearchIcon } from "lucide-react";
 import {
   Autocomplete,
   AutocompleteContent,
@@ -8,15 +9,18 @@ import {
   AutocompleteItem,
   AutocompleteList,
 } from "@/registry/ui/autocomplete";
-import { Label } from "@/registry/ui/label";
 
 export function AutocompleteDemo() {
   return (
     <Autocomplete items={tags}>
-      <Label className="flex flex-col gap-2 items-start">
-        Search tags
-        <AutocompleteInputGroup placeholder="e.g. feature" />
-      </Label>
+      <AutocompleteInputGroup
+        addonIcon={<SearchIcon />}
+        aria-label="Search framework"
+        className="w-52"
+        placeholder="e.g. Next.js"
+        showClear
+        showTrigger
+      />
 
       <AutocompleteContent>
         <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
@@ -38,18 +42,13 @@ interface Tag {
 }
 
 const tags: Tag[] = [
-  { id: "t1", value: "feature" },
-  { id: "t2", value: "fix" },
-  { id: "t3", value: "bug" },
-  { id: "t4", value: "docs" },
-  { id: "t5", value: "internal" },
-  { id: "t6", value: "mobile" },
-  { id: "c-accordion", value: "component: accordion" },
-  { id: "c-alert-dialog", value: "component: alert dialog" },
-  { id: "c-autocomplete", value: "component: autocomplete" },
-  { id: "c-filterable-menu", value: "component: filterable menu" },
-  { id: "c-toggle", value: "component: toggle" },
-  { id: "c-toggle-group", value: "component: toggle group" },
-  { id: "c-toolbar", value: "component: toolbar" },
-  { id: "c-tooltip", value: "component: tooltip" },
+  { id: "next-js", value: "Next.js" },
+  { id: "react", value: "React" },
+  { id: "vue", value: "Vue" },
+  { id: "svelte", value: "Svelte" },
+  { id: "svelteKit", value: "SvelteKit" },
+  { id: "angular", value: "Angular" },
+  { id: "solid", value: "Solid" },
+  { id: "qwik", value: "Qwik" },
+  { id: "remix", value: "Remix" },
 ];

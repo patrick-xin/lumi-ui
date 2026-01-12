@@ -203,7 +203,7 @@ type SelectTriggerGroupProps = Omit<
   React.ComponentProps<typeof BaseSelect.Trigger>,
   "children"
 > & {
-  size?: "default" | "sm";
+  size?: "default" | "sm" | "lg";
   indicatorIcon?: React.ReactNode;
   indicatorPlacement?: "start" | "end";
   placeholder?: string;
@@ -223,15 +223,14 @@ function SelectTriggerGroup({
     <BaseSelect.Trigger
       data-size={size}
       className={cn(
-        "group flex items-center gap-2 min-w-32 bg-transparent dark:bg-input/30 dark:hover:bg-input/50 ",
-        "rounded-md border border-input py-2 text-sm shadow-xs transition-[color,box-shadow]",
-        "outline-none focus-visible:border-ring/30 focus-visible:ring-1 focus-visible:ring-ring/10 focus-visible:ring-offset-1 focus-visible:ring-offset-ring/20",
-        "data-popup-open:border-ring/30 data-popup-open:ring-1 data-popup-open:ring-ring/10 data-popup-open:ring-offset-1 data-popup-open:ring-offset-ring/20",
+        "group flex items-center gap-2 min-w-32 bg-transparent dark:bg-input/30 dark:hover:bg-input/50",
+        "rounded-md border border-input py-1.5 text-sm shadow-xs transition-[color,box-shadow]",
+        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
         "data-[invalid]:border-destructive data-[invalid]:ring-destructive/20 dark:data-[invalid]:ring-destructive/40",
         "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
         "dark:data-[popup-open]:bg-input/50",
-        "data-[size=default]:h-9 data-[size=sm]:h-8",
-        indicatorPlacement === "start" ? "px-2" : "px-3",
+        "data-[size=default]:h-9 data-[size=sm]:h-8 data-[size=lg]:h-10",
+         indicatorPlacement === "start" ? "pl-1" : "pl-2 pr-1",
         className,
       )}
       {...props}
@@ -243,18 +242,16 @@ function SelectTriggerGroup({
       >
         {children}
       </BaseSelect.Value>
-      {
-        <BaseSelect.Icon
+      <BaseSelect.Icon
           data-slot="select-icon"
           className={cn(
-            "flex-none shrink-0 pointer-events-none",
-            "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:opacity-50 [&_svg]:transition-all",
+            "flex-none shrink-0 pointer-events-none size-6 flex items-center justify-center",
+            "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:transition-all",
             indicatorPlacement === "start" && "-order-1",
           )}
         >
           {indicatorIcon || <ChevronDownIcon />}
         </BaseSelect.Icon>
-      }
     </BaseSelect.Trigger>
   );
 }
@@ -287,7 +284,7 @@ function SelectContent({
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md",
             "overflow-hidden",
-            "outline outline-1 outline-border dark:-outline-offset-1",
+            "outline-1 outline-border dark:-outline-offset-1",
             "max-h-[var(--available-height)]  min-w-[var(--anchor-width)]",
             "animate-popup",
             "data-[side=none]:data-[ending-style]:transition-none data-[side=none]:data-[starting-style]:transition-none data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100 data-[side=none]:min-w-[calc(var(--anchor-width)+0.3rem)]",

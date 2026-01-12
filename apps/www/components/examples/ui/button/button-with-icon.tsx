@@ -3,7 +3,7 @@ import { Button } from "@/registry/ui/button";
 
 export function ButtonWithIcon() {
   return (
-    <Button variant="outline" size="sm">
+    <Button size="sm" variant="outline">
       <GitBranch /> New Branch
     </Button>
   );

@@ -73,19 +73,19 @@ const Icons = {
 
 const toastVariants = cva(
   // Custom styles, change the look of the toast
-  "rounded-md outline-1 shadow-lg transition-all select-none bg-popover text-popover-foreground dark:-outline-offset-1",
+  "rounded-md outline-1 shadow-lg transition-all select-none dark:-outline-offset-1",
   {
     variants: {
       type: {
-        default: "outline-border",
+        default: "outline-border bg-popover text-popover-foreground",
         success:
-          "outline-green-500/40 bg-green-50 text-green-900 dark:bg-green-950 dark:text-green-50",
+          "outline-green-500/40 bg-green-50 text-green-900 dark:bg-green-950 dark:text-green-200",
         error:
-          "outline-red-500/40 bg-red-50 text-red-900 dark:bg-red-950 dark:text-red-50",
+          "outline-red-500/40 bg-red-50 text-red-900 dark:bg-red-950 dark:text-red-200",
         warning:
-          "outline-yellow-500/40 bg-yellow-50 text-yellow-900 dark:bg-yellow-950 dark:text-yellow-50",
-        info: "outline-sky-500/40 bg-sky-50 text-sky-900 dark:bg-sky-950 dark:text-sky-50",
-        loading: "outline-border",
+          "outline-yellow-500/40 bg-yellow-50 text-yellow-900 dark:bg-yellow-950 dark:text-yellow-200",
+        info: "outline-sky-500/40 bg-sky-50 text-sky-900 dark:bg-sky-950 dark:text-sky-200",
+        loading: "outline-border bg-popover text-popover-foreground",
       },
     },
     defaultVariants: {

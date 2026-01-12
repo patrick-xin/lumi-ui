@@ -16,10 +16,10 @@ export function ButtonLoading() {
 
   return (
     <Button
+      className="w-28"
+      isLoading={isLoading}
       onClick={handleLoading}
       variant="outline"
-      isLoading={isLoading}
-      className="w-28"
     >
       {isLoading && <Loader2 className="animate-spin size-4" />}
       {isLoading ? "Loading..." : "Submit"}
