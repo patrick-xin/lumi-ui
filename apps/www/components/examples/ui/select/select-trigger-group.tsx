@@ -8,7 +8,7 @@ import {
   SelectTriggerGroup,
 } from "@/registry/ui/select";
 
-export const SelectInputGroupDemo = () => {
+export const SelectTriggerGroupDemo = () => {
   return (
     <div className="grid grid-cols-2 gap-6">
       <div className="space-y-4">
@@ -19,7 +19,7 @@ export const SelectInputGroupDemo = () => {
               className="data-[popup-open]:[&_svg]:rotate-180"
               placeholder="Select a fruit"
             />
-            <SelectContent alignItemWithTrigger>
+            <SelectContent>
               {fruits.map((fruit) => (
                 <SelectItemContent key={fruit.value} value={fruit.value}>
                   {fruit.label}
