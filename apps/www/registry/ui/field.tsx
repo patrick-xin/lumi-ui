@@ -93,7 +93,7 @@ function FieldError({
   return (
     <BaseField.Error
       data-slot="field-error"
-      className={cn("text-sm font-medium text-destructive text-balance", className)}
+      className={cn("text-sm text-destructive text-balance", className)}
       {...props}
     />
   );
