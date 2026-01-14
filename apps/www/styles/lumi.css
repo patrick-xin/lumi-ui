@@ -1,5 +1,5 @@
 @utility animate-popup {
-  @apply origin-[var(--transform-origin)] transition-[opacity,scale,translate] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)];
+  @apply origin-[var(--transform-origin)] transition-[opacity,scale,transform] ease-[cubic-bezier(0.23,1,0.32,1)] duration-150;
 
   &[data-starting-style],
   &[data-ending-style] {

@@ -230,7 +230,7 @@ function SelectTriggerGroup({
         "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
         "dark:data-[popup-open]:bg-input/50",
         "data-[size=default]:h-9 data-[size=sm]:h-8 data-[size=lg]:h-10",
-         indicatorPlacement === "start" ? "pl-1" : "pl-2 pr-1",
+        indicatorPlacement === "start" ? "pl-1" : "pl-3 pr-1",
         className,
       )}
       {...props}
@@ -282,11 +282,9 @@ function SelectContent({
         <BaseSelect.Popup
           data-slot="select-content"
           className={cn(
-            "bg-popover text-popover-foreground rounded-md shadow-md",
-            "overflow-hidden",
-            "outline-1 outline-border dark:-outline-offset-1",
-            "max-h-[var(--available-height)]  min-w-[var(--anchor-width)]",
-            "animate-popup",
+            "bg-popover text-popover-foreground rounded-md shadow-md overflow-hidden",
+            "outline-1 outline-border dark:-outline-offset-1 animate-popup",
+            "[&:not([data-side=none])]:max-h-[var(--available-height)] min-w-[var(--anchor-width)]",
             "data-[side=none]:data-[ending-style]:transition-none data-[side=none]:data-[starting-style]:transition-none data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100 data-[side=none]:min-w-[calc(var(--anchor-width)+0.3rem)]",
             className,
           )}

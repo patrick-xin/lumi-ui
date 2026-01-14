@@ -18,7 +18,11 @@ const fruits = [
 export function SelectDemo() {
   return (
     <Select items={fruits}>
-      <SelectTriggerGroup placeholder="Select a fruit" size="lg" />
+      <SelectTriggerGroup
+        className="w-48"
+        placeholder="Select a fruit"
+        size="lg"
+      />
       <SelectContent>
         {fruits.map((fruit) => (
           <SelectItemContent key={fruit.value} value={fruit.value}>

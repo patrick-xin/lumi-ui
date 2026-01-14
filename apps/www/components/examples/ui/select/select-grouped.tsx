@@ -9,24 +9,6 @@ import {
   SelectTriggerGroup,
 } from "@/registry/ui/select";
 
-const fruits = [
-  { value: "apple", label: "Apple" },
-  { value: "banana", label: "Banana" },
-  { value: "blueberry", label: "Blueberry" },
-];
-
-const vegetables = [
-  { value: "carrot", label: "Carrot" },
-  { value: "broccoli", label: "Broccoli" },
-  { value: "spinach", label: "Spinach" },
-];
-
-const proteins = [
-  { value: "chicken", label: "Chicken" },
-  { value: "beef", label: "Beef" },
-  { value: "tofu", label: "Tofu" },
-];
-
 export function SelectGroupedDemo() {
   return (
     <Select items={[...fruits, ...vegetables, ...proteins]}>
@@ -60,3 +42,21 @@ export function SelectGroupedDemo() {
     </Select>
   );
 }
+
+const fruits = [
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+  { label: "Blueberry", value: "blueberry" },
+];
+
+const vegetables = [
+  { label: "Carrot", value: "carrot" },
+  { label: "Broccoli", value: "broccoli" },
+  { label: "Spinach", value: "spinach" },
+];
+
+const proteins = [
+  { label: "Chicken", value: "chicken" },
+  { label: "Beef", value: "beef" },
+  { label: "Tofu", value: "tofu" },
+];

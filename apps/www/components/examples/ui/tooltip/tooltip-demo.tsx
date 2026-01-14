@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/registry/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip";
 

@@ -3,11 +3,11 @@
 import type { TooltipRootChangeEventDetails } from "@base-ui/react";
 import { InfoIcon } from "lucide-react";
 import * as React from "react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
   createTooltipHandle,
   Tooltip,
-  TooltipArrow,
   TooltipPopup,
   TooltipPortal,
   TooltipPositioner,
@@ -34,31 +34,31 @@ export default function TooltipControlledDemo() {
       <div className="flex gap-2 flex-wrap justify-center">
         <div className="flex gap-2">
           <TooltipTrigger
+            handle={demoTooltip}
+            id="trigger-1"
             render={
-              <Button variant="outline" size="icon">
+              <Button size="icon" variant="outline">
                 <InfoIcon aria-label="Information 1" className="size-5" />
               </Button>
             }
-            handle={demoTooltip}
-            id="trigger-1"
           />
           <TooltipTrigger
+            handle={demoTooltip}
+            id="trigger-2"
             render={
-              <Button variant="outline" size="icon">
+              <Button size="icon" variant="outline">
                 <InfoIcon aria-label="Information 2" className="size-5" />
               </Button>
             }
-            handle={demoTooltip}
-            id="trigger-2"
           />
           <TooltipTrigger
+            handle={demoTooltip}
+            id="trigger-3"
             render={
-              <Button variant="outline" size="icon">
+              <Button size="icon" variant="outline">
                 <InfoIcon aria-label="Information 3" className="size-5" />
               </Button>
             }
-            handle={demoTooltip}
-            id="trigger-3"
           />
         </div>
         <Button
@@ -72,32 +72,18 @@ export default function TooltipControlledDemo() {
       </div>
       <Tooltip
         handle={demoTooltip}
-        open={open}
         onOpenChange={handleOpenChange}
+        open={open}
         triggerId={triggerId}
       >
         <TooltipPortal>
-          <TooltipPositioner
-            className="
-              h-(--positioner-height)
-              w-(--positioner-width)
-              max-w-(--available-width)
-            "
-            sideOffset={10}
-          >
+          <TooltipPositioner sideOffset={10}>
             <TooltipPopup
-              className="
-                px-2 py-1 bg-foreground text-background
-                rounded-md
-                text-sm
-                origin-(--transform-origin)
-                transition-[transform,scale,opacity]
-                data-ending-style:opacity-0 data-ending-style:scale-90
-                data-instant:transition-none
-                data-starting-style:opacity-0 data-starting-style:scale-90"
+              className={cn(
+                "bg-popover text-popover-foreground w-fit rounded-md px-3 py-1.5 text-xs text-balance animate-popup data-instant:transition-none",
+              )}
             >
-              <TooltipArrow />
-              Controlled tooltip
+              hello from tooltip
             </TooltipPopup>
           </TooltipPositioner>
         </TooltipPortal>
