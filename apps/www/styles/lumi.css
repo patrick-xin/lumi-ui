@@ -9,24 +9,42 @@
 }
 
 @utility animate-fade-up {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.98;
-    translate: 0 0.5rem;
+    translate: 0 100%;
   }
 }
 
 @utility animate-fade-down {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.98;
-    translate: 0 -0.5rem;
+    translate: 0 -100%;
+  }
+}
+
+@utility animate-slide-left {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: 100% 0;
+  }
+}
+
+@utility animate-slide-right {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: -100% 0;
   }
 }
 

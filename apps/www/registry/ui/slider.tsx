@@ -134,8 +134,8 @@ function Slider({
             <BaseSlider.Thumb
               data-slot="slider-thumb"
               className={cn(
-                "border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-primary shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
-                "has-[:focus-visible]:outline"
+                "outline-border ring-ring/50 block size-4 shrink-0 rounded-full border bg-white transition-[color,box-shadow] hover:ring-4 disabled:pointer-events-none disabled:opacity-50",
+                "has-[:focus-visible]:ring-4 focus-visible:outline-primary"
               )}
               index={i}
               key={i}

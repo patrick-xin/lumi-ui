@@ -1,0 +1,201 @@
+---
+title: Sheet
+description: Extends the Dialog component to display content that complements the main content of the screen.
+links:
+  doc: https://base-ui.com/react/components/dialog
+  api: https://base-ui.com/react/components/dialog#api-reference
+status: new
+---
+
+<ComponentPreview name="sheet-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/sheet
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="sheet" title="sheet.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+Add the following utilities to your `globals.css`:
+
+```css
+@utility animate-fade-up {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: 0 100%;
+  }
+}
+
+@utility animate-fade-down {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: 0 -100%;
+  }
+}
+
+@utility animate-slide-left {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: 100% 0;
+  }
+}
+
+@utility animate-slide-right {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: -100% 0;
+  }
+}
+
+@utility animate-fade-zoom {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+@utility animate-fade {
+  @apply transition-all duration-200;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+```
+
+## Basic Usage
+```tsx
+import {
+  Sheet,
+  SheetClose,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
+export function SheetDemo() {
+  return (
+    <Sheet>
+      <SheetTrigger>Open Sheet</SheetTrigger>
+      <SheetContent showCloseButton>
+        <SheetHeader>
+          <SheetTitle>Are you absolutely sure?</SheetTitle>
+          <SheetDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </SheetDescription>
+        </SheetHeader>
+        <SheetFooter>
+          <SheetClose>Cancel</SheetClose>
+          <SheetClose>Continue</SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  );
+}
+```
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+```tsx
+<Sheet>
+  <SheetTrigger />
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle />
+      <SheetDescription />
+    </SheetHeader>
+    <SheetFooter>
+      <SheetClose />
+    </SheetFooter>
+  </SheetContent>
+</Sheet>
+```
+  </TabsPanel>
+  <TabsPanel value="primitive">
+```tsx
+<Sheet>
+  <SheetTrigger />
+  <SheetPortal>
+    <SheetBackdrop />
+    <SheetViewport>
+      <SheetPopup>
+        <SheetHeader>
+          <SheetTitle />
+          <SheetDescription />
+        </SheetHeader>
+        <SheetFooter>
+          <SheetClose />
+        </SheetFooter>
+      </SheetPopup>
+    </SheetViewport>
+  </SheetPortal>
+</Sheet>
+```
+  </TabsPanel>
+</Tabs>
+
+## Variants
+<ComponentPreview name="sheet-variants" />
+
+## API reference
+
+`Sheet` component uses [`Dialog`](/docs/components/overlays-dialogs/dialog) component under the hood, see [here](/docs/components/overlays-dialogs/dialog#api-reference) for details 
+
+### Composite Components
+
+| Component | Description |
+| :--- | :--- |
+| `SheetContent` | **Standard usage**. Groups Portal, Backdrop, Viewport, and Popup. |
+
+### SheetContent Side Variants
+
+| Variant | Description |
+| :--- | :--- |
+| `right` (default) | Sheet slides in from left. |
+| `left` | Sheet slides in from right. |
+| `top` | Sheet slides in from bottom. |
+| `bottom` | Sheet slides in from top. |
+| `inset` | Sheet detaches from viewport. |

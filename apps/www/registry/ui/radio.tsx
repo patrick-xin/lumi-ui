@@ -57,9 +57,9 @@ function Radio({
         "bg-transparent border-input text-primary dark:bg-input/30",
         "flex aspect-square size-4 shrink-0 items-center justify-center",
         "rounded-full border shadow-xs",
-        "transition-[color,box-shadow] outline-none",
-        "focus-visible:border-ring/30 focus-visible:ring-1 focus-visible:ring-ring/10 focus-visible:ring-offset-1 focus-visible:ring-offset-ring/5",
-        "aria-invalid:border-destructive/30 aria-invalid:ring-1 aria-invalid:ring-destructive/10 aria-invalid:ring-offset-1 aria-invalid:ring-offset-destructive/5",
+        "transition-[color,box-shadow]",
+        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10",
+        "aria-invalid:border-destructive aria-invalid:ring-4 aria-invalid:ring-destructive/10",
         "disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}

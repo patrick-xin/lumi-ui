@@ -39,7 +39,7 @@ const tabIndicatorVariants = cva(
         solid:
           "hidden pointer-events-none w-0 h-0 translate-x-0 -translate-y-0",
         underline:
-          "bg-foreground bottom-0 left-0 h-0.5 translate-x-(--active-tab-left) translate-y-0 data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:left-0 data-[orientation=vertical]:h-(--active-tab-height) data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:translate-x-0 data-[orientation=vertical]:top-(--active-tab-top) data-[orientation=vertical]:translate-y-0 data-[orientation=vertical]:-start-[calc(--spacing(1)-0.5px)]",
+          "bg-primary -bottom-0.5 left-0 h-0.5 translate-x-(--active-tab-left) translate-y-0 data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:left-0 data-[orientation=vertical]:h-(--active-tab-height) data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:translate-x-0 data-[orientation=vertical]:top-(--active-tab-top) data-[orientation=vertical]:translate-y-0 data-[orientation=vertical]:-start-[calc(--spacing(1)-0.5px)]",
       },
     },
   },
@@ -117,11 +117,11 @@ function TabsTab({
   return (
     <BaseTabs.Tab
       className={cn(
-        "relative z-[1] inline-flex items-center justify-center gap-1.5 outline-none",
+        "relative z-[1] inline-flex items-center justify-center gap-1.5",
         "rounded-md px-2 py-1",
         "text-sm font-medium text-nowrap whitespace-nowrap text-muted-foreground hover:text-foreground",
         "transition-colors duration-200 ease-in",
-        "focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
         "data-[active]:text-foreground",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
@@ -157,7 +157,11 @@ function TabsPanel({
 }: React.ComponentProps<typeof BaseTabs.Panel>) {
   return (
     <BaseTabs.Panel
-      className={cn("flex-1 outline-none", className)}
+      className={cn(
+        "flex-1 rounded-md",
+        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
+        className,
+      )}
       data-slot="tabs-panel"
       {...props}
     />

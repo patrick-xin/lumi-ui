@@ -1,5 +1,7 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar";
-import { Button } from "@/registry/ui/button";
+"use client";
+
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/registry/ui/button";
 import {
   PreviewCard,
   PreviewCardContent,
@@ -9,26 +11,29 @@ import {
 export function PreviewCardDemo() {
   return (
     <PreviewCard>
-      <PreviewCardTrigger
-        delay={100}
-        render={<Button variant="link">@nextjs</Button>}
-      />
-      <PreviewCardContent className="w-80" showArrow>
-        <div className="flex justify-between gap-4">
-          <Avatar>
-            <AvatarImage src="https://github.com/vercel.png" />
-            <AvatarFallback>VC</AvatarFallback>
-          </Avatar>
-          <div className="space-y-1">
-            <h4 className="text-sm font-semibold">@nextjs</h4>
-            <p className="text-sm">
-              The React Framework – created and maintained by @vercel.
-            </p>
-            <div className="text-muted-foreground text-xs">
-              Joined December 2021
-            </div>
-          </div>
-        </div>
+      <p className="max-w-64 text-base text-balance">
+        The principles of good{" "}
+        <PreviewCardTrigger
+          className={cn(buttonVariants({ variant: "link" }), "px-0 text-base")}
+          href="https://en.wikipedia.org/wiki/Typography"
+        >
+          typography
+        </PreviewCardTrigger>{" "}
+        remain into the digital age.
+      </p>
+      <PreviewCardContent>
+        <img
+          alt="Station Hofplein signage in Rotterdam, Netherlands"
+          className="block w-full rounded-sm"
+          height="300"
+          src="https://images.unsplash.com/photo-1619615391095-dfa29e1672ef?q=80&w=448&h=300"
+          width="448"
+        />
+        <p className="text-sm text-pretty">
+          <strong>Typography</strong> is the art and science of arranging type
+          to make written language clear, visually appealing, and effective in
+          communication.
+        </p>
       </PreviewCardContent>
     </PreviewCard>
   );

@@ -1,10 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { PreviewCard as BasePreviewCard } from "@base-ui/react/preview-card";
-import { ArrowSvg } from "@/registry/ui/arrow-svg";
-
+import type * as React from "react";
 import { cn } from "@/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 function PreviewCard({
   ...props
@@ -13,10 +12,39 @@ function PreviewCard({
 }
 
 function PreviewCardTrigger({
+  className,
   ...props
 }: React.ComponentProps<typeof BasePreviewCard.Trigger>) {
   return (
-    <BasePreviewCard.Trigger data-slot="preview-card-trigger" {...props} />
+    <BasePreviewCard.Trigger  className={cn(className)} data-slot="preview-card-trigger" {...props} />
+  );
+}
+
+function PreviewPortal({
+  ...props
+}: React.ComponentProps<typeof BasePreviewCard.Portal>) {
+  return <BasePreviewCard.Portal data-slot="preview-card-portal" {...props} />;
+}
+
+function PreviewBackdrop({
+  className,
+  ...props
+}: React.ComponentProps<typeof BasePreviewCard.Backdrop>) {
+  return (
+    <BasePreviewCard.Backdrop className={cn(className)} data-slot="preview-card-backdrop" {...props} />
+  );
+}
+
+function PreviewPositioner({
+  className,
+  ...props
+}: React.ComponentProps<typeof BasePreviewCard.Positioner>) {
+  return (
+    <BasePreviewCard.Positioner
+      className={cn(className)}
+      data-slot="preview-card-positioner"
+      {...props}
+    />
   );
 }
 
@@ -25,8 +53,29 @@ function PreviewCardPopup({
   ...props
 }: React.ComponentProps<typeof BasePreviewCard.Popup>) {
   return (
-    <BasePreviewCard.Popup data-slot="preview-card-popup"
-    className={cn("", className)} {...props} />
+    <BasePreviewCard.Popup
+      className={cn(className)}
+      data-slot="preview-card-popup"
+      {...props}
+    />
+  );
+}
+
+function PreviewCardArrow({
+  className,
+  ...props
+}: React.ComponentProps<typeof BasePreviewCard.Arrow>) {
+  return (
+    <BasePreviewCard.Arrow
+      className={cn(
+        "data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180",
+        className,
+      )}
+      data-slot="preview-card-arrow"
+      {...props}
+    >
+      <ArrowSvg />
+    </BasePreviewCard.Arrow>
   );
 }
 
@@ -45,21 +94,22 @@ function PreviewCardContent({
 }) {
   return (
     <BasePreviewCard.Portal data-slot="preview-card-portal">
-      <BasePreviewCard.Positioner align={align} sideOffset={sideOffset}>
+      <BasePreviewCard.Positioner
+        align={align}
+        data-slot="preview-card-positioner"
+        sideOffset={sideOffset}
+        
+      >
         <BasePreviewCard.Popup
-          data-slot="preview-card-content"
           className={cn(
             "bg-popover text-popover-foreground w-64 rounded-md p-4 shadow-md outline outline-border dark:-outline-offset-1",
             "animate-popup",
             className,
           )}
+          data-slot="preview-card-content"
           {...props}
         >
-          {showArrow && (
-            <BasePreviewCard.Arrow className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180">
-              <ArrowSvg />
-            </BasePreviewCard.Arrow>
-          )}
+          {showArrow && <PreviewCardArrow />}
           {children}
         </BasePreviewCard.Popup>
       </BasePreviewCard.Positioner>
@@ -67,5 +117,14 @@ function PreviewCardContent({
   );
 }
 
-
-export { PreviewCard, PreviewCardTrigger, PreviewCardContent };
+export {
+  PreviewCard,
+  PreviewCardTrigger,
+  PreviewPortal,
+  PreviewBackdrop,
+  PreviewPositioner,
+  PreviewCardPopup,
+  PreviewCardArrow,
+  // Composite component
+  PreviewCardContent,
+};
