@@ -49,3 +49,43 @@ import {
   </PreviewCardContent>
 </PreviewCard>
 ```
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+```tsx
+<PreviewCard>   
+  <PreviewCardTrigger />
+  <PreviewCardContent />
+</Select>
+```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+```tsx
+<PreviewCard>
+  <PreviewCardTrigger />
+  <PreviewCardPortal>
+    <PreviewCardBackdrop />
+    <PreviewCardPositioner>
+      <PreviewCardPopup>
+        <PreviewCardArrow />
+      </PreviewCardPopup>
+    </PreviewCardPositioner>
+  </PreviewCardPortal>
+</PreviewCard>
+```
+  </TabsPanel>
+</Tabs>
+
+## Cookbook
+
+`PreviewCardTrigger` renders `a` by default. Use render props to render other elements.
+
+<ComponentPreview name="preview-card-render" />

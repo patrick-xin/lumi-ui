@@ -162,7 +162,7 @@ const popupVariants = cva(
     variants: {
       layout: {
         center:
-          "relative grid w-full gap-4 shadow-lg max-w-lg rounded-lg animate-fade-up",
+          "relative grid w-full gap-4 shadow-lg max-w-lg rounded-lg animate-fade-zoom",
         "element-outside":
           "flex h-full w-full justify-center pointer-events-none p-0 bg-transparent outline-0 animate-fade",
         responsive: cn(

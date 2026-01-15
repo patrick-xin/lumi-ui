@@ -22,20 +22,22 @@ export function ContextMenuDemo() {
         Right click here
       </ContextMenuTrigger>
       <ContextMenuContent className="w-52">
-        <ContextMenuItem inset>
+        <ContextMenuItem variant="inset">
           Back
           <ContextMenuShortcut>⌘[</ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem inset disabled>
+        <ContextMenuItem disabled variant="inset">
           Forward
           <ContextMenuShortcut>⌘]</ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem inset>
+        <ContextMenuItem variant="inset">
           Reload
           <ContextMenuShortcut>⌘R</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuSub>
-          <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
+          <ContextMenuSubTrigger variant="inset">
+            More Tools
+          </ContextMenuSubTrigger>
           <ContextMenuSubContent className="w-44">
             <ContextMenuItem>Save Page...</ContextMenuItem>
             <ContextMenuItem>Create Shortcut...</ContextMenuItem>

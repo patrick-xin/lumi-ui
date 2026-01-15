@@ -11,7 +11,7 @@ function Textarea({ className, variant = "default", ...props }: TextareaProps) {
     <textarea
       data-slot="textarea"
       className={cn(
-        "bg-transparent w-full min-w-0 rounded-md shadow-xs border border-input transition-[color,box-shadow] outline-none cursor-text",
+        "bg-transparent w-full min-w-0 rounded-md shadow-xs border border-input transition-[color,box-shadow] cursor-text",
         "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
         "placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground",
         "disabled:cursor-not-allowed disabled:opacity-50",

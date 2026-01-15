@@ -125,7 +125,6 @@ export function DialogVariantsDemo() {
               }}
               render={<Button>Top</Button>}
             />
-
             <DialogTrigger
               handle={mainDialogHandle}
               payload={{

@@ -9,7 +9,7 @@ export function CheckboxControlledDemo() {
   return (
     <div className="space-y-4">
       <div className="text-xs font-mono">Accepted: {accepted.toString()}</div>
-      <Field name="terms" className="flex items-center gap-2">
+      <Field className="flex items-center gap-2" name="terms">
         <FieldLabel>
           <Checkbox
             checked={accepted}
