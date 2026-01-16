@@ -45,7 +45,8 @@
       "a11y": {
         "noSvgWithoutTitle": "warn",
         "useFocusableInteractive": "off",
-        "useSemanticElements": "warn"
+        "useSemanticElements": "warn",
+        "useValidAnchor": "warn"
       },
       "complexity": {
         "useLiteralKeys": "off"

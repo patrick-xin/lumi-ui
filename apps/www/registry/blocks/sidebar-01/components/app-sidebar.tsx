@@ -1,0 +1,183 @@
+import { ScrollArea } from "@/registry/ui/scroll-area";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/registry/ui/sidebar";
+import { SearchForm } from "@/registry/blocks/sidebar-01/components/search-form";
+import { VersionSwitcher } from "@/registry/blocks/sidebar-01/components/version-switcher";
+
+export const AppSidebar = () => {
+  return (
+    <Sidebar>
+      <SidebarHeader>
+        <VersionSwitcher
+          defaultVersion={data.versions[0]}
+          versions={data.versions}
+        />
+        <SearchForm />
+      </SidebarHeader>
+      <SidebarContent>
+        <ScrollArea noScrollBar>
+          {data.navMain.map((item) => (
+            <SidebarGroup key={item.title}>
+              <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {item.items.map((item) => (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton
+                        isActive={item.isActive}
+                        render={<a href={item.url}>{item.title}</a>}
+                      />
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          ))}
+        </ScrollArea>
+      </SidebarContent>
+
+      <SidebarFooter className="mt-auto">this is footer</SidebarFooter>
+    </Sidebar>
+  );
+};
+
+const data = {
+  navMain: [
+    {
+      items: [
+        {
+          title: "Installation",
+          url: "#",
+        },
+        {
+          title: "Project Structure",
+          url: "#",
+        },
+      ],
+      title: "Getting Started",
+      url: "#",
+    },
+    {
+      items: [
+        {
+          title: "Routing",
+          url: "#",
+        },
+        {
+          isActive: true,
+          title: "Data Fetching",
+          url: "#",
+        },
+        {
+          title: "Rendering",
+          url: "#",
+        },
+        {
+          title: "Caching",
+          url: "#",
+        },
+        {
+          title: "Styling",
+          url: "#",
+        },
+        {
+          title: "Optimizing",
+          url: "#",
+        },
+        {
+          title: "Configuring",
+          url: "#",
+        },
+        {
+          title: "Testing",
+          url: "#",
+        },
+        {
+          title: "Authentication",
+          url: "#",
+        },
+        {
+          title: "Deploying",
+          url: "#",
+        },
+        {
+          title: "Upgrading",
+          url: "#",
+        },
+        {
+          title: "Examples",
+          url: "#",
+        },
+      ],
+      title: "Building Your Application",
+      url: "#",
+    },
+    {
+      items: [
+        {
+          title: "Components",
+          url: "#",
+        },
+        {
+          title: "File Conventions",
+          url: "#",
+        },
+        {
+          title: "Functions",
+          url: "#",
+        },
+        {
+          title: "next.config.js Options",
+          url: "#",
+        },
+        {
+          title: "CLI",
+          url: "#",
+        },
+        {
+          title: "Edge Runtime",
+          url: "#",
+        },
+      ],
+      title: "API Reference",
+      url: "#",
+    },
+    {
+      items: [
+        {
+          title: "Accessibility",
+          url: "#",
+        },
+        {
+          title: "Fast Refresh",
+          url: "#",
+        },
+        {
+          title: "Next.js Compiler",
+          url: "#",
+        },
+        {
+          title: "Supported Browsers",
+          url: "#",
+        },
+        {
+          title: "Turbopack",
+          url: "#",
+        },
+      ],
+      title: "Architecture",
+      url: "#",
+    },
+  ],
+  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+};

@@ -61,6 +61,8 @@
     --code-foreground: var(--surface-foreground);
     --code-highlight: oklch(0.27 0 0);
     --code-number: oklch(0.72 0 0);
+
+    
   }
 
   [data-theme="celeste-light"] {

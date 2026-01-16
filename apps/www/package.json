@@ -22,7 +22,7 @@
     "registry:sync": "tsx scripts/registry-sync.ts"
   },
   "dependencies": {
-    "@base-ui/react": "^1.0.0",
+    "@base-ui/react": "^1.1.0",
     "@lumi-ui/ui": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "fumadocs-core": "^16.2.3",

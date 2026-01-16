@@ -194,6 +194,8 @@ function SheetContent({
   );
 }
 
+const createSheetHandle = BaseSheet.createHandle;
+
 export {
   Sheet,
   SheetTrigger,
@@ -206,6 +208,7 @@ export {
   SheetDescription,
   SheetFooter,
   SheetClose,
+  createSheetHandle,
   // Composite component
   SheetContent,
 };

@@ -1,5 +1,4 @@
 {
-  "extends": "@lumi-ui/tsconfig/next.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -7,13 +6,15 @@
       "fumadocs-mdx:collections/*": [".source/*"]
     }
   },
+  "exclude": ["node_modules"],
+  "extends": "@lumi-ui/tsconfig/next.json",
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.mjs",
-    ".next/dev/types/**/*.ts"
-  ],
-  "exclude": ["node_modules"]
+    ".next/dev/types/**/*.ts",
+    "components/app-sidebar-collapsible-sections"
+  ]
 }
