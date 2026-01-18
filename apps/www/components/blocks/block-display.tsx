@@ -23,16 +23,14 @@ interface BlockWrapperProps {
   block: Block;
 }
 
-export function BlockWrapper({ block }: BlockWrapperProps) {
-  const highlightedFilesPromise = getHighlightedFiles(block.files);
+export async function BlockWrapper({ block }: BlockWrapperProps) {
+  const highlightedFiles = await getHighlightedFiles(block.files);
 
   return (
     <BlockViewer
-      highlightedFiles={highlightedFilesPromise}
+      highlightedFiles={highlightedFiles}
       item={block}
       tree={block.tree}
-    >
-      <div />
-    </BlockViewer>
+    />
   );
 }
