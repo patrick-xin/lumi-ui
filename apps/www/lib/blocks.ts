@@ -27,7 +27,6 @@ const getMonorepoRoot = () => {
 
 const MONOREPO_ROOT = getMonorepoRoot();
 
-
 export async function getBlocks(category: string): Promise<Block[]> {
   const filteredBlocks = Object.values(components).filter(
     (item): item is RegistryEntry =>
@@ -105,7 +104,14 @@ export async function getBlocks(category: string): Promise<Block[]> {
   );
 }
 
-
+export async function getRegistryComponents(category: string): Promise<RegistryEntry[]> {
+  return Object.values(components).filter(
+    (item): item is RegistryEntry =>
+      item.type === "registry:component" &&
+      Array.isArray(item.categories) &&
+      item.categories.includes(category)
+  );
+}
 
 function buildTree(files: BlockFile[]): TreeNode[] {
   const root: TreeNode[] = [];

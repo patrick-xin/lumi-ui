@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { BlockWrapper } from "@/components/blocks/block-display";
 import { getBlocks } from "@/lib/blocks";
 import { registryBlockCategories } from "@/lib/categories";
@@ -21,7 +22,8 @@ interface PageProps {
 }
 
 export default async function BlocksPage({ params }: PageProps) {
-  const { categories } = await params;
+  const { categories, locale } = await params;
+  setRequestLocale(locale);
   const category = registryBlockCategories.find(
     (category) => category.slug === categories[0],
   );

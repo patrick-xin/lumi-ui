@@ -33,7 +33,7 @@ export function ComponentPreviewTabs({
         </div>
       </TabsPanel>
       <TabsPanel className="relative h-[420px]" value="code">
-        <div className="*:[figure]:h-[420px] *:[figure]:overflow-scroll *:[figure]:no-scrollbar">
+        <div className="grid w-full *:[figure]:h-[420px] *:[figure]:overflow-scroll *:[figure]:no-scrollbar">
           {source}
         </div>
       </TabsPanel>
