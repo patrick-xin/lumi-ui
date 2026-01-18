@@ -5,6 +5,28 @@ import type { RegistryEntry, RegistryFile } from "@/registry/__registry";
 import type { Block, BlockFile, TreeNode } from "@/types";
 import { rewriteRegistryImports } from "./rewrite-imports";
 
+// Get the monorepo root directory reliably
+const getMonorepoRoot = () => {
+  const currentDir = process.cwd();
+
+  // If we're in apps/www, go up two levels
+  if (currentDir.endsWith("apps/www") || currentDir.endsWith("apps\\www")) {
+    return path.resolve(currentDir, "../..");
+  }
+
+  // If we're already at the root (has both apps and packages folders)
+  const appsDir = path.join(currentDir, "apps");
+  const packagesDir = path.join(currentDir, "packages");
+  if (fs.existsSync(appsDir) && fs.existsSync(packagesDir)) {
+    return currentDir;
+  }
+
+  // Fallback: assume we need to go up two levels
+  return path.resolve(currentDir, "../..");
+};
+
+const MONOREPO_ROOT = getMonorepoRoot();
+
 
 export async function getBlocks(category: string): Promise<Block[]> {
   const filteredBlocks = Object.values(components).filter(
@@ -16,19 +38,31 @@ export async function getBlocks(category: string): Promise<Block[]> {
     filteredBlocks.map(async (block) => {
       const files = await Promise.all(
         block.files.map(async (file: RegistryFile) => {
-          let filePath = path.resolve(process.cwd(), file.path);
+          // Resolve file path relative to monorepo root
+          let filePath: string;
+
           if (file.path.startsWith("@lumi-ui/ui/")) {
+            // Handle @lumi-ui/ui/ imports
             filePath = path.resolve(
-              process.cwd(),
-              file.path.replace("@lumi-ui/ui/", "../../packages/ui/src/"),
+              MONOREPO_ROOT,
+              file.path.replace("@lumi-ui/ui/", "packages/ui/src/"),
             );
+          } else if (file.path.startsWith("../../packages/ui/src/")) {
+            // Handle relative paths from registry - remove the ../../ and resolve from monorepo root
+            filePath = path.resolve(MONOREPO_ROOT, file.path.replace("../../", ""));
+          } else {
+            // Default resolution from monorepo root
+            filePath = path.resolve(MONOREPO_ROOT, file.path);
           }
 
           let content = "";
+
           try {
             content = fs.readFileSync(filePath, "utf-8");
           } catch (e) {
             console.error(`Failed to read file ${filePath}`, e);
+            console.error(`Original file.path: ${file.path}`);
+            console.error(`Monorepo root: ${MONOREPO_ROOT}`);
           }
 
           // Determine relative path for target if not present
