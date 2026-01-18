@@ -1,9 +1,7 @@
 "use client";
 
 import type { DialogRootChangeEventDetails } from "@base-ui/react";
-import { ChevronLeft, ChevronRight, XIcon } from "lucide-react";
-import * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   createDialogHandle,
   Dialog,
@@ -13,7 +11,9 @@ import {
   DialogPortal,
   DialogTrigger,
   DialogViewport,
-} from "@/registry/ui/dialog";
+} from "@lumi-ui/ui/dialog";
+import { ChevronLeft, ChevronRight, XIcon } from "lucide-react";
+import * as React from "react";
 import { InfoMenu } from "./info-menu";
 import { ProfileCard } from "./profile-card";
 import { ShareMenu } from "./share-menu";

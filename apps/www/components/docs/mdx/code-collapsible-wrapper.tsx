@@ -1,15 +1,15 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleTrigger,
-} from "@/registry/ui/collapsible";
-import { Separator } from "@/registry/ui/separator";
+} from "@lumi-ui/ui/collapsible";
+import { Separator } from "@lumi-ui/ui/separator";
+import { ChevronDown } from "lucide-react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 export function CodeCollapsibleWrapper({
   className,

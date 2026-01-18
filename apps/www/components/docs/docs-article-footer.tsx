@@ -1,8 +1,8 @@
+import { Button } from "@lumi-ui/ui/button";
 import type { Item } from "fumadocs-core/page-tree";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
 
 interface DocsAritcleFooterProps {
   neighbours: {

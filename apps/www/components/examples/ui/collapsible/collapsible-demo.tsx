@@ -1,10 +1,10 @@
 import { ChevronRightIcon } from "lucide-react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleTrigger,
-} from "@/registry/ui/collapsible";
+} from "@lumi-ui/ui/collapsible";
 
 export default function CollapsibleDemo() {
   return (

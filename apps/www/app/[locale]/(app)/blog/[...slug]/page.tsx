@@ -24,9 +24,9 @@ export default async function BlogPost({
   const MDX = page.data.body;
 
   const formattedDate = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
     day: "numeric",
+    month: "long",
+    year: "numeric",
   }).format(new Date(page.data.date));
 
   return (

@@ -9,6 +9,7 @@ import { DocsToc } from "@/components/docs/toc";
 import { source } from "@/lib/source";
 import { absoluteUrl } from "@/lib/utils";
 import { mdxComponents } from "@/mdx-components";
+
 export const revalidate = false;
 export const dynamicParams = false;
 

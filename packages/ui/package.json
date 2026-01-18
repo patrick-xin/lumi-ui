@@ -29,6 +29,7 @@
     },
     "./lib/*": "./src/lib/*.ts",
     "./hooks/*": "./src/hooks/*.ts",
+    "./blocks/*": "./src/blocks/*",
     "./postcss.config": "./postcss.config.mjs",
     "./*": "./src/components/ui/*.tsx"
   }

@@ -2,7 +2,7 @@
 
 import { Plus } from "lucide-react";
 import * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Combobox,
   ComboboxChip,
@@ -13,15 +13,15 @@ import {
   ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
-} from "@/registry/ui/combobox";
+} from "@lumi-ui/ui/combobox";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogTitle,
-} from "@/registry/ui/dialog";
-import { Input } from "@/registry/ui/input";
+} from "@lumi-ui/ui/dialog";
+import { Input } from "@lumi-ui/ui/input";
 
 export default function ExampleCreatableCombobox() {
   const id = React.useId();

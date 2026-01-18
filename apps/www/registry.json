@@ -1,12 +1,11 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry.json",
   "homepage": "https://www.lumiui.dev/",
   "items": [
     {
       "dependencies": ["clsx", "tailwind-merge"],
       "files": [
         {
-          "path": "registry/lib/utils.ts",
+          "path": "../../packages/ui/src/lib/utils.ts",
           "type": "registry:lib"
         }
       ],
@@ -14,552 +13,747 @@
       "type": "registry:lib"
     },
     {
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "description": "A set of collapsible panels with headings.",
-      "files": [
-        {
-          "path": "registry/ui/accordion.tsx",
-          "type": "registry:ui"
-        }
-      ],
       "name": "accordion",
-      "registryDependencies": ["utils"],
       "title": "Accordion",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react"],
-      "description": "An easily stylable avatar component.",
-      "files": [
-        {
-          "path": "registry/ui/avatar.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "avatar",
-      "registryDependencies": ["utils"],
-      "title": "Avatar",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react"],
-      "description": "A dialog that requires user response to proceed.",
-      "files": [
-        {
-          "path": "registry/ui/alert-dialog.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "alert-dialog",
-      "registryDependencies": ["utils", "button"],
-      "title": "Alert Dialog",
-      "type": "registry:ui"
-    },
-    {
+      "description": "A set of collapsible panels with headings.",
+      "type": "registry:ui",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
         "lucide-react"
       ],
-      "description": "A popup that opens on top of the entire page.",
+      "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "registry/ui/dialog.tsx",
+          "path": "../../packages/ui/src/components/ui/accordion.tsx",
           "type": "registry:ui"
         }
-      ],
+      ]
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "description": "An easily stylable avatar component.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "title": "Alert Dialog",
+      "description": "A dialog that requires user response to proceed.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils", "@lumi-ui/button", "@lumi-ui/dialog"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "dialog",
-      "registryDependencies": ["utils", "button"],
       "title": "Dialog",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "description": "A component for toggling between related panels on the same page.",
+      "description": "A popup that opens on top of the entire page.",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": ["utils", "@lumi-ui/button"],
       "files": [
         {
-          "path": "registry/ui/tabs.tsx",
+          "path": "../../packages/ui/src/components/ui/dialog.tsx",
           "type": "registry:ui"
         }
-      ],
+      ]
+    },
+    {
       "name": "tabs",
-      "registryDependencies": ["utils"],
       "title": "Tabs",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react"],
-      "description": "A native scroll container with custom scrollbars.",
+      "description": "A component for toggling between related panels on the same page.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "registry/ui/scroll-area.tsx",
+          "path": "../../packages/ui/src/components/ui/tabs.tsx",
           "type": "registry:ui"
         }
-      ],
+      ]
+    },
+    {
       "name": "scroll-area",
-      "registryDependencies": ["utils"],
       "title": "Scroll Area",
-      "type": "registry:ui"
-    },
-    {
+      "description": "A native scroll container with custom scrollbars.",
+      "type": "registry:ui",
       "dependencies": ["@base-ui/react"],
-      "description": "An accessible popup anchored to a button.",
+      "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "registry/ui/popover.tsx",
+          "path": "../../packages/ui/src/components/ui/scroll-area.tsx",
           "type": "registry:ui"
         }
-      ],
+      ]
+    },
+    {
       "name": "popover",
-      "registryDependencies": ["utils", "arrow-svg"],
       "title": "Popover",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "A list of actions in a dropdown, enhanced with keyboard navigation.",
-      "files": [
-        {
-          "path": "registry/ui/dropdown-menu.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "dropdown-menu",
-      "registryDependencies": ["utils"],
-      "title": "Dropdown Menu",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "An input that suggests options as you type.",
-      "files": [
-        {
-          "path": "registry/ui/autocomplete.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "autocomplete",
-      "registryDependencies": ["utils"],
-      "title": "Autocomplete",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "description": "A native input element that automatically works with Field.",
-      "files": [
-        {
-          "path": "registry/ui/input.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "input",
-      "registryDependencies": ["utils"],
-      "title": "Autocomplete",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "description": "Displays a button or a component that looks like a button.",
-      "files": [
-        {
-          "path": "registry/ui/button.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "button",
-      "registryDependencies": ["utils"],
-      "title": "Button",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "An easily stylable checkbox component.",
-      "files": [
-        {
-          "path": "registry/ui/checkbox.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "checkbox",
-      "registryDependencies": ["utils"],
-      "title": "Checkbox",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react"],
-      "description": "A control that indicates whether a setting is on or off.",
-      "files": [
-        {
-          "path": "registry/ui/switch.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "switch",
-      "registryDependencies": ["utils"],
-      "title": "Switch",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "A common form component for choosing a predefined value in a dropdown menu.",
-      "files": [
-        {
-          "path": "registry/ui/select.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "select",
-      "registryDependencies": ["utils"],
-      "title": "Select",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": [
-        "@base-ui/react",
-        "lucide-react",
-        "class-variance-authority"
-      ],
-      "description": "A collection of links and menus for website navigation.",
-      "files": [
-        {
-          "path": "registry/ui/navigation-menu.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "navigation-menu",
-      "registryDependencies": ["utils"],
-      "title": "Navigation Menu",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["class-variance-authority"],
-      "description": "A collapsible panel controlled by a button.",
-      "files": [
-        {
-          "path": "registry/ui/collapsible.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "collapsible",
-      "registryDependencies": ["utils"],
-      "title": "Collapsible",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react"],
       "description": "An accessible popup anchored to a button.",
-      "files": [
-        {
-          "path": "registry/ui/preview-card.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "preview-card",
-      "registryDependencies": ["utils"],
-      "title": "Preview Card",
-      "type": "registry:ui"
-    },
-    {
+      "type": "registry:ui",
       "dependencies": ["@base-ui/react"],
-      "description": "Displays the status of a task that takes a long time.",
+      "registryDependencies": ["@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "registry/ui/progress.tsx",
+          "path": "../../packages/ui/src/components/ui/popover.tsx",
           "type": "registry:ui"
         }
-      ],
-      "name": "progress",
-      "registryDependencies": ["utils"],
-      "title": "Progress",
-      "type": "registry:ui"
+      ]
     },
     {
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "description": "A component that provides labeling and validation for form controls.",
-      "files": [
-        {
-          "path": "registry/ui/field.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "field",
-      "registryDependencies": ["utils", "separator"],
-      "title": "Field",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "description": "A native fieldset element with an easily stylable legend.",
-      "files": [
-        {
-          "path": "registry/ui/fieldset.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "fieldset",
-      "registryDependencies": ["utils"],
-      "title": "Field Set",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react"],
-      "description": "A native form element with consolidated error handling.",
-      "files": [
-        {
-          "path": "registry/ui/form.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "form",
-      "registryDependencies": ["utils"],
-      "title": "Form",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "An easily stylable radio button component.",
-      "files": [
-        {
-          "path": "registry/ui/radio.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "radio",
-      "registryDependencies": ["utils"],
-      "title": "Radio",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react"],
-      "description": "A popup that appears when an element is hovered or focused, showing a hint for sighted users.",
-      "files": [
-        {
-          "path": "registry/ui/tooltip.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "tooltip",
-      "registryDependencies": ["utils"],
-      "title": "Tooltip",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "description": "A two-state button that can be on or off.",
-      "files": [
-        {
-          "path": "registry/ui/toggle.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "toggle",
-      "registryDependencies": ["utils"],
-      "title": "Toggle",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "description": "Provides a shared state to a series of toggle buttons.",
-      "files": [
-        {
-          "path": "registry/ui/toggle-group.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "toggle-group",
-      "registryDependencies": ["toggle", "utils"],
-      "title": "Toggle Group",
-      "type": "registry:ui"
-    },
-    {
+      "name": "dropdown-menu",
+      "title": "Dropdown Menu",
+      "description": "A list of actions in a dropdown, enhanced with keyboard navigation.",
+      "type": "registry:ui",
       "dependencies": [
         "@base-ui/react",
         "lucide-react",
         "class-variance-authority"
       ],
-      "description": "Generates toast notifications.",
+      "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "registry/ui/toast.tsx",
+          "path": "../../packages/ui/src/components/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "autocomplete",
+      "title": "Autocomplete",
+      "description": "An input that suggests options as you type.",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["utils", "@lumi-ui/button", "@lumi-ui/input"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/autocomplete.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "title": "Input",
+      "description": "A native input element that automatically works with Field.",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "type": "registry:ui",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "title": "Button",
+      "description": "A button component that can be rendered as another tag or focusable when disabled.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/button.tsx",
           "type": "registry:ui"
         }
       ],
+      "registryDependencies": ["utils"]
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "description": "An easily stylable checkbox component.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "description": "A control that indicates whether a setting is on or off.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "title": "Select",
+      "description": "A common form component for choosing a predefined value in a dropdown menu.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "title": "Navigation Menu",
+      "description": "A collection of links and menus for website navigation.",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/navigation-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "title": "Collapsible",
+      "description": "A collapsible panel controlled by a button.",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["utils"],
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "preview-card",
+      "title": "Preview Card",
+      "description": "An accessible popup anchored to a button.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/preview-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "title": "Progress",
+      "description": "Displays the status of a task that takes a long time.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "title": "Field",
+      "description": "A component that provides labeling and validation for form controls.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["utils", "@lumi-ui/input"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "fieldset",
+      "title": "Field Set",
+      "description": "A native fieldset element with an easily stylable legend.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["utils", "@lumi-ui/separator"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/fieldset.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "form",
+      "title": "Form",
+      "description": "A native form element with consolidated error handling.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/form.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radio",
+      "title": "Radio",
+      "description": "An easily stylable radio button component.",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/radio.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip",
+      "description": "A popup that appears when an element is hovered or focused, showing a hint for sighted users.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "title": "Toggle",
+      "description": "A two-state button that can be on or off.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "title": "Toggle Group",
+      "description": "Provides a shared state to a series of toggle buttons.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["toggle", "utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/toggle-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "toast",
-      "registryDependencies": ["button", "utils"],
       "title": "Toast",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "description": "Provides a shared state to a series of checkboxes.",
+      "description": "Generates toast notifications.",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["@lumi-ui/button", "@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "registry/ui/checkbox-group.tsx",
+          "path": "../../packages/ui/src/components/ui/toast.tsx",
           "type": "registry:ui"
         }
-      ],
+      ]
+    },
+    {
       "name": "checkbox-group",
-      "registryDependencies": ["checkbox", "utils"],
       "title": "Checkbox Group",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react"],
-      "description": "An easily stylable range input.",
-      "files": [
-        {
-          "path": "registry/ui/slider.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "slider",
-      "registryDependencies": ["utils"],
-      "title": "Slider",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react"],
-      "description": "A separator element accessible to screen readers.",
-      "files": [
-        {
-          "path": "registry/ui/separator.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "separator",
-      "registryDependencies": ["utils"],
-      "title": "Separator",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "A numeric input element with increment and decrement buttons, and a scrub area.",
-      "files": [
-        {
-          "path": "registry/ui/number-field.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "number-field",
-      "registryDependencies": ["utils"],
-      "title": "Number Field",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react"],
-      "description": "A graphical display of a numeric value within a range.",
-      "files": [
-        {
-          "path": "registry/ui/meter.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "meter",
-      "registryDependencies": ["utils"],
-      "title": "Meter",
-      "type": "registry:ui"
-    },
-    {
+      "type": "registry:ui",
+      "description": "Provides a shared state to a series of checkboxes.",
       "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "description": "A container for grouping a set of buttons and controls.",
+      "registryDependencies": ["checkbox", "utils"],
       "files": [
         {
-          "path": "registry/ui/toolbar.tsx",
+          "path": "../../packages/ui/src/components/ui/checkbox-group.tsx",
           "type": "registry:ui"
         }
-      ],
+      ]
+    },
+    {
+      "name": "slider",
+      "title": "Slider",
+      "description": "An easily stylable range input.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "description": "A separator element accessible to screen readers.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "number-field",
+      "title": "Number Field",
+      "description": "A numeric input element with increment and decrement buttons, and a scrub area.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/number-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "meter",
+      "title": "Meter",
+      "description": "A graphical display of a numeric value within a range.",
+      "type": "registry:ui",
+      "registryDependencies": ["utils"],
+      "dependencies": ["@base-ui/react"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/meter.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "toolbar",
-      "registryDependencies": ["button", "utils"],
       "title": "Toolbar",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "A menu that appears at the pointer on right click or long press.",
+      "description": "A container for grouping a set of buttons and controls.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["@lumi-ui/button", "utils"],
       "files": [
         {
-          "path": "registry/ui/context-menu.tsx",
+          "path": "../../packages/ui/src/components/ui/toolbar.tsx",
           "type": "registry:ui"
         }
-      ],
+      ]
+    },
+    {
       "name": "context-menu",
-      "registryDependencies": ["utils"],
       "title": "Context Menu",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "An input combined with a list of predefined items to select.",
+      "description": "A menu that appears at the pointer on right click or long press.",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "registry/ui/combobox.tsx",
+          "path": "../../packages/ui/src/components/ui/context-menu.tsx",
           "type": "registry:ui"
         }
-      ],
+      ]
+    },
+    {
       "name": "combobox",
-      "registryDependencies": ["input", "utils"],
       "title": "Combobox",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "A menu bar providing commands and options for your application.",
+      "description": "An input combined with a list of predefined items to select.",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["@lumi-ui/input", "@lumi-ui/button", "utils"],
       "files": [
         {
-          "path": "registry/ui/menubar.tsx",
+          "path": "../../packages/ui/src/components/ui/combobox.tsx",
           "type": "registry:ui"
         }
-      ],
+      ]
+    },
+    {
       "name": "menubar",
-      "registryDependencies": ["menu", "utils"],
       "title": "Menubar",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": ["@base-ui/react", "lucide-react"],
-      "description": "Extends the Dialog component to display content that complements the main content of the screen.",
+      "description": "A menu bar providing commands and options for your application.",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": ["@lumi-ui/menu", "@lumi-ui/arrow-svg", "utils"],
       "files": [
         {
-          "path": "registry/ui/sheet.tsx",
+          "path": "../../packages/ui/src/components/ui/menubar.tsx",
           "type": "registry:ui"
         }
-      ],
+      ]
+    },
+    {
       "name": "sheet",
-      "registryDependencies": ["dialog", "utils"],
       "title": "Sheet",
-      "type": "registry:ui"
-    },
-    {
-      "dependencies": [""],
-      "description": "Arrow SVG component.",
+      "description": "Extends the Dialog component to display content that complements the main content of the screen.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": ["@lumi-ui/dialog", "@lumi-ui/button", "utils"],
       "files": [
         {
-          "path": "registry/ui/arrow-svg.tsx",
+          "path": "../../packages/ui/src/components/ui/sheet.tsx",
           "type": "registry:ui"
         }
-      ],
-      "name": "arrow-svg",
-      "registryDependencies": [""],
-      "title": "Arrow SVG",
-      "type": "registry:ui"
+      ]
     },
     {
-      "dependencies": [""],
-      "description": "A native textarea element.",
-      "files": [
-        {
-          "path": "registry/ui/textarea.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "name": "textarea",
+      "name": "resizable",
+      "title": "Resizable",
+      "description": "Accessible resizable panel groups and layouts with keyboard support.",
+      "type": "registry:ui",
+      "dependencies": ["react-resizable-panels", "lucide-react"],
       "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/resizable.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "arrow-svg",
+      "title": "Arrow SVG",
+      "description": "Arrow SVG component.",
+      "type": "registry:ui",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/arrow-svg.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "type": "registry:ui",
+      "dependencies": [],
+      "registryDependencies": [],
+      "description": "Renders an accessible label associated with controls.",
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "description": "App sidebar",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@lumi-ui/button",
+        "@lumi-ui/separator",
+        "@lumi-ui/sheet",
+        "@lumi-ui/tooltip",
+        "@lumi-ui/input",
+        "use-mobile",
+        "skeleton"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "files": [
+        {
+          "path": "../../packages/ui/src/hooks/use-mobile.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "name": "use-mobile",
+      "type": "registry:hook"
+    },
+    {
+      "name": "textarea",
       "title": "Textarea",
-      "type": "registry:ui"
+      "description": "A native textarea element.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "title": "Breadcrumb",
+      "description": "Displays the path to the current resource using a hierarchy of links.",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sidebar-01",
+      "categories": ["sidebar", "dashboard"],
+      "description": "A sidebar with submenus as dropdowns.",
+      "type": "registry:block",
+      "registryDependencies": [
+        "@lumi-ui/sidebar",
+        "@lumi-ui/breadcrumb",
+        "@lumi-ui/separator",
+        "@lumi-ui/scroll-area",
+        "@lumi-ui/dropdown-menu",
+        "@lumi-ui/label"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/page.tsx",
+          "target": "app/dashboard/page.tsx",
+          "type": "registry:page"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/search-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/version-switcher.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sidebar-03",
+      "categories": ["sidebar", "dashboard"],
+      "description": "A sidebar with submenus as dropdowns.",
+      "type": "registry:block",
+      "registryDependencies": [
+        "@lumi-ui/sidebar",
+        "@lumi-ui/breadcrumb",
+        "@lumi-ui/separator",
+        "@lumi-ui/scroll-area",
+        "@lumi-ui/dropdown-menu",
+        "@lumi-ui/label"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-03/page.tsx",
+          "target": "app/dashboard/page.tsx",
+          "type": "registry:page"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-03/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-03/components/search-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-03/components/version-switcher.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "dialog-01",
+      "categories": ["dialog", "dashboard"],
+      "description": "Nested dialogs with team management.",
+      "type": "registry:block",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "@lumi-ui/dialog",
+        "@lumi-ui/alert-dialog",
+        "@lumi-ui/dropdown-menu",
+        "@lumi-ui/button",
+        "@lumi-ui/select",
+        "@lumi-ui/toast",
+        "@lumi-ui/separator"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/blocks/dialog-01/page.tsx",
+          "target": "app/dashboard/page.tsx",
+          "type": "registry:page"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/dialog-01/components/team-management.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/dialog-01/components/member-card.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ],
   "name": "lumi-ui"

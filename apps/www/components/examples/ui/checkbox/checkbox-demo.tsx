@@ -1,5 +1,5 @@
-import { Checkbox } from "@/registry/ui/checkbox";
-import { Field, FieldLabel } from "@/registry/ui/field";
+import { Checkbox } from "@lumi-ui/ui/checkbox";
+import { Field, FieldLabel } from "@lumi-ui/ui/field";
 
 export function CheckboxDemo() {
   return (

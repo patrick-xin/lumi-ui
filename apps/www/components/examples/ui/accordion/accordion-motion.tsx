@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionSummary,
-} from "@/registry/ui/accordion";
+} from "@lumi-ui/ui/accordion";
 
 const items = [
   {

@@ -9,8 +9,8 @@ import {
   AlertDialogPortal,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/registry/ui/alert-dialog";
-import { Button } from "@/registry/ui/button";
+} from "@lumi-ui/ui/alert-dialog";
+import { Button } from "@lumi-ui/ui/button";
 
 export default function AlertDialogCustomDemo() {
   return (

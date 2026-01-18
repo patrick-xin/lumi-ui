@@ -2,7 +2,7 @@
 
 import type { DialogRootChangeEventDetails } from "@base-ui/react";
 import * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   createDialogHandle,
   Dialog,
@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/registry/ui/dialog";
+} from "@lumi-ui/ui/dialog";
 
 const demoDialog = createDialogHandle<number>();
 

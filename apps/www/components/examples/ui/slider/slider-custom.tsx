@@ -8,7 +8,7 @@ import {
   SliderRoot,
   SliderThumb,
   SliderTrack,
-} from "@/registry/ui/slider";
+} from "@lumi-ui/ui/slider";
 
 export function PriceRangeFilter() {
   const [values, setValues] = React.useState([250, 750]);

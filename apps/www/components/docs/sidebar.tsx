@@ -1,18 +1,18 @@
 "use client";
 
 import { Badge } from "@lumi-ui/ui/badge";
+import { Button } from "@lumi-ui/ui/button";
+import {
+  Collapsible,
+  CollapsiblePanel,
+  CollapsibleTrigger,
+} from "@lumi-ui/ui/collapsible";
+import { ScrollArea } from "@lumi-ui/ui/scroll-area";
 import { ChevronRight, ExternalLink, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { hasActiveChild, normalizeSidebarTree } from "@/lib/sidebar-utils";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
-import {
-  Collapsible,
-  CollapsiblePanel,
-  CollapsibleTrigger,
-} from "@/registry/ui/collapsible";
-import { ScrollArea } from "@/registry/ui/scroll-area";
 import type {
   DocRoot,
   SidebarFolderItem,

@@ -1,4 +1,4 @@
-import { Meter, MeterValue } from "@/registry/ui/meter";
+import { Meter, MeterValue } from "@lumi-ui/ui/meter";
 
 export default function ExampleMeter() {
   return (

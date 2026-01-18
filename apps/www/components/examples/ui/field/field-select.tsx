@@ -1,10 +1,10 @@
-import { Field, FieldDescription, FieldLabel } from "@/registry/ui/field";
+import { Field, FieldDescription, FieldLabel } from "@lumi-ui/ui/field";
 import {
   Select,
   SelectContent,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@/registry/ui/select";
+} from "@lumi-ui/ui/select";
 
 const fruits = [
   { label: "Apple", value: "apple" },

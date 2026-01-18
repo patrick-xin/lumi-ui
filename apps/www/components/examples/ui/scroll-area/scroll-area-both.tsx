@@ -1,4 +1,4 @@
-import { ScrollArea } from "@/registry/ui/scroll-area";
+import { ScrollArea } from "@lumi-ui/ui/scroll-area";
 
 export default function ScrollAreaBothDemo() {
   return (

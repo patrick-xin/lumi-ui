@@ -1,8 +1,8 @@
 "use client";
 
-import { Field, FieldItem, FieldLabel } from "@/registry/ui/field";
-import { Fieldset, FieldsetLegend } from "@/registry/ui/fieldset";
-import { Radio, RadioGroup } from "@/registry/ui/radio";
+import { Field, FieldItem, FieldLabel } from "@lumi-ui/ui/field";
+import { Fieldset, FieldsetLegend } from "@lumi-ui/ui/fieldset";
+import { Radio, RadioGroup } from "@lumi-ui/ui/radio";
 
 export function RadioGroupWithFieldDemo() {
   return (

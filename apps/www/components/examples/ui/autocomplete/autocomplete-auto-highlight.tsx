@@ -7,7 +7,7 @@ import {
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-} from "@/registry/ui/autocomplete";
+} from "@lumi-ui/ui/autocomplete";
 
 export function AutocompleteAutoHighlightDemo() {
   return (

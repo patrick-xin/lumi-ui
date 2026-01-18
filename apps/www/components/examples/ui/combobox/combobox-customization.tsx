@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Combobox,
   ComboboxContent,
@@ -20,14 +20,14 @@ import {
   ComboboxList,
   ComboboxTrigger,
   ComboboxValue,
-} from "@/registry/ui/combobox";
-import { Separator } from "@/registry/ui/separator";
+} from "@lumi-ui/ui/combobox";
+import { Separator } from "@lumi-ui/ui/separator";
 import {
   createTooltipHandle,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/registry/ui/tooltip";
+} from "@lumi-ui/ui/tooltip";
 
 const projectStatusTooltipHandle = createTooltipHandle();
 

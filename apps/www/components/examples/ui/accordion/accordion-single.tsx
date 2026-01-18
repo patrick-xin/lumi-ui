@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionSummary,
-} from "@/registry/ui/accordion";
+} from "@lumi-ui/ui/accordion";
 
 export default function AccordionSingleDemo() {
   return (

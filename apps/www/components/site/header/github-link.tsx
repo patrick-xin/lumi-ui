@@ -1,7 +1,7 @@
+import { Button } from "@lumi-ui/ui/button";
 import Link from "next/link";
 import { Icons } from "@/components/icons";
 import { siteConfig } from "@/lib/config";
-import { Button } from "@/registry/ui/button";
 
 export function GitHubLink() {
   return (

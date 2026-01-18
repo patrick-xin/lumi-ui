@@ -1,4 +1,4 @@
-import { Separator } from "@/registry/ui/separator";
+import { Separator } from "@lumi-ui/ui/separator";
 
 export function SeparatorDemo() {
   return (

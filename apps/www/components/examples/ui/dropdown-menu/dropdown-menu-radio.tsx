@@ -2,14 +2,14 @@
 
 import { ChevronDownIcon } from "lucide-react";
 import * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItemContent,
   DropdownMenuTrigger,
-} from "@/registry/ui/dropdown-menu";
+} from "@lumi-ui/ui/dropdown-menu";
 
 export function RadioItemsMenu() {
   const [sortBy, setSortBy] = React.useState("date");

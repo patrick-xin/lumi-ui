@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { CheckboxGroup, CheckboxGroupItem } from "@/registry/ui/checkbox-group";
-import { Label } from "@/registry/ui/label";
+import { CheckboxGroup, CheckboxGroupItem } from "@lumi-ui/ui/checkbox-group";
+import { Label } from "@lumi-ui/ui/label";
 
 const fruits = ["fuji-apple", "gala-apple", "granny-smith-apple"];
 

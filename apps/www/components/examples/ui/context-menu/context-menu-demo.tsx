@@ -13,7 +13,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from "@/registry/ui/context-menu";
+} from "@lumi-ui/ui/context-menu";
 
 export function ContextMenuDemo() {
   return (

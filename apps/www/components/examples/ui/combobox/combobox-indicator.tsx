@@ -8,7 +8,7 @@ import {
   ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
-} from "@/registry/ui/combobox";
+} from "@lumi-ui/ui/combobox";
 
 export function ComboboxIndicatorDemo() {
   return (

@@ -1,8 +1,8 @@
 "use client";
+import { Button } from "@lumi-ui/ui/button";
 import { PaletteIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Button } from "@/registry/ui/button";
 import { ColorPallete } from "./color-pallete";
 
 export const ApplyThemeButton = ({

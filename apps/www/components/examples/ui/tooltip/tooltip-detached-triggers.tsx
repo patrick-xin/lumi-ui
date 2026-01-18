@@ -1,14 +1,14 @@
 "use client";
 
 import { InfoIcon } from "lucide-react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   createTooltipHandle,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/registry/ui/tooltip";
+} from "@lumi-ui/ui/tooltip";
 
 const demoTooltip = createTooltipHandle();
 

@@ -78,7 +78,7 @@
           }
         }
       },
-      "includes": ["apps/www/components/docs/docs-actions.tsx"]
+      "includes": ["apps/www/components/docs/docs-actions.tsx", "**/*.json"]
     }
   ],
   "vcs": {

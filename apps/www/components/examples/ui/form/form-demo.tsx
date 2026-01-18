@@ -2,14 +2,14 @@
 
 import { Loader2 } from "lucide-react";
 import * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Field,
   FieldControl,
   FieldError,
   FieldLabel,
-} from "@/registry/ui/field";
-import { Form } from "@/registry/ui/form";
+} from "@lumi-ui/ui/field";
+import { Form } from "@lumi-ui/ui/form";
 
 export default function ExampleForm() {
   const [errors, setErrors] = React.useState({});

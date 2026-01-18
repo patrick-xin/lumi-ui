@@ -1,4 +1,4 @@
-import { Slider, SliderValue } from "@/registry/ui/slider";
+import { Slider, SliderValue } from "@lumi-ui/ui/slider";
 
 export function RangeSliderDemo() {
   return (

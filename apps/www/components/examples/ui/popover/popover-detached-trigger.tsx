@@ -2,7 +2,7 @@
 
 import { BellIcon } from "lucide-react";
 import * as React from "react";
-import { buttonVariants } from "@/registry/ui/button";
+import { buttonVariants } from "@lumi-ui/ui/button";
 import {
   createPopoverHandle,
   Popover,
@@ -10,7 +10,7 @@ import {
   PopoverDescription,
   PopoverTitle,
   PopoverTrigger,
-} from "@/registry/ui/popover";
+} from "@lumi-ui/ui/popover";
 
 const demoPopover = createPopoverHandle();
 

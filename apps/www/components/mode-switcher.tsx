@@ -1,9 +1,9 @@
 "use client";
 
+import { Button } from "@lumi-ui/ui/button";
 import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
 import { AnimatePresence, motion } from "motion/react";
 import { useTheme } from "next-themes";
-import { Button } from "@/registry/ui/button";
 
 export function ModeSwitcher() {
   const { setTheme, resolvedTheme } = useTheme();

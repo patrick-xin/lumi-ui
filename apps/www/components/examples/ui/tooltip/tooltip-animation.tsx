@@ -1,8 +1,8 @@
 "use client";
 
 import { HelpCircleIcon, InfoIcon, OctagonAlert } from "lucide-react";
-import { ArrowSvg } from "@/registry/ui/arrow-svg";
-import { Button } from "@/registry/ui/button";
+import { ArrowSvg } from "@lumi-ui/ui/arrow-svg";
+import { Button } from "@lumi-ui/ui/button";
 import {
   createTooltipHandle,
   Tooltip,
@@ -13,7 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
   TooltipViewport,
-} from "@/registry/ui/tooltip";
+} from "@lumi-ui/ui/tooltip";
 
 const demoTooltip = createTooltipHandle<React.ComponentType>();
 

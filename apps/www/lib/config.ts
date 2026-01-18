@@ -15,5 +15,6 @@ export const siteConfig = {
       label: "Components",
     },
   ],
+  ogImage: "https://lumiui.dev/images/lumi-landing.png",
   url: "https://lumiui.dev",
 };

@@ -7,8 +7,8 @@ import {
   ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
-} from "@/registry/ui/combobox";
-import { Field, FieldDescription, FieldLabel } from "@/registry/ui/field";
+} from "@lumi-ui/ui/combobox";
+import { Field, FieldDescription, FieldLabel } from "@lumi-ui/ui/field";
 
 export function FieldComboBoxDemo() {
   return (

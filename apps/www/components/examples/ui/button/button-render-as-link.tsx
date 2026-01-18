@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 
 export function LinkAsButton() {
   return (

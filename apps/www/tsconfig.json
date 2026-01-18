@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "fumadocs-mdx:collections/*": [".source/*"]
+      "fumadocs-mdx:collections/*": [".source/*"],
+      "@lumi-ui/ui/*": ["../../packages/ui/src/*"]
     }
   },
   "exclude": ["node_modules"],

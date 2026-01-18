@@ -1,12 +1,12 @@
 "use client";
 
 import { Collapsible } from "@base-ui/react/collapsible";
+import { buttonVariants } from "@lumi-ui/ui/button";
+import { Separator } from "@lumi-ui/ui/separator";
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type * as React from "react";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/registry/ui/button";
-import { Separator } from "@/registry/ui/separator";
 
 export function CodeCollapsibleWrapper({
   className,

@@ -12,7 +12,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/registry/ui/navigation-menu";
+} from "@lumi-ui/ui/navigation-menu";
 
 const components: { title: string; href: string; description: string }[] = [
   {

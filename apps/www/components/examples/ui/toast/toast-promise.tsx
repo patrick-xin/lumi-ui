@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/registry/ui/button";
-import { toast } from "@/registry/ui/toast";
+import { Button } from "@lumi-ui/ui/button";
+import { toast } from "@lumi-ui/ui/toast";
 
 export function ToastPromiseDemo() {
   function runPromise() {

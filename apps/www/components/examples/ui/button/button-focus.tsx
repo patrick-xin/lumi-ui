@@ -1,4 +1,4 @@
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 
 export function ButtonFocus() {
   return (

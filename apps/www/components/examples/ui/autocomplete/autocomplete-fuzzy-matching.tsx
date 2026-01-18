@@ -10,7 +10,7 @@ import {
   AutocompleteItem,
   AutocompleteList,
   AutocompleteValue,
-} from "@/registry/ui/autocomplete";
+} from "@lumi-ui/ui/autocomplete";
 
 export function FuzzyMatchingAutocompleteDemo() {
   return (

@@ -1,4 +1,4 @@
-import { Radio, RadioGroup } from "@/registry/ui/radio";
+import { Radio, RadioGroup } from "@lumi-ui/ui/radio";
 
 export function RadioGroupDemo() {
   return (

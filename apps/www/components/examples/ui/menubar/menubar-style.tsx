@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Menubar,
   MenubarContent,
@@ -8,7 +8,7 @@ import {
   MenubarMenu,
   MenubarShortcut,
   MenubarTrigger,
-} from "@/registry/ui/menubar";
+} from "@lumi-ui/ui/menubar";
 
 export function MenubarStyleDemo() {
   return (
