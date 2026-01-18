@@ -2,7 +2,7 @@
 
 import type { VariantProps } from "class-variance-authority";
 import type * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   createDialogHandle,
   Dialog,
@@ -14,17 +14,17 @@ import {
   DialogTitle,
   DialogTrigger,
   type popupVariants,
-} from "@/registry/ui/dialog";
-import { Input } from "@/registry/ui/input";
-import { Label } from "@/registry/ui/label";
-import { ScrollArea } from "@/registry/ui/scroll-area";
+} from "@lumi-ui/ui/dialog";
+import { Input } from "@lumi-ui/ui/input";
+import { Label } from "@lumi-ui/ui/label";
+import { ScrollArea } from "@lumi-ui/ui/scroll-area";
 import {
   Select,
   SelectContent,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@/registry/ui/select";
-import { Textarea } from "@/registry/ui/textarea";
+} from "@lumi-ui/ui/select";
+import { Textarea } from "@lumi-ui/ui/textarea";
 
 type DialogLayout = VariantProps<typeof popupVariants>["layout"];
 

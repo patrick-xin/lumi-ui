@@ -12,8 +12,8 @@
   ],
   "files": [
     {
-      "path": "registry/ui/separator.tsx",
-      "content": "import * as React from \"react\";\nimport { Separator as BaseSeparator } from \"@base-ui/react/separator\";\n\nimport { cn } from \"@/lib/utils\";\n\nfunction Separator({\n  className,\n  orientation = \"horizontal\",\n  ...props\n}: React.ComponentProps<typeof BaseSeparator>) {\n  return (\n    <BaseSeparator\n      data-slot=\"separator\"\n      orientation={orientation}\n      className={cn(\n        \"bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Separator };\n",
+      "path": "../../packages/ui/src/components/ui/separator.tsx",
+      "content": "import * as React from \"react\";\nimport { Separator as BaseSeparator } from \"@base-ui/react/separator\";\n\nimport { cn } from \"@lumi-ui/ui/lib/utils\";\n\nfunction Separator({\n  className,\n  orientation = \"horizontal\",\n  ...props\n}: React.ComponentProps<typeof BaseSeparator>) {\n  return (\n    <BaseSeparator\n      data-slot=\"separator\"\n      orientation={orientation}\n      className={cn(\n        \"bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Separator };\n",
       "type": "registry:ui"
     }
   ]

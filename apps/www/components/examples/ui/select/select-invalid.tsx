@@ -1,12 +1,12 @@
 "use client";
 
-import { Field, FieldLabel } from "@/registry/ui/field";
+import { Field, FieldLabel } from "@lumi-ui/ui/field";
 import {
   Select,
   SelectContent,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@/registry/ui/select";
+} from "@lumi-ui/ui/select";
 
 export function SelectInvalidDemo() {
   return (

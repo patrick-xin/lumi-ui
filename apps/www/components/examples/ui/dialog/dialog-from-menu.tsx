@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -10,16 +10,16 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/registry/ui/dialog";
+} from "@lumi-ui/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/registry/ui/dropdown-menu";
-import { Input } from "@/registry/ui/input";
-import { Label } from "@/registry/ui/label";
+} from "@lumi-ui/ui/dropdown-menu";
+import { Input } from "@lumi-ui/ui/input";
+import { Label } from "@lumi-ui/ui/label";
 
 export function DialogFromMenuDemo() {
   const [dialogOpen, setDialogOpen] = React.useState(false);

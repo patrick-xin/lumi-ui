@@ -3,7 +3,7 @@ import {
   FieldControl,
   FieldDescription,
   FieldLabel,
-} from "@/registry/ui/field";
+} from "@lumi-ui/ui/field";
 
 export function FieldDemo() {
   return (

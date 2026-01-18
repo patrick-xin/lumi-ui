@@ -1,15 +1,15 @@
-import { ChevronDownIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { CopyPageButton } from "@/components/docs/copy-page-button";
-import { Icons } from "@/components/icons";
-import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/registry/ui/dropdown-menu";
+} from "@lumi-ui/ui/dropdown-menu";
+import { ChevronDownIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { CopyPageButton } from "@/components/docs/copy-page-button";
+import { Icons } from "@/components/icons";
+import { cn } from "@/lib/utils";
 
 function getPromptUrl(baseURL: string, url: string) {
   return `${baseURL}?q=${encodeURIComponent(

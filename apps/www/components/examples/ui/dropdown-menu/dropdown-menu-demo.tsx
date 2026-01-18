@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/registry/ui/dialog";
+} from "@lumi-ui/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItemContent,
@@ -37,7 +37,7 @@ import {
   DropdownMenuSubMenuContent,
   DropdownMenuSubMenuTriggerGroup,
   DropdownMenuTrigger,
-} from "@/registry/ui/dropdown-menu";
+} from "@lumi-ui/ui/dropdown-menu";
 
 export function DropdownMenuDemo() {
   const [showMinimap, setShowMinimap] = React.useState(true);

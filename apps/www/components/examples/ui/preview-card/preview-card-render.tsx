@@ -1,12 +1,12 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar";
-import { Button } from "@/registry/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@lumi-ui/ui/avatar";
+import { Button } from "@lumi-ui/ui/button";
 import {
   PreviewCard,
   PreviewCardContent,
   PreviewCardTrigger,
-} from "@/registry/ui/preview-card";
+} from "@lumi-ui/ui/preview-card";
 
 export function PreviewCardRenderDemo() {
   return (

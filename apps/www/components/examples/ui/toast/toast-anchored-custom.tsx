@@ -10,8 +10,8 @@ import {
   X,
 } from "lucide-react";
 import React from "react";
-import { Button } from "@/registry/ui/button";
-import { ToastClose, toast } from "@/registry/ui/toast";
+import { Button } from "@lumi-ui/ui/button";
+import { ToastClose, toast } from "@lumi-ui/ui/toast";
 
 export function CustomToastAnchoredDemo() {
   const buttonRef = React.useRef<HTMLButtonElement | null>(null);

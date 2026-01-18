@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   createDialogHandle,
   Dialog,
@@ -11,9 +11,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/registry/ui/dialog";
-import { Input } from "@/registry/ui/input";
-import { Label } from "@/registry/ui/label";
+} from "@lumi-ui/ui/dialog";
+import { Input } from "@lumi-ui/ui/input";
+import { Label } from "@lumi-ui/ui/label";
 
 type User = {
   id: number;

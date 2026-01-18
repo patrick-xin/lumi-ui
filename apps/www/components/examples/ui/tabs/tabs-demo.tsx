@@ -1,16 +1,16 @@
 import { BellIcon, CreditCardIcon, UserIcon } from "lucide-react";
-import { Button } from "@/registry/ui/button";
-import { Input } from "@/registry/ui/input";
-import { Label } from "@/registry/ui/label";
+import { Button } from "@lumi-ui/ui/button";
+import { Input } from "@lumi-ui/ui/input";
+import { Label } from "@lumi-ui/ui/label";
 import {
   Select,
   SelectContent,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@/registry/ui/select";
-import { Switch } from "@/registry/ui/switch";
-import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
-import { Textarea } from "@/registry/ui/textarea";
+} from "@lumi-ui/ui/select";
+import { Switch } from "@lumi-ui/ui/switch";
+import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@lumi-ui/ui/tabs";
+import { Textarea } from "@lumi-ui/ui/textarea";
 
 export function TabsDemo() {
   return (

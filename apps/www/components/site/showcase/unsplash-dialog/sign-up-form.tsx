@@ -1,15 +1,10 @@
 "use client";
 
+import { Button } from "@lumi-ui/ui/button";
+import { Field, FieldControl, FieldError, FieldLabel } from "@lumi-ui/ui/field";
+import { Form } from "@lumi-ui/ui/form";
+import { Input } from "@lumi-ui/ui/input";
 import * as React from "react";
-import { Button } from "@/registry/ui/button";
-import {
-  Field,
-  FieldControl,
-  FieldError,
-  FieldLabel,
-} from "@/registry/ui/field";
-import { Form } from "@/registry/ui/form";
-import { Input } from "@/registry/ui/input";
 
 export type IImage = {
   alt: string;

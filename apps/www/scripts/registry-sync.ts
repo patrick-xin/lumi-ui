@@ -3,21 +3,26 @@ import path from "node:path";
 
 interface RegistryItem {
   name: string;
+  description?: string;
   type: string;
   dependencies?: string[];
-  files?: Array<{ path: string; type: string }>;
+  files?: Array<{ path: string; target?: string; type: string }>;
+  categories?: string[];
 }
 
 interface PublicRegistryItem {
   $schema: string;
   name: string;
   type: string;
+  description?: string;
   dependencies?: string[];
   files: Array<{
     path: string;
     content: string;
     type: string;
+    target?: string;
   }>;
+  categories?: string[];
 }
 
 interface DemoFile {
@@ -263,7 +268,7 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
     const registryFiles =
       item.files?.map((file) => ({
         path: file.path,
-        target: "",
+        target: file.target ?? "",
         type: file.type,
       })) || [];
 
@@ -275,10 +280,10 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
     ) {
       const importPath =
         item.type === "registry:ui"
-          ? `@/registry/ui/${item.name}`
+          ? `@lumi-ui/ui/${item.name}`
           : item.type === "registry:lib"
-            ? `@/registry/lib/${item.name}`
-            : `@/registry/blocks/${item.name}`;
+            ? `@lumi-ui/ui/lib/${item.name}`
+            : `@lumi-ui/ui/blocks/${item.name}/page`;
 
       componentLazyLoad = `component: React.lazy(async () => {
       const mod = await import("${importPath}");
@@ -289,12 +294,13 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
 
     entries.push(`  "${item.name}": {
     name: "${item.name}",
-    description: "",
+    description: "${item.description ?? ""}",
     type: "${item.type}",
+    target: "${item.files?.[0].target ?? ""}",
     registryDependencies: ${item.dependencies && item.dependencies.length > 0 && item.dependencies[0] !== "" ? JSON.stringify(item.dependencies) : "undefined"},
     files: ${JSON.stringify(registryFiles, null, 6).replace(/^/gm, "    ")},
     ${componentLazyLoad}
-    categories: undefined,
+    categories: "${item.categories ?? ""}",
     meta: undefined,
   }`);
   }

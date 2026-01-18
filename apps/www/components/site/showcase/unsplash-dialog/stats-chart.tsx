@@ -1,12 +1,12 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/registry/ui/chart";
+} from "@lumi-ui/ui/chart";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 const chartConfig: ChartConfig = {
   downloads: {

@@ -2,7 +2,7 @@
 
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 
 export function ButtonLoading() {
   const [isLoading, setIsLoading] = useState(false);

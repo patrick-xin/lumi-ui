@@ -8,13 +8,13 @@ import {
   HelpCircle,
   XCircle,
 } from "lucide-react";
-import { cn } from "@/registry/lib/utils";
+import { cn } from "@lumi-ui/ui/lib/utils";
 import {
   Select,
   SelectContent,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@/registry/ui/select";
+} from "@lumi-ui/ui/select";
 
 export function SelectCustomRenderDemo() {
   return (

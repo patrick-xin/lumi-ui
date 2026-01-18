@@ -1,8 +1,8 @@
 "use client";
 import * as React from "react";
-import { Checkbox } from "@/registry/ui/checkbox";
-import { CheckboxGroup } from "@/registry/ui/checkbox-group";
-import { Label } from "@/registry/ui/label";
+import { Checkbox } from "@lumi-ui/ui/checkbox";
+import { CheckboxGroup } from "@lumi-ui/ui/checkbox-group";
+import { Label } from "@lumi-ui/ui/label";
 
 const mainPermissions = ["view-dashboard", "manage-users", "access-reports"];
 const userManagementPermissions = [

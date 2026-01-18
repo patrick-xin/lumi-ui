@@ -2,8 +2,8 @@
 
 import { BellIcon, ListIcon, UserIcon } from "lucide-react";
 import * as React from "react";
-import { Avatar, AvatarImage } from "@/registry/ui/avatar";
-import { Button, buttonVariants } from "@/registry/ui/button";
+import { Avatar, AvatarImage } from "@lumi-ui/ui/avatar";
+import { Button, buttonVariants } from "@lumi-ui/ui/button";
 import {
   createPopoverHandle,
   Popover,
@@ -15,7 +15,7 @@ import {
   PopoverTitle,
   PopoverTrigger,
   PopoverViewport,
-} from "@/registry/ui/popover";
+} from "@lumi-ui/ui/popover";
 
 const demoPopover = createPopoverHandle<React.ComponentType>();
 

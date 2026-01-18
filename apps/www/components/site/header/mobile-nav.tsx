@@ -1,5 +1,13 @@
 "use client";
 
+import { Button } from "@lumi-ui/ui/button";
+import {
+  Dialog,
+  DialogPopup,
+  DialogPortal,
+  DialogTrigger,
+} from "@lumi-ui/ui/dialog";
+import { ScrollArea } from "@lumi-ui/ui/scroll-area";
 import Link, { type LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -7,14 +15,6 @@ import { Logo } from "@/components/logo";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
-import {
-  Dialog,
-  DialogPopup,
-  DialogPortal,
-  DialogTrigger,
-} from "@/registry/ui/dialog";
-import { ScrollArea } from "@/registry/ui/scroll-area";
 import type { NavGroup } from "@/types";
 import { GitHubLink } from "./github-link";
 

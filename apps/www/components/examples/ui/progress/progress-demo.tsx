@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Progress } from "@/registry/ui/progress";
+import { Progress } from "@lumi-ui/ui/progress";
 
 export function ProgressDemo() {
   const [progress, setProgress] = React.useState(13);

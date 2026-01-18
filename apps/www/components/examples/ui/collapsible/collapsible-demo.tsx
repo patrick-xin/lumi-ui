@@ -1,10 +1,10 @@
-import type * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { ChevronRightIcon } from "lucide-react";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleTrigger,
-} from "@/registry/ui/collapsible";
+} from "@lumi-ui/ui/collapsible";
 
 export default function CollapsibleDemo() {
   return (
@@ -12,7 +12,7 @@ export default function CollapsibleDemo() {
       <CollapsibleTrigger
         render={
           <Button className="group justify-start">
-            <ChevronIcon className="size-3 transition-all ease-out group-data-panel-open:rotate-90" />
+            <ChevronRightIcon className="size-4 transition-all ease-out group-data-panel-open:rotate-90" />
             Recovery keys
           </Button>
         }
@@ -25,13 +25,5 @@ export default function CollapsibleDemo() {
         </div>
       </CollapsiblePanel>
     </Collapsible>
-  );
-}
-
-export function ChevronIcon(props: React.ComponentProps<"svg">) {
-  return (
-    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" {...props}>
-      <path d="M3.5 9L7.5 5L3.5 1" stroke="currentcolor" />
-    </svg>
   );
 }

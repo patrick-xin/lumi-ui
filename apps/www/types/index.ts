@@ -1,6 +1,7 @@
 import type { Folder, Item, Root, Separator } from "fumadocs-core/page-tree";
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
+import type { RegistryEntry } from "../registry/__registry";
 export type ComponentStatus = "planned" | "in-progress" | "new" | undefined;
 
 export type DocPageNode = Item & {
@@ -60,3 +61,30 @@ export type SidebarItem =
   | SidebarLinkItem
   | SidebarFolderItem
   | SidebarHeaderItem;
+
+/** A node in the file tree (folder or file) */
+export interface TreeNode {
+  name: string;
+  path: string;
+  children?: TreeNode[];
+}
+
+export interface BlockFile {
+  path: string;
+  type: string;
+  target: string;
+  content: string;
+}
+
+export interface Block extends Omit<RegistryEntry, "files" | "component"> {
+  files: BlockFile[];
+  tree: TreeNode[];
+}
+
+export type FileIconType =
+  | "typescript"
+  | "css"
+  | "json"
+  | "image"
+  | "markdown"
+  | "default";

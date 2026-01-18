@@ -1,10 +1,10 @@
-import { Field, FieldItem, FieldLabel } from "@/registry/ui/field";
+import { Field, FieldItem, FieldLabel } from "@lumi-ui/ui/field";
 import {
   Fieldset,
   FieldsetDescription,
   FieldsetLegend,
-} from "@/registry/ui/fieldset";
-import { Radio, RadioGroup } from "@/registry/ui/radio";
+} from "@lumi-ui/ui/fieldset";
+import { Radio, RadioGroup } from "@lumi-ui/ui/radio";
 
 export function FieldRadioGroupDemo() {
   return (

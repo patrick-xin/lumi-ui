@@ -1,4 +1,4 @@
-import { RadioGroup, RadioIndicator, RadioRoot } from "@/registry/ui/radio";
+import { RadioGroup, RadioIndicator, RadioRoot } from "@lumi-ui/ui/radio";
 
 export function RadioCustom() {
   return (

@@ -45,7 +45,8 @@
       "a11y": {
         "noSvgWithoutTitle": "warn",
         "useFocusableInteractive": "off",
-        "useSemanticElements": "warn"
+        "useSemanticElements": "warn",
+        "useValidAnchor": "warn"
       },
       "complexity": {
         "useLiteralKeys": "off"
@@ -77,7 +78,7 @@
           }
         }
       },
-      "includes": ["apps/www/components/docs/docs-actions.tsx"]
+      "includes": ["apps/www/components/docs/docs-actions.tsx", "**/*.json"]
     }
   ],
   "vcs": {

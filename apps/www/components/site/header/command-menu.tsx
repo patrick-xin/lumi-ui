@@ -1,15 +1,5 @@
 "use client";
 
-import { useIsMac } from "@lumi-ui/ui/hooks/use-is-mac";
-import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
-import { Kbd, KbdGroup } from "@lumi-ui/ui/kbd";
-import { ArrowDown, ArrowUp, CornerDownLeftIcon, Search } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { IconMap } from "@/lib/icons";
-import { getSearchGroups } from "@/lib/sidebar-utils";
-import { cn } from "@/lib/utils";
 import {
   Autocomplete,
   AutocompleteBackdrop,
@@ -23,10 +13,20 @@ import {
   AutocompletePopup,
   AutocompletePortal,
   AutocompletePositioner,
-} from "@/registry/ui/autocomplete";
-import { Button } from "@/registry/ui/button";
-import { ScrollArea } from "@/registry/ui/scroll-area";
-import { Separator } from "@/registry/ui/separator";
+} from "@lumi-ui/ui/autocomplete";
+import { Button } from "@lumi-ui/ui/button";
+import { useIsMac } from "@lumi-ui/ui/hooks/use-is-mac";
+import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
+import { Kbd, KbdGroup } from "@lumi-ui/ui/kbd";
+import { ScrollArea } from "@lumi-ui/ui/scroll-area";
+import { Separator } from "@lumi-ui/ui/separator";
+import { ArrowDown, ArrowUp, CornerDownLeftIcon, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import * as React from "react";
+import { IconMap } from "@/lib/icons";
+import { getSearchGroups } from "@/lib/sidebar-utils";
+import { cn } from "@/lib/utils";
 import type { DocRoot, NavGroup, NavItem } from "@/types";
 
 export function CommandMenu({ tree }: { tree: DocRoot }) {

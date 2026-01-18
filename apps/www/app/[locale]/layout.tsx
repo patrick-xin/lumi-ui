@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import "@/styles/globals.css";
+import { Toaster } from "@lumi-ui/ui/toast";
 import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/components/theme-provider";
 import { siteConfig } from "@/lib/config";
 import { fontVariables } from "@/lib/fonts";
 import { routing } from "@/lib/i18n/routing";
 import { cn } from "@/lib/utils";
-import { Toaster } from "@/registry/ui/toast";
 
 export const metadata: Metadata = {
   alternates: {

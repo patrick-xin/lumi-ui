@@ -1,5 +1,5 @@
-import { Field, FieldControl, FieldLabel } from "@/registry/ui/field";
-import { Fieldset, FieldsetLegend } from "@/registry/ui/fieldset";
+import { Field, FieldControl, FieldLabel } from "@lumi-ui/ui/field";
+import { Fieldset, FieldsetLegend } from "@lumi-ui/ui/fieldset";
 
 export function FieldsetDemo() {
   return (

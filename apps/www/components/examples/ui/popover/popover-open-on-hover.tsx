@@ -1,14 +1,14 @@
 "use client";
 
 import { BellIcon } from "lucide-react";
-import { buttonVariants } from "@/registry/ui/button";
+import { buttonVariants } from "@lumi-ui/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverDescription,
   PopoverTitle,
   PopoverTrigger,
-} from "@/registry/ui/popover";
+} from "@lumi-ui/ui/popover";
 
 export function PopoverOpenOnHoverDemo() {
   return (

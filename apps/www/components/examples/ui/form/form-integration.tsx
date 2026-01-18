@@ -8,10 +8,10 @@ import {
   AutocompleteInputGroup,
   AutocompleteItem,
   AutocompleteList,
-} from "@/registry/ui/autocomplete";
-import { Button } from "@/registry/ui/button";
-import { Checkbox } from "@/registry/ui/checkbox";
-import { CheckboxGroup } from "@/registry/ui/checkbox-group";
+} from "@lumi-ui/ui/autocomplete";
+import { Button } from "@lumi-ui/ui/button";
+import { Checkbox } from "@lumi-ui/ui/checkbox";
+import { CheckboxGroup } from "@lumi-ui/ui/checkbox-group";
 import {
   Combobox,
   ComboboxContent,
@@ -19,7 +19,7 @@ import {
   ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
-} from "@/registry/ui/combobox";
+} from "@lumi-ui/ui/combobox";
 import {
   Field,
   FieldControl,
@@ -27,21 +27,21 @@ import {
   FieldError,
   FieldItem,
   FieldLabel,
-} from "@/registry/ui/field";
-import { Fieldset, FieldsetLegend } from "@/registry/ui/fieldset";
-import { Form } from "@/registry/ui/form";
-import { NumberField } from "@/registry/ui/number-field";
-import { Radio, RadioGroup } from "@/registry/ui/radio";
+} from "@lumi-ui/ui/field";
+import { Fieldset, FieldsetLegend } from "@lumi-ui/ui/fieldset";
+import { Form } from "@lumi-ui/ui/form";
+import { NumberField } from "@lumi-ui/ui/number-field";
+import { Radio, RadioGroup } from "@lumi-ui/ui/radio";
 import {
   Select,
   SelectContent,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@/registry/ui/select";
-import { Separator } from "@/registry/ui/separator";
-import { Slider, SliderValue } from "@/registry/ui/slider";
-import { Switch } from "@/registry/ui/switch";
-import { ToastClose, toast } from "@/registry/ui/toast";
+} from "@lumi-ui/ui/select";
+import { Separator } from "@lumi-ui/ui/separator";
+import { Slider, SliderValue } from "@lumi-ui/ui/slider";
+import { Switch } from "@lumi-ui/ui/switch";
+import { ToastClose, toast } from "@lumi-ui/ui/toast";
 
 export function ProjectQuoteForm() {
   return (

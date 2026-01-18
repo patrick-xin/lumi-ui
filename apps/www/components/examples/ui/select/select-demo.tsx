@@ -5,7 +5,7 @@ import {
   SelectContent,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@/registry/ui/select";
+} from "@lumi-ui/ui/select";
 
 const fruits = [
   { label: "Apple", value: "apple" },

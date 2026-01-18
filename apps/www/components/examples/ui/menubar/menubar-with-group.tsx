@@ -8,7 +8,7 @@ import {
   MenubarSeparator,
   MenubarShortcut,
   MenubarTrigger,
-} from "@/registry/ui/menubar";
+} from "@lumi-ui/ui/menubar";
 
 export function MenubarWithGroupDemo() {
   return (

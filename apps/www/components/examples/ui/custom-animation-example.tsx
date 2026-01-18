@@ -1,5 +1,5 @@
-import { Button } from "@/registry/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@/registry/ui/popover";
+import { Button } from "@lumi-ui/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@lumi-ui/ui/popover";
 
 export const CustomAnimationExample = () => {
   return (

@@ -1,16 +1,16 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@lumi-ui/ui/avatar";
 
 export function AvatarDemo() {
   return (
     <div className="flex flex-row flex-wrap items-center gap-12">
       <Avatar>
-        <AvatarImage src="/images/lumi.png" alt="Lumi UI" />
+        <AvatarImage alt="Lumi UI" src="/images/lumi.png" />
         <AvatarFallback>Lumi UI</AvatarFallback>
       </Avatar>
       <Avatar className="rounded-lg">
         <AvatarImage
-          src="https://github.com/patrick-xin.png"
           alt="@patrick-xin"
+          src="https://github.com/patrick-xin.png"
         />
         <AvatarFallback>Patrick</AvatarFallback>
       </Avatar>

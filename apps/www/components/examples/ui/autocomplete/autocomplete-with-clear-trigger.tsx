@@ -11,7 +11,7 @@ import {
   AutocompleteItem,
   AutocompleteList,
   AutocompleteTrigger,
-} from "@/registry/ui/autocomplete";
+} from "@lumi-ui/ui/autocomplete";
 
 export default function AutocompleteWithClearTrigger() {
   const [inputValue, setInputValue] = React.useState("");

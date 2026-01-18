@@ -1,5 +1,5 @@
-import { Button } from "@/registry/ui/button";
-import { Input } from "@/registry/ui/input";
+import { Button } from "@lumi-ui/ui/button";
+import { Input } from "@lumi-ui/ui/input";
 
 export function InputWithButton() {
   return (

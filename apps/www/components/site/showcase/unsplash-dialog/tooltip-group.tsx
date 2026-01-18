@@ -1,8 +1,5 @@
 import type { DialogRootChangeEventDetails } from "@base-ui/react";
-import { BookmarkIcon, PlusIcon } from "lucide-react";
-import React from "react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   createDialogHandle,
   Dialog,
@@ -10,15 +7,18 @@ import {
   DialogPopup,
   DialogPortal,
   DialogTrigger,
-} from "@/registry/ui/dialog";
-import { toast } from "@/registry/ui/toast";
+} from "@lumi-ui/ui/dialog";
+import { toast } from "@lumi-ui/ui/toast";
 import {
   createTooltipHandle,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/registry/ui/tooltip";
+} from "@lumi-ui/ui/tooltip";
+import { BookmarkIcon, PlusIcon } from "lucide-react";
+import React from "react";
+import { cn } from "@/lib/utils";
 import type { IImage } from ".";
 import { LoginForm } from "./login-form";
 import { SignUpForm } from "./sign-up-form";

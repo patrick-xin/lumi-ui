@@ -1,7 +1,7 @@
+import { Button } from "@lumi-ui/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@lumi-ui/ui/popover";
+import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@lumi-ui/ui/tabs";
 import { InfoIcon } from "lucide-react";
-import { Button } from "@/registry/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@/registry/ui/popover";
-import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 import { StatsChart } from "./stats-chart";
 
 export const InfoMenu = () => {

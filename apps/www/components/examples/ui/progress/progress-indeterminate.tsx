@@ -1,14 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   ProgressIndicator,
   ProgressLabel,
   ProgressRoot,
   ProgressTrack,
   ProgressValue,
-} from "@/registry/ui/progress";
+} from "@lumi-ui/ui/progress";
 
 export function IndeterminateDemo() {
   const [isLoading, setIsLoading] = React.useState(false);

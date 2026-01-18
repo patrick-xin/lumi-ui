@@ -1,4 +1,4 @@
-import { Slider } from "@/registry/ui/slider";
+import { Slider } from "@lumi-ui/ui/slider";
 
 export function VerticalSliderDemo() {
   return (

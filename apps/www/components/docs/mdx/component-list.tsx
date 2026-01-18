@@ -1,9 +1,9 @@
+import { Separator } from "@lumi-ui/ui/separator";
 import Link from "next/link";
 import { FOLDERS_WITH_STATUS, NON_CLICKABLE_STATUSES } from "@/lib/constants";
 import { getTreeWithStatus } from "@/lib/get-tree-with-status";
 import { source } from "@/lib/source";
 import { cn } from "@/lib/utils";
-import { Separator } from "@/registry/ui/separator";
 import type { DocFolderNode, DocNode, DocPageNode } from "@/types";
 
 export function ComponentList({ locale }: { locale: "en" | "cn" }) {

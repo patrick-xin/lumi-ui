@@ -4,12 +4,12 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleTrigger,
-} from "@/registry/ui/collapsible";
+} from "@lumi-ui/ui/collapsible";
 
 export function CollapsibleWithMotionDemo() {
   const [open, setOpen] = useState(false);

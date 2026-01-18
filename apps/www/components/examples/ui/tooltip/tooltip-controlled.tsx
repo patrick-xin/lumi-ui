@@ -4,7 +4,7 @@ import type { TooltipRootChangeEventDetails } from "@base-ui/react";
 import { InfoIcon } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   createTooltipHandle,
   Tooltip,
@@ -13,7 +13,7 @@ import {
   TooltipPositioner,
   TooltipProvider,
   TooltipTrigger,
-} from "@/registry/ui/tooltip";
+} from "@lumi-ui/ui/tooltip";
 
 const demoTooltip = createTooltipHandle();
 

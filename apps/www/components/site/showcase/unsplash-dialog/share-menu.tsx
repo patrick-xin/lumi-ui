@@ -1,14 +1,6 @@
 "use client";
 
-import { useCopyToClipboard } from "@lumi-ui/ui/hooks/use-copy-to-clipboard";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkIcon,
-  ShareIcon,
-  TwitterIcon,
-} from "lucide-react";
-import { Button } from "@/registry/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,8 +9,16 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/registry/ui/dropdown-menu";
-import { toast } from "@/registry/ui/toast";
+} from "@lumi-ui/ui/dropdown-menu";
+import { useCopyToClipboard } from "@lumi-ui/ui/hooks/use-copy-to-clipboard";
+import { toast } from "@lumi-ui/ui/toast";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkIcon,
+  ShareIcon,
+  TwitterIcon,
+} from "lucide-react";
 
 export const ShareMenu = () => {
   const { copyToClipboard } = useCopyToClipboard();

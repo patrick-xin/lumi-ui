@@ -1,5 +1,5 @@
-import { Field, FieldLabel } from "@/registry/ui/field";
-import { Slider } from "@/registry/ui/slider";
+import { Field, FieldLabel } from "@lumi-ui/ui/field";
+import { Slider } from "@lumi-ui/ui/slider";
 
 export function EdgeAlignedSliderDemo() {
   return (

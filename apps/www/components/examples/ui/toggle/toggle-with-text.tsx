@@ -1,6 +1,6 @@
 import { Italic } from "lucide-react";
 
-import { Toggle } from "@/registry/ui/toggle";
+import { Toggle } from "@lumi-ui/ui/toggle";
 
 export function ToggleWithText() {
   return (
