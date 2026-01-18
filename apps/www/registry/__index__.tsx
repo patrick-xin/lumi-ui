@@ -10,6 +10,7 @@ import type { ComponentRegistry } from "./__registry";
 export const components: ComponentRegistry = {
   "utils": {
     name: "utils",
+    title: undefined,
     description: "",
     type: "registry:lib",
     target: "",
@@ -26,11 +27,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "utils";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "accordion": {
     name: "accordion",
+    title: "Accordion",
     description: "A set of collapsible panels with headings.",
     type: "registry:ui",
     target: "",
@@ -47,11 +49,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "accordion";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "avatar": {
     name: "avatar",
+    title: "Avatar",
     description: "An easily stylable avatar component.",
     type: "registry:ui",
     target: "",
@@ -68,11 +71,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "avatar";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "alert-dialog": {
     name: "alert-dialog",
+    title: "Alert Dialog",
     description: "A dialog that requires user response to proceed.",
     type: "registry:ui",
     target: "",
@@ -89,11 +93,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "alert-dialog";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "dialog": {
     name: "dialog",
+    title: "Dialog",
     description: "A popup that opens on top of the entire page.",
     type: "registry:ui",
     target: "",
@@ -110,11 +115,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "tabs": {
     name: "tabs",
+    title: "Tabs",
     description: "A component for toggling between related panels on the same page.",
     type: "registry:ui",
     target: "",
@@ -131,11 +137,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "scroll-area": {
     name: "scroll-area",
+    title: "Scroll Area",
     description: "A native scroll container with custom scrollbars.",
     type: "registry:ui",
     target: "",
@@ -152,11 +159,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "scroll-area";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "popover": {
     name: "popover",
+    title: "Popover",
     description: "An accessible popup anchored to a button.",
     type: "registry:ui",
     target: "",
@@ -173,11 +181,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "dropdown-menu": {
     name: "dropdown-menu",
+    title: "Dropdown Menu",
     description: "A list of actions in a dropdown, enhanced with keyboard navigation.",
     type: "registry:ui",
     target: "",
@@ -194,11 +203,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dropdown-menu";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "autocomplete": {
     name: "autocomplete",
+    title: "Autocomplete",
     description: "An input that suggests options as you type.",
     type: "registry:ui",
     target: "",
@@ -215,11 +225,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "autocomplete";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "input": {
     name: "input",
+    title: "Input",
     description: "A native input element that automatically works with Field.",
     type: "registry:ui",
     target: "",
@@ -236,11 +247,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "input";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "button": {
     name: "button",
+    title: "Button",
     description: "A button component that can be rendered as another tag or focusable when disabled.",
     type: "registry:ui",
     target: "",
@@ -257,11 +269,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "button";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "checkbox": {
     name: "checkbox",
+    title: "Checkbox",
     description: "An easily stylable checkbox component.",
     type: "registry:ui",
     target: "",
@@ -278,11 +291,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "checkbox";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "switch": {
     name: "switch",
+    title: "Switch",
     description: "A control that indicates whether a setting is on or off.",
     type: "registry:ui",
     target: "",
@@ -299,11 +313,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "switch";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "select": {
     name: "select",
+    title: "Select",
     description: "A common form component for choosing a predefined value in a dropdown menu.",
     type: "registry:ui",
     target: "",
@@ -320,11 +335,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "select";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "navigation-menu": {
     name: "navigation-menu",
+    title: "Navigation Menu",
     description: "A collection of links and menus for website navigation.",
     type: "registry:ui",
     target: "",
@@ -341,11 +357,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "navigation-menu";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "collapsible": {
     name: "collapsible",
+    title: "Collapsible",
     description: "A collapsible panel controlled by a button.",
     type: "registry:ui",
     target: "",
@@ -362,11 +379,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "collapsible";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "preview-card": {
     name: "preview-card",
+    title: "Preview Card",
     description: "An accessible popup anchored to a button.",
     type: "registry:ui",
     target: "",
@@ -383,11 +401,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "preview-card";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "progress": {
     name: "progress",
+    title: "Progress",
     description: "Displays the status of a task that takes a long time.",
     type: "registry:ui",
     target: "",
@@ -404,11 +423,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "progress";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "field": {
     name: "field",
+    title: "Field",
     description: "A component that provides labeling and validation for form controls.",
     type: "registry:ui",
     target: "",
@@ -425,11 +445,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "field";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "fieldset": {
     name: "fieldset",
+    title: "Field Set",
     description: "A native fieldset element with an easily stylable legend.",
     type: "registry:ui",
     target: "",
@@ -446,11 +467,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "fieldset";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "form": {
     name: "form",
+    title: "Form",
     description: "A native form element with consolidated error handling.",
     type: "registry:ui",
     target: "",
@@ -467,11 +489,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "form";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "radio": {
     name: "radio",
+    title: "Radio",
     description: "An easily stylable radio button component.",
     type: "registry:ui",
     target: "",
@@ -488,11 +511,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "radio";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "tooltip": {
     name: "tooltip",
+    title: "Tooltip",
     description: "A popup that appears when an element is hovered or focused, showing a hint for sighted users.",
     type: "registry:ui",
     target: "",
@@ -509,11 +533,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tooltip";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "toggle": {
     name: "toggle",
+    title: "Toggle",
     description: "A two-state button that can be on or off.",
     type: "registry:ui",
     target: "",
@@ -530,11 +555,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toggle";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "toggle-group": {
     name: "toggle-group",
+    title: "Toggle Group",
     description: "Provides a shared state to a series of toggle buttons.",
     type: "registry:ui",
     target: "",
@@ -551,11 +577,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toggle-group";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "toast": {
     name: "toast",
+    title: "Toast",
     description: "Generates toast notifications.",
     type: "registry:ui",
     target: "",
@@ -572,11 +599,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toast";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "checkbox-group": {
     name: "checkbox-group",
+    title: "Checkbox Group",
     description: "Provides a shared state to a series of checkboxes.",
     type: "registry:ui",
     target: "",
@@ -593,11 +621,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "checkbox-group";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "slider": {
     name: "slider",
+    title: "Slider",
     description: "An easily stylable range input.",
     type: "registry:ui",
     target: "",
@@ -614,11 +643,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "slider";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "separator": {
     name: "separator",
+    title: "Separator",
     description: "A separator element accessible to screen readers.",
     type: "registry:ui",
     target: "",
@@ -635,11 +665,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "separator";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "number-field": {
     name: "number-field",
+    title: "Number Field",
     description: "A numeric input element with increment and decrement buttons, and a scrub area.",
     type: "registry:ui",
     target: "",
@@ -656,11 +687,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "number-field";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "meter": {
     name: "meter",
+    title: "Meter",
     description: "A graphical display of a numeric value within a range.",
     type: "registry:ui",
     target: "",
@@ -677,11 +709,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "meter";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "toolbar": {
     name: "toolbar",
+    title: "Toolbar",
     description: "A container for grouping a set of buttons and controls.",
     type: "registry:ui",
     target: "",
@@ -698,11 +731,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toolbar";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "context-menu": {
     name: "context-menu",
+    title: "Context Menu",
     description: "A menu that appears at the pointer on right click or long press.",
     type: "registry:ui",
     target: "",
@@ -719,11 +753,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "context-menu";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "combobox": {
     name: "combobox",
+    title: "Combobox",
     description: "An input combined with a list of predefined items to select.",
     type: "registry:ui",
     target: "",
@@ -740,11 +775,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "menubar": {
     name: "menubar",
+    title: "Menubar",
     description: "A menu bar providing commands and options for your application.",
     type: "registry:ui",
     target: "",
@@ -761,11 +797,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "sheet": {
     name: "sheet",
+    title: "Sheet",
     description: "Extends the Dialog component to display content that complements the main content of the screen.",
     type: "registry:ui",
     target: "",
@@ -782,11 +819,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sheet";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "resizable": {
     name: "resizable",
+    title: "Resizable",
     description: "Accessible resizable panel groups and layouts with keyboard support.",
     type: "registry:ui",
     target: "",
@@ -803,11 +841,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "resizable";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "arrow-svg": {
     name: "arrow-svg",
+    title: "Arrow SVG",
     description: "Arrow SVG component.",
     type: "registry:ui",
     target: "",
@@ -824,11 +863,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "arrow-svg";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "label": {
     name: "label",
+    title: "Label",
     description: "Renders an accessible label associated with controls.",
     type: "registry:ui",
     target: "",
@@ -845,11 +885,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "label";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "sidebar": {
     name: "sidebar",
+    title: "Sidebar",
     description: "App sidebar",
     type: "registry:ui",
     target: "",
@@ -866,11 +907,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sidebar";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "use-mobile": {
     name: "use-mobile",
+    title: undefined,
     description: "",
     type: "registry:hook",
     target: "",
@@ -883,11 +925,12 @@ export const components: ComponentRegistry = {
           }
     ],
     
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "textarea": {
     name: "textarea",
+    title: "Textarea",
     description: "A native textarea element.",
     type: "registry:ui",
     target: "",
@@ -904,11 +947,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "textarea";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "breadcrumb": {
     name: "breadcrumb",
+    title: "Breadcrumb",
     description: "Displays the path to the current resource using a hierarchy of links.",
     type: "registry:ui",
     target: "",
@@ -925,11 +969,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "breadcrumb";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "",
+    categories: undefined,
     meta: undefined,
   },
   "sidebar-01": {
     name: "sidebar-01",
+    title: undefined,
     description: "A sidebar with submenus as dropdowns.",
     type: "registry:block",
     target: "app/dashboard/page.tsx",
@@ -961,11 +1006,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sidebar-01";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "sidebar,dashboard",
+    categories: ["sidebar","dashboard"],
     meta: undefined,
   },
   "sidebar-03": {
     name: "sidebar-03",
+    title: undefined,
     description: "A sidebar with submenus as dropdowns.",
     type: "registry:block",
     target: "app/dashboard/page.tsx",
@@ -997,11 +1043,12 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sidebar-03";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "sidebar,dashboard",
+    categories: ["sidebar","dashboard"],
     meta: undefined,
   },
   "dialog-01": {
     name: "dialog-01",
+    title: undefined,
     description: "Nested dialogs with team management.",
     type: "registry:block",
     target: "app/dashboard/page.tsx",
@@ -1028,7 +1075,51 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-01";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: "dialog,dashboard",
+    categories: ["dialog","dashboard"],
+    meta: undefined,
+  },
+  "project-status-picker": {
+    name: "project-status-picker",
+    title: "Project Status Picker",
+    description: "Project status picker component.",
+    type: "registry:component",
+    target: "",
+    registryDependencies: ["lucide-react"],
+    files:     [
+          {
+                "path": "components/examples/components/project-status-picker.tsx",
+                "target": "",
+                "type": "registry:component"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/components/project-status-picker");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "project-status-picker";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["form-input","dashboard","combobox"],
+    meta: undefined,
+  },
+  "morphing-dialog": {
+    name: "morphing-dialog",
+    title: "Morphing Dialog",
+    description: "A dialog that morphs from a trigger element.",
+    type: "registry:component",
+    target: "",
+    registryDependencies: ["lucide-react","framer-motion"],
+    files:     [
+          {
+                "path": "components/examples/components/morphing-dialog.tsx",
+                "target": "",
+                "type": "registry:component"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/components/morphing-dialog");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "morphing-dialog";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["layout-navigation"],
     meta: undefined,
   },
   "accordion-custom-trigger-icon": {

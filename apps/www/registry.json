@@ -754,6 +754,42 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "project-status-picker",
+      "title": "Project Status Picker",
+      "description": "Project status picker component.",
+      "type": "registry:component",
+      "categories": ["form-input", "dashboard", "combobox"],
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "utils",
+        "@lumi-ui/button",
+        "@lumi-ui/combobox",
+        "@lumi-ui/tooltip",
+        "@lumi-ui/separator"
+      ],
+      "files": [
+        {
+          "path": "components/examples/components/project-status-picker.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "morphing-dialog",
+      "title": "Morphing Dialog",
+      "description": "A dialog that morphs from a trigger element.",
+      "type": "registry:component",
+      "categories": ["layout-navigation"],
+      "dependencies": ["lucide-react", "framer-motion"],
+      "registryDependencies": ["utils", "@lumi-ui/button", "@lumi-ui/dialog"],
+      "files": [
+        {
+          "path": "components/examples/components/morphing-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ],
   "name": "lumi-ui"

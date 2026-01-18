@@ -18,7 +18,7 @@
   "files": [
     {
       "path": "../../packages/ui/src/blocks/dialog-01/page.tsx",
-      "content": "import { TeamManagement } from \"@lumi-ui/ui/blocks/dialog-01/components/team-management\";\n\nexport default function Page() {\n  return <TeamManagement />;\n}\n",
+      "content": "import { TeamManagement } from \"@lumi-ui/ui/blocks/dialog-01/components/team-management\";\n\nexport default function Page() {\n  return (\n    <div className=\"h-screen flex justify-center items-center w-screen\">\n      <TeamManagement />\n    </div>\n  );\n}\n",
       "type": "registry:page",
       "target": "app/dashboard/page.tsx"
     },

@@ -3,6 +3,7 @@ import path from "node:path";
 
 interface RegistryItem {
   name: string;
+  title?: string;
   description?: string;
   type: string;
   dependencies?: string[];
@@ -248,6 +249,18 @@ function validateRegistry(
     }
 
     if (!found) {
+      // Skip warning for files that are already part of a registry:component
+      const isRegistryComponentFile = registry.items.some(
+        (item) =>
+          item.type === "registry:component" &&
+          item.files?.some((f) => f.path === demoFile.fullPath),
+      );
+      if (isRegistryComponentFile) {
+        found = true;
+      }
+    }
+
+    if (!found) {
       const expectedPath = demoFile.folder
         ? `components/examples/${demoFile.folder}/${demoFile.name}.tsx`
         : `components/examples/${demoFile.name}.tsx`;
@@ -262,6 +275,7 @@ function validateRegistry(
 
 function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
   const entries: string[] = [];
+  const componentNames = new Set(registry.items.map((item) => item.name));
 
   // Generate UI component entries
   for (const item of registry.items) {
@@ -276,14 +290,17 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
     if (
       item.type === "registry:ui" ||
       item.type === "registry:lib" ||
-      item.type === "registry:block"
+      item.type === "registry:block" ||
+      item.type === "registry:component"
     ) {
       const importPath =
         item.type === "registry:ui"
           ? `@lumi-ui/ui/${item.name}`
           : item.type === "registry:lib"
             ? `@lumi-ui/ui/lib/${item.name}`
-            : `@lumi-ui/ui/blocks/${item.name}/page`;
+            : item.type === "registry:block"
+              ? `@lumi-ui/ui/blocks/${item.name}/page`
+              : `@/components/examples/components/${item.name}`;
 
       componentLazyLoad = `component: React.lazy(async () => {
       const mod = await import("${importPath}");
@@ -294,19 +311,24 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
 
     entries.push(`  "${item.name}": {
     name: "${item.name}",
+    title: ${item.title ? `"${item.title}"` : "undefined"},
     description: "${item.description ?? ""}",
     type: "${item.type}",
     target: "${item.files?.[0].target ?? ""}",
     registryDependencies: ${item.dependencies && item.dependencies.length > 0 && item.dependencies[0] !== "" ? JSON.stringify(item.dependencies) : "undefined"},
     files: ${JSON.stringify(registryFiles, null, 6).replace(/^/gm, "    ")},
     ${componentLazyLoad}
-    categories: "${item.categories ?? ""}",
+    categories: ${item.categories ? JSON.stringify(item.categories) : "undefined"},
     meta: undefined,
   }`);
   }
 
   // Generate demo/example entries
   for (const demoFile of demoFiles) {
+    if (componentNames.has(demoFile.name)) {
+      continue;
+    }
+
     // Try to determine which component this demo is for
     let registryDeps: string[] = [];
 
@@ -375,8 +397,11 @@ ${entries.join(",\n")}
 
 function generateTypesFile(registry: Registry, demoFiles: DemoFile[]): string {
   // Generate union type of all registry names (components + demos)
+  const registryComponentNames = new Set(registry.items.map((item) => item.name));
   const componentNames = registry.items.map((item) => `"${item.name}"`);
-  const demoNames = demoFiles.map((demo) => `"${demo.name}"`);
+  const demoNames = demoFiles
+    .filter((demo) => !registryComponentNames.has(demo.name))
+    .map((demo) => `"${demo.name}"`);
   const allNames = [...componentNames, ...demoNames].join(" | ");
 
   return `import type React from "react";
@@ -396,8 +421,9 @@ export interface RegistryFile {
 
 export interface RegistryEntry {
   name: string;
+  title?: string;
   description?: string;
-  type: "registry:ui" | "registry:example" | "registry:lib" | "registry:hook" | "registry:block";
+  type: "registry:ui" | "registry:example" | "registry:lib" | "registry:hook" | "registry:block" | "registry:component";
   registryDependencies?: string[];
   files: RegistryFile[];
   component?: React.LazyExoticComponent<React.ComponentType<unknown>>;
@@ -511,8 +537,12 @@ function main() {
   const uiComponents = registry.items.filter(
     (item) => item.type === "registry:ui",
   );
+  const registryComponents = registry.items.filter(
+    (item) => item.type === "registry:component",
+  );
   log("\n Summary:");
   log(`  Registry UI components: ${uiComponents.length}`);
+  log(`  Registry Components: ${registryComponents.length}`);
   log(`  Demo files found: ${demoFiles.length}`);
   log(`  Components with demos: ${componentsWithDemos.length}`);
   log(`  Warnings: ${warnings.length}`);
