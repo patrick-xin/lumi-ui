@@ -663,6 +663,9 @@
       "categories": ["sidebar", "dashboard"],
       "description": "A sidebar with submenus as dropdowns.",
       "type": "registry:block",
+      "meta": {
+        "iframeHeight": 1200
+      },
       "registryDependencies": [
         "@lumi-ui/sidebar",
         "@lumi-ui/breadcrumb",
@@ -696,6 +699,9 @@
       "categories": ["sidebar", "dashboard"],
       "description": "A sidebar with submenus as dropdowns.",
       "type": "registry:block",
+      "meta": {
+        "iframeHeight": 1200
+      },
       "registryDependencies": [
         "@lumi-ui/sidebar",
         "@lumi-ui/breadcrumb",
@@ -758,9 +764,9 @@
     {
       "name": "project-status-picker",
       "title": "Project Status Picker",
-      "description": "Project status picker component.",
+      "description": "A compact status selector optimized for efficiency. Features custom hotkey logic for instant selection, rich item rendering with status colors, and contextual tooltips. Inspired by Linear.",
       "type": "registry:component",
-      "categories": ["form-input", "dashboard", "combobox"],
+      "categories": ["form-input", "dashboard"],
       "dependencies": ["lucide-react"],
       "registryDependencies": [
         "utils",
@@ -779,7 +785,7 @@
     {
       "name": "morphing-dialog",
       "title": "Morphing Dialog",
-      "description": "A dialog that morphs from a trigger element.",
+      "description": "A fluid card-to-modal transition pattern. Combines Base UI's accessible dialog primitives with Framer Motion's shared layout animations for a seamless expansion effect. Inspired by Linear.",
       "type": "registry:component",
       "categories": ["layout-navigation"],
       "dependencies": ["lucide-react", "framer-motion"],
@@ -787,6 +793,62 @@
       "files": [
         {
           "path": "components/examples/components/morphing-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "vercel-notification",
+      "title": "Vercel Notification Popover",
+      "description": "A Vercel-style notification center that adapts to the device. Renders as a popover on desktop and a bottom sheet on mobile, featuring animated tabs and hover actions.",
+      "type": "registry:component",
+      "categories": ["overlays-dialogs", "dashboard"],
+      "dependencies": ["lucide-react", "@base-ui/react"],
+      "registryDependencies": [
+        "utils",
+        "hooks",
+        "@lumi-ui/dropdown-menu",
+        "@lumi-ui/input",
+        "@lumi-ui/popover",
+        "@lumi-ui/sheet",
+        "@lumi-ui/tabs",
+        "@lumi-ui/button"
+      ],
+      "files": [
+        {
+          "path": "components/examples/components/vercel-notification.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "t3-model-selector",
+      "title": "T3 Chat Model Selector",
+      "description": "A multi-tabbed popover for selecting items from categorized groups. Features vertical navigation, search filtering, and rich hover details. Inspired by T3 Chat.",
+      "type": "registry:component",
+      "categories": ["form-input", "chat"],
+      "dependencies": [
+        "lucide-react",
+        "@base-ui/react",
+        "@icons-pack/react-simple-icons"
+      ],
+      "registryDependencies": [
+        "utils",
+        "@lumi-ui/button",
+        "@lumi-ui/dropdown-menu",
+        "@lumi-ui/input",
+        "@lumi-ui/label",
+        "@lumi-ui/popover",
+        "@lumi-ui/preview-card",
+        "@lumi-ui/radio",
+        "@lumi-ui/scroll-area",
+        "@lumi-ui/separator",
+        "@lumi-ui/tabs",
+        "@lumi-ui/tooltip"
+      ],
+      "files": [
+        {
+          "path": "components/examples/components/t3-model-selector.tsx",
           "type": "registry:component"
         }
       ]

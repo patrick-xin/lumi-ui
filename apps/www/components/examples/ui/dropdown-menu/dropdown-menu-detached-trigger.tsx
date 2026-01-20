@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Button } from "@lumi-ui/ui/button";
 import {
   createDropdownMenuHandle,
@@ -10,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
+import * as React from "react";
 
 const demoMenu = createDropdownMenuHandle();
 

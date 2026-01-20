@@ -1,7 +1,6 @@
 "use client";
 
 import type { MenuRootChangeEventDetails } from "@base-ui/react";
-import * as React from "react";
 import { Button } from "@lumi-ui/ui/button";
 import {
   createDropdownMenuHandle,
@@ -10,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
+import * as React from "react";
 
 interface MenuItemDefinition {
   label: string;

@@ -3,7 +3,7 @@
   "name": "project-status-picker",
   "type": "registry:component",
   "title": "Project Status Picker",
-  "description": "Project status picker component.",
+  "description": "A compact status selector optimized for efficiency. Features custom hotkey logic for instant selection, rich item rendering with status colors, and contextual tooltips.",
   "dependencies": [
     "lucide-react"
   ],
@@ -23,7 +23,6 @@
   ],
   "categories": [
     "form-input",
-    "dashboard",
-    "combobox"
+    "dashboard"
   ]
 }

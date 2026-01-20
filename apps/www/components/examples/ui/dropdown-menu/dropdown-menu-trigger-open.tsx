@@ -15,8 +15,8 @@ export function DropdownMenuTriggerOpen() {
         <DropdownMenuTrigger
           render={(props, state) => (
             <Button
-              variant={state.open ? "default" : "outline"}
               className="w-48"
+              variant={state.open ? "default" : "outline"}
               {...props}
             >
               Actions
@@ -33,8 +33,8 @@ export function DropdownMenuTriggerOpen() {
         <DropdownMenuTrigger
           render={
             <Button
-              variant="outline"
               className="w-48 data-[popup-open]:bg-accent dark:data-[popup-open]:bg-accent/60 data-[popup-open]:text-accent-foreground"
+              variant="outline"
             >
               Actions
             </Button>

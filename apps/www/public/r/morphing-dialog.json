@@ -3,7 +3,7 @@
   "name": "morphing-dialog",
   "type": "registry:component",
   "title": "Morphing Dialog",
-  "description": "A dialog that morphs from a trigger element.",
+  "description": "A fluid card-to-modal transition pattern inspired by Linear. Combines Base UI's accessible dialog primitives with Framer Motion's shared layout animations for a seamless expansion effect.",
   "dependencies": [
     "lucide-react",
     "framer-motion"

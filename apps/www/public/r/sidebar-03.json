@@ -34,6 +34,9 @@
       "type": "registry:component"
     }
   ],
+  "meta": {
+    "iframeHeight": 1200
+  },
   "categories": [
     "sidebar",
     "dashboard"

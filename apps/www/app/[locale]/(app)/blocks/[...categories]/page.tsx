@@ -1,9 +1,9 @@
-import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
-import { BlockWrapper } from "@/components/blocks/block-display";
+import { BlockDisplay } from "@/components/blocks/block-display";
 import { getBlocks } from "@/lib/blocks";
 import { registryBlockCategories } from "@/lib/categories";
 import { routing } from "@/lib/i18n/routing";
+import { setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
 
 export const revalidate = false;
 export const dynamicParams = false;
@@ -37,7 +37,7 @@ export default async function BlocksPage({ params }: PageProps) {
   return (
     <div className="flex flex-col gap-12 md:gap-24">
       {blocks.map((block) => (
-        <BlockWrapper block={block} key={block.name} />
+        <BlockDisplay block={block} key={block.name} />
       ))}
     </div>
   );

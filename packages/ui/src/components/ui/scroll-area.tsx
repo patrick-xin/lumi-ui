@@ -1,9 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { ScrollArea as BaseScrollArea } from "@base-ui/react/scroll-area";
-
 import { cn } from "@lumi-ui/ui/lib/utils";
+import type * as React from "react";
 
 function ScrollAreaRoot({
   className,
@@ -11,8 +10,8 @@ function ScrollAreaRoot({
 }: React.ComponentProps<typeof BaseScrollArea.Root>) {
   return (
     <BaseScrollArea.Root
-      data-slot="scroll-area-root"
       className={cn("group/scroll-area relative overflow-hidden", className)}
+      data-slot="scroll-area-root"
       {...props}
     />
   );
@@ -27,17 +26,17 @@ function ScrollAreaViewport({
 }) {
   return (
     <BaseScrollArea.Viewport
-      data-slot="scroll-area-viewport"
       className={cn(
         "h-full w-full rounded-[inherit] overscroll-contain",
         "focus-visible:outline focus-visible:outline-ring/50 focus-visible:outline-offset-2",
         gradientScrollFade &&
           cn(
             "mask-[linear-gradient(to_bottom,transparent,black_min(1.2rem,var(--scroll-area-overflow-y-start)),black_calc(100%-min(1.2rem,var(--scroll-area-overflow-y-end,1.2rem))),transparent),linear-gradient(to_right,transparent,black_min(1.2rem,var(--scroll-area-overflow-x-start)),black_calc(100%-min(1.2rem,var(--scroll-area-overflow-x-end,1.2rem))),transparent)]",
-            "[mask-composite:intersect] [-webkit-mask-composite:source-in]"
+            "[mask-composite:intersect] [-webkit-mask-composite:source-in]",
           ),
-        className
+        className,
       )}
+      data-slot="scroll-area-viewport"
       {...props}
     />
   );
@@ -49,8 +48,8 @@ function ScrollAreaCorner({
 }: React.ComponentProps<typeof BaseScrollArea.Corner>) {
   return (
     <BaseScrollArea.Corner
-      data-slot="scroll-area-corner"
       className={cn("bg-transparent", className)}
+      data-slot="scroll-area-corner"
       {...props}
     />
   );
@@ -62,8 +61,8 @@ function ScrollAreaContent({
 }: React.ComponentProps<typeof BaseScrollArea.Content>) {
   return (
     <BaseScrollArea.Content
-      data-slot="scroll-area-content"
       className={cn("flex-1", className)}
+      data-slot="scroll-area-content"
       {...props}
     />
   );
@@ -76,8 +75,6 @@ function ScrollAreaScrollBar({
 }: React.ComponentProps<typeof BaseScrollArea.Scrollbar>) {
   return (
     <BaseScrollArea.Scrollbar
-      data-slot="scroll-area-scrollbar"
-      orientation={orientation}
       className={cn(
         "flex touch-none select-none transition-colors",
         "absolute z-20 p-0.5",
@@ -92,11 +89,13 @@ function ScrollAreaScrollBar({
         orientation === "horizontal" && "data-[has-overflow-x=false]:hidden",
         className,
       )}
+      data-slot="scroll-area-scrollbar"
+      orientation={orientation}
       {...props}
     >
       <BaseScrollArea.Thumb
-        data-slot="scroll-area-thumb"
         className="bg-border relative flex-1 rounded-full"
+        data-slot="scroll-area-thumb"
       />
     </BaseScrollArea.Scrollbar>
   );
@@ -117,7 +116,10 @@ function ScrollArea({
       className={cn("flex flex-col h-full", className)}
       {...props}
     >
-      <ScrollAreaViewport gradientScrollFade={gradientScrollFade} className="flex-1 min-h-0">
+      <ScrollAreaViewport
+        className="flex-1 min-h-0"
+        gradientScrollFade={gradientScrollFade}
+      >
         <ScrollAreaContent>{children}</ScrollAreaContent>
       </ScrollAreaViewport>
       {!noScrollBar && (

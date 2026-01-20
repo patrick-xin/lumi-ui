@@ -1,5 +1,7 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+import type { Block } from "@/types";
 import {
   ResizableGroup,
   ResizablePanel,
@@ -7,8 +9,6 @@ import {
 } from "@lumi-ui/ui/resizable";
 import * as React from "react";
 import type { PanelImperativeHandle } from "react-resizable-panels";
-import { cn } from "@/lib/utils";
-import type { Block } from "@/types";
 
 interface BlockPreviewProps {
   item: Block;
@@ -38,7 +38,7 @@ function BlockViewerIframe({
         isLoading ? "opacity-0" : "opacity-100 transition-opacity duration-500",
         className,
       )}
-      height={(item.meta?.iframeHeight as number) ?? 930}
+      height={(item.meta?.iframeHeight as number) ?? 950}
       key={iframeKey}
       loading="lazy"
       onLoad={() => setIsLoading(false)}

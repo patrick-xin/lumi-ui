@@ -1007,7 +1007,7 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["sidebar","dashboard"],
-    meta: undefined,
+    meta: {"iframeHeight":1200},
   },
   "sidebar-03": {
     name: "sidebar-03",
@@ -1044,7 +1044,7 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["sidebar","dashboard"],
-    meta: undefined,
+    meta: {"iframeHeight":1200},
   },
   "dialog-01": {
     name: "dialog-01",
@@ -1081,7 +1081,7 @@ export const components: ComponentRegistry = {
   "project-status-picker": {
     name: "project-status-picker",
     title: "Project Status Picker",
-    description: "Project status picker component.",
+    description: "A compact status selector optimized for efficiency. Features custom hotkey logic for instant selection, rich item rendering with status colors, and contextual tooltips.",
     type: "registry:component",
     target: "",
     registryDependencies: ["lucide-react"],
@@ -1097,13 +1097,13 @@ export const components: ComponentRegistry = {
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "project-status-picker";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: ["form-input","dashboard","combobox"],
+    categories: ["form-input","dashboard"],
     meta: undefined,
   },
   "morphing-dialog": {
     name: "morphing-dialog",
     title: "Morphing Dialog",
-    description: "A dialog that morphs from a trigger element.",
+    description: "A fluid card-to-modal transition pattern inspired by Linear. Combines Base UI's accessible dialog primitives with Framer Motion's shared layout animations for a seamless expansion effect.",
     type: "registry:component",
     target: "",
     registryDependencies: ["lucide-react","framer-motion"],
@@ -1120,6 +1120,50 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["layout-navigation"],
+    meta: undefined,
+  },
+  "vercel-notification": {
+    name: "vercel-notification",
+    title: "Vercel Notification Popover",
+    description: "A Vercel-style notification center that adapts to the device. Renders as a popover on desktop and a bottom sheet on mobile, featuring animated tabs and hover actions.",
+    type: "registry:component",
+    target: "",
+    registryDependencies: ["lucide-react","@base-ui/react"],
+    files:     [
+          {
+                "path": "components/examples/components/vercel-notification.tsx",
+                "target": "",
+                "type": "registry:component"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/components/vercel-notification");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "vercel-notification";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["overlays-dialogs","dashboard"],
+    meta: undefined,
+  },
+  "t3-model-selector": {
+    name: "t3-model-selector",
+    title: "T3 Chat Model Selector",
+    description: "A multi-tabbed popover for selecting items from categorized groups. Features vertical navigation, search filtering, and rich hover details. Inspired by T3 Chat",
+    type: "registry:component",
+    target: "",
+    registryDependencies: ["lucide-react","@base-ui/react","@icons-pack/react-simple-icons"],
+    files:     [
+          {
+                "path": "components/examples/components/t3-model-selector.tsx",
+                "target": "",
+                "type": "registry:component"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/components/t3-model-selector");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "t3-model-selector";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["form-input","chat"],
     meta: undefined,
   },
   "accordion-custom-trigger-icon": {

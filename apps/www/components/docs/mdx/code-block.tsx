@@ -21,9 +21,16 @@ export async function CodeBlock({
 
   return (
     <figure
-      className={cn(className, hideLineNumbers && "hide-line-numbers")}
+      className={cn(className, "relative", hideLineNumbers && "hide-line-numbers")}
       data-rehype-pretty-code-figure=""
     >
+      <div className="sticky top-0 z-30 flex justify-end h-0 w-full pointer-events-none">
+        <CopyButton
+          className="pointer-events-auto top-1.5 right-2"
+          code={code}
+          variant="glow"
+        />
+      </div>
       {title && (
         <figcaption
           className="text-code-foreground [&_svg]:text-code-foreground flex items-center gap-2 [&_svg]:size-4 [&_svg]:opacity-70"
@@ -33,11 +40,6 @@ export async function CodeBlock({
           {title}
         </figcaption>
       )}
-      <CopyButton
-        className="absolute top-1.5 right-2"
-        code={code}
-        variant="glow"
-      />
       {highlightedCode}
     </figure>
   );

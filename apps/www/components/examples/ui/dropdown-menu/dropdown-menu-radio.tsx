@@ -1,7 +1,5 @@
 "use client";
 
-import { ChevronDownIcon } from "lucide-react";
-import * as React from "react";
 import { Button } from "@lumi-ui/ui/button";
 import {
   DropdownMenu,
@@ -10,6 +8,8 @@ import {
   DropdownMenuRadioItemContent,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
+import { ChevronDownIcon } from "lucide-react";
+import * as React from "react";
 
 export function RadioItemsMenu() {
   const [sortBy, setSortBy] = React.useState("date");
@@ -24,7 +24,7 @@ export function RadioItemsMenu() {
         }
       />
       <DropdownMenuContent>
-        <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
+        <DropdownMenuRadioGroup onValueChange={setSortBy} value={sortBy}>
           <DropdownMenuRadioItemContent value="date">
             Date
           </DropdownMenuRadioItemContent>

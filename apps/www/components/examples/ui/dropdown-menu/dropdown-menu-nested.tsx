@@ -1,6 +1,5 @@
 "use client";
 
-import { ChevronDownIcon } from "lucide-react";
 import { Button } from "@lumi-ui/ui/button";
 import {
   DropdownMenu,
@@ -12,13 +11,14 @@ import {
   DropdownMenuSubMenuTriggerGroup,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
+import { ChevronDownIcon } from "lucide-react";
 
 export function NestedMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline" className="w-60 justify-between">
+          <Button className="w-60 justify-between" variant="outline">
             Song <ChevronDownIcon />
           </Button>
         }
