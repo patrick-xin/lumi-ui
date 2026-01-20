@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
+import { ComponentPreview } from "@/components/docs/mdx/component-preview";
 import { getRegistryComponents } from "@/lib/blocks";
 import { registryComponentCategories } from "@/lib/categories";
 import { routing } from "@/lib/i18n/routing";
-import { ComponentPreview } from "../../../../../components/docs/mdx/component-preview";
-import type { ComponentName } from "../../../../../registry/__registry";
+import type { ComponentName } from "@/registry/__registry";
 
 export const revalidate = false;
 export const dynamicParams = false;
@@ -40,12 +40,12 @@ export default async function ComponentsPage({ params }: PageProps) {
     <div className="grid gap-16 md:gap-32 max-w-6xl mx-auto">
       {components.map((component) => (
         <div className="space-y-4" id={component.name} key={component.name}>
-          <div className="space-y-1">
+          <div className="space-y-2">
             <h2 className="text-xl font-semibold tracking-tight">
               {component.title || component.name}
             </h2>
             {component.description && (
-              <p className="text-muted-foreground text-sm max-w-[60ch]">
+              <p className="text-muted-foreground text-sm max-w-2xl text-pretty">
                 {component.description}
               </p>
             )}

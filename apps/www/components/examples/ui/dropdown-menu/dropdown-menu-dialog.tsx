@@ -1,7 +1,5 @@
 "use client";
 
-import { ChevronDownIcon, TrashIcon } from "lucide-react";
-import * as React from "react";
 import { Button } from "@lumi-ui/ui/button";
 import {
   Dialog,
@@ -19,6 +17,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
+import { ChevronDownIcon, TrashIcon } from "lucide-react";
+import * as React from "react";
 
 export function DropdownMenuDialogDemo() {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
@@ -38,15 +38,15 @@ export function DropdownMenuDialogDemo() {
           <DropdownMenuItem>Duplicate</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            variant="destructive"
             onClick={() => setDialogOpen(true)}
+            variant="destructive"
           >
             <TrashIcon className="size-4 mr-2" />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog onOpenChange={setDialogOpen} open={isDialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Are you sure?</DialogTitle>
@@ -57,14 +57,14 @@ export function DropdownMenuDialogDemo() {
           </DialogHeader>
           <DialogFooter>
             <DialogClose
-              render={<Button variant="ghost" />}
               onClick={() => setDialogOpen(false)}
+              render={<Button variant="ghost" />}
             >
               Cancel
             </DialogClose>
             <DialogClose
-              render={<Button variant="destructive" />}
               onClick={() => setDialogOpen(false)}
+              render={<Button variant="destructive" />}
             >
               Delete
             </DialogClose>

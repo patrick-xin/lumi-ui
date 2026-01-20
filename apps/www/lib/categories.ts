@@ -24,12 +24,12 @@ export const registryComponentCategories = [
   },
   {
     hidden: false,
-    name: "Dashboard",
-    slug: "dashboard",
+    name: "Overlays & Dialogs",
+    slug: "overlays-dialogs"
   },
   {
     hidden: false,
-    name: "Combobox",
-    slug: "combobox",
+    name: "Dashboard",
+    slug: "dashboard",
   },
 ];

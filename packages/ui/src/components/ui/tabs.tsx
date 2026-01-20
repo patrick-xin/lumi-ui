@@ -30,7 +30,7 @@ function TabsList({
   return (
     <BaseTabs.List
       className={cn(
-        "relative z-0 inline-flex min-h-10",
+        "relative z-0 inline-flex",
         "data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col",
         className,
       )}

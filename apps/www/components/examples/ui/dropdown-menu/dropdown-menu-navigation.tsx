@@ -1,7 +1,5 @@
 "use client";
 
-import { ChevronDownIcon, ExternalLinkIcon } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@lumi-ui/ui/button";
 import {
   DropdownMenu,
@@ -9,6 +7,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
+import { ChevronDownIcon, ExternalLinkIcon } from "lucide-react";
+import Link from "next/link";
 
 export function NavigationMenu() {
   return (
@@ -24,10 +24,10 @@ export function NavigationMenu() {
         <DropdownMenuItem
           render={
             <a
-              href="https://google.com"
-              target="_blank"
-              rel="noopener noreferrer"
               className="flex items-center gap-2"
+              href="https://google.com"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Google <ExternalLinkIcon className="size-4" />
             </a>
@@ -35,7 +35,7 @@ export function NavigationMenu() {
         />
         <DropdownMenuItem
           render={
-            <Link href="/docs/components" className="w-full">
+            <Link className="w-full" href="/docs/components">
               Go to Components
             </Link>
           }

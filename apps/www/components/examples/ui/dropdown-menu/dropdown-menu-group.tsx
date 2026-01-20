@@ -1,7 +1,5 @@
 "use client";
 
-import { ChevronDownIcon } from "lucide-react";
-import * as React from "react";
 import { Button } from "@lumi-ui/ui/button";
 import {
   DropdownMenu,
@@ -14,6 +12,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
+import { ChevronDownIcon } from "lucide-react";
+import * as React from "react";
 
 export function GroupedMenu() {
   const [sortBy, setSortBy] = React.useState("date");
@@ -23,7 +23,7 @@ export function GroupedMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline" className="w-40 justify-between">
+          <Button className="w-40 justify-between" variant="outline">
             View <ChevronDownIcon className="size-4" />
           </Button>
         }
@@ -31,7 +31,7 @@ export function GroupedMenu() {
       <DropdownMenuContent>
         <DropdownMenuGroup>
           <DropdownMenuGroupLabel>Sort</DropdownMenuGroupLabel>
-          <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
+          <DropdownMenuRadioGroup onValueChange={setSortBy} value={sortBy}>
             <DropdownMenuRadioItemContent value="date">
               Date
             </DropdownMenuRadioItemContent>

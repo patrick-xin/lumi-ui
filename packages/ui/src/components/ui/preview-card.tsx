@@ -1,22 +1,29 @@
 "use client";
 
-import { PreviewCard as BasePreviewCard } from "@base-ui/react/preview-card";
-import type * as React from "react";
-import { cn } from "@lumi-ui/ui/lib/utils";
+import {
+  PreviewCard as BasePreviewCard,
+  type PreviewCardTriggerProps,
+} from "@base-ui/react/preview-card";
 import { ArrowSvg } from "@lumi-ui/ui/arrow-svg";
+import { cn } from "@lumi-ui/ui/lib/utils";
+import type * as React from "react";
 
-function PreviewCard({
+function PreviewCard<Payload = unknown>({
   ...props
-}: React.ComponentProps<typeof BasePreviewCard.Root>) {
+}: React.ComponentProps<typeof BasePreviewCard.Root<Payload>>) {
   return <BasePreviewCard.Root data-slot="preview-card" {...props} />;
 }
 
-function PreviewCardTrigger({
+function PreviewCardTrigger<Payload = unknown>({
   className,
   ...props
-}: React.ComponentProps<typeof BasePreviewCard.Trigger>) {
+}: PreviewCardTriggerProps<Payload>) {
   return (
-    <BasePreviewCard.Trigger  className={cn(className)} data-slot="preview-card-trigger" {...props} />
+    <BasePreviewCard.Trigger
+      className={cn(className)}
+      data-slot="preview-card-trigger"
+      {...props}
+    />
   );
 }
 
@@ -31,7 +38,11 @@ function PreviewBackdrop({
   ...props
 }: React.ComponentProps<typeof BasePreviewCard.Backdrop>) {
   return (
-    <BasePreviewCard.Backdrop className={cn(className)} data-slot="preview-card-backdrop" {...props} />
+    <BasePreviewCard.Backdrop
+      className={cn(className)}
+      data-slot="preview-card-backdrop"
+      {...props}
+    />
   );
 }
 
@@ -83,22 +94,27 @@ function PreviewCardContent({
   children,
   className,
   align = "center",
+  side = "bottom",
+  alignOffset = 6,
   sideOffset = 4,
   showArrow = false,
   ...props
 }: React.ComponentProps<typeof BasePreviewCard.Popup> & {
   children: React.ReactNode;
-  align?: "center" | "start" | "end";
-  sideOffset?: number;
+  align?: BasePreviewCard.Positioner.Props["align"];
+  alignOffset?: BasePreviewCard.Positioner.Props["alignOffset"];
+  side?: BasePreviewCard.Positioner.Props["side"];
+  sideOffset?: BasePreviewCard.Positioner.Props["sideOffset"];
   showArrow?: boolean;
 }) {
   return (
     <BasePreviewCard.Portal data-slot="preview-card-portal">
       <BasePreviewCard.Positioner
         align={align}
+        alignOffset={alignOffset}
         data-slot="preview-card-positioner"
+        side={side}
         sideOffset={sideOffset}
-        
       >
         <BasePreviewCard.Popup
           className={cn(
@@ -117,6 +133,8 @@ function PreviewCardContent({
   );
 }
 
+const createPreviewCardHandle = BasePreviewCard.createHandle;
+
 export {
   PreviewCard,
   PreviewCardTrigger,
@@ -125,6 +143,7 @@ export {
   PreviewPositioner,
   PreviewCardPopup,
   PreviewCardArrow,
+  createPreviewCardHandle,
   // Composite component
   PreviewCardContent,
 };

@@ -1,18 +1,5 @@
 "use client";
 
-import {
-  ChevronDown,
-  ClipboardIcon,
-  Eye,
-  EyeOff,
-  FilePlus,
-  Settings,
-  Share2,
-  Trash2,
-  WrapText,
-} from "lucide-react";
-import Link from "next/link";
-import * as React from "react";
 import { Button } from "@lumi-ui/ui/button";
 import {
   Dialog,
@@ -38,6 +25,19 @@ import {
   DropdownMenuSubMenuTriggerGroup,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
+import {
+  ChevronDown,
+  ClipboardIcon,
+  Eye,
+  EyeOff,
+  FilePlus,
+  Settings,
+  Share2,
+  Trash2,
+  WrapText,
+} from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
 
 export function DropdownMenuDemo() {
   const [showMinimap, setShowMinimap] = React.useState(true);

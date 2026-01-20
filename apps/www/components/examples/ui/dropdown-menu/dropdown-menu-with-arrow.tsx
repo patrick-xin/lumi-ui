@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@lumi-ui/ui/button";
 import {
   DropdownMenu,
@@ -11,7 +13,7 @@ export function DropdownMenuWithArrow() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline" className="w-48">
+          <Button className="w-48" variant="outline">
             Actions
           </Button>
         }

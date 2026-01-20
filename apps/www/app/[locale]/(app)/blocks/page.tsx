@@ -1,8 +1,8 @@
-import { Button } from "@lumi-ui/ui/button";
-import Link from "next/link";
-import { BlockWrapper } from "@/components/blocks/block-display";
+import { BlockDisplay } from "@/components/blocks/block-display";
 import { getBlocks } from "@/lib/blocks";
 import type { Block } from "@/types";
+import { Button } from "@lumi-ui/ui/button";
+import Link from "next/link";
 
 export const dynamic = "force-static";
 
@@ -26,7 +26,7 @@ export default async function Page() {
     <div className="flex flex-col gap-12 md:gap-24">
       {featured.length > 0 &&
         featured.map((block) => (
-          <BlockWrapper block={block} key={block.name} />
+          <BlockDisplay block={block} key={block.name} />
         ))}
       <div className="container-wrapper">
         <div className="container flex justify-center py-6">

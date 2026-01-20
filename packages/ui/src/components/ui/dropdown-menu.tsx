@@ -1,12 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { Menu as BaseMenu } from "@base-ui/react/menu";
-import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 import { ArrowSvg } from "@lumi-ui/ui/arrow-svg";
-
 import { cn } from "@lumi-ui/ui/lib/utils";
-import { cva, VariantProps } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
+import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
+import type * as React from "react";
 
 function DropdownMenu<Payload>({
   ...props
@@ -27,9 +26,16 @@ function DropdownMenuPortal({
 }
 
 function DropdownMenuBackdrop({
+  className,
   ...props
 }: React.ComponentProps<typeof BaseMenu.Backdrop>) {
-  return <BaseMenu.Backdrop data-slot="dropdown-menu-backdrop" {...props} />;
+  return (
+    <BaseMenu.Backdrop
+      className={cn("fixed inset-0", className)}
+      data-slot="dropdown-menu-backdrop"
+      {...props}
+    />
+  );
 }
 
 function DropdownMenuPositioner({
@@ -63,15 +69,14 @@ function DropdownMenuArrow({
 }: React.ComponentProps<typeof BaseMenu.Arrow>) {
   return (
     <BaseMenu.Arrow
-      data-slot="dropdown-menu-arrow"
       className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180"
+      data-slot="dropdown-menu-arrow"
       {...props}
     >
       <ArrowSvg />
     </BaseMenu.Arrow>
   );
 }
-
 
 const dropdownMenuItemVariants = cva(
   [
@@ -83,6 +88,9 @@ const dropdownMenuItemVariants = cva(
     "[&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
   ],
   {
+    defaultVariants: {
+      variant: "default",
+    },
     variants: {
       variant: {
         default: "",
@@ -92,10 +100,7 @@ const dropdownMenuItemVariants = cva(
         ],
       },
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
+  },
 );
 
 type DropdownMenuItemProps = React.ComponentProps<typeof BaseMenu.Item> &
@@ -111,11 +116,11 @@ function DropdownMenuItem({
 }: DropdownMenuItemProps) {
   return (
     <BaseMenu.Item
-      data-slot="dropdown-menu-item"
-       className={cn(
+      className={cn(
         unstyled ? "" : dropdownMenuItemVariants({ variant }),
-        className
+        className,
       )}
+      data-slot="dropdown-menu-item"
       {...props}
     />
   );
@@ -127,8 +132,8 @@ function DropdownMenuSeparator({
 }: React.ComponentProps<typeof BaseMenu.Separator>) {
   return (
     <BaseMenu.Separator
-      data-slot="dropdown-menu-separator"
       className={cn("bg-border my-1 h-px", className)}
+      data-slot="dropdown-menu-separator"
       {...props}
     />
   );
@@ -184,8 +189,8 @@ function DropdownMenuCheckboxItem({
 }: React.ComponentProps<typeof BaseMenu.CheckboxItem>) {
   return (
     <BaseMenu.CheckboxItem
-      data-slot="dropdown-menu-checkbox-item"
       className={cn(className)}
+      data-slot="dropdown-menu-checkbox-item"
       {...props}
     />
   );
@@ -203,8 +208,8 @@ function DropdownMenuSubMenuTrigger({
 }: React.ComponentProps<typeof BaseMenu.SubmenuTrigger>) {
   return (
     <BaseMenu.SubmenuTrigger
-      data-slot="dropdown-menu-sub-menu-trigger"
       className={cn("outline-hidden select-none cursor-default", className)}
+      data-slot="dropdown-menu-sub-menu-trigger"
       {...props}
     />
   );
@@ -219,11 +224,11 @@ function DropdownMenuSubMenuContent({
 }: DropdownMenuContentProps) {
   return (
     <DropdownMenuContent
-      side={side}
-      sideOffset={sideOffset}
       align={align}
       alignOffset={alignOffset}
       data-slot="dropdown-menu-sub-menu-content"
+      side={side}
+      sideOffset={sideOffset}
       {...props}
     />
   );
@@ -235,11 +240,11 @@ function DropdownMenuShortcut({
 }: React.ComponentProps<"span">) {
   return (
     <span
-      data-slot="dropdown-menu-shortcut"
       className={cn(
         "text-muted-foreground ml-auto text-xs tracking-widest",
         className,
       )}
+      data-slot="dropdown-menu-shortcut"
       {...props}
     />
   );
@@ -252,7 +257,6 @@ function DropdownMenuSubMenuTriggerGroup({
 }: React.ComponentProps<typeof BaseMenu.SubmenuTrigger>) {
   return (
     <BaseMenu.SubmenuTrigger
-      data-slot="dropdown-menu-sub-menu-trigger"
       className={cn(
         "flex items-center gap-2 py-1.5 px-3.5 text-sm",
         "outline-none select-none cursor-default",
@@ -260,6 +264,7 @@ function DropdownMenuSubMenuTriggerGroup({
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
         className,
       )}
+      data-slot="dropdown-menu-sub-menu-trigger"
       {...props}
     >
       {children}
@@ -291,23 +296,23 @@ function DropdownMenuContent({
   return (
     <DropdownMenuPortal>
       <BaseMenu.Positioner
-        sideOffset={sideOffset}
         align={align}
         alignOffset={alignOffset}
-        side={side}
         className={cn(
           matchAnchorWidth && "w-[var(--anchor-width)]",
           "max-h-(--available-height)",
         )}
+        side={side}
+        sideOffset={sideOffset}
       >
         <BaseMenu.Popup
-          data-slot="dropdown-menu-content"
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md py-1",
             "outline outline-1 outline-border dark:-outline-offset-1",
             "animate-popup",
             className,
           )}
+          data-slot="dropdown-menu-content"
           {...props}
         >
           {showArrow && <DropdownMenuArrow />}
@@ -326,7 +331,7 @@ function DropdownMenuCheckboxItemContent({
 }: React.ComponentProps<typeof BaseMenu.CheckboxItem>) {
   return (
     <BaseMenu.CheckboxItem
-      data-slot="dropdown-menu-checkbox-item-content"
+      checked={checked}
       className={cn(
         "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
         "outline-none select-none cursor-default",
@@ -334,7 +339,7 @@ function DropdownMenuCheckboxItemContent({
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
-      checked={checked}
+      data-slot="dropdown-menu-checkbox-item-content"
       {...props}
     >
       <BaseMenu.CheckboxItemIndicator className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
@@ -352,7 +357,6 @@ function DropdownMenuRadioItemContent({
 }: React.ComponentProps<typeof BaseMenu.RadioItem>) {
   return (
     <BaseMenu.RadioItem
-      data-slot="dropdown-menu-radio-item-content"
       className={cn(
         "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
         "outline-none select-none cursor-default",
@@ -360,6 +364,7 @@ function DropdownMenuRadioItemContent({
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
       )}
+      data-slot="dropdown-menu-radio-item-content"
       {...props}
     >
       <BaseMenu.RadioItemIndicator className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">

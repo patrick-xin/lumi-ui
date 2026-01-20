@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
 import { BlockViewer } from "@/components/blocks/block-view";
 import { highlightCode } from "@/lib/highlight-code";
 import type { Block, BlockFile } from "@/types";
+import type { ReactNode } from "react";
 
 async function getHighlightedFiles(
   files: BlockFile[],
@@ -19,11 +19,11 @@ async function getHighlightedFiles(
   return Object.fromEntries(highlightedEntries);
 }
 
-interface BlockWrapperProps {
+interface BlockDisplayProps {
   block: Block;
 }
 
-export async function BlockWrapper({ block }: BlockWrapperProps) {
+export async function BlockDisplay({ block }: BlockDisplayProps) {
   const highlightedFiles = await getHighlightedFiles(block.files);
 
   return (

@@ -9,6 +9,7 @@ interface RegistryItem {
   dependencies?: string[];
   files?: Array<{ path: string; target?: string; type: string }>;
   categories?: string[];
+  meta?: Object
 }
 
 interface PublicRegistryItem {
@@ -319,7 +320,7 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
     files: ${JSON.stringify(registryFiles, null, 6).replace(/^/gm, "    ")},
     ${componentLazyLoad}
     categories: ${item.categories ? JSON.stringify(item.categories) : "undefined"},
-    meta: undefined,
+    meta: ${item.meta ? JSON.stringify(item.meta) : "undefined"},
   }`);
   }
 

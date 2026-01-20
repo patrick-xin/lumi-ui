@@ -1,7 +1,5 @@
 "use client";
 
-import { ChevronDownIcon } from "lucide-react";
-import * as React from "react";
 import { Button } from "@lumi-ui/ui/button";
 import {
   DropdownMenu,
@@ -9,6 +7,8 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
+import { ChevronDownIcon } from "lucide-react";
+import * as React from "react";
 
 export function DropdownMenuCheckboxDemo() {
   const [showMinimap, setShowMinimap] = React.useState(true);
