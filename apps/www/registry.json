@@ -803,6 +803,10 @@
       "description": "A Vercel-style notification center that adapts to the device. Renders as a popover on desktop and a bottom sheet on mobile, featuring animated tabs and hover actions.",
       "type": "registry:component",
       "categories": ["overlays-dialogs", "dashboard"],
+      "meta": {
+        "alignment": "top-right",
+        "iframeHeight": 800
+      },
       "dependencies": ["lucide-react", "@base-ui/react"],
       "registryDependencies": [
         "utils",
@@ -827,6 +831,10 @@
       "description": "A multi-tabbed popover for selecting items from categorized groups. Features vertical navigation, search filtering, and rich hover details. Inspired by T3 Chat.",
       "type": "registry:component",
       "categories": ["form-input", "chat"],
+      "meta": {
+        "alignment": "bottom-center",
+        "iframeHeight": 800
+      },
       "dependencies": [
         "lucide-react",
         "@base-ui/react",

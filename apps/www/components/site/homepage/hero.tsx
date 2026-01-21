@@ -24,7 +24,6 @@ export function HeroSection() {
               <div className="relative mx-auto">
                 {/* Corner gradients - Top Left */}
                 <CornerGradients />
-
                 <h1
                   className={cn(
                     "text-center text-5xl font-bold tracking-tight md:text-7xl",
@@ -38,8 +37,9 @@ export function HeroSection() {
               <p className="mt-8  text-pretty text-lg text-muted-foreground mx-auto xl:mt-12">
                 {t("description")}
               </p>
-              <div className="mt-12 flex items-center gap-4 mx-auto xl:mt-16">
+              <div className="mt-12 flex justify-center items-center flex-wrap gap-4 mx-auto xl:mt-16">
                 <Button
+                  className="w-50"
                   nativeButton={false}
                   render={
                     <Link href="/docs/introduction">
@@ -49,6 +49,7 @@ export function HeroSection() {
                   size="lg"
                 />
                 <Button
+                  className="w-50"
                   nativeButton={false}
                   render={
                     <Link href="/docs/components">

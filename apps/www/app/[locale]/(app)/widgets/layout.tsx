@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/blocks/page-header";
 import { PageNav } from "@/components/blocks/page-nav";
-import { ComponentsNav } from "@/components/docs/components-nav";
+import { registryComponentCategories } from "@/lib/categories";
+import type { Metadata } from "next";
 
-const title = "Component Registry";
+const title = "Component Lab";
 const description =
-  "A collection of beautiful, reusable components that you can copy and paste into your apps.";
+  "Precision-engineered UI patterns for high-performance applications. Sophisticated, accessible, and ready for production out of the box.";
 
 export const metadata: Metadata = {
   description,
@@ -45,9 +45,13 @@ export default function ComponentsLayout({
       <PageHeader>
         <PageHeaderHeading>{title}</PageHeaderHeading>
         <PageHeaderDescription>{description}</PageHeaderDescription>
-        <PageNav id="components">
-          <ComponentsNav />
-        </PageNav>
+        <PageNav
+          id="components"
+          items={registryComponentCategories.map((category) => ({
+            title: category.name,
+            href: `/widgets/${category.slug}`,
+          }))}
+        />
       </PageHeader>
 
       <div className="container">{children}</div>

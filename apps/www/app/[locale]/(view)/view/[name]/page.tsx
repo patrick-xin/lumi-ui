@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { siteConfig } from "@/lib/config";
 import { routing } from "@/lib/i18n/routing";
-import { absoluteUrl } from "@/lib/utils";
+import { absoluteUrl, cn } from "@/lib/utils";
 import { components } from "@/registry/__index__";
 import type { RegistryName } from "@/registry/__registry";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -15,7 +15,7 @@ export async function generateStaticParams() {
     names
       .filter((name) => {
         const item = components[name];
-        return ["registry:block"].includes(item.type);
+        return ["registry:block", "registry:component"].includes(item.type);
       })
       .map((name) => ({
         locale,
@@ -85,8 +85,17 @@ export default async function BlockPage({
   if (!Component) {
     return notFound();
   }
+  const alignment = component.meta?.alignment;
+
   return (
-    <div className="relative flex h-screen w-full flex-col bg-background">
+    <div
+      className={cn(
+        "relative flex h-screen w-full flex-col bg-background",
+        alignment === "top-right" && "items-end justify-start p-10",
+        alignment === "bottom-center" && "items-center justify-end p-10",
+        (!alignment || alignment === "center") && "items-center justify-center",
+      )}
+    >
       <Component />
     </div>
   );

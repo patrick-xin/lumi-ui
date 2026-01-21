@@ -1,14 +1,11 @@
-import { Button } from "@lumi-ui/ui/button";
-import type { Metadata } from "next";
-import Link from "next/link";
-import { BlocksNav } from "@/components/blocks/blocks-nav";
 import {
-  PageActions,
   PageHeader,
   PageHeaderDescription,
-  PageHeaderHeading,
+  PageHeaderHeading
 } from "@/components/blocks/page-header";
 import { PageNav } from "@/components/blocks/page-nav";
+import { registryBlockCategories } from "@/lib/categories";
+import type { Metadata } from "next";
 
 const title = "Component Blocks";
 const description =
@@ -48,27 +45,18 @@ export default function BlocksLayout({
       <PageHeader>
         <PageHeaderHeading>{title}</PageHeaderHeading>
         <PageHeaderDescription>{description}</PageHeaderDescription>
-        <PageActions>
-          <Button
-            nativeButton={false}
-            render={<a href="#blocks">Browse Blocks</a>}
-            size="lg"
-          />
-        </PageActions>
-      </PageHeader>
-      <PageNav id="blocks">
-        <BlocksNav />
-        <Button
-          className="mr-7 hidden shadow-none lg:flex"
-          nativeButton={false}
-          render={<Link href="/blocks/sidebar">Browse all blocks</Link>}
-          size="sm"
-          variant="secondary"
+        <PageNav
+          id="blocks"
+          items={[
+            { title: "Featured", href: "/blocks" },
+            ...registryBlockCategories.map((category) => ({
+              title: category.name,
+              href: `/blocks/${category.slug}`,
+            })),
+          ]}
         />
-      </PageNav>
-      <div className="container-wrapper section-soft flex-1 md:py-12">
-        <div className="container">{children}</div>
-      </div>
+      </PageHeader>
+      <div className="container">{children}</div>
     </>
   );
 }
