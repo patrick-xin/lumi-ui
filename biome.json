@@ -46,7 +46,8 @@
         "noSvgWithoutTitle": "warn",
         "useFocusableInteractive": "off",
         "useSemanticElements": "warn",
-        "useValidAnchor": "warn"
+        "useValidAnchor": "warn",
+        "noStaticElementInteractions": "warn"
       },
       "complexity": {
         "useLiteralKeys": "off"

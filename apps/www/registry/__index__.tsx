@@ -1081,7 +1081,7 @@ export const components: ComponentRegistry = {
   "project-status-picker": {
     name: "project-status-picker",
     title: "Project Status Picker",
-    description: "A compact status selector optimized for efficiency. Features custom hotkey logic for instant selection, rich item rendering with status colors, and contextual tooltips.",
+    description: "A compact status selector optimized for efficiency. Features custom hotkey logic for instant selection, rich item rendering with status colors, and contextual tooltips. Inspired by Linear.",
     type: "registry:component",
     target: "",
     registryDependencies: ["lucide-react"],
@@ -1103,7 +1103,7 @@ export const components: ComponentRegistry = {
   "morphing-dialog": {
     name: "morphing-dialog",
     title: "Morphing Dialog",
-    description: "A fluid card-to-modal transition pattern inspired by Linear. Combines Base UI's accessible dialog primitives with Framer Motion's shared layout animations for a seamless expansion effect.",
+    description: "A fluid card-to-modal transition pattern. Combines Base UI's accessible dialog primitives with Framer Motion's shared layout animations for a seamless expansion effect. Inspired by Linear.",
     type: "registry:component",
     target: "",
     registryDependencies: ["lucide-react","framer-motion"],
@@ -1142,12 +1142,12 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["overlays-dialogs","dashboard"],
-    meta: undefined,
+    meta: {"alignment":"top-right","iframeHeight":800},
   },
   "t3-model-selector": {
     name: "t3-model-selector",
     title: "T3 Chat Model Selector",
-    description: "A multi-tabbed popover for selecting items from categorized groups. Features vertical navigation, search filtering, and rich hover details. Inspired by T3 Chat",
+    description: "A multi-tabbed popover for selecting items from categorized groups. Features vertical navigation, search filtering, and rich hover details. Inspired by T3 Chat.",
     type: "registry:component",
     target: "",
     registryDependencies: ["lucide-react","@base-ui/react","@icons-pack/react-simple-icons"],
@@ -1164,7 +1164,7 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["form-input","chat"],
-    meta: undefined,
+    meta: {"alignment":"bottom-center","iframeHeight":800},
   },
   "accordion-custom-trigger-icon": {
     name: "accordion-custom-trigger-icon",

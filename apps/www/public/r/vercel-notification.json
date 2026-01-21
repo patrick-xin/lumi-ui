@@ -25,6 +25,10 @@
       "type": "registry:component"
     }
   ],
+  "meta": {
+    "alignment": "top-right",
+    "iframeHeight": 800
+  },
   "categories": [
     "overlays-dialogs",
     "dashboard"

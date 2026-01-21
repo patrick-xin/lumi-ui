@@ -62,7 +62,7 @@ function SidebarProvider({
   const isMobile = useIsMobile();
   const [_open, _setOpen] = React.useState(defaultOpen);
   const open = openProp ?? _open;
-  const [mobileHandle] = React.useState(() => createSheetHandle());
+  const mobileHandle = React.useMemo(() => createSheetHandle(), []);
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
   const setOpen = React.useCallback(
@@ -80,9 +80,8 @@ function SidebarProvider({
   );
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
-    if (isMobile) return;
     return setOpen((open) => !open);
-  }, [isMobile, setOpen]);
+  }, [setOpen]);
   // Adds a keyboard shortcut to toggle the sidebar.
   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -144,7 +143,7 @@ function Sidebar({
   variant?: "sidebar" | "floating" | "inset";
   collapsible?: "offcanvas" | "icon" | "none";
 }) {
-  const { isMobile, state, mobileHandle } = useSidebar();
+  const { isMobile, state, mobileHandle, open, setOpen } = useSidebar();
 
   if (collapsible === "none") {
     return (
@@ -163,7 +162,7 @@ function Sidebar({
 
   if (isMobile) {
     return (
-      <Sheet handle={mobileHandle}>
+      <Sheet handle={mobileHandle} onOpenChange={setOpen} open={open}>
         <SheetContent
           className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0"
           inset={variant === "inset"}

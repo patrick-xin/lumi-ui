@@ -28,7 +28,6 @@ export default async function Page() {
         featured.map((block) => (
           <BlockDisplay block={block} key={block.name} />
         ))}
-      <div className="container-wrapper">
         <div className="container flex justify-center py-6">
           <Button
             nativeButton={false}
@@ -36,7 +35,6 @@ export default async function Page() {
             variant="glow"
           />
         </div>
-      </div>
     </div>
   );
 }

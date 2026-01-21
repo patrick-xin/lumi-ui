@@ -45,4 +45,3 @@ function Toggle({ className, variant, size, ...props }: ToggleProps) {
 }
 
 export { Toggle, toggleVariants };
-export type { ToggleProps };

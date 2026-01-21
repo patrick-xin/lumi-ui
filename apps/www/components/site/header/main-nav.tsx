@@ -1,23 +1,27 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { buttonVariants } from "@lumi-ui/ui/button";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 export function MainNav({
   items,
   className,
   ...props
-}: React.ComponentProps<"nav"> & {
+}: React.ComponentProps<"div"> & {
   items: { href: string; label: string }[];
 }) {
+  const pathname = usePathname();
+  
   return (
-    <nav className={cn("flex items-center gap-2 h-full", className)} {...props}>
+    <div className={cn("flex items-center gap-2 h-full", className)} {...props}>
       {items.map((item) => (
         <Link
           className={cn(
             buttonVariants({ size: "sm", variant: "ghost" }),
             "hover:bg-transparent hover:text-primary",
+            pathname.includes(item.href) && "text-primary",
           )}
           href={item.href}
           key={item.href}
@@ -25,6 +29,6 @@ export function MainNav({
           {item.label}
         </Link>
       ))}
-    </nav>
+    </div>
   );
 }

@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
 import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
-import { cn } from "@lumi-ui/ui/lib/utils";
 import { ArrowSvg } from "@lumi-ui/ui/arrow-svg";
+import { cn } from "@lumi-ui/ui/lib/utils";
+import type * as React from "react";
 
 function TooltipProvider({
   delay = 150,
@@ -42,11 +42,11 @@ function TooltipPositioner({
 }: React.ComponentProps<typeof BaseTooltip.Positioner>) {
   return (
     <BaseTooltip.Positioner
-      data-slot="tooltip-positioner"
       className={cn(
         "outline-none h-(--positioner-height) w-(--positioner-width) max-w-(--available-width)",
         className,
       )}
+      data-slot="tooltip-positioner"
       {...props}
     />
   );
@@ -58,8 +58,8 @@ function TooltipPopup({
 }: React.ComponentProps<typeof BaseTooltip.Popup>) {
   return (
     <BaseTooltip.Popup
-      data-slot="tooltip-popup"
       className={cn("relative", className)}
+      data-slot="tooltip-popup"
       {...props}
     />
   );
@@ -71,7 +71,6 @@ function TooltipArrow({
 }: React.ComponentProps<typeof BaseTooltip.Arrow>) {
   return (
     <BaseTooltip.Arrow
-      data-slot="tooltip-arrow"
       className={cn(
         "flex",
         "data-[side=bottom]:-top-2 data-[side=bottom]:rotate-0",
@@ -80,6 +79,7 @@ function TooltipArrow({
         "data-[side=top]:-bottom-2 data-[side=top]:rotate-180",
         className,
       )}
+      data-slot="tooltip-arrow"
       {...props}
     >
       <ArrowSvg variant="tooltip" />
@@ -93,8 +93,8 @@ function TooltipViewport({
 }: React.ComponentProps<typeof BaseTooltip.Viewport>) {
   return (
     <BaseTooltip.Viewport
-      data-slot="tooltip-viewport"
       className={cn("relative h-full w-full", className)}
+      data-slot="tooltip-viewport"
       {...props}
     />
   );
@@ -121,10 +121,10 @@ function TooltipContent({
   return (
     <TooltipPortal>
       <BaseTooltip.Positioner
-        sideOffset={sideOffset}
-        side={side}
         align={align}
         alignOffset={alignOffset}
+        side={side}
+        sideOffset={sideOffset}
       >
         <BaseTooltip.Popup
           className={cn(
