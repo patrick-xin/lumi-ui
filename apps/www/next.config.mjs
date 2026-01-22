@@ -38,6 +38,7 @@ const config = {
       },
     ];
   },
+  transpilePackages: ["@lumi-ui/ui"],
 };
 
 const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts");

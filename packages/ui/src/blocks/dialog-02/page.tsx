@@ -1,6 +1,10 @@
 "use client";
 
 import type { DialogRootChangeEventDetails } from "@base-ui/react";
+import { InfoMenu } from "@lumi-ui/ui/blocks/dialog-02/components/info-menu";
+import { ProfileCard } from "@lumi-ui/ui/blocks/dialog-02/components/profile-card";
+import { ShareMenu } from "@lumi-ui/ui/blocks/dialog-02/components/share-menu";
+import { TooltipGroup } from "@lumi-ui/ui/blocks/dialog-02/components/tooltip-group";
 import { Button } from "@lumi-ui/ui/button";
 import {
   createDialogHandle,
@@ -14,14 +18,10 @@ import {
 } from "@lumi-ui/ui/dialog";
 import { ChevronLeft, ChevronRight, XIcon } from "lucide-react";
 import * as React from "react";
-import { InfoMenu } from "./info-menu";
-import { ProfileCard } from "./profile-card";
-import { ShareMenu } from "./share-menu";
-import { TooltipGroup } from "./tooltip-group";
 
 const galleryHandle = createDialogHandle<IImage>();
 
-export function UnsplashDiallog() {
+export default function UnsplashDialog() {
   const [open, setOpen] = React.useState(false);
   const [triggerId, setTriggerId] = React.useState<string | null>(null);
 

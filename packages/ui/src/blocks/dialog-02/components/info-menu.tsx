@@ -1,8 +1,8 @@
+import { StatsChart } from "@lumi-ui/ui/blocks/dialog-02/components/stats-chart";
 import { Button } from "@lumi-ui/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@lumi-ui/ui/popover";
 import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@lumi-ui/ui/tabs";
 import { InfoIcon } from "lucide-react";
-import { StatsChart } from "./stats-chart";
 
 export const InfoMenu = () => {
   return (
@@ -10,7 +10,7 @@ export const InfoMenu = () => {
       <PopoverTrigger render={<Button variant="outline" />}>
         <InfoIcon /> Info
       </PopoverTrigger>
-      <PopoverContent align="end" side="top">
+      <PopoverContent align="end" className="bg-secondary" side="top">
         <Tabs className="w-72" defaultValue="views">
           <TabsPanel value="downloads">
             <StatsChart data="downloads" />
