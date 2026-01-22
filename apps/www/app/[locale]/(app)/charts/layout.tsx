@@ -4,12 +4,10 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/blocks/page-header";
-import { PageNav } from "@/components/blocks/page-nav";
-import { registryComponentCategories } from "@/lib/categories";
 
-const title = "Component Lab";
+const title = "Charts";
 const description =
-  "Precision-engineered UI patterns for high-performance applications. Sophisticated, accessible, and ready for production out of the box.";
+  "A collection of ready-to-use chart components built with Recharts V3.";
 
 export const metadata: Metadata = {
   description,
@@ -45,13 +43,6 @@ export default function ComponentsLayout({
       <PageHeader>
         <PageHeaderHeading>{title}</PageHeaderHeading>
         <PageHeaderDescription>{description}</PageHeaderDescription>
-        <PageNav
-          id="components"
-          items={registryComponentCategories.map((category) => ({
-            href: `/widgets/${category.slug}`,
-            title: category.name,
-          }))}
-        />
       </PageHeader>
 
       <div className="container">{children}</div>
