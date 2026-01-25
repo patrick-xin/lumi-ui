@@ -3,11 +3,11 @@
 import { cn } from "@lumi-ui/ui/lib/utils";
 import { GripVerticalIcon } from "lucide-react";
 import {
-  Group,
+  Group as BaseGroup,
+  Panel as BasePanel,
+  Separator as BaseSeparator,
   type GroupProps,
-  Panel,
   type PanelProps,
-  Separator,
   type SeparatorProps,
 } from "react-resizable-panels";
 
@@ -17,7 +17,7 @@ function ResizableGroup({
   ...props
 }: GroupProps) {
   return (
-    <Group
+    <BaseGroup
       className={cn("flex h-full w-full", className)}
       data-slot="resizable-panel-group"
       orientation={orientation}
@@ -27,7 +27,7 @@ function ResizableGroup({
 }
 
 function ResizablePanel(props: PanelProps) {
-  return <Panel data-slot="resizable-panel" {...props} />;
+  return <BasePanel data-slot="resizable-panel" {...props} />;
 }
 
 function ResizableSeparator({
@@ -38,9 +38,10 @@ function ResizableSeparator({
   withHandle?: boolean;
 }) {
   return (
-    <Separator
+    <BaseSeparator
       className={cn(
-        "relative flex items-center justify-center outline-none group",
+        "relative flex items-center justify-center outline-none group bg-border",
+        "focus-visible:bg-primary/50 data-[separator='active']:bg-primary/40",
         "aria-[orientation=vertical]:w-px aria-[orientation=vertical]:h-auto",
         "aria-[orientation=vertical]:after:w-4 aria-[orientation=vertical]:after:h-full aria-[orientation=vertical]:after:-left-1.5",
         "aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full",
@@ -51,31 +52,24 @@ function ResizableSeparator({
       data-slot="resizable-separator"
       {...props}
     >
-      <div
-        className={cn(
-          "absolute inset-0 bg-border transition-colors",
-          "group-focus:bg-primary/50",
-          "group-data-[separator='active']:bg-primary/40",
-        )}
-      />
       {withHandle && (
         <div
           className={cn(
-            "relative z-10 flex items-center justify-center rounded-xs border",
-            "bg-background",
+            "relative z-10 bg-background flex items-center justify-center rounded-xs border",
             "group-aria-[orientation=vertical]:h-4 group-aria-[orientation=vertical]:w-3",
             "group-aria-[orientation=horizontal]:h-3 group-aria-[orientation=horizontal]:w-4",
           )}
         >
           <GripVerticalIcon
             className={cn(
-              "size-2.5 text-muted-foreground",
+              "size-3 text-muted-foreground",
+              "group-data-[separator='active']:text-foreground",
               "group-aria-[orientation=horizontal]:rotate-90",
             )}
           />
         </div>
       )}
-    </Separator>
+    </BaseSeparator>
   );
 }
 

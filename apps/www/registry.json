@@ -645,6 +645,20 @@
       ]
     },
     {
+      "name": "chart",
+      "title": "Chart",
+      "description": "Beautiful charts. Built using Recharts.",
+      "dependencies": ["recharts"],
+      "registryDependencies": ["utils"],
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "../../packages/ui/src/components/ui/chart.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "breadcrumb",
       "title": "Breadcrumb",
       "description": "Displays the path to the current resource using a hierarchy of links.",

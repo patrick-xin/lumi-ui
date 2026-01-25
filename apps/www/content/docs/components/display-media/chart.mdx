@@ -1,0 +1,55 @@
+---
+title: Chart
+description: Beautiful, typed charts built with Recharts v3.
+links:
+  doc: https://ui.shadcn.com/docs/components/radix/chart
+status: new
+---
+
+<ComponentPreview name="chart-demo"/>
+
+<Callout variant="info" title="Note">
+This component is a modified version of the Shadcn Chart, updated to support Recharts v3.
+</Callout>
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/chart
+    ```
+  </TabsPanel>
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Install recharts">
+        ```bash
+        npm install recharts@latest
+        ```
+      </Step>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="chart" title="chart.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## Examples
+
+<ComponentPreview name="chart-cluster-cpu"/>
+<ComponentPreview name="chart-ev-market"/>
+<ComponentPreview name="chart-radar-ai"/>
+<ComponentPreview name="chart-radial-energy"/>
+<ComponentPreview name="chart-scatter-quadrant"/>
+
+## Source Credits
+
+- Adapted from [Shadcn Charts](https://ui.shadcn.com/docs/components/base/chart) to support Recharts v3 breaking changes.
+- Recharts v3 migration logic adapted from this [GitHub Discussion](https://github.com/shadcn-ui/ui/issues/7669#issuecomment-2998299159).
+
+
+

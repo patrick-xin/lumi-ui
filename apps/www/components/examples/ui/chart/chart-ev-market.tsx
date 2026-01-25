@@ -53,8 +53,8 @@ export function ChartEVMarket() {
           Sales Volume vs. Year-over-Year Growth Rate
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex-1 min-h-72">
-        <ChartContainer config={chartConfig}>
+      <CardContent className="flex-1">
+        <ChartContainer className="h-72 min-h-72" config={chartConfig}>
           <ComposedChart
             accessibilityLayer
             data={chartData}

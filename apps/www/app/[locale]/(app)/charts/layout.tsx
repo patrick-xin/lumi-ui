@@ -1,4 +1,6 @@
+import { Button } from "@lumi-ui/ui/button";
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   PageHeader,
   PageHeaderDescription,
@@ -43,8 +45,14 @@ export default function ComponentsLayout({
       <PageHeader>
         <PageHeaderHeading>{title}</PageHeaderHeading>
         <PageHeaderDescription>{description}</PageHeaderDescription>
+        <Button
+          nativeButton={false}
+          render={<Link href="/docs/components/display-media/chart" />}
+          variant="glow"
+        >
+          Documentation
+        </Button>
       </PageHeader>
-
       <div className="container">{children}</div>
     </>
   );

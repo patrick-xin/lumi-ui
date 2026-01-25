@@ -1,12 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui/react";
 import { Button } from "@lumi-ui/ui/button";
+import { cn } from "@lumi-ui/ui/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { XIcon } from "lucide-react";
-
-import { cn } from "@lumi-ui/ui/lib/utils";
+import type * as React from "react";
 
 function Dialog<Payload>({
   ...props
@@ -240,7 +239,7 @@ const DialogElementOutsideContent = ({
     <DialogContent layout="element-outside" {...props}>
       <div
         className={cn(
-          "pointer-events-auto h-full w-full flex flex-col", 
+          "pointer-events-auto h-full w-full flex flex-col",
           "shadow-md rounded bg-background",
           className,
         )}

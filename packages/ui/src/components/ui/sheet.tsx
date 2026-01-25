@@ -1,12 +1,11 @@
 "use client";
 
-import type * as React from "react";
 import { Dialog as BaseSheet } from "@base-ui/react/dialog";
 import { Button } from "@lumi-ui/ui/button";
+import { cn } from "@lumi-ui/ui/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { XIcon } from "lucide-react";
-
-import { cn } from "@lumi-ui/ui/lib/utils";
+import type * as React from "react";
 
 function Sheet(props: React.ComponentProps<typeof BaseSheet.Root>) {
   return <BaseSheet.Root data-slot="sheet" {...props} />;
@@ -114,10 +113,7 @@ function SheetDescription({
 function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn(
-        "mt-auto flex flex-col gap-2",
-        className,
-      )}
+      className={cn("mt-auto flex flex-col gap-2", className)}
       data-slot="sheet-footer"
       {...props}
     />
@@ -181,8 +177,8 @@ function SheetContent({
             <BaseSheet.Close
               aria-label="Close"
               className="absolute top-2 right-2"
-              render={<Button size="icon-sm" variant="ghost" />}
               data-slot="sheet-close"
+              render={<Button size="icon-sm" variant="ghost" />}
             >
               <XIcon />
               <span className="sr-only">Close</span>

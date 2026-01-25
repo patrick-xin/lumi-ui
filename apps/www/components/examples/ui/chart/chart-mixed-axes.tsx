@@ -66,7 +66,7 @@ export function ChartMixedAxes() {
           {Object.entries(chartConfig).map(([key, config]) => (
             <ToggleGroupItem
               aria-label={`Toggle ${config.label}`}
-              className="gap-1 text-xs"
+              className="gap-1 text-xs cursor-pointer"
               key={key}
               size="sm"
               value={key}

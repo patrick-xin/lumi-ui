@@ -1,12 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { AlertDialog as BaseAlertDialog } from "@base-ui/react/alert-dialog";
-import { popupVariants, viewportVariants } from "@lumi-ui/ui/dialog";
 import { buttonVariants } from "@lumi-ui/ui/button";
-
+import { popupVariants, viewportVariants } from "@lumi-ui/ui/dialog";
 import { cn } from "@lumi-ui/ui/lib/utils";
-import { type VariantProps } from "class-variance-authority";
+import type { VariantProps } from "class-variance-authority";
+import type * as React from "react";
 
 function AlertDialog<Payload>({
   ...props
@@ -40,7 +39,7 @@ function AlertDialogBackdrop({
       className={cn(
         "fixed inset-0 min-h-dvh bg-black/20 backdrop-blur-xs animate-fade",
         "supports-[-webkit-touch-callout:none]:absolute",
-        className
+        className,
       )}
       data-slot="alert-dialog-backdrop"
       {...props}
@@ -121,7 +120,7 @@ function AlertDialogFooter({
     <div
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className
+        className,
       )}
       data-slot="alert-dialog-footer"
       {...props}
@@ -169,7 +168,6 @@ function AlertDialogContent({
     </AlertDialogPortal>
   );
 }
-
 
 const createAlertDialogHandle = BaseAlertDialog.createHandle;
 
