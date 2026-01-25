@@ -9,6 +9,9 @@ import {
   type ToastManagerAddOptions,
   type ToastRootProps,
 } from "@base-ui/react/toast";
+import { ArrowSvg } from "@lumi-ui/ui/arrow-svg";
+import { buttonVariants } from "@lumi-ui/ui/button";
+import { cn } from "@lumi-ui/ui/lib/utils";
 import { cva } from "class-variance-authority";
 import {
   AlertCircle,
@@ -18,9 +21,6 @@ import {
   Loader2,
   X,
 } from "lucide-react";
-import { cn } from "@lumi-ui/ui/lib/utils";
-import { ArrowSvg } from "@lumi-ui/ui/arrow-svg";
-import { buttonVariants } from "@lumi-ui/ui/button";
 
 const stackedManager = BaseToast.createToastManager();
 const anchoredManager = BaseToast.createToastManager();
@@ -63,33 +63,33 @@ type ToastOptions = ToastManagerAddOptions<ToastProps> & ToastData;
 type ToastUpdateOptions = ToastManagerUpdateOptions<ToastProps> & ToastData;
 
 const Icons = {
-  success: CheckCircle2,
+  default: null,
   error: AlertCircle,
-  warning: AlertTriangle,
   info: Info,
   loading: Loader2,
-  default: null,
+  success: CheckCircle2,
+  warning: AlertTriangle,
 };
 
 const toastVariants = cva(
   // Custom styles, change the look of the toast
   "rounded-md outline-1 shadow-lg transition-all select-none dark:-outline-offset-1",
   {
+    defaultVariants: {
+      type: "default",
+    },
     variants: {
       type: {
         default: "outline-border bg-popover text-popover-foreground",
-        success:
-          "outline-green-500/40 bg-green-50 text-green-900 dark:bg-green-950 dark:text-green-200",
         error:
           "outline-red-500/40 bg-red-50 text-red-900 dark:bg-red-950 dark:text-red-200",
-        warning:
-          "outline-yellow-500/40 bg-yellow-50 text-yellow-900 dark:bg-yellow-950 dark:text-yellow-200",
         info: "outline-sky-500/40 bg-sky-50 text-sky-900 dark:bg-sky-950 dark:text-sky-200",
         loading: "outline-border bg-popover text-popover-foreground",
+        success:
+          "outline-green-500/40 bg-green-50 text-green-900 dark:bg-green-950 dark:text-green-200",
+        warning:
+          "outline-yellow-500/40 bg-yellow-50 text-yellow-900 dark:bg-yellow-950 dark:text-yellow-200",
       },
-    },
-    defaultVariants: {
-      type: "default",
     },
   },
 );
@@ -98,49 +98,12 @@ const getOptions = (options?: ToastOptions) => {
   const { customContent, closable, data, ...rest } = options || {};
   return {
     ...rest,
-    data: { ...data, customContent, closable },
+    data: { ...data, closable, customContent },
   };
 };
 
 const toast = {
   add: (options: ToastOptions) => stackedManager.add(getOptions(options)),
-  success: (options?: ToastOptions) =>
-    stackedManager.add({ ...getOptions(options), type: "success" }),
-  error: (options?: ToastOptions) =>
-    stackedManager.add({ ...getOptions(options), type: "error" }),
-  warning: (options?: ToastOptions) =>
-    stackedManager.add({ ...getOptions(options), type: "warning" }),
-  info: (options?: ToastOptions) =>
-    stackedManager.add({ ...getOptions(options), type: "info" }),
-  promise: <Value,>(
-    promise: Promise<Value>, 
-    options: {
-      loading: ToastOptions | string;
-      success: ToastOptions | string | ((value: Value) => ToastOptions | string);
-      error: ToastOptions | string | ((error: Error) => ToastOptions | string);
-    }
-  ) => {
-    const normalize = (opt: ToastOptions | string) => 
-      typeof opt === "string" ? { title: opt } : getOptions(opt);
-
-    return stackedManager.promise(promise, {
-      loading: normalize(options.loading),
-      success: (val) => {
-        const resolved = typeof options.success === "function" ? options.success(val) : options.success;
-        return normalize(resolved);
-      },
-      error: (err) => {
-        const resolved = typeof options.error === "function" ? options.error(err) : options.error;
-        return normalize(resolved);
-      }
-    });
-  },
-  update: (id: string, options?: ToastUpdateOptions) =>
-    stackedManager.update(id, getOptions(options)),
-  close: (id: string) => {
-    stackedManager.close(id);
-    anchoredManager.close(id);
-  },
   anchor: (
     anchor: HTMLElement | null,
     options?: Omit<ToastOptions, "positionerProps"> & {
@@ -155,11 +118,57 @@ const toast = {
       ...normalized,
       positionerProps: {
         anchor,
-        sideOffset: sideOffset ?? 8,
         side: side ?? "bottom",
+        sideOffset: sideOffset ?? 8,
       },
     });
   },
+  close: (id: string) => {
+    stackedManager.close(id);
+    anchoredManager.close(id);
+  },
+  error: (options?: ToastOptions) =>
+    stackedManager.add({ ...getOptions(options), type: "error" }),
+  info: (options?: ToastOptions) =>
+    stackedManager.add({ ...getOptions(options), type: "info" }),
+  promise: <Value,>(
+    promise: Promise<Value>,
+    options: {
+      loading: ToastOptions | string;
+      success:
+        | ToastOptions
+        | string
+        | ((value: Value) => ToastOptions | string);
+      error: ToastOptions | string | ((error: Error) => ToastOptions | string);
+    },
+  ) => {
+    const normalize = (opt: ToastOptions | string) =>
+      typeof opt === "string" ? { title: opt } : getOptions(opt);
+
+    return stackedManager.promise(promise, {
+      error: (err) => {
+        const resolved =
+          typeof options.error === "function"
+            ? options.error(err)
+            : options.error;
+        return normalize(resolved);
+      },
+      loading: normalize(options.loading),
+      success: (val) => {
+        const resolved =
+          typeof options.success === "function"
+            ? options.success(val)
+            : options.success;
+        return normalize(resolved);
+      },
+    });
+  },
+  success: (options?: ToastOptions) =>
+    stackedManager.add({ ...getOptions(options), type: "success" }),
+  update: (id: string, options?: ToastUpdateOptions) =>
+    stackedManager.update(id, getOptions(options)),
+  warning: (options?: ToastOptions) =>
+    stackedManager.add({ ...getOptions(options), type: "warning" }),
 };
 
 const ToastViewport = ({ ...props }: BaseToast.Viewport.Props) => {
@@ -177,8 +186,8 @@ const ToastContent = ({ children, ...props }: BaseToast.Content.Props) => {
 const ToastTitle = ({ children, ...props }: BaseToast.Title.Props) => {
   return (
     <BaseToast.Title
-      data-slot="toast-title"
       className="text-sm font-semibold"
+      data-slot="toast-title"
       {...props}
     >
       {children}
@@ -192,8 +201,8 @@ const ToastDescription = ({
 }: BaseToast.Description.Props) => {
   return (
     <BaseToast.Description
-      data-slot="toast-description"
       className="text-sm"
+      data-slot="toast-description"
       {...props}
     >
       {children}
@@ -203,7 +212,7 @@ const ToastDescription = ({
 
 const ToastClose = ({ children, ...props }: BaseToast.Close.Props) => {
   return (
-    <BaseToast.Close data-slot="toast-close" aria-label="Close" {...props}>
+    <BaseToast.Close aria-label="Close" data-slot="toast-close" {...props}>
       {children}
     </BaseToast.Close>
   );
@@ -216,8 +225,8 @@ const ToastAction = (props: BaseToast.Action.Props) => {
 const ToastArrow = (props: BaseToast.Arrow.Props) => {
   return (
     <BaseToast.Arrow
-      data-slot="toast-arrow"
       className="data-[side=bottom]:-top-2 data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180"
+      data-slot="toast-arrow"
       {...props}
     >
       <ArrowSvg />
@@ -232,7 +241,7 @@ const Toaster = ({
 }: ToasterProps) => {
   return (
     <>
-      <BaseToast.Provider toastManager={stackedManager} limit={limit}>
+      <BaseToast.Provider limit={limit} toastManager={stackedManager}>
         <StackedToast position={position} swipeDirection={swipeDirection} />
       </BaseToast.Provider>
       <BaseToast.Provider toastManager={anchoredManager}>
@@ -252,10 +261,7 @@ const StackedToast = ({
   const { toasts } = BaseToast.useToastManager();
   return (
     <BaseToast.Portal>
-      <ToastViewport
-        data-position={position}
-        className="toast-viewport"
-      >
+      <ToastViewport className="toast-viewport" data-position={position}>
         {toasts.map((toast) => {
           const toastType = (toast.type as ToastType) || "default";
           const Icon = Icons[toastType];
@@ -263,15 +269,15 @@ const StackedToast = ({
 
           return (
             <BaseToast.Root
-              data-slot="toast-root"
-              key={toast.id}
-              toast={toast}
-              data-position={position}
-              swipeDirection={swipeDirection}
               className={cn(
                 "toast-root",
                 !isCustomContent && toastVariants({ type: toastType }),
               )}
+              data-position={position}
+              data-slot="toast-root"
+              key={toast.id}
+              swipeDirection={swipeDirection}
+              toast={toast}
             >
               <ToastContent
                 className={cn(
@@ -285,11 +291,11 @@ const StackedToast = ({
                   <div className="flex items-center gap-3 p-4">
                     {Icon && (
                       <Icon
-                        data-slot="toast-icon"
                         className={cn(
                           "size-5 shrink-0",
                           toastType === "loading" && "animate-spin",
                         )}
+                        data-slot="toast-icon"
                       />
                     )}
                     <div className="flex justify-between items-center flex-wrap flex-1">
@@ -315,8 +321,8 @@ const StackedToast = ({
                         <ToastClose
                           className={cn(
                             buttonVariants({
-                              variant: "ghost",
                               size: "icon-sm",
+                              variant: "ghost",
                             }),
                             "absolute top-1 right-1 size-6",
                             toastType === "error" && "hover:bg-red-500/20!",
@@ -351,18 +357,18 @@ const AnchoredToast = () => {
           const isCustomContent = toast.data?.customContent;
           return (
             <BaseToast.Positioner
+              className="outline-none"
               data-slot="toast-positioner"
               key={toast.id}
               toast={toast}
-              className="outline-none"
             >
               <BaseToast.Root
-                data-slot="toast-root"
-                toast={toast}
                 className={cn(
                   !isCustomContent && toastVariants({ type: "default" }),
                   "animate-popup",
                 )}
+                data-slot="toast-root"
+                toast={toast}
               >
                 {isCustomContent ? (
                   toast.data.customContent

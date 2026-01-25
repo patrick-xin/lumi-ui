@@ -1,0 +1,69 @@
+---
+title: Resizable
+description: Accessible resizable panel groups and layouts with keyboard support.
+links:
+  doc: https://react-resizable-panels.vercel.app/
+status: new  
+---
+
+<ComponentPreview name="resizable-demo" />
+
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/resizable
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Install resizable">
+        ```bash
+        npm install react-resizable-panels
+        ```
+      </Step>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="resizable" title="resizable.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## Anatomy
+```tsx
+  <ResizableGroup>   
+    <ResizablePanel />
+    <ResizableSeparator />     
+  </ResizableGroup>
+```
+
+## Basic Usage
+
+```tsx
+import {
+  ResizableGroup,
+  ResizablePanel,
+} from "@components/ui/resizable";
+
+<ResizableGroup orientation="horizontal">
+  <ResizablePanel>One</ResizablePanel>
+  <ResizablePanel>Two</ResizablePanel>
+</ResizableGroup>
+```
+
+## Orientation
+<ComponentPreview name="resizable-basic" />
+
+## Collapsible
+<ComponentPreview name="resizable-collapsible" />
+
+## Nested
+<ComponentPreview name="resizable-nested" />

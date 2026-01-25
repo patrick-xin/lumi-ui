@@ -7,9 +7,11 @@ export async function ComponentPreview({
   name,
   className,
   collapsible = false,
+  hideSource,
 }: React.ComponentProps<"div"> & {
   name: ComponentName;
   collapsible?: boolean;
+  hideSource?: boolean;
 }) {
   const { component: Component } = components[name];
 
@@ -22,6 +24,14 @@ export async function ComponentPreview({
         </code>{" "}
         not found in registry.
       </p>
+    );
+  }
+
+  if (hideSource) {
+    return (
+      <div className="grid w-full *:[figure]:h-[420px] *:[figure]:overflow-scroll *:[figure]:no-scrollbar">
+        <Component />
+      </div>
     );
   }
 

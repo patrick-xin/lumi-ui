@@ -32,7 +32,6 @@ export function SiteHeader({ locale }: { locale: string }) {
               items={[
                 { href: "/docs/introduction", label: "Docs" },
                 { href: "/widgets", label: "Component Lab" },
-                { href: "/blocks", label: "Blocks" },
               ]}
             />
           </div>

@@ -21,7 +21,6 @@ type User = {
   email: string;
 };
 
-// The payload can be strongly typed by providing a type argument to the `createDialogHandle()` function.
 const editUserDialogHandle = createDialogHandle<User>();
 
 const USERS: User[] = [
@@ -33,7 +32,7 @@ const USERS: User[] = [
 export default function UserManagementDemo() {
   return (
     <div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         {USERS.map((user) => (
           <DialogTrigger
             handle={editUserDialogHandle}
@@ -51,9 +50,8 @@ export default function UserManagementDemo() {
               <DialogDescription>
                 Update profile details for{" "}
                 <span className="font-semibold text-primary">
-                  {payload?.name}
+                  {payload?.name}.
                 </span>
-                .
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">

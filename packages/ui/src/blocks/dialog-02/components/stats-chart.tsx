@@ -45,7 +45,7 @@ export const StatsChart = ({
               className="bg-foreground text-background border-transparent shadow-none w-fit"
               hideIndicator
               labelFormatter={(value) => {
-                return new Date(value).toLocaleDateString("en-US", {
+                return new Date(value as string).toLocaleDateString("en-US", {
                   day: "numeric",
                   month: "short",
                   year: "numeric",

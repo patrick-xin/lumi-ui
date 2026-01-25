@@ -950,6 +950,28 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "chart": {
+    name: "chart",
+    title: "Chart",
+    description: "Beautiful charts. Built using Recharts.",
+    type: "registry:ui",
+    target: "",
+    registryDependencies: ["recharts"],
+    files:     [
+          {
+                "path": "../../packages/ui/src/components/ui/chart.tsx",
+                "target": "",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@lumi-ui/ui/chart");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chart";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "breadcrumb": {
     name: "breadcrumb",
     title: "Breadcrumb",
@@ -1773,6 +1795,132 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/button/button-with-icon");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "button-with-icon";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "chart-cluster-cpu": {
+    name: "chart-cluster-cpu",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["chart"],
+    files: [{
+      path: "components/examples/ui/chart/chart-cluster-cpu.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/chart/chart-cluster-cpu");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chart-cluster-cpu";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "chart-demo": {
+    name: "chart-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["chart"],
+    files: [{
+      path: "components/examples/ui/chart/chart-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/chart/chart-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chart-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "chart-ev-market": {
+    name: "chart-ev-market",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["chart"],
+    files: [{
+      path: "components/examples/ui/chart/chart-ev-market.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/chart/chart-ev-market");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chart-ev-market";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "chart-mixed-axes": {
+    name: "chart-mixed-axes",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["chart"],
+    files: [{
+      path: "components/examples/ui/chart/chart-mixed-axes.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/chart/chart-mixed-axes");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chart-mixed-axes";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "chart-radar-ai": {
+    name: "chart-radar-ai",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["chart"],
+    files: [{
+      path: "components/examples/ui/chart/chart-radar-ai.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/chart/chart-radar-ai");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chart-radar-ai";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "chart-radial-energy": {
+    name: "chart-radial-energy",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["chart"],
+    files: [{
+      path: "components/examples/ui/chart/chart-radial-energy.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/chart/chart-radial-energy");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chart-radial-energy";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "chart-scatter-quadrant": {
+    name: "chart-scatter-quadrant",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["chart"],
+    files: [{
+      path: "components/examples/ui/chart/chart-scatter-quadrant.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/chart/chart-scatter-quadrant");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chart-scatter-quadrant";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -3668,6 +3816,60 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "resizable-basic": {
+    name: "resizable-basic",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    files: [{
+      path: "components/examples/ui/resizable/resizable-basic.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/resizable/resizable-basic");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "resizable-basic";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "resizable-collapsible-sidebar": {
+    name: "resizable-collapsible-sidebar",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    files: [{
+      path: "components/examples/ui/resizable/resizable-collapsible-sidebar.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/resizable/resizable-collapsible-sidebar");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "resizable-collapsible-sidebar";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "resizable-collapsible": {
+    name: "resizable-collapsible",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    files: [{
+      path: "components/examples/ui/resizable/resizable-collapsible.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/resizable/resizable-collapsible");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "resizable-collapsible";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "resizable-demo": {
     name: "resizable-demo",
     description: "",
@@ -3681,6 +3883,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/resizable/resizable-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "resizable-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "resizable-nested": {
+    name: "resizable-nested",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["resizable"],
+    files: [{
+      path: "components/examples/ui/resizable/resizable-nested.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/resizable/resizable-nested");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "resizable-nested";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

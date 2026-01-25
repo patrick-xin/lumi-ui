@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
 import { Checkbox } from "@lumi-ui/ui/checkbox";
 import { Field, FieldLabel } from "@lumi-ui/ui/field";
+import React from "react";
 
 export function CheckboxControlledDemo() {
   const [accepted, setAccepted] = React.useState(false);
