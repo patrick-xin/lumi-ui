@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import type { Layout } from "react-resizable-panels";
-import { ChartClusterCpu } from "@/components/examples/ui/chart/chart-cluster-cpu";
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import { ChartMixedAxes } from "@/components/examples/ui/chart/chart-demo";
+import { AppSidebarIcon } from "@/components/sidebar/app-sidebar-icon";
 import {
   MainContent,
   SidebarProvider,
@@ -20,19 +20,17 @@ export default async function Page() {
 
   return (
     <SidebarProvider
-      collapsibleType="sidebar"
+      collapsibleType="icon"
       defaultLayout={defaultLayout}
       groupId={GROUP_ID}
     >
-      <AppSidebar />
+      <AppSidebarIcon />
       <MainContent>
-        <header className="flex h-16 shrink-0 items-center gap-2">
-          <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger />
-          </div>
+        <header className="flex h-16 shrink-0 items-center gap-2 p-2 sm:p-4">
+          <SidebarTrigger />
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <ChartClusterCpu />
+        <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
+          <ChartMixedAxes />
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
             <div className="bg-muted/50 aspect-video rounded-xl" />
             <div className="bg-muted/50 aspect-video rounded-xl" />

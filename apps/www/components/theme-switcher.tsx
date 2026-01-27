@@ -25,7 +25,15 @@ const THEME_OPTIONS = [
   { colorClass: "bg-[oklch(0.72_0.18_128)]", id: "canopy" },
 ];
 
-export function ThemeSwitcher() {
+export function ThemeSwitcher({
+  side = "bottom",
+  variant = "glow",
+  className,
+}: {
+  side?: "bottom" | "right";
+  variant?: "glow" | "ghost";
+  className?: string;
+}) {
   const { setTheme, resolvedTheme } = useTheme();
   const [themeSet, setThemeSet] = useState("celeste");
   const [mode, setMode] = useState("dark");
@@ -53,7 +61,15 @@ export function ThemeSwitcher() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button size="icon-sm" title="Switch theme" variant="glow">
+          <Button
+            className={cn(
+              "data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent",
+              className,
+            )}
+            size="icon-sm"
+            title="Switch theme"
+            variant={variant}
+          >
             <PaletteIcon className="size-4 transition-transform" />
           </Button>
         }
@@ -61,6 +77,7 @@ export function ThemeSwitcher() {
       <DropdownMenuContent
         className="shadow-md shadow-primary/10 outline dark:-outline-offset-1 outline-primary/10"
         matchAnchorWidth={false}
+        side={side}
       >
         <div className="grid grid-cols-3 gap-y-1">
           {THEME_OPTIONS.map(({ id, colorClass }) => (

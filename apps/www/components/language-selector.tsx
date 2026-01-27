@@ -43,7 +43,10 @@ export function LanguageSelector() {
       value={value}
     >
       <SelectTrigger
-        className={cn(buttonVariants({ size: "icon-sm", variant: "glow" }))}
+        className={cn(
+          buttonVariants({ size: "icon-sm", variant: "glow" }),
+          "data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent",
+        )}
       >
         <LanguagesIcon />
       </SelectTrigger>

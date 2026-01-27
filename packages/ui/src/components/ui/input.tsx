@@ -1,7 +1,7 @@
 import { Input as BaseInput } from "@base-ui/react/input";
+import { cn } from "@lumi-ui/ui/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import type * as React from "react";
-import { cn } from "@lumi-ui/ui/lib/utils";
 
 const inputVariants = cva(
   [
@@ -25,7 +25,7 @@ const inputVariants = cva(
     variants: {
       inputSize: {
         default: "h-9 py-1.5 text-base md:text-sm",
-        lg: "h-10 py-2 text-lg md:text-base",
+        lg: "h-10 py-2 text-base md:text-sm",
         sm: "h-8 py-1 text-sm",
       },
       variant: {

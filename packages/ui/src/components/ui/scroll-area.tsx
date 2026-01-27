@@ -76,13 +76,13 @@ function ScrollAreaScrollBar({
   return (
     <BaseScrollArea.Scrollbar
       className={cn(
-        "flex touch-none select-none transition-colors",
+        "flex touch-none select-none transition-[colors,opacity]",
         "absolute z-20 p-0.5",
         orientation === "vertical" &&
-          "right-0 top-0 bottom-0 w-2.5 border-l border-l-transparent",
+          "right-0 top-0 bottom-0 w-2 border-l border-l-transparent",
         orientation === "horizontal" &&
-          "bottom-0 left-0 right-0 h-2.5 flex-col border-t border-t-transparent",
-        "opacity-0 transition-opacity duration-200 pointer-events-none",
+          "bottom-0 left-0 right-0 h-2 flex-col border-t border-t-transparent",
+        "opacity-0 duration-200 pointer-events-none",
         "data-[hovering]:opacity-100 data-[hovering]:delay-0 data-[hovering]:pointer-events-auto",
         "data-[scrolling]:opacity-100 data-[scrolling]:duration-0 data-[scrolling]:pointer-events-auto",
         orientation === "vertical" && "data-[has-overflow-y=false]:hidden",

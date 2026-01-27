@@ -2,10 +2,17 @@
 
 import { Button } from "@lumi-ui/ui/button";
 import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
+import { cn } from "@lumi-ui/ui/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { useTheme } from "next-themes";
 
-export function ModeSwitcher() {
+export function ModeSwitcher({
+  className,
+  variant = "glow",
+}: {
+  className?: string;
+  variant?: "glow" | "ghost";
+}) {
   const { setTheme, resolvedTheme } = useTheme();
   const mounted = useMounted();
 
@@ -31,11 +38,11 @@ export function ModeSwitcher() {
 
   return (
     <Button
-      className="group/toggle extend-touch-target size-8"
+      className={cn("group/toggle extend-touch-target size-8", className)}
       onClick={toggleMode}
       size="icon"
       title="Toggle theme"
-      variant="glow"
+      variant={variant}
     >
       <AnimatePresence initial={false} mode="wait">
         {currentMode === "dark" ? (

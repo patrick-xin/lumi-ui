@@ -2286,6 +2286,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "combobox-ref": {
+    name: "combobox-ref",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["combobox"],
+    files: [{
+      path: "components/examples/ui/combobox/combobox-ref.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/combobox/combobox-ref");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox-ref";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "combobox-scroll-area": {
     name: "combobox-scroll-area",
     description: "",

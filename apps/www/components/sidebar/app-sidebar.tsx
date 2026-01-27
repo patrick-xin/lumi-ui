@@ -2,6 +2,7 @@ import { ScrollArea } from "@lumi-ui/ui/scroll-area";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -11,6 +12,7 @@ import {
   SidebarMenuItem,
 } from "@/components/sidebar/sidebar";
 import { NavMain } from "./nav-main";
+import { NavUser } from "./nav-user";
 import { VersionSwitcher } from "./version-switcher";
 
 const data = {
@@ -141,6 +143,10 @@ const data = {
       url: "#",
     },
   ],
+  user: {
+    email: "m@example.com",
+    name: "Lumi UI",
+  },
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
 };
 
@@ -152,7 +158,6 @@ export function AppSidebar() {
           defaultVersion={data.versions[0]}
           versions={data.versions}
         />
-        {/* <SearchForm /> */}
       </SidebarHeader>
       <SidebarContent>
         <ScrollArea>
@@ -179,6 +184,9 @@ export function AppSidebar() {
           ))}
         </ScrollArea>
       </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
     </Sidebar>
   );
 }
