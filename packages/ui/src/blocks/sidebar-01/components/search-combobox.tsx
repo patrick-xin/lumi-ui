@@ -12,6 +12,7 @@ import {
 } from "@lumi-ui/ui/combobox";
 import { cn } from "@lumi-ui/ui/lib/utils";
 import { Separator } from "@lumi-ui/ui/separator";
+import { SidebarMenuButton, useSidebar } from "@lumi-ui/ui/sidebar";
 import {
   CpuIcon,
   EyeIcon,
@@ -21,9 +22,7 @@ import {
   TvMinimalIcon,
   UserIcon,
 } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
-import { SidebarMenuButton, useSidebar } from "./sidebar";
 
 export function SearchCombobox() {
   const [open, setOpen] = useState(false);
@@ -65,7 +64,7 @@ export function SearchCombobox() {
             variant="ghost"
           />
           <Button
-            className="absolute right-2 text-[10px] rounded-sm text-muted-foreground cursor-pointer"
+            className="absolute hidden lg:block right-2 text-[10px] rounded-sm text-muted-foreground cursor-pointer"
             onClick={() => setOpen(false)}
             size="icon-xs"
             variant="secondary"
@@ -83,7 +82,7 @@ export function SearchCombobox() {
               indicatorPlacement="none"
               key={member.id}
               render={
-                <Link className="flex!" href={"/"}>
+                <a className="inline-flex w-full" href="#">
                   <span>{IconMap[member.iconName]}</span>
                   <span className="flex flex-col ml-2 flex-1">
                     {member.label}
@@ -91,7 +90,7 @@ export function SearchCombobox() {
                       {member.description}
                     </span>
                   </span>
-                </Link>
+                </a>
               }
               value={member}
             />

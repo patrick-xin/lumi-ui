@@ -1,5 +1,6 @@
 "use client";
 
+import { ThemeSwitcher } from "@lumi-ui/ui/blocks/sidebar-01/components/theme-switcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,6 +9,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "@lumi-ui/ui/sidebar";
 import {
   BookIcon,
   ChevronsUpDown,
@@ -18,13 +25,6 @@ import {
   SmileIcon,
   UserIcon,
 } from "lucide-react";
-import { ThemeSwitcher } from "../theme-switcher";
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "./sidebar";
 
 export function NavUser({
   user,

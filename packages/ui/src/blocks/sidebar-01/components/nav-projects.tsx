@@ -39,7 +39,7 @@ export function NavProjects({ projects }: { projects: Project[] }) {
 
   return (
     <>
-      <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+      <SidebarGroup className="group-data-[state=collapsed]:hidden">
         <SidebarGroupLabel>Projects</SidebarGroupLabel>
         <SidebarMenu>
           {projects.map((item) => (
@@ -49,21 +49,21 @@ export function NavProjects({ projects }: { projects: Project[] }) {
                   <a href={item.url}>
                     <item.icon />
                     <span>{item.name}</span>
+                    <SidebarMenuAction
+                      render={
+                        <DropdownMenuTrigger
+                          handle={projectMenuHandle}
+                          id={item.name}
+                          payload={item}
+                        />
+                      }
+                      showOnHover
+                    >
+                      <MoreHorizontal className="text-sidebar-foreground/70" />
+                    </SidebarMenuAction>
                   </a>
                 }
-              />
-              <SidebarMenuAction
-                render={
-                  <DropdownMenuTrigger
-                    handle={projectMenuHandle}
-                    id={item.name}
-                    payload={item}
-                  />
-                }
-                showOnHover
-              >
-                <MoreHorizontal className="text-sidebar-foreground/70" />
-              </SidebarMenuAction>
+              ></SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>

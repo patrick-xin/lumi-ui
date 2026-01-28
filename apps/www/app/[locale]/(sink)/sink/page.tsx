@@ -1,12 +1,12 @@
-import { cookies } from "next/headers";
-import type { Layout } from "react-resizable-panels";
-import { ChartClusterCpu } from "@/components/examples/ui/chart/chart-cluster-cpu";
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import { AppSidebar } from "@lumi-ui/ui/blocks/sidebar-01/components/app-sidebar";
 import {
   MainContent,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/sidebar/sidebar";
+} from "@lumi-ui/ui/sidebar";
+import { cookies } from "next/headers";
+import type { Layout } from "react-resizable-panels";
+import { ChartClusterCpu } from "@/components/examples/ui/chart/chart-cluster-cpu";
 
 const GROUP_ID = "main-layout-persistence";
 

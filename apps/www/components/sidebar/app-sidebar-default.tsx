@@ -1,10 +1,4 @@
-import { SearchForm } from "@lumi-ui/ui/blocks/sidebar-03/components/search-form";
-import { VersionSwitcher } from "@lumi-ui/ui/blocks/sidebar-03/components/version-switcher";
-import {
-  Collapsible,
-  CollapsiblePanel,
-  CollapsibleTrigger,
-} from "@lumi-ui/ui/collapsible";
+import { ScrollArea } from "@lumi-ui/ui/scroll-area";
 import {
   Sidebar,
   SidebarContent,
@@ -15,64 +9,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
 } from "@lumi-ui/ui/sidebar";
-import { ChevronRight } from "lucide-react";
-import type * as React from "react";
+import { NavMain } from "./nav-main";
+import { VersionSwitcher } from "./version-switcher";
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  return (
-    <Sidebar {...props}>
-      <SidebarHeader>
-        <VersionSwitcher
-          defaultVersion={data.versions[0]}
-          versions={data.versions}
-        />
-        <SearchForm />
-      </SidebarHeader>
-      <SidebarContent className="gap-0">
-        {/* We create a collapsible SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <Collapsible
-            className="group/collapsible"
-            defaultOpen
-            key={item.title}
-            title={item.title}
-          >
-            <SidebarGroup>
-              <SidebarGroupLabel
-                className="group text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm"
-                render={
-                  <CollapsibleTrigger>
-                    {item.title}
-                    <ChevronRight className="ml-auto transition-transform group-data-[panel-open]:rotate-90" />
-                  </CollapsibleTrigger>
-                }
-              />
-              <CollapsiblePanel className="ml-2">
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    {item.items.map((item) => (
-                      <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton
-                          isActive={item.isActive}
-                          render={<a href={item.url}>{item.title}</a>}
-                        />
-                      </SidebarMenuItem>
-                    ))}
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </CollapsiblePanel>
-            </SidebarGroup>
-          </Collapsible>
-        ))}
-      </SidebarContent>
-      <SidebarRail />
-    </Sidebar>
-  );
-}
-
-// This is sample data.
 const data = {
   navMain: [
     {
@@ -200,16 +140,48 @@ const data = {
       title: "Architecture",
       url: "#",
     },
-    {
-      items: [
-        {
-          title: "Contribution Guide",
-          url: "#",
-        },
-      ],
-      title: "Community",
-      url: "#",
-    },
   ],
+  user: {
+    email: "m@example.com",
+    name: "Lumi UI",
+  },
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
 };
+
+export function AppSidebar() {
+  return (
+    <Sidebar>
+      <SidebarHeader>
+        <VersionSwitcher
+          defaultVersion={data.versions[0]}
+          versions={data.versions}
+        />
+      </SidebarHeader>
+      <SidebarContent>
+        <ScrollArea>
+          <NavMain items={data.navMain} />
+          {data.navMain.map((item) => (
+            <SidebarGroup key={item.title}>
+              <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {item.items.map((item) => (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton
+                        isActive={item.isActive}
+                        render={<a href={item.url}>{item.title}</a>}
+                        tooltip={{
+                          children: "hello",
+                        }}
+                      />
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          ))}
+        </ScrollArea>
+      </SidebarContent>
+    </Sidebar>
+  );
+}

@@ -1,8 +1,8 @@
 "use client";
 
+import * as React from "react";
 import { CodeBlockWrapper } from "@/components/code-block-wrapper";
 import type { Block } from "@/types";
-import * as React from "react";
 import { BlockFileTree } from "./block-file-tree";
 import { FileIcon } from "./file-icons";
 

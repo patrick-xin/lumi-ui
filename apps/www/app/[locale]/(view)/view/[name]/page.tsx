@@ -1,13 +1,10 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { siteConfig } from "@/lib/config";
 import { routing } from "@/lib/i18n/routing";
 import { absoluteUrl, cn } from "@/lib/utils";
 import { components } from "@/registry/__index__";
 import type { RegistryName } from "@/registry/__registry";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-
-export const dynamic = "force-static";
-export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const names = Object.keys(components) as RegistryName[];

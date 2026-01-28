@@ -10,13 +10,6 @@ import {
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
 import {
-  Folder,
-  Forward,
-  type LucideIcon,
-  MoreHorizontal,
-  Trash2,
-} from "lucide-react";
-import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
@@ -24,7 +17,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "./sidebar";
+} from "@lumi-ui/ui/sidebar";
+import {
+  Folder,
+  Forward,
+  type LucideIcon,
+  MoreHorizontal,
+  Trash2,
+} from "lucide-react";
 
 interface Project {
   name: string;

@@ -1,11 +1,10 @@
 "use client";
 
-import { Button, buttonVariants } from "@lumi-ui/ui/button";
+import { Button } from "@lumi-ui/ui/button";
 import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxIcon,
   ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
@@ -27,10 +26,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@lumi-ui/ui/sheet";
-import { Textarea } from "@lumi-ui/ui/textarea";
+import { useSidebar } from "@lumi-ui/ui/sidebar";
+import { toast } from "@lumi-ui/ui/toast";
 import { ChevronsUpDownIcon, PlusIcon } from "lucide-react";
 import { useRef, useState } from "react";
-import { useSidebar } from "./sidebar";
 
 const sheetHandle = createSheetHandle();
 
@@ -50,31 +49,25 @@ export function TeamSwitcher() {
           className="flex h-9 pl-1 group-data-[state=collapsed]:hidden items-center rounded-md justify-between"
           ref={containerRef}
         >
-          <Button
-            className="text-sm px-0 flex-1 justify-start"
-            nativeButton={false}
-            render={
-              <a href="#">
-                <ComboboxValue />
-              </a>
-            }
-            variant="unstyled"
-          />
+          <a
+            className="inline-flex text-sm px-1 text-foreground flex-1 justify-start"
+            href="#"
+          >
+            <ComboboxValue />
+          </a>
 
           <ComboboxTrigger
-            className={buttonVariants({
-              className:
-                "group data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent",
-              size: "icon-sm",
-              variant: "ghost",
-            })}
+            render={
+              <Button
+                className="group data-popup-open:bg-accent data-popup-open:hover:bg-accent"
+                size={"icon-sm"}
+                variant={"ghost"}
+              />
+            }
           >
-            <ComboboxIcon>
-              <ChevronsUpDownIcon className="group-data-[popup-open]:text-foreground size-3.5" />
-            </ComboboxIcon>
+            <ChevronsUpDownIcon className="group-data-popup-open:text-foreground size-3.5" />
           </ComboboxTrigger>
         </div>
-
         <ComboboxContent
           matchAnchorWidth={!isCollapsed}
           positionerAnchor={containerRef}
@@ -83,7 +76,7 @@ export function TeamSwitcher() {
           <div className="flex justify-between items-center relative">
             <ComboboxInputGroup placeholder="Find member..." variant="ghost" />
             <Button
-              className="absolute right-2 text-[10px] rounded-sm text-muted-foreground cursor-pointer"
+              className="absolute hidden lg:block right-2 text-[10px] rounded-sm text-muted-foreground cursor-pointer"
               onClick={() => setComboboxOpen(false)}
               size="icon-xs"
               variant="secondary"
@@ -91,7 +84,6 @@ export function TeamSwitcher() {
               <kbd>Esc</kbd>
             </Button>
           </div>
-
           <Separator />
           <ComboboxEmpty>No member found.</ComboboxEmpty>
           <ComboboxList>
@@ -127,16 +119,24 @@ export function TeamSwitcher() {
               Unlock collaboration and improved performance.
             </SheetDescription>
           </SheetHeader>
-          <Form className="h-full justify-between">
+          <Form
+            className="h-full justify-between"
+            onFormSubmit={(values) => {
+              toast.success({
+                title: `${values.team} created!`,
+              });
+              sheetHandle.close();
+            }}
+          >
             <div className="flex gap-4 flex-col">
-              <Field>
+              <Field name="team">
                 <FieldLabel>Team Name</FieldLabel>
                 <Input placeholder="acme" required type="text" />
                 <FieldError />
               </Field>
-              <Field>
+              <Field name="description">
                 <FieldLabel>Description</FieldLabel>
-                <Textarea className="min-h-48" placeholder="team description" />
+                <Input placeholder="team description" />
               </Field>
             </div>
             <SheetFooter>

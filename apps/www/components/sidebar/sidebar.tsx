@@ -189,7 +189,6 @@ const Sidebar = ({ children }: React.ComponentProps<"div">) => {
         maxSize={MAX_WIDTH}
         minSize={MIN_WIDTH}
         onResize={(size) => {
-          // size is PanelSize: { asPercentage: number, inPixels: number }
           // Always use inPixels for the boolean toggle to be precise
           const currentlyCollapsed = size.inPixels <= ICON_MODE_WIDTH_PX;
           if (currentlyCollapsed !== isCollapsed) {
@@ -210,7 +209,7 @@ const Sidebar = ({ children }: React.ComponentProps<"div">) => {
       <ResizableSeparator
         className={cn(
           "hidden md:block",
-          // leave some space so separator won't touch view port edge
+          // leave some space so separator won't touch viewport edge
           collapsibleType === "sidebar" && isCollapsed && "ml-1",
         )}
       />

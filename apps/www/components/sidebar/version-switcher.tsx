@@ -6,13 +6,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
-import { Check, ChevronsUpDown, GalleryVerticalEnd } from "lucide-react";
-import * as React from "react";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/sidebar/sidebar";
+} from "@lumi-ui/ui/sidebar";
+import { Check, ChevronsUpDown, GalleryVerticalEnd } from "lucide-react";
+import * as React from "react";
 
 export function VersionSwitcher({
   versions,

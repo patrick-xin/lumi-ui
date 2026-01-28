@@ -1,189 +1,172 @@
-import { ScrollArea } from "@lumi-ui/ui/scroll-area";
+"use client";
+
+import { NavMain } from "@lumi-ui/ui/blocks/sidebar-01/components/nav-main";
+import { NavProjects } from "@lumi-ui/ui/blocks/sidebar-01/components/nav-projects";
+import { NavUser } from "@lumi-ui/ui/blocks/sidebar-01/components/nav-user";
+import { SearchCombobox } from "@lumi-ui/ui/blocks/sidebar-01/components/search-combobox";
+import { TeamSwitcher } from "@lumi-ui/ui/blocks/sidebar-01/components/team-switcher";
+import {
+  AudioWaveform,
+  BookOpen,
+  Bot,
+  Command,
+  Frame,
+  GalleryVerticalEnd,
+  MapIcon,
+  PieChart,
+  Settings2,
+  SquareTerminal,
+} from "lucide-react";
+import type * as React from "react";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/sidebar/sidebar";
-import { NavMain } from "./nav-main";
-import { NavUser } from "./nav-user";
-import { VersionSwitcher } from "./version-switcher";
+  SidebarSeparator,
+} from "./sidebar";
 
+// This is sample data.
 const data = {
   navMain: [
     {
+      icon: SquareTerminal,
+      isActive: true,
       items: [
         {
-          title: "Installation",
+          title: "History",
           url: "#",
         },
         {
-          title: "Project Structure",
+          title: "Starred",
+          url: "#",
+        },
+        {
+          title: "Settings",
           url: "#",
         },
       ],
-      title: "Getting Started",
+      title: "Playground",
       url: "#",
     },
     {
+      icon: Bot,
       items: [
         {
-          title: "Routing",
+          title: "Genesis",
           url: "#",
         },
         {
-          isActive: true,
-          title: "Data Fetching",
+          title: "Explorer",
           url: "#",
         },
         {
-          title: "Rendering",
-          url: "#",
-        },
-        {
-          title: "Caching",
-          url: "#",
-        },
-        {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
+          title: "Quantum",
           url: "#",
         },
       ],
-      title: "Building Your Application",
+      title: "Models",
       url: "#",
     },
     {
+      icon: BookOpen,
       items: [
         {
-          title: "Components",
+          title: "Introduction",
           url: "#",
         },
         {
-          title: "File Conventions",
+          title: "Get Started",
           url: "#",
         },
         {
-          title: "Functions",
+          title: "Tutorials",
           url: "#",
         },
         {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
+          title: "Changelog",
           url: "#",
         },
       ],
-      title: "API Reference",
+      title: "Documentation",
       url: "#",
     },
     {
+      icon: Settings2,
       items: [
         {
-          title: "Accessibility",
+          title: "General",
           url: "#",
         },
         {
-          title: "Fast Refresh",
+          title: "Team",
           url: "#",
         },
         {
-          title: "Next.js Compiler",
+          title: "Billing",
           url: "#",
         },
         {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
+          title: "Limits",
           url: "#",
         },
       ],
-      title: "Architecture",
+      title: "Settings",
       url: "#",
+    },
+  ],
+  projects: [
+    {
+      icon: Frame,
+      name: "Design Engineering",
+      url: "#",
+    },
+    {
+      icon: PieChart,
+      name: "Sales & Marketing",
+      url: "#",
+    },
+    {
+      icon: MapIcon,
+      name: "Travel",
+      url: "#",
+    },
+  ],
+  teams: [
+    {
+      logo: GalleryVerticalEnd,
+      name: "Acme Inc",
+      plan: "Enterprise",
+    },
+    {
+      logo: AudioWaveform,
+      name: "Acme Corp.",
+      plan: "Startup",
+    },
+    {
+      logo: Command,
+      name: "Evil Corp.",
+      plan: "Free",
     },
   ],
   user: {
     email: "m@example.com",
     name: "Lumi UI",
   },
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
 };
 
-export function AppSidebar() {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar>
+    <Sidebar {...props}>
       <SidebarHeader>
-        <VersionSwitcher
-          defaultVersion={data.versions[0]}
-          versions={data.versions}
-        />
+        <TeamSwitcher />
+        <SearchCombobox />
       </SidebarHeader>
       <SidebarContent>
-        <ScrollArea>
-          <NavMain items={data.navMain} />
-          {data.navMain.map((item) => (
-            <SidebarGroup key={item.title}>
-              <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  {item.items.map((item) => (
-                    <SidebarMenuItem key={item.title}>
-                      <SidebarMenuButton
-                        isActive={item.isActive}
-                        render={<a href={item.url}>{item.title}</a>}
-                        tooltip={{
-                          children: "hello",
-                        }}
-                      />
-                    </SidebarMenuItem>
-                  ))}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-          ))}
-        </ScrollArea>
+        <NavMain items={data.navMain} />
+        <NavProjects projects={data.projects} />
       </SidebarContent>
+      <SidebarSeparator className="mx-0" />
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>

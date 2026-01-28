@@ -5,7 +5,7 @@ export function FileIcon({ filename }: { filename: string }) {
   const type = getFileIconType(filename);
   switch (type) {
     case "typescript":
-      return <FileText className="size-4 text-blue-400" />;
+      return <FileText className="size-4 text-blue-500" />;
     case "css":
       return <FileText className="size-4 text-sky-300" />;
     case "json":

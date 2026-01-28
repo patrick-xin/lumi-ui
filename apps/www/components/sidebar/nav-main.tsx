@@ -5,7 +5,6 @@ import {
   CollapsiblePanel,
   CollapsibleTrigger,
 } from "@lumi-ui/ui/collapsible";
-import { ChevronRight, type LucideIcon } from "lucide-react";
 import {
   SidebarGroup,
   SidebarMenu,
@@ -14,7 +13,8 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/sidebar/sidebar";
+} from "@lumi-ui/ui/sidebar";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 
 export function NavMain({
   items,

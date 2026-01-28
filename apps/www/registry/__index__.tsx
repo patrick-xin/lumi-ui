@@ -1000,7 +1000,7 @@ export const components: ComponentRegistry = {
     description: "A sidebar with submenus as dropdowns.",
     type: "registry:block",
     target: "app/dashboard/page.tsx",
-    registryDependencies: undefined,
+    registryDependencies: ["motion","recharts"],
     files:     [
           {
                 "path": "../../packages/ui/src/blocks/sidebar-01/page.tsx",
@@ -1013,12 +1013,67 @@ export const components: ComponentRegistry = {
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/search-form.tsx",
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/ai-chat-dialog.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/version-switcher.tsx",
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/ai-chat.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/ask-doc.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/chart-mixed-axes.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/chat-header.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/hover-border-button.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/moving-border-button.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-main.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-main.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-projects.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/search-combobox.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/streaming.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-01/components/team-switcher.tsx",
                 "target": "",
                 "type": "registry:component"
           }
@@ -1026,43 +1081,6 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@lumi-ui/ui/blocks/sidebar-01/page");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sidebar-01";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: ["sidebar","dashboard"],
-    meta: {"iframeHeight":1200},
-  },
-  "sidebar-03": {
-    name: "sidebar-03",
-    title: undefined,
-    description: "A sidebar with submenus as dropdowns.",
-    type: "registry:block",
-    target: "app/dashboard/page.tsx",
-    registryDependencies: undefined,
-    files:     [
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-03/page.tsx",
-                "target": "app/dashboard/page.tsx",
-                "type": "registry:page"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-03/components/app-sidebar.tsx",
-                "target": "",
-                "type": "registry:component"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-03/components/search-form.tsx",
-                "target": "",
-                "type": "registry:component"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-03/components/version-switcher.tsx",
-                "target": "",
-                "type": "registry:component"
-          }
-    ],
-    component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/blocks/sidebar-03/page");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sidebar-03";
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["sidebar","dashboard"],

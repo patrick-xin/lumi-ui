@@ -1,7 +1,5 @@
 "use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react";
-
 import {
   Collapsible,
   CollapsiblePanel,
@@ -9,7 +7,6 @@ import {
 } from "@lumi-ui/ui/collapsible";
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -17,6 +14,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@lumi-ui/ui/sidebar";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 
 export function NavMain({
   items,
@@ -34,16 +32,12 @@ export function NavMain({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.title}>
-            <Collapsible
-              className="group/collapsible"
-              defaultOpen={item.isActive}
-            >
+            <Collapsible defaultOpen={item.isActive}>
               <CollapsibleTrigger
-                className="group/collapsible"
+                className="group/collapsible data-[panel-open]:bg-sidebar-accent data-[panel-open]:text-sidebar-accent-foreground"
                 render={
                   <SidebarMenuButton
                     tooltip={{
@@ -53,7 +47,7 @@ export function NavMain({
                   >
                     {item.icon && <item.icon />}
                     <span>{item.title}</span>
-                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[panel-open]/collapsible:rotate-90" />
+                    <ChevronRight className="ml-auto text-muted-foreground transition-[transform,colors] duration-200 group-data-[panel-open]/collapsible:rotate-90 group-data-[panel-open]/collapsible:text-foreground group-hover/collapsible:text-sidebar-foreground" />
                   </SidebarMenuButton>
                 }
               />

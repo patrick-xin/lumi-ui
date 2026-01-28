@@ -680,13 +680,22 @@
       "meta": {
         "iframeHeight": 1200
       },
+      "dependencies": ["motion", "recharts"],
       "registryDependencies": [
         "@lumi-ui/sidebar",
-        "@lumi-ui/breadcrumb",
         "@lumi-ui/separator",
         "@lumi-ui/scroll-area",
         "@lumi-ui/dropdown-menu",
-        "@lumi-ui/label"
+        "@lumi-ui/dialog",
+        "@lumi-ui/chart",
+        "@lumi-ui/tabs",
+        "@lumi-ui/input",
+        "@lumi-ui/sheet",
+        "@lumi-ui/form",
+        "@lumi-ui/field",
+        "@lumi-ui/button",
+        "@lumi-ui/combobox",
+        "@lumi-ui/combobox"
       ],
       "files": [
         {
@@ -699,47 +708,55 @@
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/search-form.tsx",
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/ai-chat-dialog.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/version-switcher.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "sidebar-03",
-      "categories": ["sidebar", "dashboard"],
-      "description": "A sidebar with submenus as dropdowns.",
-      "type": "registry:block",
-      "meta": {
-        "iframeHeight": 1200
-      },
-      "registryDependencies": [
-        "@lumi-ui/sidebar",
-        "@lumi-ui/breadcrumb",
-        "@lumi-ui/separator",
-        "@lumi-ui/scroll-area",
-        "@lumi-ui/dropdown-menu",
-        "@lumi-ui/label"
-      ],
-      "files": [
-        {
-          "path": "../../packages/ui/src/blocks/sidebar-03/page.tsx",
-          "target": "app/dashboard/page.tsx",
-          "type": "registry:page"
-        },
-        {
-          "path": "../../packages/ui/src/blocks/sidebar-03/components/app-sidebar.tsx",
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/ai-chat.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-03/components/search-form.tsx",
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/ask-doc.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-03/components/version-switcher.tsx",
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/chart-mixed-axes.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/chat-header.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/hover-border-button.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/moving-border-button.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-main.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-main.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-projects.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/search-combobox.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/streaming.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-01/components/team-switcher.tsx",
           "type": "registry:component"
         }
       ]
