@@ -1,14 +1,12 @@
-import { AIChat } from "@lumi-ui/ui/blocks/sidebar-01/components/ai-chat";
 import { AppSidebar } from "@lumi-ui/ui/blocks/sidebar-01/components/app-sidebar";
-import { ChartMixedAxes } from "@lumi-ui/ui/blocks/sidebar-01/components/chart-mixed-axes";
 import {
   MainContent,
   SidebarProvider,
   SidebarTrigger,
 } from "@lumi-ui/ui/sidebar";
-
 import { cookies } from "next/headers";
 import type { Layout } from "react-resizable-panels";
+import { ChartClusterCpu } from "@/components/examples/ui/chart/chart-cluster-cpu";
 
 const GROUP_ID = "main-layout-persistence";
 
@@ -22,17 +20,19 @@ export default async function Page() {
 
   return (
     <SidebarProvider
-      collapsibleType="icon"
+      collapsibleType="sidebar"
       defaultLayout={defaultLayout}
       groupId={GROUP_ID}
     >
       <AppSidebar />
       <MainContent>
-        <header className="flex h-16 shrink-0 items-center gap-2 p-2 sm:p-4">
-          <SidebarTrigger />
+        <header className="flex h-16 shrink-0 items-center gap-2">
+          <div className="flex items-center gap-2 px-4">
+            <SidebarTrigger />
+          </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
-          <ChartMixedAxes />
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+          <ChartClusterCpu />
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
             <div className="bg-muted/50 aspect-video rounded-xl" />
             <div className="bg-muted/50 aspect-video rounded-xl" />
@@ -51,7 +51,6 @@ export default async function Page() {
           </div>
         </div>
       </MainContent>
-      <AIChat />
     </SidebarProvider>
   );
 }

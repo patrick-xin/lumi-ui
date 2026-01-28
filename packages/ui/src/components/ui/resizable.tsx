@@ -41,7 +41,7 @@ function ResizableSeparator({
     <BaseSeparator
       className={cn(
         "relative flex items-center justify-center outline-none group bg-border",
-        "focus-visible:bg-primary/50 data-[separator='active']:bg-primary/40",
+        "focus-visible:bg-primary/40 data-[separator='active']:bg-primary/40 data-[separator='inactive']:bg-border",
         "aria-[orientation=vertical]:w-px aria-[orientation=vertical]:h-auto",
         "aria-[orientation=vertical]:after:w-4 aria-[orientation=vertical]:after:h-full aria-[orientation=vertical]:after:-left-1.5",
         "aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full",

@@ -1,13 +1,12 @@
 "use client";
 
-import * as React from "react";
 import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
 import { Button } from "@lumi-ui/ui/button";
-import { Check, ChevronDown, X } from "lucide-react";
 import { inputVariants } from "@lumi-ui/ui/input";
-
 import { cn } from "@lumi-ui/ui/lib/utils";
 import type { VariantProps } from "class-variance-authority";
+import { Check, ChevronDown, X } from "lucide-react";
+import type * as React from "react";
 
 function Combobox<Value, Multiple extends boolean | undefined = false>({
   children,
@@ -401,14 +400,18 @@ function ComboboxInputGroup({
 function ComboboxContent({
   className,
   children,
+  side = "bottom",
   sideOffset = 6,
   align = "start",
   matchAnchorWidth = true,
+  alignOffset = 0,
   positionerAnchor,
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Popup> & {
+  side?: BaseCombobox.Positioner.Props["side"];
   sideOffset?: BaseCombobox.Positioner.Props["sideOffset"];
   align?: BaseCombobox.Positioner.Props["align"];
+  alignOffset?: BaseCombobox.Positioner.Props["alignOffset"];
   matchAnchorWidth?: boolean;
   positionerAnchor?: React.RefObject<HTMLDivElement | null>;
 }) {
@@ -416,8 +419,10 @@ function ComboboxContent({
     <BaseCombobox.Portal data-slot="combobox-portal">
       <BaseCombobox.Positioner
         align={align}
+        alignOffset={alignOffset}
         anchor={positionerAnchor}
         data-slot="combobox-positioner"
+        side={side}
         sideOffset={sideOffset}
       >
         <BaseCombobox.Popup

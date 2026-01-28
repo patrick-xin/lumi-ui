@@ -6,13 +6,6 @@ import { NavUser } from "@lumi-ui/ui/blocks/sidebar-01/components/nav-user";
 import { SearchCombobox } from "@lumi-ui/ui/blocks/sidebar-01/components/search-combobox";
 import { TeamSwitcher } from "@lumi-ui/ui/blocks/sidebar-01/components/team-switcher";
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarSeparator,
-} from "@lumi-ui/ui/sidebar";
-import {
   AudioWaveform,
   BookOpen,
   Bot,
@@ -25,6 +18,13 @@ import {
   SquareTerminal,
 } from "lucide-react";
 import type * as React from "react";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarSeparator,
+} from "./sidebar";
 
 // This is sample data.
 const data = {

@@ -1,29 +1,29 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@lumi-ui/ui/button";
 import { useCopyToClipboard } from "@lumi-ui/ui/hooks/use-copy-to-clipboard";
 import { Separator } from "@lumi-ui/ui/separator";
 import { Tabs, TabsListContent, TabsTab } from "@lumi-ui/ui/tabs";
 import { ToggleGroup, ToggleGroupItem } from "@lumi-ui/ui/toggle-group";
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from "@lumi-ui/ui/tooltip";
 import {
-    Check,
-    Fullscreen,
-    Monitor,
-    RotateCw,
-    Smartphone,
-    Tablet,
-    Terminal,
+  Check,
+  Fullscreen,
+  Monitor,
+  RotateCw,
+  Smartphone,
+  Tablet,
+  Terminal,
 } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
+import type * as React from "react";
 import type { PanelImperativeHandle } from "react-resizable-panels";
+import { cn } from "@/lib/utils";
 
 interface ComponentToolbarProps extends React.ComponentProps<"div"> {
   view: "preview" | "code";
@@ -49,7 +49,7 @@ export function ComponentToolbar({
     <div
       className={cn(
         "flex w-full items-center justify-between gap-2 border-b border-border/40 pb-4",
-        className
+        className,
       )}
       {...props}
     >
@@ -66,7 +66,10 @@ export function ComponentToolbar({
 
         {children}
 
-        <Separator className="mx-2 h-4! hidden lg:block" orientation="vertical" />
+        <Separator
+          className="mx-2 h-4! hidden lg:block"
+          orientation="vertical"
+        />
         <div className="hidden items-center gap-1 rounded-md lg:flex border-border/60">
           <TooltipProvider closeDelay={100}>
             <ToggleGroup
@@ -173,7 +176,9 @@ export function ComponentToolbar({
           ) : (
             <Terminal className="size-3.5" />
           )}
-          <span className="hidden sm:inline">npx shadcn add @lumi-ui/{name}</span>
+          <span className="hidden sm:inline">
+            npx shadcn add @lumi-ui/{name}
+          </span>
           <span className="sm:hidden">Install</span>
         </Button>
       </div>

@@ -46,7 +46,7 @@ export function ChartMixedAxes() {
   const showFinancials =
     activeSeries.includes("revenue") || activeSeries.includes("expenses");
   return (
-    <Card className="w-full">
+    <Card className="w-full h-full">
       <CardHeader className="flex justify-between flex-wrap">
         <div className="space-y-2">
           <CardTitle>Financial Performance</CardTitle>
@@ -54,6 +54,7 @@ export function ChartMixedAxes() {
             Toggle series visibility using the controls below
           </CardDescription>
         </div>
+
         <ToggleGroup
           className="gap-2 flex-wrap"
           multiple
@@ -80,8 +81,8 @@ export function ChartMixedAxes() {
           ))}
         </ToggleGroup>
       </CardHeader>
-      <CardContent>
-        <ChartContainer className="aspect-video w-full" config={chartConfig}>
+      <CardContent className="flex-1 ">
+        <ChartContainer className="size-full" config={chartConfig}>
           <ComposedChart
             data={data}
             margin={{ bottom: 0, left: 0, right: 0, top: 0 }}

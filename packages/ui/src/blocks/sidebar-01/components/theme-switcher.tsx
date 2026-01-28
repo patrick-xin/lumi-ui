@@ -8,10 +8,10 @@ import {
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
 import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
+import { cn } from "@lumi-ui/ui/lib/utils";
 import { PaletteIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 
 const THEME_OPTIONS = [
   {
