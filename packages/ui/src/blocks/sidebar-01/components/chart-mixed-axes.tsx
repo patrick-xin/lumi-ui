@@ -54,7 +54,6 @@ export function ChartMixedAxes() {
             Toggle series visibility using the controls below
           </CardDescription>
         </div>
-
         <ToggleGroup
           className="gap-2 flex-wrap"
           multiple
@@ -81,7 +80,7 @@ export function ChartMixedAxes() {
           ))}
         </ToggleGroup>
       </CardHeader>
-      <CardContent className="flex-1 ">
+      <CardContent className="flex-1">
         <ChartContainer className="size-full" config={chartConfig}>
           <ComposedChart
             data={data}

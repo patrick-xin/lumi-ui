@@ -187,7 +187,6 @@ export const T3ModelSelector = () => {
                                 <div
                                   className={cn(
                                     "group relative flex items-center justify-between rounded-xl px-1 py-1 transition-all",
-
                                     isSelected
                                       ? "bg-primary/10 border-primary/20"
                                       : "hover:bg-primary/5 border-transparent",

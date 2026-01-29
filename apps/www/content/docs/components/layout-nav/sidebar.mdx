@@ -1,0 +1,167 @@
+---
+title: Sidebar
+description: A composable, mobile-responsive sidebar component.
+---
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/sidebar
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="sidebar" title="sidebar.tsx"/>
+      </Step>
+      <Step title="Update the import paths to match your project setup."/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+Inspired by [shadcn/ui](https://ui.shadcn.com/) and built using [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels).
+
+
+## Anatomy
+```tsx
+<SidebarProvider>
+  <Sidebar>
+    <SidebarHeader />
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel />
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton />
+              <SidebarMenuSub>
+                <SidebarMenuSubItem />
+              </SidebarMenuSub>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+      <SidebarFooter />
+    </Sidebar>
+    <MainContent />
+</SidebarProvider>
+```
+
+
+
+
+## Configuration
+
+The sidebar behavior is controlled by a few constants in the `sidebar.tsx` file. You can modify these to fit your needs.
+
+| Constant | Default | Description |
+| :--- | :--- | :--- |
+| `SIDEBAR_COOKIE_MAX_AGE` | 7 days | How long the sidebar state (cookie) persists. |
+| `DEFAULT_WIDTH` | `25rem` | The default width of the sidebar when expanded. |
+| `MIN_WIDTH` | `15rem` | The minimum width the sidebar can be resized to. |
+| `MAX_WIDTH` | `25rem` | The maximum width the sidebar can be resized to (often same as default for fixed-width). |
+| `SIDEBAR_KEYBOARD_SHORTCUT` | `b` | The keyboard shortcut (`Command+b` or `Control+b`) to toggle the sidebar. |
+
+## Usage
+
+### CollapsibleType
+
+You can set the `collapsibleType` prop to either `icon` or `sidebar` to control how the sidebar collapses. `ICON_MODE_WIDTH_PX` is the width of the sidebar in icon mode. If set `sidebar`, the sidebar will be hidden when collapsed. See [examples](/blocks/sidebar) for more details. 
+
+### With Server-Side Cookies
+
+To prevent hydration mismatch and maintain the sidebar state between refreshes, it's recommended to read the state from cookies server-side and pass it to the `SidebarProvider`.
+
+```tsx title="layout.tsx"
+import { AppSidebar } from "@/components/app-sidebar"
+import {
+  MainContent,
+  SidebarProvider,
+} from "@components/ui/sidebar"
+import { cookies } from "next/headers"
+import type { Layout } from "react-resizable-panels"
+
+const GROUP_ID = "main-layout-persistence";
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const layoutCookie = cookieStore.get(GROUP_ID);
+
+  const defaultLayout: Layout = layoutCookie
+    ? JSON.parse(layoutCookie.value)
+    : undefined;
+
+  return (
+    <SidebarProvider 
+      collapsibleType="icon"
+      defaultLayout={defaultLayout}
+      groupId={GROUP_ID}
+    >
+      <AppSidebar />
+      <MainContent>{children}</MainContent>
+    </SidebarProvider>
+  )
+}
+```
+
+
+## API Reference
+
+### SidebarProvider
+
+Renders a `<div>` that wraps the application layout and handles state management.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `defaultLayout` | `Layout` | Initial layout state, usually restored from cookies. |
+| `collapsibleType` | `"icon" \| "sidebar"` | Defines how the sidebar collapses (icon mode or full hide). Defaults to `"icon"`. |
+| `groupId` | `string` | Unique ID for the sidebar group to scope the persistence cookie. |
+| `children` | `ReactNode` | The content to wrap. |
+
+### Sidebar
+
+Renders a `ResizablePanel` (as a `<div>`) on desktop and a `Sheet` on mobile.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `side` | `"left" \| "right"` | The side of the screen the sidebar appears on. Defaults to `"left"`. |
+| `variant` | `"sidebar" \| "floating" \| "inset"` | The visual variant of the sidebar. |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"` | Controls the collapsed behavior. |
+
+### SidebarMenuButton
+
+Renders a `<button>` (default) or the provided `asChild`.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `isActive` | `boolean` | Whether the button is actively selected. |
+| `variant` | `"default" \| "outline"` | The visual variant of the button. |
+| `size` | `"default" \| "sm" \| "lg"` | The size of the button. |
+| `tooltip` | `string \| ComponentProps<typeof TooltipContent>` | Tooltip content to show when the sidebar is collapsed. |
+
+### Other Components
+
+| Component | Renders | Description |
+| :--- | :--- | :--- |
+| `SidebarContent` | `div` | The scrollable content area within the sidebar. |
+| `SidebarHeader` | `div` | A fixed header area at the top of the sidebar. |
+| `SidebarFooter` | `div` | A fixed footer area at the bottom of the sidebar. |
+| `SidebarGroup` | `div` | A section or group of items within the sidebar. |
+| `SidebarGroupLabel` | `div` | A label for a sidebar group. |
+| `SidebarGroupContent` | `div` | The content/items within a sidebar group. |
+| `SidebarMenu` | `ul` | A container for menu items. |
+| `SidebarMenuItem` | `li` | An individual item in the menu. |
+| `SidebarMenuSub` | `ul` | A container for nested sub-menu items. |
+| `SidebarMenuSubItem` | `li` | An individual item in a sub-menu. |
+| `SidebarMenuSubButton` | `a` | The clickable button within a sub-menu item. |
+| `SidebarTrigger` | `Button` | A button to toggle the sidebar's visibility. |
+| `SidebarSeparator` | `Separator` | A visual separator between items. |
+| `MainContent` | `div` | The area for your page's main content, adjacent to the sidebar. |

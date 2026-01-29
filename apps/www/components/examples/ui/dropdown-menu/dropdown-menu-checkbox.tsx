@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
-import { ChevronDownIcon } from "lucide-react";
+import { BadgeCheckIcon, ChevronDownIcon } from "lucide-react";
 import * as React from "react";
 
 export function DropdownMenuCheckboxDemo() {
@@ -33,6 +33,8 @@ export function DropdownMenuCheckboxDemo() {
         </DropdownMenuCheckboxItemContent>
         <DropdownMenuCheckboxItemContent
           checked={showSidebar}
+          indicatorIcon={<BadgeCheckIcon />}
+          indicatorPlacement="end"
           onCheckedChange={setShowSidebar}
         >
           Show Sidebar

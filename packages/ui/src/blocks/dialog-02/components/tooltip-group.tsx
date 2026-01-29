@@ -1,6 +1,6 @@
 import type { DialogRootChangeEventDetails } from "@base-ui/react";
 import { LoginForm } from "@lumi-ui/ui/blocks/dialog-02/components/login-form";
-import { SignUpForm } from "@lumi-ui/ui/blocks/dialog-02/components/sign-up-form";
+import { SignUpForm } from "@lumi-ui/ui/blocks/dialog-02/components/signup-form";
 import type { IImage } from "@lumi-ui/ui/blocks/dialog-02/page";
 import { Button } from "@lumi-ui/ui/button";
 import {

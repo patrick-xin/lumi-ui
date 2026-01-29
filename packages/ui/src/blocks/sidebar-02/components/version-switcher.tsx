@@ -2,8 +2,8 @@
 
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItemContent,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@lumi-ui/ui/dropdown-menu";
 import {
@@ -11,7 +11,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@lumi-ui/ui/sidebar";
-import { Check, ChevronsUpDown, GalleryVerticalEnd } from "lucide-react";
+import {
+  BadgeCheckIcon,
+  ChevronsUpDown,
+  GalleryVerticalEnd,
+} from "lucide-react";
 import * as React from "react";
 
 export function VersionSwitcher({
@@ -30,15 +34,17 @@ export function VersionSwitcher({
           <DropdownMenuTrigger
             render={
               <SidebarMenuButton
-                className="data-[popup-open]:bg-sidebar-accent data-[popup-open]:text-sidebar-accent-foreground"
+                className="data-[popup-open]:bg-sidebar-accent data-[popup-open]:text-sidebar-accent-foreground justify-between px-2 gap-2"
                 size="lg"
               >
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                <span>
                   <GalleryVerticalEnd className="size-4" />
-                </div>
-                <div className="flex flex-col gap-0.5 leading-none">
+                </span>
+                <div className="flex flex-col gap-1 leading-none">
                   <span className="font-medium">Documentation</span>
-                  <span className="">v{selectedVersion}</span>
+                  <span className="text-muted-foreground">
+                    v{selectedVersion}
+                  </span>
                 </div>
                 <ChevronsUpDown className="ml-auto" />
               </SidebarMenuButton>
@@ -46,13 +52,16 @@ export function VersionSwitcher({
           />
           <DropdownMenuContent matchAnchorWidth>
             {versions.map((version) => (
-              <DropdownMenuItem
+              <DropdownMenuCheckboxItemContent
+                checked={version === selectedVersion}
+                closeOnClick
+                indicatorIcon={<BadgeCheckIcon />}
+                indicatorPlacement="end"
                 key={version}
-                onClick={() => setSelectedVersion(version)}
+                onCheckedChange={() => setSelectedVersion(version)}
               >
-                v{version}{" "}
-                {version === selectedVersion && <Check className="ml-auto" />}
-              </DropdownMenuItem>
+                v{version}
+              </DropdownMenuCheckboxItemContent>
             ))}
           </DropdownMenuContent>
         </DropdownMenu>

@@ -95,8 +95,8 @@ export default async function RootLayout({
               {children}
               <Toaster
                 limit={3}
-                position="bottom-right"
-                swipeDirection={["right", "down"]}
+                position="top-right"
+                swipeDirection={["right", "up"]}
               />
             </div>
           </NextIntlClientProvider>

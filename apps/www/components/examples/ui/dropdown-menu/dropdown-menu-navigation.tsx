@@ -24,7 +24,7 @@ export function NavigationMenu() {
         <DropdownMenuItem
           render={
             <a
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 justify-between w-full"
               href="https://google.com"
               rel="noopener noreferrer"
               target="_blank"

@@ -25,6 +25,18 @@ import {
   MoreHorizontal,
   Trash2,
 } from "lucide-react";
+import { Button } from "../../../components/ui/button";
+import {
+  createDialogHandle,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "../../../components/ui/dialog";
+import { toast } from "../../../components/ui/toast";
 
 interface Project {
   name: string;
@@ -33,6 +45,7 @@ interface Project {
 }
 
 const projectMenuHandle = createDropdownMenuHandle<Project>();
+const deleteProjectDialogHandle = createDialogHandle<Project>();
 
 export function NavProjects({ projects }: { projects: Project[] }) {
   const { isMobile } = useSidebar();
@@ -86,7 +99,14 @@ export function NavProjects({ projects }: { projects: Project[] }) {
                   <Forward className="text-muted-foreground" />
                   <span>Share Project</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem variant={"destructive"}>
+                <DropdownMenuItem
+                  onClick={() => {
+                    if (project) {
+                      deleteProjectDialogHandle.openWithPayload(project);
+                    }
+                  }}
+                  variant={"destructive"}
+                >
                   <Trash2 className="text-muted-foreground" />
                   <span>Delete Project</span>
                 </DropdownMenuItem>
@@ -95,6 +115,62 @@ export function NavProjects({ projects }: { projects: Project[] }) {
           );
         }}
       </DropdownMenu>
+      <Dialog handle={deleteProjectDialogHandle}>
+        {({ payload: project }) => {
+          return (
+            <DialogContent layout="center">
+              <DialogHeader>
+                <DialogTitle>
+                  Delete
+                  <span className="ml-2 text-destructive/80">
+                    {project?.name}
+                  </span>
+                </DialogTitle>
+                <DialogDescription>
+                  Are you sure you want to delete this project? This action
+                  cannot be undone.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose
+                  render={<Button variant="outline">Cancel</Button>}
+                />
+                <DialogClose
+                  onClick={() =>
+                    toast.promise(
+                      new Promise<void>((resolve, reject) => {
+                        setTimeout(() => {
+                          const shouldSucceed = Math.random() > 0.1;
+                          if (shouldSucceed) {
+                            resolve();
+                          } else {
+                            reject(
+                              new Error(`Failed to delete ${project?.name}.`),
+                            );
+                          }
+                        }, 1500);
+                      }),
+                      {
+                        error: (err: Error) => {
+                          return { description: err.message, title: "Error" };
+                        },
+                        loading: { title: `Deleting ${project?.name}...` },
+                        success: () => {
+                          return {
+                            description: " Drag top/right to close",
+                            title: `${project?.name} deleted`,
+                          };
+                        },
+                      },
+                    )
+                  }
+                  render={<Button variant="destructive">Delete</Button>}
+                />
+              </DialogFooter>
+            </DialogContent>
+          );
+        }}
+      </Dialog>
     </>
   );
 }

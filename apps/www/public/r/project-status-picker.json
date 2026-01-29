@@ -21,6 +21,9 @@
       "type": "registry:component"
     }
   ],
+  "meta": {
+    "iframeHeight": 500
+  },
   "categories": [
     "form-input",
     "dashboard"

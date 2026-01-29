@@ -8,16 +8,16 @@ import {
 } from "@lumi-ui/ui/select";
 
 const languages = {
-  javascript: "JavaScript",
-  typescript: "TypeScript",
-  python: "Python",
-  java: "Java",
-  csharp: "C#",
-  php: "PHP",
   cpp: "C++",
-  rust: "Rust",
+  csharp: "C#",
   go: "Go",
+  java: "Java",
+  javascript: "JavaScript",
+  php: "PHP",
+  python: "Python",
+  rust: "Rust",
   swift: "Swift",
+  typescript: "TypeScript",
 };
 
 type Language = keyof typeof languages;
@@ -37,13 +37,17 @@ function renderValue(value: Language[]) {
 
 export default function MultiSelectDemo() {
   return (
-    <Select multiple defaultValue={["javascript", "typescript"]}>
-      <SelectTriggerGroup className="w-[200px]" placeholder="Select a language">
+    <Select defaultValue={["javascript", "typescript"]} multiple>
+      <SelectTriggerGroup className="w-56" placeholder="Select a language">
         {renderValue}
       </SelectTriggerGroup>
       <SelectContent>
         {values.map((value) => (
-          <SelectItemContent key={value} value={value}>
+          <SelectItemContent
+            indicatorPlacement="start"
+            key={value}
+            value={value}
+          >
             {languages[value]}
           </SelectItemContent>
         ))}

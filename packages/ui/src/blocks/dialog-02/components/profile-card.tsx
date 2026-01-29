@@ -14,7 +14,7 @@ export function ProfileCard() {
         render={
           <Button className="cursor-pointer" variant="unstyled">
             <Avatar>
-              <AvatarImage src="https://github.com/vercel.png" />
+              <AvatarImage src="https://github.com/mui.png" />
               <AvatarFallback>VC</AvatarFallback>
             </Avatar>
           </Button>
@@ -23,13 +23,14 @@ export function ProfileCard() {
       <PreviewCardContent align="start" className="w-80">
         <div className="flex justify-between gap-4">
           <Avatar>
-            <AvatarImage src="https://github.com/vercel.png" />
+            <AvatarImage src="https://github.com/mui.png" />
             <AvatarFallback>VC</AvatarFallback>
           </Avatar>
           <div className="space-y-1">
-            <h4 className="text-sm font-semibold">@nextjs</h4>
+            <h4 className="text-sm font-semibold">@base-ui</h4>
             <p className="text-sm">
-              The React Framework – created and maintained by @vercel.
+              Unstyled UI components for building accessible web apps and design
+              systems. From the creators of Radix, Floating UI, and Material UI.
             </p>
             <div className="text-muted-foreground text-xs">
               Joined December 2021

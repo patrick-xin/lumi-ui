@@ -1,9 +1,5 @@
 "use client";
 
-import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
-import Link from "next/link";
-import type * as React from "react";
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -13,6 +9,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@lumi-ui/ui/navigation-menu";
+import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
+import Link from "next/link";
+import type * as React from "react";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -131,7 +130,7 @@ export function NavigationMenuDemo() {
                       </div>
                     </Link>
                   }
-                ></NavigationMenuLink>
+                />
                 <NavigationMenuLink
                   render={
                     <Link href="#">

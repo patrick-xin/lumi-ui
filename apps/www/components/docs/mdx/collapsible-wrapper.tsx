@@ -3,7 +3,11 @@
 import { Collapsible } from "@base-ui/react/collapsible";
 import { buttonVariants } from "@lumi-ui/ui/button";
 import { Separator } from "@lumi-ui/ui/separator";
-import { ChevronDown } from "lucide-react";
+import {
+  ArrowDownFromLineIcon,
+  ArrowUpFromLineIcon,
+  ChevronDown,
+} from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type * as React from "react";
 import { cn } from "@/lib/utils";
@@ -24,14 +28,18 @@ export function CodeCollapsibleWrapper({
           className={cn("group/collapsible relative", className)}
           {...props}
         >
-          <div className="absolute top-1 right-8 z-10 flex items-center">
+          <div className="absolute top-2.5 right-10 z-50 flex items-center">
             <Collapsible.Trigger
               className={cn(
-                buttonVariants({ size: "sm", variant: "ghost" }),
-                "text-muted-foreground text-xs",
+                buttonVariants({ size: "icon-xs", variant: "glow" }),
+                "text-muted-foreground size-7",
               )}
             >
-              {state.open ? "Collapse" : "Expand"}
+              {state.open ? (
+                <ArrowUpFromLineIcon className="size-3.5" />
+              ) : (
+                <ArrowDownFromLineIcon className="size-3.5" />
+              )}
             </Collapsible.Trigger>
             <Separator className="mx-1.5 h-5" orientation="vertical" />
           </div>
@@ -51,7 +59,7 @@ export function CodeCollapsibleWrapper({
                   {!state.open && (
                     <motion.div
                       animate={{ opacity: 1 }}
-                      className="text-muted-foreground absolute inset-x-0 -bottom-2 flex h-24 items-center justify-center bg-gradient-to-b from-code/70 to-code"
+                      className="text-muted-foreground absolute inset-x-0 -bottom-2 flex h-24 items-center justify-center bg-linear-to-b from-transparent via-code/50 to-code"
                       exit={{ opacity: 0 }}
                       initial={{ opacity: 0 }}
                     >

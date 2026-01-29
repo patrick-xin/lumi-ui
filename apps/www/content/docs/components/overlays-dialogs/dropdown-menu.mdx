@@ -156,3 +156,65 @@ Control the dialog state and open it imperatively using the `onClick` handler on
 ### Multiple triggers
 
 <ComponentPreview name="dropdown-menu-multiple-triggers" />
+
+## API Reference
+
+### DropdownMenuContent
+
+A high-level container component that combines the `DropdownMenuPortal`, `DropdownMenuPositioner`, and `DropdownMenuPopup` into a single styled element for the dropdown content.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | The preferred side of the anchor to render against when open. |
+| `sideOffset` | `number` | The distance in pixels from the anchor. |
+| `align` | `"start" \| "center" \| "end"` | The preferred alignment against the anchor. |
+| `alignOffset` | `number` | An offset in pixels from the `"start"` or `"end"` alignment options. |
+| `showArrow` | `boolean` | Whether to render the arrow element. |
+| `matchAnchorWidth` | `boolean` | Whether the popup width should match the anchor width. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `BaseMenu.Popup.Props` | Passes all other props to the underlying `BaseMenu.Popup` component. |
+
+### DropdownMenuCheckboxItemContent
+
+A high-level checkbox item component that combines the `CheckboxItem` and `CheckboxItemIndicator` into a single styled element with configurable icon positioning.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `indicatorPlacement` | `"start" \| "end"` | The position of the indicator icon relative to the content. |
+| `indicatorIcon` | `React.ReactNode` | The icon to render as the item indicator. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `DropdownMenuCheckboxItem.Props` | Passes all other props to the underlying `DropdownMenuCheckboxItem` component. |
+
+### DropdownMenuRadioItemContent
+
+A high-level radio item component that combines the `RadioItem` and `RadioItemIndicator` into a single styled element with configurable icon positioning.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `indicatorPlacement` | `"start" \| "end"` | The position of the indicator icon relative to the content. |
+| `indicatorIcon` | `React.ReactNode` | The icon to render as the item indicator. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `DropdownMenuRadioItem.Props` | Passes all other props to the underlying `DropdownMenuRadioItem` component. |
+
+### DropdownMenuSubMenuTriggerGroup
+
+A composite trigger component that renders the trigger content and a chevron icon.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `className` | `string` | Additional CSS classes. |
+| `children` | `React.ReactNode` | The content of the trigger. |
+| `...props` | `BaseMenu.SubmenuTrigger.Props` | Passes all other props to the underlying `BaseMenu.SubmenuTrigger` component. |
+
+### DropdownMenuSubMenuContent
+
+A composite content component for submenus.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | The preferred side of the anchor to render against when open. |
+| `sideOffset` | `number` | The distance in pixels from the anchor. |
+| `align` | `"start" \| "center" \| "end"` | The preferred alignment against the anchor. |
+| `alignOffset` | `number` | An offset in pixels from the `"start"` or `"end"` alignment options. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `DropdownMenuContentProps` | Passes all other props to the underlying `DropdownMenuContent` component. |

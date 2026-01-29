@@ -1,12 +1,10 @@
 import { BlockDisplay } from "@/components/blocks/block-display";
 import { getBlocks } from "@/lib/blocks";
 import type { Block } from "@/types";
-import { Button } from "@lumi-ui/ui/button";
-import Link from "next/link";
 
 export const dynamic = "force-static";
 
-const FEATURED_BLOCKS = ["dialog-01", "sidebar-01"];
+const FEATURED_BLOCKS = ["sidebar-01", "dialog-02"];
 
 async function getFeaturedBlocks() {
   const featuredData = await Promise.all(
@@ -28,13 +26,6 @@ export default async function Page() {
         featured.map((block) => (
           <BlockDisplay block={block} key={block.name} />
         ))}
-        <div className="container flex justify-center py-6">
-          <Button
-            nativeButton={false}
-            render={<Link href="/blocks/sidebar">Browse more blocks</Link>}
-            variant="glow"
-          />
-        </div>
     </div>
   );
 }

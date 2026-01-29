@@ -997,10 +997,10 @@ export const components: ComponentRegistry = {
   "sidebar-01": {
     name: "sidebar-01",
     title: undefined,
-    description: "A sidebar with submenus as dropdowns.",
+    description: "Dashboard layout with sidebar and main content area.",
     type: "registry:block",
     target: "app/dashboard/page.tsx",
-    registryDependencies: ["motion","recharts"],
+    registryDependencies: undefined,
     files:     [
           {
                 "path": "../../packages/ui/src/blocks/sidebar-01/page.tsx",
@@ -1086,6 +1086,43 @@ export const components: ComponentRegistry = {
     categories: ["sidebar","dashboard"],
     meta: {"iframeHeight":1200},
   },
+  "sidebar-02": {
+    name: "sidebar-02",
+    title: undefined,
+    description: "Dashboard layout with sidebar and main content area.",
+    type: "registry:block",
+    target: "app/dashboard/page.tsx",
+    registryDependencies: undefined,
+    files:     [
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-02/page.tsx",
+                "target": "app/dashboard/page.tsx",
+                "type": "registry:page"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-02/components/app-sidebar.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-02/components/nav-main.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/sidebar-02/components/version-switcher.tsx",
+                "target": "",
+                "type": "registry:component"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@lumi-ui/ui/blocks/sidebar-02/page");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sidebar-02";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["sidebar","dashboard"],
+    meta: {"iframeHeight":1200},
+  },
   "dialog-01": {
     name: "dialog-01",
     title: undefined,
@@ -1118,6 +1155,63 @@ export const components: ComponentRegistry = {
     categories: ["dialog","dashboard"],
     meta: undefined,
   },
+  "dialog-02": {
+    name: "dialog-02",
+    title: undefined,
+    description: "Unsplash like dialog with nested auth dialogs.",
+    type: "registry:block",
+    target: "app/dashboard/page.tsx",
+    registryDependencies: ["lucide-react"],
+    files:     [
+          {
+                "path": "../../packages/ui/src/blocks/dialog-02/page.tsx",
+                "target": "app/dashboard/page.tsx",
+                "type": "registry:page"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/dialog-02/components/info-menu.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/dialog-02/components/stats-chart.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/dialog-02/components/login-form.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/dialog-02/components/signup-form.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/dialog-02/components/share-menu.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/dialog-02/components/tooltip-group.tsx",
+                "target": "",
+                "type": "registry:component"
+          },
+          {
+                "path": "../../packages/ui/src/blocks/dialog-02/components/profile-card.tsx",
+                "target": "",
+                "type": "registry:component"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@lumi-ui/ui/blocks/dialog-02/page");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-02";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["dialog"],
+    meta: undefined,
+  },
   "project-status-picker": {
     name: "project-status-picker",
     title: "Project Status Picker",
@@ -1138,7 +1232,7 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["form-input","dashboard"],
-    meta: undefined,
+    meta: {"iframeHeight":500},
   },
   "morphing-dialog": {
     name: "morphing-dialog",
@@ -1146,7 +1240,7 @@ export const components: ComponentRegistry = {
     description: "A fluid card-to-modal transition pattern. Combines Base UI's accessible dialog primitives with Framer Motion's shared layout animations for a seamless expansion effect. Inspired by Linear.",
     type: "registry:component",
     target: "",
-    registryDependencies: ["lucide-react","framer-motion"],
+    registryDependencies: ["lucide-react","motion"],
     files:     [
           {
                 "path": "components/examples/components/morphing-dialog.tsx",
@@ -1182,7 +1276,7 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["overlays-dialogs","dashboard"],
-    meta: {"alignment":"top-right","iframeHeight":800},
+    meta: {"alignment":"top-right","iframeHeight":500},
   },
   "t3-model-selector": {
     name: "t3-model-selector",
@@ -1204,7 +1298,7 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["form-input","chat"],
-    meta: {"alignment":"bottom-center","iframeHeight":800},
+    meta: {"alignment":"bottom-center","iframeHeight":500},
   },
   "accordion-custom-trigger-icon": {
     name: "accordion-custom-trigger-icon",

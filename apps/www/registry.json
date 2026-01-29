@@ -675,12 +675,11 @@
     {
       "name": "sidebar-01",
       "categories": ["sidebar", "dashboard"],
-      "description": "A sidebar with submenus as dropdowns.",
+      "description": "Dashboard layout with sidebar and main content area.",
       "type": "registry:block",
       "meta": {
         "iframeHeight": 1200
       },
-      "dependencies": ["motion", "recharts"],
       "registryDependencies": [
         "@lumi-ui/sidebar",
         "@lumi-ui/separator",
@@ -694,7 +693,6 @@
         "@lumi-ui/form",
         "@lumi-ui/field",
         "@lumi-ui/button",
-        "@lumi-ui/combobox",
         "@lumi-ui/combobox"
       ],
       "files": [
@@ -762,6 +760,42 @@
       ]
     },
     {
+      "name": "sidebar-02",
+      "categories": ["sidebar", "dashboard"],
+      "description": "Dashboard layout with sidebar and main content area.",
+      "type": "registry:block",
+      "meta": {
+        "iframeHeight": 1200
+      },
+      "registryDependencies": [
+        "@lumi-ui/sidebar",
+        "@lumi-ui/separator",
+        "@lumi-ui/scroll-area",
+        "@lumi-ui/dropdown-menu",
+        "@lumi-ui/chart",
+        "@lumi-ui/collapsible"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-02/page.tsx",
+          "target": "app/dashboard/page.tsx",
+          "type": "registry:page"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-02/components/app-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-02/components/nav-main.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/sidebar-02/components/version-switcher.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "dialog-01",
       "categories": ["dialog", "dashboard"],
       "description": "Nested dialogs with team management.",
@@ -793,11 +827,65 @@
       ]
     },
     {
+      "name": "dialog-02",
+      "categories": ["dialog"],
+      "description": "Unsplash like dialog with nested auth dialogs.",
+      "type": "registry:block",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [
+        "@lumi-ui/dialog",
+        "@lumi-ui/alert-dialog",
+        "@lumi-ui/dropdown-menu",
+        "@lumi-ui/button",
+        "@lumi-ui/select",
+        "@lumi-ui/toast",
+        "@lumi-ui/separator"
+      ],
+      "files": [
+        {
+          "path": "../../packages/ui/src/blocks/dialog-02/page.tsx",
+          "target": "app/dashboard/page.tsx",
+          "type": "registry:page"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/dialog-02/components/info-menu.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/dialog-02/components/stats-chart.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/dialog-02/components/login-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/dialog-02/components/signup-form.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/dialog-02/components/share-menu.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/dialog-02/components/tooltip-group.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "../../packages/ui/src/blocks/dialog-02/components/profile-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "project-status-picker",
       "title": "Project Status Picker",
       "description": "A compact status selector optimized for efficiency. Features custom hotkey logic for instant selection, rich item rendering with status colors, and contextual tooltips. Inspired by Linear.",
       "type": "registry:component",
       "categories": ["form-input", "dashboard"],
+      "meta": {
+        "iframeHeight": 500
+      },
       "dependencies": ["lucide-react"],
       "registryDependencies": [
         "utils",
@@ -819,7 +907,7 @@
       "description": "A fluid card-to-modal transition pattern. Combines Base UI's accessible dialog primitives with Framer Motion's shared layout animations for a seamless expansion effect. Inspired by Linear.",
       "type": "registry:component",
       "categories": ["layout-navigation"],
-      "dependencies": ["lucide-react", "framer-motion"],
+      "dependencies": ["lucide-react", "motion"],
       "registryDependencies": ["utils", "@lumi-ui/button", "@lumi-ui/dialog"],
       "files": [
         {
@@ -836,7 +924,7 @@
       "categories": ["overlays-dialogs", "dashboard"],
       "meta": {
         "alignment": "top-right",
-        "iframeHeight": 800
+        "iframeHeight": 500
       },
       "dependencies": ["lucide-react", "@base-ui/react"],
       "registryDependencies": [
@@ -864,7 +952,7 @@
       "categories": ["form-input", "chat"],
       "meta": {
         "alignment": "bottom-center",
-        "iframeHeight": 800
+        "iframeHeight": 500
       },
       "dependencies": [
         "lucide-react",

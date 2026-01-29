@@ -1,11 +1,11 @@
+import type { Metadata } from "next";
 import {
   PageHeader,
   PageHeaderDescription,
-  PageHeaderHeading
+  PageHeaderHeading,
 } from "@/components/blocks/page-header";
 import { PageNav } from "@/components/blocks/page-nav";
 import { registryBlockCategories } from "@/lib/categories";
-import type { Metadata } from "next";
 
 const title = "Component Blocks";
 const description =
@@ -48,10 +48,10 @@ export default function BlocksLayout({
         <PageNav
           id="blocks"
           items={[
-            { title: "Featured", href: "/blocks" },
+            { href: "/blocks", title: "Featured" },
             ...registryBlockCategories.map((category) => ({
-              title: category.name,
               href: `/blocks/${category.slug}`,
+              title: category.name,
             })),
           ]}
         />

@@ -9,33 +9,44 @@ import { ScrollArea } from "@lumi-ui/ui/scroll-area";
 import { Bot, Loader2, Send, User } from "lucide-react";
 import { useState } from "react";
 
-const LONG_FAKE_RESPONSE = `Here is a detailed explanation of how Large Language Models (LLMs) simulate human-like text generation.
+const RESPONSE_INTRO = `Lumi UI gives you accessible, customizable React components that you own completely. Built on Base UI for robust behavior and styled with Tailwind CSS for maximum flexibility.
 
-1. **Tokenization**: 
-The process begins by breaking down text into smaller units called tokens. These can be words, parts of words, or even individual characters. For example, the word "streaming" might be tokenized as "stream" and "ing".
+It offers two paths to production:
+1. **Composite Components**: Pre-assembled, production-ready components for common patterns. Perfect for prototyping and building standard UIs fast.
+2. **Primitive Components**: Raw, unstyled building blocks that give you full access to logic without fighting the library.
 
-2. **Neural Network Processing**:
-The model processes these tokens through layers of a transformer architecture. It uses "attention mechanisms" to understand the context of each token in relation to others, allowing it to grasp nuances like sarcasm, code syntax, or long-form narrative structures.
+This ensures you have both velocity when you need it and control when you want it.`;
 
-3. **Probability Distribution**:
-Instead of "thinking," the AI calculates the probability of the next likely token. It's effectively a highly advanced autocomplete system.
-   - Option A: 90% probability
-   - Option B: 5% probability
-   - Option C: 5% probability
+const RESPONSE_PHILOSOPHY = `Lumi UI is built on a "Dual Layer Architecture" to refuse the false dichotomy between speed and control.
 
-4. **Streaming (The Visual Effect)**:
-What you are seeing right now is the "streaming" effect. In a real backend, the server sends chunks of data as they are computed. In this UI demo, we are simulating that latency using a timer to reveal the text character by character.
+**Composites = Velocity**
+Pre-assembled components that combine structure, styling, and logic. You accept our opinions about structure in exchange for speed. Best for MVPs and 80% of use cases.
 
-This ensures the user doesn't have to wait for the entire paragraph to generate before they can start reading. It improves perceived performance significantly.
+**Primitives = Control**
+Thin wrappers around Base UI that provide state and accessibility but enforce zero visual layout. You write more code but get complete control over DOM structure.
 
-I can continue explaining technical concepts, provide code examples, or summarize long documents. The context window allows me to remember previous parts of our conversation to maintain continuity.`;
+We also optimize for **AI-Assisted Development** with flat semantic exports and clear patterns that LLMs can easily understand and generate.`;
+
+const RESPONSE_ARCHITECTURE = `Our architecture focuses on **Flat Semantic Exports** and **Immutable Logic Blocks**.
+
+- **Flat Exports**: Every component is accessible at the root level (e.g., \`Comboboxinput\`, \`ComboboxItem\`), making it easier for AI to infer usage and reducing context tokens.
+- **Immutable Primitives**: We structure primitives to be stable. You build new features in your application files by composing them, rather than modifying core component logic.
+
+We also use a **Hit-Test Pattern** for forgiving interactive areas, ensuring great UX without compromising on design precision.`;
+
+const DEFAULT_RESPONSE = `I can tell you about Lumi UI's core features, its dual-layer architecture, or the philosophies behind its design.
+
+Try asking:
+- "What is Lumi UI?"
+- "What are the core philosophies?"
+- "How does the architecture work?"`;
 
 export function ChatStreaming() {
   const { input } = useAIChat();
   const [messages, setMessages] = useState([
     {
       content:
-        "Hello! I am a simulated AI. Ask me anything, and I will generate a long response to demonstrate the streaming capability.",
+        "Hello! I am a simulated AI for Lumi UI. Ask me about the library, our philosophies, or how to get started.",
       role: "ai",
     },
   ]);
@@ -43,23 +54,22 @@ export function ChatStreaming() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [streamedContent, setStreamedContent] = useState("");
 
-  const streamResponse = async () => {
+  const streamResponse = async (textToStream: string) => {
     setIsStreaming(true);
     setStreamedContent("");
 
-    const textToStream = LONG_FAKE_RESPONSE;
     let index = 0;
 
     return new Promise<void>((resolve) => {
       const interval = setInterval(() => {
         if (index < textToStream.length) {
-          setStreamedContent((prev) => prev + textToStream[index]);
           index++;
+          setStreamedContent(textToStream.slice(0, index));
         } else {
           clearInterval(interval);
           resolve();
         }
-      }, 2);
+      }, 8);
     });
   };
 
@@ -68,11 +78,29 @@ export function ChatStreaming() {
     const userMessage = { content: inputValue, role: "user" };
     setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
-    await streamResponse();
-    setMessages((prev) => [
-      ...prev,
-      { content: LONG_FAKE_RESPONSE, role: "ai" },
-    ]);
+
+    // Determine response based on input
+    const lowerInput = inputValue.toLowerCase();
+    let responseText = DEFAULT_RESPONSE;
+
+    if (lowerInput.includes("what is") || lowerInput.includes("intro")) {
+      responseText = RESPONSE_INTRO;
+    } else if (
+      lowerInput.includes("philosophy") ||
+      lowerInput.includes("philosophies")
+    ) {
+      responseText = RESPONSE_PHILOSOPHY;
+    } else if (
+      lowerInput.includes("architecture") ||
+      lowerInput.includes("dual layer") ||
+      lowerInput.includes("work")
+    ) {
+      responseText = RESPONSE_ARCHITECTURE;
+    }
+
+    await streamResponse(responseText);
+
+    setMessages((prev) => [...prev, { content: responseText, role: "ai" }]);
     setStreamedContent("");
     setIsStreaming(false);
   };
@@ -118,26 +146,30 @@ export function ChatStreaming() {
             )}
           </div>
         ))}
-        {!input && (
+        {!input && messages.length === 1 && (
           <div className="px-14 space-y-2">
             <MovingBorderButton
               onClick={() => setInputValue("What is Lumi UI?")}
             />
             <Button
               className="bg-background cursor-pointer hover:bg-background flex flex-col h-auto justify-start items-start gap-2 w-fit border hover:border-primary/50"
-              onClick={() => setInputValue("What can I build with Lumi UI?")}
+              onClick={() => setInputValue("What are the core philosophies?")}
               variant="unstyled"
             >
               <span className="font-medium">
-                What can I build with Lumi UI?
+                What are the core philosophies?
               </span>
             </Button>
             <Button
               className="bg-background cursor-pointer hover:bg-background flex flex-col h-auto justify-start items-start gap-2 w-fit border hover:border-primary/50"
-              onClick={() => setInputValue("Is it free to use?")}
+              onClick={() =>
+                setInputValue("How does the dual layer architecture work?")
+              }
               variant="unstyled"
             >
-              <span className="font-medium">Is it free to use?</span>
+              <span className="font-medium">
+                How does the dual layer architecture work?
+              </span>
             </Button>
           </div>
         )}

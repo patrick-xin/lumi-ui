@@ -1,6 +1,5 @@
-import { AIChat } from "@lumi-ui/ui/blocks/sidebar-01/components/ai-chat";
-import { AppSidebar } from "@lumi-ui/ui/blocks/sidebar-01/components/app-sidebar";
-import { ChartMixedAxes } from "@lumi-ui/ui/blocks/sidebar-01/components/chart-mixed-axes";
+import { AppSidebar } from "@lumi-ui/ui/blocks/sidebar-02/components/app-sidebar";
+import { ChartClusterCpu } from "@lumi-ui/ui/blocks/sidebar-02/components/chart-cluster-cpu";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -31,7 +30,7 @@ export default async function Page() {
 
   return (
     <SidebarProvider
-      collapsibleType="icon"
+      collapsibleType="sidebar"
       defaultLayout={defaultLayout}
       groupId={GROUP_ID}
     >
@@ -52,9 +51,10 @@ export default async function Page() {
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4 sm:pt-0">
+
+        <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
           <div className="h-120 2xl:h-150">
-            <ChartMixedAxes />
+            <ChartClusterCpu />
           </div>
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
             <div className="bg-muted/50 aspect-video rounded-xl" />
@@ -74,7 +74,6 @@ export default async function Page() {
           </div>
         </div>
       </MainContent>
-      <AIChat />
     </SidebarProvider>
   );
 }
