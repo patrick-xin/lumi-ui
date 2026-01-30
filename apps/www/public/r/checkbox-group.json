@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "checkbox-group",
-  "type": "registry:ui",
   "title": "Checkbox Group",
   "description": "Provides a shared state to a series of checkboxes.",
   "dependencies": [
@@ -18,5 +17,6 @@
       "content": "import { CheckboxGroup as BaseCheckboxGroup } from \"@base-ui/react/checkbox-group\";\nimport type * as React from \"react\";\nimport { Checkbox } from \"@/registry/ui/checkbox\";\n\nimport { cn } from \"@/registry/lib/utils\";\n\nfunction CheckboxGroup({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseCheckboxGroup>) {\n  return (\n    <BaseCheckboxGroup\n      className={cn(\"grid gap-3\", className)}\n      data-slot=\"checkbox-group\"\n      {...props}\n    />\n  );\n}\n\nexport { CheckboxGroup, Checkbox as CheckboxGroupItem };\n",
       "type": "registry:ui"
     }
-  ]
+  ],
+  "type": "registry:ui"
 }

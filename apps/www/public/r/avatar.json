@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "avatar",
-  "type": "registry:ui",
   "title": "Avatar",
   "description": "An easily stylable avatar component.",
   "dependencies": [
@@ -16,5 +15,6 @@
       "content": "import { Avatar as BaseAvatar } from \"@base-ui/react/avatar\";\nimport { cn } from \"@/registry/lib/utils\";\n\nfunction Avatar({ className, ...props }: BaseAvatar.Root.Props) {\n  return (\n    <BaseAvatar.Root\n      className={cn(\n        \"relative flex size-8 shrink-0 overflow-hidden rounded-full select-none\",\n        className,\n      )}\n      data-slot=\"avatar\"\n      {...props}\n    />\n  );\n}\n\nfunction AvatarImage({ className, ...props }: BaseAvatar.Image.Props) {\n  return (\n    <BaseAvatar.Image\n      className={cn(\"aspect-square size-full object-cover\", className)}\n      data-slot=\"avatar-image\"\n      {...props}\n    />\n  );\n}\n\nfunction AvatarFallback({ className, ...props }: BaseAvatar.Fallback.Props) {\n  return (\n    <BaseAvatar.Fallback\n      className={cn(\n        \"bg-muted flex size-full items-center justify-center rounded-full\",\n        className,\n      )}\n      data-slot=\"avatar-fallback\"\n      {...props}\n    />\n  );\n}\n\nexport { Avatar, AvatarImage, AvatarFallback };\n",
       "type": "registry:ui"
     }
-  ]
+  ],
+  "type": "registry:ui"
 }

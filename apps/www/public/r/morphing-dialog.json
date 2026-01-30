@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "morphing-dialog",
-  "type": "registry:component",
   "title": "Morphing Dialog",
   "description": "A fluid card-to-modal transition pattern. Combines Base UI's accessible dialog primitives with Framer Motion's shared layout animations for a seamless expansion effect. Inspired by Linear.",
   "dependencies": [
@@ -22,5 +21,6 @@
   ],
   "categories": [
     "layout-navigation"
-  ]
+  ],
+  "type": "registry:component"
 }

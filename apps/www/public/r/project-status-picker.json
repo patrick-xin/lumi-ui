@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "project-status-picker",
-  "type": "registry:component",
   "title": "Project Status Picker",
   "description": "A compact status selector optimized for efficiency. Features custom hotkey logic for instant selection, rich item rendering with status colors, and contextual tooltips. Inspired by Linear.",
   "dependencies": [
@@ -27,5 +26,6 @@
   "categories": [
     "form-input",
     "dashboard"
-  ]
+  ],
+  "type": "registry:component"
 }

@@ -1,8 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "dialog-02",
-  "type": "registry:block",
-  "description": "Unsplash like dialog with nested auth dialogs.",
+  "description": "Image gallery with nested auth dialogs. Inspired by Unsplash.",
   "dependencies": [
     "lucide-react"
   ],
@@ -60,5 +59,6 @@
   ],
   "categories": [
     "dialog"
-  ]
+  ],
+  "type": "registry:block"
 }

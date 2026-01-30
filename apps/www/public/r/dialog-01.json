@@ -1,8 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "dialog-01",
-  "type": "registry:block",
-  "description": "Nested dialogs with team management.",
+  "description": "Complex user management UI with nested dialogs.",
   "dependencies": [
     "lucide-react"
   ],
@@ -36,5 +35,6 @@
   "categories": [
     "dialog",
     "dashboard"
-  ]
+  ],
+  "type": "registry:block"
 }

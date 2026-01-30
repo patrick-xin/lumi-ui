@@ -1,18 +1,18 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@lumi-ui/ui/button";
 import { useCopyToClipboard } from "@lumi-ui/ui/hooks/use-copy-to-clipboard";
-import { ToastArrow, toast } from "@lumi-ui/ui/toast";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@lumi-ui/ui/tooltip";
 import {
+  type Easing,
   motion,
   useMotionValue,
   useTransform,
-  type Easing,
   type Variants,
 } from "motion/react";
 import * as React from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/registry/ui/button";
+import { ToastArrow, toast } from "@/registry/ui/toast";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip";
 
 const duration = 0.45;
 const ease: Easing = [0.16, 1, 0.3, 1];
@@ -86,10 +86,7 @@ export function CopyButton({
         ref={buttonRef}
         render={
           <Button
-            className={cn(
-              "bg-code size-7",
-              className,
-            )}
+            className={cn("bg-code size-7", className)}
             disabled={isCopied}
             size="icon-sm"
             variant={variant}

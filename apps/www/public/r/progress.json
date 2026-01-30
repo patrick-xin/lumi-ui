@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "progress",
-  "type": "registry:ui",
   "title": "Progress",
   "description": "Displays the status of a task that takes a long time.",
   "dependencies": [
@@ -16,5 +15,6 @@
       "content": "import { Progress as BaseProgress } from \"@base-ui/react/progress\";\nimport type * as React from \"react\";\n\nimport { cn } from \"@/registry/lib/utils\";\n\nfunction Progress({\n  className,\n  value,\n  ...props\n}: React.ComponentProps<typeof BaseProgress.Root>) {\n  return (\n    <BaseProgress.Root\n      className={cn(\"relative w-full\", className)}\n      data-slot=\"progress\"\n      value={value}\n      {...props}\n    >\n      <BaseProgress.Track\n        className=\"bg-primary/20 relative h-2 w-full overflow-hidden rounded-full\"\n        data-slot=\"progress-track\"\n      >\n        <BaseProgress.Indicator\n          className=\"bg-primary h-full transition-all duration-500 ease-in-out\"\n          data-slot=\"progress-indicator\"\n        />\n      </BaseProgress.Track>\n    </BaseProgress.Root>\n  );\n}\n\nfunction ProgressRoot({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseProgress.Root>) {\n  return (\n    <BaseProgress.Root\n      className={cn(\"relative w-full\", className)}\n      data-slot=\"progress\"\n      {...props}\n    />\n  );\n}\n\nfunction ProgressTrack({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseProgress.Track>) {\n  return (\n    <BaseProgress.Track\n      className={cn(\n        \"bg-primary/20 relative h-2 w-full overflow-hidden rounded-full\",\n        className,\n      )}\n      data-slot=\"progress-track\"\n      {...props}\n    />\n  );\n}\n\nfunction ProgressIndicator({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseProgress.Indicator>) {\n  return (\n    <BaseProgress.Indicator\n      className={cn(\n        \"bg-primary h-full transition-all duration-500 ease-in-out\",\n        className,\n      )}\n      data-slot=\"progress-indicator\"\n      {...props}\n    />\n  );\n}\n\nfunction ProgressLabel({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseProgress.Label>) {\n  return (\n    <BaseProgress.Label\n      className={cn(\"text-sm font-medium\", className)}\n      data-slot=\"progress-label\"\n      {...props}\n    />\n  );\n}\n\nfunction ProgressValue({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseProgress.Value>) {\n  return (\n    <BaseProgress.Value\n      className={cn(\"text-sm text-muted-foreground\", className)}\n      data-slot=\"progress-value\"\n      {...props}\n    />\n  );\n}\n\nexport {\n  Progress,\n  ProgressRoot,\n  ProgressTrack,\n  ProgressIndicator,\n  ProgressLabel,\n  ProgressValue,\n};\n",
       "type": "registry:ui"
     }
-  ]
+  ],
+  "type": "registry:ui"
 }

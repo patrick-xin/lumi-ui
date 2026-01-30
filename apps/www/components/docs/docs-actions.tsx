@@ -88,7 +88,7 @@ export function DocsActions({
           render={
             <Button
               className={cn(
-                "h-8 rounded-l-none border-l data-[popup-open]:[&_svg]:rotate-180 max-md:[&_svg]:rotate-180 max-md:data-[popup-open]:[&_svg]:rotate-0",
+                "h-8 rounded-l-none border-l data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent data-[popup-open]:[&_svg]:rotate-180 max-md:[&_svg]:rotate-180 max-md:data-[popup-open]:[&_svg]:rotate-0",
               )}
               size="sm"
               variant="glow"

@@ -1,9 +1,9 @@
+import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { BlockDisplay } from "@/components/blocks/block-display";
 import { getBlocks } from "@/lib/blocks";
 import { registryBlockCategories } from "@/lib/categories";
 import { routing } from "@/lib/i18n/routing";
-import { setRequestLocale } from "next-intl/server";
-import { notFound } from "next/navigation";
 
 export const revalidate = false;
 export const dynamicParams = false;

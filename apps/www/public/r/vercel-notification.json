@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "vercel-notification",
-  "type": "registry:component",
   "title": "Vercel Notification Popover",
   "description": "A Vercel-style notification center that adapts to the device. Renders as a popover on desktop and a bottom sheet on mobile, featuring animated tabs and hover actions.",
   "dependencies": [
@@ -31,5 +30,6 @@
   "categories": [
     "overlays-dialogs",
     "dashboard"
-  ]
+  ],
+  "type": "registry:component"
 }

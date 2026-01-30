@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "radio",
-  "type": "registry:ui",
   "title": "Radio",
   "description": "An easily stylable radio button component.",
   "dependencies": [
@@ -17,5 +16,6 @@
       "content": "\"use client\";\n\nimport { Radio as BaseRadio } from \"@base-ui/react/radio\";\nimport { RadioGroup as BaseRadioGroup } from \"@base-ui/react/radio-group\";\nimport { CircleIcon } from \"lucide-react\";\nimport type * as React from \"react\";\nimport { cn } from \"@/registry/lib/utils\";\n\nfunction RadioGroup({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseRadioGroup>) {\n  return (\n    <BaseRadioGroup\n      className={cn(\"grid gap-3\", className)}\n      data-slot=\"radio-group\"\n      {...props}\n    />\n  );\n}\n\nfunction RadioRoot({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseRadio.Root>) {\n  return (\n    <BaseRadio.Root\n      className={cn(\"rounded-full\", className)}\n      data-slot=\"radio-root\"\n      {...props}\n    />\n  );\n}\n\nfunction RadioIndicator({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseRadio.Indicator>) {\n  return (\n    <BaseRadio.Indicator\n      className={cn(\"data-[unchecked]:hidden\", className)}\n      data-slot=\"radio-indicator\"\n      {...props}\n    />\n  );\n}\n\nfunction Radio({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseRadio.Root>) {\n  return (\n    <BaseRadio.Root\n      className={cn(\n        \"bg-transparent border-input text-primary dark:bg-input/30\",\n        \"flex aspect-square size-4 shrink-0 items-center justify-center\",\n        \"rounded-full border shadow-xs\",\n        \"transition-[color,box-shadow]\",\n        \"focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10\",\n        \"aria-invalid:border-destructive aria-invalid:ring-4 aria-invalid:ring-destructive/10\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        className,\n      )}\n      data-slot=\"radio\"\n      {...props}\n    >\n      <BaseRadio.Indicator\n        className=\"flex items-center justify-center data-[unchecked]:hidden\"\n        data-slot=\"radio-group-indicator\"\n      >\n        <CircleIcon className=\"size-2 fill-primary\" />\n      </BaseRadio.Indicator>\n    </BaseRadio.Root>\n  );\n}\n\nexport { RadioGroup, RadioRoot, RadioIndicator, Radio };\n",
       "type": "registry:ui"
     }
-  ]
+  ],
+  "type": "registry:ui"
 }

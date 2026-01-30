@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "t3-model-selector",
-  "type": "registry:component",
   "title": "T3 Chat Model Selector",
   "description": "A multi-tabbed popover for selecting items from categorized groups. Features vertical navigation, search filtering, and rich hover details. Inspired by T3 Chat.",
   "dependencies": [
@@ -37,5 +36,6 @@
   "categories": [
     "form-input",
     "chat"
-  ]
+  ],
+  "type": "registry:component"
 }

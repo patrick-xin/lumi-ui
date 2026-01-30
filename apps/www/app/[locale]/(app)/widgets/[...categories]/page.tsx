@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { ComponentView } from "@/components/blocks/component-view";
 import { ComponentSourceCode } from "@/components/docs/mdx/component-source-code";
 import { getRegistryComponents } from "@/lib/blocks";
@@ -5,9 +8,6 @@ import { registryComponentCategories } from "@/lib/categories";
 import { routing } from "@/lib/i18n/routing";
 import type { ComponentName, RegistryName } from "@/registry/__registry";
 import { Button } from "@/registry/ui/button";
-import { setRequestLocale } from "next-intl/server";
-import Link from "next/link";
-import { notFound } from "next/navigation";
 
 export const revalidate = false;
 export const dynamicParams = false;
