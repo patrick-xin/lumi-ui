@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   createDialogHandle,
   Dialog,
@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@lumi-ui/ui/dialog";
+} from "@/registry/ui/dialog";
 
 const demoDialogHandle = createDialogHandle();
 

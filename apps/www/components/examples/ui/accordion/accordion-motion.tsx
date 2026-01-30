@@ -7,25 +7,25 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionSummary,
-} from "@lumi-ui/ui/accordion";
+} from "@/registry/ui/accordion";
 
 const items = [
   {
+    content: "Yes. It adheres to the WAI-ARIA design pattern.",
     id: "item-1",
     title: "Is it accessible?",
-    content: "Yes. It adheres to the WAI-ARIA design pattern.",
   },
   {
-    id: "item-2",
-    title: "Is it styled?",
     content:
       "Yes. It comes with default styles that matches the other components' aesthetic.",
+    id: "item-2",
+    title: "Is it styled?",
   },
   {
-    id: "item-3",
-    title: "Is it animated?",
     content:
       "Yes. It's animated by default, but you can disable it if you prefer.",
+    id: "item-3",
+    title: "Is it animated?",
   },
 ];
 
@@ -34,10 +34,10 @@ export default function AccordionMotionDemo() {
 
   return (
     <Accordion
-      keepMounted
-      value={value}
-      onValueChange={setValue}
       className="w-full max-w-md"
+      keepMounted
+      onValueChange={setValue}
+      value={value}
     >
       {items.map((item) => {
         const isOpen = value.includes(item.id);
@@ -50,41 +50,41 @@ export default function AccordionMotionDemo() {
               keepMounted
               render={
                 <motion.div
+                  animate={isOpen ? "open" : "collapsed"}
+                  className="overflow-hidden"
                   hidden={false}
                   initial={false}
-                  animate={isOpen ? "open" : "collapsed"}
                   variants={{
-                    open: {
-                      height: "auto",
-                      opacity: 1,
-                      transition: {
-                        height: {
-                          type: "spring",
-                          bounce: 0,
-                          duration: 0.4,
-                        },
-                        opacity: {
-                          duration: 0.25,
-                          delay: 0.15,
-                        },
-                      },
-                    },
                     collapsed: {
                       height: 0,
                       opacity: 0,
                       transition: {
                         height: {
-                          type: "tween",
-                          ease: [0.4, 0, 0.2, 1],
                           duration: 0.3,
+                          ease: [0.4, 0, 0.2, 1],
+                          type: "tween",
                         },
                         opacity: {
                           duration: 0.2,
                         },
                       },
                     },
+                    open: {
+                      height: "auto",
+                      opacity: 1,
+                      transition: {
+                        height: {
+                          bounce: 0,
+                          duration: 0.4,
+                          type: "spring",
+                        },
+                        opacity: {
+                          delay: 0.15,
+                          duration: 0.25,
+                        },
+                      },
+                    },
                   }}
-                  className="overflow-hidden"
                 />
               }
             >

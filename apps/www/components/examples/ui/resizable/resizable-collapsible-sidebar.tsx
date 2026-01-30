@@ -1,20 +1,20 @@
 "use client";
 
+import { useIsMobile } from "@/registry/hooks/use-mobile";
+import { cn } from "@/registry/lib/utils";
+import { Button } from "@/registry/ui/button";
+import {
+    ResizableGroup,
+    ResizablePanel,
+    ResizableSeparator,
+} from "@/registry/ui/resizable";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/registry/ui/tooltip";
 import { mergeProps, useRender } from "@base-ui/react";
-import { Button } from "@lumi-ui/ui/button";
-import { useIsMobile } from "@lumi-ui/ui/hooks/use-mobile";
-import { cn } from "@lumi-ui/ui/lib/utils";
-import {
-  ResizableGroup,
-  ResizablePanel,
-  ResizableSeparator,
-} from "@lumi-ui/ui/resizable";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@lumi-ui/ui/tooltip";
 import { cva, type VariantProps } from "class-variance-authority";
 import { SettingsIcon, UserIcon } from "lucide-react";
 import { useState } from "react";

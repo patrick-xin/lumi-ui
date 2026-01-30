@@ -12,10 +12,10 @@ import {
   AutocompleteList,
   AutocompleteRow,
   AutocompleteTrigger,
-} from "@lumi-ui/ui/autocomplete";
-import { Button } from "@lumi-ui/ui/button";
-import { Input } from "@lumi-ui/ui/input";
-import { Separator } from "@lumi-ui/ui/separator";
+} from "@/registry/ui/autocomplete";
+import { Button } from "@/registry/ui/button";
+import { Input } from "@/registry/ui/input";
+import { Separator } from "@/registry/ui/separator";
 
 export function EmojiPickerAutocompleteDemo() {
   const [pickerOpen, setPickerOpen] = React.useState(false);

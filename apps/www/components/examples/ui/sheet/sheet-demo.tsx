@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -8,7 +8,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@lumi-ui/ui/sheet";
+} from "@/registry/ui/sheet";
 
 export function SheetDemo() {
   return (

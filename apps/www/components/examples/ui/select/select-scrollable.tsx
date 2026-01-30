@@ -5,7 +5,7 @@ import {
   SelectGroupLabel,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@lumi-ui/ui/select";
+} from "@/registry/ui/select";
 
 export function SelectScrollableDemo() {
   const flatItems = timezoneGroups.flatMap((group) => group.items);

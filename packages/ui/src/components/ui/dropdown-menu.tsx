@@ -323,54 +323,100 @@ function DropdownMenuContent({
   );
 }
 
+interface DropdownMenuCheckboxItemContentProps
+  extends React.ComponentProps<typeof BaseMenu.CheckboxItem> {
+  indicatorPlacement?: "start" | "end";
+  indicatorIcon?: React.ReactNode;
+}
+
 function DropdownMenuCheckboxItemContent({
   className,
   children,
   checked,
+  indicatorPlacement = "start",
+  indicatorIcon = <CheckIcon className="size-4" />,
   ...props
-}: React.ComponentProps<typeof BaseMenu.CheckboxItem>) {
+}: DropdownMenuCheckboxItemContentProps) {
   return (
     <BaseMenu.CheckboxItem
       checked={checked}
       className={cn(
-        "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
+        "grid items-center gap-2 py-1.5 pr-3 pl-3.5 text-sm",
         "outline-none select-none cursor-default",
         "highlight-on-active",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        indicatorPlacement === "start" && "grid-cols-[1rem_1fr]",
+        indicatorPlacement === "end" && "grid-cols-[1fr_1rem]",
         className,
       )}
       data-slot="dropdown-menu-checkbox-item-content"
       {...props}
     >
-      <BaseMenu.CheckboxItemIndicator className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
-        <CheckIcon className="size-4" />
+      <BaseMenu.CheckboxItemIndicator
+        className={cn(
+          "flex items-center justify-center row-start-1",
+          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          indicatorPlacement === "start" ? "col-start-1" : "col-start-2",
+        )}
+      >
+        {indicatorIcon}
       </BaseMenu.CheckboxItemIndicator>
-      {children}
+      <div
+        className={cn(
+          "flex items-center gap-2 row-start-1",
+          indicatorPlacement === "start" ? "col-start-2" : "col-start-1",
+        )}
+      >
+        {children}
+      </div>
     </BaseMenu.CheckboxItem>
   );
+}
+
+interface DropdownMenuRadioItemContentProps
+  extends React.ComponentProps<typeof BaseMenu.RadioItem> {
+  indicatorPlacement?: "start" | "end";
+  indicatorIcon?: React.ReactNode;
 }
 
 function DropdownMenuRadioItemContent({
   children,
   className,
+  indicatorPlacement = "start",
+  indicatorIcon = <CircleIcon className="size-2.5 fill-current" />,
   ...props
-}: React.ComponentProps<typeof BaseMenu.RadioItem>) {
+}: DropdownMenuRadioItemContentProps) {
   return (
     <BaseMenu.RadioItem
       className={cn(
-        "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
+        "grid items-center gap-2 py-1.5 pr-3 pl-3.5 text-sm",
         "outline-none select-none cursor-default",
         "highlight-on-active",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        indicatorPlacement === "start" && "grid-cols-[1rem_1fr]",
+        indicatorPlacement === "end" && "grid-cols-[1fr_1rem]",
         className,
       )}
       data-slot="dropdown-menu-radio-item-content"
       {...props}
     >
-      <BaseMenu.RadioItemIndicator className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
-        <CircleIcon className="size-2.5 fill-current" />
+      <BaseMenu.RadioItemIndicator
+        className={cn(
+          "flex items-center justify-center row-start-1",
+          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          indicatorPlacement === "start" ? "col-start-1" : "col-start-2",
+        )}
+      >
+        {indicatorIcon}
       </BaseMenu.RadioItemIndicator>
-      {children}
+      <div
+        className={cn(
+          "flex items-center gap-2 row-start-1",
+          indicatorPlacement === "start" ? "col-start-2" : "col-start-1",
+        )}
+      >
+        {children}
+      </div>
     </BaseMenu.RadioItem>
   );
 }

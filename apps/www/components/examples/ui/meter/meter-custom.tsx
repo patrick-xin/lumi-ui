@@ -7,14 +7,14 @@ import {
   MeterRoot,
   MeterTrack,
   MeterValue,
-} from "@lumi-ui/ui/meter";
+} from "@/registry/ui/meter";
 import {
   SliderControl,
   SliderIndicator,
   SliderRoot,
   SliderThumb,
   SliderTrack,
-} from "@lumi-ui/ui/slider";
+} from "@/registry/ui/slider";
 
 const max = 100;
 const min = 0;

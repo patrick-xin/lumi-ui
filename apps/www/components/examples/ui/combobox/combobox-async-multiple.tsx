@@ -14,7 +14,7 @@ import {
   ComboboxStatus,
   ComboboxValue,
   useComboboxFilter,
-} from "@lumi-ui/ui/combobox";
+} from "@/registry/ui/combobox";
 
 export function ComboboxAsyncMultipleDemo() {
   const id = React.useId();

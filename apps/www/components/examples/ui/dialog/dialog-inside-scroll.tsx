@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -10,8 +10,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@lumi-ui/ui/dialog";
-import { ScrollArea } from "@lumi-ui/ui/scroll-area";
+} from "@/registry/ui/dialog";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 export function DialogInsideScrollDemo() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@lumi-ui/ui/tooltip";
+import { Button } from "@/registry/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip";
 
 export function TooltipDemo() {
   return (

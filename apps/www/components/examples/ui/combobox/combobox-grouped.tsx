@@ -10,7 +10,7 @@ import {
   ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
-} from "@lumi-ui/ui/combobox";
+} from "@/registry/ui/combobox";
 
 export function ComboboxGroupedDemo() {
   return (

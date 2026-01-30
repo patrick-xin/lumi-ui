@@ -1,16 +1,16 @@
-import { Checkbox } from "@lumi-ui/ui/checkbox";
-import { CheckboxGroup } from "@lumi-ui/ui/checkbox-group";
+import { Checkbox } from "@/registry/ui/checkbox";
+import { CheckboxGroup } from "@/registry/ui/checkbox-group";
 import {
   Field,
   FieldDescription,
   FieldItem,
   FieldLabel,
-} from "@lumi-ui/ui/field";
+} from "@/registry/ui/field";
 import {
   Fieldset,
   FieldsetDescription,
   FieldsetLegend,
-} from "@lumi-ui/ui/fieldset";
+} from "@/registry/ui/fieldset";
 
 export function FieldCheckboxGroupDemo() {
   return (

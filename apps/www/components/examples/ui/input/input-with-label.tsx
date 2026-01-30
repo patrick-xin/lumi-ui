@@ -1,5 +1,5 @@
-import { Field, FieldDescription, FieldLabel } from "@lumi-ui/ui/field";
-import { Input } from "@lumi-ui/ui/input";
+import { Field, FieldDescription, FieldLabel } from "@/registry/ui/field";
+import { Input } from "@/registry/ui/input";
 
 export function InputWithLabel() {
   return (

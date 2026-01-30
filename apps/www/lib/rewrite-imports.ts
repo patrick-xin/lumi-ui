@@ -77,5 +77,8 @@ export function rewriteRegistryImports(sourceCode: string): string {
     "@lumi-ui/hooks/": "@/hooks/",
     "@lumi-ui/lib/": "@/lib/",
     "@lumi-ui/ui/": "@/components/ui/",
+    "@/registry/ui/": "@/components/ui/",
+    "@/registry/lib/": "@/lib/",
+    "@/registry/hooks/": "@/hooks/",
   });
 }

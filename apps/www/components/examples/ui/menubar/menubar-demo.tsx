@@ -14,7 +14,7 @@ import {
   MenubarSubMenuContent,
   MenubarSubMenuTrigger,
   MenubarTrigger,
-} from "@lumi-ui/ui/menubar";
+} from "@/registry/ui/menubar";
 
 export function MenubarDemo() {
   return (

@@ -4,7 +4,7 @@ import {
   FieldDescription,
   FieldError,
   FieldLabel,
-} from "@lumi-ui/ui/field";
+} from "@/registry/ui/field";
 
 export default function FieldErrorDemo() {
   return (

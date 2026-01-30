@@ -9,8 +9,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@lumi-ui/ui/alert-dialog";
-import { Button } from "@lumi-ui/ui/button";
+} from "@/registry/ui/alert-dialog";
+import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -19,8 +19,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@lumi-ui/ui/dialog";
-import { Textarea } from "@lumi-ui/ui/textarea";
+} from "@/registry/ui/dialog";
+import { Textarea } from "@/registry/ui/textarea";
 
 export function DialogCloseConfirmationDemo() {
   const [dialogOpen, setDialogOpen] = React.useState(false);

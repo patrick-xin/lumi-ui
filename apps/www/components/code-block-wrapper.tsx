@@ -48,7 +48,6 @@ export function CodeBlockWrapper({
           </div>
         </div>
       )}
-
       {children}
     </figure>
   );

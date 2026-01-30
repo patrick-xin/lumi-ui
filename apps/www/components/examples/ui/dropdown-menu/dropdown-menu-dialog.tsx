@@ -1,23 +1,23 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@lumi-ui/ui/dialog";
+  AlertDialog,
+  AlertDialogClose,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/registry/ui/alert-dialog";
+import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@lumi-ui/ui/dropdown-menu";
-import { ChevronDownIcon, TrashIcon } from "lucide-react";
+} from "@/registry/ui/dropdown-menu";
+import { ChevronDownIcon, CopyIcon, PenIcon, TrashIcon } from "lucide-react";
 import * as React from "react";
 
 export function DropdownMenuDialogDemo() {
@@ -28,49 +28,55 @@ export function DropdownMenuDialogDemo() {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button variant="outline">
+            <Button className="w-32 justify-between" variant="outline">
               Actions <ChevronDownIcon className="size-4" />
             </Button>
           }
         />
         <DropdownMenuContent>
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Duplicate</DropdownMenuItem>
+          <DropdownMenuItem>
+            <PenIcon />
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <CopyIcon />
+            Duplicate
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => setDialogOpen(true)}
             variant="destructive"
           >
-            <TrashIcon className="size-4 mr-2" />
+            <TrashIcon />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Dialog onOpenChange={setDialogOpen} open={isDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Are you sure?</DialogTitle>
-            <DialogDescription>
+      <AlertDialog onOpenChange={setDialogOpen} open={isDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
               This action cannot be undone. This will permanently delete the
               item.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <DialogClose
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogClose
               onClick={() => setDialogOpen(false)}
-              render={<Button variant="ghost" />}
+              variant="ghost"
             >
               Cancel
-            </DialogClose>
-            <DialogClose
+            </AlertDialogClose>
+            <AlertDialogClose
               onClick={() => setDialogOpen(false)}
-              render={<Button variant="destructive" />}
+              variant="destructive"
             >
               Delete
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+            </AlertDialogClose>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }

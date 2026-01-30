@@ -2,9 +2,9 @@
 
 import { CheckIcon, ClipboardIcon } from "lucide-react";
 import React from "react";
-import { Button } from "@lumi-ui/ui/button";
-import { toast } from "@lumi-ui/ui/toast";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@lumi-ui/ui/tooltip";
+import { Button } from "@/registry/ui/button";
+import { toast } from "@/registry/ui/toast";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip";
 
 export function ToastAnchoredDemo() {
   const [copied, setCopied] = React.useState(false);

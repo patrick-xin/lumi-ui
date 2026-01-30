@@ -289,19 +289,21 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
 
     let componentLazyLoad = "";
     if (
-      item.type === "registry:ui" ||
-      item.type === "registry:lib" ||
-      item.type === "registry:block" ||
-      item.type === "registry:component"
+      (item.type === "registry:ui" ||
+        item.type === "registry:lib" ||
+        item.type === "registry:block" ||
+        item.type === "registry:component") &&
+      item.files &&
+      item.files.length > 0
     ) {
       const importPath =
         item.type === "registry:ui"
-          ? `@lumi-ui/ui/${item.name}`
+          ? `registry/ui/${item.name}`
           : item.type === "registry:lib"
-            ? `@lumi-ui/ui/lib/${item.name}`
+            ? `registry/lib/${item.name}`
             : item.type === "registry:block"
-              ? `@lumi-ui/ui/blocks/${item.name}/page`
-              : `@/components/examples/components/${item.name}`;
+              ? `registry/blocks/${item.name}/page`
+              : `registry/components/${item.name}`;
 
       componentLazyLoad = `component: React.lazy(async () => {
       const mod = await import("${importPath}");

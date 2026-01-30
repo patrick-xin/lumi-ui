@@ -10,7 +10,7 @@ import {
   AutocompleteItem,
   AutocompleteList,
   AutocompleteStatus,
-} from "@lumi-ui/ui/autocomplete";
+} from "@/registry/ui/autocomplete";
 
 export function AutocompleteAsyncDemo() {
   const [searchValue, setSearchValue] = React.useState("");

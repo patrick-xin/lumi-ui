@@ -51,7 +51,6 @@ interface SidebarContextType {
   isMobile: boolean;
   collapsedSize: number | undefined;
   mobileHandle: Dialog.Handle<unknown>;
-  collapsedSizePixels: number;
   isCollapsed: boolean;
   setIsCollapsed: (open: boolean) => void;
 }
@@ -94,8 +93,6 @@ const SidebarProvider = ({
     return savedPercentage < COLLAPSED_PERCENTAGE_THRESHOLD;
   });
 
-  const collapsedSizePixels = collapsibleType === "icon" ? 48 : 0;
-
   const toggleSidebar = React.useCallback(() => {
     const panel = sidebarRef.current;
     if (!panel) return;
@@ -124,7 +121,6 @@ const SidebarProvider = ({
     <SidebarContext.Provider
       value={{
         collapsedSize,
-        collapsedSizePixels,
         collapsibleType,
         isCollapsed,
         isMobile,
@@ -188,11 +184,11 @@ const Sidebar = ({ children }: React.ComponentProps<"div">) => {
         id={SIDEBAR_ID}
         maxSize={MAX_WIDTH}
         minSize={MIN_WIDTH}
-        onResize={(size) => {
-          // Always use inPixels for the boolean toggle to be precise
-          const currentlyCollapsed = size.inPixels <= ICON_MODE_WIDTH_PX;
-          if (currentlyCollapsed !== isCollapsed) {
-            setIsCollapsed(currentlyCollapsed);
+        onResize={() => {
+          // Only sync if Panel confirms collapse state changed
+          const panelCollapsed = sidebarRef.current?.isCollapsed() ?? false;
+          if (panelCollapsed !== isCollapsed) {
+            setIsCollapsed(panelCollapsed);
           }
         }}
         panelRef={sidebarRef}
@@ -216,6 +212,18 @@ const Sidebar = ({ children }: React.ComponentProps<"div">) => {
     </>
   );
 };
+
+function MainContent({ className, ...props }: PanelProps) {
+  return (
+    <ResizablePanel
+      className={cn("relative overflow-y-auto", className)}
+      data-slot="main-content"
+      id={MAIN_CONTENT_ID}
+      {...props}
+    />
+  );
+}
+
 const sidebarMenuButtonVariants = cva(
   [
     "relative peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md px-4 py-3 text-left transition-[width,height,padding,colors]",
@@ -319,17 +327,6 @@ function SidebarTrigger({
           <span className="sr-only">Toggle Sidebar</span>
         </Button>
       }
-    />
-  );
-}
-
-function MainContent({ className, ...props }: PanelProps) {
-  return (
-    <ResizablePanel
-      className={cn("relative overflow-y-auto", className)}
-      data-slot="main-content"
-      id={MAIN_CONTENT_ID}
-      {...props}
     />
   );
 }

@@ -1,14 +1,14 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItemContent,
   DropdownMenuTrigger,
-} from "@lumi-ui/ui/dropdown-menu";
-import { ChevronDownIcon } from "lucide-react";
+} from "@/registry/ui/dropdown-menu";
+import { BadgeCheckIcon, ChevronDownIcon } from "lucide-react";
 import * as React from "react";
 
 export function RadioItemsMenu() {
@@ -31,7 +31,11 @@ export function RadioItemsMenu() {
           <DropdownMenuRadioItemContent value="name">
             Name
           </DropdownMenuRadioItemContent>
-          <DropdownMenuRadioItemContent value="type">
+          <DropdownMenuRadioItemContent
+            indicatorIcon={<BadgeCheckIcon />}
+            indicatorPlacement="end"
+            value="type"
+          >
             Type
           </DropdownMenuRadioItemContent>
         </DropdownMenuRadioGroup>

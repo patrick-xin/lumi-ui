@@ -1,9 +1,9 @@
+import type { ReactNode } from "react";
 import { BlockSource } from "@/components/blocks/block-source";
 import { ComponentView } from "@/components/blocks/component-view";
 import { highlightCode } from "@/lib/highlight-code";
+import type { ComponentName } from "@/registry/__registry";
 import type { Block, BlockFile } from "@/types";
-import type { ReactNode } from "react";
-import { ComponentName } from "../../registry/__registry";
 
 async function getHighlightedFiles(
   files: BlockFile[],
@@ -31,7 +31,7 @@ export async function BlockDisplay({ block }: BlockDisplayProps) {
   return (
     <ComponentView
       description={block.description}
-      iframeHeight={block.meta?.iframeHeight as number | string ?? 900 }
+      iframeHeight={(block.meta?.iframeHeight as number | string) ?? 900}
       name={block.name as ComponentName}
       source={<BlockSource block={block} highlightedFiles={highlightedFiles} />}
       title={block.description}

@@ -1,12 +1,12 @@
 "use client";
 
-import { Field, FieldLabel } from "@lumi-ui/ui/field";
+import { Field, FieldLabel } from "@/registry/ui/field";
 import {
   ResizableGroup,
   ResizablePanel,
   ResizableSeparator,
-} from "@lumi-ui/ui/resizable";
-import { Switch } from "@lumi-ui/ui/switch";
+} from "@/registry/ui/resizable";
+import { Switch } from "@/registry/ui/switch";
 import { useState } from "react";
 
 export const ResizableOrientation = () => {

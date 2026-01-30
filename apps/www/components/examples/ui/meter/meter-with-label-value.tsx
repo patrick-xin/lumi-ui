@@ -4,7 +4,7 @@ import {
   MeterRoot,
   MeterTrack,
   MeterValue,
-} from "@lumi-ui/ui/meter";
+} from "@/registry/ui/meter";
 
 export function MeterWithLabelAndValueDemo() {
   return (

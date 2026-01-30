@@ -1,13 +1,13 @@
 "use client";
 
 import { XIcon } from "lucide-react";
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
   DialogElementOutsideContent,
   DialogTrigger,
-} from "@lumi-ui/ui/dialog";
+} from "@/registry/ui/dialog";
 
 export function DialogElementsOutsidePopupDemo() {
   return (

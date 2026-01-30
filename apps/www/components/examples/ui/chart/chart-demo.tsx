@@ -6,14 +6,14 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@lumi-ui/ui/card";
+} from "@/registry/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@lumi-ui/ui/chart";
-import { ToggleGroup, ToggleGroupItem } from "@lumi-ui/ui/toggle-group";
+} from "@/registry/ui/chart";
+import { ToggleGroup, ToggleGroupItem } from "@/registry/ui/toggle-group";
 import * as React from "react";
 import {
   Area,

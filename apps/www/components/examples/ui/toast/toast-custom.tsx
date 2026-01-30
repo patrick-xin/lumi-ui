@@ -1,13 +1,13 @@
 "use client";
 
 import { X } from "lucide-react";
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   ToastClose,
   ToastDescription,
   ToastTitle,
   toast,
-} from "@lumi-ui/ui/toast";
+} from "@/registry/ui/toast";
 
 export function ToastCustomDemo() {
   const createToast = () => {

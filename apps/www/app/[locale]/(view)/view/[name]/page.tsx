@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { siteConfig } from "@/lib/config";
 import { routing } from "@/lib/i18n/routing";
 import { absoluteUrl, cn } from "@/lib/utils";
@@ -93,7 +94,15 @@ export default async function BlockPage({
         (!alignment || alignment === "center") && "items-center justify-center",
       )}
     >
-      <Component />
+      <Suspense
+        fallback={
+          <div className="h-screen w-screen flex justify-center items-center text-sm">
+            Loading preview...
+          </div>
+        }
+      >
+        <Component />
+      </Suspense>
     </div>
   );
 }

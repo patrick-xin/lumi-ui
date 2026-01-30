@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronsUpDownIcon, SearchIcon } from "lucide-react";
-import { buttonVariants } from "@lumi-ui/ui/button";
+import { buttonVariants } from "@/registry/ui/button";
 import {
   Combobox,
   ComboboxContent,
@@ -12,8 +12,8 @@ import {
   ComboboxList,
   ComboboxTrigger,
   ComboboxValue,
-} from "@lumi-ui/ui/combobox";
-import { Separator } from "@lumi-ui/ui/separator";
+} from "@/registry/ui/combobox";
+import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupDemo() {
   return (

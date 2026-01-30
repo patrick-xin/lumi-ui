@@ -1,6 +1,6 @@
 import { Italic } from "lucide-react";
 
-import { Toggle } from "@lumi-ui/ui/toggle";
+import { Toggle } from "@/registry/ui/toggle";
 
 export function ToggleLarge() {
   return (

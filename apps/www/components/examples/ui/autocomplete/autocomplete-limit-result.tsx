@@ -10,7 +10,7 @@ import {
   AutocompleteList,
   AutocompleteStatus,
   useAutocompleteFilter,
-} from "@lumi-ui/ui/autocomplete";
+} from "@/registry/ui/autocomplete";
 
 const limit = 8;
 

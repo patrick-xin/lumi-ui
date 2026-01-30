@@ -2,14 +2,14 @@
 
 import { Pause, Play, RotateCcw, Upload } from "lucide-react";
 import * as React from "react";
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   ProgressIndicator,
   ProgressLabel,
   ProgressRoot,
   ProgressTrack,
   ProgressValue,
-} from "@lumi-ui/ui/progress";
+} from "@/registry/ui/progress";
 
 export default function ProgressDemo() {
   const [value, setValue] = React.useState(0);

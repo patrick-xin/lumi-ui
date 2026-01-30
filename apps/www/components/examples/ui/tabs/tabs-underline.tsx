@@ -1,17 +1,17 @@
 "use client";
 import { useState } from "react";
-import { Button } from "@lumi-ui/ui/button";
-import { Input } from "@lumi-ui/ui/input";
-import { Label } from "@lumi-ui/ui/label";
-import { Switch } from "@lumi-ui/ui/switch";
+import { Button } from "@/registry/ui/button";
+import { Input } from "@/registry/ui/input";
+import { Label } from "@/registry/ui/label";
+import { Switch } from "@/registry/ui/switch";
 import {
   TabIndicator,
   Tabs,
   TabsList,
   TabsPanel,
   TabsTab,
-} from "@lumi-ui/ui/tabs";
-import { Textarea } from "@lumi-ui/ui/textarea";
+} from "@/registry/ui/tabs";
+import { Textarea } from "@/registry/ui/textarea";
 
 export function TabsUnderline() {
   const [orientation, setOrientation] = useState<"vertical" | "horizontal">(

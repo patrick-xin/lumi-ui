@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
 import { cn } from "@lumi-ui/ui/lib/utils";
 import { AnimatePresence, motion } from "motion/react";

@@ -1,5 +1,5 @@
-import { Field, FieldLabel } from "@lumi-ui/ui/field";
-import { NumberField } from "@lumi-ui/ui/number-field";
+import { Field, FieldLabel } from "@/registry/ui/field";
+import { NumberField } from "@/registry/ui/number-field";
 
 export function NumberFieldDemo() {
   return (
