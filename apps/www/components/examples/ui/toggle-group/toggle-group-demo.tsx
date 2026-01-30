@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem } from "@lumi-ui/ui/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "@/registry/ui/toggle-group";
 import { BookmarkIcon, HeartIcon, StarIcon } from "lucide-react";
 
 export function ToggleGroupDemo() {

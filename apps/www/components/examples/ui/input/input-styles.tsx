@@ -1,4 +1,4 @@
-import { Input } from "@lumi-ui/ui/input";
+import { Input } from "@/registry/ui/input";
 
 export function InputVariantsDemo() {
   return (

@@ -4,7 +4,7 @@ import {
   TabsList,
   TabsPanel,
   TabsTab,
-} from "@lumi-ui/ui/tabs";
+} from "@/registry/ui/tabs";
 
 export function TabsPill() {
   return (

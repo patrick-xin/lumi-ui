@@ -11,7 +11,7 @@ import {
   ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
-} from "@lumi-ui/ui/combobox";
+} from "@/registry/ui/combobox";
 
 export function ComboboxMultipleSelectDemo() {
   const containerRef = React.useRef<HTMLDivElement | null>(null);

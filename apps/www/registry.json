@@ -2,15 +2,81 @@
   "homepage": "https://www.lumiui.dev/",
   "items": [
     {
+      "name": "ui",
+      "registryDependencies": [
+        "@lumi-ui/accordion",
+        "@lumi-ui/alert",
+        "@lumi-ui/alert-dialog",
+        "@lumi-ui/autocomplete",
+        "@lumi-ui/avatar",
+        "@lumi-ui/badge",
+        "@lumi-ui/breadcrumb",
+        "@lumi-ui/button",
+        "@lumi-ui/checkbox",
+        "@lumi-ui/checkbox-group",
+        "@lumi-ui/collapsible",
+        "@lumi-ui/combobox",
+        "@lumi-ui/command",
+        "@lumi-ui/dialog",
+        "@lumi-ui/empty",
+        "@lumi-ui/field",
+        "@lumi-ui/fieldset",
+        "@lumi-ui/form",
+        "@lumi-ui/frame",
+        "@lumi-ui/group",
+        "@lumi-ui/input",
+        "@lumi-ui/input-group",
+        "@lumi-ui/kbd",
+        "@lumi-ui/label",
+        "@lumi-ui/menu",
+        "@lumi-ui/meter",
+        "@lumi-ui/number-field",
+        "@lumi-ui/pagination",
+        "@lumi-ui/popover",
+        "@lumi-ui/preview-card",
+        "@lumi-ui/progress",
+        "@lumi-ui/radio-group",
+        "@lumi-ui/scroll-area",
+        "@lumi-ui/select",
+        "@lumi-ui/separator",
+        "@lumi-ui/sheet",
+        "@lumi-ui/sidebar",
+        "@lumi-ui/skeleton",
+        "@lumi-ui/slider",
+        "@lumi-ui/spinner",
+        "@lumi-ui/switch",
+        "@lumi-ui/table",
+        "@lumi-ui/tabs",
+        "@lumi-ui/textarea",
+        "@lumi-ui/toast",
+        "@lumi-ui/toggle",
+        "@lumi-ui/toggle-group",
+        "@lumi-ui/toolbar",
+        "@lumi-ui/tooltip",
+        "@lumi-ui/resizable"
+      ],
+      "type": "registry:ui"
+    },
+    {
       "dependencies": ["clsx", "tailwind-merge"],
       "files": [
         {
-          "path": "../../packages/ui/src/lib/utils.ts",
+          "path": "registry/lib/utils.ts",
           "type": "registry:lib"
         }
       ],
       "name": "utils",
       "type": "registry:lib"
+    },
+    {
+      "files": [
+        {
+          "path": "registry/hooks/use-mobile.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "name": "use-mobile",
+      "type": "registry:hook"
     },
     {
       "name": "accordion",
@@ -25,7 +91,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/accordion.tsx",
+          "path": "registry/ui/accordion.tsx",
           "type": "registry:ui"
         }
       ]
@@ -39,7 +105,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/avatar.tsx",
+          "path": "registry/ui/avatar.tsx",
           "type": "registry:ui"
         }
       ]
@@ -53,7 +119,7 @@
       "registryDependencies": ["utils", "@lumi-ui/button", "@lumi-ui/dialog"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/alert-dialog.tsx",
+          "path": "registry/ui/alert-dialog.tsx",
           "type": "registry:ui"
         }
       ]
@@ -71,7 +137,7 @@
       "registryDependencies": ["utils", "@lumi-ui/button"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/dialog.tsx",
+          "path": "registry/ui/dialog.tsx",
           "type": "registry:ui"
         }
       ]
@@ -85,7 +151,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/tabs.tsx",
+          "path": "registry/ui/tabs.tsx",
           "type": "registry:ui"
         }
       ]
@@ -99,7 +165,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/scroll-area.tsx",
+          "path": "registry/ui/scroll-area.tsx",
           "type": "registry:ui"
         }
       ]
@@ -113,7 +179,7 @@
       "registryDependencies": ["@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/popover.tsx",
+          "path": "registry/ui/popover.tsx",
           "type": "registry:ui"
         }
       ]
@@ -131,7 +197,7 @@
       "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/dropdown-menu.tsx",
+          "path": "registry/ui/dropdown-menu.tsx",
           "type": "registry:ui"
         }
       ]
@@ -149,7 +215,7 @@
       "registryDependencies": ["utils", "@lumi-ui/button", "@lumi-ui/input"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/autocomplete.tsx",
+          "path": "registry/ui/autocomplete.tsx",
           "type": "registry:ui"
         }
       ]
@@ -163,7 +229,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/input.tsx",
+          "path": "registry/ui/input.tsx",
           "type": "registry:ui"
         }
       ]
@@ -176,7 +242,7 @@
       "dependencies": ["@base-ui/react", "class-variance-authority"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/button.tsx",
+          "path": "registry/ui/button.tsx",
           "type": "registry:ui"
         }
       ],
@@ -191,7 +257,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/checkbox.tsx",
+          "path": "registry/ui/checkbox.tsx",
           "type": "registry:ui"
         }
       ]
@@ -205,7 +271,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/switch.tsx",
+          "path": "registry/ui/switch.tsx",
           "type": "registry:ui"
         }
       ]
@@ -219,7 +285,7 @@
       "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/select.tsx",
+          "path": "registry/ui/select.tsx",
           "type": "registry:ui"
         }
       ]
@@ -237,7 +303,7 @@
       "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/navigation-menu.tsx",
+          "path": "registry/ui/navigation-menu.tsx",
           "type": "registry:ui"
         }
       ]
@@ -251,7 +317,7 @@
       "type": "registry:ui",
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/collapsible.tsx",
+          "path": "registry/ui/collapsible.tsx",
           "type": "registry:ui"
         }
       ]
@@ -265,7 +331,7 @@
       "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/preview-card.tsx",
+          "path": "registry/ui/preview-card.tsx",
           "type": "registry:ui"
         }
       ]
@@ -279,7 +345,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/progress.tsx",
+          "path": "registry/ui/progress.tsx",
           "type": "registry:ui"
         }
       ]
@@ -293,7 +359,7 @@
       "registryDependencies": ["utils", "@lumi-ui/input"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/field.tsx",
+          "path": "registry/ui/field.tsx",
           "type": "registry:ui"
         }
       ]
@@ -307,7 +373,7 @@
       "registryDependencies": ["utils", "@lumi-ui/separator"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/fieldset.tsx",
+          "path": "registry/ui/fieldset.tsx",
           "type": "registry:ui"
         }
       ]
@@ -321,7 +387,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/form.tsx",
+          "path": "registry/ui/form.tsx",
           "type": "registry:ui"
         }
       ]
@@ -335,7 +401,7 @@
       "type": "registry:ui",
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/radio.tsx",
+          "path": "registry/ui/radio.tsx",
           "type": "registry:ui"
         }
       ]
@@ -349,7 +415,7 @@
       "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/tooltip.tsx",
+          "path": "registry/ui/tooltip.tsx",
           "type": "registry:ui"
         }
       ]
@@ -363,7 +429,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/toggle.tsx",
+          "path": "registry/ui/toggle.tsx",
           "type": "registry:ui"
         }
       ]
@@ -377,7 +443,7 @@
       "registryDependencies": ["toggle", "utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/toggle-group.tsx",
+          "path": "registry/ui/toggle-group.tsx",
           "type": "registry:ui"
         }
       ]
@@ -395,7 +461,7 @@
       "registryDependencies": ["@lumi-ui/button", "@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/toast.tsx",
+          "path": "registry/ui/toast.tsx",
           "type": "registry:ui"
         }
       ]
@@ -409,7 +475,7 @@
       "registryDependencies": ["checkbox", "utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/checkbox-group.tsx",
+          "path": "registry/ui/checkbox-group.tsx",
           "type": "registry:ui"
         }
       ]
@@ -423,7 +489,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/slider.tsx",
+          "path": "registry/ui/slider.tsx",
           "type": "registry:ui"
         }
       ]
@@ -437,7 +503,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/separator.tsx",
+          "path": "registry/ui/separator.tsx",
           "type": "registry:ui"
         }
       ]
@@ -451,7 +517,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/number-field.tsx",
+          "path": "registry/ui/number-field.tsx",
           "type": "registry:ui"
         }
       ]
@@ -465,7 +531,7 @@
       "dependencies": ["@base-ui/react"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/meter.tsx",
+          "path": "registry/ui/meter.tsx",
           "type": "registry:ui"
         }
       ]
@@ -479,7 +545,7 @@
       "registryDependencies": ["@lumi-ui/button", "utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/toolbar.tsx",
+          "path": "registry/ui/toolbar.tsx",
           "type": "registry:ui"
         }
       ]
@@ -497,7 +563,7 @@
       "registryDependencies": ["utils", "@lumi-ui/arrow-svg"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/context-menu.tsx",
+          "path": "registry/ui/context-menu.tsx",
           "type": "registry:ui"
         }
       ]
@@ -515,7 +581,7 @@
       "registryDependencies": ["@lumi-ui/input", "@lumi-ui/button", "utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/combobox.tsx",
+          "path": "registry/ui/combobox.tsx",
           "type": "registry:ui"
         }
       ]
@@ -533,7 +599,7 @@
       "registryDependencies": ["@lumi-ui/menu", "@lumi-ui/arrow-svg", "utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/menubar.tsx",
+          "path": "registry/ui/menubar.tsx",
           "type": "registry:ui"
         }
       ]
@@ -547,7 +613,7 @@
       "registryDependencies": ["@lumi-ui/dialog", "@lumi-ui/button", "utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/sheet.tsx",
+          "path": "registry/ui/sheet.tsx",
           "type": "registry:ui"
         }
       ]
@@ -561,7 +627,7 @@
       "registryDependencies": ["utils"],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/resizable.tsx",
+          "path": "registry/ui/resizable.tsx",
           "type": "registry:ui"
         }
       ]
@@ -575,7 +641,7 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/arrow-svg.tsx",
+          "path": "registry/ui/arrow-svg.tsx",
           "type": "registry:ui"
         }
       ]
@@ -589,7 +655,7 @@
       "description": "Renders an accessible label associated with controls.",
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/label.tsx",
+          "path": "registry/ui/label.tsx",
           "type": "registry:ui"
         }
       ]
@@ -602,33 +668,24 @@
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
-        "lucide-react"
+        "lucide-react",
+        "react-resizable-panels"
       ],
       "registryDependencies": [
         "@lumi-ui/button",
+        "@lumi-ui/resizable",
         "@lumi-ui/separator",
         "@lumi-ui/sheet",
         "@lumi-ui/tooltip",
         "@lumi-ui/input",
-        "use-mobile",
-        "skeleton"
+        "@lumi-ui/use-mobile"
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/sidebar.tsx",
+          "path": "registry/ui/sidebar.tsx",
           "type": "registry:ui"
         }
       ]
-    },
-    {
-      "files": [
-        {
-          "path": "../../packages/ui/src/hooks/use-mobile.ts",
-          "type": "registry:hook"
-        }
-      ],
-      "name": "use-mobile",
-      "type": "registry:hook"
     },
     {
       "name": "textarea",
@@ -639,7 +696,7 @@
       "type": "registry:ui",
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/textarea.tsx",
+          "path": "registry/ui/textarea.tsx",
           "type": "registry:ui"
         }
       ]
@@ -653,7 +710,7 @@
       "type": "registry:ui",
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/chart.tsx",
+          "path": "registry/ui/chart.tsx",
           "type": "registry:ui"
         }
       ]
@@ -667,7 +724,7 @@
       "type": "registry:ui",
       "files": [
         {
-          "path": "../../packages/ui/src/components/ui/breadcrumb.tsx",
+          "path": "registry/ui/breadcrumb.tsx",
           "type": "registry:ui"
         }
       ]
@@ -675,7 +732,7 @@
     {
       "name": "sidebar-01",
       "categories": ["sidebar", "dashboard"],
-      "description": "Dashboard layout with sidebar and main content area.",
+      "description": "Sidebar with collapsible icons and sections.",
       "type": "registry:block",
       "meta": {
         "iframeHeight": 1200
@@ -693,68 +750,40 @@
         "@lumi-ui/form",
         "@lumi-ui/field",
         "@lumi-ui/button",
-        "@lumi-ui/combobox"
+        "@lumi-ui/combobox",
+        "@lumi-ui/collapsible",
+        "@lumi-ui/toggle-group",
+        "@lumi-ui/toast",
+        "card"
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/blocks/sidebar-01/page.tsx",
+          "path": "registry/blocks/sidebar-01/page.tsx",
           "target": "app/dashboard/page.tsx",
           "type": "registry:page"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/app-sidebar.tsx",
+          "path": "registry/blocks/sidebar-01/components/app-sidebar.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/ai-chat-dialog.tsx",
+          "path": "registry/blocks/sidebar-01/components/nav-main.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/ai-chat.tsx",
+          "path": "registry/blocks/sidebar-01/components/nav-projects.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/ask-doc.tsx",
+          "path": "registry/blocks/sidebar-01/components/nav-user.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/chart-mixed-axes.tsx",
+          "path": "registry/blocks/sidebar-01/components/search-combobox.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/chat-header.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/hover-border-button.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/moving-border-button.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-main.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-main.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-projects.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/search-combobox.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/streaming.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "../../packages/ui/src/blocks/sidebar-01/components/team-switcher.tsx",
+          "path": "registry/blocks/sidebar-01/components/team-switcher.tsx",
           "type": "registry:component"
         }
       ]
@@ -777,20 +806,20 @@
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/blocks/sidebar-02/page.tsx",
+          "path": "registry/blocks/sidebar-02/page.tsx",
           "target": "app/dashboard/page.tsx",
           "type": "registry:page"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-02/components/app-sidebar.tsx",
+          "path": "registry/blocks/sidebar-02/components/app-sidebar.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-02/components/nav-main.tsx",
+          "path": "registry/blocks/sidebar-02/components/nav-main.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/sidebar-02/components/version-switcher.tsx",
+          "path": "registry/blocks/sidebar-02/components/version-switcher.tsx",
           "type": "registry:component"
         }
       ]
@@ -812,16 +841,16 @@
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/blocks/dialog-01/page.tsx",
+          "path": "registry/blocks/dialog-01/page.tsx",
           "target": "app/dashboard/page.tsx",
           "type": "registry:page"
         },
         {
-          "path": "../../packages/ui/src/blocks/dialog-01/components/team-management.tsx",
+          "path": "registry/blocks/dialog-01/components/team-management.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/dialog-01/components/member-card.tsx",
+          "path": "registry/blocks/dialog-01/components/member-card.tsx",
           "type": "registry:component"
         }
       ]
@@ -843,36 +872,36 @@
       ],
       "files": [
         {
-          "path": "../../packages/ui/src/blocks/dialog-02/page.tsx",
+          "path": "registry/blocks/dialog-02/page.tsx",
           "target": "app/dashboard/page.tsx",
           "type": "registry:page"
         },
         {
-          "path": "../../packages/ui/src/blocks/dialog-02/components/info-menu.tsx",
+          "path": "registry/blocks/dialog-02/components/info-menu.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/dialog-02/components/stats-chart.tsx",
+          "path": "registry/blocks/dialog-02/components/stats-chart.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/dialog-02/components/login-form.tsx",
+          "path": "registry/blocks/dialog-02/components/login-form.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/dialog-02/components/signup-form.tsx",
+          "path": "registry/blocks/dialog-02/components/signup-form.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/dialog-02/components/share-menu.tsx",
+          "path": "registry/blocks/dialog-02/components/share-menu.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/dialog-02/components/tooltip-group.tsx",
+          "path": "registry/blocks/dialog-02/components/tooltip-group.tsx",
           "type": "registry:component"
         },
         {
-          "path": "../../packages/ui/src/blocks/dialog-02/components/profile-card.tsx",
+          "path": "registry/blocks/dialog-02/components/profile-card.tsx",
           "type": "registry:component"
         }
       ]
@@ -896,7 +925,7 @@
       ],
       "files": [
         {
-          "path": "components/examples/components/project-status-picker.tsx",
+          "path": "registry/components/project-status-picker.tsx",
           "type": "registry:component"
         }
       ]
@@ -908,10 +937,14 @@
       "type": "registry:component",
       "categories": ["layout-navigation"],
       "dependencies": ["lucide-react", "motion"],
-      "registryDependencies": ["utils", "@lumi-ui/button", "@lumi-ui/dialog"],
+      "registryDependencies": [
+        "@lumi-ui/button",
+        "@lumi-ui/dialog",
+        "@lumi-ui/scroll-area"
+      ],
       "files": [
         {
-          "path": "components/examples/components/morphing-dialog.tsx",
+          "path": "registry/components/morphing-dialog.tsx",
           "type": "registry:component"
         }
       ]
@@ -928,8 +961,7 @@
       },
       "dependencies": ["lucide-react", "@base-ui/react"],
       "registryDependencies": [
-        "utils",
-        "hooks",
+        "@lumi-ui/use-mobile",
         "@lumi-ui/dropdown-menu",
         "@lumi-ui/input",
         "@lumi-ui/popover",
@@ -939,7 +971,7 @@
       ],
       "files": [
         {
-          "path": "components/examples/components/vercel-notification.tsx",
+          "path": "registry/components/vercel-notification.tsx",
           "type": "registry:component"
         }
       ]
@@ -975,7 +1007,7 @@
       ],
       "files": [
         {
-          "path": "components/examples/components/t3-model-selector.tsx",
+          "path": "registry/components/t3-model-selector.tsx",
           "type": "registry:component"
         }
       ]

@@ -1,13 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Select,
   SelectContent,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@lumi-ui/ui/select";
+} from "@/registry/ui/select";
 
 const fruits = [
   { value: "apple", label: "Apple" },

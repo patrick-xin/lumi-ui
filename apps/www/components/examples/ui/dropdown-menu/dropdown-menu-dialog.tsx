@@ -8,15 +8,15 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@lumi-ui/ui/alert-dialog";
-import { Button } from "@lumi-ui/ui/button";
+} from "@/registry/ui/alert-dialog";
+import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@lumi-ui/ui/dropdown-menu";
+} from "@/registry/ui/dropdown-menu";
 import { ChevronDownIcon, CopyIcon, PenIcon, TrashIcon } from "lucide-react";
 import * as React from "react";
 

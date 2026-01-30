@@ -4,7 +4,7 @@ import type { DialogRootChangeEventDetails } from "@base-ui/react";
 import { ChevronLeft, ChevronRight, XIcon } from "lucide-react";
 import * as React from "react";
 import { ToggleGroupDemo } from "@/components/examples/ui/toggle-group/toggle-group-demo";
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   createDialogHandle,
   Dialog,
@@ -14,7 +14,7 @@ import {
   DialogPortal,
   DialogTrigger,
   DialogViewport,
-} from "@lumi-ui/ui/dialog";
+} from "@/registry/ui/dialog";
 
 type IImage = {
   alt: string;

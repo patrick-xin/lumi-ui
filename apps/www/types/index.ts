@@ -1,7 +1,7 @@
 import type { Folder, Item, Root, Separator } from "fumadocs-core/page-tree";
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
-import type { RegistryEntry } from "../registry/__registry";
+import type { RegistryEntry } from "@/registry/__registry";
 export type ComponentStatus = "planned" | "in-progress" | "new" | undefined;
 
 export type DocPageNode = Item & {

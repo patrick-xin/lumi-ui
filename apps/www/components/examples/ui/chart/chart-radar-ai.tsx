@@ -7,13 +7,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@lumi-ui/ui/card";
+} from "@/registry/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@lumi-ui/ui/chart";
+} from "@/registry/ui/chart";
 import { TrendingUp } from "lucide-react";
 import {
   PolarAngleAxis,

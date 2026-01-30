@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@lumi-ui/ui/dropdown-menu";
+} from "@/registry/ui/dropdown-menu";
 import { ChevronDownIcon, ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 

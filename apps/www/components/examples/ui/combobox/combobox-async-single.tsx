@@ -10,7 +10,7 @@ import {
   ComboboxList,
   ComboboxStatus,
   useComboboxFilter,
-} from "@lumi-ui/ui/combobox";
+} from "@/registry/ui/combobox";
 
 export function ComboboxAsyncSingleDemo() {
   const [searchResults, setSearchResults] = React.useState<DirectoryUser[]>([]);

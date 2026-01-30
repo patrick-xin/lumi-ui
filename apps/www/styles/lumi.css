@@ -1,3 +1,4 @@
+/* For popups */
 @utility animate-popup {
   @apply origin-[var(--transform-origin)] transition-[opacity,scale,transform] ease-[cubic-bezier(0.23,1,0.32,1)] duration-150;
 
@@ -8,6 +9,7 @@
   }
 }
 
+/* For dialogs */
 @utility animate-fade-up {
   @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
 
@@ -69,11 +71,7 @@
 
 /* Active Highlight */
 @utility highlight-on-active {
-  @apply data-[highlighted]:relative data-[highlighted]:z-0;
-  
-  @apply data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-md;
-
-  @apply data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground;
+  @apply data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-1 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-md data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground;
 }
 
 /* 

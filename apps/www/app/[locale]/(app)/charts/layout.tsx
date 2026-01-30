@@ -1,11 +1,11 @@
-import { Button } from "@lumi-ui/ui/button";
-import type { Metadata } from "next";
-import Link from "next/link";
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/blocks/page-header";
+import { Button } from "@/registry/ui/button";
+import type { Metadata } from "next";
+import Link from "next/link";
 
 const title = "Charts";
 const description =

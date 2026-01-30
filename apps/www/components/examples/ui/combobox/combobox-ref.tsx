@@ -10,8 +10,8 @@ import {
   ComboboxList,
   ComboboxTrigger,
   ComboboxValue,
-} from "@lumi-ui/ui/combobox";
-import { Separator } from "@lumi-ui/ui/separator";
+} from "@/registry/ui/combobox";
+import { Separator } from "@/registry/ui/separator";
 import { ChevronDownIcon } from "lucide-react";
 import { useRef } from "react";
 

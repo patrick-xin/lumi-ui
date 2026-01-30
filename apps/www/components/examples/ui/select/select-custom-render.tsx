@@ -1,20 +1,20 @@
 "use client";
 
+import { cn } from "@/registry/lib/utils";
 import {
-  CheckCircle2,
-  ChevronsUpDownIcon,
-  Circle,
-  CircleDashed,
-  HelpCircle,
-  XCircle,
+    Select,
+    SelectContent,
+    SelectItemContent,
+    SelectTriggerGroup,
+} from "@/registry/ui/select";
+import {
+    CheckCircle2,
+    ChevronsUpDownIcon,
+    Circle,
+    CircleDashed,
+    HelpCircle,
+    XCircle,
 } from "lucide-react";
-import { cn } from "@lumi-ui/ui/lib/utils";
-import {
-  Select,
-  SelectContent,
-  SelectItemContent,
-  SelectTriggerGroup,
-} from "@lumi-ui/ui/select";
 
 export function SelectCustomRenderDemo() {
   return (

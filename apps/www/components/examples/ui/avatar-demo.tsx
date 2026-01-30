@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@lumi-ui/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar";
 
 export function AvatarDemo() {
   return (

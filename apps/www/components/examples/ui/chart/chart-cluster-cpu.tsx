@@ -1,19 +1,19 @@
 "use client";
 
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@lumi-ui/ui/card";
+} from "@/registry/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@lumi-ui/ui/chart";
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+} from "@/registry/ui/chart";
 
 const data = Array.from({ length: 100 }, (_, i) => {
   const totalMinutes = Math.floor((i * 1440) / 100);
@@ -45,7 +45,7 @@ export function ChartClusterCpu() {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1">
-        <ChartContainer className="size-full" config={chartConfig}>
+        <ChartContainer className="size-full md:h-96" config={chartConfig}>
           <AreaChart
             data={data}
             margin={{

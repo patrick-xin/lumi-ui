@@ -5,7 +5,7 @@ import {
   FieldControl,
   FieldLabel,
   FieldValidity,
-} from "@lumi-ui/ui/field";
+} from "@/registry/ui/field";
 
 export default function FieldValidityDemo() {
   return (

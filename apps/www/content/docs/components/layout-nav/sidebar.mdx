@@ -1,6 +1,7 @@
 ---
 title: Sidebar
 description: A composable, mobile-responsive sidebar component.
+status: "new"
 ---
 
 ## Installation
@@ -76,7 +77,7 @@ The sidebar behavior is controlled by a few constants in the `sidebar.tsx` file.
 
 You can set the `collapsibleType` prop to either `icon` or `sidebar` to control how the sidebar collapses. `ICON_MODE_WIDTH_PX` is the width of the sidebar in icon mode. If set `sidebar`, the sidebar will be hidden when collapsed. See [examples](/blocks/sidebar) for more details. 
 
-### With Server-Side Cookies
+### With Server-Side Cookies(default)
 
 To prevent hydration mismatch and maintain the sidebar state between refreshes, it's recommended to read the state from cookies server-side and pass it to the `SidebarProvider`.
 
@@ -110,6 +111,97 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     </SidebarProvider>
   )
 }
+```
+
+### With Client-Side Cookies
+
+Replace `SidebarProvider` with code below:
+
+```tsx
+const SidebarProvider = ({
+	collapsibleType = "icon",
+	children,
+	groupId,
+}: {
+	children: ReactNode;
+	collapsibleType?: Collapsible;
+	groupId: string;
+}) => {
+	const { defaultLayout, onLayoutChanged } = useDefaultLayout({
+		id: groupId,
+		storage: localStorage,
+	});
+	const isMobile = useIsMobile();
+	const sidebarRef = usePanelRef();
+	const mobileHandle = useMemo(() => createSheetHandle(), []);
+	const collapsedSize = collapsibleType === "icon" ? ICON_MODE_WIDTH_PX : 0;
+
+	// For icon
+	const [isCollapsed, setIsCollapsed] = useState(() => {
+		// If no cookie, default to expanded
+		if (!defaultLayout || !defaultLayout.sidebar) return false;
+
+		// The cookie value is a percentage (0-100)
+		const savedPercentage = defaultLayout.sidebar;
+
+		// Compare against our safety threshold
+		return savedPercentage < COLLAPSED_PERCENTAGE_THRESHOLD;
+	});
+
+	const toggleSidebar = React.useCallback(() => {
+		const panel = sidebarRef.current;
+		if (!panel) return;
+		if (panel.isCollapsed()) {
+			panel.expand();
+		} else {
+			panel.collapse();
+		}
+	}, [sidebarRef]);
+
+	React.useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (
+				event.key === SIDEBAR_KEYBOARD_SHORTCUT &&
+				(event.metaKey || event.ctrlKey)
+			) {
+				event.preventDefault();
+				toggleSidebar();
+			}
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, [toggleSidebar]);
+
+	return (
+		<SidebarContext.Provider
+			value={{
+				collapsedSize,
+				collapsibleType,
+				isCollapsed,
+				isMobile,
+				mobileHandle,
+				setIsCollapsed,
+				sidebarRef,
+				toggleSidebar,
+			}}
+		>
+			<TooltipProvider>
+				<div className="h-screen w-screen overflow-hidden">
+					<ResizableGroup
+						data-slot="sidebar-wrapper"
+						id={groupId}
+						defaultLayout={defaultLayout}
+						onLayoutChanged={onLayoutChanged}
+						orientation="horizontal"
+						resizeTargetMinimumSize={{ coarse: 37, fine: 27 }}
+					>
+						{children}
+					</ResizableGroup>
+				</div>
+			</TooltipProvider>
+		</SidebarContext.Provider>
+	);
+};
 ```
 
 

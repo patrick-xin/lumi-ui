@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@lumi-ui/ui/button";
-import { Checkbox } from "@lumi-ui/ui/checkbox";
-import { CheckboxGroup } from "@lumi-ui/ui/checkbox-group";
-import { Field, FieldItem, FieldLabel } from "@lumi-ui/ui/field";
-import { Fieldset, FieldsetLegend } from "@lumi-ui/ui/fieldset";
-import { Input } from "@lumi-ui/ui/input";
-import { Label } from "@lumi-ui/ui/label";
-import { Radio, RadioGroup } from "@lumi-ui/ui/radio";
-import { ScrollArea } from "@lumi-ui/ui/scroll-area";
-import { Separator } from "@lumi-ui/ui/separator";
+import { Button } from "@/registry/ui/button";
+import { Checkbox } from "@/registry/ui/checkbox";
+import { CheckboxGroup } from "@/registry/ui/checkbox-group";
+import { Field, FieldItem, FieldLabel } from "@/registry/ui/field";
+import { Fieldset, FieldsetLegend } from "@/registry/ui/fieldset";
+import { Input } from "@/registry/ui/input";
+import { Label } from "@/registry/ui/label";
+import { Radio, RadioGroup } from "@/registry/ui/radio";
+import { ScrollArea } from "@/registry/ui/scroll-area";
+import { Separator } from "@/registry/ui/separator";
 import {
   Sheet,
   SheetClose,
@@ -20,8 +20,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@lumi-ui/ui/sheet";
-import { Slider } from "@lumi-ui/ui/slider";
+} from "@/registry/ui/sheet";
+import { Slider } from "@/registry/ui/slider";
 
 export function SheetDemo() {
   return (

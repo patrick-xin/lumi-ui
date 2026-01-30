@@ -4,7 +4,7 @@ import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleTrigger,
-} from "@lumi-ui/ui/collapsible";
+} from "@/registry/ui/collapsible";
 import {
   CheckCircle2,
   ChevronRight,

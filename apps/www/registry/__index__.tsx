@@ -8,6 +8,18 @@ import React from "react";
 import type { ComponentRegistry } from "./__registry";
 
 export const components: ComponentRegistry = {
+  "ui": {
+    name: "ui",
+    title: undefined,
+    description: "",
+    type: "registry:ui",
+    target: "",
+    registryDependencies: undefined,
+    files:     [],
+    
+    categories: undefined,
+    meta: undefined,
+  },
   "utils": {
     name: "utils",
     title: undefined,
@@ -17,16 +29,34 @@ export const components: ComponentRegistry = {
     registryDependencies: ["clsx","tailwind-merge"],
     files:     [
           {
-                "path": "../../packages/ui/src/lib/utils.ts",
+                "path": "registry/lib/utils.ts",
                 "target": "",
                 "type": "registry:lib"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/lib/utils");
+      const mod = await import("registry/lib/utils");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "utils";
       return { default: mod.default || mod[exportName] };
     }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "use-mobile": {
+    name: "use-mobile",
+    title: undefined,
+    description: "",
+    type: "registry:hook",
+    target: "",
+    registryDependencies: undefined,
+    files:     [
+          {
+                "path": "registry/hooks/use-mobile.ts",
+                "target": "",
+                "type": "registry:hook"
+          }
+    ],
+    
     categories: undefined,
     meta: undefined,
   },
@@ -39,13 +69,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority","lucide-react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/accordion.tsx",
+                "path": "registry/ui/accordion.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/accordion");
+      const mod = await import("registry/ui/accordion");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "accordion";
       return { default: mod.default || mod[exportName] };
     }),
@@ -61,13 +91,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/avatar.tsx",
+                "path": "registry/ui/avatar.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/avatar");
+      const mod = await import("registry/ui/avatar");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "avatar";
       return { default: mod.default || mod[exportName] };
     }),
@@ -83,13 +113,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/alert-dialog.tsx",
+                "path": "registry/ui/alert-dialog.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/alert-dialog");
+      const mod = await import("registry/ui/alert-dialog");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "alert-dialog";
       return { default: mod.default || mod[exportName] };
     }),
@@ -105,13 +135,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority","lucide-react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/dialog.tsx",
+                "path": "registry/ui/dialog.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/dialog");
+      const mod = await import("registry/ui/dialog");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog";
       return { default: mod.default || mod[exportName] };
     }),
@@ -127,13 +157,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/tabs.tsx",
+                "path": "registry/ui/tabs.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/tabs");
+      const mod = await import("registry/ui/tabs");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tabs";
       return { default: mod.default || mod[exportName] };
     }),
@@ -149,13 +179,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/scroll-area.tsx",
+                "path": "registry/ui/scroll-area.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/scroll-area");
+      const mod = await import("registry/ui/scroll-area");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "scroll-area";
       return { default: mod.default || mod[exportName] };
     }),
@@ -171,13 +201,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/popover.tsx",
+                "path": "registry/ui/popover.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/popover");
+      const mod = await import("registry/ui/popover");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "popover";
       return { default: mod.default || mod[exportName] };
     }),
@@ -193,13 +223,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/dropdown-menu.tsx",
+                "path": "registry/ui/dropdown-menu.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/dropdown-menu");
+      const mod = await import("registry/ui/dropdown-menu");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dropdown-menu";
       return { default: mod.default || mod[exportName] };
     }),
@@ -215,13 +245,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/autocomplete.tsx",
+                "path": "registry/ui/autocomplete.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/autocomplete");
+      const mod = await import("registry/ui/autocomplete");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "autocomplete";
       return { default: mod.default || mod[exportName] };
     }),
@@ -237,13 +267,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/input.tsx",
+                "path": "registry/ui/input.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/input");
+      const mod = await import("registry/ui/input");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "input";
       return { default: mod.default || mod[exportName] };
     }),
@@ -259,13 +289,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/button.tsx",
+                "path": "registry/ui/button.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/button");
+      const mod = await import("registry/ui/button");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "button";
       return { default: mod.default || mod[exportName] };
     }),
@@ -281,13 +311,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/checkbox.tsx",
+                "path": "registry/ui/checkbox.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/checkbox");
+      const mod = await import("registry/ui/checkbox");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "checkbox";
       return { default: mod.default || mod[exportName] };
     }),
@@ -303,13 +333,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/switch.tsx",
+                "path": "registry/ui/switch.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/switch");
+      const mod = await import("registry/ui/switch");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "switch";
       return { default: mod.default || mod[exportName] };
     }),
@@ -325,13 +355,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/select.tsx",
+                "path": "registry/ui/select.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/select");
+      const mod = await import("registry/ui/select");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "select";
       return { default: mod.default || mod[exportName] };
     }),
@@ -347,13 +377,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/navigation-menu.tsx",
+                "path": "registry/ui/navigation-menu.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/navigation-menu");
+      const mod = await import("registry/ui/navigation-menu");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "navigation-menu";
       return { default: mod.default || mod[exportName] };
     }),
@@ -369,13 +399,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/collapsible.tsx",
+                "path": "registry/ui/collapsible.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/collapsible");
+      const mod = await import("registry/ui/collapsible");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "collapsible";
       return { default: mod.default || mod[exportName] };
     }),
@@ -391,13 +421,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/preview-card.tsx",
+                "path": "registry/ui/preview-card.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/preview-card");
+      const mod = await import("registry/ui/preview-card");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "preview-card";
       return { default: mod.default || mod[exportName] };
     }),
@@ -413,13 +443,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/progress.tsx",
+                "path": "registry/ui/progress.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/progress");
+      const mod = await import("registry/ui/progress");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "progress";
       return { default: mod.default || mod[exportName] };
     }),
@@ -435,13 +465,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/field.tsx",
+                "path": "registry/ui/field.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/field");
+      const mod = await import("registry/ui/field");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "field";
       return { default: mod.default || mod[exportName] };
     }),
@@ -457,13 +487,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/fieldset.tsx",
+                "path": "registry/ui/fieldset.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/fieldset");
+      const mod = await import("registry/ui/fieldset");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "fieldset";
       return { default: mod.default || mod[exportName] };
     }),
@@ -479,13 +509,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/form.tsx",
+                "path": "registry/ui/form.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/form");
+      const mod = await import("registry/ui/form");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "form";
       return { default: mod.default || mod[exportName] };
     }),
@@ -501,13 +531,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/radio.tsx",
+                "path": "registry/ui/radio.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/radio");
+      const mod = await import("registry/ui/radio");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "radio";
       return { default: mod.default || mod[exportName] };
     }),
@@ -523,13 +553,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/tooltip.tsx",
+                "path": "registry/ui/tooltip.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/tooltip");
+      const mod = await import("registry/ui/tooltip");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "tooltip";
       return { default: mod.default || mod[exportName] };
     }),
@@ -545,13 +575,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/toggle.tsx",
+                "path": "registry/ui/toggle.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/toggle");
+      const mod = await import("registry/ui/toggle");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toggle";
       return { default: mod.default || mod[exportName] };
     }),
@@ -567,13 +597,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/toggle-group.tsx",
+                "path": "registry/ui/toggle-group.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/toggle-group");
+      const mod = await import("registry/ui/toggle-group");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toggle-group";
       return { default: mod.default || mod[exportName] };
     }),
@@ -589,13 +619,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/toast.tsx",
+                "path": "registry/ui/toast.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/toast");
+      const mod = await import("registry/ui/toast");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toast";
       return { default: mod.default || mod[exportName] };
     }),
@@ -611,13 +641,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/checkbox-group.tsx",
+                "path": "registry/ui/checkbox-group.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/checkbox-group");
+      const mod = await import("registry/ui/checkbox-group");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "checkbox-group";
       return { default: mod.default || mod[exportName] };
     }),
@@ -633,13 +663,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/slider.tsx",
+                "path": "registry/ui/slider.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/slider");
+      const mod = await import("registry/ui/slider");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "slider";
       return { default: mod.default || mod[exportName] };
     }),
@@ -655,13 +685,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/separator.tsx",
+                "path": "registry/ui/separator.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/separator");
+      const mod = await import("registry/ui/separator");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "separator";
       return { default: mod.default || mod[exportName] };
     }),
@@ -677,13 +707,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/number-field.tsx",
+                "path": "registry/ui/number-field.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/number-field");
+      const mod = await import("registry/ui/number-field");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "number-field";
       return { default: mod.default || mod[exportName] };
     }),
@@ -699,13 +729,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/meter.tsx",
+                "path": "registry/ui/meter.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/meter");
+      const mod = await import("registry/ui/meter");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "meter";
       return { default: mod.default || mod[exportName] };
     }),
@@ -721,13 +751,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/toolbar.tsx",
+                "path": "registry/ui/toolbar.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/toolbar");
+      const mod = await import("registry/ui/toolbar");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toolbar";
       return { default: mod.default || mod[exportName] };
     }),
@@ -743,13 +773,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/context-menu.tsx",
+                "path": "registry/ui/context-menu.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/context-menu");
+      const mod = await import("registry/ui/context-menu");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "context-menu";
       return { default: mod.default || mod[exportName] };
     }),
@@ -765,13 +795,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/combobox.tsx",
+                "path": "registry/ui/combobox.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/combobox");
+      const mod = await import("registry/ui/combobox");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "combobox";
       return { default: mod.default || mod[exportName] };
     }),
@@ -787,13 +817,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/menubar.tsx",
+                "path": "registry/ui/menubar.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/menubar");
+      const mod = await import("registry/ui/menubar");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "menubar";
       return { default: mod.default || mod[exportName] };
     }),
@@ -809,13 +839,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["@base-ui/react","lucide-react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/sheet.tsx",
+                "path": "registry/ui/sheet.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/sheet");
+      const mod = await import("registry/ui/sheet");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sheet";
       return { default: mod.default || mod[exportName] };
     }),
@@ -831,13 +861,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["react-resizable-panels","lucide-react"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/resizable.tsx",
+                "path": "registry/ui/resizable.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/resizable");
+      const mod = await import("registry/ui/resizable");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "resizable";
       return { default: mod.default || mod[exportName] };
     }),
@@ -853,13 +883,13 @@ export const components: ComponentRegistry = {
     registryDependencies: undefined,
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/arrow-svg.tsx",
+                "path": "registry/ui/arrow-svg.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/arrow-svg");
+      const mod = await import("registry/ui/arrow-svg");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "arrow-svg";
       return { default: mod.default || mod[exportName] };
     }),
@@ -875,13 +905,13 @@ export const components: ComponentRegistry = {
     registryDependencies: undefined,
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/label.tsx",
+                "path": "registry/ui/label.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/label");
+      const mod = await import("registry/ui/label");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "label";
       return { default: mod.default || mod[exportName] };
     }),
@@ -894,37 +924,19 @@ export const components: ComponentRegistry = {
     description: "App sidebar",
     type: "registry:ui",
     target: "",
-    registryDependencies: ["@base-ui/react","class-variance-authority","lucide-react"],
+    registryDependencies: ["@base-ui/react","class-variance-authority","lucide-react","react-resizable-panels"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/sidebar.tsx",
+                "path": "registry/ui/sidebar.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/sidebar");
+      const mod = await import("registry/ui/sidebar");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sidebar";
       return { default: mod.default || mod[exportName] };
     }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "use-mobile": {
-    name: "use-mobile",
-    title: undefined,
-    description: "",
-    type: "registry:hook",
-    target: "",
-    registryDependencies: undefined,
-    files:     [
-          {
-                "path": "../../packages/ui/src/hooks/use-mobile.ts",
-                "target": "",
-                "type": "registry:hook"
-          }
-    ],
-    
     categories: undefined,
     meta: undefined,
   },
@@ -937,13 +949,13 @@ export const components: ComponentRegistry = {
     registryDependencies: undefined,
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/textarea.tsx",
+                "path": "registry/ui/textarea.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/textarea");
+      const mod = await import("registry/ui/textarea");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "textarea";
       return { default: mod.default || mod[exportName] };
     }),
@@ -959,13 +971,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["recharts"],
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/chart.tsx",
+                "path": "registry/ui/chart.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/chart");
+      const mod = await import("registry/ui/chart");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chart";
       return { default: mod.default || mod[exportName] };
     }),
@@ -981,13 +993,13 @@ export const components: ComponentRegistry = {
     registryDependencies: undefined,
     files:     [
           {
-                "path": "../../packages/ui/src/components/ui/breadcrumb.tsx",
+                "path": "registry/ui/breadcrumb.tsx",
                 "target": "",
                 "type": "registry:ui"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/breadcrumb");
+      const mod = await import("registry/ui/breadcrumb");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "breadcrumb";
       return { default: mod.default || mod[exportName] };
     }),
@@ -997,89 +1009,49 @@ export const components: ComponentRegistry = {
   "sidebar-01": {
     name: "sidebar-01",
     title: undefined,
-    description: "Dashboard layout with sidebar and main content area.",
+    description: "Sidebar with collapsible icons and sections.",
     type: "registry:block",
     target: "app/dashboard/page.tsx",
     registryDependencies: undefined,
     files:     [
           {
-                "path": "../../packages/ui/src/blocks/sidebar-01/page.tsx",
+                "path": "registry/blocks/sidebar-01/page.tsx",
                 "target": "app/dashboard/page.tsx",
                 "type": "registry:page"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/app-sidebar.tsx",
+                "path": "registry/blocks/sidebar-01/components/app-sidebar.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/ai-chat-dialog.tsx",
+                "path": "registry/blocks/sidebar-01/components/nav-main.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/ai-chat.tsx",
+                "path": "registry/blocks/sidebar-01/components/nav-projects.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/ask-doc.tsx",
+                "path": "registry/blocks/sidebar-01/components/nav-user.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/chart-mixed-axes.tsx",
+                "path": "registry/blocks/sidebar-01/components/search-combobox.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/chat-header.tsx",
-                "target": "",
-                "type": "registry:component"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/hover-border-button.tsx",
-                "target": "",
-                "type": "registry:component"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/moving-border-button.tsx",
-                "target": "",
-                "type": "registry:component"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-main.tsx",
-                "target": "",
-                "type": "registry:component"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-main.tsx",
-                "target": "",
-                "type": "registry:component"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/nav-projects.tsx",
-                "target": "",
-                "type": "registry:component"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/search-combobox.tsx",
-                "target": "",
-                "type": "registry:component"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/streaming.tsx",
-                "target": "",
-                "type": "registry:component"
-          },
-          {
-                "path": "../../packages/ui/src/blocks/sidebar-01/components/team-switcher.tsx",
+                "path": "registry/blocks/sidebar-01/components/team-switcher.tsx",
                 "target": "",
                 "type": "registry:component"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/blocks/sidebar-01/page");
+      const mod = await import("registry/blocks/sidebar-01/page");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sidebar-01";
       return { default: mod.default || mod[exportName] };
     }),
@@ -1095,28 +1067,28 @@ export const components: ComponentRegistry = {
     registryDependencies: undefined,
     files:     [
           {
-                "path": "../../packages/ui/src/blocks/sidebar-02/page.tsx",
+                "path": "registry/blocks/sidebar-02/page.tsx",
                 "target": "app/dashboard/page.tsx",
                 "type": "registry:page"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-02/components/app-sidebar.tsx",
+                "path": "registry/blocks/sidebar-02/components/app-sidebar.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-02/components/nav-main.tsx",
+                "path": "registry/blocks/sidebar-02/components/nav-main.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/sidebar-02/components/version-switcher.tsx",
+                "path": "registry/blocks/sidebar-02/components/version-switcher.tsx",
                 "target": "",
                 "type": "registry:component"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/blocks/sidebar-02/page");
+      const mod = await import("registry/blocks/sidebar-02/page");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "sidebar-02";
       return { default: mod.default || mod[exportName] };
     }),
@@ -1132,23 +1104,23 @@ export const components: ComponentRegistry = {
     registryDependencies: ["lucide-react"],
     files:     [
           {
-                "path": "../../packages/ui/src/blocks/dialog-01/page.tsx",
+                "path": "registry/blocks/dialog-01/page.tsx",
                 "target": "app/dashboard/page.tsx",
                 "type": "registry:page"
           },
           {
-                "path": "../../packages/ui/src/blocks/dialog-01/components/team-management.tsx",
+                "path": "registry/blocks/dialog-01/components/team-management.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/dialog-01/components/member-card.tsx",
+                "path": "registry/blocks/dialog-01/components/member-card.tsx",
                 "target": "",
                 "type": "registry:component"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/blocks/dialog-01/page");
+      const mod = await import("registry/blocks/dialog-01/page");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-01";
       return { default: mod.default || mod[exportName] };
     }),
@@ -1164,48 +1136,48 @@ export const components: ComponentRegistry = {
     registryDependencies: ["lucide-react"],
     files:     [
           {
-                "path": "../../packages/ui/src/blocks/dialog-02/page.tsx",
+                "path": "registry/blocks/dialog-02/page.tsx",
                 "target": "app/dashboard/page.tsx",
                 "type": "registry:page"
           },
           {
-                "path": "../../packages/ui/src/blocks/dialog-02/components/info-menu.tsx",
+                "path": "registry/blocks/dialog-02/components/info-menu.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/dialog-02/components/stats-chart.tsx",
+                "path": "registry/blocks/dialog-02/components/stats-chart.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/dialog-02/components/login-form.tsx",
+                "path": "registry/blocks/dialog-02/components/login-form.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/dialog-02/components/signup-form.tsx",
+                "path": "registry/blocks/dialog-02/components/signup-form.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/dialog-02/components/share-menu.tsx",
+                "path": "registry/blocks/dialog-02/components/share-menu.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/dialog-02/components/tooltip-group.tsx",
+                "path": "registry/blocks/dialog-02/components/tooltip-group.tsx",
                 "target": "",
                 "type": "registry:component"
           },
           {
-                "path": "../../packages/ui/src/blocks/dialog-02/components/profile-card.tsx",
+                "path": "registry/blocks/dialog-02/components/profile-card.tsx",
                 "target": "",
                 "type": "registry:component"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@lumi-ui/ui/blocks/dialog-02/page");
+      const mod = await import("registry/blocks/dialog-02/page");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-02";
       return { default: mod.default || mod[exportName] };
     }),
@@ -1221,13 +1193,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["lucide-react"],
     files:     [
           {
-                "path": "components/examples/components/project-status-picker.tsx",
+                "path": "registry/components/project-status-picker.tsx",
                 "target": "",
                 "type": "registry:component"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/components/project-status-picker");
+      const mod = await import("registry/components/project-status-picker");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "project-status-picker";
       return { default: mod.default || mod[exportName] };
     }),
@@ -1243,13 +1215,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["lucide-react","motion"],
     files:     [
           {
-                "path": "components/examples/components/morphing-dialog.tsx",
+                "path": "registry/components/morphing-dialog.tsx",
                 "target": "",
                 "type": "registry:component"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/components/morphing-dialog");
+      const mod = await import("registry/components/morphing-dialog");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "morphing-dialog";
       return { default: mod.default || mod[exportName] };
     }),
@@ -1265,13 +1237,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["lucide-react","@base-ui/react"],
     files:     [
           {
-                "path": "components/examples/components/vercel-notification.tsx",
+                "path": "registry/components/vercel-notification.tsx",
                 "target": "",
                 "type": "registry:component"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/components/vercel-notification");
+      const mod = await import("registry/components/vercel-notification");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "vercel-notification";
       return { default: mod.default || mod[exportName] };
     }),
@@ -1287,13 +1259,13 @@ export const components: ComponentRegistry = {
     registryDependencies: ["lucide-react","@base-ui/react","@icons-pack/react-simple-icons"],
     files:     [
           {
-                "path": "components/examples/components/t3-model-selector.tsx",
+                "path": "registry/components/t3-model-selector.tsx",
                 "target": "",
                 "type": "registry:component"
           }
     ],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/components/t3-model-selector");
+      const mod = await import("registry/components/t3-model-selector");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "t3-model-selector";
       return { default: mod.default || mod[exportName] };
     }),
@@ -1736,7 +1708,7 @@ export const components: ComponentRegistry = {
     name: "avatar-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["avatar"],
+    registryDependencies: ["ui"],
     files: [{
       path: "components/examples/ui/avatar-demo.tsx",
       type: "registry:example",
@@ -2456,7 +2428,7 @@ export const components: ComponentRegistry = {
     name: "custom-animation-example",
     description: "",
     type: "registry:example",
-    registryDependencies: undefined,
+    registryDependencies: ["ui"],
     files: [{
       path: "components/examples/ui/custom-animation-example.tsx",
       type: "registry:example",
@@ -3284,7 +3256,7 @@ export const components: ComponentRegistry = {
     name: "highlight-comparison",
     description: "",
     type: "registry:example",
-    registryDependencies: undefined,
+    registryDependencies: ["ui"],
     files: [{
       path: "components/examples/ui/highlight-comparison.tsx",
       type: "registry:example",

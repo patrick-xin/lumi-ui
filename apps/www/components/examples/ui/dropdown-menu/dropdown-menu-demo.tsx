@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@lumi-ui/ui/dialog";
+} from "@/registry/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItemContent,
@@ -24,7 +24,7 @@ import {
   DropdownMenuSubMenuContent,
   DropdownMenuSubMenuTriggerGroup,
   DropdownMenuTrigger,
-} from "@lumi-ui/ui/dropdown-menu";
+} from "@/registry/ui/dropdown-menu";
 import {
   ChevronDown,
   ClipboardIcon,

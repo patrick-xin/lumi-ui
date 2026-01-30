@@ -17,7 +17,8 @@
   },
   "HomePage": {
     "browseComponents": "Browse components",
-    "description": "Composable React components powered by Base UI and Tailwind CSS — Build fast, customize everything.",
+    "description": "Composable React components powered by Base UI and Tailwind CSS",
+    "subtitle": "Build fast, customize everything.",
     "title": "Illuminate your interface",
     "viewDocs": "View docs"
   }

@@ -9,7 +9,7 @@ import { registryComponentCategories } from "@/lib/categories";
 
 const title = "Component Lab";
 const description =
-  "Precision-engineered UI patterns for high-performance applications. Sophisticated, accessible, and ready for production out of the box.";
+  "Precision-engineered UI components built for correctness, accessibility, and performance. Composable by design and ready for production use.";
 
 export const metadata: Metadata = {
   description,

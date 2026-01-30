@@ -1,8 +1,25 @@
 "use client";
-import { Button } from "@lumi-ui/ui/button";
+
+import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { Button } from "@/registry/ui/button";
+
+const smoothEase = [0.25, 1, 0.5, 1] as const;
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    transition: {
+      delay,
+      duration: 0.5,
+      ease: smoothEase,
+    },
+    y: 0,
+  }),
+};
 
 export function HeroSection() {
   const t = useTranslations("HomePage");
@@ -10,26 +27,45 @@ export function HeroSection() {
     <div className="overflow-hidden">
       <section>
         <div className="relative pt-24">
-          <div className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--color-background)_75%)]" />
           <div className="mx-auto max-w-5xl px-6">
             <div className="flex flex-col justify-center">
               <div className="relative mx-auto">
-                {/* Corner gradients - Top Left */}
+                {/* Corner gradients */}
                 <CornerGradients />
-                <h1
+                <motion.h1
+                  animate="visible"
                   className={cn(
                     "text-center text-5xl font-bold tracking-tight md:text-7xl",
                   )}
+                  custom={0}
+                  initial="hidden"
+                  variants={fadeUpVariants}
                 >
-                  <span className="relative inline-block overflow-hidden text-transparent bg-clip-text bg-gradient-to-b from-zinc-200 to-zinc-500">
+                  <span className="relative inline-block overflow-hidden text-transparent bg-clip-text bg-gradient-to-b from-primary/20 via-primary/70 to-primary/40">
                     {t("title")}
                   </span>
-                </h1>
+                </motion.h1>
               </div>
-              <p className="mt-8  text-pretty text-lg text-muted-foreground mx-auto xl:mt-12">
+              <motion.p
+                animate="visible"
+                className="mt-8 text-pretty text-lg text-muted-foreground mx-auto max-w-2xl text-center"
+                custom={0.1}
+                initial="hidden"
+                variants={fadeUpVariants}
+              >
                 {t("description")}
-              </p>
-              <div className="mt-12 flex justify-center items-center flex-wrap gap-4 mx-auto xl:mt-16">
+                <br />
+                <span className="inline-block font-semibold text-foreground mt-2">
+                  {t("subtitle")}
+                </span>
+              </motion.p>
+              <motion.div
+                animate="visible"
+                className="mt-12 flex justify-center items-center flex-wrap gap-4 mx-auto md:hidden"
+                custom={0.2}
+                initial="hidden"
+                variants={fadeUpVariants}
+              >
                 <Button
                   className="w-50"
                   nativeButton={false}
@@ -53,7 +89,7 @@ export function HeroSection() {
                   size="lg"
                   variant="glow"
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -65,25 +101,43 @@ export function HeroSection() {
 const CornerGradients = () => {
   return (
     <>
-      <div aria-hidden className="absolute -top-4 -left-4 w-16 h-px opacity-50">
+      <motion.div
+        animate={{ opacity: 0.5, scaleX: 1 }}
+        aria-hidden
+        className="absolute -top-4 -left-4 w-16 h-px opacity-50"
+        initial={{ opacity: 0, scaleX: 0 }}
+        style={{ transformOrigin: "left" }}
+        transition={{ delay: 0.3, duration: 0.6, ease: smoothEase }}
+      >
         <div
           className="h-full w-full"
           style={{
             background: `linear-gradient(to right, var(--primary), transparent)`,
           }}
         />
-      </div>
-      <div aria-hidden className="absolute -top-4 -left-4 w-px h-16 opacity-50">
+      </motion.div>
+      <motion.div
+        animate={{ opacity: 0.5, scaleY: 1 }}
+        aria-hidden
+        className="absolute -top-4 -left-4 w-px h-16 opacity-50"
+        initial={{ opacity: 0, scaleY: 0 }}
+        style={{ transformOrigin: "top" }}
+        transition={{ delay: 0.35, duration: 0.6, ease: smoothEase }}
+      >
         <div
           className="h-full w-full"
           style={{
             background: `linear-gradient(to bottom, var(--primary), transparent)`,
           }}
         />
-      </div>
-      <div
+      </motion.div>
+      <motion.div
+        animate={{ opacity: 0.5, scaleX: 1 }}
         aria-hidden
         className="absolute -bottom-4 -right-4 w-16 h-px opacity-50"
+        initial={{ opacity: 0, scaleX: 0 }}
+        style={{ transformOrigin: "right" }}
+        transition={{ delay: 0.4, duration: 0.6, ease: smoothEase }}
       >
         <div
           className="h-full w-full"
@@ -91,10 +145,14 @@ const CornerGradients = () => {
             background: `linear-gradient(to left, var(--primary), transparent)`,
           }}
         />
-      </div>
-      <div
+      </motion.div>
+      <motion.div
+        animate={{ opacity: 0.5, scaleY: 1 }}
         aria-hidden
         className="absolute -bottom-4 -right-4 w-px h-16 opacity-50"
+        initial={{ opacity: 0, scaleY: 0 }}
+        style={{ transformOrigin: "bottom" }}
+        transition={{ delay: 0.45, duration: 0.6, ease: smoothEase }}
       >
         <div
           className="h-full w-full"
@@ -102,7 +160,7 @@ const CornerGradients = () => {
             background: `linear-gradient(to top, var(--primary), transparent)`,
           }}
         />
-      </div>
+      </motion.div>
     </>
   );
 };

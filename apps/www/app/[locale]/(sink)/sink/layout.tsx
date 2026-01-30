@@ -1,7 +1,5 @@
-import { AppSidebar } from "@lumi-ui/ui/blocks/sidebar-02/components/app-sidebar";
-
-import { MainContent, SidebarProvider } from "@lumi-ui/ui/sidebar";
-
+import { AppSidebar } from "@/registry/blocks/sidebar-02/components/app-sidebar";
+import { MainContent, SidebarProvider } from "@/registry/ui/sidebar";
 import { cookies } from "next/headers";
 import type { Layout } from "react-resizable-panels";
 

@@ -19,7 +19,7 @@ import {
   AutocompleteInputGroup,
   AutocompleteItem,
   AutocompleteList,
-} from "@lumi-ui/ui/autocomplete";
+} from "@/registry/ui/autocomplete";
 
 interface Command {
   id: string;

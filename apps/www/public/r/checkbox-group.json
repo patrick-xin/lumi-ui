@@ -14,8 +14,8 @@
   ],
   "files": [
     {
-      "path": "../../packages/ui/src/components/ui/checkbox-group.tsx",
-      "content": "import * as React from \"react\"\nimport { CheckboxGroup as BaseCheckboxGroup } from \"@base-ui/react/checkbox-group\"\nimport { Checkbox } from \"@lumi-ui/ui/checkbox\"\n\nimport { cn } from \"@lumi-ui/ui/lib/utils\"\n\nfunction CheckboxGroup({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseCheckboxGroup>) {\n  return (\n    <BaseCheckboxGroup\n      data-slot=\"checkbox-group\"\n      className={cn(\"grid gap-3\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { CheckboxGroup, Checkbox as CheckboxGroupItem }\n",
+      "path": "registry/ui/checkbox-group.tsx",
+      "content": "import { CheckboxGroup as BaseCheckboxGroup } from \"@base-ui/react/checkbox-group\";\nimport type * as React from \"react\";\nimport { Checkbox } from \"@/registry/ui/checkbox\";\n\nimport { cn } from \"@/registry/lib/utils\";\n\nfunction CheckboxGroup({\n  className,\n  ...props\n}: React.ComponentProps<typeof BaseCheckboxGroup>) {\n  return (\n    <BaseCheckboxGroup\n      className={cn(\"grid gap-3\", className)}\n      data-slot=\"checkbox-group\"\n      {...props}\n    />\n  );\n}\n\nexport { CheckboxGroup, Checkbox as CheckboxGroupItem };\n",
       "type": "registry:ui"
     }
   ]

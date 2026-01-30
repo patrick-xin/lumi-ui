@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@lumi-ui/ui/tabs";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 
 export function TabsGhostDemo() {
   return (

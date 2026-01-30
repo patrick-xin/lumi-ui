@@ -1,14 +1,14 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
+import { cn } from "@/lib/utils";
+import { Button } from "@/registry/ui/button";
 import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleTrigger,
-} from "@lumi-ui/ui/collapsible";
-import { cn } from "@lumi-ui/ui/lib/utils";
-import { ChevronRight, Folder, FolderOpen } from "lucide-react";
+} from "@/registry/ui/collapsible";
 import type { TreeNode } from "@/types";
+import { ChevronRight, Folder, FolderOpen } from "lucide-react";
 import { FileIcon } from "./file-icons";
 
 interface BlockFileTreeProps {

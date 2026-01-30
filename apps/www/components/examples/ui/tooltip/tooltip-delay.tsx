@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@lumi-ui/ui/tooltip";
+} from "@/registry/ui/tooltip";
 
 export function TooltipDelayDemo() {
   return (

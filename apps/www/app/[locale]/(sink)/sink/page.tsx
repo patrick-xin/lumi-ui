@@ -1,3 +1,4 @@
+import { ChartClusterCpu } from "@/components/examples/ui/chart/chart-cluster-cpu";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -5,8 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@lumi-ui/ui/breadcrumb";
-import { ChartClusterCpu } from "@/components/examples/ui/chart/chart-cluster-cpu";
+} from "@/registry/ui/breadcrumb";
 
 export default function Page() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
-import { Checkbox } from "@lumi-ui/ui/checkbox";
-import { Field, FieldLabel } from "@lumi-ui/ui/field";
+import { Checkbox } from "@/registry/ui/checkbox";
+import { Field, FieldLabel } from "@/registry/ui/field";
 import React from "react";
 
 export function CheckboxControlledDemo() {

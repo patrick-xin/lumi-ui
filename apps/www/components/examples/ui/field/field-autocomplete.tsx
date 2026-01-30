@@ -7,8 +7,8 @@ import {
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList,
-} from "@lumi-ui/ui/autocomplete";
-import { Field, FieldDescription, FieldLabel } from "@lumi-ui/ui/field";
+} from "@/registry/ui/autocomplete";
+import { Field, FieldDescription, FieldLabel } from "@/registry/ui/field";
 
 const fruits = [
   { label: "Apple", value: "apple" },

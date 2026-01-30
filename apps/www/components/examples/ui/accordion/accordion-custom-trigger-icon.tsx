@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionTrigger,
-} from "@lumi-ui/ui/accordion";
+} from "@/registry/ui/accordion";
 
 const items = [
   {
@@ -28,10 +28,10 @@ export function AccordionCustomTriggerIconDemo() {
     <Accordion className="w-full max-w-sm space-y-2">
       {items.map((item) => (
         <AccordionItem
+          className="border-0 my-2"
           disabled={item.value === "item-3"}
           key={item.value}
           value={item.value}
-          className="border-0 my-2"
         >
           <AccordionHeader>
             <AccordionTrigger

@@ -1,4 +1,4 @@
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@lumi-ui/ui/dialog";
+} from "@/registry/ui/dialog";
 
 export function DialogNestedDemo() {
   return (

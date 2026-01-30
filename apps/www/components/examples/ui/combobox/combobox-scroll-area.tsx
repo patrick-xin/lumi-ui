@@ -7,8 +7,8 @@ import {
   ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
-} from "@lumi-ui/ui/combobox";
-import { ScrollArea } from "@lumi-ui/ui/scroll-area";
+} from "@/registry/ui/combobox";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 export function ComboboxScrollAreaDemo() {
   return (

@@ -1,4 +1,4 @@
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,10 +8,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@lumi-ui/ui/dialog";
-import { Field, FieldLabel } from "@lumi-ui/ui/field";
-import { Form } from "@lumi-ui/ui/form";
-import { Input } from "@lumi-ui/ui/input";
+} from "@/registry/ui/dialog";
+import { Field, FieldLabel } from "@/registry/ui/field";
+import { Form } from "@/registry/ui/form";
+import { Input } from "@/registry/ui/input";
 
 export function DialogDemo() {
   return (

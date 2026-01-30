@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Button } from "@lumi-ui/ui/button";
-import { toast } from "@lumi-ui/ui/toast";
+import { Button } from "@/registry/ui/button";
+import { toast } from "@/registry/ui/toast";
 
 export function ToastVeryingHeightsDemo() {
   const [count, setCount] = React.useState(0);

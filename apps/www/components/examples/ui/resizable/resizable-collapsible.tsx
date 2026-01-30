@@ -4,7 +4,7 @@ import {
   ResizableGroup,
   ResizablePanel,
   ResizableSeparator,
-} from "@lumi-ui/ui/resizable";
+} from "@/registry/ui/resizable";
 
 export const ResizableCollapsible = () => {
   return (

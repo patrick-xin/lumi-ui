@@ -7,7 +7,7 @@ import {
   SelectGroupLabel,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@lumi-ui/ui/select";
+} from "@/registry/ui/select";
 
 export function SelectGroupedDemo() {
   return (

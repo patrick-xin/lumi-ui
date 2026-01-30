@@ -10,8 +10,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
   createAlertDialogHandle,
-} from "@lumi-ui/ui/alert-dialog";
-import { Button } from "@lumi-ui/ui/button";
+} from "@/registry/ui/alert-dialog";
+import { Button } from "@/registry/ui/button";
 
 const deleteAlertHandle = createAlertDialogHandle();
 

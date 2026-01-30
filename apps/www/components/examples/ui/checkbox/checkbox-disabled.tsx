@@ -1,5 +1,5 @@
-import { Checkbox } from "@lumi-ui/ui/checkbox";
-import { Label } from "@lumi-ui/ui/label";
+import { Checkbox } from "@/registry/ui/checkbox";
+import { Label } from "@/registry/ui/label";
 
 export function CheckboxDisabled() {
   return (

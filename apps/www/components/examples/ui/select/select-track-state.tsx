@@ -6,7 +6,7 @@ import {
   SelectContent,
   SelectItemContent,
   SelectTriggerGroup,
-} from "@lumi-ui/ui/select";
+} from "@/registry/ui/select";
 
 const frameworks = [
   { value: "next", label: "Next.js" },

@@ -1,4 +1,4 @@
-import { Input } from "@lumi-ui/ui/input";
+import { Input } from "@/registry/ui/input";
 
 export function InputDemo() {
   return <Input placeholder="Email" type="email" />;

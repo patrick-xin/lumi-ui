@@ -2,10 +2,10 @@
 
 import { Loader2 } from "lucide-react";
 import React from "react";
-import { Button } from "@lumi-ui/ui/button";
-import { Field, FieldError, FieldLabel } from "@lumi-ui/ui/field";
-import { Form } from "@lumi-ui/ui/form";
-import { Input } from "@lumi-ui/ui/input";
+import { Button } from "@/registry/ui/button";
+import { Field, FieldError, FieldLabel } from "@/registry/ui/field";
+import { Form } from "@/registry/ui/form";
+import { Input } from "@/registry/ui/input";
 
 export function InputWithFormDemo() {
   const [errors, setErrors] = React.useState({});

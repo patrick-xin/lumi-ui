@@ -7,9 +7,9 @@ import {
 import { PageNav } from "@/components/blocks/page-nav";
 import { registryBlockCategories } from "@/lib/categories";
 
-const title = "Component Blocks";
+const title = "Composition Library";
 const description =
-  "A collection of high-level components ready for immediate integration.";
+  "Curated UI compositions that combine multiple components into proven, production-ready patterns. Designed for real-world flows, accessibility, and scale.";
 
 export const metadata: Metadata = {
   description,

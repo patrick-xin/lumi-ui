@@ -1,15 +1,15 @@
 "use client";
 
 import type * as React from "react";
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Field,
   FieldControl,
   FieldError,
   FieldLabel,
-} from "@lumi-ui/ui/field";
-import { Form } from "@lumi-ui/ui/form";
-import { toast } from "@lumi-ui/ui/toast";
+} from "@/registry/ui/field";
+import { Form } from "@/registry/ui/form";
+import { toast } from "@/registry/ui/toast";
 
 export default function NativeSubmitForm() {
   const handleNativeSubmit = (event: React.FormEvent<HTMLFormElement>) => {

@@ -6,12 +6,12 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@lumi-ui/ui/card";
+} from "@/registry/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
-} from "@lumi-ui/ui/chart";
+} from "@/registry/ui/chart";
 import {
   CartesianGrid,
   ReferenceLine,

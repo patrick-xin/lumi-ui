@@ -3,7 +3,7 @@
 import type { PopoverRootChangeEventDetails } from "@base-ui/react";
 import { BellIcon } from "lucide-react";
 import * as React from "react";
-import { Button, buttonVariants } from "@lumi-ui/ui/button";
+import { Button, buttonVariants } from "@/registry/ui/button";
 import {
   createPopoverHandle,
   Popover,
@@ -11,7 +11,7 @@ import {
   PopoverDescription,
   PopoverTitle,
   PopoverTrigger,
-} from "@lumi-ui/ui/popover";
+} from "@/registry/ui/popover";
 
 const demoPopover = createPopoverHandle<{ text: string }>();
 

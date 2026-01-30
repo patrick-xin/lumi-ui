@@ -8,7 +8,7 @@ import {
   AutocompleteInputGroup,
   AutocompleteItem,
   AutocompleteList,
-} from "@lumi-ui/ui/autocomplete";
+} from "@/registry/ui/autocomplete";
 
 export function AutocompleteDemo() {
   return (

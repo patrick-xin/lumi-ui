@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
-import { Checkbox } from "@lumi-ui/ui/checkbox";
-import { Field, FieldLabel } from "@lumi-ui/ui/field";
-import { Form } from "@lumi-ui/ui/form";
-import { toast } from "@lumi-ui/ui/toast";
+import { Button } from "@/registry/ui/button";
+import { Checkbox } from "@/registry/ui/checkbox";
+import { Field, FieldLabel } from "@/registry/ui/field";
+import { Form } from "@/registry/ui/form";
+import { toast } from "@/registry/ui/toast";
 
 export function CheckboxFormDemo() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

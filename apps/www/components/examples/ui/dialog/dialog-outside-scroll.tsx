@@ -3,7 +3,7 @@
 import { XIcon } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@lumi-ui/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Dialog,
   DialogBackdrop,
@@ -15,13 +15,13 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogViewport,
-} from "@lumi-ui/ui/dialog";
+} from "@/registry/ui/dialog";
 import {
   ScrollAreaContent,
   ScrollAreaRoot,
   ScrollAreaScrollBar,
   ScrollAreaViewport,
-} from "@lumi-ui/ui/scroll-area";
+} from "@/registry/ui/scroll-area";
 
 export function DialogOutsideScrollDemo() {
   return (

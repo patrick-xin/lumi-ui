@@ -1,12 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@lumi-ui/ui/button";
+import { buttonVariants } from "@/registry/ui/button";
 import {
   PreviewCard,
   PreviewCardContent,
   PreviewCardTrigger,
-} from "@lumi-ui/ui/preview-card";
+} from "@/registry/ui/preview-card";
 
 export function PreviewCardDemo() {
   return (

@@ -10,15 +10,15 @@ import {
 } from "lucide-react";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@lumi-ui/ui/button";
-import { Label } from "@lumi-ui/ui/label";
+import { Button } from "@/registry/ui/button";
+import { Label } from "@/registry/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverDescription,
   PopoverTitle,
   PopoverTrigger,
-} from "@lumi-ui/ui/popover";
+} from "@/registry/ui/popover";
 
 export function ProjectPopover() {
   const [view, setView] = React.useState<ViewType>("default");

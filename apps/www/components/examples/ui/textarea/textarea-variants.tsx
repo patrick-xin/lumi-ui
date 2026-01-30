@@ -1,4 +1,4 @@
-import { Textarea } from "@lumi-ui/ui/textarea";
+import { Textarea } from "@/registry/ui/textarea";
 
 export function TextareaVariantDemo() {
   return (
