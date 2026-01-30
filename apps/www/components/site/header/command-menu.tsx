@@ -62,8 +62,14 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
   };
 
   const handleSelect = (item: NavItem) => {
+    const isExternalUrl =
+      item.url.startsWith("http") || item.url.startsWith("https");
     isNavigatingRef.current = true;
-    router.push(item.url);
+    if (isExternalUrl) {
+      window.open(item.url, "_blank", "noopener,noreferrer");
+    } else {
+      router.push(item.url);
+    }
     setIsOpen(false);
     setInputValue("");
   };

@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/registry/ui/button";
 import { Check, Copy, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { Button } from "@/registry/ui/button";
 
 interface CopyPageButtonProps {
   slug?: string[];

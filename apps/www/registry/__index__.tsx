@@ -1098,7 +1098,7 @@ export const components: ComponentRegistry = {
   "dialog-01": {
     name: "dialog-01",
     title: undefined,
-    description: "Nested dialogs with team management.",
+    description: "Complex user management UI with nested dialogs.",
     type: "registry:block",
     target: "app/dashboard/page.tsx",
     registryDependencies: ["lucide-react"],
@@ -1130,7 +1130,7 @@ export const components: ComponentRegistry = {
   "dialog-02": {
     name: "dialog-02",
     title: undefined,
-    description: "Unsplash like dialog with nested auth dialogs.",
+    description: "Image gallery with nested auth dialogs. Inspired by Unsplash.",
     type: "registry:block",
     target: "app/dashboard/page.tsx",
     registryDependencies: ["lucide-react"],

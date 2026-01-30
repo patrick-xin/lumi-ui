@@ -1,11 +1,11 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/blocks/page-header";
 import { Button } from "@/registry/ui/button";
-import type { Metadata } from "next";
-import Link from "next/link";
 
 const title = "Charts";
 const description =
@@ -13,26 +13,7 @@ const description =
 
 export const metadata: Metadata = {
   description,
-  openGraph: {
-    images: [
-      {
-        url: `/og?title=${encodeURIComponent(
-          title,
-        )}&description=${encodeURIComponent(description)}`,
-      },
-    ],
-  },
   title,
-  twitter: {
-    card: "summary_large_image",
-    images: [
-      {
-        url: `/og?title=${encodeURIComponent(
-          title,
-        )}&description=${encodeURIComponent(description)}`,
-      },
-    ],
-  },
 };
 
 export default function ComponentsLayout({

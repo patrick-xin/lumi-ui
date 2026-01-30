@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "form",
-  "type": "registry:ui",
   "title": "Form",
   "description": "A native form element with consolidated error handling.",
   "dependencies": [
@@ -16,5 +15,6 @@
       "content": "import { Form as BaseForm } from \"@base-ui/react/form\";\nimport type * as React from \"react\";\n\nimport { cn } from \"@/registry/lib/utils\";\n\nfunction Form({ className, ...props }: React.ComponentProps<typeof BaseForm>) {\n  return (\n    <BaseForm\n      className={cn(\"flex flex-col gap-6\", className)}\n      data-slot=\"form\"\n      {...props}\n    />\n  );\n}\n\ntype FormProps = React.ComponentProps<typeof BaseForm>;\ntype FormErrors = NonNullable<FormProps[\"errors\"]>;\ntype FormValues = Record<string, unknown>;\n\nexport { Form };\nexport type { FormErrors, FormProps, FormValues };\n",
       "type": "registry:ui"
     }
-  ]
+  ],
+  "type": "registry:ui"
 }

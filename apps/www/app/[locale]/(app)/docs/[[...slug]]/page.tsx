@@ -7,7 +7,6 @@ import { DocsAritcleHeader } from "@/components/docs/docs-article-header";
 import { Callout } from "@/components/docs/mdx/call-out";
 import { DocsToc } from "@/components/docs/toc";
 import { source } from "@/lib/source";
-import { absoluteUrl } from "@/lib/utils";
 import { mdxComponents } from "@/mdx-components";
 
 export const revalidate = false;
@@ -38,33 +37,7 @@ export async function generateMetadata(props: {
 
   return {
     description: doc.description,
-    openGraph: {
-      description: doc.description,
-      images: [
-        {
-          url: `/og?title=${encodeURIComponent(
-            doc.title,
-          )}&description=${encodeURIComponent(doc.description)}`,
-        },
-      ],
-      title: doc.title,
-      type: "article",
-      url: absoluteUrl(page.url),
-    },
     title: doc.title,
-    twitter: {
-      card: "summary_large_image",
-      creator: "@alpesdream",
-      description: doc.description,
-      images: [
-        {
-          url: `/og?title=${encodeURIComponent(
-            doc.title,
-          )}&description=${encodeURIComponent(doc.description)}`,
-        },
-      ],
-      title: doc.title,
-    },
   };
 }
 

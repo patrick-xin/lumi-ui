@@ -13,6 +13,10 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 export const metadata: Metadata = {
   alternates: {
     canonical: "./",
+    languages: {
+      "en-US": "/",
+      "zh-CN": "/cn",
+    },
   },
   authors: [
     {
@@ -39,16 +43,14 @@ export const metadata: Metadata = {
     "Agentic Coding",
   ],
   manifest: `${siteConfig.url}/site.webmanifest`,
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://www.lumiui.dev",
-  ),
+  metadataBase: new URL("https://www.lumiui.dev"),
   openGraph: {
     description: siteConfig.description,
     images: [
       {
         alt: siteConfig.name,
         height: 630,
-        url: `${process.env.NEXT_PUBLIC_APP_URL || "https://lumiui.dev"}/opengraph-image.png`,
+        url: "/opengraph-image.jpg",
         width: 1200,
       },
     ],
@@ -56,7 +58,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: siteConfig.name,
     type: "website",
-    url: process.env.NEXT_PUBLIC_APP_URL || "https://lumiui.dev",
+    url: "https://lumiui.dev",
   },
   title: {
     default: siteConfig.name,
@@ -66,9 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: "@alpesdream",
     description: siteConfig.description,
-    images: [
-      `${process.env.NEXT_PUBLIC_APP_URL || "https://lumiui.dev"}/opengraph-image.png`,
-    ],
+    images: ["/twitter.jpg"],
     title: siteConfig.name,
   },
 };

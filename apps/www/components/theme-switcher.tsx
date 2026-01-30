@@ -1,5 +1,9 @@
 "use client";
 
+import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
+import { PaletteIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
@@ -8,10 +12,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
-import { PaletteIcon } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 
 const THEME_OPTIONS = [
   {

@@ -1,6 +1,7 @@
 "use client";
 
 import type { MenuRootChangeEventDetails } from "@base-ui/react";
+import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
   createDropdownMenuHandle,
@@ -9,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import * as React from "react";
+import { toast } from "@/registry/ui/toast";
 
 interface MenuItemDefinition {
   label: string;
@@ -20,20 +21,23 @@ const MENUS = {
   library: [
     {
       label: "Add to library",
-      onClick: () => console.log("Adding to library"),
+      onClick: () => toast.success({ title: "Adding to library" }),
     },
     {
       label: "Add to favorites",
-      onClick: () => console.log("Adding to favorites"),
+      onClick: () => toast.success({ title: "Adding to favorites" }),
     },
   ] as MenuItemDefinition[],
   playback: [
-    { label: "Play", onClick: () => console.log("Playing") },
-    { label: "Add to queue", onClick: () => console.log("Adding to queue") },
+    { label: "Play", onClick: () => toast.success({ title: "Playing" }) },
+    {
+      label: "Add to queue",
+      onClick: () => toast.success({ title: "Adding to queue" }),
+    },
   ] as MenuItemDefinition[],
   share: [
-    { label: "Share", onClick: () => console.log("Sharing") },
-    { label: "Copy link", onClick: () => console.log("Copying") },
+    { label: "Share", onClick: () => toast.success({ title: "Sharing" }) },
+    { label: "Copy link", onClick: () => toast.success({ title: "Copying" }) },
   ] as MenuItemDefinition[],
 };
 

@@ -25,7 +25,7 @@ export const IconMap: Record<string, React.ComponentType<LucideProps>> = {
   "Get Started": Book,
   Introduction: Book,
   "Layout & Navigation": Diamond,
-  Misc: Diamond,
+  Miscellaneous: Diamond,
   "Overlays & Dialogs": Diamond,
   Palette,
   Play,

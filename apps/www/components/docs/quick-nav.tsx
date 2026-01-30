@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@lumi-ui/ui/button";
 import type { Item } from "fumadocs-core/page-tree";
 import { ArrowLeft, ArrowRight } from "lucide-react";

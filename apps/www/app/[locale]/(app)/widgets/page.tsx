@@ -1,9 +1,9 @@
+import Link from "next/link";
 import { ComponentView } from "@/components/blocks/component-view";
 import { ComponentSourceCode } from "@/components/docs/mdx/component-source-code";
 import { components } from "@/registry/__index__";
 import type { ComponentName, RegistryName } from "@/registry/__registry";
 import { Button } from "@/registry/ui/button";
-import Link from "next/link";
 
 export const dynamic = "force-static";
 

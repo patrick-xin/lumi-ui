@@ -2,8 +2,7 @@
 
 import { cn } from "@lumi-ui/ui/lib/utils";
 import { ScrollArea } from "@lumi-ui/ui/scroll-area";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/lib/i18n/navigation";
 
 interface PageNavItem {
   title: string;
@@ -18,7 +17,13 @@ export function PageNav({
   const pathname = usePathname();
 
   return (
-    <div className={cn("relative overflow-hidden max-w-6xl mt-8 mx-auto", className)} {...props}>
+    <div
+      className={cn(
+        "relative overflow-hidden max-w-6xl mt-8 mx-auto",
+        className,
+      )}
+      {...props}
+    >
       <ScrollArea
         className="w-96 md:w-auto max-w-none"
         gradientScrollFade
@@ -32,15 +37,15 @@ export function PageNav({
                 : pathname?.startsWith(item.href);
             return (
               <Link
-                key={item.href}
-                href={item.href}
                 className={cn(
                   "hover:text-primary flex h-7 items-center justify-center px-4 text-center text-sm font-medium transition-colors first:pl-0",
                   isActive
                     ? "text-primary data-[active=true]:text-primary"
-                    : "text-muted-foreground"
+                    : "text-muted-foreground",
                 )}
                 data-active={isActive}
+                href={item.href}
+                key={item.href}
               >
                 {item.title}
               </Link>

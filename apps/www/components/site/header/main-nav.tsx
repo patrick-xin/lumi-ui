@@ -1,8 +1,8 @@
 "use client";
 
 import { buttonVariants } from "@lumi-ui/ui/button";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Link } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 export function MainNav({
@@ -13,7 +13,6 @@ export function MainNav({
   items: { href: string; label: string }[];
 }) {
   const pathname = usePathname();
-
   return (
     <div className={cn("flex items-center gap-2 h-full", className)} {...props}>
       {items.map((item) => (

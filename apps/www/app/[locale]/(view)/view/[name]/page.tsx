@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { siteConfig } from "@/lib/config";
 import { routing } from "@/lib/i18n/routing";
-import { absoluteUrl, cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { components } from "@/registry/__index__";
 import type { RegistryName } from "@/registry/__registry";
 
@@ -42,28 +41,7 @@ export async function generateMetadata({
 
   return {
     description,
-    openGraph: {
-      description,
-      images: [
-        {
-          alt: siteConfig.name,
-          height: 630,
-          url: siteConfig.ogImage,
-          width: 1200,
-        },
-      ],
-      title,
-      type: "article",
-      url: absoluteUrl(`/view/${name}`),
-    },
     title,
-    twitter: {
-      card: "summary_large_image",
-      creator: "@shadcn",
-      description,
-      images: [siteConfig],
-      title,
-    },
   };
 }
 
