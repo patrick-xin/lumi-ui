@@ -7,6 +7,22 @@ import {
   SiOpenai,
   SiX,
 } from "@icons-pack/react-simple-icons";
+import {
+  Brain,
+  Check,
+  ChevronDownIcon,
+  Eye,
+  FileText,
+  Filter,
+  Image as ImageIcon,
+  InfoIcon,
+  SlidersHorizontal,
+  StarIcon,
+  Wrench,
+  Zap,
+} from "lucide-react";
+import React from "react";
+import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
@@ -19,7 +35,6 @@ import {
 } from "@/registry/ui/dropdown-menu";
 import { Input } from "@/registry/ui/input";
 import { Label } from "@/registry/ui/label";
-import { cn } from "@/registry/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@/registry/ui/popover";
 import {
   createPreviewCardHandle,
@@ -44,21 +59,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/registry/ui/tooltip";
-import {
-  Brain,
-  Check,
-  ChevronDownIcon,
-  Eye,
-  FileText,
-  Filter,
-  Image as ImageIcon,
-  InfoIcon,
-  SlidersHorizontal,
-  StarIcon,
-  Wrench,
-  Zap,
-} from "lucide-react";
-import React from "react";
 
 const ModelDetailPopoverHandle = createPreviewCardHandle<ModelDetail>();
 const ModelTooltipHandle = createTooltipHandle<Pick<ModelDetail, "name">>();
@@ -117,31 +117,32 @@ export const T3ModelSelector = () => {
                 defaultValue="starred"
                 orientation="vertical"
               >
-                <TabsList className="rounded-none outline-none space-y-1.5 bg-background mx-1 my-2">
-                  {PROVIDERS.map((provider) => (
-                    <TabsTab
-                      className="hover:text-foreground size-7"
-                      key={provider.value}
-                      render={
-                        <TooltipTrigger
-                          handle={ModelTooltipHandle}
-                          payload={{ name: provider.name }}
-                        />
-                      }
-                      value={provider.value}
-                    >
-                      {provider.icon}
-                    </TabsTab>
-                  ))}
+                <ScrollArea gradientScrollFade noScrollBar>
+                  <TabsList className="rounded-none outline-none overflow-hidden space-y-2 bg-background mx-1 my-2">
+                    {PROVIDERS.map((provider) => (
+                      <TabsTab
+                        className="hover:text-foreground size-7"
+                        key={provider.value}
+                        render={
+                          <TooltipTrigger
+                            handle={ModelTooltipHandle}
+                            payload={{ name: provider.name }}
+                          />
+                        }
+                        value={provider.value}
+                      >
+                        {provider.icon}
+                      </TabsTab>
+                    ))}
 
-                  <TabIndicator
-                    className={cn(
-                      "rounded-md bg-primary/10",
-                      "data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
-                    )}
-                  />
-                </TabsList>
-
+                    <TabIndicator
+                      className={cn(
+                        "rounded-md bg-primary/10",
+                        "data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
+                      )}
+                    />
+                  </TabsList>
+                </ScrollArea>
                 <Separator orientation="vertical" />
 
                 {PROVIDERS.map((provider) => {

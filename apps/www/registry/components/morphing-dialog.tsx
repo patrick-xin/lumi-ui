@@ -2,13 +2,13 @@
 
 import { Button } from "@/registry/ui/button";
 import {
-  Dialog,
-  DialogBackdrop,
-  DialogClose,
-  DialogPopup,
-  DialogPortal,
-  DialogTitle,
-  DialogViewport,
+    Dialog,
+    DialogBackdrop,
+    DialogClose,
+    DialogPopup,
+    DialogPortal,
+    DialogTitle,
+    DialogViewport,
 } from "@/registry/ui/dialog";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 import type { DialogRootActions } from "@base-ui/react/dialog";
@@ -44,7 +44,7 @@ export function MorphingDialog() {
           <div className="flex gap-2 md:gap-6 lg:gap-10 mx-auto">
             {ITEMS.map((item) => (
               <motion.button
-                className="relative group flex flex-col cursor-pointer bg-muted hover:bg-muted/80 transition-colors flex-1 size-64 lg:size-80 rounded focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10"
+                className="relative group flex flex-col cursor-pointer bg-muted hover:bg-muted/80 transition-colors flex-1 size-64 lg:size-80 rounded focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10"
                 key={item.id}
                 layoutId={`card-container-${item.id}`}
                 onClick={() => handleOpen(item)}

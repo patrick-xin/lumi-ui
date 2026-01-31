@@ -95,6 +95,13 @@ Add the following utilities to your `globals.css`:
 }
 ```
 
+If you prefer to write inline css in `popupVariants`, you can replace the following with utility:
+```css
+data-[starting-style]:scale-94 data-[starting-style]:opacity-0 
+data-[ending-style]:scale-94 data-[ending-style]:opacity-0 
+transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)]
+```
+
 ## Basic Usage
 ```tsx
 import {

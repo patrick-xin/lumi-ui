@@ -16,7 +16,7 @@ export function AutocompleteDemo() {
       <AutocompleteInputGroup
         addonIcon={<SearchIcon />}
         aria-label="Search framework"
-        className="w-52"
+        className="w-64"
         placeholder="e.g. Next.js"
         showClear
         showTrigger

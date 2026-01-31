@@ -18,9 +18,9 @@ import {
   Loader2,
   X,
 } from "lucide-react";
+import { cn } from "@/registry/lib/utils";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 import { buttonVariants } from "@/registry/ui/button";
-import { cn } from "@/registry/lib/utils";
 
 const stackedManager = BaseToast.createToastManager();
 const anchoredManager = BaseToast.createToastManager();
@@ -288,17 +288,17 @@ const StackedToast = ({
                 {isCustomContent ? (
                   toast.data.customContent
                 ) : (
-                  <div className="flex items-center gap-3 p-4">
+                  <div className="flex items-start gap-3 p-4">
                     {Icon && (
                       <Icon
                         className={cn(
-                          "size-5 shrink-0",
-                          toastType === "loading" && "animate-spin",
+                          "size-5 shrink-0 mt-0.5",
+                          toastType === "loading" && "animate-spin mt-0",
                         )}
                         data-slot="toast-icon"
                       />
                     )}
-                    <div className="flex justify-between items-center flex-wrap flex-1">
+                    <div className="flex flex-col flex-wrap flex-1 gap-2">
                       <div className="space-y-1">
                         {toast.title && <ToastTitle>{toast.title}</ToastTitle>}
                         {toast.description && (

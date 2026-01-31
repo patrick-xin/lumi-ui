@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import {
-  PageHeader,
-  PageHeaderDescription,
-  PageHeaderHeading,
-} from "@/components/blocks/page-header";
-import { PageNav } from "@/components/blocks/page-nav";
-import { registryBlockCategories } from "@/lib/categories";
+import { BlocksHeader } from "@/components/site/blocks-header";
 
 const title = "Composition Library";
 const description =
@@ -28,20 +22,7 @@ export default async function BlocksLayout({
   setRequestLocale(locale);
   return (
     <>
-      <PageHeader>
-        <PageHeaderHeading>{title}</PageHeaderHeading>
-        <PageHeaderDescription>{description}</PageHeaderDescription>
-        <PageNav
-          id="blocks"
-          items={[
-            { href: "/blocks", title: "Featured" },
-            ...registryBlockCategories.map((category) => ({
-              href: `/blocks/${category.slug}`,
-              title: category.name,
-            })),
-          ]}
-        />
-      </PageHeader>
+      <BlocksHeader />
       <div className="container">{children}</div>
     </>
   );

@@ -1,14 +1,13 @@
 "use client";
 
 import { Button as BaseButton } from "@base-ui/react/button";
-import { cva, type VariantProps } from "class-variance-authority";
-
 import { cn } from "@lumi-ui/ui/lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 
 const buttonVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 text-sm font-medium rounded-md whitespace-nowrap transition-all",
-    "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10",
+    "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
     "aria-invalid:border-destructive aria-invalid:ring-4 aria-invalid:ring-destructive/10",
     "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0",
     "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",

@@ -1,5 +1,21 @@
 "use client";
 
+import {
+  AudioWaveform,
+  BookOpen,
+  Bot,
+  Command,
+  CreditCard,
+  Frame,
+  GalleryVerticalEnd,
+  PieChart,
+  Receipt,
+  Settings2,
+  ShieldCheck,
+  SquareTerminal,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 import { NavMain } from "@/registry/blocks/sidebar-03/components/nav-main";
 import { NavProjects } from "@/registry/blocks/sidebar-03/components/nav-projects";
 import { NavUser } from "@/registry/blocks/sidebar-03/components/nav-user";
@@ -12,152 +28,112 @@ import {
   SidebarHeader,
   SidebarSeparator,
 } from "@/registry/ui/sidebar";
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  MapIcon,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react";
-import type * as React from "react";
 
-// This is sample data.
 const data = {
   navMain: [
     {
       icon: SquareTerminal,
       isActive: true,
       items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
+        { title: "Executive Summary", url: "#" },
+        { title: "Live KPIs", url: "#" },
+        { title: "Alerts & Anomalies", url: "#" },
       ],
-      title: "Playground",
+      title: "Overview",
+      url: "#",
+    },
+    {
+      icon: PieChart,
+      items: [
+        { title: "Revenue & Margin", url: "#" },
+        { title: "Cohorts & Retention", url: "#" },
+        { title: "Forecasting", url: "#" },
+        { title: "Attribution", url: "#" },
+      ],
+      title: "Performance",
+      url: "#",
+    },
+    {
+      icon: CreditCard,
+      items: [
+        { title: "Invoices", url: "#" },
+        { title: "Transactions", url: "#" },
+        { title: "Payouts", url: "#" },
+        { title: "Disputes", url: "#" },
+      ],
+      title: "Billing",
+      url: "#",
+    },
+    {
+      icon: Users,
+      items: [
+        { title: "Accounts", url: "#" },
+        { title: "Segments", url: "#" },
+        { title: "Health Scores", url: "#" },
+        { title: "Renewals", url: "#" },
+      ],
+      title: "Customers",
       url: "#",
     },
     {
       icon: Bot,
       items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
+        { title: "Insights", url: "#" },
+        { title: "Rules & Workflows", url: "#" },
+        { title: "Webhooks", url: "#" },
+        { title: "Audit Trail", url: "#" },
       ],
-      title: "Models",
+      title: "Automation",
       url: "#",
     },
     {
       icon: BookOpen,
       items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
+        { title: "Playbooks", url: "#" },
+        { title: "API Reference", url: "#" },
+        { title: "Release Notes", url: "#" },
+        { title: "Status", url: "#" },
       ],
-      title: "Documentation",
+      title: "Resources",
       url: "#",
     },
     {
       icon: Settings2,
       items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
+        { title: "Workspace", url: "#" },
+        { title: "Members & Roles", url: "#" },
+        { title: "Billing Settings", url: "#" },
+        { title: "Limits & Usage", url: "#" },
       ],
-      title: "Settings",
+      title: "Admin",
       url: "#",
     },
   ],
+
   projects: [
-    {
-      icon: Frame,
-      name: "Design Engineering",
-      url: "#",
-    },
-    {
-      icon: PieChart,
-      name: "Sales & Marketing",
-      url: "#",
-    },
-    {
-      icon: MapIcon,
-      name: "Travel",
-      url: "#",
-    },
+    { icon: Frame, name: "Executive Dashboard", url: "#" },
+    { icon: TrendingUp, name: "Revenue Intelligence", url: "#" },
+    { icon: Receipt, name: "Billing Operations", url: "#" },
+    { icon: ShieldCheck, name: "Risk & Compliance", url: "#" },
   ],
+
   teams: [
-    {
-      logo: GalleryVerticalEnd,
-      name: "Acme Inc",
-      plan: "Enterprise",
-    },
-    {
-      logo: AudioWaveform,
-      name: "Acme Corp.",
-      plan: "Startup",
-    },
-    {
-      logo: Command,
-      name: "Evil Corp.",
-      plan: "Free",
-    },
+    { logo: GalleryVerticalEnd, name: "Lumen Capital", plan: "Enterprise" },
+    { logo: Command, name: "Arcadia Ventures", plan: "Scale" },
+    { logo: AudioWaveform, name: "Kairo Studio", plan: "Pro" },
   ],
+
   user: {
+    avatarUrl: "#",
     email: "m@example.com",
     name: "Lumi UI",
+    role: "Admin",
   },
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar() {
   return (
-    <Sidebar {...props}>
+    <Sidebar>
       <SidebarHeader>
         <TeamSwitcher />
         <SearchCombobox />

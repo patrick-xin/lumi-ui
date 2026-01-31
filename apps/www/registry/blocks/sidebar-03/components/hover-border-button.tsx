@@ -62,7 +62,7 @@ export function HoverBorderButton({
     <Button
       className={cn(
         "relative flex rounded-sm border content-center transition duration-100 items-center flex-col flex-nowrap gap-10 h-min justify-center overflow-visible p-px box-decoration-clone w-fit",
-        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10",
+        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
       )}
       onMouseEnter={() => {
         setHovered(true);

@@ -4,9 +4,9 @@ import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
 import type { VariantProps } from "class-variance-authority";
 import { Check, ChevronDown, X } from "lucide-react";
 import type * as React from "react";
+import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
 import { inputVariants } from "@/registry/ui/input";
-import { cn } from "@/registry/lib/utils";
 
 function Combobox<Value, Multiple extends boolean | undefined = false>({
   children,
@@ -26,9 +26,19 @@ function ComboboxValue({
 }
 
 function ComboboxIcon({
+  className,
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Icon>) {
-  return <BaseCombobox.Icon data-slot="combobox-icon" {...props} />;
+  return (
+    <BaseCombobox.Icon
+      className={cn(
+        "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+        className,
+      )}
+      data-slot="combobox-icon"
+      {...props}
+    />
+  );
 }
 
 function ComboboxInput({
@@ -249,7 +259,7 @@ function ComboboxItem({
   return (
     <BaseCombobox.Item
       className={cn(
-        "flex gap-2 py-1.5 pl-3.5 pr-8 text-sm",
+        "flex items-center gap-2 py-1.5 pl-3.5 pr-8 text-sm",
         "select-none cursor-default outline-none",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
@@ -291,7 +301,7 @@ function ComboboxGroupLabel({
   return (
     <BaseCombobox.GroupLabel
       className={cn(
-        "px-3 py-1 text-xs text-muted-foreground font-medium",
+        "px-3.5 py-1.5 text-xs text-muted-foreground font-medium",
         className,
       )}
       data-slot="combobox-group-label"
@@ -306,7 +316,7 @@ function ComboboxSeparator({
 }: React.ComponentProps<typeof BaseCombobox.Separator>) {
   return (
     <BaseCombobox.Separator
-      className={cn("-mx-1 my-1 h-px bg-border", className)}
+      className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
       data-slot="combobox-separator"
       {...props}
     />
@@ -477,7 +487,7 @@ function ComboboxItemContent({
         <BaseCombobox.ItemIndicator
           className={cn(
             "flex items-center justify-center row-start-1",
-            "[&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
+            "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
             indicatorPlacement === "start" ? "col-start-1" : "col-start-2",
           )}
           data-slot="combobox-item-indicator"

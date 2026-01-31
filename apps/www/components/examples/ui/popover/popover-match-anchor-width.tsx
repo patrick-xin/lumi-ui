@@ -8,7 +8,7 @@ export function PopoverMatchAnchorWidthDemo() {
     <Popover>
       <PopoverTrigger render={<Button className="w-64">Open</Button>} />
       <PopoverContent matchAnchorWidth>
-        <div className="text-muted-foreground">
+        <div className="text-muted-foreground text-sm">
           content inside will have the same width as the trigger
         </div>
       </PopoverContent>

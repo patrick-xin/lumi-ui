@@ -221,7 +221,7 @@ export function PhilosophyCards() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
           {PHILOSOPHY_ITEMS.map((item, index) => (
             <motion.button
-              className={`relative group flex flex-col cursor-pointer bg-linear-to-br ${item.gradient} border border-border/50 hover:border-border transition-colors rounded-lg p-6 text-left focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10`}
+              className={`relative group flex flex-col cursor-pointer bg-linear-to-br ${item.gradient} border border-border/50 hover:border-border transition-colors rounded-lg p-6 text-left focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10`}
               initial={{ opacity: 0, y: 20 }}
               key={item.id}
               layoutId={`card-container-${item.id}`}

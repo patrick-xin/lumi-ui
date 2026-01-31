@@ -1,6 +1,5 @@
 "use client";
 
-import { CircleAlert } from "lucide-react";
 import {
   Combobox,
   ComboboxContent,
@@ -22,12 +21,7 @@ export function ComboboxDemo() {
         <ComboboxEmpty>No framework found.</ComboboxEmpty>
         <ComboboxList>
           {(item: string) => (
-            <ComboboxItemContent
-              indicatorIcon={<CircleAlert />}
-              indicatorPlacement="end"
-              key={item}
-              value={item}
-            >
+            <ComboboxItemContent key={item} value={item}>
               {item}
             </ComboboxItemContent>
           )}

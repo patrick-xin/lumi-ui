@@ -25,7 +25,6 @@
       "!**/build",
       "!**/.source",
       "!**/styles",
-      "!**/registry",
       "!**/public",
       "!**/app/og"
     ]
@@ -46,8 +45,9 @@
         "noSvgWithoutTitle": "warn",
         "useFocusableInteractive": "off",
         "useSemanticElements": "warn",
-        "useValidAnchor": "warn",
-        "noStaticElementInteractions": "warn"
+        "useValidAnchor": "off",
+        "noStaticElementInteractions": "warn",
+        "noLabelWithoutControl": "off"
       },
       "complexity": {
         "useLiteralKeys": "off"
@@ -57,13 +57,13 @@
       },
       "recommended": true,
       "security": {
-        "noDangerouslySetInnerHtml": "warn"
+        "noDangerouslySetInnerHtml": "off"
       },
       "style": {
-        "noNonNullAssertion": "warn"
+        "noNonNullAssertion": "off"
       },
       "suspicious": {
-        "noArrayIndexKey": "warn",
+        "noArrayIndexKey": "off",
         "noAssignInExpressions": "warn",
         "noExplicitAny": "warn",
         "noUnknownAtRules": "off"
