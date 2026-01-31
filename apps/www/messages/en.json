@@ -21,5 +21,25 @@
     "subtitle": "Build fast, customize everything.",
     "title": "Illuminate your interface",
     "viewDocs": "View docs"
+  },
+  "Navigation": {
+    "Docs": "Docs",
+    "Component Lab": "Component Lab",
+    "Composition Library": "Composition Library"
+  },
+  "Widgets": {
+    "title": "Component Lab",
+    "description": "Precision-engineered UI components built for correctness, accessibility, and performance. Composable by design and ready for production use.",
+    "form-input": "Form & Input",
+    "layout-navigation": "Layout & Navigation",
+    "overlays-dialogs": "Overlays & Dialogs",
+    "dashboard": "Dashboard"
+  },
+  "Blocks": {
+    "title": "Composition Library",
+    "description": "Curated UI compositions that combine multiple components into proven, production-ready patterns. Designed for real-world flows, accessibility, and scale.",
+    "featured": "Featured",
+    "sidebar": "Sidebar",
+    "dialog": "Dialog"
   }
 }

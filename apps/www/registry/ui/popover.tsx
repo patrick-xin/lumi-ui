@@ -2,9 +2,8 @@ import {
   Popover as BasePopover,
   type PopoverTriggerProps,
 } from "@base-ui/react/popover";
-import { ArrowSvg } from "@/registry/ui/arrow-svg";
-
 import { cn } from "@/registry/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 function Popover<Payload = unknown>({
   ...props
@@ -45,11 +44,7 @@ function PopoverPositioner({
 function PopoverPopup({ className, ...props }: BasePopover.Popup.Props) {
   return (
     <BasePopover.Popup
-      className={cn(
-        "relative rounded-md bg-popover text-popover-foreground shadow-md outline outline-border dark:-outline-offset-1",
-        "origin-[var(--transform-origin)] transition-[transform,scale,opacity]",
-        className,
-      )}
+      className={cn("relative", className)}
       data-slot="popover-popup"
       {...props}
     />

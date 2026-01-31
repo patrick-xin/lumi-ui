@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronRight, type LucideIcon } from "lucide-react";
 import {
   Collapsible,
   CollapsiblePanel,
@@ -14,7 +15,6 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/registry/ui/sidebar";
-import { ChevronRight, type LucideIcon } from "lucide-react";
 
 export function NavMain({
   items,

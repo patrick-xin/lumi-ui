@@ -29,21 +29,21 @@ interface Command {
 }
 
 const commands: Command[] = [
-  { id: "c1", label: "Profile", group: "Settings", icon: <User /> },
-  { id: "c2", label: "Mail", group: "Suggestions", icon: <Mail /> },
-  { id: "c3", label: "Settings", group: "Settings", icon: <Settings /> },
-  { id: "c4", label: "New Team", group: "Settings", icon: <UserPlus /> },
+  { group: "Settings", icon: <User />, id: "c1", label: "Profile" },
+  { group: "Suggestions", icon: <Mail />, id: "c2", label: "Mail" },
+  { group: "Settings", icon: <Settings />, id: "c3", label: "Settings" },
+  { group: "Settings", icon: <UserPlus />, id: "c4", label: "New Team" },
   {
-    id: "c5",
-    label: "New Message",
     group: "Suggestions",
     icon: <MessageSquare />,
+    id: "c5",
+    label: "New Message",
   },
   {
-    id: "c6",
-    label: "Add new item",
     group: "Suggestions",
     icon: <PlusCircle />,
+    id: "c6",
+    label: "Add new item",
   },
 ];
 
@@ -52,7 +52,7 @@ function groupCommands(items: Command[]) {
   items.forEach((item) => {
     (groups[item.group] = groups[item.group] || []).push(item);
   });
-  return Object.entries(groups).map(([value, items]) => ({ value, items }));
+  return Object.entries(groups).map(([value, items]) => ({ items, value }));
 }
 
 const groupedCommands = groupCommands(commands);
@@ -71,7 +71,7 @@ export function AutocompleteGroupedDemo() {
         <AutocompleteEmpty>No results found.</AutocompleteEmpty>
         <AutocompleteList>
           {(group: { value: string; items: Command[] }) => (
-            <AutocompleteGroup key={group.value} items={group.items}>
+            <AutocompleteGroup items={group.items} key={group.value}>
               <AutocompleteGroupLabel>{group.value}</AutocompleteGroupLabel>
               <AutocompleteCollection>
                 {(command: Command) => (

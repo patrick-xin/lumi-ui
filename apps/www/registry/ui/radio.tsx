@@ -56,7 +56,7 @@ function Radio({
         "flex aspect-square size-4 shrink-0 items-center justify-center",
         "rounded-full border shadow-xs",
         "transition-[color,box-shadow]",
-        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10",
+        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
         "aria-invalid:border-destructive aria-invalid:ring-4 aria-invalid:ring-destructive/10",
         "disabled:cursor-not-allowed disabled:opacity-50",
         className,

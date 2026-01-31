@@ -1,5 +1,8 @@
 "use client";
 
+import { ChevronsUpDown, PlusIcon, UserSearch } from "lucide-react";
+import { useState } from "react";
+import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
   Combobox,
@@ -26,16 +29,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/registry/ui/sheet";
-import { useSidebar } from "@/registry/ui/sidebar";
+import { SidebarMenuButton, useSidebar } from "@/registry/ui/sidebar";
 import { toast } from "@/registry/ui/toast";
-import { ChevronsUpDownIcon, PlusIcon } from "lucide-react";
-import { useRef, useState } from "react";
 
 const sheetHandle = createSheetHandle();
 
 export function TeamSwitcher() {
   const [comboboxOpen, setComboboxOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const { isCollapsed } = useSidebar();
   return (
     <>
@@ -45,32 +45,33 @@ export function TeamSwitcher() {
         onOpenChange={setComboboxOpen}
         open={comboboxOpen}
       >
-        <div
-          className="flex h-9 pl-1 group-data-[state=collapsed]:hidden items-center rounded-md justify-between"
-          ref={containerRef}
-        >
-          <a
-            className="inline-flex text-sm px-1 text-foreground flex-1 justify-start"
-            href="#"
-          >
-            <ComboboxValue />
-          </a>
+        <ComboboxTrigger
+          render={
+            <SidebarMenuButton
+              className="data-[popup-open]:bg-sidebar-accent data-[popup-open]:text-sidebar-accent-foreground"
+              size="lg"
+            >
+              <div
+                className={cn(
+                  "grid flex-1 text-left text-sm leading-tight",
+                  isCollapsed && "hidden",
+                )}
+              >
+                <span className="truncate font-semibold">
+                  <ComboboxValue />
+                </span>
+              </div>
+              {isCollapsed ? (
+                <UserSearch className="mx-auto" />
+              ) : (
+                <ChevronsUpDown className="ml-auto" />
+              )}
+            </SidebarMenuButton>
+          }
+        />
 
-          <ComboboxTrigger
-            render={
-              <Button
-                className="group data-popup-open:bg-accent data-popup-open:hover:bg-accent"
-                size={"icon-sm"}
-                variant={"ghost"}
-              />
-            }
-          >
-            <ChevronsUpDownIcon className="group-data-popup-open:text-foreground size-3.5" />
-          </ComboboxTrigger>
-        </div>
         <ComboboxContent
           matchAnchorWidth={!isCollapsed}
-          positionerAnchor={containerRef}
           side={isCollapsed ? "right" : "bottom"}
         >
           <div className="flex justify-between items-center relative">

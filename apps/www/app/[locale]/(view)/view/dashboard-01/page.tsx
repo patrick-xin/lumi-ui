@@ -1,9 +1,10 @@
 import { cookies } from "next/headers";
 import type { Layout } from "react-resizable-panels";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { AIChat } from "@/registry/blocks/sidebar-03/components/ai-chat";
 import { AppSidebar } from "@/registry/blocks/sidebar-03/components/app-sidebar";
 import { ChartMixedAxes } from "@/registry/blocks/sidebar-03/components/chart-mixed-axes";
+import { DashboardContent } from "@/registry/blocks/sidebar-03/components/dashboard-content";
+import { VercelNotification } from "@/registry/blocks/sidebar-03/components/vercel-notification";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,6 +19,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/registry/ui/sidebar";
+import { ThemeSwitcher } from "../../../../../components/theme-switcher";
 
 const GROUP_ID = "main-layout-persistence";
 
@@ -44,7 +46,7 @@ export default async function Page() {
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="/docs/introduction">
-                  Get Started
+                  Dashboard
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
@@ -53,7 +55,8 @@ export default async function Page() {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <div className="ml-auto">
+          <div className="ml-auto flex gap-2">
+            <VercelNotification />
             <ThemeSwitcher />
           </div>
         </header>
@@ -61,22 +64,7 @@ export default async function Page() {
           <div className="h-120 2xl:h-150">
             <ChartMixedAxes />
           </div>
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-          </div>
-          <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-          </div>
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-          </div>
+          <DashboardContent />
         </div>
       </MainContent>
       <AIChat />

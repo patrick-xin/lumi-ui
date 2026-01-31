@@ -1,24 +1,24 @@
 "use client";
 
-import { useIsMobile } from "@/registry/hooks/use-mobile";
-import { cn } from "@/registry/lib/utils";
-import { Button } from "@/registry/ui/button";
-import {
-    ResizableGroup,
-    ResizablePanel,
-    ResizableSeparator,
-} from "@/registry/ui/resizable";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/registry/ui/tooltip";
 import { mergeProps, useRender } from "@base-ui/react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { SettingsIcon, UserIcon } from "lucide-react";
 import { useState } from "react";
 import { useDefaultLayout, usePanelRef } from "react-resizable-panels";
+import { useIsMobile } from "@/registry/hooks/use-mobile";
+import { cn } from "@/registry/lib/utils";
+import { Button } from "@/registry/ui/button";
+import {
+  ResizableGroup,
+  ResizablePanel,
+  ResizableSeparator,
+} from "@/registry/ui/resizable";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/registry/ui/tooltip";
 
 export const ResizableCollapsible = () => {
   const { defaultLayout, onLayoutChanged } = useDefaultLayout({
@@ -103,7 +103,7 @@ const sidebarMenuButtonVariants = cva(
   [
     "peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left transition-[width,height,padding]",
     "active:bg-sidebar-accent active:text-sidebar-accent-foreground",
-    "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10",
+    "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
     "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
     "[&>span:last-child]:truncate [&_svg]:size-4 [&_svg]:shrink-0",
     "data-active:bg-sidebar-accent data-active:text-sidebar-accent-foreground data-active:font-medium",

@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import {
-  PageHeader,
-  PageHeaderDescription,
-  PageHeaderHeading,
-} from "@/components/blocks/page-header";
-import { PageNav } from "@/components/blocks/page-nav";
-import { registryComponentCategories } from "@/lib/categories";
+import { WidgetsHeader } from "@/components/site/widgets-header";
 
 const title = "Component Lab";
 const description =
@@ -26,19 +20,10 @@ export default async function ComponentsLayout({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+
   return (
     <>
-      <PageHeader>
-        <PageHeaderHeading>{title}</PageHeaderHeading>
-        <PageHeaderDescription>{description}</PageHeaderDescription>
-        <PageNav
-          id="components"
-          items={registryComponentCategories.map((category) => ({
-            href: `/widgets/${category.slug}`,
-            title: category.name,
-          }))}
-        />
-      </PageHeader>
+      <WidgetsHeader />
 
       <div className="container">{children}</div>
     </>

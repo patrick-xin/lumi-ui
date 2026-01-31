@@ -143,7 +143,10 @@ function SelectGroupLabel({
 }: React.ComponentProps<typeof BaseSelect.GroupLabel>) {
   return (
     <BaseSelect.GroupLabel
-      className={cn("text-muted-foreground px-2 py-1.5 text-xs", className)}
+      className={cn(
+        "px-3 py-1 text-xs text-muted-foreground font-medium",
+        className,
+      )}
       data-slot="select-label"
       {...props}
     />
@@ -163,7 +166,7 @@ function SelectSeparator({
   );
 }
 
-function SelectScrollUpButton({
+function SelectScrollUpArrow({
   className,
   ...props
 }: React.ComponentProps<typeof BaseSelect.ScrollUpArrow>) {
@@ -181,7 +184,7 @@ function SelectScrollUpButton({
   );
 }
 
-function SelectScrollDownButton({
+function SelectScrollDownArrow({
   className,
   ...props
 }: React.ComponentProps<typeof BaseSelect.ScrollDownArrow>) {
@@ -223,12 +226,13 @@ function SelectTriggerGroup({
     <BaseSelect.Trigger
       className={cn(
         "group flex items-center gap-2 min-w-32 bg-transparent dark:bg-input/30 dark:hover:bg-input/50",
-        "rounded-md border border-input py-1.5 text-sm shadow-xs transition-[color,box-shadow]",
+        "rounded-md border border-input text-sm shadow-xs transition-[color,box-shadow]",
         "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
         "data-[invalid]:border-destructive data-[invalid]:ring-destructive/20 dark:data-[invalid]:ring-destructive/40",
         "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
         "dark:data-[popup-open]:bg-input/50",
         "data-[size=default]:h-9 data-[size=sm]:h-8 data-[size=lg]:h-10",
+        "data-[size=default]:py-1.5 data-[size=sm]:py-1 data-[size=lg]:py-2",
         indicatorPlacement === "start" ? "pl-1" : "pl-3 pr-1",
         className,
       )}
@@ -261,7 +265,7 @@ function SelectContent({
   children,
   side = "bottom",
   align = "start",
-  sideOffset = 4,
+  sideOffset = 6,
   alignOffset = 0,
   alignItemWithTrigger = false,
   ...props
@@ -290,11 +294,11 @@ function SelectContent({
           data-slot="select-content"
           {...props}
         >
-          <SelectScrollUpButton />
-          <BaseSelect.List className="relative py-1 scroll-py-6 overflow-y-auto max-h-[min(24rem,var(--available-height))]">
+          <SelectScrollUpArrow />
+          <BaseSelect.List className="relative py-1 scroll-py-6 overflow-y-auto max-h-[min(23rem,var(--available-height))]">
             {children}
           </BaseSelect.List>
-          <SelectScrollDownButton />
+          <SelectScrollDownArrow />
         </BaseSelect.Popup>
       </BaseSelect.Positioner>
     </SelectPortal>
@@ -367,8 +371,8 @@ export {
   SelectItemIndicator,
   SelectGroup,
   SelectGroupLabel,
-  SelectScrollUpButton,
-  SelectScrollDownButton,
+  SelectScrollUpArrow,
+  SelectScrollDownArrow,
   SelectSeparator,
   // Composite components
   SelectTriggerGroup,

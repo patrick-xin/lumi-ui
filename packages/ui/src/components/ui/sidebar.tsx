@@ -228,7 +228,7 @@ const sidebarMenuButtonVariants = cva(
   [
     "relative peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md px-4 py-3 text-left transition-[width,height,padding,colors]",
     "[&>span:last-child]:truncate [&_svg]:size-4 [&_svg]:shrink-0",
-    "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10",
+    "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
     "data-[popup-open]:bg-accent",
     "data-[active]:bg-sidebar-accent data-[active]:text-sidebar-accent-foreground",
     "group-data-[state=collapsed]:size-8 group-data-[state=collapsed]:p-2",
@@ -421,7 +421,7 @@ export function SidebarGroupLabel({
       {
         className: cn(
           "text-sidebar-foreground/70 flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium transition-[margin,opacity] duration-200 ease-linear",
-          "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10",
+          "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
           "[&>svg]:size-4 [&>svg]:shrink-0",
           "group-data-[state=collapsed]:-mt-8 group-data-[state=collapsed]:opacity-0",
           className,
@@ -482,7 +482,7 @@ function SidebarMenuSubButton({
         className: cn(
           "flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2",
           "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-          "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10",
+          "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
           "active:bg-sidebar-accent active:text-sidebar-accent-foreground",
           "[&>svg]:text-sidebar-accent-foreground [&>svg]:size-4 [&>svg]:shrink-0 [&>span:last-child]:truncate",
           "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
@@ -535,7 +535,7 @@ function SidebarMenuAction({
           "peer flex items-center justify-center absolute top-1.5 right-1 aspect-square w-5 rounded-md transition-transform text-sidebar-foreground hover:bg-accent",
           "[&>svg]:size-4 [&>svg]:shrink-0",
           "peer-data-[size=default]/menu-button:top-1.5 peer-data-[size=lg]/menu-button:top-2.5 peer-data-[size=sm]/menu-button:top-1 after:absolute after:-inset-2 md:after:hidden ",
-          "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-primary/10",
+          "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
           "data-[popup-open]:bg-accent",
           showOnHover &&
             "group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[popup-open]:opacity-100 md:opacity-0",

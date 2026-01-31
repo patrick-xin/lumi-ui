@@ -1,18 +1,39 @@
 "use client";
 
+import { motion } from "motion/react";
 import Link from "next/link";
+import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 
+const smoothEase = [0.25, 1, 0.5, 1] as const;
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    transition: { delay, duration: 0.5, ease: smoothEase },
+    y: 0,
+  }),
+};
+
 export default function ComponentShowcase() {
+  const [loaded, setLoaded] = React.useState(false);
+
   return (
-    <section className="container mx-auto hidden md:block">
+    <motion.section
+      animate="visible"
+      className="container mx-auto hidden md:block"
+      custom={0.3}
+      initial="hidden"
+      variants={fadeUpVariants}
+    >
       <div className="relative flex flex-col items-center justify-center">
         <div className="group relative flex h-[500px] w-full items-center justify-center overflow-hidden rounded-md perspective-[2000px]">
           <div
             className={cn(
               "absolute inset-0 mx-auto",
-              "w-[95%] h-[80%] md:h-[120%]",
+              "w-[95%] h-[520px] md:h-[600px] will-change-transform",
               "[transform:translate(10%,-5%)_scale(1.1)_rotateX(47deg)_rotateY(32deg)_rotate(324deg)]",
               "bg-background border border-border rounded-xl shadow-2xl shadow-primary/10",
               "after:absolute after:inset-0 after:rounded-xl after:bg-gradient-to-b after:from-transparent after:via-transparent after:to-background after:z-20",
@@ -20,11 +41,26 @@ export default function ComponentShowcase() {
           >
             <div className="absolute inset-0 rounded-xl bg-background/50 ring-1 ring-inset ring-border/50" />
 
-            <iframe
-              className="h-full w-full rounded-xl bg-muted/20 opacity-90 grayscale-[0.2] invert-[0.02]"
+            <motion.div
+              animate={{ opacity: loaded ? 0 : 1 }}
+              aria-hidden
+              className="absolute inset-0 rounded-xl bg-muted/30"
+              initial={{ opacity: 1 }}
+              transition={{ duration: 0.35, ease: smoothEase }}
+            >
+              <div className="h-full w-full rounded-xl animate-pulse" />
+            </motion.div>
+
+            <motion.iframe
+              animate={{ opacity: loaded ? 0.9 : 0 }}
+              className="h-full w-full rounded-xl bg-muted/20 grayscale-[0.2] invert-[0.02]"
+              initial={{ opacity: 0 }}
+              loading="lazy"
+              onLoad={() => setLoaded(true)}
               src="/view/dashboard-01"
               tabIndex={-1}
               title="Lumi Dashboard"
+              transition={{ duration: 0.45, ease: smoothEase }}
             />
           </div>
 
@@ -45,6 +81,6 @@ export default function ComponentShowcase() {
           />
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

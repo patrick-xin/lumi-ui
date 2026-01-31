@@ -1,14 +1,14 @@
+import { SiFigma } from "@icons-pack/react-simple-icons";
 import {
   Activity,
   ArrowUpRight,
   Book,
   Component,
-  Diamond,
-  type LucideProps,
+  Diamond, type LucideProps,
   Palette,
   Play,
   Scale,
-  SquareMousePointer,
+  SquareMousePointer
 } from "lucide-react";
 import type { FileIconType } from "@/types";
 
@@ -21,6 +21,7 @@ export const IconMap: Record<string, React.ComponentType<LucideProps>> = {
   "Display & Media": Diamond,
   default: ArrowUpRight,
   "Feedback & Status": Diamond,
+  Figma: SiFigma,
   "Form & Input": Diamond,
   "Get Started": Book,
   Introduction: Book,

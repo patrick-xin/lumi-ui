@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
+import ComponentShowcase from "./component-showcase";
 
 const smoothEase = [0.25, 1, 0.5, 1] as const;
 
@@ -21,14 +22,43 @@ const fadeUpVariants = {
   }),
 };
 
-export function HeroSection() {
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+export const Hero = () => {
+  return (
+    <motion.div
+      animate="visible"
+      className="flex flex-col overflow-y-hidden max-h-[calc(100dvh-10rem)] justify-center items-center gap-12"
+      initial="hidden"
+      variants={container}
+    >
+      <HeroHeading />
+      <ComponentShowcase />
+    </motion.div>
+  );
+};
+
+function HeroHeading() {
   const t = useTranslations("HomePage");
+  const locale = useLocale();
   return (
     <div className="overflow-hidden">
       <section>
         <div className="relative pt-24">
           <div className="mx-auto max-w-5xl px-6">
             <div className="flex flex-col justify-center">
+              <div className="absolute top-6 inset-x-0 flex justify-center">
+                {locale === "cn" && (
+                  <span className="text-xs border rounded-xl px-2 py-1">
+                    🚀 中文文档开发中
+                  </span>
+                )}
+              </div>
               <div className="relative mx-auto">
                 {/* Corner gradients */}
                 <CornerGradients />
@@ -41,9 +71,7 @@ export function HeroSection() {
                   initial="hidden"
                   variants={fadeUpVariants}
                 >
-                  <span className="relative inline-block overflow-hidden text-transparent bg-clip-text bg-gradient-to-b from-primary/20 via-primary/70 to-primary/40">
-                    {t("title")}
-                  </span>
+                  {t("title")}
                 </motion.h1>
               </div>
               <motion.p
@@ -55,8 +83,8 @@ export function HeroSection() {
               >
                 {t("description")}
                 <br />
-                <span className="inline-block font-semibold text-foreground mt-2">
-                  {t("subtitle")}
+                <span className="inline-flex items-center font-semibold text-foreground mt-2">
+                  {t("subtitle")}{" "}
                 </span>
               </motion.p>
               <motion.div

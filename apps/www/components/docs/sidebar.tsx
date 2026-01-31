@@ -125,17 +125,17 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
   const isExternalUrl =
     item.href.startsWith("http") || item.href.startsWith("https");
   const isExternal = item.external || isExternalUrl;
-
   if (item.disabled) {
     return (
-      <span className="flex h-8 w-full items-center px-2 text-sm text-muted-foreground/40 cursor-not-allowed">
+      <span className="flex h-8 w-full items-center px-2 text-sm text-muted-foreground/40 cursor-default select-none">
+        {Icon && <Icon className="ml-0.5 mr-3.5 size-4 shrink-0" />}
         {item.label}
         {item.status === "planned" && (
           <Badge
             className="ml-auto text-[9px] font-medium text-muted-foreground/50"
             variant="outline"
           >
-            Planned
+            Coming soon
           </Badge>
         )}
       </span>

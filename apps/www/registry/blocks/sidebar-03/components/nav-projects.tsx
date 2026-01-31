@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  Folder,
+  Forward,
+  type LucideIcon,
+  MoreHorizontal,
+  Trash2,
+} from "lucide-react";
 import { Button } from "@/registry/ui/button";
 import {
   createDialogHandle,
@@ -30,13 +37,6 @@ import {
   useSidebar,
 } from "@/registry/ui/sidebar";
 import { toast } from "@/registry/ui/toast";
-import {
-  Folder,
-  Forward,
-  type LucideIcon,
-  MoreHorizontal,
-  Trash2,
-} from "lucide-react";
 
 interface Project {
   name: string;
@@ -157,7 +157,7 @@ export function NavProjects({ projects }: { projects: Project[] }) {
                         loading: { title: `Deleting ${project?.name}...` },
                         success: () => {
                           return {
-                            description: " Drag top/right to close",
+                            description: "Drag/swipe to dismiss",
                             title: `${project?.name} deleted`,
                           };
                         },

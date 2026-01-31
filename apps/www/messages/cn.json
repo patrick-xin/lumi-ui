@@ -21,5 +21,25 @@
     "subtitle": "构建快速，随心定制。",
     "title": "出色，更出彩",
     "viewDocs": "查看文档"
+  },
+  "Navigation": {
+    "Docs": "文档",
+    "Component Lab": "组件实验室",
+    "Composition Library": "组合式方案库"
+  },
+  "Widgets": {
+    "title": "组件实验室",
+    "description": "精心打磨的 UI 组件，兼顾精准还原、无障碍访问与高性能。秉持组合式设计理念，生产环境就绪。",
+    "form-input": "表单与输入",
+    "layout-navigation": "布局与导航",
+    "overlays-dialogs": "覆盖层与对话框",
+    "dashboard": "仪表盘"
+  },
+  "Blocks": {
+    "title": "组合式方案库",
+    "description": "精心甄选的 UI 组合，将多个组件封装为经过实战检验、生产级就绪的设计模式。专为真实业务流程、无障碍访问及大规模应用而打造。",
+    "featured": "精选",
+    "sidebar": "侧边栏",
+    "dialog": "对话框"
   }
 }

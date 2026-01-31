@@ -4,8 +4,8 @@ import { Menu as BaseMenu } from "@base-ui/react/menu";
 import { cva, type VariantProps } from "class-variance-authority";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 import type * as React from "react";
-import { ArrowSvg } from "@/registry/ui/arrow-svg";
 import { cn } from "@/registry/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 function DropdownMenu<Payload>({
   ...props
@@ -84,8 +84,7 @@ const dropdownMenuItemVariants = cva(
     "outline-none select-none cursor-default",
     "highlight-on-active",
     "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
-    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-    "[&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
   ],
   {
     defaultVariants: {
@@ -132,7 +131,7 @@ function DropdownMenuSeparator({
 }: React.ComponentProps<typeof BaseMenu.Separator>) {
   return (
     <BaseMenu.Separator
-      className={cn("bg-border my-1 h-px", className)}
+      className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
       data-slot="dropdown-menu-separator"
       {...props}
     />
@@ -308,7 +307,7 @@ function DropdownMenuContent({
         <BaseMenu.Popup
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md py-1",
-            "outline outline-1 outline-border dark:-outline-offset-1",
+            "outline outline-border dark:-outline-offset-1",
             "animate-popup",
             className,
           )}

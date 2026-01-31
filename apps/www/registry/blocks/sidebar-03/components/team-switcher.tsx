@@ -1,5 +1,8 @@
 "use client";
 
+import { ChevronsUpDownIcon, PlusIcon, UserSearchIcon } from "lucide-react";
+import { useRef, useState } from "react";
+import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
   Combobox,
@@ -14,6 +17,7 @@ import {
 import { Field, FieldError, FieldLabel } from "@/registry/ui/field";
 import { Form } from "@/registry/ui/form";
 import { Input } from "@/registry/ui/input";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Separator } from "@/registry/ui/separator";
 import {
   createSheetHandle,
@@ -26,17 +30,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/registry/ui/sheet";
-import { useSidebar } from "@/registry/ui/sidebar";
+import { SidebarMenuButton, useSidebar } from "@/registry/ui/sidebar";
 import { toast } from "@/registry/ui/toast";
-import { ChevronsUpDownIcon, PlusIcon } from "lucide-react";
-import { useRef, useState } from "react";
 
 const sheetHandle = createSheetHandle();
 
 export function TeamSwitcher() {
   const [comboboxOpen, setComboboxOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
   const { isCollapsed } = useSidebar();
+
   return (
     <>
       <Combobox
@@ -45,36 +49,56 @@ export function TeamSwitcher() {
         onOpenChange={setComboboxOpen}
         open={comboboxOpen}
       >
-        <div
-          className="flex h-9 pl-1 group-data-[state=collapsed]:hidden items-center rounded-md justify-between"
+        <SidebarMenuButton
+          className="pr-1 text-foreground bg-transparent hover:bg-transparent"
           ref={containerRef}
+          render={<div />}
+          size="lg"
+          tooltip="Switch team"
         >
-          <a
-            className="inline-flex text-sm px-1 text-foreground flex-1 justify-start"
-            href="#"
+          <div
+            className={cn(
+              "grid flex-1 text-left text-sm leading-tight transition-all",
+              isCollapsed && "hidden",
+            )}
           >
-            <ComboboxValue />
-          </a>
-
+            <span className="truncate font-semibold">
+              <a className="inline-block w-full truncate align-middle" href="#">
+                <ComboboxValue />
+              </a>
+            </span>
+          </div>
           <ComboboxTrigger
             render={
               <Button
-                className="group data-popup-open:bg-accent data-popup-open:hover:bg-accent"
-                size={"icon-sm"}
-                variant={"ghost"}
-              />
+                className={cn(
+                  "group/trigger shrink-0 hover:bg-sidebar-accent data-[popup-open]:bg-sidebar-accent data-[popup-open]:text-sidebar-accent-foreground",
+                  isCollapsed ? "mx-auto" : "ml-auto",
+                )}
+                size="icon"
+                variant="unstyled"
+              >
+                {isCollapsed ? (
+                  <UserSearchIcon className="size-4.5 text-muted-foreground group-hover/trigger:text-foreground group-data-[popup-open]/trigger:text-foreground" />
+                ) : (
+                  <ChevronsUpDownIcon className="size-4 text-muted-foreground group-hover/trigger:text-foreground group-data-[popup-open]/trigger:text-foreground" />
+                )}
+              </Button>
             }
-          >
-            <ChevronsUpDownIcon className="group-data-popup-open:text-foreground size-3.5" />
-          </ComboboxTrigger>
-        </div>
+          />
+        </SidebarMenuButton>
         <ComboboxContent
+          className="flex flex-col h-56 overflow-hidden"
           matchAnchorWidth={!isCollapsed}
           positionerAnchor={containerRef}
           side={isCollapsed ? "right" : "bottom"}
         >
-          <div className="flex justify-between items-center relative">
-            <ComboboxInputGroup placeholder="Find member..." variant="ghost" />
+          <div className="flex justify-between items-center relative flex-none">
+            <ComboboxInputGroup
+              className="caret-primary"
+              placeholder="Find member..."
+              variant="ghost"
+            />
             <Button
               className="absolute hidden lg:block right-2 text-[10px] rounded-sm text-muted-foreground cursor-pointer"
               onClick={() => setComboboxOpen(false)}
@@ -85,20 +109,24 @@ export function TeamSwitcher() {
             </Button>
           </div>
           <Separator />
-          <ComboboxEmpty>No member found.</ComboboxEmpty>
-          <ComboboxList>
-            {(member: TeamMember) => (
-              <ComboboxItemContent
-                indicatorPlacement="end"
-                key={member.id}
-                value={member}
-              >
-                {member.label}
-              </ComboboxItemContent>
-            )}
-          </ComboboxList>
+          <ComboboxEmpty className="flex-1 mt-12 h-full">
+            No member found.
+          </ComboboxEmpty>
+          <ScrollArea className="pr-1" gradientScrollFade>
+            <ComboboxList className="flex-1 min-h-0">
+              {(member: TeamMember) => (
+                <ComboboxItemContent
+                  indicatorPlacement="end"
+                  key={member.id}
+                  value={member}
+                >
+                  {member.label}
+                </ComboboxItemContent>
+              )}
+            </ComboboxList>
+          </ScrollArea>
           <Separator />
-          <div className="p-2">
+          <div className="p-2 flex-none">
             <SheetTrigger
               handle={sheetHandle}
               onClick={() => setComboboxOpen(false)}
@@ -166,4 +194,6 @@ const teamMembers: TeamMember[] = [
   { id: "4", label: "Maria Garcia", role: "Marketing", value: "maria.g" },
   { id: "5", label: "David Chen", role: "Engineering", value: "david.c" },
   { id: "6", label: "Emma Roberts", role: "Product", value: "emma.r" },
+  { id: "7", label: "John Doe", role: "Office", value: "john.d" },
+  { id: "8", label: "Jane Doe", role: "Marketing", value: "jane.d" },
 ];

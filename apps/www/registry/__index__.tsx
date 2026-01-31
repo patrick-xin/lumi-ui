@@ -2604,24 +2604,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "dialog-nested": {
-    name: "dialog-nested",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["dialog"],
-    files: [{
-      path: "components/examples/ui/dialog/dialog-nested.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/dialog/dialog-nested");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-nested";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "dialog-outside-scroll": {
     name: "dialog-outside-scroll",
     description: "",

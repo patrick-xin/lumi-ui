@@ -251,6 +251,14 @@ toast.error({ title: "Error occurred", description: "Please try again" })
 
 <ComponentPreview name="toast-variant" />
 
+### Swipe directions
+
+By default, toasts can be swiped in all four directions. You can explicitly change this by setting the `swipeDirection` prop.
+
+### Toast Positions
+
+Toasts are positioned at the bottom-right. You can change this by setting the `position` prop.
+
 ### Closable
 
 <ComponentPreview name="toast-closable" />
@@ -360,7 +368,7 @@ The provider component that renders the viewport.
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `position` | `ToastPosition` | `"bottom-right"` | Where the stack appears. Options: `top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, `bottom-right`. |
-| `swipeDirection` | `SwipeDirection` | `["down", "right"]` | Direction users can swipe to dismiss. |
+| `swipeDirection` | `SwipeDirection` | `["down", "right"]` | Direction users can swipe to dismiss. `["up", "down", "left", "right"]` |
 | `limit` | `number` | `3` | Maximum number of toasts visible at once. |
 
 ### toast
