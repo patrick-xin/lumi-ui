@@ -1206,6 +1206,28 @@ export const components: ComponentRegistry = {
     categories: ["form-input","dashboard"],
     meta: {"iframeHeight":500},
   },
+  "expandable-dialog": {
+    name: "expandable-dialog",
+    title: "Expandable Dialog",
+    description: "Responsive dialog that can expand and shrink",
+    type: "registry:component",
+    target: "",
+    registryDependencies: ["lucide-react","motion"],
+    files:     [
+          {
+                "path": "registry/components/expandable-dialog.tsx",
+                "target": "",
+                "type": "registry:component"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/components/expandable-dialog");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "expandable-dialog";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["layout-navigation"],
+    meta: {"iframeHeight":1000},
+  },
   "morphing-dialog": {
     name: "morphing-dialog",
     title: "Morphing Dialog",
@@ -1226,7 +1248,7 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["layout-navigation"],
-    meta: undefined,
+    meta: {"iframeHeight":1000},
   },
   "vercel-notification": {
     name: "vercel-notification",
@@ -1248,7 +1270,7 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["overlays-dialogs","dashboard"],
-    meta: {"alignment":"top-right","iframeHeight":500},
+    meta: {"alignment":"top-right","iframeHeight":800},
   },
   "t3-model-selector": {
     name: "t3-model-selector",
@@ -1270,7 +1292,7 @@ export const components: ComponentRegistry = {
       return { default: mod.default || mod[exportName] };
     }),
     categories: ["form-input","chat"],
-    meta: {"alignment":"bottom-center","iframeHeight":500},
+    meta: {"alignment":"bottom-center","iframeHeight":800},
   },
   "accordion-custom-trigger-icon": {
     name: "accordion-custom-trigger-icon",

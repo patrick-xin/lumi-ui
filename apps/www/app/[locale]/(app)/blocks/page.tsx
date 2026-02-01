@@ -21,7 +21,7 @@ async function getFeaturedBlocks() {
 export default async function Page() {
   const featured = await getFeaturedBlocks();
   return (
-    <div className="flex flex-col gap-12 md:gap-24">
+    <div className="flex flex-col gap-12 md:gap-24 scroll-mt-24">
       {featured.length > 0 &&
         featured.map((block) => (
           <BlockDisplay block={block} key={block.name} />

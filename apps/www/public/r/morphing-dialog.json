@@ -19,6 +19,9 @@
       "type": "registry:component"
     }
   ],
+  "meta": {
+    "iframeHeight": 1000
+  },
   "categories": [
     "layout-navigation"
   ],

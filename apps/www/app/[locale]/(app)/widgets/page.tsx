@@ -1,15 +1,15 @@
-import Link from "next/link";
 import { ComponentView } from "@/components/blocks/component-view";
 import { ComponentSourceCode } from "@/components/docs/mdx/component-source-code";
 import { components } from "@/registry/__index__";
 import type { ComponentName, RegistryName } from "@/registry/__registry";
-import { Button } from "@/registry/ui/button";
 
 export const dynamic = "force-static";
 
 const FEATURED_COMPONENTS = [
   "vercel-notification",
   "morphing-dialog",
+  "expandable-dialog",
+  "t3-model-selector",
 ] as ComponentName[];
 
 async function getFeaturedComponents() {
@@ -44,14 +44,6 @@ export default async function Page() {
             title={component.title}
           />
         ))}
-
-      <div className="flex justify-center py-6">
-        <Button
-          nativeButton={false}
-          render={<Link href="/widgets">Browse more components</Link>}
-          variant="glow"
-        />
-      </div>
     </div>
   );
 }
