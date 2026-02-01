@@ -931,12 +931,37 @@
       ]
     },
     {
+      "name": "expandable-dialog",
+      "title": "Expandable Dialog",
+      "description": "Responsive dialog that can expand and shrink",
+      "type": "registry:component",
+      "categories": ["layout-navigation"],
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": [
+        "@lumi-ui/button",
+        "@lumi-ui/dialog",
+        "@lumi-ui/scroll-area"
+      ],
+      "meta": {
+        "iframeHeight": 1000
+      },
+      "files": [
+        {
+          "path": "registry/components/expandable-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "morphing-dialog",
       "title": "Morphing Dialog",
       "description": "A fluid card-to-modal transition pattern. Combines Base UI's accessible dialog primitives with Framer Motion's shared layout animations for a seamless expansion effect. Inspired by Linear.",
       "type": "registry:component",
       "categories": ["layout-navigation"],
       "dependencies": ["lucide-react", "motion"],
+      "meta": {
+        "iframeHeight": 1000
+      },
       "registryDependencies": [
         "@lumi-ui/button",
         "@lumi-ui/dialog",
@@ -957,7 +982,7 @@
       "categories": ["overlays-dialogs", "dashboard"],
       "meta": {
         "alignment": "top-right",
-        "iframeHeight": 500
+        "iframeHeight": 800
       },
       "dependencies": ["lucide-react", "@base-ui/react"],
       "registryDependencies": [
@@ -984,7 +1009,7 @@
       "categories": ["form-input", "chat"],
       "meta": {
         "alignment": "bottom-center",
-        "iframeHeight": 500
+        "iframeHeight": 800
       },
       "dependencies": [
         "lucide-react",

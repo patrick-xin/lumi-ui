@@ -1,3 +1,4 @@
+import { Loader2 } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -75,7 +76,7 @@ export default async function BlockPage({
       <Suspense
         fallback={
           <div className="h-screen w-screen flex justify-center items-center text-sm">
-            Loading preview...
+            <Loader2 className="size-5 animate-spin" />
           </div>
         }
       >

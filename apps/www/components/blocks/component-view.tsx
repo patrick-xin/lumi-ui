@@ -66,7 +66,10 @@ export function ComponentView({
 
   return (
     <div
-      className={cn("group/block-view-wrapper flex flex-col gap-4", className)}
+      className={cn(
+        "group/block-view-wrapper flex flex-col gap-4 min-w-0",
+        className,
+      )}
       style={{ "--height": height } as React.CSSProperties}
       {...props}
     >
