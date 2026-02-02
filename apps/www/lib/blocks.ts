@@ -1,8 +1,8 @@
+import fs from "node:fs";
+import path from "node:path";
 import { components } from "@/registry/__index__";
 import type { RegistryEntry, RegistryFile } from "@/registry/__registry";
 import type { Block, BlockFile, TreeNode } from "@/types";
-import fs from "fs";
-import path from "path";
 import { rewriteRegistryImports } from "./rewrite-imports";
 
 // Get the monorepo root directory reliably
@@ -34,7 +34,7 @@ export async function getRegistryItem(block: RegistryEntry): Promise<Block> {
       let filePath: string;
 
       if (file.path.startsWith("registry/")) {
-        filePath = path.resolve(MONOREPO_ROOT, "apps/www", file.path)
+        filePath = path.resolve(MONOREPO_ROOT, "apps/www", file.path);
       } else if (file.path.startsWith("@lumi-ui/ui/")) {
         // Handle @lumi-ui/ui/ imports
         filePath = path.resolve(

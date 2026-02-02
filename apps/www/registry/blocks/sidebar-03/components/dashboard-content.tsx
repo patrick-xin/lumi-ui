@@ -366,7 +366,7 @@ export function DashboardContent() {
         title: "Success!",
         type: "success",
       });
-    } catch (error) {
+    } catch {
       toast.update(toastId, {
         actionProps: {
           children: "Retry",
@@ -423,7 +423,7 @@ export function DashboardContent() {
         title: "Success!",
         type: "success",
       });
-    } catch (error) {
+    } catch {
       toast.update(toastId, {
         actionProps: {
           children: "Retry",

@@ -1,6 +1,8 @@
 "use client";
 
 import type { DialogRootChangeEventDetails } from "@base-ui/react";
+import { ChevronLeft, ChevronRight, XIcon } from "lucide-react";
+import * as React from "react";
 import { InfoMenu } from "@/registry/blocks/dialog-02/components/info-menu";
 import { ProfileCard } from "@/registry/blocks/dialog-02/components/profile-card";
 import { ShareMenu } from "@/registry/blocks/dialog-02/components/share-menu";
@@ -16,8 +18,6 @@ import {
   DialogTrigger,
   DialogViewport,
 } from "@/registry/ui/dialog";
-import { ChevronLeft, ChevronRight, XIcon } from "lucide-react";
-import * as React from "react";
 
 const galleryHandle = createDialogHandle<IImage>();
 
@@ -36,7 +36,7 @@ export default function UnsplashDialog() {
     (direction: "next" | "prev") => {
       if (!triggerId) return;
       const currentIndex = parseInt(triggerId.replace("trigger-", ""), 10);
-      if (isNaN(currentIndex)) return;
+      if (Number.isNaN(currentIndex)) return;
 
       let nextIndex = 0;
       if (direction === "next") {

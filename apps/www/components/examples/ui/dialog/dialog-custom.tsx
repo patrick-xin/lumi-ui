@@ -40,7 +40,7 @@ export function DialogCustomDemo() {
     (direction: "next" | "prev") => {
       if (!triggerId) return;
       const currentIndex = parseInt(triggerId.replace("trigger-", ""), 10);
-      if (isNaN(currentIndex)) return;
+      if (Number.isNaN(currentIndex)) return;
 
       let nextIndex = 0;
       if (direction === "next") {

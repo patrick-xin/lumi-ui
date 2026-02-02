@@ -136,8 +136,13 @@ export default function ExampleCreatableCombobox() {
   return (
     <React.Fragment>
       <Combobox
+        inputValue={query}
         items={itemsForView}
         multiple
+        onInputValueChange={setQuery}
+        onItemHighlighted={(item) => {
+          highlightedItemRef.current = item;
+        }}
         onValueChange={(next) => {
           const creatableSelection = next.find(
             (item) =>
@@ -155,11 +160,6 @@ export default function ExampleCreatableCombobox() {
           setQuery("");
         }}
         value={selected}
-        inputValue={query}
-        onInputValueChange={setQuery}
-        onItemHighlighted={(item) => {
-          highlightedItemRef.current = item;
-        }}
       >
         <div className="max-w-112 flex flex-col gap-1">
           <label className="text-sm leading-5 font-medium" htmlFor={id}>
@@ -173,16 +173,16 @@ export default function ExampleCreatableCombobox() {
               {(value: LabelItem[]) => (
                 <React.Fragment>
                   {value.map((label) => (
-                    <ComboboxChip key={label.id} aria-label={label.value}>
+                    <ComboboxChip aria-label={label.value} key={label.id}>
                       {label.value}
                     </ComboboxChip>
                   ))}
                   <ComboboxInput
-                    ref={comboboxInputRef}
-                    id={id}
-                    placeholder={value.length > 0 ? "" : "e.g. bug"}
                     className="flex-1 min-w-12"
+                    id={id}
                     onKeyDown={handleInputKeyDown}
+                    placeholder={value.length > 0 ? "" : "e.g. bug"}
+                    ref={comboboxInputRef}
                     variant="ghost"
                   />
                 </React.Fragment>
@@ -197,18 +197,18 @@ export default function ExampleCreatableCombobox() {
             {(item: LabelItem) =>
               item.creatable ? (
                 <ComboboxItemContent
+                  indicatorPlacement="none"
                   key={item.id}
                   value={item}
-                  indicatorPlacement="none"
                 >
                   <Plus className="size-4" />
                   <span>Create &quot;{item.creatable}&quot;</span>
                 </ComboboxItemContent>
               ) : (
                 <ComboboxItemContent
+                  indicatorPlacement="end"
                   key={item.id}
                   value={item}
-                  indicatorPlacement="end"
                 >
                   {item.value}
                 </ComboboxItemContent>
@@ -218,21 +218,21 @@ export default function ExampleCreatableCombobox() {
         </ComboboxContent>
       </Combobox>
 
-      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+      <Dialog onOpenChange={setOpenDialog} open={openDialog}>
         <DialogContent initialFocus={createInputRef}>
           <DialogTitle>Create new label</DialogTitle>
           <DialogDescription>Add a new label to select.</DialogDescription>
-          <form onSubmit={handleCreateSubmit} className="space-y-4">
+          <form className="space-y-4" onSubmit={handleCreateSubmit}>
             <Input
-              ref={createInputRef}
-              placeholder="Label name"
               defaultValue={pendingQueryRef.current}
+              placeholder="Label name"
+              ref={createInputRef}
             />
             <DialogFooter>
               <Button
+                onClick={() => setOpenDialog(false)}
                 type="button"
                 variant="outline"
-                onClick={() => setOpenDialog(false)}
               >
                 Cancel
               </Button>

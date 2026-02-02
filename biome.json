@@ -50,7 +50,8 @@
         "noLabelWithoutControl": "off"
       },
       "complexity": {
-        "useLiteralKeys": "off"
+        "useLiteralKeys": "off",
+        "useOptionalChain": "off"
       },
       "correctness": {
         "useExhaustiveDependencies": "warn"
@@ -64,9 +65,13 @@
       },
       "suspicious": {
         "noArrayIndexKey": "off",
-        "noAssignInExpressions": "warn",
+        "noAssignInExpressions": "off",
         "noExplicitAny": "warn",
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noDocumentCookie": "off"
+      },
+      "performance": {
+        "noImgElement": "off"
       }
     }
   },

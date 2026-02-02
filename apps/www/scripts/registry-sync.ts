@@ -9,7 +9,7 @@ interface RegistryItem {
   dependencies?: string[];
   files?: Array<{ path: string; target?: string; type: string }>;
   categories?: string[];
-  meta?: Object
+  meta?: Record<string, string>
 }
 
 interface PublicRegistryItem {
