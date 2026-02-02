@@ -1,10 +1,9 @@
 "use client";
 
 import { NumberField as BaseNumberField } from "@base-ui/react/number-field";
+import { cn } from "@lumi-ui/ui/lib/utils";
 import { Minus, Plus } from "lucide-react";
 import type * as React from "react";
-
-import { cn } from "@lumi-ui/ui/lib/utils";
 
 const NumberFieldRoot = ({
   className,
@@ -38,8 +37,8 @@ const NumberFieldInput = ({
   <BaseNumberField.Input
     className={cn(
       "tabular-nums outline-none",
-     "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
-     "aria-invalid:outline aria-invalid:outline-destructive/80 aria-invalid:ring-4 aria-invalid:ring-destructive/20",
+      "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
+      "aria-invalid:outline aria-invalid:outline-destructive/80 aria-invalid:ring-4 aria-invalid:ring-destructive/20",
       className,
     )}
     data-slot="number-field-input"
@@ -114,6 +113,7 @@ function CursorGrowIcon(props: React.ComponentProps<"svg">) {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
+      <title>cursor icon</title>
       <path d="M19.5 5.5L6.49737 5.51844V2L1 6.9999L6.5 12L6.49737 8.5L19.5 8.5V12L25 6.9999L19.5 2V5.5Z" />
     </svg>
   );
@@ -146,43 +146,41 @@ function NumberField({
 }: React.ComponentProps<typeof BaseNumberField.Root>) {
   return (
     <BaseNumberField.Root
-      data-slot="number-field"
       className="flex flex-col gap-2 data-[disabled]:opacity-50  data-[disabled]:pointer-events-none"
+      data-slot="number-field"
       {...props}
     >
       {children}
       <BaseNumberField.Group
-        data-slot="number-field-group"
         className={cn(
           "flex h-9 w-full overflow-hidden rounded-md border border-input bg-transparent shadow-xs",
           "data-[invalid]:border-destructive data-[invalid]:ring-destructive/20",
         )}
-        
+        data-slot="number-field-group"
       >
         <BaseNumberField.Decrement
-          data-slot="number-field-decrement"
           className={cn(
             "flex items-center justify-center shrink-0 h-full aspect-square",
             "border-r border-input bg-input/60 text-foreground",
             "transition-colors hover:bg-input",
             "data-[disabled]:bg-transparent",
           )}
+          data-slot="number-field-decrement"
         >
           <Minus className="size-4" />
         </BaseNumberField.Decrement>
         <BaseNumberField.Input
-          data-slot="number-field-input"
           className="flex-1 min-w-0 px-2.5 text-center text-sm tabular-nums outline-none rounded-xs placeholder:text-muted-foreground focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/80 data-[invalid]:border-destructive/30 data-[invalid]:ring-1 data-[invalid]:ring-destructive/10 data-[invalid]:ring-offset-1 data-[invalid]:ring-offset-destructive/5"
-
+          data-slot="number-field-input"
         />
         <BaseNumberField.Increment
-          data-slot="number-field-increment"
           className={cn(
             "flex items-center justify-center shrink-0 h-full aspect-square",
             "border-l border-input bg-input/60 text-foreground",
             "transition-colors hover:bg-input",
             "data-[disabled]:bg-transparent",
           )}
+          data-slot="number-field-increment"
         >
           <Plus className="size-4" />
         </BaseNumberField.Increment>
