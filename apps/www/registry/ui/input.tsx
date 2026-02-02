@@ -6,8 +6,8 @@ import { cn } from "@/registry/lib/utils";
 
 const inputVariants = cva(
   [
-    "bg-transparent w-full min-w-0 rounded-md shadow-sm border border-input cursor-text transition-[color,box-shadow,border,ring] appearance-none duration-150 px-3",
-    "placeholder:text-muted-foreground",
+    "bg-transparent w-full min-w-0 rounded-md shadow-sm text-sm border border-input cursor-text transition-[color,box-shadow,border,ring] appearance-none duration-150",
+    "placeholder:text-muted-foreground placeholder:text-sm",
     "file:text-foreground file:inline-flex file:items-center file:h-full file:border-0 file:bg-transparent file:text-sm file:font-medium",
     // focus state
     "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
@@ -25,9 +25,9 @@ const inputVariants = cva(
     },
     variants: {
       inputSize: {
-        default: "h-9 py-1.5 text-base md:text-sm",
-        lg: "h-10 py-2 text-base md:text-sm",
-        sm: "h-8 py-1 text-sm",
+        default: "h-9 py-1.5 px-2.5",
+        lg: "h-10 py-2 px-3",
+        sm: "h-8 py-1 px-2",
       },
       variant: {
         default: "dark:bg-input/30",

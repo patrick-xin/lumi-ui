@@ -1,0 +1,61 @@
+---
+title: Basic Usage
+description: Building accessible forms with constraint validation, accessible labels, and seamless integration with Base UI components.
+---
+
+<ComponentPreview name="form-integration" />
+
+## About
+This form implementation is built on top of Base UI Form and Base UI Field. It leverages the native Constraint Validation API, meaning you can often build robust forms without needing external libraries like React Hook Form or Zod, though they are fully supported.
+
+## Anatomy
+```tsx
+<Form>
+  <Field>
+    <FieldLabel /> 
+    <FieldControl />
+    <FieldDescription />
+    <FieldError />
+  </Field>
+  <Button type="submit"/>
+</Form>
+```
+
+## Basic Usage
+```tsx
+import { Button } from "@/components/ui/button";
+import {
+  Field,
+  FieldControl,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from "@/components/ui/field";
+import { Form } from "@/components/ui/form";
+
+export const BasicForm = () => {
+  return (
+    <Form onFormSubmit={(value) => console.log(value)}>
+      <Field name="username">
+        <FieldLabel>Username</FieldLabel>
+        <FieldControl minLength={3} required />
+        <FieldDescription>Public display name.</FieldDescription>
+        <FieldError />
+      </Field>
+      <Button>Submit</Button>
+    </Form>
+  );
+};
+```
+
+### With Select
+<ComponentPreview name="select-form" />
+
+### With Autocomplete
+<ComponentPreview name="autocomplete-form" />
+
+### With Combobox
+<ComponentPreview name="combobox-form" />
+
+## Integration with React Hook Form
+See [Form Integration with React Hook Form](/docs/guides/forms/rhf).

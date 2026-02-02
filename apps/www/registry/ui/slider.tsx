@@ -86,13 +86,18 @@ function SliderThumb({
   );
 }
 
+type SliderProps = React.ComponentProps<typeof BaseSlider.Root> & {
+  inputRef?: React.Ref<HTMLInputElement>;
+};
+
 function Slider({
   className,
   defaultValue,
   value,
   children,
+  inputRef,
   ...props
-}: React.ComponentProps<typeof BaseSlider.Root>) {
+}: SliderProps) {
   const thumbCount = React.useMemo(() => {
     const valueToInspect = value ?? defaultValue;
     if (Array.isArray(valueToInspect)) return valueToInspect.length;
@@ -133,11 +138,12 @@ function Slider({
           {Array.from({ length: thumbCount }, (_, i) => (
             <BaseSlider.Thumb
               className={cn(
-                "outline-border ring-ring/50 block size-4 shrink-0 rounded-full border bg-white transition-[color,box-shadow] hover:ring-4 disabled:pointer-events-none disabled:opacity-50",
-                "has-[:focus-visible]:ring-4 focus-visible:outline-primary",
+                "outline-border ring-ring/50 block size-4 shrink-0 rounded-full bg-white transition-[color,box-shadow] hover:ring-4 disabled:pointer-events-none disabled:opacity-50",
+                "has-[:focus-visible]:ring-4 focus-visible:outline-border",
               )}
               data-slot="slider-thumb"
               index={i}
+              inputRef={i === 0 ? inputRef : undefined}
               key={i}
             />
           ))}

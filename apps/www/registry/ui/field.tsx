@@ -3,8 +3,8 @@
 import { Field as BaseField } from "@base-ui/react/field";
 import type { VariantProps } from "class-variance-authority";
 import type * as React from "react";
-import { inputVariants } from "@/registry/ui/input";
 import { cn } from "@/registry/lib/utils";
+import { inputVariants } from "@/registry/ui/input";
 
 function Field({
   className,
@@ -13,8 +13,10 @@ function Field({
   return (
     <BaseField.Root
       className={cn(
-        "group relative flex flex-col gap-3",
-        "has-[[data-slot=checkbox]]:flex-row has-[[data-slot=checkbox]]:gap-2",
+        "group relative flex flex-col gap-2",
+        "has-[[data-slot=checkbox]]:flex-row has-[[data-slot=checkbox]]:items-center has-[[data-slot=checkbox]]:flex-wrap",
+        "has-[[data-slot=radio]]:flex-row has-[[data-slot=radio]]:items-center has-[[data-slot=radio]]:flex-wrap",
+        "has-[[data-slot=switch]]:flex-row has-[[data-slot=switch]]:items-center has-[[data-slot=switch]]:flex-wrap",
         className,
       )}
       data-slot="field"
@@ -30,10 +32,12 @@ function FieldLabel({
   return (
     <BaseField.Label
       className={cn(
-        "inline-flex items-center gap-2 text-sm leading-none font-medium select-none transition-colors",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "inline-flex items-start gap-2 text-sm leading-none font-medium select-none transition-colors",
+        "data-[disabled]:opacity-50",
         "data-[invalid]:text-destructive",
-        "group-has-required:after:content-['*'] group-has-required:after:text-destructive group-has-required:after:-ml-0.5 group-has-required:pointer-events-none",
+        "group-has-required:after:content-['*'] group-has-required:after:text-destructive group-has-required:after:-ml-0.5",
+        "aria-required:after:content-['*'] aria-required:after:text-destructive aria-required:after:-ml-0.5",
+        "[&_[data-slot=checkbox]]:-mt-px [&_[data-slot=switch]]:-mt-0.5",
         className,
       )}
       data-slot="field-label"

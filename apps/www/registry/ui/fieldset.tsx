@@ -2,9 +2,8 @@
 
 import { Fieldset as BaseFieldset } from "@base-ui/react/fieldset";
 import type * as React from "react";
-import { Separator } from "@/registry/ui/separator";
-
 import { cn } from "@/registry/lib/utils";
+import { Separator } from "@/registry/ui/separator";
 
 function Fieldset({
   className,

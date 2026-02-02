@@ -12,15 +12,15 @@ export default function ExampleCheckboxGroup() {
 
   return (
     <CheckboxGroup
-      aria-labelledby={id}
-      value={value}
-      onValueChange={setValue}
       allValues={fruits}
+      aria-labelledby={id}
+      onValueChange={setValue}
       style={{ marginLeft: "1rem" }}
+      value={value}
     >
       <Label
-        id={id}
         className="flex items-center gap-2"
+        id={id}
         style={{ marginLeft: "-1rem" }}
       >
         <CheckboxGroupItem name="apples" parent />
