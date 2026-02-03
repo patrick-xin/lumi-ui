@@ -1,5 +1,5 @@
 ---
-title: Basic Usage
+title: Base UI
 description: Building accessible forms with constraint validation, accessible labels, and seamless integration with Base UI components.
 ---
 
@@ -45,8 +45,13 @@ export const BasicForm = () => {
       <Button>Submit</Button>
     </Form>
   );
-};
 ```
+
+## Build Individual Component
+Pass the name prop to `<FieldRoot>` to include the wrapped control's value when a parent form is submitted
+
+### With Input
+<ComponentPreview name="input-with-form" />
 
 ### With Select
 <ComponentPreview name="select-form" />
@@ -56,6 +61,30 @@ export const BasicForm = () => {
 
 ### With Combobox
 <ComponentPreview name="combobox-form" />
+
+### With Radio Group
+<ComponentPreview name="radio-with-fieldset-field" />
+
+### With Checkbox Group
+<ComponentPreview name="checkbox-group-form" />
+
+### With Checkbox
+<ComponentPreview name="checkbox-form" />
+
+### With Slider
+<ComponentPreview name="slider-form" />
+
+### With Switch
+<ComponentPreview name="switch-form" />
+
+### With Number Field
+<ComponentPreview name="number-field-form" />
+
+### Server Actions With Zod
+<ComponentPreview name="form-server-action-zod" />
+
+### Server Actions With Zod Controlled Mode
+<ComponentPreview name="form-server-action-controlled" />
 
 ## Integration with React Hook Form
 See [Form Integration with React Hook Form](/docs/guides/forms/rhf).

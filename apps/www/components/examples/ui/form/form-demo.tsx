@@ -34,11 +34,11 @@ export default function ExampleForm() {
       <Field name="url">
         <FieldLabel>Homepage</FieldLabel>
         <FieldControl
-          type="url"
-          required
           defaultValue="https://example.com"
-          placeholder="https://example.com"
           pattern="https?://.*"
+          placeholder="https://example.com"
+          required
+          type="url"
         />
         <FieldError />
       </Field>

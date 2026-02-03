@@ -1,21 +1,118 @@
 ---
 title: React Hook Form
-description: How to use form components with React Hook Form.
+description: How to use form components with React Hook Form for advanced form handling with validation.
 ---
-
-
 
 <ComponentPreview name="form-rhf" />
 
+## About
+
+React Hook Form (RHF) provides performant, flexible form handling with minimal re-renders. When combined with Zod for schema validation, you get type-safe forms with excellent developer experience.
+
+## Installation
+
+Install the required dependencies:
 
 ```bash
-npx install react-hook-form
-``` 
+npm install react-hook-form zod @hookform/resolvers
+```
 
-### Input
-Inputs are most used components in forms, thus we extract it with RHF for common usage.
+## Anatomy
 
-```tsx title="form-input"
+```tsx
+<FormProvider {...methods}>
+  <Form onSubmit={methods.handleSubmit(onSubmit)}>
+    {/* Option 1: Pre-built FormInput component */}
+    <FormInput name="fieldName" label="Label" />
+    
+    {/* Option 2: Custom Controller wrapper */}
+    <Controller
+      control={methods.control}
+      name="fieldName"
+      render={({ field, fieldState }) => (
+        <Field invalid={fieldState.invalid}>
+          <FieldLabel>Label</FieldLabel>
+          <CustomComponent {...field} />
+          <FieldError match={!!fieldState.error}>
+            {fieldState.error?.message}
+          </FieldError>
+        </Field>
+      )}
+    />
+  </Form>
+</FormProvider>
+```
+
+## Basic Usage
+
+### 1. Define Schema
+
+Use Zod to define your form schema with validation rules:
+
+```tsx
+import { z } from "zod";
+
+export const formSchema = z.object({
+  projectName: z
+    .string()
+    .min(5, "Project name must be at least 5 characters")
+    .max(100, "Project name must be at most 100 characters"),
+  email: z.string().email("Invalid email address"),
+  priority: z.enum(["low", "medium", "high"]),
+  budget: z.number().min(0).optional(),
+  services: z.array(z.string()).min(1, "Select at least one service"),
+  acceptTerms: z.boolean().refine((val) => val === true, {
+    message: "You must accept the terms",
+  }),
+});
+
+export type FormValues = z.infer<typeof formSchema>;
+```
+
+### 2. Initialize Form
+
+Set up React Hook Form with Zod resolver:
+
+```tsx
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
+import { Form } from "@/components/ui/form";
+import { formSchema, type FormValues } from "./schema";
+
+export function MyForm() {
+  const methods = useForm<FormValues>({
+    defaultValues: {
+      projectName: "",
+      email: "",
+      priority: "medium",
+      budget: undefined,
+      services: [],
+      acceptTerms: false,
+    },
+    resolver: zodResolver(formSchema),
+  });
+
+  const onSubmit = (data: FormValues) => {
+    console.log(data);
+  };
+
+  return (
+    <FormProvider {...methods}>
+      <Form onSubmit={methods.handleSubmit(onSubmit)}>
+        {/* Form fields go here */}
+      </Form>
+    </FormProvider>
+  );
+}
+```
+
+## FormInput Component
+
+For simple inputs (text, email, password, textarea), use the pre-built `FormInput` component:
+
+```tsx title="components/form-input.tsx"
 "use client";
 
 import type * as React from "react";
@@ -46,9 +143,10 @@ type FormInputProps<T extends FieldValues> = Omit<
   className?: string;
   controlClassName?: string;
   multiline?: boolean;
+  isRequired?: boolean;
 };
 
-const FormInput = <T extends FieldValues>({
+export function FormInput<T extends FieldValues>({
   name,
   label,
   placeholder,
@@ -57,9 +155,10 @@ const FormInput = <T extends FieldValues>({
   variant,
   className,
   controlClassName,
+  isRequired = false,
   multiline = false,
   ...props
-}: FormInputProps<T>) => {
+}: FormInputProps<T>) {
   const { control } = useFormContext<T>();
 
   return (
@@ -78,7 +177,9 @@ const FormInput = <T extends FieldValues>({
           touched={isTouched}
         >
           {label && (
-            <FieldLabel aria-required={!!rules?.required}>{label}</FieldLabel>
+            <FieldLabel aria-required={!!rules?.required || isRequired}>
+              {label}
+            </FieldLabel>
           )}
           <FieldControl
             className={controlClassName}
@@ -101,12 +202,672 @@ const FormInput = <T extends FieldValues>({
       rules={rules}
     />
   );
-};
-
-export { FormInput };
+}
 ```
 
-### Without Zod
-Pass `rules` to individual field.
+### Using FormInput
 
-### With Zod
+```tsx
+import { FormInput } from "@/components/form-input";
+
+// Inside your form component:
+<FormInput<FormValues>
+  name="projectName"
+  label="Project Name"
+  description="A short name for your project"
+  placeholder="My Awesome Project"
+  isRequired
+/>
+
+<FormInput<FormValues>
+  name="email"
+  label="Email Address"
+  type="email"
+  placeholder="you@example.com"
+/>
+
+<FormInput<FormValues>
+  name="description"
+  label="Description"
+  multiline
+  placeholder="Tell us about your project..."
+/>
+```
+
+## Custom Controller Pattern
+
+For complex components (Select, Autocomplete, Combobox, etc.), wrap them with Controller:
+
+### Generic Pattern
+
+```tsx
+<Controller
+  control={methods.control}
+  name="fieldName"
+  render={({
+    field: { ref, name, value, onBlur, onChange },
+    fieldState: { invalid, isTouched, isDirty, error },
+  }) => (
+    <Field
+      dirty={isDirty}
+      invalid={invalid}
+      name={name}
+      touched={isTouched}
+    >
+      <FieldLabel>Label</FieldLabel>
+      {/* Your component here */}
+      <FieldError match={!!error}>{error?.message}</FieldError>
+    </Field>
+  )}
+/>
+```
+
+### Field State Props
+
+When using Controller, pass these props to `Field`:
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `dirty` | `boolean` | Field value has been modified |
+| `invalid` | `boolean` | Field has validation errors |
+| `touched` | `boolean` | Field has been focused and blurred |
+| `name` | `string` | Field name for accessibility |
+
+### Select Example
+
+```tsx
+import { Controller } from "react-hook-form";
+import {
+  Select,
+  SelectContent,
+  SelectItemContent,
+  SelectTriggerGroup,
+} from "@/components/ui/select";
+
+<Controller
+  control={methods.control}
+  name="priority"
+  render={({
+    field: { ref, name, value, onBlur, onChange },
+    fieldState: { invalid, isTouched, isDirty, error },
+  }) => (
+    <Field
+      dirty={isDirty}
+      invalid={invalid}
+      name={name}
+      touched={isTouched}
+    >
+      <FieldLabel aria-required>Priority</FieldLabel>
+      <Select
+        inputRef={ref}
+        items={[
+          { label: "Low", value: "low" },
+          { label: "Medium", value: "medium" },
+          { label: "High", value: "high" },
+        ]}
+        onValueChange={onChange}
+        value={value}
+      >
+        <SelectTriggerGroup
+          className="w-48"
+          onBlur={onBlur}
+          placeholder="Select priority"
+        />
+        <SelectContent>
+          <SelectItemContent value="low">Low</SelectItemContent>
+          <SelectItemContent value="medium">Medium</SelectItemContent>
+          <SelectItemContent value="high">High</SelectItemContent>
+        </SelectContent>
+      </Select>
+      <FieldError match={!!error}>{error?.message}</FieldError>
+    </Field>
+  )}
+/>
+```
+
+### Autocomplete Example
+
+```tsx
+import { Controller } from "react-hook-form";
+import {
+  Autocomplete,
+  AutocompleteContent,
+  AutocompleteEmpty,
+  AutocompleteInputGroup,
+  AutocompleteItem,
+  AutocompleteList,
+} from "@/components/ui/autocomplete";
+
+<Controller
+  control={methods.control}
+  name="framework"
+  render={({
+    field: { ref, name, value, onBlur, onChange },
+    fieldState: { invalid, isTouched, isDirty, error },
+  }) => (
+    <Field
+      dirty={isDirty}
+      invalid={invalid}
+      name={name}
+      touched={isTouched}
+    >
+      <Autocomplete
+        items={FRAMEWORKS}
+        itemToStringValue={(item) => item.name}
+        mode="both"
+        onValueChange={onChange}
+        value={value}
+      >
+        <FieldLabel>Preferred Framework</FieldLabel>
+        <AutocompleteInputGroup
+          className="w-80"
+          onBlur={onBlur}
+          placeholder="e.g. Next.js"
+          ref={ref}
+        />
+        <AutocompleteContent>
+          <AutocompleteEmpty>No frameworks found.</AutocompleteEmpty>
+          <AutocompleteList>
+            {(item) => (
+              <AutocompleteItem key={item.id} value={item}>
+                {item.name}
+              </AutocompleteItem>
+            )}
+          </AutocompleteList>
+        </AutocompleteContent>
+      </Autocomplete>
+      <FieldError match={!!error}>{error?.message}</FieldError>
+    </Field>
+  )}
+/>
+```
+
+### Number Field Example
+
+```tsx
+import { Controller } from "react-hook-form";
+import { NumberField } from "@/components/ui/number-field";
+
+<Controller
+  control={methods.control}
+  name="budget"
+  render={({
+    field: { ref, name, value, onBlur, onChange },
+    fieldState: { invalid, isTouched, isDirty, error },
+  }) => (
+    <Field
+      dirty={isDirty}
+      invalid={invalid}
+      name={name}
+      touched={isTouched}
+    >
+      <FieldLabel>Budget ($1000s)</FieldLabel>
+      <NumberField
+        inputRef={ref}
+        max={100}
+        min={1}
+        onBlur={onBlur}
+        onValueChange={onChange}
+        value={value}
+      />
+      <FieldError match={!!error}>{error?.message}</FieldError>
+    </Field>
+  )}
+/>
+```
+
+### Slider (Range) Example
+
+```tsx
+import { Controller } from "react-hook-form";
+import { Slider, SliderValue } from "@/components/ui/slider";
+import { Fieldset, FieldsetLegend } from "@/components/ui/fieldset";
+
+<Controller
+  control={methods.control}
+  name="budgetRange"
+  render={({
+    field: { ref, name, value, onBlur, onChange },
+    fieldState: { invalid, isTouched, isDirty, error },
+  }) => (
+    <Field
+      dirty={isDirty}
+      invalid={invalid}
+      name={name}
+      touched={isTouched}
+    >
+      <Fieldset>
+        <FieldsetLegend>Budget Range</FieldsetLegend>
+        <Slider
+          inputRef={ref}
+          max={100}
+          min={1}
+          onBlur={onBlur}
+          onValueChange={onChange}
+          step={1}
+          thumbAlignment="edge"
+          value={value}
+        >
+          <SliderValue>
+            {(_, values) => `$${values[0]}k - $${values[1]}k`}
+          </SliderValue>
+        </Slider>
+      </Fieldset>
+      <FieldError match={!!error}>{error?.message}</FieldError>
+    </Field>
+  )}
+/>
+```
+
+### Radio Group Example
+
+```tsx
+import { Controller } from "react-hook-form";
+import { Radio, RadioGroup } from "@/components/ui/radio";
+import { FieldItem } from "@/components/ui/field";
+import { Fieldset, FieldsetLegend } from "@/components/ui/fieldset";
+
+<Controller
+  control={methods.control}
+  name="priority"
+  render={({
+    field: { ref, name, value, onBlur, onChange },
+    fieldState: { invalid, isTouched, isDirty, error },
+  }) => (
+    <Field
+      dirty={isDirty}
+      invalid={invalid}
+      name={name}
+      touched={isTouched}
+    >
+      <Fieldset
+        render={
+          <RadioGroup
+            inputRef={ref}
+            onValueChange={onChange}
+            value={value}
+          />
+        }
+      >
+        <FieldsetLegend>Priority</FieldsetLegend>
+        <div className="flex gap-3">
+          <FieldItem>
+            <FieldLabel>
+              <Radio onBlur={onBlur} value="low" />
+              Low
+            </FieldLabel>
+          </FieldItem>
+          <FieldItem>
+            <FieldLabel>
+              <Radio onBlur={onBlur} value="medium" />
+              Medium
+            </FieldLabel>
+          </FieldItem>
+          <FieldItem>
+            <FieldLabel>
+              <Radio onBlur={onBlur} value="high" />
+              High
+            </FieldLabel>
+          </FieldItem>
+        </div>
+      </Fieldset>
+      <FieldError match={!!error}>{error?.message}</FieldError>
+    </Field>
+  )}
+/>
+```
+
+### Checkbox Group Example
+
+```tsx
+import { Controller } from "react-hook-form";
+import { Checkbox } from "@/components/ui/checkbox";
+import { CheckboxGroup } from "@/components/ui/checkbox-group";
+
+<Controller
+  control={methods.control}
+  name="services"
+  render={({
+    field: { ref, name, value, onBlur, onChange },
+    fieldState: { invalid, isTouched, isDirty, error },
+  }) => (
+    <Field
+      dirty={isDirty}
+      invalid={invalid}
+      name={name}
+      touched={isTouched}
+    >
+      <Fieldset
+        render={<CheckboxGroup onValueChange={onChange} value={value} />}
+      >
+        <FieldsetLegend>Services</FieldsetLegend>
+        <div className="grid grid-cols-2 gap-3">
+          {[
+            { id: "design", label: "UI/UX Design" },
+            { id: "seo", label: "SEO Setup" },
+            { id: "analytics", label: "Analytics" },
+          ].map((s) => (
+            <FieldItem key={s.id}>
+              <FieldLabel>
+                <Checkbox onBlur={onBlur} value={s.id} />
+                {s.label}
+              </FieldLabel>
+            </FieldItem>
+          ))}
+        </div>
+      </Fieldset>
+      <FieldError match={!!error}>{error?.message}</FieldError>
+    </Field>
+  )}
+/>
+```
+
+### Switch Example
+
+```tsx
+import { Controller } from "react-hook-form";
+import { Switch } from "@/components/ui/switch";
+
+<Controller
+  control={methods.control}
+  name="acceptTerms"
+  render={({
+    field: { ref, name, value, onBlur, onChange },
+    fieldState: { invalid, isTouched, isDirty, error },
+  }) => (
+    <Field
+      dirty={isDirty}
+      invalid={invalid}
+      name={name}
+      touched={isTouched}
+    >
+      <FieldLabel className="flex items-center justify-between rounded-lg border p-3">
+        <span className="flex flex-col">
+          <span className="font-medium">Accept Terms</span>
+          <span className="text-sm text-muted-foreground">
+            I agree to the terms and conditions
+          </span>
+        </span>
+        <Switch
+          checked={value}
+          inputRef={ref}
+          onBlur={onBlur}
+          onCheckedChange={onChange}
+        />
+      </FieldLabel>
+      <FieldError match={!!error}>{error?.message}</FieldError>
+    </Field>
+  )}
+/>
+```
+
+## Complete Working Example
+
+Here's a complete form combining multiple components:
+
+```tsx
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import {
+  Field,
+  FieldError,
+  FieldItem,
+  FieldLabel,
+} from "@/components/ui/field";
+import { Fieldset, FieldsetLegend } from "@/components/ui/fieldset";
+import { Form } from "@/components/ui/form";
+import { Radio, RadioGroup } from "@/components/ui/radio";
+import {
+  Select,
+  SelectContent,
+  SelectItemContent,
+  SelectTriggerGroup,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { FormInput } from "@/components/form-input";
+
+const schema = z.object({
+  projectName: z.string().min(3, "Project name must be at least 3 characters"),
+  email: z.string().email("Invalid email address"),
+  priority: z.enum(["low", "medium", "high"]),
+  status: z.enum(["active", "inactive"]),
+  notifications: z.boolean(),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+export function ProjectForm() {
+  const methods = useForm<FormValues>({
+    defaultValues: {
+      projectName: "",
+      email: "",
+      priority: "medium",
+      status: "active",
+      notifications: true,
+    },
+    resolver: zodResolver(schema),
+  });
+
+  const onSubmit = (data: FormValues) => {
+    console.log("Form submitted:", data);
+  };
+
+  return (
+    <FormProvider {...methods}>
+      <Form
+        onSubmit={methods.handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 w-full max-w-md"
+      >
+        {/* Simple inputs with FormInput */}
+        <FormInput<FormValues>
+          name="projectName"
+          label="Project Name"
+          placeholder="Enter project name"
+          isRequired
+        />
+
+        <FormInput<FormValues>
+          name="email"
+          label="Email"
+          type="email"
+          placeholder="you@example.com"
+          isRequired
+        />
+
+        {/* Select with Controller */}
+        <Controller
+          control={methods.control}
+          name="priority"
+          render={({
+            field: { ref, name, value, onBlur, onChange },
+            fieldState: { invalid, isTouched, isDirty, error },
+          }) => (
+            <Field
+              dirty={isDirty}
+              invalid={invalid}
+              name={name}
+              touched={isTouched}
+            >
+              <FieldLabel aria-required>Priority</FieldLabel>
+              <Select
+                inputRef={ref}
+                items={[
+                  { label: "Low", value: "low" },
+                  { label: "Medium", value: "medium" },
+                  { label: "High", value: "high" },
+                ]}
+                onValueChange={onChange}
+                value={value}
+              >
+                <SelectTriggerGroup
+                  className="w-full"
+                  onBlur={onBlur}
+                  placeholder="Select priority"
+                />
+                <SelectContent>
+                  <SelectItemContent value="low">Low</SelectItemContent>
+                  <SelectItemContent value="medium">Medium</SelectItemContent>
+                  <SelectItemContent value="high">High</SelectItemContent>
+                </SelectContent>
+              </Select>
+              <FieldError match={!!error}>{error?.message}</FieldError>
+            </Field>
+          )}
+        />
+
+        {/* Radio Group with Controller */}
+        <Controller
+          control={methods.control}
+          name="status"
+          render={({
+            field: { ref, name, value, onBlur, onChange },
+            fieldState: { invalid, isTouched, isDirty, error },
+          }) => (
+            <Field
+              dirty={isDirty}
+              invalid={invalid}
+              name={name}
+              touched={isTouched}
+            >
+              <Fieldset
+                render={
+                  <RadioGroup
+                    inputRef={ref}
+                    onValueChange={onChange}
+                    value={value}
+                  />
+                }
+              >
+                <FieldsetLegend>Status</FieldsetLegend>
+                <div className="flex gap-4">
+                  <FieldItem>
+                    <FieldLabel>
+                      <Radio onBlur={onBlur} value="active" />
+                      Active
+                    </FieldLabel>
+                  </FieldItem>
+                  <FieldItem>
+                    <FieldLabel>
+                      <Radio onBlur={onBlur} value="inactive" />
+                      Inactive
+                    </FieldLabel>
+                  </FieldItem>
+                </div>
+              </Fieldset>
+              <FieldError match={!!error}>{error?.message}</FieldError>
+            </Field>
+          )}
+        />
+
+        {/* Switch with Controller */}
+        <Controller
+          control={methods.control}
+          name="notifications"
+          render={({
+            field: { ref, name, value, onBlur, onChange },
+            fieldState: { invalid, isTouched, isDirty, error },
+          }) => (
+            <Field
+              dirty={isDirty}
+              invalid={invalid}
+              name={name}
+              touched={isTouched}
+            >
+              <FieldLabel className="flex items-center justify-between rounded-lg border p-3">
+                <span className="flex flex-col">
+                  <span className="font-medium">Enable Notifications</span>
+                  <span className="text-sm text-muted-foreground">
+                    Receive email updates
+                  </span>
+                </span>
+                <Switch
+                  checked={value}
+                  inputRef={ref}
+                  onBlur={onBlur}
+                  onCheckedChange={onChange}
+                />
+              </FieldLabel>
+              <FieldError match={!!error}>{error?.message}</FieldError>
+            </Field>
+          )}
+        />
+
+        <Button type="submit" className="mt-4">
+          Submit
+        </Button>
+      </Form>
+    </FormProvider>
+  );
+}
+```
+
+## FieldError Match Prop
+
+The `FieldError` component conditionally displays errors using the `match` prop:
+
+```tsx
+// Show error only when there's an error object
+<FieldError match={!!error}>{error?.message}</FieldError>
+
+// Show error for specific validation types
+<FieldError match="valueMissing">This field is required</FieldError>
+<FieldError match="typeMismatch">Invalid format</FieldError>
+<FieldError match="tooShort">Value is too short</FieldError>
+```
+
+## Validation Modes
+
+Control when validation runs by setting the mode in `useForm`:
+
+```tsx
+const methods = useForm<FormValues>({
+  mode: "onChange",    // Validate on every change
+  mode: "onBlur",      // Validate on blur
+  mode: "onSubmit",    // Validate on submit only (default)
+  mode: "all",         // Validate on change, blur, and submit
+  mode: "onTouched",   // Validate on touched
+  reValidateMode: "onChange", // Re-validation mode after submit
+  reValidateMode:"onBlur" // Re-validation mode onBlur
+  reValidateMode:"onSubmit" // Re-validation mode onSubmit
+  resolver: zodResolver(schema),
+});
+```
+
+## Accessing Form State
+
+React Hook Form provides methods to access form state:
+
+```tsx
+const { 
+  formState: { errors, isDirty, isValid, isSubmitting },
+  watch,
+  setValue,
+  reset,
+  trigger,  // Manually trigger validation
+} = methods;
+
+// Watch a specific field
+const projectName = watch("projectName");
+
+// Programmatically set a value
+setValue("priority", "high");
+
+// Reset form to default values
+reset();
+
+// Check if form is valid
+console.log(isValid);
+```
+
+## Tips
+
+1. **Always pass `inputRef`** to custom components for proper focus management
+2. **Use `onBlur`** from field to trigger blur validation
+3. **Use `aria-required`** on `FieldLabel` when field is required
+4. **Use `FormProvider`** to access form methods in child components via `useFormContext`
+5. **FieldItem** is useful for `Checkbox`/`Radio` layouts to properly align labels
+6. **Fieldset** groups related fields like `RadioGroup` or `CheckboxGroup` with a legend

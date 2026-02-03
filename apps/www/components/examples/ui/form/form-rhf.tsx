@@ -67,7 +67,7 @@ export const formSchema = z.object({
     .max(100, "Project name must be <= 100 characters"),
   projectType: z.string().min(1, "Project type is required"),
   requireNda: z.boolean(),
-  timeline: z.number().int().min(2).max(20).nullable(),
+  timeline: z.number().int().min(1).max(20).nullable(),
 });
 
 export type FormValues = z.infer<typeof formSchema>;
@@ -78,7 +78,7 @@ export const FormWithRHF = () => {
       additionalServices: [],
       budgetRange: [5, 20],
       description: "",
-      location: { id: "san-francisco", name: "San Francisco, CA" },
+      location: { id: "", name: "" },
       primaryTechStack: "",
       priority: "speed",
       projectName: "",
@@ -87,6 +87,7 @@ export const FormWithRHF = () => {
       timeline: null,
     },
     resolver: zodResolver(formSchema),
+    reValidateMode: "onSubmit",
   });
   async function submitForm(data: FormValues) {
     toast.add({
@@ -152,7 +153,7 @@ export const FormWithRHF = () => {
                   onValueChange={onChange}
                   value={value}
                 >
-                  <FieldLabel>Preferred Framework</FieldLabel>
+                  <FieldLabel aria-required>Preferred Framework</FieldLabel>
                   <AutocompleteInputGroup
                     className="w-full sm:w-64"
                     onBlur={onBlur}
@@ -247,7 +248,7 @@ export const FormWithRHF = () => {
                 name={name}
                 touched={isTouched}
               >
-                <FieldLabel>Type</FieldLabel>
+                <FieldLabel aria-required>Type</FieldLabel>
                 <Select
                   inputRef={ref}
                   items={PROJECT_TYPES}
@@ -291,7 +292,7 @@ export const FormWithRHF = () => {
                 <NumberField
                   inputRef={ref}
                   max={20}
-                  min={2}
+                  min={1}
                   onBlur={onBlur}
                   onValueChange={onChange}
                   value={value}

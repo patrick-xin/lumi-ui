@@ -21,7 +21,7 @@ export function SelectFormDemo() {
     <Form
       aria-label="Select form"
       onFormSubmit={(values) =>
-        toast.add({
+        toast.success({
           description: JSON.stringify(values),
           title: "Form submitted",
         })

@@ -42,6 +42,7 @@ const FormInput = <T extends FieldValues>({
   controlClassName,
   isRequired = false,
   multiline = false,
+
   ...props
 }: FormInputProps<T>) => {
   const { control } = useFormContext<T>();

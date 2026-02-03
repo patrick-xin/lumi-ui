@@ -159,7 +159,7 @@ export function ProjectQuoteForm() {
         </Field>
         <Field className="col-span-1 w-32" name="timelineWeeks">
           <FieldLabel>Timeline (Weeks)</FieldLabel>
-          <NumberField defaultValue={4} max={52} min={1} required />
+          <NumberField defaultValue={undefined} max={20} min={1} required />
           <FieldError />
         </Field>
       </div>

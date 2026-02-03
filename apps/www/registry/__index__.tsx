@@ -3346,6 +3346,60 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "form-server-action-controlled": {
+    name: "form-server-action-controlled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["form"],
+    files: [{
+      path: "components/examples/ui/form/form-server-action-controlled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/form/form-server-action-controlled");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "form-server-action-controlled";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "form-server-action-zod": {
+    name: "form-server-action-zod",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["form"],
+    files: [{
+      path: "components/examples/ui/form/form-server-action-zod.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/form/form-server-action-zod");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "form-server-action-zod";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "form-zod": {
+    name: "form-zod",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["form"],
+    files: [{
+      path: "components/examples/ui/form/form-zod.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/form/form-zod");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "form-zod";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "highlight-comparison": {
     name: "highlight-comparison",
     description: "",
@@ -4547,6 +4601,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/slider/slider-edge");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "slider-edge";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "slider-form": {
+    name: "slider-form",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["slider"],
+    files: [{
+      path: "components/examples/ui/slider/slider-form.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/slider/slider-form");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "slider-form";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
