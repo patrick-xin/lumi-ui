@@ -1,0 +1,90 @@
+---
+title: Base UI
+description: Building accessible forms with constraint validation, accessible labels, and seamless integration with Base UI components.
+---
+
+<ComponentPreview name="form-integration" />
+
+## About
+This form implementation is built on top of Base UI Form and Base UI Field. It leverages the native Constraint Validation API, meaning you can often build robust forms without needing external libraries like React Hook Form or Zod, though they are fully supported.
+
+## Anatomy
+```tsx
+<Form>
+  <Field>
+    <FieldLabel /> 
+    <FieldControl />
+    <FieldDescription />
+    <FieldError />
+  </Field>
+  <Button type="submit"/>
+</Form>
+```
+
+## Basic Usage
+```tsx
+import { Button } from "@/components/ui/button";
+import {
+  Field,
+  FieldControl,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from "@/components/ui/field";
+import { Form } from "@/components/ui/form";
+
+export const BasicForm = () => {
+  return (
+    <Form onFormSubmit={(value) => console.log(value)}>
+      <Field name="username">
+        <FieldLabel>Username</FieldLabel>
+        <FieldControl minLength={3} required />
+        <FieldDescription>Public display name.</FieldDescription>
+        <FieldError />
+      </Field>
+      <Button>Submit</Button>
+    </Form>
+  );
+```
+
+## Build Individual Component
+Pass the name prop to `<FieldRoot>` to include the wrapped control's value when a parent form is submitted
+
+### With Input
+<ComponentPreview name="input-with-form" />
+
+### With Select
+<ComponentPreview name="select-form" />
+
+### With Autocomplete
+<ComponentPreview name="autocomplete-form" />
+
+### With Combobox
+<ComponentPreview name="combobox-form" />
+
+### With Radio Group
+<ComponentPreview name="radio-with-fieldset-field" />
+
+### With Checkbox Group
+<ComponentPreview name="checkbox-group-form" />
+
+### With Checkbox
+<ComponentPreview name="checkbox-form" />
+
+### With Slider
+<ComponentPreview name="slider-form" />
+
+### With Switch
+<ComponentPreview name="switch-form" />
+
+### With Number Field
+<ComponentPreview name="number-field-form" />
+
+### Server Actions With Zod
+<ComponentPreview name="form-server-action-zod" />
+
+### Server Actions With Zod Controlled Mode
+<ComponentPreview name="form-server-action-controlled" />
+
+## Integration with React Hook Form
+See [Form Integration with React Hook Form](/docs/guides/forms/rhf).

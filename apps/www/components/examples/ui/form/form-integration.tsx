@@ -1,6 +1,6 @@
 "use client";
 
-import { BookHeart, ChevronsUpDownIcon, X } from "lucide-react";
+import { ChevronsUpDownIcon, X } from "lucide-react";
 import {
   Autocomplete,
   AutocompleteContent,
@@ -47,7 +47,7 @@ export function ProjectQuoteForm() {
   return (
     <Form
       aria-label="Request project quote"
-      className="flex w-fit lg:w-[500px] max-w-lg flex-col gap-6 rounded-md lg:border p-4 lg:p-8 shadow-md"
+      className="w-full max-w-3xl mx-auto flex flex-col gap-6 rounded-md border p-4 sm:p-6 lg:p-8 shadow-md"
       onFormSubmit={(formValues) => {
         toast.add({
           customContent: (
@@ -72,15 +72,11 @@ export function ProjectQuoteForm() {
       </div>
       <Field name="projectName">
         <FieldLabel>Project Title</FieldLabel>
-        <div className="relative">
-          <BookHeart className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
-          <FieldControl
-            className="pl-9"
-            minLength={5}
-            placeholder="e.g. SaaS Dashboard Redesign"
-            required
-          />
-        </div>
+        <FieldControl
+          minLength={5}
+          placeholder="e.g. SaaS Dashboard Redesign"
+          required
+        />
         <FieldDescription>A short name for this project</FieldDescription>
         <FieldError />
       </Field>
@@ -163,7 +159,7 @@ export function ProjectQuoteForm() {
         </Field>
         <Field className="col-span-1 w-32" name="timelineWeeks">
           <FieldLabel>Timeline (Weeks)</FieldLabel>
-          <NumberField defaultValue={4} max={52} min={1} required />
+          <NumberField defaultValue={undefined} max={20} min={1} required />
           <FieldError />
         </Field>
       </div>
@@ -251,7 +247,7 @@ export function ProjectQuoteForm() {
         </FieldLabel>
       </Field>
       <Button className="mt-4 w-full" size="lg" type="submit">
-        Calculate Estimate
+        Submit
       </Button>
     </Form>
   );

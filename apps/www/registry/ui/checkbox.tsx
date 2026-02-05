@@ -13,8 +13,7 @@ function Checkbox({
   return (
     <BaseCheckbox.Root
       className={cn(
-        "peer inline-flex size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow",
-        "border-input dark:bg-input/30",
+        "peer inline-flex size-4 shrink-0 rounded-sm border border-input shadow-xs transition-shadow",
         "data-checked:bg-primary data-checked:text-primary-foreground data-checked:border-primary",
         "data-indeterminate:bg-primary data-indeterminate:text-primary-foreground data-indeterminate:border-primary",
         "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:outline-offset-2 focus-visible:ring-primary/30",

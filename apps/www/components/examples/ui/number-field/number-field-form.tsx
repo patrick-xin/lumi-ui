@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/registry/ui/button";
-import { Checkbox } from "@/registry/ui/checkbox";
 import {
   Field,
   FieldDescription,
@@ -9,12 +8,13 @@ import {
   FieldLabel,
 } from "@/registry/ui/field";
 import { Form } from "@/registry/ui/form";
+import { NumberField } from "@/registry/ui/number-field";
 import { toast } from "@/registry/ui/toast";
 
-export function CheckboxFormDemo() {
+export function NumberFieldDemo() {
   return (
     <Form
-      aria-label="Checkbox form"
+      aria-label="Number field form"
       className="w-64"
       onFormSubmit={(value) =>
         toast.success({
@@ -23,15 +23,13 @@ export function CheckboxFormDemo() {
         })
       }
     >
-      <Field name="terms">
-        <Checkbox required />
-        <FieldLabel>Accept terms and conditions</FieldLabel>
+      <Field name="quantity">
+        <FieldLabel>Quantity</FieldLabel>
+        <NumberField defaultValue={undefined} max={99} min={1} required />
         <FieldDescription>
-          By checking this box, you agree to our terms and conditions
+          Please enter a quantity between 1 and 99
         </FieldDescription>
-        <FieldError match="valueMissing">
-          Please accept the terms and conditions
-        </FieldError>
+        <FieldError />
       </Field>
       <Button type="submit">Submit</Button>
     </Form>

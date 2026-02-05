@@ -12,6 +12,7 @@ export function InputWithFormDemo() {
   const [loading, setLoading] = React.useState(false);
   return (
     <Form
+      aria-label="Input form"
       errors={errors}
       onSubmit={async (event) => {
         event.preventDefault();
@@ -31,11 +32,11 @@ export function InputWithFormDemo() {
       <Field name="url">
         <FieldLabel>Homepage</FieldLabel>
         <Input
-          type="url"
-          required
           defaultValue="https://example.com"
-          placeholder="https://example.com"
           pattern="https?://.*"
+          placeholder="https://example.com"
+          required
+          type="url"
         />
         <FieldError />
       </Field>

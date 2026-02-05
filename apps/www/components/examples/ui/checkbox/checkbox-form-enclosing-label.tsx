@@ -11,10 +11,10 @@ import {
 import { Form } from "@/registry/ui/form";
 import { toast } from "@/registry/ui/toast";
 
-export function CheckboxFormDemo() {
+export function CheckboxEnclosingLabelFormDemo() {
   return (
     <Form
-      aria-label="Checkbox form"
+      aria-label="Checkbox enclosing label form"
       className="w-64"
       onFormSubmit={(value) =>
         toast.success({
@@ -24,8 +24,9 @@ export function CheckboxFormDemo() {
       }
     >
       <Field name="terms">
-        <Checkbox required />
-        <FieldLabel>Accept terms and conditions</FieldLabel>
+        <FieldLabel>
+          <Checkbox required /> Accept terms and conditions
+        </FieldLabel>
         <FieldDescription>
           By checking this box, you agree to our terms and conditions
         </FieldDescription>

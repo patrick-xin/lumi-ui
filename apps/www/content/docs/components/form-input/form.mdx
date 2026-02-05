@@ -36,14 +36,15 @@ Form is composed together with [Field](/docs/components/form-input/field).
 
 ```tsx
 import { Form } from "@/components/ui/form"
-import { Field, FieldLabel, FieldControl, FieldError } from "@/components/ui/field"
+import { Field, FieldLabel, FieldControl, FieldError, FieldDescription } from "@/components/ui/field"
 ```
 
 ```tsx
 <Form>
-  <Field>
-    <FieldLabel />
-    <FieldControl />
+  <Field name="username">
+    <FieldLabel>Username</FieldLabel>
+    <FieldControl required minLength={3} />
+    <FieldDescription>Public display name.</FieldDescription>
     <FieldError />
   </Field>
 </Form>
@@ -53,15 +54,17 @@ import { Field, FieldLabel, FieldControl, FieldError } from "@/components/ui/fie
 ## Cookbook
 
 ### Native Submit
-
 <ComponentPreview name="form-native-submit" />
 
 ### On Form Submit
-
 <ComponentPreview name="form-on-form-submit" />
+
+### With Zod
+<ComponentPreview name="form-zod" />
+
+### With Server Action and Zod
+<ComponentPreview name="form-server-action-zod" />
 
 ### Integration with other components
 
-<ComponentPreview name="form-integration" />
-
-## Integration with React Hook Form (Coming Soon)
+See [Form Guide](/docs/guides/forms/basic) for details.

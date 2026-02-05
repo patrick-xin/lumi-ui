@@ -140,11 +140,16 @@ const NumberFieldScrubArea = ({
   </BaseNumberField.ScrubArea>
 );
 
+type NumberFieldProps = React.ComponentProps<typeof BaseNumberField.Root> & {
+  inputRef?: React.Ref<HTMLInputElement>;
+};
+
 function NumberField({
   className,
   children,
+  inputRef,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.Root>) {
+}: NumberFieldProps) {
   return (
     <BaseNumberField.Root
       className="flex flex-col gap-2 data-[disabled]:opacity-50  data-[disabled]:pointer-events-none"
@@ -171,8 +176,11 @@ function NumberField({
           <Minus className="size-4" />
         </BaseNumberField.Decrement>
         <BaseNumberField.Input
-          className="flex-1 min-w-0 px-2.5 text-center text-sm tabular-nums outline-none rounded-xs placeholder:text-muted-foreground focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/80 data-[invalid]:border-destructive/30 data-[invalid]:ring-1 data-[invalid]:ring-destructive/10 data-[invalid]:ring-offset-1 data-[invalid]:ring-offset-destructive/5"
+          className={cn(
+            "flex-1 min-w-0 px-2.5 text-center bg-transparent dark:bg-input/30 text-sm tabular-nums outline-none rounded-xs placeholder:text-muted-foreground focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/80 data-[invalid]:border-destructive/30 data-[invalid]:ring-1 data-[invalid]:ring-destructive/50 data-[invalid]:ring-offset-1 data-[invalid]:ring-offset-destructive/5",
+          )}
           data-slot="number-field-input"
+          ref={inputRef}
         />
         <BaseNumberField.Increment
           className={cn(
