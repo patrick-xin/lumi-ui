@@ -1,17 +1,5 @@
 "use client";
 
-import { Button } from "@/registry/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/registry/ui/dropdown-menu";
-import { useIsMobile } from "@/registry/hooks/use-mobile";
-import { Input } from "@/registry/ui/input";
-import { Popover, PopoverContent, PopoverTrigger } from "@/registry/ui/popover";
-import { Sheet, SheetContent, SheetTrigger } from "@/registry/ui/sheet";
-import { TabIndicator, Tabs, TabsList, TabsTab } from "@/registry/ui/tabs";
 import {
   ArchiveIcon,
   BellIcon,
@@ -24,6 +12,18 @@ import {
   UserIcon,
 } from "lucide-react";
 import React from "react";
+import { useIsMobile } from "@/registry/hooks/use-mobile";
+import { Button } from "@/registry/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/registry/ui/dropdown-menu";
+import { Input } from "@/registry/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/registry/ui/popover";
+import { Sheet, SheetContent, SheetTrigger } from "@/registry/ui/sheet";
+import { TabIndicator, Tabs, TabsList, TabsTab } from "@/registry/ui/tabs";
 
 type TabType = "all" | "unread" | "archived";
 
@@ -115,7 +115,7 @@ const ContentContainer = () => {
   if (activeTab === "all") {
     return (
       <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
-        <ol className="list-none group" data-tab={activeTab}>
+        <ol className="list-none group">
           {Array.from({ length: 30 }).map((_, index) => (
             <li
               className="group/link border-b border-muted last:border-0 hover:bg-muted transition-colors"
@@ -161,7 +161,7 @@ const ContentContainer = () => {
   if (activeTab === "unread") {
     return (
       <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
-        <ol className="list-none group" data-tab={activeTab}>
+        <ol className="list-none group">
           {Array.from({ length: 20 }).map((_, index) => (
             <li
               className="group/link border-b border-muted last:border-0 hover:bg-muted transition-colors"

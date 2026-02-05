@@ -19,7 +19,8 @@
     "@lumi-ui/collapsible",
     "@lumi-ui/toggle-group",
     "@lumi-ui/toast",
-    "card"
+    "card",
+    "@lumi-ui/breadcrumb"
   ],
   "files": [
     {

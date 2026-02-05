@@ -1,12 +1,17 @@
 "use client";
 
+import { Chrome, Eye, EyeOff, Github } from "lucide-react";
+import * as React from "react";
 import { Button } from "@/registry/ui/button";
-import { Field, FieldControl, FieldError, FieldLabel } from "@/registry/ui/field";
+import {
+  Field,
+  FieldControl,
+  FieldError,
+  FieldLabel,
+} from "@/registry/ui/field";
 import { Form } from "@/registry/ui/form";
 import { Input } from "@/registry/ui/input";
 import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
-import { Chrome, Eye, EyeOff, Github } from "lucide-react";
-import * as React from "react";
 
 export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -54,10 +59,6 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
                 <FieldLabel>Password</FieldLabel>
                 <Button
                   className="p-0 h-auto font-normal text-xs"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // Handle forgot password
-                  }}
                   variant="link"
                 >
                   Forgot password?

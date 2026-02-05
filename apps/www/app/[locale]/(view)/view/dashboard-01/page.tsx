@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import type { Layout } from "react-resizable-panels";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { AIChat } from "@/registry/blocks/sidebar-03/components/ai-chat";
 import { AppSidebar } from "@/registry/blocks/sidebar-03/components/app-sidebar";
 import { ChartMixedAxes } from "@/registry/blocks/sidebar-03/components/chart-mixed-axes";
@@ -19,7 +20,6 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/registry/ui/sidebar";
-import { ThemeSwitcher } from "../../../../../components/theme-switcher";
 
 const GROUP_ID = "main-layout-persistence";
 

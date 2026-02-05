@@ -57,7 +57,7 @@ export const formSchema = z.object({
     .string()
     .min(5, "Project name must be at least 5 characters")
     .max(100, "Project name must be at most 100 characters"),
-  email: z.string().email("Invalid email address"),
+  email: z.email("Invalid email address"),
   priority: z.enum(["low", "medium", "high"]),
   budget: z.number().min(0).optional(),
   services: z.array(z.string()).min(1, "Select at least one service"),
@@ -511,6 +511,38 @@ import { Fieldset, FieldsetLegend } from "@/components/ui/fieldset";
           </FieldItem>
         </div>
       </Fieldset>
+      <FieldError match={!!error}>{error?.message}</FieldError>
+    </Field>
+  )}
+/>
+```
+
+### Checkbox Example
+```tsx
+import { Controller } from "react-hook-form";
+import { Checkbox } from "@/components/ui/checkbox";
+
+<Controller
+  control={methods.control}
+  name="acceptTerms"
+  render={({
+    field: { ref, name, value, onBlur, onChange },
+    fieldState: { invalid, isTouched, isDirty, error },
+  }) => (
+    <Field
+      dirty={isDirty}
+      invalid={invalid}
+      name={name}
+      touched={isTouched}
+    >
+      <FieldLabel>
+        <Checkbox
+          checked={value}
+          inputRef={ref}
+          onBlur={onBlur}
+          onCheckedChange={onChange}
+        />
+      </FieldLabel>
       <FieldError match={!!error}>{error?.message}</FieldError>
     </Field>
   )}

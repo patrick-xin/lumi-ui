@@ -96,7 +96,7 @@ function FieldError({
 }: React.ComponentProps<typeof BaseField.Error>) {
   return (
     <BaseField.Error
-      className={cn("text-sm text-destructive text-balance", className)}
+      className={cn("text-sm text-destructive text-pretty", className)}
       data-slot="field-error"
       {...props}
     />
