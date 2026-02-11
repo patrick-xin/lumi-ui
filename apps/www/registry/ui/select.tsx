@@ -1,10 +1,10 @@
 "use client";
 
 import { Select as BaseSelect } from "@base-ui/react/select";
-import { ArrowSvg } from "@lumi-ui/ui/arrow-svg";
-import { cn } from "@lumi-ui/ui/lib/utils";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import type * as React from "react";
+import { cn } from "@/registry/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 function Select<Value, Multiple extends boolean | undefined = false>(
   props: BaseSelect.Root.Props<Value, Multiple>,

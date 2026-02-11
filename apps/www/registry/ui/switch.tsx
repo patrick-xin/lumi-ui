@@ -31,6 +31,7 @@ function Switch({
         "has-[:focus-visible]:ring-4 focus-visible:outline-hidden",
         "data-[unchecked]:bg-input dark:data-[unchecked]:bg-input/80",
         "data-[checked]:bg-primary",
+        "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
         className,
       )}
       data-slot="switch"
