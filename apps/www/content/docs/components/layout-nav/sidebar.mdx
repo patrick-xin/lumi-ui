@@ -77,7 +77,7 @@ The sidebar behavior is controlled by a few constants in the `sidebar.tsx` file.
 
 You can set the `collapsibleType` prop to either `icon` or `sidebar` to control how the sidebar collapses. `ICON_MODE_WIDTH_PX` is the width of the sidebar in icon mode. If set `sidebar`, the sidebar will be hidden when collapsed. See [examples](/blocks/sidebar) for more details. 
 
-### With Server-Side Cookies(default)
+### With Nextjs
 
 To prevent hydration mismatch and maintain the sidebar state between refreshes, it's recommended to read the state from cookies server-side and pass it to the `SidebarProvider`.
 
@@ -111,6 +111,84 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     </SidebarProvider>
   )
 }
+```
+
+### With TanStack Start
+```ts title="uitls.ts"
+import { createServerFn } from "@tanstack/react-start";
+import { getCookie } from "@tanstack/react-start/server";
+import type { Layout } from "react-resizable-panels";
+
+const GROUP_ID = "main-layout-persistence";
+
+export const getSidebarLayout = createServerFn({ method: "GET" }).handler(
+	async () => {
+		const raw = getCookie(GROUP_ID);
+		if (!raw) return undefined;
+
+		try {
+			return JSON.parse(raw) as Layout;
+		} catch {
+			return undefined;
+		}
+	},
+);
+
+function getCookieValue(name: string): string | undefined {
+	if (typeof document === "undefined") return undefined;
+
+	const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	const m = document.cookie.match(new RegExp(`(?:^|;\\s*)${escaped}=([^;]*)`));
+	return m ? m[1] : undefined;
+}
+
+export function getSidebarLayoutClient(): Layout | undefined {
+	const raw = getCookieValue(GROUP_ID);
+	if (!raw) return undefined;
+
+	try {
+		return JSON.parse(decodeURIComponent(raw)) as Layout;
+	} catch {
+		return undefined;
+	}
+}
+```
+
+```tsx title="layout.tsx"
+import { AppSidebar } from "@/components/app-sidebar";
+import { MainContent, SidebarProvider } from "@/components/ui/sidebar";
+import { getSidebarLayout, getSidebarLayoutClient } from "@/utils";
+import { createFileRoute } from "@tanstack/react-router";
+
+const GROUP_ID = "main-layout-persistence";
+
+export const Route = createFileRoute("/dashboard/")({
+	component: RouteComponent,
+	beforeLoad: async () => {
+		if (typeof document === "undefined") {
+			return { defaultLayout: await getSidebarLayout() };
+		} else {
+			return { defaultLayout: getSidebarLayoutClient() };
+		}
+	},
+});
+
+function RouteComponent() {
+	const { defaultLayout } = Route.useRouteContext();
+	return (
+		<SidebarProvider
+			collapsibleType="icon"
+			groupId={GROUP_ID}
+			defaultLayout={defaultLayout}
+		>
+			<AppSidebar />
+			<MainContent>
+        ...
+      </MainContent>
+		</SidebarProvider>
+	);
+}
+
 ```
 
 ### With Client-Side Cookies
