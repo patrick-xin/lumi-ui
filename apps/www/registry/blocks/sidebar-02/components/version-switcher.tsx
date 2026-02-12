@@ -1,6 +1,12 @@
 "use client";
 
 import {
+  BadgeCheckIcon,
+  ChevronsUpDown,
+  GalleryVerticalEnd,
+} from "lucide-react";
+import * as React from "react";
+import {
   DropdownMenu,
   DropdownMenuCheckboxItemContent,
   DropdownMenuContent,
@@ -11,12 +17,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/registry/ui/sidebar";
-import {
-  BadgeCheckIcon,
-  ChevronsUpDown,
-  GalleryVerticalEnd,
-} from "lucide-react";
-import * as React from "react";
 
 export function VersionSwitcher({
   versions,

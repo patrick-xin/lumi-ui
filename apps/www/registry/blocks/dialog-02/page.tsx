@@ -3,10 +3,6 @@
 import type { DialogRootChangeEventDetails } from "@base-ui/react";
 import { ChevronLeft, ChevronRight, XIcon } from "lucide-react";
 import * as React from "react";
-import { InfoMenu } from "@/registry/blocks/dialog-02/components/info-menu";
-import { ProfileCard } from "@/registry/blocks/dialog-02/components/profile-card";
-import { ShareMenu } from "@/registry/blocks/dialog-02/components/share-menu";
-import { TooltipGroup } from "@/registry/blocks/dialog-02/components/tooltip-group";
 import { Button } from "@/registry/ui/button";
 import {
   createDialogHandle,
@@ -18,6 +14,10 @@ import {
   DialogTrigger,
   DialogViewport,
 } from "@/registry/ui/dialog";
+import { InfoMenu } from "./components/info-menu";
+import { ProfileCard } from "./components/profile-card";
+import { ShareMenu } from "./components/share-menu";
+import { TooltipGroup } from "./components/tooltip-group";
 
 const galleryHandle = createDialogHandle<IImage>();
 

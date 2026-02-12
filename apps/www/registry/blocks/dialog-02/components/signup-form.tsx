@@ -1,10 +1,15 @@
 "use client";
 
+import * as React from "react";
 import { Button } from "@/registry/ui/button";
-import { Field, FieldControl, FieldError, FieldLabel } from "@/registry/ui/field";
+import {
+  Field,
+  FieldControl,
+  FieldError,
+  FieldLabel,
+} from "@/registry/ui/field";
 import { Form } from "@/registry/ui/form";
 import { Input } from "@/registry/ui/input";
-import * as React from "react";
 
 export type IImage = {
   alt: string;

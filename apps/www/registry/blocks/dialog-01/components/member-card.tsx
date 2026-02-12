@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback } from "@/registry/ui/avatar";
-import type { TeamMember } from "@/registry/blocks/dialog-01/components/team-management";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback } from "@/registry/ui/avatar";
+import type { TeamMember } from "./team-management";
 
 export const MemberCard = ({
   member,

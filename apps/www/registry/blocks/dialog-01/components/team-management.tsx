@@ -2,6 +2,18 @@
 
 import type { DialogRootChangeEventDetails } from "@base-ui/react";
 import {
+  ChevronsUpDownIcon,
+  Eye,
+  Loader2,
+  MoreHorizontal,
+  ShieldAlert,
+  ShieldCheck,
+  Trash2,
+  User,
+} from "lucide-react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
+import {
   AlertDialog,
   AlertDialogClose,
   AlertDialogContent,
@@ -13,7 +25,6 @@ import {
   createAlertDialogHandle,
 } from "@/registry/ui/alert-dialog";
 import { Badge } from "@/registry/ui/badge";
-import { MemberCard } from "@/registry/blocks/dialog-01/components/member-card";
 import { Button } from "@/registry/ui/button";
 import {
   createDialogHandle,
@@ -33,7 +44,6 @@ import {
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 import { Label } from "@/registry/ui/label";
-import { cn } from "@/lib/utils";
 import {
   Select,
   SelectContent,
@@ -42,17 +52,7 @@ import {
 } from "@/registry/ui/select";
 import { Separator } from "@/registry/ui/separator";
 import { toast } from "@/registry/ui/toast";
-import {
-  ChevronsUpDownIcon,
-  Eye,
-  Loader2,
-  MoreHorizontal,
-  ShieldAlert,
-  ShieldCheck,
-  Trash2,
-  User,
-} from "lucide-react";
-import * as React from "react";
+import { MemberCard } from "./member-card";
 
 export type TeamMember = {
   id: string;

@@ -114,7 +114,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 ```
 
 ### With TanStack Start
-```ts title="uitls.ts"
+```ts title="utils.ts"
 import { createServerFn } from "@tanstack/react-start";
 import { getCookie } from "@tanstack/react-start/server";
 import type { Layout } from "react-resizable-panels";
@@ -154,11 +154,11 @@ export function getSidebarLayoutClient(): Layout | undefined {
 }
 ```
 
-```tsx title="layout.tsx"
+```tsx title="route.tsx"
 import { AppSidebar } from "@/components/app-sidebar";
 import { MainContent, SidebarProvider } from "@/components/ui/sidebar";
 import { getSidebarLayout, getSidebarLayoutClient } from "@/utils";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 const GROUP_ID = "main-layout-persistence";
 
@@ -183,7 +183,7 @@ function RouteComponent() {
 		>
 			<AppSidebar />
 			<MainContent>
-        ...
+        <Outlet />
       </MainContent>
 		</SidebarProvider>
 	);

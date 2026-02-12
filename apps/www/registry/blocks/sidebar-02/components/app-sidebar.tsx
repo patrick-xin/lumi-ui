@@ -1,5 +1,3 @@
-import { NavMain } from "@/registry/blocks/sidebar-02/components/nav-main";
-import { VersionSwitcher } from "@/registry/blocks/sidebar-02/components/version-switcher";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 import {
   Sidebar,
@@ -12,6 +10,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/registry/ui/sidebar";
+import { NavMain } from "./nav-main";
+import { VersionSwitcher } from "./version-switcher";
 
 export function AppSidebar() {
   return (

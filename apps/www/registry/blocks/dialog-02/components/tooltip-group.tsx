@@ -1,7 +1,7 @@
 import type { DialogRootChangeEventDetails } from "@base-ui/react";
-import { LoginForm } from "@/registry/blocks/dialog-02/components/login-form";
-import { SignUpForm } from "@/registry/blocks/dialog-02/components/signup-form";
-import type { IImage } from "@/registry/blocks/dialog-02/page";
+import { BookmarkIcon, PlusIcon } from "lucide-react";
+import React from "react";
+import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
   createDialogHandle,
@@ -11,7 +11,6 @@ import {
   DialogPortal,
   DialogTrigger,
 } from "@/registry/ui/dialog";
-import { cn } from "@/registry/lib/utils";
 import { toast } from "@/registry/ui/toast";
 import {
   createTooltipHandle,
@@ -20,8 +19,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/registry/ui/tooltip";
-import { BookmarkIcon, PlusIcon } from "lucide-react";
-import React from "react";
+import type { IImage } from "../page";
+import { LoginForm } from "./login-form";
+import { SignUpForm } from "./signup-form";
 
 type UserAction = "bookmark" | "add-collection";
 type FormType = "signin" | "signup";

@@ -10,8 +10,8 @@ import {
   type PanelProps,
   usePanelRef,
 } from "react-resizable-panels";
-import { useIsMobile } from "@/registry/hooks/use-mobile";
-import { cn } from "@/registry/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
   ResizableGroup,
@@ -33,9 +33,9 @@ import {
 } from "@/registry/ui/tooltip";
 
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const DEFAULT_WIDTH = "25rem";
-const MAX_WIDTH = "25rem";
-const MIN_WIDTH = "15rem";
+const DEFAULT_WIDTH = "25%";
+const MAX_WIDTH = "25%";
+const MIN_WIDTH = "15%";
 const SIDEBAR_KEYBOARD_SHORTCUT = "b";
 const ICON_MODE_WIDTH_PX = 48;
 // If the percentage in the cookie is below this, we assume it's collapsed
@@ -137,9 +137,7 @@ const SidebarProvider = ({
             defaultLayout={defaultLayout}
             id={groupId}
             onLayoutChanged={(layout) => {
-              document.cookie = `${groupId}=${JSON.stringify(
-                layout,
-              )}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+              document.cookie = `${groupId}=${encodeURIComponent(JSON.stringify(layout))}; Path=/; Max-Age=${SIDEBAR_COOKIE_MAX_AGE}; SameSite=Lax`;
             }}
             orientation="horizontal"
             resizeTargetMinimumSize={{ coarse: 37, fine: 27 }}
@@ -558,20 +556,20 @@ function SidebarMenuAction({
 export {
   MainContent,
   Sidebar,
-  SidebarHeader,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarHeader,
   SidebarMenu,
-  SidebarMenuItem,
+  SidebarMenuAction,
   SidebarMenuButton,
+  SidebarMenuItem,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarProvider,
-  SidebarTrigger,
   SidebarSeparator,
-  SidebarMenuAction,
+  SidebarTrigger,
   useSidebar,
 };
