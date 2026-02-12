@@ -1,3 +1,5 @@
+import { cookies } from "next/headers";
+import type { Layout } from "react-resizable-panels";
 import { AppSidebar } from "@/registry/blocks/sidebar-01/components/app-sidebar";
 import {
   Breadcrumb,
@@ -14,9 +16,6 @@ import {
   SidebarTrigger,
 } from "@/registry/ui/sidebar";
 
-import { cookies } from "next/headers";
-import type { Layout } from "react-resizable-panels";
-
 const GROUP_ID = "main-layout-persistence";
 
 export default async function Page() {
@@ -26,7 +25,6 @@ export default async function Page() {
   const defaultLayout: Layout = layoutCookie
     ? JSON.parse(layoutCookie.value)
     : undefined;
-
   return (
     <SidebarProvider
       collapsibleType="icon"

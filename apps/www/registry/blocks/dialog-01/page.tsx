@@ -1,4 +1,4 @@
-import { TeamManagement } from "@/registry/blocks/dialog-01/components/team-management";
+import { TeamManagement } from "./components/team-management";
 
 export default function Page() {
   return (

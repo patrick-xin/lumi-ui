@@ -31,6 +31,7 @@ import * as React from "react";
 import type { PanelImperativeHandle } from "react-resizable-panels";
 import { cn } from "@/lib/utils";
 import type { ComponentName } from "@/registry/__registry";
+import { TabsPanel } from "../../registry/ui/tabs";
 
 interface ComponentViewProps extends React.ComponentProps<"div"> {
   name: ComponentName;
@@ -39,6 +40,8 @@ interface ComponentViewProps extends React.ComponentProps<"div"> {
   source: React.ReactNode;
   iframeHeight?: number | string;
 }
+
+const tooltipHandle = createTooltipHandle<{ title: string }>();
 
 export function ComponentView({
   name,
@@ -49,8 +52,6 @@ export function ComponentView({
   iframeHeight,
   ...props
 }: ComponentViewProps) {
-  const tooltipHandle = createTooltipHandle<{ title: string }>();
-  const [view, setView] = React.useState<"preview" | "code">("preview");
   const [iframeKey, setIframeKey] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const resizablePanelRef = React.useRef<PanelImperativeHandle>(null);
@@ -83,174 +84,172 @@ export function ComponentView({
           </p>
         )}
       </div>
-      <div className="flex w-full items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <Tabs
-            onValueChange={(value) => setView(value as "preview" | "code")}
-            value={view}
-          >
+
+      <div className="w-full">
+        <Tabs defaultValue="preview">
+          <div className="flex items-center justify-between">
             <TabsListContent>
               <TabsTab value="preview">Preview</TabsTab>
               <TabsTab value="code">Code</TabsTab>
             </TabsListContent>
-          </Tabs>
-          <Separator
-            className="h-4! ml-1 hidden md:block"
-            orientation="vertical"
-          />
-          <div className="hidden items-center gap-1 rounded-md md:flex border-border/60">
-            <TooltipProvider closeDelay={100}>
-              <ToggleGroup
-                className="gap-1"
-                defaultValue={[100]}
-                onValueChange={(value) => {
-                  if (!value || value.length === 0) return;
-                  const sizeValue = value[0];
-                  setView("preview");
-                  if (resizablePanelRef?.current) {
-                    resizablePanelRef.current.resize(sizeValue);
-                  }
-                }}
-              >
-                <TooltipTrigger
-                  handle={tooltipHandle}
-                  payload={{ title: "Desktop" }}
-                  render={
-                    <ToggleGroupItem size="xs" value="100">
-                      <Monitor className="size-4" />
-                    </ToggleGroupItem>
-                  }
-                />
-                <TooltipTrigger
-                  handle={tooltipHandle}
-                  payload={{ title: "Tablet" }}
-                  render={
-                    <ToggleGroupItem size="xs" value="60">
-                      <Tablet className="size-4" />
-                    </ToggleGroupItem>
-                  }
-                />
-                <TooltipTrigger
-                  handle={tooltipHandle}
-                  payload={{ title: "Smartphone" }}
-                  render={
-                    <ToggleGroupItem size="xs" value="30">
-                      <Smartphone className="size-4" />
-                    </ToggleGroupItem>
-                  }
-                />
-              </ToggleGroup>
-
-              <TooltipTrigger
-                handle={tooltipHandle}
-                payload={{ title: "Open in New Tab" }}
-                render={
-                  <Button
-                    className="size-7 rounded-md p-0"
-                    nativeButton={false}
-                    render={
-                      <Link href={`/view/${name}`} target="_blank">
-                        <span className="sr-only">Open in New Tab</span>
-                        <Fullscreen className="size-4" />
-                      </Link>
+            <Separator
+              className="h-4! mx-2 hidden md:block"
+              orientation="vertical"
+            />
+            <div className="hidden items-center gap-1 rounded-md md:flex border-border/60">
+              <TooltipProvider closeDelay={100}>
+                <ToggleGroup
+                  className="gap-1"
+                  defaultValue={[100]}
+                  onValueChange={(value) => {
+                    if (!value || value.length === 0) return;
+                    const sizeValue = value[0];
+                    if (resizablePanelRef?.current) {
+                      resizablePanelRef.current.resize(sizeValue);
                     }
-                    size="icon"
-                    variant="ghost"
+                  }}
+                >
+                  <TooltipTrigger
+                    handle={tooltipHandle}
+                    payload={{ title: "Desktop" }}
+                    render={
+                      <ToggleGroupItem size="xs" value="100">
+                        <Monitor className="size-4" />
+                      </ToggleGroupItem>
+                    }
                   />
-                }
-              />
+                  <TooltipTrigger
+                    handle={tooltipHandle}
+                    payload={{ title: "Tablet" }}
+                    render={
+                      <ToggleGroupItem size="xs" value="60">
+                        <Tablet className="size-4" />
+                      </ToggleGroupItem>
+                    }
+                  />
+                  <TooltipTrigger
+                    handle={tooltipHandle}
+                    payload={{ title: "Smartphone" }}
+                    render={
+                      <ToggleGroupItem size="xs" value="30">
+                        <Smartphone className="size-4" />
+                      </ToggleGroupItem>
+                    }
+                  />
+                </ToggleGroup>
 
-              <TooltipTrigger
-                handle={tooltipHandle}
-                payload={{ title: "Refresh Preview" }}
-                render={
-                  <Button
-                    className="size-7 rounded-md p-0"
-                    onClick={() => {
-                      setIframeKey((k) => k + 1);
-                      setIsLoading(true);
-                    }}
-                    size="icon"
-                    variant="ghost"
-                  >
-                    <RotateCw className="size-4" />
-                    <span className="sr-only">Refresh Preview</span>
-                  </Button>
-                }
-              />
-
-              <Tooltip handle={tooltipHandle}>
-                {({ payload }) => {
-                  if (!payload) return null;
-                  return <TooltipContent>{payload.title}</TooltipContent>;
-                }}
-              </Tooltip>
-            </TooltipProvider>
-          </div>
-        </div>
-        <div className="flex items-center">
-          <Button
-            className="w-fit gap-2 px-3 shadow-none font-mono text-xs"
-            onClick={() => {
-              copyToClipboard(`npx shadcn@latest add @lumi-ui/${name}`);
-            }}
-            size="sm"
-            variant="glow"
-          >
-            {isCopied ? (
-              <Check className="size-3.5" />
-            ) : (
-              <Terminal className="size-3.5" />
-            )}
-            <span className="hidden sm:inline">
-              npx shadcn add @lumi-ui/{name}
-            </span>
-            <span className="sm:hidden">Install</span>
-          </Button>
-        </div>
-      </div>
-      <div className="relative rounded-md h-[var(--height)] overflow-hidden border">
-        {view === "preview" && (
-          <div className="relative grid w-full gap-4 h-[var(--height)]">
-            <div className="absolute inset-0 bg-[radial-gradient(#d4d4d4_1px,transparent_1px)] bg-size-[20px_20px] dark:bg-[radial-gradient(#404040_1px,transparent_1px)]" />
-            <ResizableGroup
-              className="rounded-md"
-              defaultLayout={{ [PANEL_ID]: 100, [SPACER_ID]: 0 }}
-              orientation="horizontal"
-            >
-              <ResizablePanel
-                className="relative rounded-md bg-background shadow-sm overflow-hidden"
-                defaultSize={100}
-                id={PANEL_ID}
-                minSize={30}
-                panelRef={resizablePanelRef}
-              >
-                <iframe
-                  className={cn(
-                    "w-full h-full",
-                    isLoading
-                      ? "opacity-0"
-                      : "opacity-100 transition-opacity duration-500",
-                  )}
-                  key={iframeKey}
-                  onLoad={() => setIsLoading(false)}
-                  src={`/view/${name}`}
-                  title={title || name}
+                <TooltipTrigger
+                  handle={tooltipHandle}
+                  payload={{ title: "Open in New Tab" }}
+                  render={
+                    <Button
+                      className="size-7 rounded-md p-0"
+                      nativeButton={false}
+                      render={
+                        <Link href={`/view/${name}`} target="_blank">
+                          <span className="sr-only">Open in New Tab</span>
+                          <Fullscreen className="size-4" />
+                        </Link>
+                      }
+                      size="icon"
+                      variant="ghost"
+                    />
+                  }
                 />
-              </ResizablePanel>
-              <ResizableSeparator withHandle />
-              <ResizablePanel defaultSize={0} id={SPACER_ID} minSize={0} />
-            </ResizableGroup>
+
+                <TooltipTrigger
+                  handle={tooltipHandle}
+                  payload={{ title: "Refresh Preview" }}
+                  render={
+                    <Button
+                      className="size-7 rounded-md p-0"
+                      onClick={() => {
+                        setIframeKey((k) => k + 1);
+                        setIsLoading(true);
+                      }}
+                      size="icon"
+                      variant="ghost"
+                    >
+                      <RotateCw className="size-4" />
+                      <span className="sr-only">Refresh Preview</span>
+                    </Button>
+                  }
+                />
+
+                <Tooltip handle={tooltipHandle}>
+                  {({ payload }) => {
+                    if (!payload) return null;
+                    return <TooltipContent>{payload.title}</TooltipContent>;
+                  }}
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+            <div className="flex items-center ml-auto">
+              <Button
+                className="w-fit gap-2 px-3 shadow-none font-mono text-xs"
+                onClick={() => {
+                  copyToClipboard(`npx shadcn@latest add @lumi-ui/${name}`);
+                }}
+                size="sm"
+                variant="glow"
+              >
+                {isCopied ? (
+                  <Check className="size-3.5" />
+                ) : (
+                  <Terminal className="size-3.5" />
+                )}
+                <span className="hidden sm:inline">
+                  npx shadcn add @lumi-ui/{name}
+                </span>
+                <span className="sm:hidden">Install</span>
+              </Button>
+            </div>
           </div>
-        )}
-        {view === "code" && (
-          <div
-            className="grid w-full overflow-scroll no-scrollbar overscroll-contain"
-            style={{ height }}
-          >
-            {source}
+
+          <div className="relative rounded-md h-[var(--height)] overflow-hidden border">
+            <TabsPanel keepMounted value="preview">
+              <div className="relative grid w-full gap-4 h-[var(--height)]">
+                <div className="absolute inset-0 bg-[radial-gradient(#d4d4d4_1px,transparent_1px)] bg-size-[20px_20px] dark:bg-[radial-gradient(#404040_1px,transparent_1px)]" />
+                <ResizableGroup
+                  className="rounded-md"
+                  defaultLayout={{ [PANEL_ID]: 100, [SPACER_ID]: 0 }}
+                  orientation="horizontal"
+                >
+                  <ResizablePanel
+                    className="relative rounded-md bg-background shadow-sm overflow-hidden"
+                    defaultSize={100}
+                    id={PANEL_ID}
+                    minSize={30}
+                    panelRef={resizablePanelRef}
+                  >
+                    <iframe
+                      className={cn(
+                        "w-full h-full",
+                        isLoading
+                          ? "opacity-0"
+                          : "opacity-100 transition-opacity duration-500",
+                      )}
+                      key={iframeKey}
+                      onLoad={() => setIsLoading(false)}
+                      src={`/view/${name}`}
+                      title={title || name}
+                    />
+                  </ResizablePanel>
+                  <ResizableSeparator withHandle />
+                  <ResizablePanel defaultSize={0} id={SPACER_ID} minSize={0} />
+                </ResizableGroup>
+              </div>
+            </TabsPanel>
+            <TabsPanel keepMounted value="code">
+              <div
+                className="grid w-full overflow-scroll no-scrollbar overscroll-contain"
+                style={{ height }}
+              >
+                {source}
+              </div>
+            </TabsPanel>
           </div>
-        )}
+        </Tabs>
       </div>
     </div>
   );

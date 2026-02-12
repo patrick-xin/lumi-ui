@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkIcon,
+  ShareIcon,
+  TwitterIcon,
+} from "lucide-react";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
@@ -11,13 +18,6 @@ import {
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 import { toast } from "@/registry/ui/toast";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkIcon,
-  ShareIcon,
-  TwitterIcon,
-} from "lucide-react";
 
 export const ShareMenu = () => {
   const handleCopy = () => {

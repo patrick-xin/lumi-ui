@@ -21,7 +21,6 @@ function BlockCodeContent({
   if (!highlightedFiles) return null;
 
   const highlighted = activeFile ? highlightedFiles[activeFile] : null;
-
   return <div className="no-scrollbar overflow-y-auto">{highlighted}</div>;
 }
 

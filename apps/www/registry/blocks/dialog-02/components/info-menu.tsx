@@ -1,8 +1,8 @@
-import { StatsChart } from "@/registry/blocks/dialog-02/components/stats-chart";
+import { InfoIcon } from "lucide-react";
 import { Button } from "@/registry/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/registry/ui/popover";
 import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
-import { InfoIcon } from "lucide-react";
+import { StatsChart } from "./stats-chart";
 
 export const InfoMenu = () => {
   return (

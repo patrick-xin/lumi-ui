@@ -12,7 +12,7 @@ import {
   UserIcon,
 } from "lucide-react";
 import React from "react";
-import { useIsMobile } from "@/registry/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
@@ -22,17 +22,20 @@ import {
 } from "@/registry/ui/dropdown-menu";
 import { Input } from "@/registry/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/registry/ui/popover";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/registry/ui/sheet";
-import { TabIndicator, Tabs, TabsList, TabsTab } from "@/registry/ui/tabs";
-
-type TabType = "all" | "unread" | "archived";
+import {
+  TabIndicator,
+  Tabs,
+  TabsList,
+  TabsPanel,
+  TabsTab,
+} from "@/registry/ui/tabs";
 
 const NotificationContext = React.createContext<
   | {
       open: boolean;
       setOpen: (open: boolean) => void;
-      activeTab: TabType;
-      setActiveTab: (tab: TabType) => void;
       onClose: () => void;
     }
   | undefined
@@ -48,18 +51,15 @@ const useNotification = () => {
   return context;
 };
 
-export const VercelNotification = () => {
+export const Notifications = () => {
   const [open, setOpen] = React.useState(false);
-  const [activeTab, setActiveTab] = React.useState<TabType>("all");
   const handleClose = () => setOpen(false);
 
   return (
     <NotificationContext.Provider
       value={{
-        activeTab,
         onClose: handleClose,
         open,
-        setActiveTab,
         setOpen,
       }}
     >
@@ -110,148 +110,89 @@ function NotificationPopover() {
   );
 }
 
-const ContentContainer = () => {
-  const { activeTab, onClose } = useNotification();
-  if (activeTab === "all") {
-    return (
-      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
-        <ol className="list-none group">
-          {Array.from({ length: 30 }).map((_, index) => (
-            <li
-              className="group/link border-b border-muted last:border-0 hover:bg-muted transition-colors"
-              key={index}
-            >
-              <a
-                className="outline-none flex justify-between items-center gap-4 p-4"
-                href="#"
-                onClick={onClose}
-              >
-                <span>
-                  <MessageCircleDashed className="size-4" />
-                </span>
-
-                <div className="flex flex-col justify-start gap-0.5 flex-1">
-                  <span className="text-sm">New notification {index + 1}</span>
-                  <span className="text-xs text-muted-foreground">
-                    {index + 1} mins ago
-                  </span>
-                </div>
-
-                <div className="opacity-0 group-hover/link:opacity-100 transition-opacity w-8">
-                  <Button
-                    className="cursor-pointer rounded-full text-muted-foreground hover:text-foreground"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                    }}
-                    size="icon-sm"
-                    title="Archive"
-                    variant="ghost"
-                  >
-                    <ArchiveIcon />
-                  </Button>
-                </div>
-              </a>
-            </li>
-          ))}
-        </ol>
-      </div>
-    );
-  }
-  if (activeTab === "unread") {
-    return (
-      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
-        <ol className="list-none group">
-          {Array.from({ length: 20 }).map((_, index) => (
-            <li
-              className="group/link border-b border-muted last:border-0 hover:bg-muted transition-colors"
-              key={index}
-            >
-              <a
-                className="outline-none flex justify-between items-center gap-4 p-4"
-                href="#"
-                onClick={onClose}
-              >
-                <span>
-                  <MessageCircleIcon className="size-4" />
-                </span>
-                <div className="flex flex-col justify-start gap-0.5 flex-1">
-                  <span className="text-sm">
-                    Unread notification {index + 1}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {index + 1} mins ago
-                  </span>
-                </div>
-                <div className="w-8 opacity-0" />
-              </a>
-            </li>
-          ))}
-        </ol>
-      </div>
-    );
-  }
-  if (activeTab === "archived")
-    return (
-      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain flex flex-col">
-        <div className="flex gap-2 py-2 px-4 items-center">
-          <Input placeholder="Search" variant="transparent" />
-          <FilterDropdown />
-        </div>
-        <div className="flex-1 flex justify-center items-center">
-          <span className="-mt-6 text-muted-foreground flex flex-col items-center gap-2">
-            <span className="bg-muted rounded-full p-3">
-              <ArchiveIcon className="size-5" />
-            </span>
-            No archived notifications
-          </span>
-        </div>
-      </div>
-    );
-  return null;
-};
-
 const UnderLineTabs = () => {
-  const { activeTab, setActiveTab, onClose } = useNotification();
+  const { onClose } = useNotification();
   return (
-    <div className="flex-1 flex flex-col min-h-0">
-      {/* Header */}
-      <div className="flex items-center justify-between border-b px-2 bg-background h-12 flex-none">
-        <Tabs
-          className="h-full"
-          onValueChange={(v) => setActiveTab(v as TabType)}
-          value={activeTab}
-        >
-          <TabsList className="gap-6 h-full">
-            <TabsTab
-              className="w-16 cursor-pointer hover:text-foreground"
-              value="all"
-            >
-              All
-            </TabsTab>
-            <TabsTab
-              className="w-16 cursor-pointer hover:text-foreground"
-              value="unread"
-            >
-              Unread
-            </TabsTab>
-            <TabsTab
-              className="w-16 cursor-pointer hover:text-foreground"
-              value="archived"
-            >
-              Archived
-            </TabsTab>
-            <TabIndicator className="bg-foreground -bottom-0.5 left-0 h-0.5 translate-x-(--active-tab-left) translate-y-0" />
-          </TabsList>
-        </Tabs>
-        <Button size="icon-sm" variant="ghost">
+    <Tabs className="h-full" defaultValue="all">
+      <div className="flex justify-between h-12 items-center border-b">
+        <TabsList className="gap-6 h-full">
+          <TabsTab
+            className="w-16 cursor-pointer hover:text-foreground"
+            value="all"
+          >
+            All
+          </TabsTab>
+          <TabsTab
+            className="w-16 cursor-pointer hover:text-foreground"
+            value="unread"
+          >
+            Unread
+          </TabsTab>
+          <TabsTab
+            className="w-16 cursor-pointer hover:text-foreground"
+            value="archived"
+          >
+            Archived
+          </TabsTab>
+          <TabIndicator className="bg-foreground -bottom-0.5 left-0 h-0.5 translate-x-(--active-tab-left) translate-y-0" />
+        </TabsList>
+        <Button className="mr-2" size="icon-sm" variant="ghost">
           <Settings />
         </Button>
       </div>
-      {/* Content */}
-      <ContentContainer />
-      {/* Footer */}
-      {activeTab === "all" && (
+      <TabsPanel
+        className="h-full flex flex-col min-h-0"
+        keepMounted
+        value="all"
+      >
+        <ScrollArea
+          className="flex flex-col flex-1 min-h-0 h-full"
+          gradientScrollFade
+          noScrollBar
+        >
+          <ol className="list-none group w-full">
+            {Array.from({ length: 30 }).map((_, index) => (
+              <li
+                className="group/link border-b border-muted last:border-0 hover:bg-muted transition-colors"
+                key={index}
+              >
+                <a
+                  className="outline-none flex justify-between items-center gap-4 p-4"
+                  href="#"
+                  onClick={onClose}
+                >
+                  <span>
+                    <MessageCircleDashed className="size-4" />
+                  </span>
+
+                  <div className="flex flex-col justify-start gap-0.5 flex-1">
+                    <span className="text-sm">
+                      New notification {index + 1}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {index + 1} mins ago
+                    </span>
+                  </div>
+
+                  <div className="opacity-0 group-hover/link:opacity-100 transition-opacity w-8">
+                    <Button
+                      className="cursor-pointer rounded-full text-muted-foreground hover:text-foreground"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                      }}
+                      size="icon-sm"
+                      title="Archive"
+                      variant="ghost"
+                    >
+                      <ArchiveIcon />
+                    </Button>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </ScrollArea>
         <div className="bg-background border-t border-muted flex-none">
           <Button
             className="w-full rounded-none cursor-pointer hover:bg-muted shadow-none"
@@ -261,8 +202,63 @@ const UnderLineTabs = () => {
             View All
           </Button>
         </div>
-      )}
-    </div>
+      </TabsPanel>
+      <TabsPanel
+        className="h-full flex flex-col min-h-0"
+        keepMounted
+        value="unread"
+      >
+        <ScrollArea className="flex-1 min-h-0" gradientScrollFade noScrollBar>
+          <ol className="list-none group">
+            {Array.from({ length: 20 }).map((_, index) => (
+              <li
+                className="group/link border-b border-muted last:border-0 hover:bg-muted transition-colors"
+                key={index}
+              >
+                <a
+                  className="outline-none flex justify-between items-center gap-4 p-4"
+                  href="#"
+                  onClick={onClose}
+                >
+                  <span>
+                    <MessageCircleIcon className="size-4" />
+                  </span>
+                  <div className="flex flex-col justify-start gap-0.5 flex-1">
+                    <span className="text-sm">
+                      Unread notification {index + 1}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {index + 1} mins ago
+                    </span>
+                  </div>
+                  <div className="w-8 opacity-0" />
+                </a>
+              </li>
+            ))}
+          </ol>
+        </ScrollArea>
+      </TabsPanel>
+      <TabsPanel className="flex flex-col h-full" keepMounted value="archived">
+        <ScrollArea
+          className="flex-1 min-h-0 flex flex-col relative"
+          gradientScrollFade
+          noScrollBar
+        >
+          <div className="flex gap-2 py-2 px-4 items-center">
+            <Input placeholder="Search" variant="transparent" />
+            <FilterDropdown />
+          </div>
+          <div className="flex justify-center items-center absolute inset-x-0 top-[calc(50%-3rem)]">
+            <span className="text-muted-foreground flex flex-col items-center gap-2">
+              <span className="bg-muted rounded-full p-3">
+                <ArchiveIcon className="size-5" />
+              </span>
+              No archived notifications
+            </span>
+          </div>
+        </ScrollArea>
+      </TabsPanel>
+    </Tabs>
   );
 };
 
