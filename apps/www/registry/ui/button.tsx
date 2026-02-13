@@ -47,11 +47,6 @@ const buttonVariants = cva(
   },
 );
 
-type ButtonProps = React.ComponentProps<typeof BaseButton> &
-  VariantProps<typeof buttonVariants> & {
-    isLoading?: boolean;
-  };
-
 const Button = ({
   className,
   variant,
@@ -60,7 +55,10 @@ const Button = ({
   disabled,
   focusableWhenDisabled,
   ...props
-}: ButtonProps) => {
+}: BaseButton.Props &
+  VariantProps<typeof buttonVariants> & {
+    isLoading?: boolean;
+  }) => {
   return (
     <BaseButton
       className={cn(buttonVariants({ className, size, variant }))}

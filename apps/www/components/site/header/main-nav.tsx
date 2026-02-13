@@ -1,10 +1,10 @@
 "use client";
 
-import { buttonVariants } from "@lumi-ui/ui/button";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/registry/ui/button";
 
 export function MainNav({
   items,

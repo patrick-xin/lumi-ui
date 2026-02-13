@@ -1,18 +1,18 @@
 "use client";
 
+import type { TOCItemType } from "fumadocs-core/toc";
+import { ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { useTocActiveItem } from "@/hooks/use-toc-active-Item";
+import { cn } from "@/lib/utils";
 import {
   createDialogHandle,
   Dialog,
   DialogPopup,
   DialogPortal,
   DialogTrigger,
-} from "@lumi-ui/ui/dialog";
-import { ScrollArea } from "@lumi-ui/ui/scroll-area";
-import type { TOCItemType } from "fumadocs-core/toc";
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
-import { useTocActiveItem } from "@/hooks/use-toc-active-Item";
-import { cn } from "@/lib/utils";
+} from "@/registry/ui/dialog";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 const tocHandle = createDialogHandle();
 

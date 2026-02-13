@@ -2,14 +2,10 @@
 
 import { Field as BaseField } from "@base-ui/react/field";
 import type { VariantProps } from "class-variance-authority";
-import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { inputVariants } from "@/registry/ui/input";
 
-function Field({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseField.Root>) {
+function Field({ className, ...props }: BaseField.Root.Props) {
   return (
     <BaseField.Root
       className={cn(
@@ -25,10 +21,7 @@ function Field({
   );
 }
 
-function FieldLabel({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseField.Label>) {
+function FieldLabel({ className, ...props }: BaseField.Label.Props) {
   return (
     <BaseField.Label
       className={cn(
@@ -51,7 +44,7 @@ function FieldControl({
   inputSize = "default",
   variant = "default",
   ...props
-}: React.ComponentProps<typeof BaseField.Control> & {
+}: BaseField.Control.Props & {
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
   variant?: VariantProps<typeof inputVariants>["variant"];
 }) {
@@ -67,7 +60,7 @@ function FieldControl({
 function FieldDescription({
   className,
   ...props
-}: React.ComponentProps<typeof BaseField.Description>) {
+}: BaseField.Description.Props) {
   return (
     <BaseField.Description
       className={cn("text-sm text-muted-foreground", className)}
@@ -77,10 +70,7 @@ function FieldDescription({
   );
 }
 
-function FieldItem({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseField.Item>) {
+function FieldItem({ className, ...props }: BaseField.Item.Props) {
   return (
     <BaseField.Item
       className={cn("flex items-center gap-2", className)}
@@ -90,10 +80,7 @@ function FieldItem({
   );
 }
 
-function FieldError({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseField.Error>) {
+function FieldError({ className, ...props }: BaseField.Error.Props) {
   return (
     <BaseField.Error
       className={cn("text-sm text-destructive text-pretty", className)}

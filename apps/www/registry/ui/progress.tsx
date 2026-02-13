@@ -1,13 +1,67 @@
 import { Progress as BaseProgress } from "@base-ui/react/progress";
-import type * as React from "react";
 
 import { cn } from "@/registry/lib/utils";
 
-function Progress({
+function ProgressRoot({ className, ...props }: BaseProgress.Root.Props) {
+  return (
+    <BaseProgress.Root
+      className={cn("relative w-full", className)}
+      data-slot="progress"
+      {...props}
+    />
+  );
+}
+
+function ProgressTrack({ className, ...props }: BaseProgress.Track.Props) {
+  return (
+    <BaseProgress.Track
+      className={cn(
+        "bg-primary/20 relative h-2 w-full overflow-hidden rounded-full",
+        className,
+      )}
+      data-slot="progress-track"
+      {...props}
+    />
+  );
+}
+
+function ProgressIndicator({
   className,
-  value,
   ...props
-}: React.ComponentProps<typeof BaseProgress.Root>) {
+}: BaseProgress.Indicator.Props) {
+  return (
+    <BaseProgress.Indicator
+      className={cn(
+        "bg-primary h-full transition-all duration-500 ease-in-out",
+        className,
+      )}
+      data-slot="progress-indicator"
+      {...props}
+    />
+  );
+}
+
+function ProgressLabel({ className, ...props }: BaseProgress.Label.Props) {
+  return (
+    <BaseProgress.Label
+      className={cn("text-sm font-medium", className)}
+      data-slot="progress-label"
+      {...props}
+    />
+  );
+}
+
+function ProgressValue({ className, ...props }: BaseProgress.Value.Props) {
+  return (
+    <BaseProgress.Value
+      className={cn("text-sm text-muted-foreground", className)}
+      data-slot="progress-value"
+      {...props}
+    />
+  );
+}
+
+function Progress({ className, value, ...props }: BaseProgress.Root.Props) {
   return (
     <BaseProgress.Root
       className={cn("relative w-full", className)}
@@ -28,82 +82,12 @@ function Progress({
   );
 }
 
-function ProgressRoot({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseProgress.Root>) {
-  return (
-    <BaseProgress.Root
-      className={cn("relative w-full", className)}
-      data-slot="progress"
-      {...props}
-    />
-  );
-}
-
-function ProgressTrack({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseProgress.Track>) {
-  return (
-    <BaseProgress.Track
-      className={cn(
-        "bg-primary/20 relative h-2 w-full overflow-hidden rounded-full",
-        className,
-      )}
-      data-slot="progress-track"
-      {...props}
-    />
-  );
-}
-
-function ProgressIndicator({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseProgress.Indicator>) {
-  return (
-    <BaseProgress.Indicator
-      className={cn(
-        "bg-primary h-full transition-all duration-500 ease-in-out",
-        className,
-      )}
-      data-slot="progress-indicator"
-      {...props}
-    />
-  );
-}
-
-function ProgressLabel({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseProgress.Label>) {
-  return (
-    <BaseProgress.Label
-      className={cn("text-sm font-medium", className)}
-      data-slot="progress-label"
-      {...props}
-    />
-  );
-}
-
-function ProgressValue({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseProgress.Value>) {
-  return (
-    <BaseProgress.Value
-      className={cn("text-sm text-muted-foreground", className)}
-      data-slot="progress-value"
-      {...props}
-    />
-  );
-}
-
 export {
-  Progress,
   ProgressRoot,
   ProgressTrack,
   ProgressIndicator,
   ProgressLabel,
   ProgressValue,
+  // Composite component
+  Progress,
 };

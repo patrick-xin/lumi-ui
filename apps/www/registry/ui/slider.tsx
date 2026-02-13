@@ -5,10 +5,7 @@ import * as React from "react";
 
 import { cn } from "@/registry/lib/utils";
 
-function SliderRoot({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSlider.Root>) {
+function SliderRoot({ className, ...props }: BaseSlider.Root.Props) {
   return (
     <BaseSlider.Root
       className={cn("touch-none select-none", className)}
@@ -18,10 +15,7 @@ function SliderRoot({
   );
 }
 
-function SliderControl({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSlider.Control>) {
+function SliderControl({ className, ...props }: BaseSlider.Control.Props) {
   return (
     <BaseSlider.Control
       className={cn("touch-none select-none", className)}
@@ -31,10 +25,7 @@ function SliderControl({
   );
 }
 
-function SliderTrack({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSlider.Track>) {
+function SliderTrack({ className, ...props }: BaseSlider.Track.Props) {
   return (
     <BaseSlider.Track
       className={cn("rounded-full select-none", className)}
@@ -44,10 +35,7 @@ function SliderTrack({
   );
 }
 
-function SliderValue({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSlider.Value>) {
+function SliderValue({ className, ...props }: BaseSlider.Value.Props) {
   return (
     <BaseSlider.Value
       className={cn("text-sm font-medium", className)}
@@ -57,10 +45,7 @@ function SliderValue({
   );
 }
 
-function SliderIndicator({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSlider.Indicator>) {
+function SliderIndicator({ className, ...props }: BaseSlider.Indicator.Props) {
   return (
     <BaseSlider.Indicator
       className={cn("select-none")}
@@ -70,10 +55,7 @@ function SliderIndicator({
   );
 }
 
-function SliderThumb({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSlider.Thumb>) {
+function SliderThumb({ className, ...props }: BaseSlider.Thumb.Props) {
   return (
     <BaseSlider.Thumb
       className={cn(
@@ -86,10 +68,6 @@ function SliderThumb({
   );
 }
 
-type SliderProps = React.ComponentProps<typeof BaseSlider.Root> & {
-  inputRef?: React.Ref<HTMLInputElement>;
-};
-
 function Slider({
   className,
   defaultValue,
@@ -97,7 +75,9 @@ function Slider({
   children,
   inputRef,
   ...props
-}: SliderProps) {
+}: BaseSlider.Root.Props & {
+  inputRef?: React.Ref<HTMLInputElement>;
+}) {
   const thumbCount = React.useMemo(() => {
     const valueToInspect = value ?? defaultValue;
     if (Array.isArray(valueToInspect)) return valueToInspect.length;

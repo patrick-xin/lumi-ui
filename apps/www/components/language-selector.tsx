@@ -1,17 +1,17 @@
 "use client";
 
-import { buttonVariants } from "@lumi-ui/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItemContent,
-  SelectTrigger,
-} from "@lumi-ui/ui/select";
 import { LanguagesIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import { usePathname, useRouter } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/registry/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItemContent,
+  SelectTrigger,
+} from "@/registry/ui/select";
 
 const languages = [
   { label: "English", value: "en" },

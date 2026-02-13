@@ -1,9 +1,8 @@
 import { Form as BaseForm } from "@base-ui/react/form";
-import type * as React from "react";
 
 import { cn } from "@/registry/lib/utils";
 
-function Form({ className, ...props }: React.ComponentProps<typeof BaseForm>) {
+function Form({ className, ...props }: BaseForm.Props) {
   return (
     <BaseForm
       className={cn("flex flex-col gap-6", className)}
@@ -13,7 +12,7 @@ function Form({ className, ...props }: React.ComponentProps<typeof BaseForm>) {
   );
 }
 
-type FormProps = React.ComponentProps<typeof BaseForm>;
+type FormProps = BaseForm.Props;
 type FormErrors = NonNullable<FormProps["errors"]>;
 type FormValues = Record<string, unknown>;
 

@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@/registry/ui/button";
 import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
 import { cn } from "@lumi-ui/ui/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { useTheme } from "next-themes";
+import { Button } from "@/registry/ui/button";
 
 export function ModeSwitcher({
   className,

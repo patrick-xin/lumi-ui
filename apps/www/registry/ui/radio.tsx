@@ -3,13 +3,9 @@
 import { Radio as BaseRadio } from "@base-ui/react/radio";
 import { RadioGroup as BaseRadioGroup } from "@base-ui/react/radio-group";
 import { CircleIcon } from "lucide-react";
-import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 
-function RadioGroup({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseRadioGroup>) {
+function RadioGroup({ className, ...props }: BaseRadioGroup.Props) {
   return (
     <BaseRadioGroup
       className={cn("grid gap-3", className)}
@@ -19,10 +15,7 @@ function RadioGroup({
   );
 }
 
-function RadioRoot({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseRadio.Root>) {
+function RadioRoot({ className, ...props }: BaseRadio.Root.Props) {
   return (
     <BaseRadio.Root
       className={cn("rounded-full", className)}
@@ -32,23 +25,17 @@ function RadioRoot({
   );
 }
 
-function RadioIndicator({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseRadio.Indicator>) {
+function RadioIndicator({ className, ...props }: BaseRadio.Indicator.Props) {
   return (
     <BaseRadio.Indicator
-      className={cn("data-[unchecked]:hidden", className)}
+      className={cn("data-unchecked:hidden", className)}
       data-slot="radio-indicator"
       {...props}
     />
   );
 }
 
-function Radio({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseRadio.Root>) {
+function Radio({ className, ...props }: BaseRadio.Root.Props) {
   return (
     <BaseRadio.Root
       className={cn(
@@ -74,4 +61,10 @@ function Radio({
   );
 }
 
-export { RadioGroup, RadioRoot, RadioIndicator, Radio };
+export {
+  RadioGroup,
+  RadioRoot,
+  RadioIndicator,
+  // Composite component
+  Radio,
+};

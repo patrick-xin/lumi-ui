@@ -1,22 +1,6 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
 import { useCopyToClipboard } from "@lumi-ui/ui/hooks/use-copy-to-clipboard";
-import {
-  ResizableGroup,
-  ResizablePanel,
-  ResizableSeparator,
-} from "@lumi-ui/ui/resizable";
-import { Separator } from "@lumi-ui/ui/separator";
-import { Tabs, TabsListContent, TabsTab } from "@lumi-ui/ui/tabs";
-import { ToggleGroup, ToggleGroupItem } from "@lumi-ui/ui/toggle-group";
-import {
-  createTooltipHandle,
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@lumi-ui/ui/tooltip";
 import {
   Check,
   Fullscreen,
@@ -31,6 +15,22 @@ import * as React from "react";
 import type { PanelImperativeHandle } from "react-resizable-panels";
 import { cn } from "@/lib/utils";
 import type { ComponentName } from "@/registry/__registry";
+import { Button } from "@/registry/ui/button";
+import {
+  ResizableGroup,
+  ResizablePanel,
+  ResizableSeparator,
+} from "@/registry/ui/resizable";
+import { Separator } from "@/registry/ui/separator";
+import { Tabs, TabsListContent, TabsTab } from "@/registry/ui/tabs";
+import { ToggleGroup, ToggleGroupItem } from "@/registry/ui/toggle-group";
+import {
+  createTooltipHandle,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/registry/ui/tooltip";
 import { TabsPanel } from "../../registry/ui/tabs";
 
 interface ComponentViewProps extends React.ComponentProps<"div"> {
@@ -100,7 +100,7 @@ export function ComponentView({
               <TooltipProvider closeDelay={100}>
                 <ToggleGroup
                   className="gap-1"
-                  defaultValue={[100]}
+                  defaultValue={["100"]}
                   onValueChange={(value) => {
                     if (!value || value.length === 0) return;
                     const sizeValue = value[0];

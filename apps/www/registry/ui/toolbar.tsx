@@ -2,15 +2,10 @@
 
 import { Toolbar as BaseToolbar } from "@base-ui/react/toolbar";
 import type { VariantProps } from "class-variance-authority";
-import type * as React from "react";
-
-import { buttonVariants } from "@/registry/ui/button";
 import { cn } from "@/registry/lib/utils";
+import { buttonVariants } from "@/registry/ui/button";
 
-function Toolbar({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseToolbar.Root>) {
+function Toolbar({ className, ...props }: BaseToolbar.Root.Props) {
   return (
     <BaseToolbar.Root
       className={cn(
@@ -23,10 +18,7 @@ function Toolbar({
   );
 }
 
-function ToolbarGroup({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseToolbar.Group>) {
+function ToolbarGroup({ className, ...props }: BaseToolbar.Group.Props) {
   return (
     <BaseToolbar.Group
       className={cn("flex items-center gap-1", className)}
@@ -36,9 +28,8 @@ function ToolbarGroup({
   );
 }
 
-interface ToolbarButtonProps
-  extends React.ComponentProps<typeof BaseToolbar.Button>,
-    VariantProps<typeof buttonVariants> {}
+type ToolbarButtonProps = BaseToolbar.Button.Props &
+  VariantProps<typeof buttonVariants>;
 
 function ToolbarButton({
   className,
@@ -61,7 +52,7 @@ function ToolbarButton({
 function ToolbarSeparator({
   className,
   ...props
-}: React.ComponentProps<typeof BaseToolbar.Separator>) {
+}: BaseToolbar.Separator.Props) {
   return (
     <BaseToolbar.Separator
       className={cn("bg-border mx-1 h-5 w-[1px]", className)}
@@ -71,10 +62,7 @@ function ToolbarSeparator({
   );
 }
 
-function ToolbarLink({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseToolbar.Link>) {
+function ToolbarLink({ className, ...props }: BaseToolbar.Link.Props) {
   return (
     <BaseToolbar.Link
       className={cn(
@@ -89,10 +77,7 @@ function ToolbarLink({
   );
 }
 
-function ToolbarInput({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseToolbar.Input>) {
+function ToolbarInput({ className, ...props }: BaseToolbar.Input.Props) {
   return (
     <BaseToolbar.Input
       className={cn(

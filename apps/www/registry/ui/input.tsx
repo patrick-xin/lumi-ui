@@ -1,6 +1,5 @@
 import { Input as BaseInput } from "@base-ui/react/input";
 import { cva, type VariantProps } from "class-variance-authority";
-import type * as React from "react";
 
 import { cn } from "@/registry/lib/utils";
 
@@ -45,8 +44,7 @@ function Input({
   className,
   type,
   ...props
-}: React.ComponentProps<typeof BaseInput> &
-  VariantProps<typeof inputVariants>) {
+}: BaseInput.Props & VariantProps<typeof inputVariants>) {
   return (
     <BaseInput
       className={cn(inputVariants({ inputSize, variant }), className)}

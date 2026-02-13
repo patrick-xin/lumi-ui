@@ -5,13 +5,10 @@ import { Menubar as BaseMenubar } from "@base-ui/react/menubar";
 import { cva, type VariantProps } from "class-variance-authority";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 import type * as React from "react";
-import { ArrowSvg } from "@/registry/ui/arrow-svg";
 import { cn } from "@/registry/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
-function Menubar({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMenubar>) {
+function Menubar({ className, ...props }: BaseMenubar.Props) {
   return (
     <BaseMenubar
       className={cn(
@@ -24,26 +21,19 @@ function Menubar({
   );
 }
 
-function MenubarMenu({ ...props }: React.ComponentProps<typeof BaseMenu.Root>) {
+function MenubarMenu({ ...props }: BaseMenu.Root.Props) {
   return <BaseMenu.Root data-slot="menubar-menu" {...props} />;
 }
 
-function MenubarPortal({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Portal>) {
+function MenubarPortal({ ...props }: BaseMenu.Portal.Props) {
   return <BaseMenu.Portal data-slot="menubar-portal" {...props} />;
 }
 
-function MenubarBackdrop({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Backdrop>) {
+function MenubarBackdrop({ ...props }: BaseMenu.Backdrop.Props) {
   return <BaseMenu.Backdrop data-slot="menubar-backdrop" {...props} />;
 }
 
-function MenubarTrigger({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Trigger>) {
+function MenubarTrigger({ className, ...props }: BaseMenu.Trigger.Props) {
   return (
     <BaseMenu.Trigger
       className={cn(
@@ -59,10 +49,7 @@ function MenubarTrigger({
   );
 }
 
-function MenubarPositioner({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Positioner>) {
+function MenubarPositioner({ className, ...props }: BaseMenu.Positioner.Props) {
   return (
     <BaseMenu.Positioner
       className={cn("relative", className)}
@@ -72,10 +59,7 @@ function MenubarPositioner({
   );
 }
 
-function MenubarPopup({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Popup>) {
+function MenubarPopup({ className, ...props }: BaseMenu.Popup.Props) {
   return (
     <BaseMenu.Popup
       className={cn("relative", className)}
@@ -85,9 +69,7 @@ function MenubarPopup({
   );
 }
 
-function MenubarArrow({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Arrow>) {
+function MenubarArrow({ ...props }: BaseMenu.Arrow.Props) {
   return (
     <BaseMenu.Arrow
       className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180"
@@ -124,7 +106,7 @@ const menubarItemVariants = cva(
   },
 );
 
-type MenubarItemProps = React.ComponentProps<typeof BaseMenu.Item> &
+type MenubarItemProps = BaseMenu.Item.Props &
   VariantProps<typeof menubarItemVariants> & {
     unstyled?: boolean;
   };
@@ -147,10 +129,7 @@ function MenubarItem({
   );
 }
 
-function MenubarSeparator({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Separator>) {
+function MenubarSeparator({ className, ...props }: BaseMenu.Separator.Props) {
   return (
     <BaseMenu.Separator
       className={cn("bg-border my-1 h-px", className)}
@@ -160,16 +139,11 @@ function MenubarSeparator({
   );
 }
 
-function MenubarGroup({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Group>) {
+function MenubarGroup({ ...props }: BaseMenu.Group.Props) {
   return <BaseMenu.Group data-slot="menubar-group" {...props} />;
 }
 
-function MenubarGroupLabel({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMenu.GroupLabel>) {
+function MenubarGroupLabel({ className, ...props }: BaseMenu.GroupLabel.Props) {
   return (
     <BaseMenu.GroupLabel
       className={cn(
@@ -182,9 +156,7 @@ function MenubarGroupLabel({
   );
 }
 
-function MenubarRadioGroup({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.RadioGroup>) {
+function MenubarRadioGroup({ ...props }: BaseMenu.RadioGroup.Props) {
   return <BaseMenu.RadioGroup data-slot="menubar-radio-group" {...props} />;
 }
 
@@ -192,7 +164,7 @@ function MenubarRadioItem({
   children,
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.RadioItem>) {
+}: BaseMenu.RadioItem.Props) {
   return (
     <BaseMenu.RadioItem
       className={cn(className)}
@@ -205,7 +177,7 @@ function MenubarRadioItem({
 function MenubarCheckboxItem({
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.CheckboxItem>) {
+}: BaseMenu.CheckboxItem.Props) {
   return (
     <BaseMenu.CheckboxItem
       className={cn(className)}
@@ -215,9 +187,7 @@ function MenubarCheckboxItem({
   );
 }
 
-function MenubarSubMenu({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.SubmenuRoot>) {
+function MenubarSubMenu({ ...props }: BaseMenu.SubmenuRoot.Props) {
   return <BaseMenu.SubmenuRoot data-slot="menubar-sub-menu" {...props} />;
 }
 
@@ -225,7 +195,7 @@ function MenubarSubMenuTrigger({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof BaseMenu.SubmenuTrigger>) {
+}: BaseMenu.SubmenuTrigger.Props) {
   return (
     <BaseMenu.SubmenuTrigger
       className={cn(
@@ -261,7 +231,7 @@ function MenubarShortcut({
   );
 }
 
-type MenubarContentProps = React.ComponentProps<typeof BaseMenu.Popup> & {
+type MenubarContentProps = BaseMenu.Popup.Props & {
   side?: BaseMenu.Positioner.Props["side"];
   sideOffset?: BaseMenu.Positioner.Props["sideOffset"];
   align?: BaseMenu.Positioner.Props["align"];
@@ -336,7 +306,7 @@ function MenubarCheckboxItemContent({
   children,
   checked,
   ...props
-}: React.ComponentProps<typeof BaseMenu.CheckboxItem>) {
+}: BaseMenu.CheckboxItem.Props) {
   return (
     <BaseMenu.CheckboxItem
       checked={checked}
@@ -362,7 +332,7 @@ function MenubarRadioItemContent({
   children,
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.RadioItem>) {
+}: BaseMenu.RadioItem.Props) {
   return (
     <BaseMenu.RadioItem
       className={cn(

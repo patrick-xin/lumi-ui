@@ -14,7 +14,7 @@ function AccordionItem({ className, ...props }: BaseAccordion.Item.Props) {
   return (
     <BaseAccordion.Item
       className={cn(
-        "border-b last:border-b-0 data-[disabled]:opacity-50",
+        "border-b last:border-b-0 data-disabled:opacity-50",
         className,
       )}
       data-slot="accordion-item"

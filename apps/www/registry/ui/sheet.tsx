@@ -4,18 +4,18 @@ import { Dialog as BaseSheet } from "@base-ui/react/dialog";
 import { cva, type VariantProps } from "class-variance-authority";
 import { XIcon } from "lucide-react";
 import type * as React from "react";
-import { Button } from "@/registry/ui/button";
 import { cn } from "@/registry/lib/utils";
+import { Button } from "@/registry/ui/button";
 
-function Sheet(props: React.ComponentProps<typeof BaseSheet.Root>) {
+function Sheet(props: BaseSheet.Root.Props) {
   return <BaseSheet.Root data-slot="sheet" {...props} />;
 }
 
-function SheetTrigger(props: React.ComponentProps<typeof BaseSheet.Trigger>) {
+function SheetTrigger(props: BaseSheet.Trigger.Props) {
   return <BaseSheet.Trigger data-slot="sheet-trigger" {...props} />;
 }
 
-function SheetPortal(props: React.ComponentProps<typeof BaseSheet.Portal>) {
+function SheetPortal(props: BaseSheet.Portal.Props) {
   return <BaseSheet.Portal data-slot="sheet-portal" {...props} />;
 }
 
@@ -44,10 +44,7 @@ function SheetViewport({
   );
 }
 
-function SheetBackdrop({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSheet.Backdrop>) {
+function SheetBackdrop({ className, ...props }: BaseSheet.Backdrop.Props) {
   return (
     <BaseSheet.Backdrop
       className={cn(
@@ -61,11 +58,7 @@ function SheetBackdrop({
   );
 }
 
-function SheetPopup({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof BaseSheet.Popup>) {
+function SheetPopup({ className, children, ...props }: BaseSheet.Popup.Props) {
   return (
     <BaseSheet.Popup
       className={cn("bg-background", className)}
@@ -120,7 +113,7 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function SheetClose(props: React.ComponentProps<typeof BaseSheet.Close>) {
+function SheetClose(props: BaseSheet.Close.Props) {
   return <BaseSheet.Close data-slot="sheet-close" {...props} />;
 }
 
@@ -142,7 +135,7 @@ const popupVariants = cva(
 );
 
 interface SheetContentProps
-  extends React.ComponentProps<typeof BaseSheet.Popup>,
+  extends BaseSheet.Popup.Props,
     VariantProps<typeof popupVariants> {
   showCloseButton?: boolean;
   inset?: boolean;

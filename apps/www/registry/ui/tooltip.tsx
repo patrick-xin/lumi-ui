@@ -1,14 +1,13 @@
 "use client";
 
 import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip";
-import type * as React from "react";
-import { ArrowSvg } from "@/registry/ui/arrow-svg";
 import { cn } from "@/registry/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 function TooltipProvider({
   delay = 150,
   ...props
-}: React.ComponentProps<typeof BaseTooltip.Provider>) {
+}: BaseTooltip.Provider.Props) {
   return (
     <BaseTooltip.Provider
       data-slot="tooltip-provider"
@@ -18,28 +17,24 @@ function TooltipProvider({
   );
 }
 
-function Tooltip<Payload = unknown>({
-  ...props
-}: React.ComponentProps<typeof BaseTooltip.Root<Payload>>) {
+function Tooltip<Payload>({ ...props }: BaseTooltip.Root.Props<Payload>) {
   return <BaseTooltip.Root data-slot="tooltip" {...props} />;
 }
 
-function TooltipTrigger<Payload = unknown>({
+function TooltipTrigger<Payload>({
   ...props
-}: React.ComponentProps<typeof BaseTooltip.Trigger<Payload>>) {
+}: BaseTooltip.Trigger.Props<Payload>) {
   return <BaseTooltip.Trigger data-slot="tooltip-trigger" {...props} />;
 }
 
-function TooltipPortal({
-  ...props
-}: React.ComponentProps<typeof BaseTooltip.Portal>) {
+function TooltipPortal({ ...props }: BaseTooltip.Portal.Props) {
   return <BaseTooltip.Portal data-slot="tooltip-portal" {...props} />;
 }
 
 function TooltipPositioner({
   className,
   ...props
-}: React.ComponentProps<typeof BaseTooltip.Positioner>) {
+}: BaseTooltip.Positioner.Props) {
   return (
     <BaseTooltip.Positioner
       className={cn(
@@ -52,10 +47,7 @@ function TooltipPositioner({
   );
 }
 
-function TooltipPopup({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseTooltip.Popup>) {
+function TooltipPopup({ className, ...props }: BaseTooltip.Popup.Props) {
   return (
     <BaseTooltip.Popup
       className={cn("relative", className)}
@@ -65,10 +57,7 @@ function TooltipPopup({
   );
 }
 
-function TooltipArrow({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseTooltip.Arrow>) {
+function TooltipArrow({ className, ...props }: BaseTooltip.Arrow.Props) {
   return (
     <BaseTooltip.Arrow
       className={cn(
@@ -87,10 +76,7 @@ function TooltipArrow({
   );
 }
 
-function TooltipViewport({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseTooltip.Viewport>) {
+function TooltipViewport({ className, ...props }: BaseTooltip.Viewport.Props) {
   return (
     <BaseTooltip.Viewport
       className={cn("relative h-full w-full", className)}
@@ -99,14 +85,6 @@ function TooltipViewport({
     />
   );
 }
-
-type TooltipContentProps = React.ComponentProps<typeof BaseTooltip.Popup> & {
-  align?: BaseTooltip.Positioner.Props["align"];
-  alignOffset?: BaseTooltip.Positioner.Props["alignOffset"];
-  side?: BaseTooltip.Positioner.Props["side"];
-  sideOffset?: BaseTooltip.Positioner.Props["sideOffset"];
-  showArrow?: boolean;
-};
 
 function TooltipContent({
   className,
@@ -117,7 +95,13 @@ function TooltipContent({
   showArrow = true,
   children,
   ...props
-}: TooltipContentProps) {
+}: BaseTooltip.Popup.Props &
+  Pick<
+    BaseTooltip.Positioner.Props,
+    "align" | "alignOffset" | "side" | "sideOffset"
+  > & {
+    showArrow?: boolean;
+  }) {
   return (
     <TooltipPortal>
       <BaseTooltip.Positioner

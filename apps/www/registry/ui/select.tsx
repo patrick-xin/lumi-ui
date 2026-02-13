@@ -16,7 +16,7 @@ function SelectTrigger({
   children,
   className,
   ...props
-}: React.ComponentProps<typeof BaseSelect.Trigger>) {
+}: BaseSelect.Trigger.Props) {
   return (
     <BaseSelect.Trigger
       className={cn(
@@ -36,7 +36,7 @@ function SelectValue({
   placeholder,
   children,
   ...props
-}: React.ComponentProps<typeof BaseSelect.Value> & {
+}: BaseSelect.Value.Props & {
   placeholder?: string;
 }) {
   return (
@@ -54,10 +54,7 @@ function SelectValue({
   );
 }
 
-function SelectIcon({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSelect.Icon>) {
+function SelectIcon({ className, ...props }: BaseSelect.Icon.Props) {
   return (
     <BaseSelect.Icon
       className={cn("pointer-events-none", className)}
@@ -67,22 +64,18 @@ function SelectIcon({
   );
 }
 
-function SelectBackdrop({
-  ...props
-}: React.ComponentProps<typeof BaseSelect.Backdrop>) {
+function SelectBackdrop({ ...props }: BaseSelect.Backdrop.Props) {
   return <BaseSelect.Backdrop data-slot="select-backdrop" {...props} />;
 }
 
-function SelectPortal({
-  ...props
-}: React.ComponentProps<typeof BaseSelect.Portal>) {
+function SelectPortal({ ...props }: BaseSelect.Portal.Props) {
   return <BaseSelect.Portal data-slot="select-portal" {...props} />;
 }
 
 function SelectPositioner({
   alignItemWithTrigger,
   ...props
-}: React.ComponentProps<typeof BaseSelect.Positioner>) {
+}: BaseSelect.Positioner.Props) {
   return (
     <BaseSelect.Positioner
       alignItemWithTrigger={alignItemWithTrigger}
@@ -92,21 +85,15 @@ function SelectPositioner({
   );
 }
 
-function SelectPopup({
-  ...props
-}: React.ComponentProps<typeof BaseSelect.Popup>) {
+function SelectPopup({ ...props }: BaseSelect.Popup.Props) {
   return <BaseSelect.Popup data-slot="select-popup" {...props} />;
 }
 
-function SelectList({
-  ...props
-}: React.ComponentProps<typeof BaseSelect.List>) {
+function SelectList({ ...props }: BaseSelect.List.Props) {
   return <BaseSelect.List data-slot="select-list" {...props} />;
 }
 
-function SelectArrow({
-  ...props
-}: React.ComponentProps<typeof BaseSelect.Arrow>) {
+function SelectArrow({ ...props }: BaseSelect.Arrow.Props) {
   return (
     <BaseSelect.Arrow data-slot="select-arrow" {...props}>
       <ArrowSvg variant="popover" />
@@ -114,10 +101,7 @@ function SelectArrow({
   );
 }
 
-function SelectItem({
-  children,
-  ...props
-}: React.ComponentProps<typeof BaseSelect.Item>) {
+function SelectItem({ children, ...props }: BaseSelect.Item.Props) {
   return (
     <BaseSelect.Item data-slot="select-item" {...props}>
       {children}
@@ -125,30 +109,24 @@ function SelectItem({
   );
 }
 
-function SelectItemText({
-  ...props
-}: React.ComponentProps<typeof BaseSelect.ItemText>) {
+function SelectItemText({ ...props }: BaseSelect.ItemText.Props) {
   return <BaseSelect.ItemText data-slot="select-item-text" {...props} />;
 }
 
-function SelectItemIndicator({
-  ...props
-}: React.ComponentProps<typeof BaseSelect.ItemIndicator>) {
+function SelectItemIndicator({ ...props }: BaseSelect.ItemIndicator.Props) {
   return (
     <BaseSelect.ItemIndicator data-slot="select-item-indicator" {...props} />
   );
 }
 
-function SelectGroup({
-  ...props
-}: React.ComponentProps<typeof BaseSelect.Group>) {
+function SelectGroup({ ...props }: BaseSelect.Group.Props) {
   return <BaseSelect.Group data-slot="select-group" {...props} />;
 }
 
 function SelectGroupLabel({
   className,
   ...props
-}: React.ComponentProps<typeof BaseSelect.GroupLabel>) {
+}: BaseSelect.GroupLabel.Props) {
   return (
     <BaseSelect.GroupLabel
       className={cn(
@@ -161,10 +139,7 @@ function SelectGroupLabel({
   );
 }
 
-function SelectSeparator({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSelect.Separator>) {
+function SelectSeparator({ className, ...props }: BaseSelect.Separator.Props) {
   return (
     <BaseSelect.Separator
       className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
@@ -177,7 +152,7 @@ function SelectSeparator({
 function SelectScrollUpArrow({
   className,
   ...props
-}: React.ComponentProps<typeof BaseSelect.ScrollUpArrow>) {
+}: BaseSelect.ScrollUpArrow.Props) {
   return (
     <BaseSelect.ScrollUpArrow
       className={cn(
@@ -195,7 +170,7 @@ function SelectScrollUpArrow({
 function SelectScrollDownArrow({
   className,
   ...props
-}: React.ComponentProps<typeof BaseSelect.ScrollDownArrow>) {
+}: BaseSelect.ScrollDownArrow.Props) {
   return (
     <BaseSelect.ScrollDownArrow
       className={cn(
@@ -210,15 +185,12 @@ function SelectScrollDownArrow({
   );
 }
 
-type SelectTriggerGroupProps = Omit<
-  React.ComponentProps<typeof BaseSelect.Trigger>,
-  "children"
-> & {
+type SelectTriggerGroupProps = Omit<BaseSelect.Trigger.Props, "children"> & {
   size?: "default" | "sm" | "lg";
   indicatorIcon?: React.ReactNode;
   indicatorPlacement?: "start" | "end";
   placeholder?: string;
-  children?: React.ComponentProps<typeof BaseSelect.Value>["children"];
+  children?: BaseSelect.Value.Props["children"];
 };
 
 function SelectTriggerGroup({
@@ -277,9 +249,9 @@ function SelectContent({
   alignOffset = 0,
   alignItemWithTrigger = false,
   ...props
-}: React.ComponentProps<typeof BaseSelect.Popup> &
+}: BaseSelect.Popup.Props &
   Pick<
-    React.ComponentProps<typeof BaseSelect.Positioner>,
+    BaseSelect.Positioner.Props,
     "side" | "sideOffset" | "align" | "alignOffset" | "alignItemWithTrigger"
   >) {
   return (
@@ -313,8 +285,7 @@ function SelectContent({
   );
 }
 
-interface SelectItemContentProps
-  extends React.ComponentProps<typeof BaseSelect.Item> {
+interface SelectItemContentProps extends BaseSelect.Item.Props {
   indicatorPlacement?: "start" | "end";
   indicatorIcon?: React.ReactNode;
 }
@@ -350,7 +321,6 @@ function SelectItemContent({
       >
         {indicatorIcon}
       </BaseSelect.ItemIndicator>
-
       <BaseSelect.ItemText
         className={cn(
           "flex items-center gap-2 row-start-1",

@@ -82,7 +82,7 @@ function ComboboxContent({
   matchAnchorWidth = true,
   positionerAnchor,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Popup> & {
+}: BaseCombobox.Popup.Props & {
   sideOffset?: BaseCombobox.Positioner.Props["sideOffset"];
   align?: BaseCombobox.Positioner.Props["align"];
   matchAnchorWidth?: boolean;
@@ -181,7 +181,7 @@ Base UI 提供了行为基础，而我们提供了视觉一致性。
 function ComboboxTrigger({
   className,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Trigger>) {
+}: BaseCombobox.Trigger.Props) {
   return (
     <BaseCombobox.Trigger
       data-slot="combobox-trigger" // 用于全局 CSS 定位
