@@ -5,12 +5,12 @@ import {
   type PreviewCardTriggerProps,
 } from "@base-ui/react/preview-card";
 import type * as React from "react";
-import { ArrowSvg } from "@/registry/ui/arrow-svg";
 import { cn } from "@/registry/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 function PreviewCard<Payload = unknown>({
   ...props
-}: React.ComponentProps<typeof BasePreviewCard.Root<Payload>>) {
+}: BasePreviewCard.Root.Props<Payload>) {
   return <BasePreviewCard.Root data-slot="preview-card" {...props} />;
 }
 
@@ -27,16 +27,14 @@ function PreviewCardTrigger<Payload = unknown>({
   );
 }
 
-function PreviewPortal({
-  ...props
-}: React.ComponentProps<typeof BasePreviewCard.Portal>) {
+function PreviewPortal({ ...props }: BasePreviewCard.Portal.Props) {
   return <BasePreviewCard.Portal data-slot="preview-card-portal" {...props} />;
 }
 
 function PreviewBackdrop({
   className,
   ...props
-}: React.ComponentProps<typeof BasePreviewCard.Backdrop>) {
+}: BasePreviewCard.Backdrop.Props) {
   return (
     <BasePreviewCard.Backdrop
       className={cn(className)}
@@ -49,7 +47,7 @@ function PreviewBackdrop({
 function PreviewPositioner({
   className,
   ...props
-}: React.ComponentProps<typeof BasePreviewCard.Positioner>) {
+}: BasePreviewCard.Positioner.Props) {
   return (
     <BasePreviewCard.Positioner
       className={cn(className)}
@@ -62,7 +60,7 @@ function PreviewPositioner({
 function PreviewCardPopup({
   className,
   ...props
-}: React.ComponentProps<typeof BasePreviewCard.Popup>) {
+}: BasePreviewCard.Popup.Props) {
   return (
     <BasePreviewCard.Popup
       className={cn(className)}
@@ -75,7 +73,7 @@ function PreviewCardPopup({
 function PreviewCardArrow({
   className,
   ...props
-}: React.ComponentProps<typeof BasePreviewCard.Arrow>) {
+}: BasePreviewCard.Arrow.Props) {
   return (
     <BasePreviewCard.Arrow
       className={cn(
@@ -99,7 +97,7 @@ function PreviewCardContent({
   sideOffset = 4,
   showArrow = false,
   ...props
-}: React.ComponentProps<typeof BasePreviewCard.Popup> & {
+}: BasePreviewCard.Popup.Props & {
   children: React.ReactNode;
   align?: BasePreviewCard.Positioner.Props["align"];
   alignOffset?: BasePreviewCard.Positioner.Props["alignOffset"];

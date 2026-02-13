@@ -3,12 +3,8 @@
 import { Fieldset as BaseFieldset } from "@base-ui/react/fieldset";
 import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
-import { Separator } from "@/registry/ui/separator";
 
-function Fieldset({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseFieldset.Root>) {
+function Fieldset({ className, ...props }: BaseFieldset.Root.Props) {
   return (
     <BaseFieldset.Root
       className={cn(
@@ -22,10 +18,7 @@ function Fieldset({
   );
 }
 
-function FieldsetLegend({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseFieldset.Legend>) {
+function FieldsetLegend({ className, ...props }: BaseFieldset.Legend.Props) {
   return (
     <BaseFieldset.Legend
       className={cn("text-foreground font-medium text-base", className)}
@@ -48,11 +41,4 @@ function FieldsetDescription({
   );
 }
 
-function FieldsetSeparator({
-  className,
-  ...props
-}: React.ComponentProps<typeof Separator>) {
-  return <Separator className={cn("my-2", className)} {...props} />;
-}
-
-export { Fieldset, FieldsetDescription, FieldsetLegend, FieldsetSeparator };
+export { Fieldset, FieldsetDescription, FieldsetLegend };

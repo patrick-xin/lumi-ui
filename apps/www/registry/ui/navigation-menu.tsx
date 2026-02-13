@@ -3,15 +3,13 @@
 import { NavigationMenu as BaseNavigationMenu } from "@base-ui/react/navigation-menu";
 import { cva } from "class-variance-authority";
 import { ChevronDownIcon } from "lucide-react";
-import type * as React from "react";
-import { ArrowSvg } from "@/registry/ui/arrow-svg";
-
 import { cn } from "@/registry/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
 function NavigationMenuRoot({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Root>) {
+}: BaseNavigationMenu.Root.Props) {
   return (
     <BaseNavigationMenu.Root
       className={cn("relative max-w-max", className)}
@@ -24,7 +22,7 @@ function NavigationMenuRoot({
 function NavigationMenuList({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.List>) {
+}: BaseNavigationMenu.List.Props) {
   return (
     <BaseNavigationMenu.List
       className={cn(
@@ -40,7 +38,7 @@ function NavigationMenuList({
 function NavigationMenuItem({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Item>) {
+}: BaseNavigationMenu.Item.Props) {
   return (
     <BaseNavigationMenu.Item
       className={cn("relative", className)}
@@ -68,7 +66,7 @@ function NavigationMenuTrigger({
   children,
   showIcon = true,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Trigger> & {
+}: BaseNavigationMenu.Trigger.Props & {
   showIcon?: boolean;
 }) {
   return (
@@ -90,7 +88,7 @@ function NavigationMenuTrigger({
 function NavigationMenuIcon({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Icon>) {
+}: BaseNavigationMenu.Icon.Props) {
   return (
     <BaseNavigationMenu.Icon
       className={cn("transition-transform duration-200 ease-out", className)}
@@ -103,7 +101,7 @@ function NavigationMenuIcon({
 function NavigationMenuContent({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Content>) {
+}: BaseNavigationMenu.Content.Props) {
   return (
     <BaseNavigationMenu.Content
       className={cn(
@@ -124,7 +122,7 @@ function NavigationMenuContent({
 function NavigationMenuLink({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Link>) {
+}: BaseNavigationMenu.Link.Props) {
   return (
     <BaseNavigationMenu.Link
       className={cn(
@@ -145,9 +143,7 @@ function NavigationMenuLink({
   );
 }
 
-function NavigationMenuPortal(
-  props: React.ComponentProps<typeof BaseNavigationMenu.Portal>,
-) {
+function NavigationMenuPortal(props: BaseNavigationMenu.Portal.Props) {
   return (
     <BaseNavigationMenu.Portal data-slot="navigation-menu-portal" {...props} />
   );
@@ -156,7 +152,7 @@ function NavigationMenuPortal(
 function NavigationMenuBackdrop({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Backdrop>) {
+}: BaseNavigationMenu.Backdrop.Props) {
   return (
     <BaseNavigationMenu.Backdrop
       className={cn("fixed inset-0 bg-black/50 animate-fade", className)}
@@ -170,7 +166,7 @@ function NavigationMenuPositioner({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Positioner>) {
+}: BaseNavigationMenu.Positioner.Props) {
   return (
     <BaseNavigationMenu.Positioner
       className={cn(
@@ -189,9 +185,7 @@ function NavigationMenuPositioner({
   );
 }
 
-function NavigationMenuPopup(
-  props: React.ComponentProps<typeof BaseNavigationMenu.Popup>,
-) {
+function NavigationMenuPopup(props: BaseNavigationMenu.Popup.Props) {
   return (
     <BaseNavigationMenu.Popup
       className={cn(
@@ -204,9 +198,7 @@ function NavigationMenuPopup(
   );
 }
 
-function NavigationMenuArrow({
-  className,
-}: React.ComponentProps<typeof BaseNavigationMenu.Arrow>) {
+function NavigationMenuArrow({ className }: BaseNavigationMenu.Arrow.Props) {
   return (
     <BaseNavigationMenu.Arrow
       className={cn(
@@ -224,7 +216,7 @@ function NavigationMenuArrow({
 function NavigationMenuViewport({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Viewport>) {
+}: BaseNavigationMenu.Viewport.Props) {
   return (
     <BaseNavigationMenu.Viewport
       className={cn("relative h-full w-full overflow-hidden", className)}
@@ -240,7 +232,7 @@ function NavigationMenu({
   orientation = "horizontal",
   showArrow = false,
   ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Root> & {
+}: BaseNavigationMenu.Root.Props & {
   showArrow?: boolean;
 }) {
   return (

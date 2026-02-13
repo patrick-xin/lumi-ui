@@ -4,54 +4,40 @@ import { ContextMenu as BaseContextMenu } from "@base-ui/react/context-menu";
 import { cva, type VariantProps } from "class-variance-authority";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 import type * as React from "react";
-import { ArrowSvg } from "@/registry/ui/arrow-svg";
 import { cn } from "@/registry/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
-function ContextMenu({
-  ...props
-}: React.ComponentProps<typeof BaseContextMenu.Root>) {
+function ContextMenu({ ...props }: BaseContextMenu.Root.Props) {
   return <BaseContextMenu.Root data-slot="context-menu" {...props} />;
 }
 
-function ContextMenuTrigger({
-  ...props
-}: React.ComponentProps<typeof BaseContextMenu.Trigger>) {
+function ContextMenuTrigger({ ...props }: BaseContextMenu.Trigger.Props) {
   return (
     <BaseContextMenu.Trigger data-slot="context-menu-trigger" {...props} />
   );
 }
 
-function ContextMenuGroup({
-  ...props
-}: React.ComponentProps<typeof BaseContextMenu.Group>) {
+function ContextMenuGroup({ ...props }: BaseContextMenu.Group.Props) {
   return <BaseContextMenu.Group data-slot="context-menu-group" {...props} />;
 }
 
-function ContextMenuPortal({
-  ...props
-}: React.ComponentProps<typeof BaseContextMenu.Portal>) {
+function ContextMenuPortal({ ...props }: BaseContextMenu.Portal.Props) {
   return <BaseContextMenu.Portal data-slot="context-menu-portal" {...props} />;
 }
 
-function ContextMenuBackdrop({
-  ...props
-}: React.ComponentProps<typeof BaseContextMenu.Backdrop>) {
+function ContextMenuBackdrop({ ...props }: BaseContextMenu.Backdrop.Props) {
   return (
     <BaseContextMenu.Backdrop data-slot="context-menu-backdrop" {...props} />
   );
 }
 
-function ContextMenuSub({
-  ...props
-}: React.ComponentProps<typeof BaseContextMenu.SubmenuRoot>) {
+function ContextMenuSub({ ...props }: BaseContextMenu.SubmenuRoot.Props) {
   return (
     <BaseContextMenu.SubmenuRoot data-slot="context-menu-sub" {...props} />
   );
 }
 
-function ContextMenuRadioGroup({
-  ...props
-}: React.ComponentProps<typeof BaseContextMenu.RadioGroup>) {
+function ContextMenuRadioGroup({ ...props }: BaseContextMenu.RadioGroup.Props) {
   return (
     <BaseContextMenu.RadioGroup
       data-slot="context-menu-radio-group"
@@ -63,7 +49,7 @@ function ContextMenuRadioGroup({
 function ContextMenuPositioner({
   className,
   ...props
-}: React.ComponentProps<typeof BaseContextMenu.Positioner>) {
+}: BaseContextMenu.Positioner.Props) {
   return (
     <BaseContextMenu.Positioner
       className={cn(className)}
@@ -77,7 +63,7 @@ function ContextMenuPopup({
   className,
   "data-slot": dataSlot,
   ...props
-}: React.ComponentProps<typeof BaseContextMenu.Popup> & {
+}: BaseContextMenu.Popup.Props & {
   "data-slot"?: string;
 }) {
   const finalSlot = dataSlot || "context-menu-popup";
@@ -90,30 +76,17 @@ function ContextMenuPopup({
   );
 }
 
-function ContextMenuArrow({
-  ...props
-}: React.ComponentProps<typeof BaseContextMenu.Arrow>) {
+function ContextMenuArrow({ ...props }: BaseContextMenu.Arrow.Props) {
   return <BaseContextMenu.Arrow data-slot="context-menu-arrow" {...props} />;
 }
 
-type ContextMenuContentProps = React.ComponentProps<
-  typeof BaseContextMenu.Popup
-> & {
-  align?: React.ComponentProps<typeof BaseContextMenu.Positioner>["align"];
-  alignOffset?: React.ComponentProps<
-    typeof BaseContextMenu.Positioner
-  >["alignOffset"];
-  side?: React.ComponentProps<typeof BaseContextMenu.Positioner>["side"];
-  sideOffset?: React.ComponentProps<
-    typeof BaseContextMenu.Positioner
-  >["sideOffset"];
-  showArrow?: boolean;
-  positionerProps?: Omit<
-    React.ComponentProps<typeof BaseContextMenu.Positioner>,
-    "children" | "className"
-  >;
-  portalProps?: React.ComponentProps<typeof BaseContextMenu.Portal>;
-};
+type ContextMenuContentProps = BaseContextMenu.Popup.Props &
+  Pick<
+    BaseContextMenu.Positioner.Props,
+    "align" | "alignOffset" | "side" | "sideOffset"
+  > & {
+    showArrow?: boolean;
+  };
 
 function ContextMenuContent({
   children,
@@ -123,19 +96,16 @@ function ContextMenuContent({
   side = "bottom",
   sideOffset = 4,
   showArrow = false,
-  positionerProps,
-  portalProps,
-  ...popupProps
+  ...props
 }: ContextMenuContentProps) {
   return (
-    <ContextMenuPortal {...portalProps}>
+    <ContextMenuPortal>
       <ContextMenuPositioner
         align={align}
         alignOffset={alignOffset}
         className="max-h-(--available-height) outline-none"
         side={side}
         sideOffset={sideOffset}
-        {...positionerProps}
       >
         <ContextMenuPopup
           className={cn(
@@ -144,7 +114,7 @@ function ContextMenuContent({
             className,
           )}
           data-slot="context-menu-content"
-          {...popupProps}
+          {...props}
         >
           {showArrow && (
             <ContextMenuArrow className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180">
@@ -203,7 +173,7 @@ const contextItemVariants = cva(
   },
 );
 
-type MenubarItemProps = React.ComponentProps<typeof BaseContextMenu.Item> &
+type ContextMenuItemProps = BaseContextMenu.Item.Props &
   VariantProps<typeof contextItemVariants> & {
     unstyled?: boolean;
   };
@@ -213,7 +183,7 @@ function ContextMenuItem({
   variant = "default",
   unstyled,
   ...props
-}: MenubarItemProps) {
+}: ContextMenuItemProps) {
   return (
     <BaseContextMenu.Item
       className={cn(
@@ -232,7 +202,7 @@ function ContextMenuCheckboxItem({
   children,
   checked,
   ...props
-}: React.ComponentProps<typeof BaseContextMenu.CheckboxItem>) {
+}: BaseContextMenu.CheckboxItem.Props) {
   return (
     <BaseContextMenu.CheckboxItem
       checked={checked}
@@ -259,7 +229,7 @@ function ContextMenuRadioItem({
   children,
   className,
   ...props
-}: React.ComponentProps<typeof BaseContextMenu.RadioItem>) {
+}: BaseContextMenu.RadioItem.Props) {
   return (
     <BaseContextMenu.RadioItem
       className={cn(
@@ -285,7 +255,7 @@ function ContextMenuLabel({
   className,
   inset,
   ...props
-}: React.ComponentProps<typeof BaseContextMenu.GroupLabel> & {
+}: BaseContextMenu.GroupLabel.Props & {
   inset?: boolean;
 }) {
   return (
@@ -304,7 +274,7 @@ function ContextMenuLabel({
 function ContextMenuSeparator({
   className,
   ...props
-}: React.ComponentProps<typeof BaseContextMenu.Separator>) {
+}: BaseContextMenu.Separator.Props) {
   return (
     <BaseContextMenu.Separator
       className={cn("bg-border -mx-1 my-1 h-px", className)}
@@ -336,7 +306,7 @@ function ContextMenuSubTrigger({
   unstyled,
   variant = "default",
   ...props
-}: React.ComponentProps<typeof BaseContextMenu.SubmenuTrigger> &
+}: BaseContextMenu.SubmenuTrigger.Props &
   VariantProps<typeof contextItemVariants> & {
     unstyled?: boolean;
   }) {

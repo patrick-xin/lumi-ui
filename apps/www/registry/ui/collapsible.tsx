@@ -2,7 +2,6 @@
 
 import { Collapsible as BaseCollapsible } from "@base-ui/react/collapsible";
 import { cva, type VariantProps } from "class-variance-authority";
-import type * as React from "react";
 
 import { cn } from "@/registry/lib/utils";
 
@@ -18,27 +17,19 @@ const panelVariants = cva("overflow-hidden", {
   },
 });
 
-function Collapsible({
-  ...props
-}: React.ComponentProps<typeof BaseCollapsible.Root>) {
+function Collapsible({ ...props }: BaseCollapsible.Root.Props) {
   return <BaseCollapsible.Root data-slot="collapsible" {...props} />;
 }
 
-function CollapsibleTrigger({
-  ...props
-}: React.ComponentProps<typeof BaseCollapsible.Trigger>) {
+function CollapsibleTrigger({ ...props }: BaseCollapsible.Trigger.Props) {
   return <BaseCollapsible.Trigger data-slot="collapsible-trigger" {...props} />;
 }
-
-interface CollapsiblePanelProps
-  extends React.ComponentProps<typeof BaseCollapsible.Panel>,
-    VariantProps<typeof panelVariants> {}
 
 function CollapsiblePanel({
   className,
   animation,
   ...props
-}: CollapsiblePanelProps) {
+}: BaseCollapsible.Panel.Props & VariantProps<typeof panelVariants>) {
   return (
     <BaseCollapsible.Panel
       className={cn(panelVariants({ animation }), className)}

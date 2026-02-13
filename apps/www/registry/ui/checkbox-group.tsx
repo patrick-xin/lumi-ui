@@ -1,13 +1,8 @@
 import { CheckboxGroup as BaseCheckboxGroup } from "@base-ui/react/checkbox-group";
-import type * as React from "react";
+import { cn } from "@/registry/lib/utils";
 import { Checkbox } from "@/registry/ui/checkbox";
 
-import { cn } from "@/registry/lib/utils";
-
-function CheckboxGroup({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCheckboxGroup>) {
+function CheckboxGroup({ className, ...props }: BaseCheckboxGroup.Props) {
   return (
     <BaseCheckboxGroup
       className={cn("grid gap-3", className)}

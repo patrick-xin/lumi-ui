@@ -2,14 +2,10 @@
 
 import { Checkbox as BaseCheckbox } from "@base-ui/react/checkbox";
 import { CheckIcon, MinusIcon } from "lucide-react";
-import type * as React from "react";
 
 import { cn } from "@/registry/lib/utils";
 
-function Checkbox({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCheckbox.Root>) {
+function Checkbox({ className, ...props }: BaseCheckbox.Root.Props) {
   return (
     <BaseCheckbox.Root
       className={cn(

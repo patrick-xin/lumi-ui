@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
 import { useScrollToTop } from "@lumi-ui/ui/hooks/use-scroll-to-top";
 import type { TOCItemType } from "fumadocs-core/toc";
 import { ArrowUpIcon, TextAlignStartIcon } from "lucide-react";
@@ -8,6 +7,7 @@ import { useTranslations } from "next-intl";
 import * as React from "react";
 import { useTocActiveItem } from "@/hooks/use-toc-active-Item";
 import { cn } from "@/lib/utils";
+import { Button } from "@/registry/ui/button";
 
 interface DocsTableOfContentsProps {
   toc: TOCItemType[];

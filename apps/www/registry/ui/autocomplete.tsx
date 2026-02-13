@@ -10,16 +10,14 @@ import { inputVariants } from "@/registry/ui/input";
 
 const Autocomplete = BaseAutocomplete.Root;
 
-function AutocompleteValue({
-  ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Value>) {
+function AutocompleteValue({ ...props }: BaseAutocomplete.Value.Props) {
   return <BaseAutocomplete.Value data-slot="autocomplete-value" {...props} />;
 }
 
 function AutocompleteIcon({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Icon>) {
+}: BaseAutocomplete.Icon.Props) {
   return (
     <BaseAutocomplete.Icon
       className={cn(
@@ -37,7 +35,7 @@ function AutocompleteInput({
   variant = "default",
   inputSize = "default",
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Input> & {
+}: BaseAutocomplete.Input.Props & {
   variant?: VariantProps<typeof inputVariants>["variant"];
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
 }) {
@@ -53,7 +51,7 @@ function AutocompleteInput({
 function AutocompleteClear({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Clear>) {
+}: BaseAutocomplete.Clear.Props) {
   return (
     <BaseAutocomplete.Clear
       aria-label="Clear selection"
@@ -67,7 +65,7 @@ function AutocompleteClear({
 function AutocompleteTrigger({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Trigger>) {
+}: BaseAutocomplete.Trigger.Props) {
   return (
     <BaseAutocomplete.Trigger
       className={cn(
@@ -83,7 +81,7 @@ function AutocompleteTrigger({
 function AutocompleteList({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.List>) {
+}: BaseAutocomplete.List.Props) {
   return (
     <BaseAutocomplete.List
       className={cn(
@@ -97,15 +95,11 @@ function AutocompleteList({
   );
 }
 
-function AutocompletePortal({
-  ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Portal>) {
+function AutocompletePortal({ ...props }: BaseAutocomplete.Portal.Props) {
   return <BaseAutocomplete.Portal data-slot="autocomplete-portal" {...props} />;
 }
 
-function AutocompleteBackdrop({
-  ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Backdrop>) {
+function AutocompleteBackdrop({ ...props }: BaseAutocomplete.Backdrop.Props) {
   return (
     <BaseAutocomplete.Backdrop data-slot="autocomplete-backdrop" {...props} />
   );
@@ -114,7 +108,7 @@ function AutocompleteBackdrop({
 function AutocompletePositioner({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Positioner>) {
+}: BaseAutocomplete.Positioner.Props) {
   return (
     <BaseAutocomplete.Positioner
       className={cn("outline-none", className)}
@@ -124,22 +118,18 @@ function AutocompletePositioner({
   );
 }
 
-function AutocompletePopup({
-  ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Popup>) {
+function AutocompletePopup({ ...props }: BaseAutocomplete.Popup.Props) {
   return <BaseAutocomplete.Popup data-slot="autocomplete-popup" {...props} />;
 }
 
-function AutocompleteArrow({
-  ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Arrow>) {
+function AutocompleteArrow({ ...props }: BaseAutocomplete.Arrow.Props) {
   return <BaseAutocomplete.Arrow data-slot="autocomplete-arrow" {...props} />;
 }
 
 function AutocompleteStatus({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Status>) {
+}: BaseAutocomplete.Status.Props) {
   return (
     <BaseAutocomplete.Status
       className={cn(
@@ -155,7 +145,7 @@ function AutocompleteStatus({
 function AutocompleteEmpty({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Empty>) {
+}: BaseAutocomplete.Empty.Props) {
   return (
     <BaseAutocomplete.Empty
       className={cn(
@@ -170,7 +160,7 @@ function AutocompleteEmpty({
 
 function AutocompleteCollection({
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Collection>) {
+}: BaseAutocomplete.Collection.Props) {
   return (
     <BaseAutocomplete.Collection
       data-slot="autocomplete-collection"
@@ -179,16 +169,14 @@ function AutocompleteCollection({
   );
 }
 
-function AutocompleteRow({
-  ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Row>) {
+function AutocompleteRow({ ...props }: BaseAutocomplete.Row.Props) {
   return <BaseAutocomplete.Row data-slot="autocomplete-row" {...props} />;
 }
 
 function AutocompleteItem({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Item>) {
+}: BaseAutocomplete.Item.Props) {
   return (
     <BaseAutocomplete.Item
       className={cn(
@@ -208,7 +196,7 @@ function AutocompleteItem({
 function AutocompleteGroup({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Group>) {
+}: BaseAutocomplete.Group.Props) {
   return (
     <BaseAutocomplete.Group
       className={cn("mb-1 last:mb-0", className)}
@@ -221,7 +209,7 @@ function AutocompleteGroup({
 function AutocompleteGroupLabel({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.GroupLabel>) {
+}: BaseAutocomplete.GroupLabel.Props) {
   return (
     <BaseAutocomplete.GroupLabel
       className={cn(
@@ -237,7 +225,7 @@ function AutocompleteGroupLabel({
 function AutocompleteSeparator({
   className,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Separator>) {
+}: BaseAutocomplete.Separator.Props) {
   return (
     <BaseAutocomplete.Separator
       className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
@@ -255,7 +243,7 @@ function AutocompleteInputGroup({
   inputSize = "default",
   addonIcon,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Input> & {
+}: BaseAutocomplete.Input.Props & {
   showTrigger?: boolean;
   showClear?: boolean;
   variant?: VariantProps<typeof inputVariants>["variant"];
@@ -339,12 +327,11 @@ function AutocompleteContent({
   matchAnchorWidth = true,
   positionerAnchor,
   ...props
-}: React.ComponentProps<typeof BaseAutocomplete.Popup> & {
-  sideOffset?: BaseAutocomplete.Positioner.Props["sideOffset"];
-  align?: BaseAutocomplete.Positioner.Props["align"];
-  matchAnchorWidth?: boolean;
-  positionerAnchor?: React.RefObject<HTMLDivElement | null>;
-}) {
+}: BaseAutocomplete.Popup.Props &
+  Pick<BaseAutocomplete.Positioner.Props, "sideOffset" | "align"> & {
+    matchAnchorWidth?: boolean;
+    positionerAnchor?: React.RefObject<HTMLDivElement | null>;
+  }) {
   return (
     <BaseAutocomplete.Portal data-slot="autocomplete-portal">
       <BaseAutocomplete.Positioner

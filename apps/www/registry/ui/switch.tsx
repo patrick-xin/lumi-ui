@@ -1,16 +1,12 @@
 import { Switch as BaseSwitch } from "@base-ui/react/switch";
-import type * as React from "react";
 
 import { cn } from "@/registry/lib/utils";
 
-function SwitchRoot(props: React.ComponentProps<typeof BaseSwitch.Root>) {
+function SwitchRoot(props: BaseSwitch.Root.Props) {
   return <BaseSwitch.Root data-slot="switch-root" {...props} />;
 }
 
-function SwitchThumb({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSwitch.Thumb>) {
+function SwitchThumb({ className, ...props }: BaseSwitch.Thumb.Props) {
   return (
     <BaseSwitch.Thumb
       className={cn("pointer-events-none", className)}
@@ -20,10 +16,7 @@ function SwitchThumb({
   );
 }
 
-function Switch({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseSwitch.Root>) {
+function Switch({ className, ...props }: BaseSwitch.Root.Props) {
   return (
     <BaseSwitch.Root
       className={cn(

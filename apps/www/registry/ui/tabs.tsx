@@ -1,14 +1,13 @@
 "use client";
 
 import { Tabs as BaseTabs } from "@base-ui/react/tabs";
-import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 
 function Tabs({
   className,
   orientation = "horizontal",
   ...props
-}: React.ComponentProps<typeof BaseTabs.Root>) {
+}: BaseTabs.Root.Props) {
   return (
     <BaseTabs.Root
       className={cn(
@@ -22,11 +21,7 @@ function Tabs({
   );
 }
 
-function TabsList({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof BaseTabs.List>) {
+function TabsList({ className, children, ...props }: BaseTabs.List.Props) {
   return (
     <BaseTabs.List
       className={cn(
@@ -41,10 +36,7 @@ function TabsList({
     </BaseTabs.List>
   );
 }
-function TabIndicator({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseTabs.Indicator>) {
+function TabIndicator({ className, ...props }: BaseTabs.Indicator.Props) {
   return (
     <BaseTabs.Indicator
       className={cn(
@@ -57,10 +49,7 @@ function TabIndicator({
   );
 }
 
-function TabsTab({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseTabs.Tab>) {
+function TabsTab({ className, ...props }: BaseTabs.Tab.Props) {
   return (
     <BaseTabs.Tab
       className={cn(
@@ -82,10 +71,7 @@ function TabsTab({
   );
 }
 
-function TabsPanel({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseTabs.Panel>) {
+function TabsPanel({ className, ...props }: BaseTabs.Panel.Props) {
   return (
     <BaseTabs.Panel
       className={cn(
@@ -103,7 +89,7 @@ function TabsListContent({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof BaseTabs.List>) {
+}: BaseTabs.List.Props) {
   return (
     <BaseTabs.List
       className={cn(

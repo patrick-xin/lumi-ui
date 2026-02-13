@@ -7,28 +7,24 @@ import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
-function DropdownMenu<Payload>({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Root<Payload>>) {
+function DropdownMenu<Payload>({ ...props }: BaseMenu.Root.Props<Payload>) {
   return <BaseMenu.Root data-slot="dropdown-menu" {...props} />;
 }
 
 function DropdownMenuTrigger<Payload>({
   ...props
-}: React.ComponentProps<typeof BaseMenu.Trigger<Payload>>) {
+}: BaseMenu.Trigger.Props<Payload>) {
   return <BaseMenu.Trigger data-slot="dropdown-menu-trigger" {...props} />;
 }
 
-function DropdownMenuPortal({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Portal>) {
+function DropdownMenuPortal({ ...props }: BaseMenu.Portal.Props) {
   return <BaseMenu.Portal data-slot="dropdown-menu-portal" {...props} />;
 }
 
 function DropdownMenuBackdrop({
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.Backdrop>) {
+}: BaseMenu.Backdrop.Props) {
   return (
     <BaseMenu.Backdrop
       className={cn("fixed inset-0", className)}
@@ -41,7 +37,7 @@ function DropdownMenuBackdrop({
 function DropdownMenuPositioner({
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.Positioner>) {
+}: BaseMenu.Positioner.Props) {
   return (
     <BaseMenu.Positioner
       className={cn("relative", className)}
@@ -51,10 +47,7 @@ function DropdownMenuPositioner({
   );
 }
 
-function DropdownMenuPopup({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Popup>) {
+function DropdownMenuPopup({ className, ...props }: BaseMenu.Popup.Props) {
   return (
     <BaseMenu.Popup
       className={cn("relative", className)}
@@ -64,9 +57,7 @@ function DropdownMenuPopup({
   );
 }
 
-function DropdownMenuArrow({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Arrow>) {
+function DropdownMenuArrow({ ...props }: BaseMenu.Arrow.Props) {
   return (
     <BaseMenu.Arrow
       className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180"
@@ -102,7 +93,7 @@ const dropdownMenuItemVariants = cva(
   },
 );
 
-type DropdownMenuItemProps = React.ComponentProps<typeof BaseMenu.Item> &
+type DropdownMenuItemProps = BaseMenu.Item.Props &
   VariantProps<typeof dropdownMenuItemVariants> & {
     unstyled?: boolean;
   };
@@ -128,7 +119,7 @@ function DropdownMenuItem({
 function DropdownMenuSeparator({
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.Separator>) {
+}: BaseMenu.Separator.Props) {
   return (
     <BaseMenu.Separator
       className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
@@ -138,16 +129,14 @@ function DropdownMenuSeparator({
   );
 }
 
-function DropdownMenuGroup({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.Group>) {
+function DropdownMenuGroup({ ...props }: BaseMenu.Group.Props) {
   return <BaseMenu.Group data-slot="dropdown-menu-group" {...props} />;
 }
 
 function DropdownMenuGroupLabel({
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.GroupLabel>) {
+}: BaseMenu.GroupLabel.Props) {
   return (
     <BaseMenu.GroupLabel
       className={cn(
@@ -160,9 +149,7 @@ function DropdownMenuGroupLabel({
   );
 }
 
-function DropdownMenuRadioGroup({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.RadioGroup>) {
+function DropdownMenuRadioGroup({ ...props }: BaseMenu.RadioGroup.Props) {
   return (
     <BaseMenu.RadioGroup data-slot="dropdown-menu-radio-group" {...props} />
   );
@@ -172,7 +159,7 @@ function DropdownMenuRadioItem({
   children,
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.RadioItem>) {
+}: BaseMenu.RadioItem.Props) {
   return (
     <BaseMenu.RadioItem
       className={cn(className)}
@@ -185,7 +172,7 @@ function DropdownMenuRadioItem({
 function DropdownMenuCheckboxItem({
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.CheckboxItem>) {
+}: BaseMenu.CheckboxItem.Props) {
   return (
     <BaseMenu.CheckboxItem
       className={cn(className)}
@@ -195,16 +182,14 @@ function DropdownMenuCheckboxItem({
   );
 }
 
-function DropdownMenuSubMenu({
-  ...props
-}: React.ComponentProps<typeof BaseMenu.SubmenuRoot>) {
+function DropdownMenuSubMenu({ ...props }: BaseMenu.SubmenuRoot.Props) {
   return <BaseMenu.SubmenuRoot data-slot="dropdown-menu-sub-menu" {...props} />;
 }
 
 function DropdownMenuSubMenuTrigger({
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.SubmenuTrigger>) {
+}: BaseMenu.SubmenuTrigger.Props) {
   return (
     <BaseMenu.SubmenuTrigger
       className={cn("outline-hidden select-none cursor-default", className)}
@@ -253,7 +238,7 @@ function DropdownMenuSubMenuTriggerGroup({
   children,
   className,
   ...props
-}: React.ComponentProps<typeof BaseMenu.SubmenuTrigger>) {
+}: BaseMenu.SubmenuTrigger.Props) {
   return (
     <BaseMenu.SubmenuTrigger
       className={cn(
@@ -272,7 +257,7 @@ function DropdownMenuSubMenuTriggerGroup({
   );
 }
 
-type DropdownMenuContentProps = React.ComponentProps<typeof BaseMenu.Popup> & {
+type DropdownMenuContentProps = BaseMenu.Popup.Props & {
   side?: BaseMenu.Positioner.Props["side"];
   sideOffset?: BaseMenu.Positioner.Props["sideOffset"];
   align?: BaseMenu.Positioner.Props["align"];
@@ -323,7 +308,7 @@ function DropdownMenuContent({
 }
 
 interface DropdownMenuCheckboxItemContentProps
-  extends React.ComponentProps<typeof BaseMenu.CheckboxItem> {
+  extends BaseMenu.CheckboxItem.Props {
   indicatorPlacement?: "start" | "end";
   indicatorIcon?: React.ReactNode;
 }
@@ -372,8 +357,7 @@ function DropdownMenuCheckboxItemContent({
   );
 }
 
-interface DropdownMenuRadioItemContentProps
-  extends React.ComponentProps<typeof BaseMenu.RadioItem> {
+interface DropdownMenuRadioItemContentProps extends BaseMenu.RadioItem.Props {
   indicatorPlacement?: "start" | "end";
   indicatorIcon?: React.ReactNode;
 }

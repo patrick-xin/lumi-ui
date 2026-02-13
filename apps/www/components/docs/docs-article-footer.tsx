@@ -34,7 +34,7 @@ export const DocsAritcleFooter = ({ neighbours }: DocsAritcleFooterProps) => {
             className="justify-end"
             nativeButton={false}
             render={
-              <Link href={neighbours.previous.url}>
+              <Link href={neighbours.previous.url} prefetch={false}>
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 <span className="truncate">{neighbours.previous.name}</span>
               </Link>
@@ -49,7 +49,7 @@ export const DocsAritcleFooter = ({ neighbours }: DocsAritcleFooterProps) => {
             className="justify-end"
             nativeButton={false}
             render={
-              <Link href={neighbours.next.url}>
+              <Link href={neighbours.next.url} prefetch={false}>
                 <span className="truncate">{neighbours.next.name}</span>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>

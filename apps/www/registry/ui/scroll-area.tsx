@@ -1,13 +1,9 @@
 "use client";
 
 import { ScrollArea as BaseScrollArea } from "@base-ui/react/scroll-area";
-import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 
-function ScrollAreaRoot({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseScrollArea.Root>) {
+function ScrollAreaRoot({ className, ...props }: BaseScrollArea.Root.Props) {
   return (
     <BaseScrollArea.Root
       className={cn("group/scroll-area relative overflow-hidden", className)}
@@ -21,7 +17,7 @@ function ScrollAreaViewport({
   className,
   gradientScrollFade,
   ...props
-}: React.ComponentProps<typeof BaseScrollArea.Viewport> & {
+}: BaseScrollArea.Viewport.Props & {
   gradientScrollFade?: boolean;
 }) {
   return (
@@ -45,7 +41,7 @@ function ScrollAreaViewport({
 function ScrollAreaCorner({
   className,
   ...props
-}: React.ComponentProps<typeof BaseScrollArea.Corner>) {
+}: BaseScrollArea.Corner.Props) {
   return (
     <BaseScrollArea.Corner
       className={cn("bg-transparent", className)}
@@ -58,7 +54,7 @@ function ScrollAreaCorner({
 function ScrollAreaContent({
   className,
   ...props
-}: React.ComponentProps<typeof BaseScrollArea.Content>) {
+}: BaseScrollArea.Content.Props) {
   return (
     <BaseScrollArea.Content
       className={cn("flex-1", className)}
@@ -72,7 +68,7 @@ function ScrollAreaScrollBar({
   className,
   orientation = "vertical",
   ...props
-}: React.ComponentProps<typeof BaseScrollArea.Scrollbar>) {
+}: BaseScrollArea.Scrollbar.Props) {
   return (
     <BaseScrollArea.Scrollbar
       className={cn(
@@ -107,7 +103,7 @@ function ScrollArea({
   noScrollBar = false,
   children,
   ...props
-}: React.ComponentProps<typeof BaseScrollArea.Root> & {
+}: BaseScrollArea.Root.Props & {
   gradientScrollFade?: boolean;
   noScrollBar?: boolean;
 }) {
@@ -134,10 +130,11 @@ function ScrollArea({
 }
 
 export {
-  ScrollArea,
+  ScrollAreaRoot,
   ScrollAreaScrollBar,
   ScrollAreaContent,
-  ScrollAreaRoot,
   ScrollAreaViewport,
   ScrollAreaCorner,
+  // Composite component
+  ScrollArea,
 };

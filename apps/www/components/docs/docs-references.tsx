@@ -1,6 +1,6 @@
-import { Button } from "@lumi-ui/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/registry/ui/button";
 
 interface DocsReferenceProps {
   links?: {

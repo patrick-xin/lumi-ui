@@ -82,7 +82,7 @@ function ComboboxContent({
   matchAnchorWidth = true,
   positionerAnchor,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Popup> & {
+}: BaseCombobox.Popup.Props & {
   sideOffset?: BaseCombobox.Positioner.Props["sideOffset"];
   align?: BaseCombobox.Positioner.Props["align"];
   matchAnchorWidth?: boolean;
@@ -182,7 +182,7 @@ Every primitive follows this structure:
 function ComboboxTrigger({
   className,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Trigger>) {
+}: BaseCombobox.Trigger.Props) {
   return (
     <BaseCombobox.Trigger
       data-slot="combobox-trigger" // For global CSS targeting

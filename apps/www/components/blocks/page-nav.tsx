@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@lumi-ui/ui/lib/utils";
-import { ScrollArea } from "@lumi-ui/ui/scroll-area";
 import { Link, usePathname } from "@/lib/i18n/navigation";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 interface PageNavItem {
   title: string;
@@ -46,6 +46,7 @@ export function PageNav({
                 data-active={isActive}
                 href={item.href}
                 key={item.href}
+                prefetch={false}
               >
                 {item.title}
               </Link>

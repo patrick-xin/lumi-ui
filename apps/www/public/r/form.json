@@ -12,7 +12,7 @@
   "files": [
     {
       "path": "registry/ui/form.tsx",
-      "content": "import { Form as BaseForm } from \"@base-ui/react/form\";\nimport type * as React from \"react\";\n\nimport { cn } from \"@/registry/lib/utils\";\n\nfunction Form({ className, ...props }: React.ComponentProps<typeof BaseForm>) {\n  return (\n    <BaseForm\n      className={cn(\"flex flex-col gap-6\", className)}\n      data-slot=\"form\"\n      {...props}\n    />\n  );\n}\n\ntype FormProps = React.ComponentProps<typeof BaseForm>;\ntype FormErrors = NonNullable<FormProps[\"errors\"]>;\ntype FormValues = Record<string, unknown>;\n\nexport { Form };\nexport type { FormErrors, FormProps, FormValues };\n",
+      "content": "import { Form as BaseForm } from \"@base-ui/react/form\";\n\nimport { cn } from \"@/registry/lib/utils\";\n\nfunction Form({ className, ...props }: BaseForm.Props) {\n  return (\n    <BaseForm\n      className={cn(\"flex flex-col gap-6\", className)}\n      data-slot=\"form\"\n      {...props}\n    />\n  );\n}\n\ntype FormProps = BaseForm.Props;\ntype FormErrors = NonNullable<FormProps[\"errors\"]>;\ntype FormValues = Record<string, unknown>;\n\nexport { Form };\nexport type { FormErrors, FormProps, FormValues };\n",
       "type": "registry:ui"
     }
   ],

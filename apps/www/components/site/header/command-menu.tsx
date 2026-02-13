@@ -1,5 +1,14 @@
 "use client";
 
+import { useIsMac } from "@lumi-ui/ui/hooks/use-is-mac";
+import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
+import { ArrowDown, ArrowUp, CornerDownLeftIcon, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import * as React from "react";
+import { IconMap } from "@/lib/icons";
+import { getSearchGroups } from "@/lib/sidebar-utils";
+import { cn } from "@/lib/utils";
 import {
   Autocomplete,
   AutocompleteBackdrop,
@@ -13,20 +22,11 @@ import {
   AutocompletePopup,
   AutocompletePortal,
   AutocompletePositioner,
-} from "@lumi-ui/ui/autocomplete";
-import { Button } from "@lumi-ui/ui/button";
-import { useIsMac } from "@lumi-ui/ui/hooks/use-is-mac";
-import { useMounted } from "@lumi-ui/ui/hooks/use-mounted";
-import { Kbd, KbdGroup } from "@lumi-ui/ui/kbd";
-import { ScrollArea } from "@lumi-ui/ui/scroll-area";
-import { Separator } from "@lumi-ui/ui/separator";
-import { ArrowDown, ArrowUp, CornerDownLeftIcon, Search } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
-import * as React from "react";
-import { IconMap } from "@/lib/icons";
-import { getSearchGroups } from "@/lib/sidebar-utils";
-import { cn } from "@/lib/utils";
+} from "@/registry/ui/autocomplete";
+import { Button } from "@/registry/ui/button";
+import { Kbd, KbdGroup } from "@/registry/ui/kbd";
+import { ScrollArea } from "@/registry/ui/scroll-area";
+import { Separator } from "@/registry/ui/separator";
 import type { DocRoot, NavGroup, NavItem } from "@/types";
 
 export function CommandMenu({ tree }: { tree: DocRoot }) {
@@ -95,7 +95,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
         <AutocompletePortal>
           <AutocompleteBackdrop className="fixed inset-0 bg-black/20 backdrop-blur-xs animate-fade" />
           <AutocompletePositioner
-            className="inset-0 z-0 bottom-0 pointer-events-none flex justify-center items-center"
+            className="inset-0 z-0 bottom-0 pointer-events-none flex justify-center items-center opacity-100!"
             positionMethod="fixed"
           >
             <AutocompletePopup

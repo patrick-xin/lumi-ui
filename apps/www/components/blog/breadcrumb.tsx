@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -5,8 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@lumi-ui/ui/breadcrumb";
-import Link from "next/link";
+} from "@/registry/ui/breadcrumb";
 
 export const BlogBreadcrumb = ({ title }: { title: string }) => {
   return (

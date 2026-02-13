@@ -1,12 +1,8 @@
 import { Meter as BaseMeter } from "@base-ui/react/meter";
-import type * as React from "react";
 
 import { cn } from "@/registry/lib/utils";
 
-const MeterRoot = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMeter.Root>) => (
+const MeterRoot = ({ className, ...props }: BaseMeter.Root.Props) => (
   <BaseMeter.Root
     className={cn("relative w-full", className)}
     data-slot="meter"
@@ -14,10 +10,7 @@ const MeterRoot = ({
   />
 );
 
-const MeterTrack = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMeter.Track>) => (
+const MeterTrack = ({ className, ...props }: BaseMeter.Track.Props) => (
   <BaseMeter.Track
     className={cn("relative w-full overflow-hidden", className)}
     data-slot="meter-track"
@@ -25,10 +18,7 @@ const MeterTrack = ({
   />
 );
 
-const MeterIndicator = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMeter.Indicator>) => (
+const MeterIndicator = ({ className, ...props }: BaseMeter.Indicator.Props) => (
   <BaseMeter.Indicator
     className={cn("h-full transition-all duration-500", className)}
     data-slot="meter-indicator"
@@ -36,10 +26,7 @@ const MeterIndicator = ({
   />
 );
 
-const MeterLabel = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMeter.Label>) => (
+const MeterLabel = ({ className, ...props }: BaseMeter.Label.Props) => (
   <BaseMeter.Label
     className={cn("text-sm font-medium leading-none", className)}
     data-slot="meter-label"
@@ -47,10 +34,7 @@ const MeterLabel = ({
   />
 );
 
-const MeterValue = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseMeter.Value>) => (
+const MeterValue = ({ className, ...props }: BaseMeter.Value.Props) => (
   <BaseMeter.Value
     className={cn("text-sm text-muted-foreground", className)}
     data-slot="meter-value"
@@ -58,11 +42,7 @@ const MeterValue = ({
   />
 );
 
-function Meter({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof MeterRoot>) {
+function Meter({ className, children, ...props }: BaseMeter.Root.Props) {
   return (
     <BaseMeter.Root
       className={cn("relative w-full", className)}

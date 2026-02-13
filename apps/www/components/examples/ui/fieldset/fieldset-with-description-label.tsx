@@ -1,9 +1,5 @@
 import { Field, FieldControl, FieldLabel } from "@/registry/ui/field";
-import {
-  Fieldset,
-  FieldsetLegend,
-  FieldsetSeparator,
-} from "@/registry/ui/fieldset";
+import { Fieldset, FieldsetLegend } from "@/registry/ui/fieldset";
 
 export function FieldsetWithDescriptionLabelDemo() {
   return (
@@ -20,7 +16,6 @@ export function FieldsetWithDescriptionLabelDemo() {
             <FieldControl placeholder="Doe" />
           </Field>
         </Fieldset>
-        <FieldsetSeparator />
         <Fieldset>
           <FieldsetLegend>Billing Address</FieldsetLegend>
           <Field>

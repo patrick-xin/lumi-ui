@@ -4,31 +4,24 @@ import { Dialog as BaseDialog } from "@base-ui/react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { XIcon } from "lucide-react";
 import type * as React from "react";
-import { Button } from "@/registry/ui/button";
 import { cn } from "@/registry/lib/utils";
+import { Button } from "@/registry/ui/button";
 
-function Dialog<Payload>({
-  ...props
-}: React.ComponentProps<typeof BaseDialog.Root<Payload>>) {
+function Dialog<Payload>({ ...props }: BaseDialog.Root.Props<Payload>) {
   return <BaseDialog.Root data-slot="dialog" {...props} />;
 }
 
 function DialogTrigger<Payload>({
   ...props
-}: React.ComponentProps<typeof BaseDialog.Trigger<Payload>>) {
+}: BaseDialog.Trigger.Props<Payload>) {
   return <BaseDialog.Trigger data-slot="dialog-trigger" {...props} />;
 }
 
-function DialogPortal({
-  ...props
-}: React.ComponentProps<typeof BaseDialog.Portal>) {
+function DialogPortal({ ...props }: BaseDialog.Portal.Props) {
   return <BaseDialog.Portal data-slot="dialog-portal" {...props} />;
 }
 
-function DialogViewport({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseDialog.Viewport>) {
+function DialogViewport({ className, ...props }: BaseDialog.Viewport.Props) {
   return (
     <BaseDialog.Viewport
       className={cn("fixed inset-0 outline-none", className)}
@@ -38,10 +31,7 @@ function DialogViewport({
   );
 }
 
-function DialogBackdrop({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseDialog.Backdrop>) {
+function DialogBackdrop({ className, ...props }: BaseDialog.Backdrop.Props) {
   return (
     <BaseDialog.Backdrop
       className={cn(
@@ -59,7 +49,7 @@ function DialogPopup({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof BaseDialog.Popup>) {
+}: BaseDialog.Popup.Props) {
   return (
     <BaseDialog.Popup
       className={cn("bg-background", className)}
@@ -75,10 +65,7 @@ function DialogClose({ ...props }: BaseDialog.Close.Props) {
   return <BaseDialog.Close data-slot="dialog-close" {...props} />;
 }
 
-function DialogTitle({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseDialog.Title>) {
+function DialogTitle({ className, ...props }: BaseDialog.Title.Props) {
   return (
     <BaseDialog.Title
       className={cn("text-lg leading-none font-semibold", className)}
@@ -91,7 +78,7 @@ function DialogTitle({
 function DialogDescription({
   className,
   ...props
-}: React.ComponentProps<typeof BaseDialog.Description>) {
+}: BaseDialog.Description.Props) {
   return (
     <BaseDialog.Description
       className={cn("text-muted-foreground text-sm", className)}
@@ -184,11 +171,10 @@ const popupVariants = cva(
   },
 );
 
-interface DialogContentProps
-  extends React.ComponentProps<typeof BaseDialog.Popup>,
-    VariantProps<typeof popupVariants> {
-  showCloseButton?: boolean;
-}
+type DialogContentProps = BaseDialog.Popup.Props &
+  VariantProps<typeof popupVariants> & {
+    showCloseButton?: boolean;
+  };
 
 function DialogContent({
   children,

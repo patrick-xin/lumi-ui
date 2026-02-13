@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@lumi-ui/ui/button";
 import type { Item } from "fumadocs-core/page-tree";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/registry/ui/button";
 
 interface DocsQuickNavProps {
   neighbours: {
@@ -19,7 +19,7 @@ export const DocsQuickNav = ({ neighbours }: DocsQuickNavProps) => {
         <Button
           nativeButton={false}
           render={
-            <Link href={neighbours.previous.url}>
+            <Link href={neighbours.previous.url} prefetch={false}>
               <ArrowLeft className="h-4 w-4" />
               <span className="sr-only">Previous</span>
             </Link>
@@ -32,7 +32,7 @@ export const DocsQuickNav = ({ neighbours }: DocsQuickNavProps) => {
         <Button
           nativeButton={false}
           render={
-            <Link href={neighbours.next.url}>
+            <Link href={neighbours.next.url} prefetch={false}>
               <span className="sr-only">Next</span>
               <ArrowRight className="h-4 w-4" />
             </Link>

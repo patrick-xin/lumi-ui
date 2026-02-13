@@ -2,7 +2,6 @@
 
 import { Toggle as BaseToggle } from "@base-ui/react/toggle";
 import { cva, type VariantProps } from "class-variance-authority";
-import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 
 const toggleVariants = cva(
@@ -28,11 +27,7 @@ const toggleVariants = cva(
   },
 );
 
-interface ToggleProps
-  extends React.ComponentProps<typeof BaseToggle>,
-    VariantProps<typeof toggleVariants> {
-  className?: string;
-}
+type ToggleProps = BaseToggle.Props & VariantProps<typeof toggleVariants>;
 
 function Toggle({ className, variant, size, ...props }: ToggleProps) {
   return (

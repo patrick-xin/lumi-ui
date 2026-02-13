@@ -1,6 +1,6 @@
-import { Button } from "@lumi-ui/ui/button";
 import Link from "next/link";
 import { Logo } from "@/components/logo";
+import { Button } from "@/registry/ui/button";
 
 export function SiteFooter() {
   return (

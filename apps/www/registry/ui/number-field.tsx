@@ -9,7 +9,7 @@ import { cn } from "@/registry/lib/utils";
 const NumberFieldRoot = ({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.Root>) => (
+}: BaseNumberField.Root.Props) => (
   <BaseNumberField.Root
     className={cn("grid gap-1.5", className)}
     data-slot="number-field"
@@ -20,7 +20,7 @@ const NumberFieldRoot = ({
 const NumberFieldGroup = ({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.Group>) => (
+}: BaseNumberField.Group.Props) => (
   <BaseNumberField.Group
     className={cn(
       "w-full overflow-hidden data-[disabled]:opacity-50",
@@ -34,7 +34,7 @@ const NumberFieldGroup = ({
 const NumberFieldInput = ({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.Input>) => (
+}: BaseNumberField.Input.Props) => (
   <BaseNumberField.Input
     className={cn(
       "tabular-nums outline-none",
@@ -51,7 +51,7 @@ const NumberFieldDecrement = ({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.Decrement>) => (
+}: BaseNumberField.Decrement.Props) => (
   <BaseNumberField.Decrement
     className={cn(
       "flex items-center justify-center select-none",
@@ -69,7 +69,7 @@ const NumberFieldIncrement = ({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.Increment>) => (
+}: BaseNumberField.Increment.Props) => (
   <BaseNumberField.Increment
     className={cn(
       "flex items-center justify-center select-none",
@@ -86,7 +86,7 @@ const NumberFieldIncrement = ({
 const NumberFieldScrubAreaRoot = ({
   className,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.ScrubArea>) => (
+}: BaseNumberField.ScrubArea.Props) => (
   <BaseNumberField.ScrubArea
     className={cn("cursor-ew-resize", className)}
     data-slot="number-field-scrub-area"
@@ -95,7 +95,7 @@ const NumberFieldScrubAreaRoot = ({
 );
 
 const NumberFieldScrubAreaCursor = (
-  props: React.ComponentProps<typeof BaseNumberField.ScrubAreaCursor>,
+  props: BaseNumberField.ScrubAreaCursor.Props,
 ) => (
   <BaseNumberField.ScrubAreaCursor
     data-slot="number-field-scrub-area"
@@ -124,7 +124,7 @@ const NumberFieldScrubArea = ({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.ScrubArea>) => (
+}: BaseNumberField.ScrubArea.Props) => (
   <BaseNumberField.ScrubArea
     className={cn(
       "flex cursor-ew-resize items-center gap-1.5 select-none text-sm font-medium text-foreground data-[disabled]:opacity-50",
@@ -140,7 +140,7 @@ const NumberFieldScrubArea = ({
   </BaseNumberField.ScrubArea>
 );
 
-type NumberFieldProps = React.ComponentProps<typeof BaseNumberField.Root> & {
+type NumberFieldProps = BaseNumberField.Root.Props & {
   inputRef?: React.Ref<HTMLInputElement>;
 };
 

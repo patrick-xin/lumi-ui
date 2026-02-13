@@ -25,10 +25,7 @@ function ComboboxValue({
   return <BaseCombobox.Value data-slot="combobox-value" {...props} />;
 }
 
-function ComboboxIcon({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Icon>) {
+function ComboboxIcon({ className, ...props }: BaseCombobox.Icon.Props) {
   return (
     <BaseCombobox.Icon
       className={cn(
@@ -46,7 +43,7 @@ function ComboboxInput({
   inputSize = "default",
   variant = "default",
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Input> & {
+}: BaseCombobox.Input.Props & {
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
   variant?: VariantProps<typeof inputVariants>["variant"];
 }) {
@@ -59,10 +56,7 @@ function ComboboxInput({
   );
 }
 
-function ComboboxClear({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Clear>) {
+function ComboboxClear({ className, ...props }: BaseCombobox.Clear.Props) {
   return (
     <BaseCombobox.Clear
       aria-label="Clear selection"
@@ -73,10 +67,7 @@ function ComboboxClear({
   );
 }
 
-function ComboboxTrigger({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Trigger>) {
+function ComboboxTrigger({ className, ...props }: BaseCombobox.Trigger.Props) {
   return (
     <BaseCombobox.Trigger
       className={cn(
@@ -89,10 +80,7 @@ function ComboboxTrigger({
   );
 }
 
-function ComboboxChips({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Chips>) {
+function ComboboxChips({ className, ...props }: BaseCombobox.Chips.Props) {
   return (
     <BaseCombobox.Chips
       className={cn(
@@ -113,7 +101,7 @@ function ComboboxChip({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Chip>) {
+}: BaseCombobox.Chip.Props) {
   return (
     <BaseCombobox.Chip
       className={cn(
@@ -135,7 +123,7 @@ function ComboboxChipRemove({
   className,
   icon = <X />,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.ChipRemove> & {
+}: BaseCombobox.ChipRemove.Props & {
   icon?: React.ReactNode;
 }) {
   return (
@@ -154,10 +142,7 @@ function ComboboxChipRemove({
   );
 }
 
-function ComboboxList({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.List>) {
+function ComboboxList({ className, ...props }: BaseCombobox.List.Props) {
   return (
     <BaseCombobox.List
       className={cn(
@@ -171,22 +156,18 @@ function ComboboxList({
   );
 }
 
-function ComboboxPortal({
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Portal>) {
+function ComboboxPortal({ ...props }: BaseCombobox.Portal.Props) {
   return <BaseCombobox.Portal data-slot="combobox-portal" {...props} />;
 }
 
-function ComboboxBackdrop({
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Backdrop>) {
+function ComboboxBackdrop({ ...props }: BaseCombobox.Backdrop.Props) {
   return <BaseCombobox.Backdrop data-slot="combobox-backdrop" {...props} />;
 }
 
 function ComboboxPositioner({
   className,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Positioner>) {
+}: BaseCombobox.Positioner.Props) {
   return (
     <BaseCombobox.Positioner
       className={cn("outline-none", className)}
@@ -196,22 +177,15 @@ function ComboboxPositioner({
   );
 }
 
-function ComboboxPopup({
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Popup>) {
+function ComboboxPopup({ ...props }: BaseCombobox.Popup.Props) {
   return <BaseCombobox.Popup data-slot="combobox-popup" {...props} />;
 }
 
-function ComboboxArrow({
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Arrow>) {
+function ComboboxArrow({ ...props }: BaseCombobox.Arrow.Props) {
   return <BaseCombobox.Arrow data-slot="combobox-arrow" {...props} />;
 }
 
-function ComboboxStatus({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Status>) {
+function ComboboxStatus({ className, ...props }: BaseCombobox.Status.Props) {
   return (
     <BaseCombobox.Status
       className={cn(
@@ -224,10 +198,7 @@ function ComboboxStatus({
   );
 }
 
-function ComboboxEmpty({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Empty>) {
+function ComboboxEmpty({ className, ...props }: BaseCombobox.Empty.Props) {
   return (
     <BaseCombobox.Empty
       className={cn(
@@ -240,22 +211,15 @@ function ComboboxEmpty({
   );
 }
 
-function ComboboxCollection({
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Collection>) {
+function ComboboxCollection({ ...props }: BaseCombobox.Collection.Props) {
   return <BaseCombobox.Collection data-slot="combobox-collection" {...props} />;
 }
 
-function ComboboxRow({
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Row>) {
+function ComboboxRow({ ...props }: BaseCombobox.Row.Props) {
   return <BaseCombobox.Row data-slot="combobox-row" {...props} />;
 }
 
-function ComboboxItem({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Item>) {
+function ComboboxItem({ className, ...props }: BaseCombobox.Item.Props) {
   return (
     <BaseCombobox.Item
       className={cn(
@@ -270,9 +234,7 @@ function ComboboxItem({
   );
 }
 
-function ComboboxItemIndicator({
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.ItemIndicator>) {
+function ComboboxItemIndicator({ ...props }: BaseCombobox.ItemIndicator.Props) {
   return (
     <BaseCombobox.ItemIndicator
       data-slot="combobox-item-indicator"
@@ -281,10 +243,7 @@ function ComboboxItemIndicator({
   );
 }
 
-function ComboboxGroup({
-  className,
-  ...props
-}: React.ComponentProps<typeof BaseCombobox.Group>) {
+function ComboboxGroup({ className, ...props }: BaseCombobox.Group.Props) {
   return (
     <BaseCombobox.Group
       className={cn("mb-1 last:mb-0", className)}
@@ -297,7 +256,7 @@ function ComboboxGroup({
 function ComboboxGroupLabel({
   className,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.GroupLabel>) {
+}: BaseCombobox.GroupLabel.Props) {
   return (
     <BaseCombobox.GroupLabel
       className={cn(
@@ -313,7 +272,7 @@ function ComboboxGroupLabel({
 function ComboboxSeparator({
   className,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Separator>) {
+}: BaseCombobox.Separator.Props) {
   return (
     <BaseCombobox.Separator
       className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
@@ -331,7 +290,7 @@ function ComboboxInputGroup({
   inputSize = "default",
   addonIcon,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Input> & {
+}: BaseCombobox.Input.Props & {
   showTrigger?: boolean;
   showClear?: boolean;
   variant?: VariantProps<typeof inputVariants>["variant"];
@@ -417,14 +376,14 @@ function ComboboxContent({
   alignOffset = 0,
   positionerAnchor,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Popup> & {
-  side?: BaseCombobox.Positioner.Props["side"];
-  sideOffset?: BaseCombobox.Positioner.Props["sideOffset"];
-  align?: BaseCombobox.Positioner.Props["align"];
-  alignOffset?: BaseCombobox.Positioner.Props["alignOffset"];
-  matchAnchorWidth?: boolean;
-  positionerAnchor?: React.RefObject<HTMLDivElement | null>;
-}) {
+}: BaseCombobox.Popup.Props &
+  Pick<
+    BaseCombobox.Positioner.Props,
+    "side" | "sideOffset" | "align" | "alignOffset"
+  > & {
+    matchAnchorWidth?: boolean;
+    positionerAnchor?: React.RefObject<HTMLDivElement | null>;
+  }) {
   return (
     <BaseCombobox.Portal data-slot="combobox-portal">
       <BaseCombobox.Positioner
@@ -455,8 +414,7 @@ function ComboboxContent({
   );
 }
 
-interface ComboboxItemContentProps
-  extends React.ComponentProps<typeof BaseCombobox.Item> {
+interface ComboboxItemContentProps extends BaseCombobox.Item.Props {
   indicatorPlacement?: "start" | "end" | "none";
   indicatorIcon?: React.ReactNode;
 }
