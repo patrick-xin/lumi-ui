@@ -15,12 +15,12 @@ export function CollapsibleWithMotionDemo() {
   const [open, setOpen] = useState(false);
 
   return (
-    <Collapsible open={open} onOpenChange={setOpen} className="w-full max-w-sm">
+    <Collapsible className="w-full max-w-sm" onOpenChange={setOpen} open={open}>
       <CollapsibleTrigger
         render={
           <Button
-            variant="ghost"
             className="w-full justify-start rounded-md rounded-b-none border border-b-0 hover:bg-transparent! cursor-pointer text-muted-foreground hover:text-foreground"
+            variant="ghost"
           >
             {open ? (
               <>
@@ -40,10 +40,10 @@ export function CollapsibleWithMotionDemo() {
         keepMounted
         render={
           <motion.div
-            hidden={false}
-            initial={false}
             animate={{ height: open ? "auto" : 100 }}
             className="relative overflow-hidden"
+            hidden={false}
+            initial={false}
           >
             <div
               className={cn(
@@ -53,8 +53,8 @@ export function CollapsibleWithMotionDemo() {
             >
               {Array.from({ length: 4 }).map((_, i) => (
                 <div
-                  key={String(i)}
                   className="flex h-12 w-full shrink-0 items-center justify-center rounded-md bg-accent/30"
+                  key={String(i)}
                 >
                   <span className="text-sm font-medium">{i + 1}</span>
                 </div>
@@ -64,10 +64,10 @@ export function CollapsibleWithMotionDemo() {
             <AnimatePresence>
               {!open && (
                 <motion.div
-                  initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
                   className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-background to-transparent pointer-events-none"
+                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }}
                 />
               )}
             </AnimatePresence>
