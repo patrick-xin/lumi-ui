@@ -102,7 +102,7 @@ export function MobileToc({
   return (
     <div
       className={cn(
-        "fixed inset-x-0 top-(--header-height) backdrop-blur-md supports-[backdrop-filter]:bg-background/80 border-primary/20 border-t border-b",
+        "fixed inset-x-0 top-(--header-height) backdrop-blur-md supports-[backdrop-filter]:bg-background/80 border-primary/20 border-t border-b z-1000",
         className,
       )}
     >

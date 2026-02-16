@@ -21,7 +21,7 @@ export function MainNav({
         <Link
           className={cn(
             buttonVariants({ size: "sm", variant: "ghost" }),
-            "hover:bg-transparent hover:text-primary",
+            "hover:bg-transparent hover:text-primary text-muted-foreground",
             pathname.includes(item.href) && "text-primary",
           )}
           href={item.href}

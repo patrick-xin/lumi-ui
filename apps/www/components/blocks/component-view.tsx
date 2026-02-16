@@ -22,7 +22,7 @@ import {
   ResizableSeparator,
 } from "@/registry/ui/resizable";
 import { Separator } from "@/registry/ui/separator";
-import { Tabs, TabsListContent, TabsTab } from "@/registry/ui/tabs";
+import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 import { ToggleGroup, ToggleGroupItem } from "@/registry/ui/toggle-group";
 import {
   createTooltipHandle,
@@ -31,7 +31,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/registry/ui/tooltip";
-import { TabsPanel } from "../../registry/ui/tabs";
 
 interface ComponentViewProps extends React.ComponentProps<"div"> {
   name: ComponentName;
@@ -40,8 +39,6 @@ interface ComponentViewProps extends React.ComponentProps<"div"> {
   source: React.ReactNode;
   iframeHeight?: number | string;
 }
-
-const tooltipHandle = createTooltipHandle<{ title: string }>();
 
 export function ComponentView({
   name,
@@ -52,6 +49,10 @@ export function ComponentView({
   iframeHeight,
   ...props
 }: ComponentViewProps) {
+  const tooltipHandle = React.useMemo(
+    () => createTooltipHandle<{ title: string }>(),
+    [],
+  );
   const [iframeKey, setIframeKey] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const resizablePanelRef = React.useRef<PanelImperativeHandle>(null);

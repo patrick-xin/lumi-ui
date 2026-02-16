@@ -86,7 +86,7 @@ export const T3ModelSelector = () => {
             render={
               <Button
                 aria-label="Select model"
-                className="group justify-between data-[popup-open]:bg-primary/10 hover:bg-primary/10 bg-primary/5 w-48"
+                className="group justify-between data-[popup-open]:bg-primary/10 hover:bg-primary/10 bg-primary/5 w-48 h-8 text-xs"
                 variant="unstyled"
               >
                 {selectedModel?.name || "Select a model"}
