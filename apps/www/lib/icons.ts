@@ -8,7 +8,7 @@ import {
   Palette,
   Play,
   Scale,
-  SquareMousePointer
+  SquareMousePointer,
 } from "lucide-react";
 import type { FileIconType } from "@/types";
 
