@@ -5,7 +5,7 @@ import {
   SiShadcnui,
   SiTailwindcss,
 } from "@icons-pack/react-simple-icons";
-import { ChevronRight, CpuIcon, type LucideIcon } from "lucide-react";
+import { Bot, ChevronRight, CpuIcon, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { hasActiveChild, normalizeSidebarTree } from "@/lib/sidebar-utils";
@@ -160,7 +160,14 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
           {Icon && <Icon className="mr-2 size-4 shrink-0" />}
           <ThemeBadge theme={item.label.toLowerCase()} />
           <ResourceIcon name={item.label} />
-          <span className="truncate">{item.label}</span>
+          <span
+            className={cn(
+              "truncate",
+              item.label === "Agent Skills" && "text-primary",
+            )}
+          >
+            {item.label}
+          </span>
           {item.status === "new" && (
             <span className="ml-auto size-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
           )}
@@ -207,9 +214,11 @@ const ThemeBadge = ({ theme }: { theme: string }) => {
 
 const ResourceIcon = ({ name }: { name: string }) => {
   switch (name) {
+    case "Agent Skills":
+      return <Bot className="mr-1.5 size-4.5 text-primary" />;
     case "github":
       return <SiGithub className="mr-1.5 size-4" />;
-    case "tailwindcss":
+    case "tailwind css":
       return <SiTailwindcss className="mr-1.5 size-4" />;
     case "shadcn/ui":
       return <SiShadcnui className="mr-2.5 size-3" />;
