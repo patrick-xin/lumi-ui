@@ -1,0 +1,130 @@
+# Animation
+
+Lumi UI provides a streamlined animation system that uses **CSS Transitions** instead of traditional CSS animations, creating a more responsive, native-like experience while keeping your code clean and maintainable.
+
+## Core Philosophy
+
+### Consistent across components
+
+By centralizing animation logic into shared utility classes, your entire application maintains a unified motion language. This ensures that every popover, modal, and dropdown feels physically identical.
+
+### Native Feel with CSS Transitions
+Unlike most libraries that use CSS Animations (which must complete once started), Lumi UI uses CSS Transitions that track element state. This means animations can smoothly reverse direction mid-way, preventing the "snapping" effect when users interact quickly.
+
+### Clean, Minimal Code
+Replace verbose animation classes with single utility classes:
+
+Traditional approach:
+```tsx
+<PopoverPrimitive.Popup
+  className="data-[state=open]:animate-in data-[state=closed]:animate-out
+    data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
+    data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 ..." />
+```
+
+Lumi UI approach:
+```tsx
+<BasePopover.Popup className="animate-popup ..." />
+```
+
+## Available Animation Classes
+
+| Class | Usage |
+| :--- | :--- |
+| `animate-popup` | Used for Popovers, Dropdowns, Selects etc... |
+| `animate-fade-up` | Used for Dialogs. |
+| `animate-fade-zoom` | Used for Dialogs. |
+| `animate-fade-down` | Used for Dialogs. |
+| `animate-fade` | Used for Backdrops. |
+
+## CSS Utility Definitions
+
+If installed via CLI, these are pre-configured. For manual installation, add to your CSS:
+
+```css
+@utility animate-popup {
+  @apply origin-[var(--transform-origin)] transition-[opacity,scale,transform] duration-200;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.95;
+  }
+}
+
+@utility animate-fade-up {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 0.5rem;
+  }
+}
+
+@utility animate-fade-down {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 -0.5rem;
+  }
+}
+
+@utility animate-fade-zoom {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+@utility animate-fade {
+  @apply transition-all duration-200;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+```
+
+### Component-Specific Overrides
+For unique animation needs, override the utility class.
+
+## Opting out
+
+Remove the utility class and use standard Tailwind classes for complete control:
+
+```tsx
+<PopoverContent
+  className="data-[ending-style]:scale-90 data-[ending-style]:opacity-0
+  data-[starting-style]:scale-90 data-[starting-style]:opacity-0
+  origin-[var(--transform-origin)] transition-[transform,scale,opacity]"
+/>
+```
+```tsx
+<DialogContent
+  className="transition-all duration-200 data-[ending-style]:scale-90
+  data-[ending-style]:opacity-0 data-[starting-style]:scale-90
+  data-[starting-style]:opacity-0"
+/>
+```
+```tsx
+<DialogBackdrop className="transition-all duration-200
+data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
+```
+
+## Component Compatibility
+
+Uses `animate-popup`:
+- Form Input: Combobox, Select
+- Overlays & Dialogs: ContextMenu, DropdownMenu, Popover, PreviewCard, Tooltip
+- Navigation: Menubar
+
+Uses `animate-fade-up`, `animate-fade-zoom`, `animate-fade-down`, `animate-fade`: Dialog, AlertDialog

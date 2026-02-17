@@ -122,7 +122,7 @@ function DropdownMenuSeparator({
 }: BaseMenu.Separator.Props) {
   return (
     <BaseMenu.Separator
-      className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
+      className={cn("bg-border pointer-events-none my-1 h-px", className)}
       data-slot="dropdown-menu-separator"
       {...props}
     />

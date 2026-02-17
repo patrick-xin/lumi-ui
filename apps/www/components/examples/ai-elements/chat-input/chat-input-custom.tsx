@@ -13,8 +13,10 @@ import {
   ChatInputRoot,
   ChatInputSubmitButton,
   ChatInputTextarea,
-} from "@/registry/components/chat-input";
+} from "@/registry/ai/chat-input";
 import { Button } from "@/registry/ui/button";
+import { T3ModelSelector } from "../../../../registry/components/t3-model-selector";
+import { toast } from "../../../../registry/ui/toast";
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes}B`;
@@ -81,7 +83,10 @@ export default function ChatInputCustom() {
     await new Promise((resolve) => {
       setTimeout(resolve, 600);
     });
-
+    toast.success({
+      description: `${customValue} ${customAttachments.length > 0 ? `with ${customAttachments.length} attachments` : ""}`,
+      title: "Message sent",
+    });
     setCustomValue("");
     revokeAttachmentPreviews(customAttachments);
     setCustomAttachments([]);
@@ -103,7 +108,7 @@ export default function ChatInputCustom() {
   }, []);
 
   return (
-    <div className="fixed inset-x-0 bottom-10 mx-auto w-full max-w-3xl px-4">
+    <div className="w-full max-w-3xl px-4">
       <input
         className="sr-only"
         multiple
@@ -121,31 +126,30 @@ export default function ChatInputCustom() {
       >
         <ChatInputRoot className="rounded-2xl border-primary/20 bg-background/80 shadow-lg shadow-primary/5">
           <ChatInputTextarea
-            className="px-4 py-4 text-base"
+            className="px-4 py-4"
             onSubmitShortcut={() => {
               if (customSubmitDisabled) return;
               void handleCustomSubmit();
             }}
             onValueChange={setCustomValue}
             placeholder="Draft a launch brief with 3 key risks..."
+            required
             value={customValue}
           />
 
           <div className="flex items-center justify-between border-t border-primary/10 px-3 py-3">
             <ChatInputActions>
+              <T3ModelSelector />
               <ChatInputAttachButton
-                className="rounded-full"
                 onClick={() => {
                   customFileInputRef.current?.click();
                 }}
                 size="sm"
-                variant="outline"
               />
             </ChatInputActions>
 
             <ChatInputActions>
               <Button
-                className="rounded-full"
                 disabled={customSubmitting || !customHasSubmittableContent}
                 onClick={() => {
                   setCustomValue("");
@@ -153,13 +157,11 @@ export default function ChatInputCustom() {
                   setCustomAttachments([]);
                 }}
                 size="sm"
-                type="button"
                 variant="ghost"
               >
-                Reset
+                Clear
               </Button>
               <ChatInputSubmitButton
-                className="rounded-full"
                 disabled={customSubmitDisabled}
                 isSubmitting={customSubmitting}
                 type="submit"

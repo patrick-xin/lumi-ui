@@ -103,7 +103,7 @@ export function CommandMenu({ tree }: { tree: DocRoot }) {
                 "relative bg-popover text-popover-foreground rounded outline outline-input animate-fade",
                 "pointer-events-auto w-full max-w-[calc(100%-2rem)] sm:max-w-lg",
                 "-translate-y-16 sm:-translate-y-32 max-w-[var(--available-width)]",
-                "mx-4",
+                "mx-4 flex flex-col overflow-hidden",
               )}
               finalFocus={() => !isNavigatingRef.current}
             >

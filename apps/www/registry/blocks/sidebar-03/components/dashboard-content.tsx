@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  AlertTriangle,
   ArrowDownRight,
   ArrowUpRight,
   BookIcon,
@@ -54,7 +55,6 @@ import { Input } from "@/registry/ui/input";
 import { Progress } from "@/registry/ui/progress";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Separator } from "@/registry/ui/separator";
-import { Skeleton } from "@/registry/ui/skeleton";
 import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 import { toast } from "@/registry/ui/toast";
 import { KpiSparkGrid } from "./kpi-card";
@@ -280,11 +280,7 @@ function ActivityTag({ tag }: { tag?: Activity["tag"] }) {
     success: { className: "bg-primary/15 text-primary", label: "Success" },
   };
   const t = map[tag];
-  return (
-    <Badge className={cn("font-normal hover:bg-inherit", t.className)}>
-      {t.label}
-    </Badge>
-  );
+  return <Badge className={cn("font-normal", t.className)}>{t.label}</Badge>;
 }
 
 const fakeApiCall = async () => {
@@ -711,16 +707,17 @@ export function DashboardContent() {
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Churn risk</span>
                     <Badge
-                      className="bg-muted text-foreground"
+                      className="bg-destructive/15 text-destructive"
                       variant="secondary"
                     >
-                      Medium
+                      <AlertTriangle className="h-4 w-4" /> High
                     </Badge>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Skeleton className="h-2 flex-1" />
-                    <Skeleton className="h-2 w-12" />
-                  </div>
+                  <Progress
+                    className="h-2"
+                    indicatorClassName="bg-destructive"
+                    value={90}
+                  />
                   <p className="text-xs text-muted-foreground">
                     Top driver: payment failures increased over the last 7 days.
                   </p>

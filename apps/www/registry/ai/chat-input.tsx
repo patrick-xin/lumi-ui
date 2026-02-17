@@ -12,13 +12,21 @@ import * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
+  createDialogHandle,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/registry/ui/dialog";
 import { ScrollArea } from "@/registry/ui/scroll-area";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 const chatInputTransition: Transition = {
   bounce: 0.1,
@@ -46,6 +54,12 @@ function composeRefs<T>(
     }
   };
 }
+function getAttachmentKind(attachment: ChatInputAttachmentData): string {
+  if (attachment.kind?.trim()) return attachment.kind;
+
+  const extension = attachment.label.split(".").pop()?.toLowerCase();
+  return extension || "file";
+}
 
 function useChatInputAutoResize({
   maxHeight = 220,
@@ -61,6 +75,10 @@ function useChatInputAutoResize({
     const textarea = textareaRef.current;
     if (!textarea) return;
 
+    const isCaretAtEnd =
+      textarea.selectionStart === textarea.value.length &&
+      textarea.selectionEnd === textarea.value.length;
+
     textarea.style.height = `${minHeight}px`;
 
     const nextHeight = Math.max(
@@ -68,6 +86,10 @@ function useChatInputAutoResize({
       Math.min(textarea.scrollHeight, maxHeight),
     );
 
+    textarea.style.height = `${nextHeight}px`;
+    if (isCaretAtEnd) {
+      textarea.scrollTop = textarea.scrollHeight;
+    }
     setHeight((prev) => (prev === nextHeight ? prev : nextHeight));
   }, [maxHeight, minHeight]);
 
@@ -113,18 +135,11 @@ function useMeasuredHeight(active: boolean) {
   };
 }
 
-function getAttachmentKind(attachment: ChatInputAttachmentData): string {
-  if (attachment.kind?.trim()) return attachment.kind;
-
-  const extension = attachment.label.split(".").pop()?.toLowerCase();
-  return extension || "file";
-}
-
 function ChatInputRoot({ className, ...props }: HTMLMotionProps<"div">) {
   return (
     <motion.div
       className={cn(
-        "block w-full overflow-hidden rounded-md border bg-background",
+        "w-full overflow-hidden rounded-md border bg-background",
         className,
       )}
       layout
@@ -201,9 +216,9 @@ function ChatInputTextarea({
     <motion.textarea
       animate={{ height }}
       className={cn(
-        "w-full resize-none overflow-y-auto rounded-none border-none outline-none bg-transparent px-3 py-4 text-sm shadow-none",
+        "w-full resize-none overflow-y-auto overscroll-contain rounded-none border-none outline-none bg-transparent px-3 py-4 text-sm shadow-none",
         "placeholder:text-muted-foreground",
-        "focus-visible:outline-none",
+        "focus-visible:outline-none will-change-height",
         className,
       )}
       onChange={handleChange}
@@ -250,19 +265,33 @@ function ChatInputAttachButton({
   size = "icon-sm",
   type = "button",
   variant = "ghost",
+  tooltipContent = "Attach files",
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button> & {
+  tooltipContent?: React.ReactNode;
+}) {
   return (
-    <Button
-      className={cn("text-muted-foreground hover:text-foreground", className)}
-      size={size}
-      type={type}
-      variant={variant}
-      {...props}
-    >
-      {children ?? <Paperclip className="size-4" />}
-      <span className="sr-only">Attach files</span>
-    </Button>
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <Button
+            className={cn("group", className)}
+            size={size}
+            type={type}
+            variant={variant}
+            {...props}
+          >
+            {children ?? (
+              <Paperclip className="size-4 text-muted-foreground group-hover:text-foreground" />
+            )}
+            <span className="sr-only">Attach files</span>
+          </Button>
+        }
+      />
+      <TooltipContent showArrow={false} side="bottom" sideOffset={4}>
+        {tooltipContent}
+      </TooltipContent>
+    </Tooltip>
   );
 }
 
@@ -342,7 +371,10 @@ function ChatInputAttachmentItem({
 }: HTMLMotionProps<"div">) {
   return (
     <motion.div
-      className={cn("group relative size-28", className)}
+      className={cn(
+        "group relative size-28 z-10 bg-muted rounded-md",
+        className,
+      )}
       layout
       transition={chatInputTransition}
       {...props}
@@ -387,7 +419,7 @@ function ChatInputAttachmentRemove({
   return (
     <Button
       className={cn(
-        "absolute -left-2 -top-2 rounded-full border opacity-0 shadow-sm transition-opacity group-hover:opacity-100",
+        "absolute -left-2 -top-2 z-20 rounded-full hover:bg-secondary opacity-0 transition-opacity group-hover:opacity-100",
         className,
       )}
       size={size}
@@ -420,6 +452,72 @@ interface ChatInputAttachmentPreviewDialogProps {
   ) => React.ReactNode | undefined;
 }
 
+interface ChatInputAttachmentPreviewContentProps {
+  attachment: ChatInputAttachmentData;
+  renderPreview?: (
+    attachment: ChatInputAttachmentData,
+  ) => React.ReactNode | undefined;
+}
+
+function ChatInputAttachmentPreviewContent({
+  attachment,
+  renderPreview,
+}: ChatInputAttachmentPreviewContentProps) {
+  const customPreview = renderPreview?.(attachment);
+  const hasImagePreview = Boolean(attachment.previewImageUrl);
+  const hasTextPreview = Boolean(attachment.previewText?.trim());
+
+  return (
+    <DialogContent className="sm:max-w-2xl" layout="scrollable" showCloseButton>
+      <DialogHeader>
+        <DialogTitle className="line-clamp-1">{attachment.label}</DialogTitle>
+        <DialogDescription className="line-clamp-1">
+          {attachment.meta ? (
+            <>
+              {attachment.meta} {"\u2022"} {getAttachmentKind(attachment)}
+            </>
+          ) : (
+            getAttachmentKind(attachment)
+          )}
+        </DialogDescription>
+      </DialogHeader>
+
+      {customPreview ? (
+        customPreview
+      ) : (
+        <>
+          {hasImagePreview ? (
+            <div className="overflow-hidden rounded-md border bg-muted/20">
+              <img
+                alt={attachment.previewAlt || attachment.label}
+                className="h-auto max-h-[60dvh] w-full object-contain"
+                src={attachment.previewImageUrl}
+              />
+            </div>
+          ) : null}
+
+          {hasTextPreview ? (
+            <ScrollArea
+              className="max-h-[50dvh] rounded-md bg-muted/20"
+              gradientScrollFade
+            >
+              <pre className="text-xs leading-5 whitespace-pre-wrap wrap-break-word px-3 py-2">
+                {attachment.previewText}
+              </pre>
+            </ScrollArea>
+          ) : null}
+
+          {!hasImagePreview && !hasTextPreview ? (
+            <div className="rounded-md border bg-muted/20 p-4 text-sm text-muted-foreground">
+              No preview available for this attachment.
+            </div>
+          ) : null}
+        </>
+      )}
+    </DialogContent>
+  );
+}
+
 function ChatInputAttachmentPreviewDialog({
   attachment,
   onOpenChange,
@@ -428,63 +526,12 @@ function ChatInputAttachmentPreviewDialog({
 }: ChatInputAttachmentPreviewDialogProps) {
   if (!attachment) return null;
 
-  const customPreview = renderPreview?.(attachment);
-  const hasImagePreview = Boolean(attachment.previewImageUrl);
-  const hasTextPreview = Boolean(attachment.previewText?.trim());
-
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
-      <DialogContent
-        className="sm:max-w-2xl"
-        layout="scrollable"
-        showCloseButton
-      >
-        <DialogHeader>
-          <DialogTitle className="line-clamp-1">{attachment.label}</DialogTitle>
-          <DialogDescription className="line-clamp-1">
-            {attachment.meta ? (
-              <>
-                {attachment.meta} {"\u2022"} {getAttachmentKind(attachment)}
-              </>
-            ) : (
-              getAttachmentKind(attachment)
-            )}
-          </DialogDescription>
-        </DialogHeader>
-
-        {customPreview ? (
-          customPreview
-        ) : (
-          <>
-            {hasImagePreview ? (
-              <div className="overflow-hidden rounded-md border bg-muted/20">
-                <img
-                  alt={attachment.previewAlt || attachment.label}
-                  className="h-auto max-h-[60dvh] w-full object-contain"
-                  src={attachment.previewImageUrl}
-                />
-              </div>
-            ) : null}
-
-            {hasTextPreview ? (
-              <ScrollArea
-                className="max-h-[50dvh] rounded-md border bg-muted/20 p-3"
-                gradientScrollFade
-              >
-                <pre className="text-xs leading-5 whitespace-pre-wrap break-words">
-                  {attachment.previewText}
-                </pre>
-              </ScrollArea>
-            ) : null}
-
-            {!hasImagePreview && !hasTextPreview ? (
-              <div className="rounded-md border bg-muted/20 p-4 text-sm text-muted-foreground">
-                No preview available for this attachment.
-              </div>
-            ) : null}
-          </>
-        )}
-      </DialogContent>
+      <ChatInputAttachmentPreviewContent
+        attachment={attachment}
+        renderPreview={renderPreview}
+      />
     </Dialog>
   );
 }
@@ -528,21 +575,14 @@ function ChatInput({
   value,
   ...props
 }: ChatInputProps) {
+  const attachmentPreviewDialogHandle = React.useMemo(
+    () => createDialogHandle<ChatInputAttachmentData>(),
+    [],
+  );
   const hasAttachments = attachments.length > 0;
   const hasSubmittableContent = value.trim().length > 0 || hasAttachments;
   const submitDisabled =
     disabled || isSubmitting || !hasSubmittableContent || !onSubmit;
-  const [previewAttachmentId, setPreviewAttachmentId] = React.useState<
-    string | null
-  >(null);
-  const previewAttachment =
-    attachments.find((item) => item.id === previewAttachmentId) || null;
-
-  React.useEffect(() => {
-    if (previewAttachmentId && !previewAttachment) {
-      setPreviewAttachmentId(null);
-    }
-  }, [previewAttachment, previewAttachmentId]);
 
   const handleSubmit = () => {
     if (submitDisabled) return;
@@ -564,30 +604,55 @@ function ChatInput({
                   }}
                 />
 
-                <Button
-                  className="relative size-full justify-start p-2 text-left"
-                  onClick={() => {
-                    if (!enableAttachmentPreview) return;
-                    setPreviewAttachmentId(attachment.id);
-                  }}
-                  type="button"
-                  variant="outline"
-                >
-                  <div className="flex size-full flex-col gap-1">
-                    <ChatInputAttachmentLabel>
-                      {attachment.label}
-                    </ChatInputAttachmentLabel>
-                    {attachment.meta ? (
-                      <ChatInputAttachmentMeta>
-                        {attachment.meta}
-                      </ChatInputAttachmentMeta>
-                    ) : null}
+                {enableAttachmentPreview ? (
+                  <DialogTrigger
+                    handle={attachmentPreviewDialogHandle}
+                    payload={attachment}
+                    render={
+                      <Button
+                        className="relative size-full justify-start p-2 text-left cursor-pointer"
+                        type="button"
+                        variant="outline"
+                      >
+                        <div className="flex size-full flex-col gap-1">
+                          <ChatInputAttachmentLabel>
+                            {attachment.label}
+                          </ChatInputAttachmentLabel>
+                          {attachment.meta ? (
+                            <ChatInputAttachmentMeta>
+                              {attachment.meta}
+                            </ChatInputAttachmentMeta>
+                          ) : null}
 
-                    <div className="absolute bottom-2 left-2 rounded border px-1.5 py-0.5 text-[10px] uppercase text-muted-foreground">
-                      {getAttachmentKind(attachment)}
+                          <div className="absolute bottom-2 left-2 rounded border px-1.5 py-0.5 text-[10px] uppercase text-muted-foreground">
+                            {getAttachmentKind(attachment)}
+                          </div>
+                        </div>
+                      </Button>
+                    }
+                  />
+                ) : (
+                  <Button
+                    className="relative size-full justify-start p-2 text-left"
+                    type="button"
+                    variant="outline"
+                  >
+                    <div className="flex size-full flex-col gap-1">
+                      <ChatInputAttachmentLabel>
+                        {attachment.label}
+                      </ChatInputAttachmentLabel>
+                      {attachment.meta ? (
+                        <ChatInputAttachmentMeta>
+                          {attachment.meta}
+                        </ChatInputAttachmentMeta>
+                      ) : null}
+
+                      <div className="absolute bottom-2 left-2 rounded border px-1.5 py-0.5 text-[10px] uppercase text-muted-foreground">
+                        {getAttachmentKind(attachment)}
+                      </div>
                     </div>
-                  </div>
-                </Button>
+                  </Button>
+                )}
               </ChatInputAttachmentItem>
             )}
           </React.Fragment>
@@ -615,11 +680,13 @@ function ChatInput({
 
         <ChatInputToolbar>
           <ChatInputActions>
-            {leftActions}
-            <ChatInputAttachButton
-              disabled={disabled}
-              onClick={onAttachClick}
-            />
+            <TooltipProvider delay={100}>
+              {leftActions}
+              <ChatInputAttachButton
+                disabled={disabled}
+                onClick={onAttachClick}
+              />
+            </TooltipProvider>
           </ChatInputActions>
           <ChatInputActions>
             {rightActions}
@@ -638,33 +705,36 @@ function ChatInput({
         ) : null}
       </ChatInputRoot>
 
-      <ChatInputAttachmentPreviewDialog
-        attachment={previewAttachment}
-        onOpenChange={(open) => {
-          if (!open) {
-            setPreviewAttachmentId(null);
-          }
+      <Dialog handle={attachmentPreviewDialogHandle}>
+        {({ payload }) => {
+          if (!payload) return null;
+
+          return (
+            <ChatInputAttachmentPreviewContent
+              attachment={payload}
+              renderPreview={renderAttachmentPreview}
+            />
+          );
         }}
-        open={Boolean(previewAttachment)}
-        renderPreview={renderAttachmentPreview}
-      />
+      </Dialog>
     </MotionConfig>
   );
 }
 
 export {
-  ChatInput,
-  ChatInputActions,
-  ChatInputAttachButton,
-  ChatInputAttachmentItem,
+  ChatInputRoot,
   ChatInputTextarea,
+  ChatInputToolbar,
+  ChatInputActions,
+  ChatInputSubmitButton,
+  ChatInputAttachButton,
+  ChatInputAttachments,
+  ChatInputAttachmentItem,
   ChatInputAttachmentLabel,
   ChatInputAttachmentMeta,
   ChatInputAttachmentRemove,
-  ChatInputAttachments,
   ChatInputAttachmentPreviewDialog,
-  ChatInputRoot,
-  ChatInputSubmitButton,
-  ChatInputToolbar,
   type ChatInputAttachmentData,
+  // Composite component
+  ChatInput,
 };

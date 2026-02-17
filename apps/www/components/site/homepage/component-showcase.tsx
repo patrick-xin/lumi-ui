@@ -29,7 +29,7 @@ export default function ComponentShowcase() {
       variants={fadeUpVariants}
     >
       <div className="relative flex flex-col items-center justify-center">
-        <div className="group relative flex h-[500px] w-full items-center justify-center overflow-hidden rounded-md perspective-[2000px]">
+        <div className="group relative flex h-[450px] w-full items-center justify-center overflow-hidden rounded-md perspective-[2000px]">
           <div
             className={cn(
               "absolute inset-0 mx-auto",

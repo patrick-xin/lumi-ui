@@ -1,5 +1,5 @@
-import { cn } from "@/registry/lib/utils";
 import type React from "react";
+import { cn } from "@/registry/lib/utils";
 
 type ArrowProps = React.ComponentProps<"svg"> & {
   variant?: "tooltip" | "popover";
@@ -12,7 +12,6 @@ export function ArrowSvg({
 }: ArrowProps) {
   return (
     <svg
-    
       className={cn("rotate-0", className)}
       fill="none"
       height="10"

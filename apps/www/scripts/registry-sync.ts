@@ -125,7 +125,7 @@ function getExistingDemoFiles(): DemoFile[] {
         if (entry.isDirectory()) {
           // Recurse into "ui" and "blocks" directories
           if (
-            (entry.name === "ui" || entry.name === "blocks") &&
+            (entry.name === "ui" || entry.name === "blocks" || entry.name === "ai-elements") &&
             prefix === ""
           ) {
             scanDirectory(path.join(directory, entry.name), entry.name);
@@ -296,8 +296,10 @@ function generateIndexFile(registry: Registry, demoFiles: DemoFile[]): string {
       item.files &&
       item.files.length > 0
     ) {
-      const importPath =
-        item.type === "registry:ui"
+      const filePath = item.files?.[0]?.path;
+      const importPath = filePath
+        ? filePath.replace(".tsx", "").replace(".ts", "")
+        : item.type === "registry:ui"
           ? `registry/ui/${item.name}`
           : item.type === "registry:lib"
             ? `registry/lib/${item.name}`

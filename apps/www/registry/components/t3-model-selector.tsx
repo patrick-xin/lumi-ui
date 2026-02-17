@@ -123,12 +123,14 @@ export const T3ModelSelector = () => {
                       <TabsTab
                         className="hover:text-foreground size-7"
                         key={provider.value}
-                        render={
+                        render={(props, state) => (
                           <TooltipTrigger
                             handle={ModelTooltipHandle}
                             payload={{ name: provider.name }}
+                            {...props}
+                            disabled={state.active}
                           />
-                        }
+                        )}
                         value={provider.value}
                       >
                         {provider.icon}

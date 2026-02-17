@@ -61,7 +61,7 @@ function TooltipArrow({ className, ...props }: BaseTooltip.Arrow.Props) {
   return (
     <BaseTooltip.Arrow
       className={cn(
-        "flex",
+        "flex items-center justify-center",
         "data-[side=bottom]:-top-2 data-[side=bottom]:rotate-0",
         "data-[side=left]:-right-3 data-[side=left]:rotate-90",
         "data-[side=right]:-left-3 data-[side=right]:-rotate-90",
@@ -69,6 +69,9 @@ function TooltipArrow({ className, ...props }: BaseTooltip.Arrow.Props) {
         className,
       )}
       data-slot="tooltip-arrow"
+      style={{
+        width: "max(20px, calc(var(--radius) * 1.7))",
+      }}
       {...props}
     >
       <ArrowSvg variant="tooltip" />
@@ -112,7 +115,7 @@ function TooltipContent({
       >
         <BaseTooltip.Popup
           className={cn(
-            "bg-foreground text-background w-fit rounded-md px-3 py-1.5 text-xs text-balance animate-popup duration-0 data-instant:transition-none",
+            "bg-foreground text-background w-fit rounded-md px-3 py-1.5 text-xs text-balance animate-popup duration-0 data-instant:transition-none outline-none",
             className,
           )}
           {...props}

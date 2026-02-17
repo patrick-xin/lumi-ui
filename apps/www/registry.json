@@ -58,6 +58,26 @@
       "type": "registry:ui"
     },
     {
+      "name": "chat-input",
+      "type": "registry:ui",
+      "title": "Chat Input",
+      "description": "A chat input component.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": [
+        "@lumi-ui/button",
+        "@lumi-ui/dialog",
+        "@lumi-ui/scroll-area"
+      ],
+      "files": [
+        {
+          "path": "registry/ai/chat-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ai-elements/chat-input.tsx"
+        }
+      ],
+      "categories": ["ai"]
+    },
+    {
       "dependencies": ["clsx", "tailwind-merge"],
       "files": [
         {

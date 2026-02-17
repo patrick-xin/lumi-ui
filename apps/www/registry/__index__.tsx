@@ -20,6 +20,28 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "chat-input": {
+    name: "chat-input",
+    title: "Chat Input",
+    description: "A chat input component.",
+    type: "registry:ui",
+    target: "components/ai-elements/chat-input.tsx",
+    registryDependencies: ["motion","lucide-react"],
+    files:     [
+          {
+                "path": "registry/ai/chat-input.tsx",
+                "target": "components/ai-elements/chat-input.tsx",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/ai/chat-input");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chat-input";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["ai"],
+    meta: undefined,
+  },
   "utils": {
     name: "utils",
     title: undefined,
@@ -1293,6 +1315,60 @@ export const components: ComponentRegistry = {
     }),
     categories: ["form-input","chat"],
     meta: {"alignment":"bottom-center","iframeHeight":800},
+  },
+  "chat-input-basic": {
+    name: "chat-input-basic",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["chat-input"],
+    files: [{
+      path: "components/examples/ai-elements/chat-input/chat-input-basic.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ai-elements/chat-input/chat-input-basic");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chat-input-basic";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "chat-input-custom": {
+    name: "chat-input-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["chat-input"],
+    files: [{
+      path: "components/examples/ai-elements/chat-input/chat-input-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ai-elements/chat-input/chat-input-custom");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chat-input-custom";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "chat-input-demo": {
+    name: "chat-input-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["chat-input"],
+    files: [{
+      path: "components/examples/ai-elements/chat-input/chat-input-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ai-elements/chat-input/chat-input-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chat-input-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
   },
   "accordion-custom-trigger-icon": {
     name: "accordion-custom-trigger-icon",

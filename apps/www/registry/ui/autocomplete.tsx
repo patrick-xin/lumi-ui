@@ -85,8 +85,8 @@ function AutocompleteList({
   return (
     <BaseAutocomplete.List
       className={cn(
-        "outline-0 py-1 data-[empty]:p-0",
-        "overflow-y-auto scroll-py-2 overscroll-contain",
+        "outline-none py-1 data-[empty]:p-0",
+        "min-h-0 overflow-y-auto scroll-py-2",
         className,
       )}
       data-slot="autocomplete-list"
@@ -344,7 +344,7 @@ function AutocompleteContent({
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md",
             "outline outline-1 outline-border dark:-outline-offset-1",
-            "overflow-hidden overflow-y-auto",
+            "flex flex-col overflow-hidden",
             "max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))]",
             matchAnchorWidth && "w-[var(--anchor-width)]",
             className,
