@@ -14,16 +14,16 @@ export function ComboboxScrollAreaDemo() {
   return (
     <Combobox items={frameworks}>
       <ComboboxInputGroup
+        className="w-48"
         id="select-framework"
         placeholder="e.g. Next.js"
-        className="w-48"
       />
       <ComboboxContent>
         <ScrollArea
-          gradientScrollFade
-          noScrollBar
-          // add height constraint
           className="h-32"
+          gradientScrollFade
+          // add height constraint
+          noScrollBar
         >
           <ComboboxEmpty>No framework found.</ComboboxEmpty>
           <ComboboxList>

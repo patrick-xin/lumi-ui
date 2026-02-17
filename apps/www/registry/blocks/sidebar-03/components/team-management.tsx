@@ -24,7 +24,6 @@ import {
   AlertDialogTrigger,
   createAlertDialogHandle,
 } from "@/registry/ui/alert-dialog";
-import { Avatar, AvatarFallback } from "@/registry/ui/avatar";
 import { Badge } from "@/registry/ui/badge";
 import { Button } from "@/registry/ui/button";
 import {
@@ -53,6 +52,7 @@ import {
 } from "@/registry/ui/select";
 import { Separator } from "@/registry/ui/separator";
 import { toast } from "@/registry/ui/toast";
+import { MemberCard } from "./member-card";
 
 export type TeamMember = {
   id: string;
@@ -198,7 +198,7 @@ export function TeamManagement() {
   };
 
   return (
-    <div className="w-full mx-auto border rounded-md bg-card">
+    <div className="w-full mx-auto border rounded-xl bg-card">
       <div className="flex justify-between p-6">
         <div className="space-y-2">
           <div className="text-lg font-semibold">Team Members</div>
@@ -545,30 +545,3 @@ const INITIAL_TEAM_MEMBERS: TeamMember[] = [
     role: "Member",
   },
 ];
-
-export const MemberCard = ({
-  member,
-  className,
-}: {
-  member: TeamMember;
-  className?: string;
-}) => {
-  return (
-    <div
-      className={cn(
-        "flex items-center justify-between space-x-4 p-2",
-        className,
-      )}
-    >
-      <div className="flex items-center space-x-4">
-        <Avatar>
-          <AvatarFallback>{member.initials}</AvatarFallback>
-        </Avatar>
-        <div>
-          <p className="text-sm font-medium leading-none">{member.name}</p>
-          <p className="text-sm text-muted-foreground">{member.email}</p>
-        </div>
-      </div>
-    </div>
-  );
-};

@@ -1,0 +1,83 @@
+# Lumi UI Documentation
+
+> A collection of composable React components built with Base UI and Tailwind CSS, designed for clarity, speed, and complete code ownership.
+
+## Get Started
+- [Introduction](https://lumiui.dev/docs/introduction): Overview of Lumi UI's design philosophy and tech stack.
+- [Installation](https://lumiui.dev/docs/installation): Guide to using the `shadcn/ui` CLI for dependency management.
+- [Philosophies](https://lumiui.dev/docs/philosophies): Architectural decisions regarding robustness, accessibility, and AI-friendliness.
+- [Animation](https://lumiui.dev/docs/animation-guide): Understanding the animation system.
+- [Hit-Test & Highlights](https://lumiui.dev/docs/highlights): Approach to interactive touch targets.
+- [Components List](https://lumiui.dev/docs/components): Overview of shipped components.
+
+## Components: Form & Input
+- [Form](https://lumiui.dev/docs/components/form-input/form): A native form element with consolidated error handling.
+- [Input](https://lumiui.dev/docs/components/form-input/input): A native input element that automatically works with Field.
+- [Autocomplete](https://lumiui.dev/docs/components/form-input/autocomplete): An input that suggests options as you type.
+- [Button](https://lumiui.dev/docs/components/form-input/button): Displays a button or a component that looks like a button.
+- [Checkbox Group](https://lumiui.dev/docs/components/form-input/checkbox-group): Provides shared state to a series of checkboxes.
+- [Checkbox](https://lumiui.dev/docs/components/form-input/checkbox): An easily stylable checkbox component.
+- [Combobox](https://lumiui.dev/docs/components/form-input/combobox): An input combined with a list of predefined items to select.
+- [Field](https://lumiui.dev/docs/components/form-input/field): Provides labelling and validation for form controls.
+- [Fieldset](https://lumiui.dev/docs/components/form-input/fieldset): A native fieldset element with an easily stylable legend.
+- [Number Field](https://lumiui.dev/docs/components/form-input/number-field): Numeric input with increment/decrement buttons and scrub area.
+- [Radio](https://lumiui.dev/docs/components/form-input/radio): An easily stylable radio button component.
+- [Select](https://lumiui.dev/docs/components/form-input/select): Dropdown menu for choosing a predefined value.
+- [Slider](https://lumiui.dev/docs/components/form-input/slider): An easily stylable range input.
+- [Switch](https://lumiui.dev/docs/components/form-input/switch): A control that indicates whether a setting is on or off.
+- [Textarea](https://lumiui.dev/docs/components/form-input/textarea): A native textarea element.
+
+## Components: Layout & Navigation
+- [Accordion](https://lumiui.dev/docs/components/layout-nav/accordion): A set of collapsible panels with headings.
+- [Tabs](https://lumiui.dev/docs/components/layout-nav/tabs): Toggling between related panels on the same page.
+- [Navigation Menu](https://lumiui.dev/docs/components/layout-nav/navigation-menu): Collection of links and menus for website navigation.
+- [Scroll Area](https://lumiui.dev/docs/components/layout-nav/scroll-area): Native scroll container with custom scrollbars.
+- [Separator](https://lumiui.dev/docs/components/layout-nav/separator): A separator element accessible to screen readers.
+- [Sidebar](https://lumiui.dev/docs/components/layout-nav/sidebar): Composable, mobile-responsive sidebar component.
+
+## Components: Overlays & Dialogs
+- [Dialog](https://lumiui.dev/docs/components/overlays-dialogs/dialog): A popup that opens on top of the entire page.
+- [Alert Dialog](https://lumiui.dev/docs/components/overlays-dialogs/alert-dialog): Modal dialog interrupting the user for a response.
+- [Context Menu](https://lumiui.dev/docs/components/overlays-dialogs/context-menu): Menu appearing at the pointer on right click/long press.
+- [Dropdown Menu](https://lumiui.dev/docs/components/overlays-dialogs/dropdown-menu): List of actions in a dropdown with keyboard navigation.
+- [Popover](https://lumiui.dev/docs/components/overlays-dialogs/popover): Accessible popup anchored to a button.
+- [Preview Card](https://lumiui.dev/docs/components/overlays-dialogs/preview-card): Popup preview on hover for sighted users.
+- [Sheet](https://lumiui.dev/docs/components/overlays-dialogs/sheet): Extends Dialog to display complementary content.
+- [Tooltip](https://lumiui.dev/docs/components/overlays-dialogs/tooltip): Popup hint appearing on hover or focus.
+
+## Components: Feedback & Status
+- [Meter](https://lumiui.dev/docs/components/feedback-status/meter): Graphical display of a numeric value within a range.
+- [Progress](https://lumiui.dev/docs/components/feedback-status/progress): Displays the status of a long-running task.
+- [Toast](https://lumiui.dev/docs/components/feedback-status/toast): Generates toast notifications.
+
+## Components: Display & Media
+- [Avatar](https://lumiui.dev/docs/components/display-media/avatar): An easily stylable avatar component.
+- [Chart](https://lumiui.dev/docs/components/display-media/chart): Beautiful, typed charts built with Recharts v3.
+
+## Components: Miscellaneous
+- [Collapsible](https://lumiui.dev/docs/components/misc/collapsible): A collapsible panel controlled by a button.
+- [Menubar](https://lumiui.dev/docs/components/misc/menubar): Menu bar providing commands and options.
+- [Resizable](https://lumiui.dev/docs/components/misc/resizable): Accessible resizable panel groups and layouts.
+- [Toggle Group](https://lumiui.dev/docs/components/misc/toggle-group): Shared state for a series of toggle buttons.
+- [Toggle](https://lumiui.dev/docs/components/misc/toggle): A two-state button (on/off).
+- [Toolbar](https://lumiui.dev/docs/components/misc/toolbar): Container for grouping buttons and controls.
+
+## Themes
+- [Dune](https://lumiui.dev/docs/themes/dune): Warm sandstone neutrals with desert sunset vibes.
+- [Canopy](https://lumiui.dev/docs/themes/canopy): Crisp garden freshness mixed with deep rainforest tones.
+- [Celeste](https://lumiui.dev/docs/themes/celeste): Professional aesthetic bridging noon sky and cosmos.
+- [Lagoon](https://lumiui.dev/docs/themes/lagoon): Precise aquatic theme, shallow waters and deep ocean.
+- [Orchid](https://lumiui.dev/docs/themes/orchid): Warm, expressive palette of vibrant rose and plum.
+
+## Component Lab
+- [Vercel Notification](https://lumiui.dev/view/vercel-notification): A Vercel-style notification center that adapts to the device. Renders as a popover on desktop and a bottom sheet on mobile, featuring animated tabs and hover actions.
+- [Morphing Dialog](https://lumiui.dev/view/morphing-dialog): A fluid card-to-modal transition pattern. Combines Base UI's accessible dialog primitives with Framer Motion's shared layout animations for a seamless expansion effect. Inspired by Linear.
+- [Project Status Picker](https://lumiui.dev/view/project-status-picker): A compact status selector optimized for efficiency. Features custom hotkey logic for instant selection, rich item rendering with status colors, and contextual tooltips. Inspired by Linear.
+- [T3 Chat Model Selector](https://lumiui.dev/view/t3-model-selector): A multi-tabbed popover for selecting items from categorized groups. Features vertical navigation, search filtering, and rich hover details. Inspired by T3 Chat.
+
+## Composition Library
+- [Sidebar with collapsible icons and sections](https://lumiui.dev/view/sidebar-01): Sidebar with collapsible icons and sections.
+- [Dashboard layout with sidebar and main content area](https://lumiui.dev/view/sidebar-02): Dashboard layout with sidebar and main content area.
+- [Complex user management UI with nested dialogs.](https://lumiui.dev/view/dialog-01): Complex user management UI with nested dialogs.
+- [Image gallery with nested auth dialogs. Inspired by Unsplash.](https://lumiui.dev/view/dialog-02): Image gallery with nested auth dialogs. Inspired by Unsplash.
+

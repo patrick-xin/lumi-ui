@@ -61,7 +61,16 @@ function ProgressValue({ className, ...props }: BaseProgress.Value.Props) {
   );
 }
 
-function Progress({ className, value, ...props }: BaseProgress.Root.Props) {
+function Progress({
+  className,
+  value,
+  trackClassName,
+  indicatorClassName,
+  ...props
+}: BaseProgress.Root.Props & {
+  trackClassName?: string;
+  indicatorClassName?: string;
+}) {
   return (
     <BaseProgress.Root
       className={cn("relative w-full", className)}
@@ -70,11 +79,17 @@ function Progress({ className, value, ...props }: BaseProgress.Root.Props) {
       {...props}
     >
       <BaseProgress.Track
-        className="bg-primary/20 relative h-2 w-full overflow-hidden rounded-full"
+        className={cn(
+          "bg-primary/20 relative h-2 w-full overflow-hidden rounded-full",
+          trackClassName,
+        )}
         data-slot="progress-track"
       >
         <BaseProgress.Indicator
-          className="bg-primary h-full transition-all duration-500 ease-in-out"
+          className={cn(
+            "bg-primary h-full transition-all duration-500 ease-in-out",
+            indicatorClassName,
+          )}
           data-slot="progress-indicator"
         />
       </BaseProgress.Track>

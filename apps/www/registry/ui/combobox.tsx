@@ -147,7 +147,7 @@ function ComboboxList({ className, ...props }: BaseCombobox.List.Props) {
     <BaseCombobox.List
       className={cn(
         "outline-0 py-1 data-[empty]:p-0",
-        "overflow-y-auto scroll-py-2 overscroll-contain",
+        "min-h-0 overflow-y-auto scroll-py-2",
         className,
       )}
       data-slot="combobox-list"
@@ -398,7 +398,7 @@ function ComboboxContent({
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md",
             "outline-1 outline-border dark:-outline-offset-1",
-            "overflow-hidden overflow-y-auto",
+            "flex flex-col overflow-hidden",
             "max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))]",
             "animate-popup",
             matchAnchorWidth && "w-[var(--anchor-width)]",
