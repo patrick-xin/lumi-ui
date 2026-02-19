@@ -29,6 +29,8 @@ After components are copied, code is owned by the user project.
 4. Apply minimal, idempotent patches.
    - Never overwrite full global CSS; append missing rules only.
    - Preserve existing design tokens and wrapper conventions.
+   - Never overwrite existing project-owned files (especially `@/components/ui/*` and `@/lib/utils`); merge changes or create adjacent files instead.
+   - For `shadcn add`, do not use `--overwrite`; if prompted about an existing file, keep the existing file by default.
 
 5. Verify.
    - Feature code imports from `@/components/ui/*`.
@@ -44,6 +46,7 @@ After components are copied, code is owned by the user project.
 - Preserve `data-slot` attributes on every wrapper.
 - Preserve ref forwarding, prop spreading, and `render`/`useRender`/`mergeProps` semantics.
 - Do not assume docs match project version; check local code and installed types when uncertain.
+- Never replace user-customized wrappers or shared utilities (e.g., `button`, `utils`) unless the user explicitly requests that exact overwrite.
 
 ## References
 

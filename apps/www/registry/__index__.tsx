@@ -1028,6 +1028,116 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "badge": {
+    name: "badge",
+    title: "Badge",
+    description: "Displays a small count or status indicator.",
+    type: "registry:ui",
+    target: "",
+    registryDependencies: ["class-variance-authority"],
+    files:     [
+          {
+                "path": "registry/ui/badge.tsx",
+                "target": "",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/ui/badge");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "badge";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "card": {
+    name: "card",
+    title: "Card",
+    description: "Displays content inside a themed container.",
+    type: "registry:ui",
+    target: "",
+    registryDependencies: undefined,
+    files:     [
+          {
+                "path": "registry/ui/card.tsx",
+                "target": "",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/ui/card");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "card";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer": {
+    name: "drawer",
+    title: "Drawer",
+    description: "An overlay panel that slides from the viewport edge.",
+    type: "registry:ui",
+    target: "",
+    registryDependencies: ["@base-ui/react","class-variance-authority","lucide-react"],
+    files:     [
+          {
+                "path": "registry/ui/drawer.tsx",
+                "target": "",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/ui/drawer");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd": {
+    name: "kbd",
+    title: "KBD",
+    description: "Styles keyboard key hints and key groups.",
+    type: "registry:ui",
+    target: "",
+    registryDependencies: undefined,
+    files:     [
+          {
+                "path": "registry/ui/kbd.tsx",
+                "target": "",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/ui/kbd");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "kbd";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "skeleton": {
+    name: "skeleton",
+    title: "Skeleton",
+    description: "A placeholder used while content is loading.",
+    type: "registry:ui",
+    target: "",
+    registryDependencies: undefined,
+    files:     [
+          {
+                "path": "registry/ui/skeleton.tsx",
+                "target": "",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/ui/skeleton");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "skeleton";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "sidebar-01": {
     name: "sidebar-01",
     title: undefined,
@@ -1315,60 +1425,6 @@ export const components: ComponentRegistry = {
     }),
     categories: ["form-input","chat"],
     meta: {"alignment":"bottom-center","iframeHeight":800},
-  },
-  "chat-input-basic": {
-    name: "chat-input-basic",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["chat-input"],
-    files: [{
-      path: "components/examples/ai-elements/chat-input/chat-input-basic.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ai-elements/chat-input/chat-input-basic");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chat-input-basic";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "chat-input-custom": {
-    name: "chat-input-custom",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["chat-input"],
-    files: [{
-      path: "components/examples/ai-elements/chat-input/chat-input-custom.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ai-elements/chat-input/chat-input-custom");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chat-input-custom";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "chat-input-demo": {
-    name: "chat-input-demo",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["chat-input"],
-    files: [{
-      path: "components/examples/ai-elements/chat-input/chat-input-demo.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ai-elements/chat-input/chat-input-demo");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "chat-input-demo";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
   },
   "accordion-custom-trigger-icon": {
     name: "accordion-custom-trigger-icon",
@@ -2814,7 +2870,7 @@ export const components: ComponentRegistry = {
     name: "drawer-action-sheet",
     description: "",
     type: "registry:example",
-    registryDependencies: undefined,
+    registryDependencies: ["drawer"],
     files: [{
       path: "components/examples/ui/drawer/drawer-action-sheet.tsx",
       type: "registry:example",
@@ -2832,7 +2888,7 @@ export const components: ComponentRegistry = {
     name: "drawer-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: undefined,
+    registryDependencies: ["drawer"],
     files: [{
       path: "components/examples/ui/drawer/drawer-demo.tsx",
       type: "registry:example",
@@ -2850,7 +2906,7 @@ export const components: ComponentRegistry = {
     name: "drawer-mobile-navigation",
     description: "",
     type: "registry:example",
-    registryDependencies: undefined,
+    registryDependencies: ["drawer"],
     files: [{
       path: "components/examples/ui/drawer/drawer-mobile-navigation.tsx",
       type: "registry:example",
@@ -2868,7 +2924,7 @@ export const components: ComponentRegistry = {
     name: "drawer-snap-points",
     description: "",
     type: "registry:example",
-    registryDependencies: undefined,
+    registryDependencies: ["drawer"],
     files: [{
       path: "components/examples/ui/drawer/drawer-snap-points.tsx",
       type: "registry:example",
@@ -2886,7 +2942,7 @@ export const components: ComponentRegistry = {
     name: "drawer-stacked",
     description: "",
     type: "registry:example",
-    registryDependencies: undefined,
+    registryDependencies: ["drawer"],
     files: [{
       path: "components/examples/ui/drawer/drawer-stacked.tsx",
       type: "registry:example",
