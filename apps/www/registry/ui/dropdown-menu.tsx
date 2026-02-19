@@ -18,7 +18,6 @@ function DropdownMenuTrigger<Payload>({
   return (
     <BaseMenu.Trigger
       className={cn(
-        "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
         className,
       )}
       data-slot="dropdown-menu-trigger"

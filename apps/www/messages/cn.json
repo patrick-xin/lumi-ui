@@ -17,7 +17,7 @@
   },
   "HomePage": {
     "browseComponents": "浏览组件",
-    "description": "基于 Base UI 和 Tailwind CSS 的 React 组件库",
+    "description": "基于 Base UI 和 Tailwind CSS 的 React 组件库。",
     "subtitle": "构建快速，随心定制。",
     "title": "出色，更出彩",
     "viewDocs": "查看文档"

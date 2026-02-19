@@ -1,6 +1,6 @@
 export const siteConfig = {
   description:
-    "Composable React components powered by Base UI and Tailwind CSS — built for clarity, speed, and total code ownership.",
+    "Composable React components powered by Base UI and Tailwind CSS. Build fast, customize everything.",
   links: {
     github: "https://github.com/patrick-xin/lumi-ui",
   },

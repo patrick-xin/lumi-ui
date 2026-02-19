@@ -16,16 +16,15 @@ export function ComboboxGroupedDemo() {
   return (
     <Combobox items={groupedProduce}>
       <ComboboxInputGroup
-        showTrigger
-        placeholder="Select produce"
         className="w-64"
+        placeholder="Select produce"
+        showTrigger
       />
-
       <ComboboxContent>
         <ComboboxEmpty>No produce found.</ComboboxEmpty>
         <ComboboxList>
           {(group: ProduceGroup) => (
-            <ComboboxGroup key={group.value} items={group.items}>
+            <ComboboxGroup items={group.items} key={group.value}>
               <ComboboxGroupLabel>{group.value}</ComboboxGroupLabel>
               <ComboboxCollection>
                 {(item: Produce) => (
@@ -58,22 +57,22 @@ interface ProduceGroup {
 }
 
 const produceData: Produce[] = [
-  { id: "fruit-apple", label: "Apple", group: "Fruits" },
-  { id: "fruit-banana", label: "Banana", group: "Fruits" },
-  { id: "fruit-mango", label: "Mango", group: "Fruits" },
-  { id: "fruit-kiwi", label: "Kiwi", group: "Fruits" },
-  { id: "fruit-grape", label: "Grape", group: "Fruits" },
-  { id: "fruit-orange", label: "Orange", group: "Fruits" },
-  { id: "fruit-strawberry", label: "Strawberry", group: "Fruits" },
-  { id: "fruit-watermelon", label: "Watermelon", group: "Fruits" },
-  { id: "veg-broccoli", label: "Broccoli", group: "Vegetables" },
-  { id: "veg-carrot", label: "Carrot", group: "Vegetables" },
-  { id: "veg-cauliflower", label: "Cauliflower", group: "Vegetables" },
-  { id: "veg-cucumber", label: "Cucumber", group: "Vegetables" },
-  { id: "veg-kale", label: "Kale", group: "Vegetables" },
-  { id: "veg-pepper", label: "Bell pepper", group: "Vegetables" },
-  { id: "veg-spinach", label: "Spinach", group: "Vegetables" },
-  { id: "veg-zucchini", label: "Zucchini", group: "Vegetables" },
+  { group: "Fruits", id: "fruit-apple", label: "Apple" },
+  { group: "Fruits", id: "fruit-banana", label: "Banana" },
+  { group: "Fruits", id: "fruit-mango", label: "Mango" },
+  { group: "Fruits", id: "fruit-kiwi", label: "Kiwi" },
+  { group: "Fruits", id: "fruit-grape", label: "Grape" },
+  { group: "Fruits", id: "fruit-orange", label: "Orange" },
+  { group: "Fruits", id: "fruit-strawberry", label: "Strawberry" },
+  { group: "Fruits", id: "fruit-watermelon", label: "Watermelon" },
+  { group: "Vegetables", id: "veg-broccoli", label: "Broccoli" },
+  { group: "Vegetables", id: "veg-carrot", label: "Carrot" },
+  { group: "Vegetables", id: "veg-cauliflower", label: "Cauliflower" },
+  { group: "Vegetables", id: "veg-cucumber", label: "Cucumber" },
+  { group: "Vegetables", id: "veg-kale", label: "Kale" },
+  { group: "Vegetables", id: "veg-pepper", label: "Bell pepper" },
+  { group: "Vegetables", id: "veg-spinach", label: "Spinach" },
+  { group: "Vegetables", id: "veg-zucchini", label: "Zucchini" },
 ];
 
 function groupProduce(items: Produce[]): ProduceGroup[] {
@@ -82,7 +81,7 @@ function groupProduce(items: Produce[]): ProduceGroup[] {
     (groups[item.group] ??= []).push(item);
   });
   const order = ["Fruits", "Vegetables"];
-  return order.map((value) => ({ value, items: groups[value] ?? [] }));
+  return order.map((value) => ({ items: groups[value] ?? [], value }));
 }
 
 const groupedProduce: ProduceGroup[] = groupProduce(produceData);

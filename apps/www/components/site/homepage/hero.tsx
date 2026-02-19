@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
+import { MovingBorderButton } from "../../../registry/blocks/sidebar-03/components/moving-border-button";
 import ComponentShowcase from "./component-showcase";
 
 const smoothEase = [0.25, 1, 0.5, 1] as const;
@@ -47,82 +48,86 @@ function HeroHeading() {
   const t = useTranslations("HomePage");
   const locale = useLocale();
   return (
-    <div className="overflow-hidden">
-      <section>
-        <div className="relative pt-24">
-          <div className="mx-auto max-w-5xl px-6">
-            <div className="flex flex-col justify-center">
-              <div className="absolute top-6 inset-x-0 flex justify-center">
-                {locale === "cn" && (
-                  <span className="text-xs border rounded-xl px-2 py-1">
-                    🚀 中文文档开发中
-                  </span>
-                )}
-              </div>
-              <div className="relative mx-auto">
-                {/* Corner gradients */}
-                <CornerGradients />
-                <motion.h1
-                  animate="visible"
-                  className={cn(
-                    "text-center text-5xl font-bold tracking-tight md:text-7xl",
-                  )}
-                  custom={0}
-                  initial="hidden"
-                  variants={fadeUpVariants}
-                >
-                  {t("title")}
-                </motion.h1>
-              </div>
-              <motion.p
-                animate="visible"
-                className="mt-8 text-pretty text-lg text-muted-foreground mx-auto max-w-2xl text-center"
-                custom={0.1}
-                initial="hidden"
-                variants={fadeUpVariants}
+    <section className="overflow-hidden">
+      <div className="relative pt-24">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="flex flex-col justify-center">
+            <div className="absolute top-6 inset-x-0 flex justify-center">
+              <MovingBorderButton
+                className="text-primary"
+                nativeButton={false}
+                render={
+                  <a
+                    href="https://github.com/patrick-xin/lumi-ui-skill"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  />
+                }
               >
-                {t("description")}
-                <br />
-                <span className="inline-flex items-center font-semibold text-foreground mt-2">
-                  {t("subtitle")}{" "}
-                </span>
-              </motion.p>
-              <motion.div
-                animate="visible"
-                className="mt-12 flex justify-center items-center flex-wrap gap-4 mx-auto md:hidden"
-                custom={0.2}
-                initial="hidden"
-                variants={fadeUpVariants}
-              >
-                <Button
-                  className="w-50"
-                  nativeButton={false}
-                  render={
-                    <Link href="/docs/introduction">
-                      <span className="text-nowrap">{t("viewDocs")}</span>
-                    </Link>
-                  }
-                  size="lg"
-                />
-                <Button
-                  className="w-50"
-                  nativeButton={false}
-                  render={
-                    <Link href="/docs/components">
-                      <span className="text-nowrap">
-                        {t("browseComponents")}
-                      </span>
-                    </Link>
-                  }
-                  size="lg"
-                  variant="glow"
-                />
-              </motion.div>
+                Lumi Skill
+              </MovingBorderButton>
             </div>
+            <div className="relative mx-auto">
+              {/* Corner gradients */}
+              <CornerGradients />
+              <motion.h1
+                animate="visible"
+                className={cn(
+                  "text-center text-5xl font-bold tracking-tight md:text-7xl",
+                )}
+                custom={0}
+                initial="hidden"
+                variants={fadeUpVariants}
+              >
+                {t("title")}
+              </motion.h1>
+            </div>
+            <motion.p
+              animate="visible"
+              className="mt-8 text-pretty text-lg text-muted-foreground mx-auto max-w-2xl text-center"
+              custom={0.1}
+              initial="hidden"
+              variants={fadeUpVariants}
+            >
+              {t("description")}
+              <br />
+              <span className="inline-flex items-center font-semibold text-foreground mt-2">
+                {t("subtitle")}{" "}
+              </span>
+            </motion.p>
+            <motion.div
+              animate="visible"
+              className="mt-12 flex justify-center items-center flex-wrap gap-4 mx-auto md:hidden"
+              custom={0.2}
+              initial="hidden"
+              variants={fadeUpVariants}
+            >
+              <Button
+                className="w-50"
+                nativeButton={false}
+                render={
+                  <Link href="/docs/introduction">
+                    <span className="text-nowrap">{t("viewDocs")}</span>
+                  </Link>
+                }
+                size="lg"
+              />
+              <Button
+                className="w-50"
+                nativeButton={false}
+                render={
+                  <Link href="/docs/components">
+                    <span className="text-nowrap">{t("browseComponents")}</span>
+                  </Link>
+                }
+                size="lg"
+                variant="glow"
+              />
+            </motion.div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
 

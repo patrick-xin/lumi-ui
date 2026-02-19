@@ -5,7 +5,7 @@ import { AIChat } from "@/registry/blocks/sidebar-03/components/ai-chat";
 import { AppSidebar } from "@/registry/blocks/sidebar-03/components/app-sidebar";
 import { ChartMixedAxes } from "@/registry/blocks/sidebar-03/components/chart-mixed-axes";
 import { DashboardContent } from "@/registry/blocks/sidebar-03/components/dashboard-content";
-import { VercelNotification } from "@/registry/blocks/sidebar-03/components/vercel-notification";
+import { Notifications } from "@/registry/blocks/sidebar-03/components/vercel-notification";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -56,7 +56,7 @@ export default async function Page() {
             </BreadcrumbList>
           </Breadcrumb>
           <div className="ml-auto flex gap-2">
-            <VercelNotification />
+            <Notifications />
             <ThemeSwitcher />
           </div>
         </header>

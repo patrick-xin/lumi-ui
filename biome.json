@@ -47,7 +47,8 @@
         "useSemanticElements": "warn",
         "useValidAnchor": "off",
         "noStaticElementInteractions": "warn",
-        "noLabelWithoutControl": "off"
+        "noLabelWithoutControl": "off",
+        "useAnchorContent": "off"
       },
       "complexity": {
         "useLiteralKeys": "off",
