@@ -1,5 +1,18 @@
 "use client";
 
+import {
+  ChevronDown,
+  ClipboardIcon,
+  Eye,
+  EyeOff,
+  FilePlus,
+  Settings,
+  Share2,
+  Trash2,
+  WrapText,
+} from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
   Dialog,
@@ -16,6 +29,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuGroupLabel,
   DropdownMenuItem,
+  DropdownMenuLinkItem,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItemContent,
   DropdownMenuSeparator,
@@ -25,19 +39,7 @@ import {
   DropdownMenuSubMenuTriggerGroup,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import {
-  ChevronDown,
-  ClipboardIcon,
-  Eye,
-  EyeOff,
-  FilePlus,
-  Settings,
-  Share2,
-  Trash2,
-  WrapText,
-} from "lucide-react";
-import Link from "next/link";
-import * as React from "react";
+import { toast } from "@/registry/ui/toast";
 
 export function DropdownMenuDemo() {
   const [showMinimap, setShowMinimap] = React.useState(true);
@@ -67,16 +69,18 @@ export function DropdownMenuDemo() {
               <Share2 className="size-4" />
               <span>Share</span>
             </DropdownMenuSubMenuTriggerGroup>
-            <DropdownMenuSubMenuContent>
-              <DropdownMenuItem>
+            <DropdownMenuSubMenuContent className="w-40">
+              <DropdownMenuItem
+                onClick={() => toast.success({ title: "Link copied!" })}
+              >
                 <ClipboardIcon />
                 Copy Link
               </DropdownMenuItem>
-              <DropdownMenuItem
+              <DropdownMenuLinkItem
                 render={
                   <Link className="w-full" href="/">
                     <Settings className="size-4" />
-                    <span>Sharing Settings...</span>
+                    <span>Sharing Settings</span>
                   </Link>
                 }
               />

@@ -46,6 +46,7 @@ links:
        <DropdownMenuTrigger />
        <DropdownMenuContent>
           <DropdownMenuItem />
+          <DropdownMenuLinkItem />
           <DropdownMenuItem>
             <DropdownMenuShortcut />
           </DropdownMenuItem>
@@ -78,6 +79,7 @@ links:
           <DropdownMenuPopup>
             <DropdownMenuArrow />
             <DropdownMenuItem />
+            <DropdownMenuLinkItem />
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuGroupLabel />
@@ -141,7 +143,7 @@ links:
 <ComponentPreview name="dropdown-menu-control" />
 
 ### Navigate to another page
-Use the `render` prop to compose a menu item with an anchor element.
+`DropdownMenuLinkItem` renders `a` by default. Use `render` prop to render link based on your framework.
 <ComponentPreview name="dropdown-menu-navigation" />
 
 ### Open a dialog

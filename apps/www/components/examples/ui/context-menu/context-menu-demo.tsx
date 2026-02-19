@@ -1,17 +1,17 @@
 import {
   ContextMenu,
-  ContextMenuCheckboxItem,
+  ContextMenuCheckboxItemContent,
   ContextMenuContent,
   ContextMenuGroup,
   ContextMenuItem,
   ContextMenuLabel,
   ContextMenuRadioGroup,
-  ContextMenuRadioItem,
+  ContextMenuRadioItemContent,
   ContextMenuSeparator,
   ContextMenuShortcut,
   ContextMenuSub,
   ContextMenuSubContent,
-  ContextMenuSubTrigger,
+  ContextMenuSubTriggerGroup,
   ContextMenuTrigger,
 } from "@/registry/ui/context-menu";
 
@@ -35,9 +35,9 @@ export function ContextMenuDemo() {
           <ContextMenuShortcut>⌘R</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuSub>
-          <ContextMenuSubTrigger variant="inset">
+          <ContextMenuSubTriggerGroup variant="inset">
             More Tools
-          </ContextMenuSubTrigger>
+          </ContextMenuSubTriggerGroup>
           <ContextMenuSubContent className="w-44">
             <ContextMenuItem>Save Page...</ContextMenuItem>
             <ContextMenuItem>Create Shortcut...</ContextMenuItem>
@@ -49,18 +49,22 @@ export function ContextMenuDemo() {
           </ContextMenuSubContent>
         </ContextMenuSub>
         <ContextMenuSeparator />
-        <ContextMenuCheckboxItem checked>
+        <ContextMenuCheckboxItemContent checked>
           Show Bookmarks
-        </ContextMenuCheckboxItem>
-        <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
+        </ContextMenuCheckboxItemContent>
+        <ContextMenuCheckboxItemContent>
+          Show Full URLs
+        </ContextMenuCheckboxItemContent>
         <ContextMenuSeparator />
         <ContextMenuGroup>
           <ContextMenuRadioGroup>
             <ContextMenuLabel inset>People</ContextMenuLabel>
-            <ContextMenuRadioItem value="pedro">
+            <ContextMenuRadioItemContent value="pedro">
               Pedro Duarte
-            </ContextMenuRadioItem>
-            <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+            </ContextMenuRadioItemContent>
+            <ContextMenuRadioItemContent value="colm">
+              Colm Tuite
+            </ContextMenuRadioItemContent>
           </ContextMenuRadioGroup>
         </ContextMenuGroup>
       </ContextMenuContent>

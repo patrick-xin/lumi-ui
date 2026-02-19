@@ -10,7 +10,7 @@ import {
 
 export const SelectTriggerGroupDemo = () => {
   return (
-    <div className="grid grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="space-y-4">
         <div className="flex flex-col gap-2">
           <span className="text-xs font-semibold">Animate icon</span>

@@ -1,14 +1,14 @@
 "use client";
 
+import { ChevronDownIcon, ExternalLinkIcon } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuLinkItem,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import { ChevronDownIcon, ExternalLinkIcon } from "lucide-react";
-import Link from "next/link";
 
 export function NavigationMenu() {
   return (
@@ -21,19 +21,15 @@ export function NavigationMenu() {
         }
       />
       <DropdownMenuContent matchAnchorWidth={false}>
-        <DropdownMenuItem
-          render={
-            <a
-              className="flex items-center gap-2 justify-between w-full"
-              href="https://google.com"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Google <ExternalLinkIcon className="size-4" />
-            </a>
-          }
-        />
-        <DropdownMenuItem
+        <DropdownMenuLinkItem
+          className="flex items-center gap-2 justify-between w-full"
+          href="https://google.com"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Google <ExternalLinkIcon className="size-4" />
+        </DropdownMenuLinkItem>
+        <DropdownMenuLinkItem
           render={
             <Link className="w-full" href="/docs/components">
               Go to Components

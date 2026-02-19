@@ -30,3 +30,152 @@ links:
     </Steps>
   </TabsPanel>
 </CodeTabs>
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+     ```tsx
+     <ContextMenu>
+       <ContextMenuTrigger />
+       <ContextMenuContent>
+         <ContextMenuItem />
+         <ContextMenuLinkItem />
+         <ContextMenuItem>
+           <ContextMenuShortcut />
+         </ContextMenuItem>
+         <ContextMenuSeparator />
+         <ContextMenuGroup>
+           <ContextMenuLabel />
+         </ContextMenuGroup>
+         <ContextMenuRadioGroup>
+           <ContextMenuRadioItemContent />
+         </ContextMenuRadioGroup>
+         <ContextMenuCheckboxItemContent />
+         <ContextMenuSub>
+           <ContextMenuSubTriggerGroup />
+           <ContextMenuSubContent>
+             {/* Submenu items */}
+           </ContextMenuSubContent>
+         </ContextMenuSub>
+       </ContextMenuContent>
+     </ContextMenu>
+     ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+    ```tsx
+    <ContextMenu>
+      <ContextMenuTrigger />
+      <ContextMenuPortal>
+        <ContextMenuBackdrop />
+        <ContextMenuPositioner>
+          <ContextMenuPopup>
+            <ContextMenuArrow />
+            <ContextMenuItem />
+            <ContextMenuLinkItem />
+            <ContextMenuSeparator />
+            <ContextMenuGroup>
+              <ContextMenuLabel />
+            </ContextMenuGroup>
+            <ContextMenuRadioGroup>
+              <ContextMenuRadioItem />
+            </ContextMenuRadioGroup>
+            <ContextMenuCheckboxItem />
+            <ContextMenuSub>
+              <ContextMenuSubTrigger />
+            </ContextMenuSub>
+          </ContextMenuPopup>
+        </ContextMenuPositioner>
+      </ContextMenuPortal>
+    </ContextMenu>
+    ```
+  </TabsPanel>
+</Tabs>
+
+## Basic Usage
+
+<ComponentPreview name="context-menu-demo" />
+
+## Features
+
+### Composite Ergonomics
+
+<ComponentPreview name="context-menu-composite-advantages" />
+
+### Primitive Control
+
+<ComponentPreview name="context-menu-primitive-control" />
+
+### Item Variants
+
+<ComponentPreview name="context-menu-variants" />
+
+## API Reference
+
+### ContextMenuContent
+
+A high-level container component that combines `ContextMenuPortal`, `ContextMenuPositioner`, and `ContextMenuPopup` into a single styled content element.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | The preferred side of the anchor to render against when open. |
+| `sideOffset` | `number` | The distance in pixels from the anchor. |
+| `align` | `"start" \| "center" \| "end"` | The preferred alignment against the anchor. |
+| `alignOffset` | `number` | An offset in pixels from the `"start"` or `"end"` alignment options. |
+| `showArrow` | `boolean` | Whether to render the arrow element. |
+| `matchAnchorWidth` | `boolean` | Whether the popup width should match the anchor width. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `BaseContextMenu.Popup.Props` | Passes all other props to the underlying popup component. |
+
+### ContextMenuCheckboxItemContent
+
+A high-level checkbox item component that combines `ContextMenuCheckboxItem` and `CheckboxItemIndicator` into a single styled element with configurable indicator placement.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `indicatorPlacement` | `"start" \| "end"` | The position of the indicator icon relative to the content. |
+| `indicatorIcon` | `React.ReactNode` | The icon to render as the checked indicator. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `BaseContextMenu.CheckboxItem.Props` | Passes all other props to the underlying checkbox item component. |
+
+### ContextMenuRadioItemContent
+
+A high-level radio item component that combines `ContextMenuRadioItem` and `RadioItemIndicator` into a single styled element with configurable indicator placement.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `indicatorPlacement` | `"start" \| "end"` | The position of the indicator icon relative to the content. |
+| `indicatorIcon` | `React.ReactNode` | The icon to render as the selected indicator. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `BaseContextMenu.RadioItem.Props` | Passes all other props to the underlying radio item component. |
+
+### ContextMenuSubTriggerGroup
+
+A composite submenu trigger component that renders trigger content and a chevron icon while reusing context menu item variants.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `variant` | `"default" \| "destructive" \| "inset"` | The visual style variant applied to the trigger row. |
+| `unstyled` | `boolean` | Disables built-in trigger styling when `true`. |
+| `className` | `string` | Additional CSS classes. |
+| `children` | `React.ReactNode` | The content of the trigger. |
+| `...props` | `BaseContextMenu.SubmenuTrigger.Props` | Passes all other props to the underlying submenu trigger component. |
+
+### ContextMenuSubContent
+
+A composite content component for submenus.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | The preferred side of the anchor to render against when open. |
+| `sideOffset` | `number` | The distance in pixels from the anchor. |
+| `align` | `"start" \| "center" \| "end"` | The preferred alignment against the anchor. |
+| `alignOffset` | `number` | An offset in pixels from the `"start"` or `"end"` alignment options. |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `ContextMenuContentProps` | Passes all other props to the underlying `ContextMenuContent` component. |

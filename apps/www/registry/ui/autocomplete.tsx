@@ -55,7 +55,10 @@ function AutocompleteClear({
   return (
     <BaseAutocomplete.Clear
       aria-label="Clear selection"
-      className={cn("outline-none", className)}
+      className={cn(
+        "outline-none pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
+        className,
+      )}
       data-slot="autocomplete-clear"
       {...props}
     />
@@ -69,7 +72,7 @@ function AutocompleteTrigger({
   return (
     <BaseAutocomplete.Trigger
       className={cn(
-        "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
+        "outline-none pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
         className,
       )}
       data-slot="autocomplete-trigger"

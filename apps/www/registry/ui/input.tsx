@@ -5,7 +5,7 @@ import { cn } from "@/registry/lib/utils";
 
 const inputVariants = cva(
   [
-    "bg-transparent w-full min-w-0 rounded-md shadow-sm text-sm border border-input cursor-text transition-[color,box-shadow,border,ring] appearance-none duration-150",
+    "bg-transparent w-full min-w-0 rounded-md shadow-sm text-base border border-input cursor-text transition-[color,box-shadow,border,ring] appearance-none duration-150",
     "placeholder:text-muted-foreground placeholder:text-sm",
     "file:text-foreground file:inline-flex file:items-center file:h-full file:border-0 file:bg-transparent file:text-sm file:font-medium",
     // focus state
