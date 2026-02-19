@@ -5,6 +5,29 @@ import { CheckIcon, MinusIcon } from "lucide-react";
 
 import { cn } from "@/registry/lib/utils";
 
+function CheckboxRoot({ className, ...props }: BaseCheckbox.Root.Props) {
+  return (
+    <BaseCheckbox.Root
+      className={cn(className)}
+      data-slot="checkbox-root"
+      {...props}
+    />
+  );
+}
+
+function CheckboxIndicator({
+  className,
+  ...props
+}: BaseCheckbox.Indicator.Props) {
+  return (
+    <BaseCheckbox.Indicator
+      className={cn(className)}
+      data-slot="checkbox-indicator"
+      {...props}
+    />
+  );
+}
+
 function Checkbox({ className, ...props }: BaseCheckbox.Root.Props) {
   return (
     <BaseCheckbox.Root
@@ -37,4 +60,9 @@ function Checkbox({ className, ...props }: BaseCheckbox.Root.Props) {
   );
 }
 
-export { Checkbox };
+export {
+  CheckboxRoot,
+  CheckboxIndicator,
+  // Composite component
+  Checkbox,
+};

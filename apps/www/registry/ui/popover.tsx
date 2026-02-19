@@ -5,16 +5,24 @@ import {
 import { cn } from "@/registry/lib/utils";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
-function Popover<Payload = unknown>({
-  ...props
-}: BasePopover.Root.Props<Payload>) {
+function Popover<Payload>({ ...props }: BasePopover.Root.Props<Payload>) {
   return <BasePopover.Root data-slot="popover" {...props} />;
 }
 
-function PopoverTrigger<Payload = unknown>({
+function PopoverTrigger<Payload>({
+  className,
   ...props
 }: PopoverTriggerProps<Payload>) {
-  return <BasePopover.Trigger data-slot="popover-trigger" {...props} />;
+  return (
+    <BasePopover.Trigger
+      className={cn(
+        "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
+        className,
+      )}
+      data-slot="popover-trigger"
+      {...props}
+    />
+  );
 }
 
 function PopoverBackdrop({ ...props }: BasePopover.Backdrop.Props) {

@@ -210,7 +210,7 @@ function SelectTriggerGroup({
         "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
         "data-[invalid]:border-destructive data-[invalid]:ring-destructive/20 dark:data-[invalid]:ring-destructive/40",
         "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
-        "dark:data-[popup-open]:bg-input/50",
+        "data-[popup-open]:bg-input/50 dark:data-[popup-open]:bg-input",
         "data-[size=default]:h-9 data-[size=sm]:h-8 data-[size=lg]:h-10",
         "data-[size=default]:py-1.5 data-[size=sm]:py-1 data-[size=lg]:py-2",
         indicatorPlacement === "start" ? "pl-1" : "pl-3 pr-1",

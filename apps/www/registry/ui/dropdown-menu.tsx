@@ -12,9 +12,19 @@ function DropdownMenu<Payload>({ ...props }: BaseMenu.Root.Props<Payload>) {
 }
 
 function DropdownMenuTrigger<Payload>({
+  className,
   ...props
 }: BaseMenu.Trigger.Props<Payload>) {
-  return <BaseMenu.Trigger data-slot="dropdown-menu-trigger" {...props} />;
+  return (
+    <BaseMenu.Trigger
+      className={cn(
+        "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
+        className,
+      )}
+      data-slot="dropdown-menu-trigger"
+      {...props}
+    />
+  );
 }
 
 function DropdownMenuPortal({ ...props }: BaseMenu.Portal.Props) {
@@ -111,6 +121,25 @@ function DropdownMenuItem({
         className,
       )}
       data-slot="dropdown-menu-item"
+      {...props}
+    />
+  );
+}
+
+function DropdownMenuLinkItem({
+  className,
+  unstyled = false,
+  ...props
+}: BaseMenu.LinkItem.Props & {
+  unstyled?: boolean;
+}) {
+  return (
+    <BaseMenu.LinkItem
+      className={cn(
+        unstyled ? "" : dropdownMenuItemVariants({ variant: "default" }),
+        className,
+      )}
+      data-slot="dropdown-menu-link-item"
       {...props}
     />
   );
@@ -415,6 +444,7 @@ export {
   DropdownMenuPopup,
   DropdownMenuArrow,
   DropdownMenuItem,
+  DropdownMenuLinkItem,
   DropdownMenuSeparator,
   DropdownMenuGroup,
   DropdownMenuGroupLabel,

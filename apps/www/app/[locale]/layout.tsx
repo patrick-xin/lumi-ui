@@ -5,7 +5,7 @@ import { routing } from "@/lib/i18n/routing";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/registry/ui/toast";
 import "@/styles/globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -71,6 +71,11 @@ export const metadata: Metadata = {
     images: ["/twitter.jpg"],
     title: siteConfig.name,
   },
+};
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  width: "device-width",
 };
 
 export default async function RootLayout({
