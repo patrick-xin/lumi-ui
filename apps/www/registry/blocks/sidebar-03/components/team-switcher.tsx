@@ -17,6 +17,7 @@ import {
 import { Field, FieldError, FieldLabel } from "@/registry/ui/field";
 import { Form } from "@/registry/ui/form";
 import { Input } from "@/registry/ui/input";
+import { Kbd } from "@/registry/ui/kbd";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Separator } from "@/registry/ui/separator";
 import {
@@ -105,7 +106,7 @@ export function TeamSwitcher() {
               size="icon-xs"
               variant="secondary"
             >
-              <kbd>Esc</kbd>
+              <Kbd>Esc</Kbd>
             </Button>
           </div>
           <Separator />

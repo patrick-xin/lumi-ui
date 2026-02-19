@@ -74,7 +74,7 @@ function TooltipArrow({ className, ...props }: BaseTooltip.Arrow.Props) {
       }}
       {...props}
     >
-      <ArrowSvg variant="tooltip" />
+      <ArrowSvg />
     </BaseTooltip.Arrow>
   );
 }
@@ -115,9 +115,10 @@ function TooltipContent({
       >
         <BaseTooltip.Popup
           className={cn(
-            "bg-foreground text-background w-fit rounded-md px-3 py-1.5 text-xs text-balance animate-popup duration-0 data-instant:transition-none outline-none",
+            "bg-popover text-popover-foreground w-fit rounded-md px-3 py-1.5 text-xs text-balance animate-popup duration-0 data-instant:transition-none outline outline-border dark:-outline-offset-1",
             className,
           )}
+          data-slot="tooltip-content"
           {...props}
         >
           {children}

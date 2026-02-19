@@ -2,6 +2,7 @@
 
 import { BellIcon } from "lucide-react";
 import * as React from "react";
+import { cn } from "@/registry/lib/utils";
 import { buttonVariants } from "@/registry/ui/button";
 import {
   createPopoverHandle,
@@ -18,7 +19,10 @@ export default function PopoverDetachedTriggerDemo() {
   return (
     <React.Fragment>
       <PopoverTrigger
-        className={buttonVariants({ size: "icon-sm", variant: "outline" })}
+        className={cn(
+          buttonVariants({ size: "icon-sm", variant: "outline" }),
+          "data-popup-open:bg-accent/60",
+        )}
         handle={demoPopover}
       >
         <BellIcon />

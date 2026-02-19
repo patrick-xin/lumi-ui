@@ -1,5 +1,15 @@
 "use client";
 
+import {
+  CpuIcon,
+  EyeIcon,
+  SearchIcon,
+  Settings2Icon,
+  SparklesIcon,
+  TvMinimalIcon,
+  UserIcon,
+} from "lucide-react";
+import { useState } from "react";
 import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
@@ -11,18 +21,9 @@ import {
   ComboboxList,
   ComboboxTrigger,
 } from "@/registry/ui/combobox";
+import { Kbd } from "@/registry/ui/kbd";
 import { Separator } from "@/registry/ui/separator";
 import { SidebarMenuButton, useSidebar } from "@/registry/ui/sidebar";
-import {
-  CpuIcon,
-  EyeIcon,
-  SearchIcon,
-  Settings2Icon,
-  SparklesIcon,
-  TvMinimalIcon,
-  UserIcon,
-} from "lucide-react";
-import { useState } from "react";
 
 export function SearchCombobox() {
   const [open, setOpen] = useState(false);
@@ -51,8 +52,8 @@ export function SearchCombobox() {
         }
       />
       <ComboboxContent
-      	className={cn(isCollapsed && "w-64")}
         align="start"
+        className={cn(isCollapsed && "w-64")}
         matchAnchorWidth={!isCollapsed}
         side={isCollapsed ? "right" : "bottom"}
         sideOffset={isCollapsed ? 2 : -32}
@@ -65,12 +66,12 @@ export function SearchCombobox() {
             variant="ghost"
           />
           <Button
-            className="absolute hidden lg:block right-2 text-[10px] rounded-sm text-muted-foreground cursor-pointer"
+            className="absolute hidden lg:block right-2 rounded-sm text-muted-foreground cursor-pointer"
             onClick={() => setOpen(false)}
-            size="icon-xs"
-            variant="secondary"
+            size="icon"
+            variant="unstyled"
           >
-            <kbd>Esc</kbd>
+            <Kbd className="bg-accent">Esc</Kbd>
           </Button>
         </div>
         <Separator />

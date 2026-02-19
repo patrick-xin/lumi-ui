@@ -1,7 +1,7 @@
 "use client";
 
 import { BellIcon } from "lucide-react";
-import { buttonVariants } from "@/registry/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Popover,
   PopoverContent,
@@ -14,7 +14,9 @@ export function PopoverWithArrowDemo() {
   return (
     <Popover>
       <PopoverTrigger
-        className={buttonVariants({ size: "icon-sm", variant: "outline" })}
+        render={
+          <Button className="data-popup-open:bg-accent/60" variant="outline" />
+        }
       >
         <BellIcon />
       </PopoverTrigger>

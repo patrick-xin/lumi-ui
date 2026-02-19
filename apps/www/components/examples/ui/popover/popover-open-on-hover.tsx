@@ -1,6 +1,7 @@
 "use client";
 
 import { BellIcon } from "lucide-react";
+import { cn } from "@/registry/lib/utils";
 import { buttonVariants } from "@/registry/ui/button";
 import {
   Popover,
@@ -14,7 +15,10 @@ export function PopoverOpenOnHoverDemo() {
   return (
     <Popover>
       <PopoverTrigger
-        className={buttonVariants({ size: "icon-sm", variant: "outline" })}
+        className={cn(
+          buttonVariants({ size: "icon-sm", variant: "outline" }),
+          "data-popup-open:bg-accent/60",
+        )}
         openOnHover
       >
         <BellIcon aria-label="Notifications" />

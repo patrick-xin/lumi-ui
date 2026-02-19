@@ -1,0 +1,53 @@
+---
+title: Kbd
+description: Display textual user input from keyboard.
+---
+
+<ComponentPreview name="kbd-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/kbd
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="kbd" title="kbd.tsx" collapsible/>
+      </Step>
+      <Step title="Update the import paths to match your project setup."/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## Anatomy
+
+```tsx
+<KbdGroup>
+  <Kbd/>
+</KbdGroup>
+```
+
+## Features
+
+### With Group
+
+<ComponentPreview name="kbd-group" />
+
+### With Tooltip
+
+<ComponentPreview name="kbd-tooltip" />
+
+### With Button
+
+<ComponentPreview name="kbd-button" />

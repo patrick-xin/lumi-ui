@@ -776,20 +776,6 @@
       ]
     },
     {
-      "name": "drawer",
-      "title": "Drawer",
-      "description": "An overlay panel that slides from the viewport edge.",
-      "type": "registry:ui",
-      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
-      "registryDependencies": ["@lumi-ui/button", "utils"],
-      "files": [
-        {
-          "path": "registry/ui/drawer.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "kbd",
       "title": "KBD",
       "description": "Styles keyboard key hints and key groups.",
@@ -843,7 +829,8 @@
         "@lumi-ui/toggle-group",
         "@lumi-ui/toast",
         "card",
-        "@lumi-ui/breadcrumb"
+        "@lumi-ui/breadcrumb",
+        "@lumi-ui/kbd"
       ],
       "files": [
         {

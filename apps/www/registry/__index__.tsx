@@ -1072,28 +1072,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "drawer": {
-    name: "drawer",
-    title: "Drawer",
-    description: "An overlay panel that slides from the viewport edge.",
-    type: "registry:ui",
-    target: "",
-    registryDependencies: ["@base-ui/react","class-variance-authority","lucide-react"],
-    files:     [
-          {
-                "path": "registry/ui/drawer.tsx",
-                "target": "",
-                "type": "registry:ui"
-          }
-    ],
-    component: React.lazy(async () => {
-      const mod = await import("registry/ui/drawer");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "kbd": {
     name: "kbd",
     title: "KBD",
@@ -2924,7 +2902,7 @@ export const components: ComponentRegistry = {
     name: "drawer-action-sheet",
     description: "",
     type: "registry:example",
-    registryDependencies: ["drawer"],
+    registryDependencies: undefined,
     files: [{
       path: "components/examples/ui/drawer/drawer-action-sheet.tsx",
       type: "registry:example",
@@ -2942,7 +2920,7 @@ export const components: ComponentRegistry = {
     name: "drawer-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["drawer"],
+    registryDependencies: undefined,
     files: [{
       path: "components/examples/ui/drawer/drawer-demo.tsx",
       type: "registry:example",
@@ -2960,7 +2938,7 @@ export const components: ComponentRegistry = {
     name: "drawer-mobile-navigation",
     description: "",
     type: "registry:example",
-    registryDependencies: ["drawer"],
+    registryDependencies: undefined,
     files: [{
       path: "components/examples/ui/drawer/drawer-mobile-navigation.tsx",
       type: "registry:example",
@@ -2978,7 +2956,7 @@ export const components: ComponentRegistry = {
     name: "drawer-snap-points",
     description: "",
     type: "registry:example",
-    registryDependencies: ["drawer"],
+    registryDependencies: undefined,
     files: [{
       path: "components/examples/ui/drawer/drawer-snap-points.tsx",
       type: "registry:example",
@@ -2996,7 +2974,7 @@ export const components: ComponentRegistry = {
     name: "drawer-stacked",
     description: "",
     type: "registry:example",
-    registryDependencies: ["drawer"],
+    registryDependencies: undefined,
     files: [{
       path: "components/examples/ui/drawer/drawer-stacked.tsx",
       type: "registry:example",
@@ -3851,6 +3829,78 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/input/input-with-label");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "input-with-label";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd-button": {
+    name: "kbd-button",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    files: [{
+      path: "components/examples/ui/kbd/kbd-button.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/kbd/kbd-button");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "kbd-button";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd-demo": {
+    name: "kbd-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    files: [{
+      path: "components/examples/ui/kbd/kbd-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/kbd/kbd-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "kbd-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd-group": {
+    name: "kbd-group",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    files: [{
+      path: "components/examples/ui/kbd/kbd-group.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/kbd/kbd-group");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "kbd-group";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "kbd-tooltip": {
+    name: "kbd-tooltip",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["kbd"],
+    files: [{
+      path: "components/examples/ui/kbd/kbd-tooltip.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/kbd/kbd-tooltip");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "kbd-tooltip";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

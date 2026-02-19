@@ -1,5 +1,7 @@
 "use client";
 
+import { BadgeCheckIcon, ChevronDownIcon } from "lucide-react";
+import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
@@ -8,8 +10,6 @@ import {
   DropdownMenuRadioItemContent,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import { BadgeCheckIcon, ChevronDownIcon } from "lucide-react";
-import * as React from "react";
 
 export function RadioItemsMenu() {
   const [sortBy, setSortBy] = React.useState("date");
@@ -18,7 +18,7 @@ export function RadioItemsMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline">
+          <Button className="data-popup-open:bg-accent/60" variant="outline">
             Sort By <ChevronDownIcon className="size-4" />
           </Button>
         }

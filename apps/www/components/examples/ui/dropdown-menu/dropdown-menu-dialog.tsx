@@ -1,5 +1,7 @@
 "use client";
 
+import { ChevronDownIcon, CopyIcon, PenIcon, TrashIcon } from "lucide-react";
+import * as React from "react";
 import {
   AlertDialog,
   AlertDialogClose,
@@ -17,8 +19,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import { ChevronDownIcon, CopyIcon, PenIcon, TrashIcon } from "lucide-react";
-import * as React from "react";
 
 export function DropdownMenuDialogDemo() {
   const [isDialogOpen, setDialogOpen] = React.useState(false);
@@ -28,7 +28,10 @@ export function DropdownMenuDialogDemo() {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button className="w-32 justify-between" variant="outline">
+            <Button
+              className="w-32 justify-between data-popup-open:bg-accent/60"
+              variant="outline"
+            >
               Actions <ChevronDownIcon className="size-4" />
             </Button>
           }

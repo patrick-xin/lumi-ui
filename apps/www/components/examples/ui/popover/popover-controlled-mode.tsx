@@ -3,6 +3,7 @@
 import type { PopoverRootChangeEventDetails } from "@base-ui/react";
 import { BellIcon } from "lucide-react";
 import * as React from "react";
+import { cn } from "@/registry/lib/utils";
 import { Button, buttonVariants } from "@/registry/ui/button";
 import {
   createPopoverHandle,
@@ -31,7 +32,10 @@ export function PopoverControlledModeDemo() {
     <React.Fragment>
       <div className="flex gap-4 flex-wrap justify-center">
         <PopoverTrigger
-          className={buttonVariants({ size: "icon-sm", variant: "outline" })}
+          className={cn(
+            buttonVariants({ size: "icon-sm", variant: "outline" }),
+            "data-popup-open:bg-accent/60",
+          )}
           handle={demoPopover}
           id="trigger-1"
         >
@@ -45,7 +49,10 @@ export function PopoverControlledModeDemo() {
           <BellIcon aria-label="Notifications" />
         </PopoverTrigger>
         <PopoverTrigger
-          className={buttonVariants({ size: "icon-sm", variant: "outline" })}
+          className={cn(
+            buttonVariants({ size: "icon-sm", variant: "outline" }),
+            "data-popup-open:bg-accent/60",
+          )}
           handle={demoPopover}
           id="trigger-3"
         >

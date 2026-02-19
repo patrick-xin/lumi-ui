@@ -96,7 +96,7 @@ function SelectList({ ...props }: BaseSelect.List.Props) {
 function SelectArrow({ ...props }: BaseSelect.Arrow.Props) {
   return (
     <BaseSelect.Arrow data-slot="select-arrow" {...props}>
-      <ArrowSvg variant="popover" />
+      <ArrowSvg />
     </BaseSelect.Arrow>
   );
 }
@@ -205,12 +205,12 @@ function SelectTriggerGroup({
   return (
     <BaseSelect.Trigger
       className={cn(
-        "group flex items-center gap-2 min-w-32 bg-transparent dark:bg-input/30 dark:hover:bg-input/50",
-        "rounded-md border border-input text-sm shadow-xs transition-[color,box-shadow]",
+        "border shadow-xs bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60 data-popup-open:bg-accent data-popup-open:text-accent-foreground dark:data-popup-open:bg-accent/60",
+        "group flex items-center gap-2 min-w-32",
+        "rounded-md text-sm transition-[color,box-shadow]",
         "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
         "data-[invalid]:border-destructive data-[invalid]:ring-destructive/20 dark:data-[invalid]:ring-destructive/40",
         "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
-        "data-[popup-open]:bg-input/50 dark:data-[popup-open]:bg-input",
         "data-[size=default]:h-9 data-[size=sm]:h-8 data-[size=lg]:h-10",
         "data-[size=default]:py-1.5 data-[size=sm]:py-1 data-[size=lg]:py-2",
         indicatorPlacement === "start" ? "pl-1" : "pl-3 pr-1",

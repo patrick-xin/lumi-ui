@@ -23,21 +23,21 @@ export function PopoverWithAnimationDemo() {
   return (
     <div className="flex gap-4">
       <PopoverTrigger
-        className={buttonVariants({ variant: "outline", size: "icon" })}
+        className={buttonVariants({ size: "icon", variant: "outline" })}
         handle={demoPopover}
         payload={NotificationsPanel}
       >
         <BellIcon aria-label="Notifications" />
       </PopoverTrigger>
       <PopoverTrigger
-        className={buttonVariants({ variant: "outline", size: "icon" })}
+        className={buttonVariants({ size: "icon", variant: "outline" })}
         handle={demoPopover}
         payload={ActivityPanel}
       >
         <ListIcon aria-label="Activity" />
       </PopoverTrigger>
       <PopoverTrigger
-        className={buttonVariants({ variant: "outline", size: "icon" })}
+        className={buttonVariants({ size: "icon", variant: "outline" })}
         handle={demoPopover}
         payload={ProfilePanel}
       >
@@ -48,16 +48,16 @@ export function PopoverWithAnimationDemo() {
         {({ payload: Payload }) => (
           <PopoverPortal>
             <PopoverPositioner
-              sideOffset={8}
               className={`
                 transition-[top,left,right,bottom,transform]
                 duration-[0.35s]
                 ease-[cubic-bezier(0.22,1,0.36,1)]
                 data-instant:transition-none`}
+              sideOffset={8}
             >
               <PopoverPopup
                 className={`
-                  h-(--popup-height,auto) w-(--popup-width,auto)
+                  h-(--popup-height,auto) w-(--popup-width,auto) bg-popover shadow-md outline outline-border dark:-outline-offset-1 rounded-md
                   max-w-[500px] origin-(--transform-origin)
                   transition-[width,height,opacity,scale]
                   duration-[0.35s]
@@ -131,10 +131,10 @@ function ProfilePanel() {
       </PopoverTitle>
       <Avatar className="col-start-1 col-end-2 row-start-1 row-end-3 inline-flex h-12 w-12 items-center justify-center">
         <AvatarImage
+          className="h-full w-full object-cover"
+          height="48"
           src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=128&h=128&dpr=2&q=80"
           width="48"
-          height="48"
-          className="h-full w-full object-cover"
         />
       </Avatar>
       <span className="col-start-2 col-end-3 row-start-2 row-end-3 text-sm">
@@ -142,10 +142,10 @@ function ProfilePanel() {
       </span>
       <div className="col-start-1 col-end-3 row-start-3 row-end-4 mt-2 flex flex-col gap-2 border-t pt-2 text-sm">
         <Button
-          variant="link"
           className="justify-start px-0"
           nativeButton={false}
           render={<a href="/">Profile settings</a>}
+          variant="link"
         >
           Profile settings
         </Button>

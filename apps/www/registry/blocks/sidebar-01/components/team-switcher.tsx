@@ -31,6 +31,7 @@ import {
 } from "@/registry/ui/sheet";
 import { SidebarMenuButton, useSidebar } from "@/registry/ui/sidebar";
 import { toast } from "@/registry/ui/toast";
+import { Kbd } from "../../../ui/kbd";
 
 const sheetHandle = createSheetHandle();
 
@@ -77,12 +78,12 @@ export function TeamSwitcher() {
           <div className="flex justify-between items-center relative">
             <ComboboxInputGroup placeholder="Find member..." variant="ghost" />
             <Button
-              className="absolute hidden lg:block right-2 text-[10px] rounded-sm text-muted-foreground cursor-pointer"
+              className="absolute hidden lg:block right-2 rounded-sm text-muted-foreground cursor-pointer"
               onClick={() => setComboboxOpen(false)}
-              size="icon-xs"
-              variant="secondary"
+              size="icon"
+              variant="unstyled"
             >
-              <kbd>Esc</kbd>
+              <Kbd className="bg-accent">Esc</Kbd>
             </Button>
           </div>
           <Separator />

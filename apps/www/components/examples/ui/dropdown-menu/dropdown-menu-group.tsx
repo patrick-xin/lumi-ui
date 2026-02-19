@@ -1,5 +1,7 @@
 "use client";
 
+import { ChevronDownIcon } from "lucide-react";
+import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
@@ -12,8 +14,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import { ChevronDownIcon } from "lucide-react";
-import * as React from "react";
 
 export function GroupedMenu() {
   const [sortBy, setSortBy] = React.useState("date");
@@ -23,7 +23,10 @@ export function GroupedMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button className="w-40 justify-between" variant="outline">
+          <Button
+            className="w-40 justify-between data-popup-open:bg-accent/60"
+            variant="outline"
+          >
             View <ChevronDownIcon className="size-4" />
           </Button>
         }

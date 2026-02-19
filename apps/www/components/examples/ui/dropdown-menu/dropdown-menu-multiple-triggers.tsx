@@ -66,19 +66,19 @@ export default function DropdownMenuMultipleTriggersDemo() {
           handle={demoMenu}
           id="menu-trigger-1"
           payload={"library" as const}
-          render={<Button variant="outline">Library</Button>}
+          render={<Button variant="secondary">Library</Button>}
         />
         <DropdownMenuTrigger
           handle={demoMenu}
           id="menu-trigger-2"
           payload={"playback" as const}
-          render={<Button variant="outline">Playback</Button>}
+          render={<Button variant="secondary">Playback</Button>}
         />
         <DropdownMenuTrigger
           handle={demoMenu}
           id="menu-trigger-3"
           payload={"share" as const}
-          render={<Button variant="outline">Share</Button>}
+          render={<Button variant="secondary">Share</Button>}
         />
         <Button
           onClick={() => {
