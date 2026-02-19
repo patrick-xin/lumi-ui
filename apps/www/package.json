@@ -22,10 +22,12 @@
     "registry:sync": "tsx scripts/registry-sync.ts"
   },
   "dependencies": {
+    "@ai-sdk/react": "^3.0.92",
     "@base-ui/react": "^1.2.0",
     "@hookform/resolvers": "^5.2.2",
     "@icons-pack/react-simple-icons": "^13.8.0",
     "@lumi-ui/ui": "workspace:*",
+    "ai": "^6.0.90",
     "class-variance-authority": "^0.7.1",
     "fumadocs-core": "^16.4.11",
     "fumadocs-mdx": "^14.2.6",

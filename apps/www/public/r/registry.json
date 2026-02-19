@@ -5,37 +5,38 @@
       "name": "ui",
       "registryDependencies": [
         "@lumi-ui/accordion",
-        "@lumi-ui/alert",
         "@lumi-ui/alert-dialog",
+        "@lumi-ui/arrow-svg",
         "@lumi-ui/autocomplete",
         "@lumi-ui/avatar",
         "@lumi-ui/badge",
         "@lumi-ui/breadcrumb",
         "@lumi-ui/button",
+        "@lumi-ui/card",
+        "@lumi-ui/chart",
         "@lumi-ui/checkbox",
         "@lumi-ui/checkbox-group",
         "@lumi-ui/collapsible",
         "@lumi-ui/combobox",
-        "@lumi-ui/command",
+        "@lumi-ui/context-menu",
         "@lumi-ui/dialog",
-        "@lumi-ui/empty",
+        "@lumi-ui/drawer",
+        "@lumi-ui/dropdown-menu",
         "@lumi-ui/field",
         "@lumi-ui/fieldset",
         "@lumi-ui/form",
-        "@lumi-ui/frame",
-        "@lumi-ui/group",
         "@lumi-ui/input",
-        "@lumi-ui/input-group",
         "@lumi-ui/kbd",
         "@lumi-ui/label",
-        "@lumi-ui/menu",
+        "@lumi-ui/menubar",
         "@lumi-ui/meter",
+        "@lumi-ui/navigation-menu",
         "@lumi-ui/number-field",
-        "@lumi-ui/pagination",
         "@lumi-ui/popover",
         "@lumi-ui/preview-card",
         "@lumi-ui/progress",
-        "@lumi-ui/radio-group",
+        "@lumi-ui/radio",
+        "@lumi-ui/resizable",
         "@lumi-ui/scroll-area",
         "@lumi-ui/select",
         "@lumi-ui/separator",
@@ -43,17 +44,14 @@
         "@lumi-ui/sidebar",
         "@lumi-ui/skeleton",
         "@lumi-ui/slider",
-        "@lumi-ui/spinner",
         "@lumi-ui/switch",
-        "@lumi-ui/table",
         "@lumi-ui/tabs",
         "@lumi-ui/textarea",
         "@lumi-ui/toast",
         "@lumi-ui/toggle",
         "@lumi-ui/toggle-group",
         "@lumi-ui/toolbar",
-        "@lumi-ui/tooltip",
-        "@lumi-ui/resizable"
+        "@lumi-ui/tooltip"
       ],
       "type": "registry:ui"
     },
@@ -616,7 +614,7 @@
         "lucide-react",
         "class-variance-authority"
       ],
-      "registryDependencies": ["@lumi-ui/menu", "@lumi-ui/arrow-svg", "utils"],
+      "registryDependencies": ["@lumi-ui/arrow-svg", "utils"],
       "files": [
         {
           "path": "registry/ui/menubar.tsx",
@@ -745,6 +743,76 @@
       "files": [
         {
           "path": "registry/ui/breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "description": "Displays a small count or status indicator.",
+      "type": "registry:ui",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "description": "Displays content inside a themed container.",
+      "type": "registry:ui",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "drawer",
+      "title": "Drawer",
+      "description": "An overlay panel that slides from the viewport edge.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "registryDependencies": ["@lumi-ui/button", "utils"],
+      "files": [
+        {
+          "path": "registry/ui/drawer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "kbd",
+      "title": "KBD",
+      "description": "Styles keyboard key hints and key groups.",
+      "type": "registry:ui",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/kbd.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "description": "A placeholder used while content is loading.",
+      "type": "registry:ui",
+      "dependencies": [],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/skeleton.tsx",
           "type": "registry:ui"
         }
       ]

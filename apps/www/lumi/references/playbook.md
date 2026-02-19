@@ -191,6 +191,8 @@ Always verify actual class names in copied component files before editing.
 - Do not rewrite unrelated component internals.
 - Respect existing tokens, spacing, and utility style.
 - If docs and project disagree, follow project code + installed package behavior.
+- Never overwrite existing project-owned files (notably `@/components/ui/*` wrappers and `@/lib/utils`) unless explicitly asked.
+- For CLI installs (`shadcn add` / Lumi registry): do not pass `--overwrite`; when prompted on existing files, keep local files and manually merge only required changes.
 
 ## Final Checks
 

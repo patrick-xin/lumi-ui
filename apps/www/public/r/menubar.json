@@ -9,7 +9,6 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "@lumi-ui/menu",
     "@lumi-ui/arrow-svg",
     "utils"
   ],
