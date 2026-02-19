@@ -1,7 +1,7 @@
 "use client";
 
 import NextLink from "next/link";
-import { Button } from "../../../../registry/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Drawer,
   DrawerBackdrop,
@@ -12,8 +12,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
   DrawerViewport,
-} from "../../../../registry/ui/drawer";
-import { ScrollArea } from "../../../../registry/ui/scroll-area";
+} from "@/registry/ui/drawer";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 const ITEMS = [
   { href: "#", label: "Overview" },

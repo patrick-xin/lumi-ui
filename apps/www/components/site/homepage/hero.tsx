@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { MovingBorderButton } from "@/registry/blocks/sidebar-03/components/moving-border-button";
 import { Button } from "@/registry/ui/button";
-import { MovingBorderButton } from "../../../registry/blocks/sidebar-03/components/moving-border-button";
 import ComponentShowcase from "./component-showcase";
 
 const smoothEase = [0.25, 1, 0.5, 1] as const;
@@ -46,7 +46,7 @@ export const Hero = () => {
 
 function HeroHeading() {
   const t = useTranslations("HomePage");
-  const locale = useLocale();
+
   return (
     <section className="overflow-hidden">
       <div className="relative pt-24">

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/registry/ui/button";
+import { Checkbox } from "@/registry/ui/checkbox";
 import {
   Drawer,
   DrawerClose,
@@ -11,8 +12,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/registry/ui/drawer";
-import { Checkbox } from "../../../../registry/ui/checkbox";
-import { Label } from "../../../../registry/ui/label";
+import { Label } from "@/registry/ui/label";
 
 const billingItems = [
   "Team plan renewal on Aug 30",
