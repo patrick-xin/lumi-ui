@@ -11,8 +11,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/registry/ui/drawer";
-import { Input } from "../../../../registry/ui/input";
-import { Label } from "../../../../registry/ui/label";
+import { Input } from "@/registry/ui/input";
+import { Label } from "@/registry/ui/label";
 
 const fakeNotifications = [
   "Design handoff completed",

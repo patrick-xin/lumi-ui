@@ -10,13 +10,13 @@ import {
 
 export function DropdownMenuTriggerOpen() {
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-col gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger
           render={(props, state) => (
             <Button
               className="w-48"
-              variant={state.open ? "default" : "outline"}
+              variant={state.open ? "secondary" : "outline"}
               {...props}
             >
               Actions

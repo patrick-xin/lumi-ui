@@ -76,7 +76,7 @@
     @apply border-border outline-ring/50;
   }
   ::selection {
-    @apply bg-primary text-background;
+    @apply bg-primary/50 text-background;
   }
   html {
     @apply scroll-smooth;

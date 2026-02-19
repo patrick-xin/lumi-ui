@@ -13,16 +13,7 @@ function PopoverTrigger<Payload>({
   className,
   ...props
 }: PopoverTriggerProps<Payload>) {
-  return (
-    <BasePopover.Trigger
-      className={cn(
-        "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
-        className,
-      )}
-      data-slot="popover-trigger"
-      {...props}
-    />
-  );
+  return <BasePopover.Trigger data-slot="popover-trigger" {...props} />;
 }
 
 function PopoverBackdrop({ ...props }: BasePopover.Backdrop.Props) {

@@ -1,13 +1,13 @@
 "use client";
 
-import { useAIChat } from "@/registry/blocks/sidebar-03/components/ai-chat";
-import { MovingBorderButton } from "@/registry/blocks/sidebar-03/components/moving-border-button";
-import { Button } from "@/registry/ui/button";
-import { Input } from "@/registry/ui/input";
-import { cn } from "@/registry/lib/utils";
-import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Bot, Loader2, Send, User } from "lucide-react";
 import { useState } from "react";
+import { useAIChat } from "@/registry/blocks/sidebar-03/components/ai-chat";
+import { MovingBorderButton } from "@/registry/blocks/sidebar-03/components/moving-border-button";
+import { cn } from "@/registry/lib/utils";
+import { Button } from "@/registry/ui/button";
+import { Input } from "@/registry/ui/input";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 const RESPONSE_INTRO = `Lumi UI gives you accessible, customizable React components that you own completely. Built on Base UI for robust behavior and styled with Tailwind CSS for maximum flexibility.
 
@@ -150,7 +150,9 @@ export function ChatStreaming() {
           <div className="px-14 space-y-2">
             <MovingBorderButton
               onClick={() => setInputValue("What is Lumi UI?")}
-            />
+            >
+              What is Lumi UI
+            </MovingBorderButton>
             <Button
               className="bg-background cursor-pointer hover:bg-background flex flex-col h-auto justify-start items-start gap-2 w-fit border hover:border-primary/50"
               onClick={() => setInputValue("What are the core philosophies?")}

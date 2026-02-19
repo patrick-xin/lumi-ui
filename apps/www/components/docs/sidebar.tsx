@@ -161,10 +161,7 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
           <ThemeBadge theme={item.label.toLowerCase()} />
           <ResourceIcon name={item.label} />
           <span
-            className={cn(
-              "truncate",
-              item.label === "Agent Skills" && "text-primary",
-            )}
+            className={cn("truncate", item.label === "Skill" && "text-primary")}
           >
             {item.label}
           </span>
@@ -214,7 +211,7 @@ const ThemeBadge = ({ theme }: { theme: string }) => {
 
 const ResourceIcon = ({ name }: { name: string }) => {
   switch (name) {
-    case "Agent Skills":
+    case "Skill":
       return <Bot className="mr-1.5 size-4.5 text-primary" />;
     case "github":
       return <SiGithub className="mr-1.5 size-4" />;

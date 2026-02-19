@@ -2,8 +2,11 @@
 
 import {
   Combobox,
+  ComboboxCollection,
   ComboboxContent,
   ComboboxEmpty,
+  ComboboxGroup,
+  ComboboxGroupLabel,
   ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
@@ -12,25 +15,31 @@ import { ScrollArea } from "@/registry/ui/scroll-area";
 
 export function ComboboxScrollAreaDemo() {
   return (
-    <Combobox items={frameworks}>
+    <Combobox items={groupedProduce}>
       <ComboboxInputGroup
-        className="w-48"
-        id="select-framework"
-        placeholder="e.g. Next.js"
+        className="w-64"
+        placeholder="Select produce"
+        showTrigger
       />
       <ComboboxContent>
-        <ScrollArea
-          className="h-32"
-          gradientScrollFade
-          // add height constraint
-          noScrollBar
-        >
-          <ComboboxEmpty>No framework found.</ComboboxEmpty>
+        <ScrollArea className="h-48" gradientScrollFade noScrollBar>
+          <ComboboxEmpty>No produce found.</ComboboxEmpty>
           <ComboboxList>
-            {(item: string) => (
-              <ComboboxItemContent key={item} value={item}>
-                {item}
-              </ComboboxItemContent>
+            {(group: ProduceGroup) => (
+              <ComboboxGroup items={group.items} key={group.value}>
+                <ComboboxGroupLabel>{group.value}</ComboboxGroupLabel>
+                <ComboboxCollection>
+                  {(item: Produce) => (
+                    <ComboboxItemContent
+                      indicatorPlacement="end"
+                      key={item.id}
+                      value={item}
+                    >
+                      {item.label}
+                    </ComboboxItemContent>
+                  )}
+                </ComboboxCollection>
+              </ComboboxGroup>
             )}
           </ComboboxList>
         </ScrollArea>
@@ -39,15 +48,43 @@ export function ComboboxScrollAreaDemo() {
   );
 }
 
-const frameworks = [
-  "Next.js",
-  "React",
-  "Vue",
-  "Nuxt",
-  "Svelte",
-  "SvelteKit",
-  "Angular",
-  "Solid",
-  "Qwik",
-  "Remix",
+interface Produce {
+  id: string;
+  label: string;
+  group: "Fruits" | "Vegetables";
+}
+
+interface ProduceGroup {
+  value: string;
+  items: Produce[];
+}
+
+const produceData: Produce[] = [
+  { group: "Fruits", id: "fruit-apple", label: "Apple" },
+  { group: "Fruits", id: "fruit-banana", label: "Banana" },
+  { group: "Fruits", id: "fruit-mango", label: "Mango" },
+  { group: "Fruits", id: "fruit-kiwi", label: "Kiwi" },
+  { group: "Fruits", id: "fruit-grape", label: "Grape" },
+  { group: "Fruits", id: "fruit-orange", label: "Orange" },
+  { group: "Fruits", id: "fruit-strawberry", label: "Strawberry" },
+  { group: "Fruits", id: "fruit-watermelon", label: "Watermelon" },
+  { group: "Vegetables", id: "veg-broccoli", label: "Broccoli" },
+  { group: "Vegetables", id: "veg-carrot", label: "Carrot" },
+  { group: "Vegetables", id: "veg-cauliflower", label: "Cauliflower" },
+  { group: "Vegetables", id: "veg-cucumber", label: "Cucumber" },
+  { group: "Vegetables", id: "veg-kale", label: "Kale" },
+  { group: "Vegetables", id: "veg-pepper", label: "Bell pepper" },
+  { group: "Vegetables", id: "veg-spinach", label: "Spinach" },
+  { group: "Vegetables", id: "veg-zucchini", label: "Zucchini" },
 ];
+
+function groupProduce(items: Produce[]): ProduceGroup[] {
+  const groups: Record<string, Produce[]> = {};
+  items.forEach((item) => {
+    (groups[item.group] ??= []).push(item);
+  });
+  const order = ["Fruits", "Vegetables"];
+  return order.map((value) => ({ items: groups[value] ?? [], value }));
+}
+
+const groupedProduce: ProduceGroup[] = groupProduce(produceData);
