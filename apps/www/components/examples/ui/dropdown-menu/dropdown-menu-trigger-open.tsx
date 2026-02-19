@@ -16,14 +16,14 @@ export function DropdownMenuTriggerOpen() {
           render={(props, state) => (
             <Button
               className="w-48"
-              variant={state.open ? "secondary" : "outline"}
+              variant={state.open ? "destructive" : "outline"}
               {...props}
             >
               Actions
             </Button>
           )}
         />
-        <DropdownMenuContent matchAnchorWidth>
+        <DropdownMenuContent matchAnchorWidth showArrow>
           <DropdownMenuItem>Edit</DropdownMenuItem>
           <DropdownMenuItem>Duplicate</DropdownMenuItem>
           <DropdownMenuItem>Delete</DropdownMenuItem>

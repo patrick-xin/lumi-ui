@@ -279,7 +279,7 @@ function AutocompleteInputGroup({
       <BaseAutocomplete.Input
         className={cn(
           inputVariants({ inputSize, variant }),
-          addonIcon && "pl-7",
+          addonIcon && "pl-7.5",
           paddingClass,
         )}
         data-slot="autocomplete-input"

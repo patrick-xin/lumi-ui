@@ -15,7 +15,7 @@ export function NavigationMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="outline">
+          <Button className="data-popup-open:bg-accent/60" variant="outline">
             Navigate <ChevronDownIcon className="size-4" />
           </Button>
         }

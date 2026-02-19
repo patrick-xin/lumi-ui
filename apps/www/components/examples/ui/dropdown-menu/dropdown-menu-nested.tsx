@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDownIcon } from "lucide-react";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
@@ -11,14 +12,16 @@ import {
   DropdownMenuSubMenuTriggerGroup,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import { ChevronDownIcon } from "lucide-react";
 
 export function NestedMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button className="w-60 justify-between" variant="outline">
+          <Button
+            className="w-60 justify-between data-popup-open:bg-accent/60"
+            variant="outline"
+          >
             Song <ChevronDownIcon />
           </Button>
         }

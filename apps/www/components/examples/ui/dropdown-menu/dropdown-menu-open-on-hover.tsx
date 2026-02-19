@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDownIcon } from "lucide-react";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
@@ -7,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import { ChevronDownIcon } from "lucide-react";
 
 export function HoverMenu() {
   return (
@@ -17,7 +17,7 @@ export function HoverMenu() {
         delay={200}
         openOnHover
         render={
-          <Button variant="outline">
+          <Button className="data-popup-open:bg-accent/60" variant="outline">
             Workspace <ChevronDownIcon className="size-4" />
           </Button>
         }

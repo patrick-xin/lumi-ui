@@ -67,7 +67,7 @@ export default function TooltipAnimationDemo() {
             >
               <TooltipPopup
                 className="
-                  relative bg-foreground text-background
+                  relative bg-popover text-popover-foreground outline outline-border dark:-outline-offset-1
                   h-(--popup-height,auto) w-(--popup-width,auto)
                   max-w-[500px]
                   rounded-md
