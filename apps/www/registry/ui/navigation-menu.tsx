@@ -12,8 +12,8 @@ function NavigationMenuRoot({
 }: BaseNavigationMenu.Root.Props) {
   return (
     <BaseNavigationMenu.Root
-      className={cn("relative max-w-max", className)}
-      data-slot="navigation-menu-root"
+      className={cn("relative", className)}
+      data-slot="navigation-menu"
       {...props}
     />
   );

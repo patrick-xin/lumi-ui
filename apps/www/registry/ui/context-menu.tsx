@@ -7,18 +7,34 @@ import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
-function ContextMenu({ ...props }: BaseContextMenu.Root.Props) {
+function ContextMenu(props: BaseContextMenu.Root.Props) {
   return <BaseContextMenu.Root data-slot="context-menu" {...props} />;
 }
 
-function ContextMenuTrigger({ ...props }: BaseContextMenu.Trigger.Props) {
+function ContextMenuTrigger({
+  className,
+  ...props
+}: BaseContextMenu.Trigger.Props) {
   return (
-    <BaseContextMenu.Trigger data-slot="context-menu-trigger" {...props} />
+    <BaseContextMenu.Trigger
+      className={className}
+      data-slot="context-menu-trigger"
+      {...props}
+    />
   );
 }
 
-function ContextMenuPortal({ ...props }: BaseContextMenu.Portal.Props) {
-  return <BaseContextMenu.Portal data-slot="context-menu-portal" {...props} />;
+function ContextMenuPortal({
+  className,
+  ...props
+}: BaseContextMenu.Portal.Props) {
+  return (
+    <BaseContextMenu.Portal
+      className={className}
+      data-slot="context-menu-portal"
+      {...props}
+    />
+  );
 }
 
 function ContextMenuBackdrop({
@@ -49,24 +65,27 @@ function ContextMenuPositioner({
 
 function ContextMenuPopup({
   className,
-  "data-slot": dataSlot,
   ...props
-}: BaseContextMenu.Popup.Props & {
-  "data-slot"?: string;
-}) {
+}: BaseContextMenu.Popup.Props) {
   return (
     <BaseContextMenu.Popup
       className={cn("relative", className)}
-      data-slot={dataSlot || "context-menu-popup"}
+      data-slot="context-menu-popup"
       {...props}
     />
   );
 }
 
-function ContextMenuArrow({ ...props }: BaseContextMenu.Arrow.Props) {
+function ContextMenuArrow({
+  className,
+  ...props
+}: BaseContextMenu.Arrow.Props) {
   return (
     <BaseContextMenu.Arrow
-      className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180"
+      className={cn(
+        "data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180",
+        className,
+      )}
       data-slot="context-menu-arrow"
       {...props}
     >
@@ -75,13 +94,26 @@ function ContextMenuArrow({ ...props }: BaseContextMenu.Arrow.Props) {
   );
 }
 
-function ContextMenuGroup({ ...props }: BaseContextMenu.Group.Props) {
-  return <BaseContextMenu.Group data-slot="context-menu-group" {...props} />;
+function ContextMenuGroup({
+  className,
+  ...props
+}: BaseContextMenu.Group.Props) {
+  return (
+    <BaseContextMenu.Group
+      className={className}
+      data-slot="context-menu-group"
+      {...props}
+    />
+  );
 }
 
-function ContextMenuRadioGroup({ ...props }: BaseContextMenu.RadioGroup.Props) {
+function ContextMenuRadioGroup({
+  className,
+  ...props
+}: BaseContextMenu.RadioGroup.Props) {
   return (
     <BaseContextMenu.RadioGroup
+      className={className}
       data-slot="context-menu-radio-group"
       {...props}
     />
@@ -211,14 +243,14 @@ function ContextMenuRadioItem({
 }: BaseContextMenu.RadioItem.Props) {
   return (
     <BaseContextMenu.RadioItem
-      className={cn(className)}
+      className={className}
       data-slot="context-menu-radio-item"
       {...props}
     />
   );
 }
 
-function ContextMenuSub({ ...props }: BaseContextMenu.SubmenuRoot.Props) {
+function ContextMenuSub(props: BaseContextMenu.SubmenuRoot.Props) {
   return (
     <BaseContextMenu.SubmenuRoot data-slot="context-menu-sub" {...props} />
   );
@@ -230,7 +262,7 @@ function ContextMenuSubTrigger({
 }: BaseContextMenu.SubmenuTrigger.Props) {
   return (
     <BaseContextMenu.SubmenuTrigger
-      className={cn("outline-none select-none cursor-default", className)}
+      className={className}
       data-slot="context-menu-sub-trigger"
       {...props}
     />
@@ -274,7 +306,7 @@ function ContextMenuContent({
   ...props
 }: ContextMenuContentProps) {
   return (
-    <ContextMenuPortal>
+    <BaseContextMenu.Portal>
       <BaseContextMenu.Positioner
         align={align}
         alignOffset={alignOffset}
@@ -282,6 +314,7 @@ function ContextMenuContent({
           matchAnchorWidth && "w-[var(--anchor-width)]",
           "max-h-(--available-height)",
         )}
+        data-slot="context-menu-positioner"
         side={side}
         sideOffset={sideOffset}
       >
@@ -299,7 +332,7 @@ function ContextMenuContent({
           {children}
         </BaseContextMenu.Popup>
       </BaseContextMenu.Positioner>
-    </ContextMenuPortal>
+    </BaseContextMenu.Portal>
   );
 }
 

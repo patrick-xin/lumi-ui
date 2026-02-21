@@ -20,6 +20,7 @@ function Combobox<Value, Multiple extends boolean | undefined = false>({
 }
 
 function ComboboxValue({
+  children,
   ...props
 }: React.ComponentProps<typeof BaseCombobox.Value>) {
   return <BaseCombobox.Value data-slot="combobox-value" {...props} />;
@@ -289,6 +290,7 @@ function ComboboxInputGroup({
   variant = "default",
   inputSize = "default",
   addonIcon,
+  inputClassName,
   ...props
 }: BaseCombobox.Input.Props & {
   showTrigger?: boolean;
@@ -296,6 +298,7 @@ function ComboboxInputGroup({
   variant?: VariantProps<typeof inputVariants>["variant"];
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
   addonIcon?: React.ReactNode;
+  inputClassName?: string;
 }) {
   const paddingClass =
     showTrigger && showClear
@@ -325,6 +328,7 @@ function ComboboxInputGroup({
           inputVariants({ inputSize, variant }),
           addonIcon && "pl-7",
           paddingClass,
+          inputClassName,
         )}
         data-slot="combobox-input"
         {...props}
@@ -337,7 +341,7 @@ function ComboboxInputGroup({
             render={
               <Button
                 className="[&_svg]:text-muted-foreground hover:[&_svg]:text-foreground"
-                size={"icon-xs"}
+                size="icon-xs"
                 variant="ghost"
               />
             }

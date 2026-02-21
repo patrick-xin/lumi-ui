@@ -26,8 +26,10 @@ export default function AlertDialogCustomDemo() {
             You can’t undo this action.
           </AlertDialogDescription>
           <div className="flex justify-end gap-4">
-            <AlertDialogClose variant="outline">Cancel</AlertDialogClose>
-            <AlertDialogClose>Discard</AlertDialogClose>
+            <AlertDialogClose render={<Button variant="outline" />}>
+              Cancel
+            </AlertDialogClose>
+            <AlertDialogClose render={<Button />}>Discard</AlertDialogClose>
           </div>
         </AlertDialogPopup>
       </AlertDialogPortal>

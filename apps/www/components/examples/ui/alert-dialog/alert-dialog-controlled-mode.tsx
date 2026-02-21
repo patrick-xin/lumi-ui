@@ -63,8 +63,8 @@ export default function AlertDialogDetachedTriggersControlledDemo() {
       </div>
       <AlertDialog<AlertPayload>
         handle={demoAlertDialog}
-        open={open}
         onOpenChange={handleOpenChange}
+        open={open}
         triggerId={triggerId}
       >
         {({ payload }) => (
@@ -78,8 +78,10 @@ export default function AlertDialogDetachedTriggersControlledDemo() {
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogClose variant="outline">Cancel</AlertDialogClose>
-              <AlertDialogClose>Confirm</AlertDialogClose>
+              <AlertDialogClose render={<Button variant="outline" />}>
+                Cancel
+              </AlertDialogClose>
+              <AlertDialogClose render={<Button />}>Confirm</AlertDialogClose>
             </AlertDialogFooter>
           </AlertDialogContent>
         )}

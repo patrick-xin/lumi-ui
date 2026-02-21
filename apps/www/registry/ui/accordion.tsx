@@ -39,7 +39,7 @@ function AccordionSummary({
   ...props
 }: BaseAccordion.Trigger.Props) {
   return (
-    <BaseAccordion.Header>
+    <BaseAccordion.Header data-slot="accordion-summary">
       <BaseAccordion.Trigger
         className={cn(
           "flex flex-1 w-full items-center justify-between text-sm py-4 font-medium transition-all hover:underline text-left",
@@ -48,6 +48,7 @@ function AccordionSummary({
           "[&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:shrink-0",
           className,
         )}
+        data-slot="accordion-trigger"
         {...props}
       >
         {children}

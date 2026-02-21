@@ -104,9 +104,9 @@ export function TeamSwitcher() {
               className="absolute hidden lg:block right-2 text-[10px] rounded-sm text-muted-foreground cursor-pointer"
               onClick={() => setComboboxOpen(false)}
               size="icon-xs"
-              variant="secondary"
+              variant="unstyled"
             >
-              <Kbd>Esc</Kbd>
+              <Kbd className="bg-accent">Esc</Kbd>
             </Button>
           </div>
           <Separator />

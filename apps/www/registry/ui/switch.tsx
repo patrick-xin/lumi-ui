@@ -3,7 +3,7 @@ import { Switch as BaseSwitch } from "@base-ui/react/switch";
 import { cn } from "@/registry/lib/utils";
 
 function SwitchRoot(props: BaseSwitch.Root.Props) {
-  return <BaseSwitch.Root data-slot="switch-root" {...props} />;
+  return <BaseSwitch.Root data-slot="switch" {...props} />;
 }
 
 function SwitchThumb({ className, ...props }: BaseSwitch.Thumb.Props) {

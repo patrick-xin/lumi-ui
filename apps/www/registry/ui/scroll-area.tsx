@@ -7,7 +7,7 @@ function ScrollAreaRoot({ className, ...props }: BaseScrollArea.Root.Props) {
   return (
     <BaseScrollArea.Root
       className={cn("group/scroll-area relative overflow-hidden", className)}
-      data-slot="scroll-area-root"
+      data-slot="scroll-area"
       {...props}
     />
   );
@@ -116,7 +116,9 @@ function ScrollArea({
         className="flex-1 min-h-0"
         gradientScrollFade={gradientScrollFade}
       >
-        <ScrollAreaContent>{children}</ScrollAreaContent>
+        <ScrollAreaContent data-slot="scroll-area">
+          {children}
+        </ScrollAreaContent>
       </ScrollAreaViewport>
       {!noScrollBar && (
         <>

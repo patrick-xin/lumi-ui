@@ -11,12 +11,24 @@ function Sheet(props: BaseSheet.Root.Props) {
   return <BaseSheet.Root data-slot="sheet" {...props} />;
 }
 
-function SheetTrigger(props: BaseSheet.Trigger.Props) {
-  return <BaseSheet.Trigger data-slot="sheet-trigger" {...props} />;
+function SheetTrigger({ className, ...props }: BaseSheet.Trigger.Props) {
+  return (
+    <BaseSheet.Trigger
+      className={className}
+      data-slot="sheet-trigger"
+      {...props}
+    />
+  );
 }
 
-function SheetPortal(props: BaseSheet.Portal.Props) {
-  return <BaseSheet.Portal data-slot="sheet-portal" {...props} />;
+function SheetPortal({ className, ...props }: BaseSheet.Portal.Props) {
+  return (
+    <BaseSheet.Portal
+      className={className}
+      data-slot="sheet-portal"
+      {...props}
+    />
+  );
 }
 
 function SheetViewport({
@@ -113,8 +125,10 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function SheetClose(props: BaseSheet.Close.Props) {
-  return <BaseSheet.Close data-slot="sheet-close" {...props} />;
+function SheetClose({ className, ...props }: BaseSheet.Close.Props) {
+  return (
+    <BaseSheet.Close className={className} data-slot="sheet-close" {...props} />
+  );
 }
 
 const popupVariants = cva(

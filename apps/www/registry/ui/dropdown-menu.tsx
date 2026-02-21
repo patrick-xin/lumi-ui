@@ -7,7 +7,7 @@ import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
-function DropdownMenu<Payload>({ ...props }: BaseMenu.Root.Props<Payload>) {
+function DropdownMenu<Payload>(props: BaseMenu.Root.Props<Payload>) {
   return <BaseMenu.Root data-slot="dropdown-menu" {...props} />;
 }
 
@@ -17,17 +17,21 @@ function DropdownMenuTrigger<Payload>({
 }: BaseMenu.Trigger.Props<Payload>) {
   return (
     <BaseMenu.Trigger
-      className={cn(
-        className,
-      )}
+      className={className}
       data-slot="dropdown-menu-trigger"
       {...props}
     />
   );
 }
 
-function DropdownMenuPortal({ ...props }: BaseMenu.Portal.Props) {
-  return <BaseMenu.Portal data-slot="dropdown-menu-portal" {...props} />;
+function DropdownMenuPortal({ className, ...props }: BaseMenu.Portal.Props) {
+  return (
+    <BaseMenu.Portal
+      className={className}
+      data-slot="dropdown-menu-portal"
+      {...props}
+    />
+  );
 }
 
 function DropdownMenuBackdrop({
@@ -157,8 +161,14 @@ function DropdownMenuSeparator({
   );
 }
 
-function DropdownMenuGroup({ ...props }: BaseMenu.Group.Props) {
-  return <BaseMenu.Group data-slot="dropdown-menu-group" {...props} />;
+function DropdownMenuGroup({ className, ...props }: BaseMenu.Group.Props) {
+  return (
+    <BaseMenu.Group
+      className={className}
+      data-slot="dropdown-menu-group"
+      {...props}
+    />
+  );
 }
 
 function DropdownMenuGroupLabel({
@@ -177,9 +187,16 @@ function DropdownMenuGroupLabel({
   );
 }
 
-function DropdownMenuRadioGroup({ ...props }: BaseMenu.RadioGroup.Props) {
+function DropdownMenuRadioGroup({
+  className,
+  ...props
+}: BaseMenu.RadioGroup.Props) {
   return (
-    <BaseMenu.RadioGroup data-slot="dropdown-menu-radio-group" {...props} />
+    <BaseMenu.RadioGroup
+      className={className}
+      data-slot="dropdown-menu-radio-group"
+      {...props}
+    />
   );
 }
 
@@ -190,7 +207,7 @@ function DropdownMenuRadioItem({
 }: BaseMenu.RadioItem.Props) {
   return (
     <BaseMenu.RadioItem
-      className={cn(className)}
+      className={className}
       {...props}
       data-slot="dropdown-menu-radio-item"
     />
@@ -203,14 +220,27 @@ function DropdownMenuCheckboxItem({
 }: BaseMenu.CheckboxItem.Props) {
   return (
     <BaseMenu.CheckboxItem
-      className={cn(className)}
+      className={className}
       data-slot="dropdown-menu-checkbox-item"
       {...props}
     />
   );
 }
 
-function DropdownMenuSubMenu({ ...props }: BaseMenu.SubmenuRoot.Props) {
+function DropdownMenuCheckboxItemIndicator({
+  className,
+  ...props
+}: BaseMenu.CheckboxItemIndicator.Props) {
+  return (
+    <BaseMenu.CheckboxItemIndicator
+      className={className}
+      data-slot="dropdown-menu-checkbox-item-indicator"
+      {...props}
+    />
+  );
+}
+
+function DropdownMenuSubMenu(props: BaseMenu.SubmenuRoot.Props) {
   return <BaseMenu.SubmenuRoot data-slot="dropdown-menu-sub-menu" {...props} />;
 }
 
@@ -220,7 +250,7 @@ function DropdownMenuSubMenuTrigger({
 }: BaseMenu.SubmenuTrigger.Props) {
   return (
     <BaseMenu.SubmenuTrigger
-      className={cn("outline-hidden select-none cursor-default", className)}
+      className={className}
       data-slot="dropdown-menu-sub-menu-trigger"
       {...props}
     />
@@ -443,6 +473,7 @@ export {
   DropdownMenuPopup,
   DropdownMenuArrow,
   DropdownMenuItem,
+  DropdownMenuCheckboxItemIndicator,
   DropdownMenuLinkItem,
   DropdownMenuSeparator,
   DropdownMenuGroup,

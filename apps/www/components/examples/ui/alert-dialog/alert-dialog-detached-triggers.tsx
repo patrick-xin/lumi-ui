@@ -20,8 +20,8 @@ export function AlertDialogDetachedTriggerDemo() {
     <div className="flex gap-4 p-8">
       {/* Outside of AlertDialog */}
       <AlertDialogTrigger
-        render={<Button variant="destructive">Delete Report</Button>}
         handle={deleteAlertHandle}
+        render={<Button variant="destructive">Delete Report</Button>}
       />
       <AlertDialog handle={deleteAlertHandle}>
         <AlertDialogContent>
@@ -32,8 +32,10 @@ export function AlertDialogDetachedTriggerDemo() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogClose variant="outline">Cancel</AlertDialogClose>
-            <AlertDialogClose>Discard</AlertDialogClose>
+            <AlertDialogClose render={<Button variant="outline" />}>
+              Cancel
+            </AlertDialogClose>
+            <AlertDialogClose render={<Button />}>Discard</AlertDialogClose>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

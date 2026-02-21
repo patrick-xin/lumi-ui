@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { Button } from "@/registry/ui/button";
 import {
   createDropdownMenuHandle,
@@ -9,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
-import * as React from "react";
 
 const demoMenu = createDropdownMenuHandle();
 

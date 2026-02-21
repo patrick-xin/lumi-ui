@@ -11,6 +11,7 @@ function ToggleGroup({ className, children, ...props }: BaseToggleGroup.Props) {
         "flex w-fit items-center gap-px rounded-md p-0.5",
         className,
       )}
+      data-slot="toggle-group"
       {...props}
     >
       {children}

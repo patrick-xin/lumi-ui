@@ -17,6 +17,7 @@ import {
 import { Field, FieldError, FieldLabel } from "@/registry/ui/field";
 import { Form } from "@/registry/ui/form";
 import { Input } from "@/registry/ui/input";
+import { Kbd } from "@/registry/ui/kbd";
 import { Separator } from "@/registry/ui/separator";
 import {
   createSheetHandle,
@@ -31,7 +32,6 @@ import {
 } from "@/registry/ui/sheet";
 import { SidebarMenuButton, useSidebar } from "@/registry/ui/sidebar";
 import { toast } from "@/registry/ui/toast";
-import { Kbd } from "../../../ui/kbd";
 
 const sheetHandle = createSheetHandle();
 

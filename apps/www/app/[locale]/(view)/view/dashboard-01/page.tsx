@@ -3,7 +3,6 @@ import type { Layout } from "react-resizable-panels";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { AIChat } from "@/registry/blocks/sidebar-03/components/ai-chat";
 import { AppSidebar } from "@/registry/blocks/sidebar-03/components/app-sidebar";
-import { ChartMixedAxes } from "@/registry/blocks/sidebar-03/components/chart-mixed-axes";
 import { DashboardContent } from "@/registry/blocks/sidebar-03/components/dashboard-content";
 import { Notifications } from "@/registry/blocks/sidebar-03/components/vercel-notification";
 import {
@@ -38,16 +37,14 @@ export default async function Page() {
       groupId={GROUP_ID}
     >
       <AppSidebar />
-      <MainContent className="bg-sidebar">
-        <header className="flex h-12 bg-sidebar z-10 sticky top-0 items-center gap-2 p-2 sm:p-4">
+      <MainContent className="bg-background">
+        <header className="flex h-12 bg-background z-10 sticky top-0 items-center gap-2 p-2 sm:p-4">
           <SidebarTrigger />
           <Separator className="mr-2 h-4" orientation="vertical" />
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/docs/introduction">
-                  Dashboard
-                </BreadcrumbLink>
+                <BreadcrumbLink href="/docs/introduction">Docs</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
@@ -61,9 +58,6 @@ export default async function Page() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4 sm:pt-0">
-          <div className="h-120 2xl:h-150">
-            <ChartMixedAxes />
-          </div>
           <DashboardContent />
         </div>
       </MainContent>

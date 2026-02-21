@@ -98,13 +98,29 @@ function AutocompleteList({
   );
 }
 
-function AutocompletePortal({ ...props }: BaseAutocomplete.Portal.Props) {
-  return <BaseAutocomplete.Portal data-slot="autocomplete-portal" {...props} />;
+function AutocompletePortal({
+  className,
+  ...props
+}: BaseAutocomplete.Portal.Props) {
+  return (
+    <BaseAutocomplete.Portal
+      className={className}
+      data-slot="autocomplete-portal"
+      {...props}
+    />
+  );
 }
 
-function AutocompleteBackdrop({ ...props }: BaseAutocomplete.Backdrop.Props) {
+function AutocompleteBackdrop({
+  className,
+  ...props
+}: BaseAutocomplete.Backdrop.Props) {
   return (
-    <BaseAutocomplete.Backdrop data-slot="autocomplete-backdrop" {...props} />
+    <BaseAutocomplete.Backdrop
+      className={className}
+      data-slot="autocomplete-backdrop"
+      {...props}
+    />
   );
 }
 
@@ -121,12 +137,30 @@ function AutocompletePositioner({
   );
 }
 
-function AutocompletePopup({ ...props }: BaseAutocomplete.Popup.Props) {
-  return <BaseAutocomplete.Popup data-slot="autocomplete-popup" {...props} />;
+function AutocompletePopup({
+  className,
+  ...props
+}: BaseAutocomplete.Popup.Props) {
+  return (
+    <BaseAutocomplete.Popup
+      className={className}
+      data-slot="autocomplete-popup"
+      {...props}
+    />
+  );
 }
 
-function AutocompleteArrow({ ...props }: BaseAutocomplete.Arrow.Props) {
-  return <BaseAutocomplete.Arrow data-slot="autocomplete-arrow" {...props} />;
+function AutocompleteArrow({
+  className,
+  ...props
+}: BaseAutocomplete.Arrow.Props) {
+  return (
+    <BaseAutocomplete.Arrow
+      className={className}
+      data-slot="autocomplete-arrow"
+      {...props}
+    />
+  );
 }
 
 function AutocompleteStatus({
@@ -161,9 +195,7 @@ function AutocompleteEmpty({
   );
 }
 
-function AutocompleteCollection({
-  ...props
-}: BaseAutocomplete.Collection.Props) {
+function AutocompleteCollection(props: BaseAutocomplete.Collection.Props) {
   return (
     <BaseAutocomplete.Collection
       data-slot="autocomplete-collection"
@@ -172,8 +204,14 @@ function AutocompleteCollection({
   );
 }
 
-function AutocompleteRow({ ...props }: BaseAutocomplete.Row.Props) {
-  return <BaseAutocomplete.Row data-slot="autocomplete-row" {...props} />;
+function AutocompleteRow({ className, ...props }: BaseAutocomplete.Row.Props) {
+  return (
+    <BaseAutocomplete.Row
+      className={className}
+      data-slot="autocomplete-row"
+      {...props}
+    />
+  );
 }
 
 function AutocompleteItem({

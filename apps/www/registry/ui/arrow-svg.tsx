@@ -12,6 +12,7 @@ export function ArrowSvg({ className, ...props }: ArrowProps) {
       viewBox="0 0 20 10"
       width="20"
       {...props}
+      data-slot="arrow"
     >
       <path
         className="fill-popover"

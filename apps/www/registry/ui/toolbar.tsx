@@ -28,15 +28,12 @@ function ToolbarGroup({ className, ...props }: BaseToolbar.Group.Props) {
   );
 }
 
-type ToolbarButtonProps = BaseToolbar.Button.Props &
-  VariantProps<typeof buttonVariants>;
-
 function ToolbarButton({
   className,
   variant = "ghost",
   size = "sm",
   ...props
-}: ToolbarButtonProps) {
+}: BaseToolbar.Button.Props & VariantProps<typeof buttonVariants>) {
   return (
     <BaseToolbar.Button
       className={cn(

@@ -200,7 +200,7 @@ export function KpiSparkCard({
   );
 
   return (
-    <Card className="bg-card">
+    <Card>
       <CardHeader className="space-y-1">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">

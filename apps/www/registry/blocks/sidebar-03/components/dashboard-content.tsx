@@ -20,6 +20,7 @@ import {
   Users,
 } from "lucide-react";
 import * as React from "react";
+import { DataTable } from "@/components/blocks/data-table";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar";
 import { Badge } from "@/registry/ui/badge";
@@ -57,6 +58,7 @@ import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Separator } from "@/registry/ui/separator";
 import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 import { toast } from "@/registry/ui/toast";
+import { ChartMixedAxes } from "./chart-mixed-axes";
 import { KpiSparkGrid } from "./kpi-card";
 import {
   Table,
@@ -133,8 +135,6 @@ const transactions: Txn[] = [
     method: "Bank",
     status: "paid",
   },
-
-  // --- additional mock data ---
   {
     amount: 5600,
     customer: "Helios Systems",
@@ -482,10 +482,14 @@ export function DashboardContent() {
 
   return (
     <>
-      <div className="flex flex-1 flex-col gap-4">
+      <div className="flex flex-1 flex-col gap-4 xl:gap-6">
         <KpiSparkGrid />
+        <div className="h-120 2xl:h-150">
+          <ChartMixedAxes />
+        </div>
+        <DataTable />
         <section className="grid gap-4 lg:grid-cols-3">
-          <Card className="lg:col-span-2 bg-card">
+          <Card className="lg:col-span-2">
             <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
               <div className="space-y-1">
                 <CardTitle className="text-base">Transactions</CardTitle>
@@ -579,7 +583,10 @@ export function DashboardContent() {
 
                   <TableBody>
                     {filtered.map((t) => (
-                      <TableRow className="hover:bg-muted/50" key={t.id}>
+                      <TableRow
+                        className="even:bg-primary/5 hover:bg-card even:hover:bg-primary/5 border-0"
+                        key={t.id}
+                      >
                         <TableCell className="font-medium">{t.id}</TableCell>
                         <TableCell className="text-muted-foreground">
                           {t.date}
@@ -667,7 +674,7 @@ export function DashboardContent() {
           {/* Right rail */}
           <div className="flex flex-col gap-4">
             {/* Health */}
-            <Card className="bg-card">
+            <Card className="">
               <CardHeader>
                 <CardTitle className="text-base">Revenue health</CardTitle>
                 <CardDescription>Goal tracking and churn risk.</CardDescription>
@@ -726,7 +733,7 @@ export function DashboardContent() {
             </Card>
 
             {/* Activity */}
-            <Card className="bg-card">
+            <Card className="">
               <CardHeader>
                 <CardTitle className="text-base">Activity</CardTitle>
                 <CardDescription>Latest operational events.</CardDescription>
@@ -759,7 +766,7 @@ export function DashboardContent() {
           </div>
         </section>
         <section className="w-full">
-          <Card className="xl:col-span-2 bg-card">
+          <Card className="xl:col-span-2 ">
             <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
               <div className="space-y-1">
                 <CardTitle className="text-base">Top customers</CardTitle>
@@ -834,7 +841,7 @@ export function DashboardContent() {
 
                 <TabsPanel className="mt-4" value="pipeline">
                   <div className="grid gap-4 md:grid-cols-3">
-                    <Card>
+                    <Card className="">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm">Qualified</CardTitle>
                         <CardDescription>Potential deals</CardDescription>
@@ -850,7 +857,7 @@ export function DashboardContent() {
                       </CardContent>
                     </Card>
 
-                    <Card>
+                    <Card className="">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm">Negotiation</CardTitle>
                         <CardDescription>Late-stage</CardDescription>
@@ -866,7 +873,7 @@ export function DashboardContent() {
                       </CardContent>
                     </Card>
 
-                    <Card>
+                    <Card className="">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm">Closed</CardTitle>
                         <CardDescription>This month</CardDescription>
@@ -925,7 +932,7 @@ export function DashboardContent() {
           </Card>
         </section>
         <section className="grid grid-cols-2 gap-6">
-          <Card className="bg-card">
+          <Card className="">
             <CardHeader>
               <CardTitle className="text-base">Account owners</CardTitle>
               <CardDescription>Who’s on point for renewals.</CardDescription>
@@ -1001,7 +1008,7 @@ export function DashboardContent() {
           <TeamManagement />
         </section>
         <section className="w-full">
-          <Card className="bg-card">
+          <Card className="">
             <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
               <div className="space-y-1">
                 <CardTitle className="text-base">Insights</CardTitle>
