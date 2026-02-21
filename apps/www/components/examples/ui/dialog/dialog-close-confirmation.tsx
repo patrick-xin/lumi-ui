@@ -77,7 +77,9 @@ export function DialogCloseConfirmationDemo() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogClose variant="outline">Keep Editing</AlertDialogClose>
+            <AlertDialogClose render={<Button variant="outline" />}>
+              Keep Editing
+            </AlertDialogClose>
             <Button
               onClick={() => {
                 setConfirmationOpen(false);

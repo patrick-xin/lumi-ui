@@ -21,16 +21,28 @@ function Menubar({ className, ...props }: BaseMenubar.Props) {
   );
 }
 
-function MenubarMenu({ ...props }: BaseMenu.Root.Props) {
+function MenubarMenu(props: BaseMenu.Root.Props) {
   return <BaseMenu.Root data-slot="menubar-menu" {...props} />;
 }
 
-function MenubarPortal({ ...props }: BaseMenu.Portal.Props) {
-  return <BaseMenu.Portal data-slot="menubar-portal" {...props} />;
+function MenubarPortal({ className, ...props }: BaseMenu.Portal.Props) {
+  return (
+    <BaseMenu.Portal
+      className={className}
+      data-slot="menubar-portal"
+      {...props}
+    />
+  );
 }
 
-function MenubarBackdrop({ ...props }: BaseMenu.Backdrop.Props) {
-  return <BaseMenu.Backdrop data-slot="menubar-backdrop" {...props} />;
+function MenubarBackdrop({ className, ...props }: BaseMenu.Backdrop.Props) {
+  return (
+    <BaseMenu.Backdrop
+      className={className}
+      data-slot="menubar-backdrop"
+      {...props}
+    />
+  );
 }
 
 function MenubarTrigger({ className, ...props }: BaseMenu.Trigger.Props) {
@@ -139,8 +151,14 @@ function MenubarSeparator({ className, ...props }: BaseMenu.Separator.Props) {
   );
 }
 
-function MenubarGroup({ ...props }: BaseMenu.Group.Props) {
-  return <BaseMenu.Group data-slot="menubar-group" {...props} />;
+function MenubarGroup({ className, ...props }: BaseMenu.Group.Props) {
+  return (
+    <BaseMenu.Group
+      className={className}
+      data-slot="menubar-group"
+      {...props}
+    />
+  );
 }
 
 function MenubarGroupLabel({ className, ...props }: BaseMenu.GroupLabel.Props) {
@@ -156,8 +174,14 @@ function MenubarGroupLabel({ className, ...props }: BaseMenu.GroupLabel.Props) {
   );
 }
 
-function MenubarRadioGroup({ ...props }: BaseMenu.RadioGroup.Props) {
-  return <BaseMenu.RadioGroup data-slot="menubar-radio-group" {...props} />;
+function MenubarRadioGroup({ className, ...props }: BaseMenu.RadioGroup.Props) {
+  return (
+    <BaseMenu.RadioGroup
+      className={className}
+      data-slot="menubar-radio-group"
+      {...props}
+    />
+  );
 }
 
 function MenubarRadioItem({
@@ -167,7 +191,7 @@ function MenubarRadioItem({
 }: BaseMenu.RadioItem.Props) {
   return (
     <BaseMenu.RadioItem
-      className={cn(className)}
+      className={className}
       data-slot="menubar-radio-item"
       {...props}
     />
@@ -180,14 +204,14 @@ function MenubarCheckboxItem({
 }: BaseMenu.CheckboxItem.Props) {
   return (
     <BaseMenu.CheckboxItem
-      className={cn(className)}
+      className={className}
       data-slot="menubar-checkbox-item"
       {...props}
     />
   );
 }
 
-function MenubarSubMenu({ ...props }: BaseMenu.SubmenuRoot.Props) {
+function MenubarSubMenu(props: BaseMenu.SubmenuRoot.Props) {
   return <BaseMenu.SubmenuRoot data-slot="menubar-sub-menu" {...props} />;
 }
 
@@ -345,7 +369,10 @@ function MenubarRadioItemContent({
       data-slot="menubar-radio-item-content"
       {...props}
     >
-      <BaseMenu.RadioItemIndicator className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+      <BaseMenu.RadioItemIndicator
+        className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+        data-slot="menubar-radio-item-indicator"
+      >
         <CircleIcon className="size-2.5 fill-current" />
       </BaseMenu.RadioItemIndicator>
       {children}

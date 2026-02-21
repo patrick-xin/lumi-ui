@@ -19,7 +19,7 @@ function RadioRoot({ className, ...props }: BaseRadio.Root.Props) {
   return (
     <BaseRadio.Root
       className={cn("rounded-full", className)}
-      data-slot="radio-root"
+      data-slot="radio"
       {...props}
     />
   );

@@ -9,7 +9,7 @@ import { ArrowSvg } from "@/registry/ui/arrow-svg";
 function Select<Value, Multiple extends boolean | undefined = false>(
   props: BaseSelect.Root.Props<Value, Multiple>,
 ): React.JSX.Element {
-  return <BaseSelect.Root {...props} />;
+  return <BaseSelect.Root {...props} data-slot="select" />;
 }
 
 function SelectTrigger({
@@ -217,6 +217,7 @@ function SelectTriggerGroup({
         className,
       )}
       data-size={size}
+      data-slot="select-trigger-group"
       {...props}
     >
       <BaseSelect.Value
@@ -260,6 +261,7 @@ function SelectContent({
         align={align}
         alignItemWithTrigger={alignItemWithTrigger}
         alignOffset={alignOffset}
+        data-slot="select-positioner"
         side={side}
         sideOffset={sideOffset}
       >
@@ -275,7 +277,10 @@ function SelectContent({
           {...props}
         >
           <SelectScrollUpArrow />
-          <BaseSelect.List className="relative py-1 scroll-py-6 overflow-y-auto max-h-[min(23rem,var(--available-height))]">
+          <BaseSelect.List
+            className="relative py-1 scroll-py-6 overflow-y-auto max-h-[min(20rem,var(--available-height))]"
+            data-slot="select-list"
+          >
             {children}
           </BaseSelect.List>
           <SelectScrollDownArrow />
@@ -288,6 +293,7 @@ function SelectContent({
 interface SelectItemContentProps extends BaseSelect.Item.Props {
   indicatorPlacement?: "start" | "end";
   indicatorIcon?: React.ReactNode;
+  hideIndicator?: boolean;
 }
 
 function SelectItemContent({
@@ -295,37 +301,47 @@ function SelectItemContent({
   children,
   indicatorPlacement = "end",
   indicatorIcon = <CheckIcon />,
+  hideIndicator = false,
   ...props
 }: SelectItemContentProps) {
+  const hasIndicator = !hideIndicator;
+  const isStart = hasIndicator && indicatorPlacement === "start";
+  const isEnd = hasIndicator && indicatorPlacement === "end";
+
   return (
     <BaseSelect.Item
       className={cn(
-        "grid items-center gap-2 py-1.5 pl-3.5 text-sm",
-        "outline-none select-none cursor-default",
+        "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 text-sm outline-none",
         "highlight-on-active",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-        indicatorPlacement === "start" && "grid-cols-[1rem_1fr] pr-8",
-        indicatorPlacement === "end" && "grid-cols-[1fr_1rem] pr-3",
+        hasIndicator && "grid gap-2 pl-3.5",
+        isStart && "grid-cols-[1rem_1fr] pr-8",
+        isEnd && "grid-cols-[1fr_1rem] pr-3",
+        !hasIndicator && "px-3.5",
         className,
       )}
       data-slot="select-item"
       {...props}
     >
-      <BaseSelect.ItemIndicator
-        className={cn(
-          "flex items-center justify-center row-start-1",
-          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
-          indicatorPlacement === "start" ? "col-start-1" : "col-start-2",
-        )}
-        data-slot="select-item-indicator"
-      >
-        {indicatorIcon}
-      </BaseSelect.ItemIndicator>
+      {hasIndicator && (
+        <BaseSelect.ItemIndicator
+          className={cn(
+            "flex items-center justify-center row-start-1",
+            "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
+            isStart ? "col-start-1" : "col-start-2",
+          )}
+          data-slot="select-item-indicator"
+        >
+          {indicatorIcon}
+        </BaseSelect.ItemIndicator>
+      )}
       <BaseSelect.ItemText
         className={cn(
-          "flex items-center gap-2 row-start-1",
-          indicatorPlacement === "start" ? "col-start-2" : "col-start-1",
+          "flex items-center gap-2 row-start-1 truncate",
+          isStart && "col-start-2",
+          isEnd && "col-start-1",
         )}
+        data-slot="select-item-text"
       >
         {children}
       </BaseSelect.ItemText>

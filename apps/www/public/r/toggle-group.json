@@ -14,7 +14,7 @@
   "files": [
     {
       "path": "registry/ui/toggle-group.tsx",
-      "content": "\"use client\";\n\nimport { ToggleGroup as BaseToggleGroup } from \"@base-ui/react/toggle-group\";\nimport { cn } from \"@/registry/lib/utils\";\nimport { Toggle } from \"@/registry/ui/toggle\";\n\nfunction ToggleGroup({ className, children, ...props }: BaseToggleGroup.Props) {\n  return (\n    <BaseToggleGroup\n      className={cn(\n        \"flex w-fit items-center gap-px rounded-md p-0.5\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </BaseToggleGroup>\n  );\n}\n\nexport { ToggleGroup, Toggle as ToggleGroupItem };\n",
+      "content": "\"use client\";\n\nimport { ToggleGroup as BaseToggleGroup } from \"@base-ui/react/toggle-group\";\nimport { cn } from \"@/registry/lib/utils\";\nimport { Toggle } from \"@/registry/ui/toggle\";\n\nfunction ToggleGroup({ className, children, ...props }: BaseToggleGroup.Props) {\n  return (\n    <BaseToggleGroup\n      className={cn(\n        \"flex w-fit items-center gap-px rounded-md p-0.5\",\n        className,\n      )}\n      data-slot=\"toggle-group\"\n      {...props}\n    >\n      {children}\n    </BaseToggleGroup>\n  );\n}\n\nexport { ToggleGroup, Toggle as ToggleGroupItem };\n",
       "type": "registry:ui"
     }
   ],

@@ -8,27 +8,31 @@ import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
-function PreviewCard<Payload = unknown>({
-  ...props
-}: BasePreviewCard.Root.Props<Payload>) {
+function PreviewCard<Payload>(props: BasePreviewCard.Root.Props<Payload>) {
   return <BasePreviewCard.Root data-slot="preview-card" {...props} />;
 }
 
-function PreviewCardTrigger<Payload = unknown>({
+function PreviewCardTrigger<Payload>({
   className,
   ...props
 }: PreviewCardTriggerProps<Payload>) {
   return (
     <BasePreviewCard.Trigger
-      className={cn(className)}
+      className={className}
       data-slot="preview-card-trigger"
       {...props}
     />
   );
 }
 
-function PreviewPortal({ ...props }: BasePreviewCard.Portal.Props) {
-  return <BasePreviewCard.Portal data-slot="preview-card-portal" {...props} />;
+function PreviewPortal({ className, ...props }: BasePreviewCard.Portal.Props) {
+  return (
+    <BasePreviewCard.Portal
+      className={className}
+      data-slot="preview-card-portal"
+      {...props}
+    />
+  );
 }
 
 function PreviewBackdrop({
@@ -37,7 +41,7 @@ function PreviewBackdrop({
 }: BasePreviewCard.Backdrop.Props) {
   return (
     <BasePreviewCard.Backdrop
-      className={cn(className)}
+      className={className}
       data-slot="preview-card-backdrop"
       {...props}
     />
@@ -50,7 +54,7 @@ function PreviewPositioner({
 }: BasePreviewCard.Positioner.Props) {
   return (
     <BasePreviewCard.Positioner
-      className={cn(className)}
+      className={className}
       data-slot="preview-card-positioner"
       {...props}
     />
@@ -63,7 +67,7 @@ function PreviewCardPopup({
 }: BasePreviewCard.Popup.Props) {
   return (
     <BasePreviewCard.Popup
-      className={cn(className)}
+      className={className}
       data-slot="preview-card-popup"
       {...props}
     />
@@ -106,7 +110,7 @@ function PreviewCardContent({
   showArrow?: boolean;
 }) {
   return (
-    <BasePreviewCard.Portal data-slot="preview-card-portal">
+    <BasePreviewCard.Portal>
       <BasePreviewCard.Positioner
         align={align}
         alignOffset={alignOffset}

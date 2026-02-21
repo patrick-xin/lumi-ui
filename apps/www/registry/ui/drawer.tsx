@@ -31,11 +31,12 @@ function DrawerIndentBackground({
   );
 }
 
-function Drawer<Payload>({ ...props }: BaseDrawer.Root.Props<Payload>) {
+function Drawer<Payload>(props: BaseDrawer.Root.Props<Payload>) {
   return <BaseDrawer.Root data-slot="drawer" {...props} />;
 }
 
 function DrawerTrigger<Payload>({
+  className,
   ...props
 }: BaseDrawer.Trigger.Props<Payload>) {
   return <BaseDrawer.Trigger data-slot="drawer-trigger" {...props} />;

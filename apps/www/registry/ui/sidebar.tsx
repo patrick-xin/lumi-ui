@@ -150,7 +150,7 @@ const SidebarProvider = ({
   );
 };
 
-const Sidebar = ({ children }: React.ComponentProps<"div">) => {
+const Sidebar = ({ className, children }: React.ComponentProps<"div">) => {
   const {
     collapsedSize,
     sidebarRef,
@@ -165,7 +165,10 @@ const Sidebar = ({ children }: React.ComponentProps<"div">) => {
     return (
       <Sheet handle={mobileHandle}>
         <SheetContent
-          className="bg-sidebar text-sidebar-foreground w-72 p-0!"
+          className={cn(
+            "bg-sidebar text-sidebar-foreground w-72 p-0!",
+            className,
+          )}
           side="left"
         >
           <div className="flex size-full flex-col">{children}</div>
@@ -192,7 +195,10 @@ const Sidebar = ({ children }: React.ComponentProps<"div">) => {
         panelRef={sidebarRef}
       >
         <div
-          className="relative size-full group bg-sidebar text-sidebar-foreground overflow-hidden flex flex-col"
+          className={cn(
+            "relative size-full group bg-sidebar text-sidebar-foreground overflow-hidden flex flex-col",
+            className,
+          )}
           data-collapsible={collapsibleType}
           data-slot="sidebar"
           data-state={isCollapsed ? "collapsed" : "expanded"}

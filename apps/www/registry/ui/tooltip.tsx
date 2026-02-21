@@ -17,18 +17,31 @@ function TooltipProvider({
   );
 }
 
-function Tooltip<Payload>({ ...props }: BaseTooltip.Root.Props<Payload>) {
+function Tooltip<Payload>(props: BaseTooltip.Root.Props<Payload>) {
   return <BaseTooltip.Root data-slot="tooltip" {...props} />;
 }
 
 function TooltipTrigger<Payload>({
+  className,
   ...props
 }: BaseTooltip.Trigger.Props<Payload>) {
-  return <BaseTooltip.Trigger data-slot="tooltip-trigger" {...props} />;
+  return (
+    <BaseTooltip.Trigger
+      className={className}
+      data-slot="tooltip-trigger"
+      {...props}
+    />
+  );
 }
 
-function TooltipPortal({ ...props }: BaseTooltip.Portal.Props) {
-  return <BaseTooltip.Portal data-slot="tooltip-portal" {...props} />;
+function TooltipPortal({ className, ...props }: BaseTooltip.Portal.Props) {
+  return (
+    <BaseTooltip.Portal
+      className={className}
+      data-slot="tooltip-portal"
+      {...props}
+    />
+  );
 }
 
 function TooltipPositioner({
@@ -82,7 +95,7 @@ function TooltipArrow({ className, ...props }: BaseTooltip.Arrow.Props) {
 function TooltipViewport({ className, ...props }: BaseTooltip.Viewport.Props) {
   return (
     <BaseTooltip.Viewport
-      className={cn("relative h-full w-full", className)}
+      className={cn("relative size-full", className)}
       data-slot="tooltip-viewport"
       {...props}
     />
@@ -110,6 +123,7 @@ function TooltipContent({
       <BaseTooltip.Positioner
         align={align}
         alignOffset={alignOffset}
+        data-slot="tooltip-positioner"
         side={side}
         sideOffset={sideOffset}
       >

@@ -33,7 +33,7 @@ export function AlertDialogOpenFromMenuDemo() {
           <DropdownMenuItem>Menu item</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      <AlertDialog onOpenChange={setDialogOpen} open={dialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Settings</AlertDialogTitle>
@@ -42,7 +42,7 @@ export function AlertDialogOpenFromMenuDemo() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogClose>Close</AlertDialogClose>
+            <AlertDialogClose render={<Button />}>Close</AlertDialogClose>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

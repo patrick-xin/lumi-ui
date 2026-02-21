@@ -67,13 +67,13 @@ export function DropdownMenuDialogDemo() {
           <AlertDialogFooter>
             <AlertDialogClose
               onClick={() => setDialogOpen(false)}
-              variant="ghost"
+              render={<Button variant="ghost" />}
             >
               Cancel
             </AlertDialogClose>
             <AlertDialogClose
               onClick={() => setDialogOpen(false)}
-              variant="destructive"
+              render={<Button variant="destructive" />}
             >
               Delete
             </AlertDialogClose>

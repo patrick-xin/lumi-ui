@@ -64,11 +64,6 @@
   /* Mobile vs Desktop Widths */
   --toast-max-width-mobile: 80%; 
   --toast-max-width-desktop: var(--toast-width);
-
-
-  --sidebar-width: 16rem;
-  --sidebar-width-icon: 3rem;
-  --sidebar-width-mobile: 18rem;
 }
 
 @layer base {

@@ -21,15 +21,15 @@ export function AlertDialogRenderDifferentContentDemo() {
   return (
     <div className="flex gap-4 p-8">
       <AlertDialogTrigger
-        render={<Button variant="destructive">Delete Report</Button>}
         handle={deleteAlertHandle}
         payload={{ id: "file-123", name: "Annual_Report.pdf" }}
+        render={<Button variant="destructive">Delete Report</Button>}
       />
 
       <AlertDialogTrigger
-        render={<Button variant="destructive">Delete User</Button>}
         handle={deleteAlertHandle}
         payload={{ id: "user-999", name: "John Doe" }}
+        render={<Button variant="destructive">Delete User</Button>}
       />
 
       <AlertDialog handle={deleteAlertHandle}>
@@ -43,8 +43,12 @@ export function AlertDialogRenderDifferentContentDemo() {
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogClose variant="outline">Cancel</AlertDialogClose>
-              <AlertDialogClose>Yes, Delete</AlertDialogClose>
+              <AlertDialogClose render={<Button variant="outline" />}>
+                Cancel
+              </AlertDialogClose>
+              <AlertDialogClose render={<Button />}>
+                Yes, Delete
+              </AlertDialogClose>
             </AlertDialogFooter>
           </AlertDialogContent>
         )}

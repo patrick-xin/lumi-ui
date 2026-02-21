@@ -9,7 +9,7 @@ function CheckboxRoot({ className, ...props }: BaseCheckbox.Root.Props) {
   return (
     <BaseCheckbox.Root
       className={cn(className)}
-      data-slot="checkbox-root"
+      data-slot="checkbox"
       {...props}
     />
   );

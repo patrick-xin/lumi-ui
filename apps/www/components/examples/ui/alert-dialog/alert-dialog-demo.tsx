@@ -27,8 +27,10 @@ export function AlertDialogDemo() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogClose variant="outline">Cancel</AlertDialogClose>
-          <AlertDialogClose>Continue</AlertDialogClose>
+          <AlertDialogClose render={<Button variant="outline" />}>
+            Cancel
+          </AlertDialogClose>
+          <AlertDialogClose render={<Button />}>Continue</AlertDialogClose>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

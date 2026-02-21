@@ -375,7 +375,7 @@ export function TeamManagement() {
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
-                    <AlertDialogClose variant="outline">
+                    <AlertDialogClose render={<Button variant="outline" />}>
                       No, Keep Editing
                     </AlertDialogClose>
                     <Button
@@ -461,7 +461,7 @@ export function TeamManagement() {
                       onClick={() => {
                         setConfirmDeleteOpen(false);
                       }}
-                      variant="outline"
+                      render={<Button variant="outline" />}
                     >
                       Cancel
                     </AlertDialogClose>

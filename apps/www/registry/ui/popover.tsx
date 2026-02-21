@@ -9,16 +9,37 @@ function Popover<Payload>(props: BasePopover.Root.Props<Payload>) {
   return <BasePopover.Root data-slot="popover" {...props} />;
 }
 
-function PopoverTrigger<Payload>(props: PopoverTriggerProps<Payload>) {
-  return <BasePopover.Trigger data-slot="popover-trigger" {...props} />;
+function PopoverTrigger<Payload>({
+  className,
+  ...props
+}: PopoverTriggerProps<Payload>) {
+  return (
+    <BasePopover.Trigger
+      className={className}
+      data-slot="popover-trigger"
+      {...props}
+    />
+  );
 }
 
-function PopoverBackdrop(props: BasePopover.Backdrop.Props) {
-  return <BasePopover.Backdrop data-slot="popover-backdrop" {...props} />;
+function PopoverBackdrop({ className, ...props }: BasePopover.Backdrop.Props) {
+  return (
+    <BasePopover.Backdrop
+      className={cn("fixed inset-0", className)}
+      data-slot="popover-backdrop"
+      {...props}
+    />
+  );
 }
 
-function PopoverPortal(props: BasePopover.Portal.Props) {
-  return <BasePopover.Portal data-slot="popover-portal" {...props} />;
+function PopoverPortal({ className, ...props }: BasePopover.Portal.Props) {
+  return (
+    <BasePopover.Portal
+      className={className}
+      data-slot="popover-portal"
+      {...props}
+    />
+  );
 }
 
 function PopoverPositioner({
@@ -65,7 +86,7 @@ function PopoverArrow({ className, ...props }: BasePopover.Arrow.Props) {
 function PopoverTitle({ className, ...props }: BasePopover.Title.Props) {
   return (
     <BasePopover.Title
-      className={cn("text-sm font-semibold", className)}
+      className={cn("text-base font-semibold", className)}
       data-slot="popover-title"
       {...props}
     />
@@ -78,7 +99,7 @@ function PopoverDescription({
 }: BasePopover.Description.Props) {
   return (
     <BasePopover.Description
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn("text-muted-foreground text-base", className)}
       data-slot="popover-description"
       {...props}
     />
@@ -88,15 +109,21 @@ function PopoverDescription({
 function PopoverViewport({ className, ...props }: BasePopover.Viewport.Props) {
   return (
     <BasePopover.Viewport
-      className={cn("relative h-full w-full", className)}
+      className={cn("relative size-full", className)}
       data-slot="popover-viewport"
       {...props}
     />
   );
 }
 
-function PopoverClose({ ...props }: BasePopover.Close.Props) {
-  return <BasePopover.Close data-slot="popover-close" {...props} />;
+function PopoverClose({ className, ...props }: BasePopover.Close.Props) {
+  return (
+    <BasePopover.Close
+      className={className}
+      data-slot="popover-close"
+      {...props}
+    />
+  );
 }
 
 function PopoverContent({
@@ -132,7 +159,7 @@ function PopoverContent({
             "animate-popup",
             className,
           )}
-          data-slot="popover-popup"
+          data-slot="popover-content"
           {...props}
         >
           {showArrow && <PopoverArrow />}
