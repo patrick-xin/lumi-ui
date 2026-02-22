@@ -7,16 +7,16 @@ export function PopoverMatchAnchorWidthDemo() {
   return (
     <div className="flex flex-wrap gap-4">
       <Popover>
-        <PopoverTrigger render={<Button className="w-64">Open</Button>} />
-        <PopoverContent matchAnchorWidth>
+        <PopoverTrigger render={<Button className="w-32">Open</Button>} />
+        <PopoverContent matchAnchorWidth showArrow>
           <div className="text-muted-foreground text-sm">
             content inside will have the same width as the trigger
           </div>
         </PopoverContent>
       </Popover>
       <Popover>
-        <PopoverTrigger render={<Button className="w-64">Open</Button>} />
-        <PopoverContent>
+        <PopoverTrigger render={<Button className="w-32">Open</Button>} />
+        <PopoverContent matchAnchorWidth={false}>
           <div className="text-muted-foreground text-sm">
             content inside will not have the same width as the trigger
           </div>

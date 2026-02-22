@@ -483,10 +483,10 @@ export function DashboardContent() {
   return (
     <>
       <div className="flex flex-1 flex-col gap-4 xl:gap-6">
-        <KpiSparkGrid />
         <div className="h-120 2xl:h-150">
           <ChartMixedAxes />
         </div>
+        <KpiSparkGrid />
         <DataTable />
         <section className="grid gap-4 lg:grid-cols-3">
           <Card className="lg:col-span-2">

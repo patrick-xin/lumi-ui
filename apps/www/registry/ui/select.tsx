@@ -20,7 +20,7 @@ function SelectTrigger({
   return (
     <BaseSelect.Trigger
       className={cn(
-        "pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
+        "outline-none pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
         className,
       )}
       data-slot="select-trigger"
@@ -42,7 +42,7 @@ function SelectValue({
   return (
     <BaseSelect.Value
       className={cn(
-        "flex items-center gap-2 line-clamp-1 data-[placeholder]:text-muted-foreground data-[placeholder]:before:content-[attr(data-placeholder-text)]",
+        "flex items-center gap-2 line-clamp-1 data-placeholder:text-muted-foreground data-placeholder:before:content-[attr(data-placeholder-text)]",
         className,
       )}
       data-placeholder-text={placeholder}
@@ -64,63 +64,116 @@ function SelectIcon({ className, ...props }: BaseSelect.Icon.Props) {
   );
 }
 
-function SelectBackdrop({ ...props }: BaseSelect.Backdrop.Props) {
-  return <BaseSelect.Backdrop data-slot="select-backdrop" {...props} />;
+function SelectBackdrop({ className, ...props }: BaseSelect.Backdrop.Props) {
+  return (
+    <BaseSelect.Backdrop
+      className={cn(className)}
+      data-slot="select-backdrop"
+      {...props}
+    />
+  );
 }
 
-function SelectPortal({ ...props }: BaseSelect.Portal.Props) {
-  return <BaseSelect.Portal data-slot="select-portal" {...props} />;
+function SelectPortal({ className, ...props }: BaseSelect.Portal.Props) {
+  return (
+    <BaseSelect.Portal
+      className={cn(className)}
+      data-slot="select-portal"
+      {...props}
+    />
+  );
 }
 
 function SelectPositioner({
+  className,
   alignItemWithTrigger,
   ...props
 }: BaseSelect.Positioner.Props) {
   return (
     <BaseSelect.Positioner
       alignItemWithTrigger={alignItemWithTrigger}
+      className={cn(className)}
       data-slot="select-positioner"
       {...props}
     />
   );
 }
 
-function SelectPopup({ ...props }: BaseSelect.Popup.Props) {
-  return <BaseSelect.Popup data-slot="select-popup" {...props} />;
-}
-
-function SelectList({ ...props }: BaseSelect.List.Props) {
-  return <BaseSelect.List data-slot="select-list" {...props} />;
-}
-
-function SelectArrow({ ...props }: BaseSelect.Arrow.Props) {
+function SelectPopup({ className, ...props }: BaseSelect.Popup.Props) {
   return (
-    <BaseSelect.Arrow data-slot="select-arrow" {...props}>
+    <BaseSelect.Popup
+      className={cn(className)}
+      data-slot="select-popup"
+      {...props}
+    />
+  );
+}
+
+function SelectList({ className, ...props }: BaseSelect.List.Props) {
+  return (
+    <BaseSelect.List
+      className={cn(className)}
+      data-slot="select-list"
+      {...props}
+    />
+  );
+}
+
+function SelectArrow({ className, ...props }: BaseSelect.Arrow.Props) {
+  return (
+    <BaseSelect.Arrow
+      className={cn(className)}
+      data-slot="select-arrow"
+      {...props}
+    >
       <ArrowSvg />
     </BaseSelect.Arrow>
   );
 }
 
-function SelectItem({ children, ...props }: BaseSelect.Item.Props) {
+function SelectItem({ className, children, ...props }: BaseSelect.Item.Props) {
   return (
-    <BaseSelect.Item data-slot="select-item" {...props}>
+    <BaseSelect.Item
+      className={cn(className)}
+      data-slot="select-item"
+      {...props}
+    >
       {children}
     </BaseSelect.Item>
   );
 }
 
-function SelectItemText({ ...props }: BaseSelect.ItemText.Props) {
-  return <BaseSelect.ItemText data-slot="select-item-text" {...props} />;
-}
-
-function SelectItemIndicator({ ...props }: BaseSelect.ItemIndicator.Props) {
+function SelectItemText({ className, ...props }: BaseSelect.ItemText.Props) {
   return (
-    <BaseSelect.ItemIndicator data-slot="select-item-indicator" {...props} />
+    <BaseSelect.ItemText
+      className={cn(className)}
+      data-slot="select-item-text"
+      {...props}
+    />
   );
 }
 
-function SelectGroup({ ...props }: BaseSelect.Group.Props) {
-  return <BaseSelect.Group data-slot="select-group" {...props} />;
+function SelectItemIndicator({
+  className,
+  ...props
+}: BaseSelect.ItemIndicator.Props) {
+  return (
+    <BaseSelect.ItemIndicator
+      className={cn(className)}
+      data-slot="select-item-indicator"
+      {...props}
+    />
+  );
+}
+
+function SelectGroup({ className, ...props }: BaseSelect.Group.Props) {
+  return (
+    <BaseSelect.Group
+      className={cn(className)}
+      data-slot="select-group"
+      {...props}
+    />
+  );
 }
 
 function SelectGroupLabel({
@@ -130,7 +183,7 @@ function SelectGroupLabel({
   return (
     <BaseSelect.GroupLabel
       className={cn(
-        "px-3.5 py-1.5 text-xs text-muted-foreground font-medium",
+        "px-3.5 py-1.5 text-xs text-muted-foreground font-medium select-none",
         className,
       )}
       data-slot="select-label"
@@ -209,7 +262,8 @@ function SelectTriggerGroup({
         "group flex items-center gap-2 min-w-32",
         "rounded-md text-sm transition-[color,box-shadow]",
         "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
-        "data-[invalid]:border-destructive data-[invalid]:ring-destructive/20 dark:data-[invalid]:ring-destructive/40",
+        "data-invalid:border-destructive data-invalid:ring-destructive/20 dark:data-invalid:ring-destructive/40",
+        "data-disabled:opacity-50 data-disabled:hover:bg-transparent",
         "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
         "data-[size=default]:h-9 data-[size=sm]:h-8 data-[size=lg]:h-10",
         "data-[size=default]:py-1.5 data-[size=sm]:py-1 data-[size=lg]:py-2",
@@ -221,7 +275,7 @@ function SelectTriggerGroup({
       {...props}
     >
       <BaseSelect.Value
-        className="flex flex-1 items-center gap-2 truncate line-clamp-1 data-[placeholder]:text-muted-foreground data-[placeholder]:before:content-[attr(data-placeholder-text)]"
+        className="flex flex-1 items-center gap-2 truncate line-clamp-1 data-placeholder:text-muted-foreground data-placeholder:before:content-[attr(data-placeholder-text)]"
         data-placeholder-text={placeholder}
         data-slot="select-value"
       >
@@ -269,8 +323,8 @@ function SelectContent({
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md overflow-hidden",
             "outline-1 outline-border dark:-outline-offset-1 animate-popup",
-            "[&:not([data-side=none])]:max-h-[var(--available-height)] min-w-[var(--anchor-width)]",
-            "data-[side=none]:data-[ending-style]:transition-none data-[side=none]:data-[starting-style]:transition-none data-[side=none]:data-[starting-style]:scale-100 data-[side=none]:data-[starting-style]:opacity-100 data-[side=none]:min-w-[calc(var(--anchor-width)+0.3rem)]",
+            "[&:not([data-side=none])]:max-h-(--available-height) min-w-(--anchor-width)",
+            "data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:min-w-(--anchor-width+0.3rem)",
             className,
           )}
           data-slot="select-content"
@@ -313,7 +367,7 @@ function SelectItemContent({
       className={cn(
         "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 text-sm outline-none",
         "highlight-on-active",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "data-disabled:pointer-events-none data-disabled:opacity-50",
         hasIndicator && "grid gap-2 pl-3.5",
         isStart && "grid-cols-[1rem_1fr] pr-8",
         isEnd && "grid-cols-[1fr_1rem] pr-3",

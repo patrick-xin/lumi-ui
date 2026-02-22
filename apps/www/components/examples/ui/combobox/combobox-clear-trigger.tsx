@@ -15,7 +15,7 @@ export function ComboboxClearTriggerDemo() {
     <Combobox items={frameworks}>
       <ComboboxInputGroup
         addonIcon={<SearchIcon />}
-        className="w-48"
+        className="w-64"
         id="select-framework"
         placeholder="e.g. Next.js"
         showClear

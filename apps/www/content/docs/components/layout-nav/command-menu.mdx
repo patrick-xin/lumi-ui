@@ -1,0 +1,276 @@
+---
+title: Command Menu
+description: A mobile-friendly command palette for search and quick actions.
+---
+
+<ComponentPreview name="command-menu-demo" />
+
+Built with:
+
+- [Dialog](/docs/components/overlays-dialogs/dialog)
+- [Autocomplete](/docs/components/form-input/autocomplete)
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/command-menu
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy `registry/ui/command-menu.tsx` into `components/ui/command-menu.tsx`."/>
+      <Step title="Make sure `dialog`, `autocomplete`, and `scroll-area` are available in your project."/>
+      <Step title="Update import paths to match your project setup."/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## Anatomy
+
+```tsx
+<CommandMenu>
+  <CommandMenuTrigger />
+  <CommandMenuContent>
+    <Command items={groupedItems}>
+      <CommandInput />
+      <CommandEmpty />
+      <CommandScrollArea>
+        <CommandList>
+          <CommandGroup>
+            <CommandGroupLabel />
+            <CommandCollection>
+              <CommandItem>
+                <CommandShortcut />
+              </CommandItem>
+            </CommandCollection>
+          </CommandGroup>
+          <CommandSeparator />
+        </CommandList>
+      </CommandScrollArea>
+    </Command>
+    <CommandMenuFooter />
+  </CommandMenuContent>
+</CommandMenu>
+```
+
+
+## Basic Usage
+
+```tsx
+"use client";
+
+import * as React from "react";
+import {
+  Command,
+  CommandCollection,
+  CommandEmpty,
+  CommandGroup,
+  CommandGroupLabel,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandMenu,
+  CommandMenuContent,
+  CommandMenuTrigger,
+  CommandScrollArea,
+} from "@/components/ui/command-menu";
+import { Button } from "@/components/ui/button";
+
+export function CommandMenuMinimal() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <CommandMenu onOpenChange={setOpen} open={open}>
+      <CommandMenuTrigger render={<Button variant="outline">Open</Button>} />
+      <CommandMenuContent aria-label="Command menu">
+        <Command items={groupedItems}>
+          <CommandInput placeholder="Search..." />
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandScrollArea>
+            <CommandList>
+              {(group: Group) => (
+                <CommandGroup items={group.items} key={group.value}>
+                  <CommandGroupLabel>{group.value}</CommandGroupLabel>
+                  <CommandCollection>
+                    {(item: Item) => (
+                      <CommandItem
+                        key={item.value}
+                        onClick={() => setOpen(false)}
+                        value={item}
+                      >
+                        {item.label}
+                      </CommandItem>
+                    )}
+                  </CommandCollection>
+                </CommandGroup>
+              )}
+            </CommandList>
+          </CommandScrollArea>
+        </Command>
+      </CommandMenuContent>
+    </CommandMenu>
+  );
+}
+
+type Item = { value: string; label: string };
+type Group = { value: string; items: Item[] };
+
+const groupedItems: Group[] = [
+  {
+    value: "Resources",
+    items: [
+      { label: "Documentation", value: "docs" },
+      { label: "Components", value: "components" },
+    ],
+  },
+  {
+    value: "Actions",
+    items: [{ label: "Settings", value: "settings" }],
+  },
+];
+```
+
+## Cookbook
+
+These customizations are done in `components/ui/command-menu.tsx`.
+
+### Center command menu
+
+```tsx
+<DialogViewport
+  className={cn(
+    "flex flex-col items-center justify-center",
+    // add top padding to move the popup down
+     "pt-[10dvh]",
+  )}
+>
+```
+
+### Adjust position
+
+Use viewport top padding to place the popup higher or lower:
+
+- `pt-[20dvh]`: lower
+- `pt-[10dvh]`: default
+- `pt-[5dvh]`: higher
+
+```tsx
+<DialogViewport className={cn("flex flex-col items-center", "pt-[10dvh]")} />
+```
+
+### Tune popup width and animation
+
+In `CommandMenuContent`, this class controls width and default animation:
+
+```tsx
+"w-[min(40rem,calc(100vw-2rem))] animate-fade-zoom"
+```
+
+- `w-[min(40rem,calc(100vw-2rem))]` keeps the menu mobile-friendly.
+- Swap `animate-fade-zoom` for any supported utility from [Animation Guide](/docs/animation-guide).
+
+### CommandScrollArea
+
+Default `CommandScrollArea` uses:
+
+```tsx
+"h-auto max-h-64 sm:max-h-96"
+```
+
+- `h-auto` keeps content height fluid.
+- `max-h-64` is optional and makes the list shorter.
+
+You can skip `CommandScrollArea` and use your own container:
+
+```tsx
+<div className="h-auto max-h-80 overflow-y-auto">
+  <CommandList>{/* items */}</CommandList>
+</div>
+```
+
+### Swap Input
+
+`CommandInput` is built on `AutocompleteInputGroup` and can show a clear button (`showClear`).
+
+If you need full control, replace it with `AutocompleteInput`:
+
+```tsx
+import { AutocompleteInput } from "@/components/ui/autocomplete";
+
+<Command items={groupedItems}>
+  <AutocompleteInput className="border-b px-4 py-3" placeholder="Search..." />
+</Command>
+```
+
+### Tune CommandItem highlight
+
+`CommandItem` uses highlighted inset classes:
+
+```tsx
+"group/command-item ... data-[highlighted]:before:inset-x-3"
+```
+
+Adjust the inset value (`inset-x-2`, `inset-x-4`, etc.) to change the pill width without adding padding on the parent list container.
+
+See [Hit-Test & Highlights](/docs/highlights) for the pattern details.
+
+## API Reference
+
+### CommandMenuContent
+
+A composite content wrapper that combines `DialogPortal`, `DialogBackdrop`, `DialogViewport`, and `DialogPopup`.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `className` | `string` | Additional CSS classes for the popup container. |
+| `children` | `React.ReactNode` | Content rendered inside the popup. |
+| `...props` | `DialogPopupProps` | Passes all other props to the underlying dialog popup. |
+
+### Command
+
+A preconfigured autocomplete root for command interactions.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `autoHighlight` | `Autocomplete prop` | Defaults to `"always"` for keyboard-first flows. |
+| `inline` | `boolean` | Defaults to `true` to keep list rendering inline. |
+| `keepHighlight` | `boolean` | Defaults to `true` to preserve highlighted item state. |
+| `open` | `boolean` | Defaults to `true` so list remains visible in the dialog. |
+| `...props` | `React.ComponentProps<typeof Autocomplete>` | Passes all other props to the underlying autocomplete root. |
+
+### CommandInput
+
+A composite input based on `AutocompleteInputGroup`.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `addonIcon` | `React.ReactNode` | Prefix icon; defaults to `<Search />`. |
+| `inputSize` | `"default" \| "sm" \| "lg"` | Input size; defaults to `"lg"`. |
+| `className` | `string` | Additional classes for the input group. |
+| `...props` | `React.ComponentProps<typeof AutocompleteInputGroup>` | Passes all other input-group props. |
+
+### CommandScrollArea
+
+Scroll container for command results.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `className` | `string` | Additional CSS classes. |
+| `...props` | `React.ComponentProps<typeof ScrollArea>` | Passes all other props to the underlying scroll area. |
+
+### CommandItem
+
+Styled command row with built-in highlight states.
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `className` | `string` | Additional classes for item layout and interaction styling. |
+| `...props` | `AutocompleteItemProps` | Passes all other props to the underlying autocomplete item. |

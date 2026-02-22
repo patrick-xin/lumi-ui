@@ -1,7 +1,6 @@
-import {
-  Popover as BasePopover,
-  type PopoverTriggerProps,
-} from "@base-ui/react/popover";
+"use client";
+
+import { Popover as BasePopover } from "@base-ui/react/popover";
 import { cn } from "@/registry/lib/utils";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 
@@ -12,10 +11,10 @@ function Popover<Payload>(props: BasePopover.Root.Props<Payload>) {
 function PopoverTrigger<Payload>({
   className,
   ...props
-}: PopoverTriggerProps<Payload>) {
+}: BasePopover.Trigger.Props<Payload>) {
   return (
     <BasePopover.Trigger
-      className={className}
+      className={cn("relative", className)}
       data-slot="popover-trigger"
       {...props}
     />
@@ -35,7 +34,7 @@ function PopoverBackdrop({ className, ...props }: BasePopover.Backdrop.Props) {
 function PopoverPortal({ className, ...props }: BasePopover.Portal.Props) {
   return (
     <BasePopover.Portal
-      className={className}
+      className={cn(className)}
       data-slot="popover-portal"
       {...props}
     />
@@ -48,10 +47,7 @@ function PopoverPositioner({
 }: BasePopover.Positioner.Props) {
   return (
     <BasePopover.Positioner
-      className={cn(
-        "h-(--positioner-height) w-(--positioner-width) max-w-(--available-width)",
-        className,
-      )}
+      className={cn("max-w-(--available-width)", className)}
       data-slot="popover-positioner"
       {...props}
     />
@@ -99,7 +95,7 @@ function PopoverDescription({
 }: BasePopover.Description.Props) {
   return (
     <BasePopover.Description
-      className={cn("text-muted-foreground text-base", className)}
+      className={cn("text-muted-foreground text-sm", className)}
       data-slot="popover-description"
       {...props}
     />
@@ -119,7 +115,7 @@ function PopoverViewport({ className, ...props }: BasePopover.Viewport.Props) {
 function PopoverClose({ className, ...props }: BasePopover.Close.Props) {
   return (
     <BasePopover.Close
-      className={className}
+      className={cn(className)}
       data-slot="popover-close"
       {...props}
     />
@@ -149,7 +145,10 @@ function PopoverContent({
       <BasePopover.Positioner
         align={align}
         alignOffset={alignOffset}
-        className={cn(matchAnchorWidth && "w-[var(--anchor-width)]")}
+        className={cn(
+          matchAnchorWidth && "w-(--anchor-width)",
+          "max-h-(--available-height)",
+        )}
         side={side}
         sideOffset={sideOffset}
       >

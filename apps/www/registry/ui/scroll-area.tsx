@@ -57,7 +57,7 @@ function ScrollAreaContent({
 }: BaseScrollArea.Content.Props) {
   return (
     <BaseScrollArea.Content
-      className={cn("flex-1", className)}
+      className={cn("flex-1 h-full", className)}
       data-slot="scroll-area-content"
       {...props}
     />

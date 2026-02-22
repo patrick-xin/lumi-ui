@@ -303,7 +303,7 @@ const TriggerButton = (props: React.ComponentProps<typeof Button>) => {
   return (
     <Button
       aria-label="Notifications, you have unread messages"
-      className="relative data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent rounded-full"
+      className="relative data-popup-open:bg-accent data-popup-open:hover:bg-accent rounded-full"
       size="icon-sm"
       variant="outline"
       {...props}

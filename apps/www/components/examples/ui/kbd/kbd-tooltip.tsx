@@ -1,11 +1,11 @@
+import { Button } from "@/registry/ui/button";
 import { Kbd, KbdGroup } from "@/registry/ui/kbd";
-import { Button } from "../../../../registry/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../../../../registry/ui/tooltip";
+} from "@/registry/ui/tooltip";
 
 export function KbdTooltipDemo() {
   return (
