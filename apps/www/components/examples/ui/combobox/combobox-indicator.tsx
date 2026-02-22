@@ -23,7 +23,7 @@ export function ComboboxIndicatorDemo() {
         <ComboboxList>
           {(item: string) => (
             <ComboboxItemContent
-              indicatorIcon={<CheckCheckIcon className="text-green-700" />}
+              indicatorIcon={<CheckCheckIcon className="text-foreground" />}
               indicatorPlacement="end"
               key={item}
               value={item}

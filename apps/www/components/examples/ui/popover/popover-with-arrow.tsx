@@ -12,7 +12,7 @@ import {
 
 export function PopoverWithArrowDemo() {
   return (
-    <Popover>
+    <Popover defaultOpen>
       <PopoverTrigger
         render={
           <Button className="data-popup-open:bg-accent/60" variant="outline" />

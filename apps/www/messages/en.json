@@ -20,7 +20,8 @@
     "description": "Composable React components powered by Base UI and Tailwind CSS.",
     "subtitle": "Build fast, customize everything.",
     "title": "Illuminate your interface",
-    "viewDocs": "View docs"
+    "viewDocs": "View docs",
+    "seeInAction": "See in action"
   },
   "Navigation": {
     "Docs": "Docs",

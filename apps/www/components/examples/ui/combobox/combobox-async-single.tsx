@@ -79,19 +79,9 @@ export function ComboboxAsyncSingleDemo() {
 
   return (
     <Combobox
+      filter={null}
       items={items}
       itemToStringLabel={(user: DirectoryUser) => user.name}
-      filter={null}
-      onOpenChangeComplete={(open) => {
-        if (!open && selectedValue) {
-          setSearchResults([selectedValue]);
-        }
-      }}
-      onValueChange={(nextSelectedValue) => {
-        setSelectedValue(nextSelectedValue);
-        setSearchValue("");
-        setError(null);
-      }}
       onInputValueChange={(nextSearchValue, { reason }) => {
         setSearchValue(nextSearchValue);
 
@@ -124,8 +114,18 @@ export function ComboboxAsyncSingleDemo() {
           });
         });
       }}
+      onOpenChangeComplete={(open) => {
+        if (!open && selectedValue) {
+          setSearchResults([selectedValue]);
+        }
+      }}
+      onValueChange={(nextSelectedValue) => {
+        setSelectedValue(nextSelectedValue);
+        setSearchValue("");
+        setError(null);
+      }}
     >
-      <ComboboxInputGroup placeholder="Search..." className="w-64" />
+      <ComboboxInputGroup className="w-64" placeholder="Search..." />
 
       <ComboboxContent aria-busy={isPending || undefined}>
         <ComboboxStatus className="p-2">{getStatus()}</ComboboxStatus>
@@ -137,9 +137,9 @@ export function ComboboxAsyncSingleDemo() {
         <ComboboxList>
           {(user: DirectoryUser) => (
             <ComboboxItemContent
+              className="items-start"
               key={user.id}
               value={user}
-              className="items-start"
             >
               <div className="flex flex-col gap-1">
                 <div className="font-medium">{user.name}</div>
@@ -175,8 +175,8 @@ async function searchUsers(
   // Simulate occasional network errors (1% chance)
   if (Math.random() < 0.01 || query === "will_error") {
     return {
-      users: [],
       error: "Failed to fetch people. Please try again.",
+      users: [],
     };
   }
 
@@ -190,45 +190,45 @@ async function searchUsers(
   });
 
   return {
-    users,
     error: null,
+    users,
   };
 }
 
 const allUsers: DirectoryUser[] = [
   {
+    email: "michael.foster@example.com",
     id: "michael-foster",
     name: "Michael Foster",
-    username: "michael",
-    email: "michael.foster@example.com",
     title: "Engineering Manager",
+    username: "michael",
   },
   {
+    email: "lindsay.walton@example.com",
     id: "lindsay-walton",
     name: "Lindsay Walton",
-    username: "lindsay",
-    email: "lindsay.walton@example.com",
     title: "Product Designer",
+    username: "lindsay",
   },
   {
+    email: "tom.cook@example.com",
     id: "tom-cook",
     name: "Tom Cook",
-    username: "tom",
-    email: "tom.cook@example.com",
     title: "Frontend Engineer",
+    username: "tom",
   },
   {
+    email: "whitney.francis@example.com",
     id: "whitney-francis",
     name: "Whitney Francis",
-    username: "whitney",
-    email: "whitney.francis@example.com",
     title: "Customer Success",
+    username: "whitney",
   },
   {
+    email: "arlene.mccoy@example.com",
     id: "arlene-mccoy",
     name: "Arlene McCoy",
-    username: "arlene",
-    email: "arlene.mccoy@example.com",
     title: "Data Analyst",
+    username: "arlene",
   },
 ];

@@ -7,11 +7,19 @@ import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
 import { inputVariants } from "@/registry/ui/input";
+import { ArrowSvg } from "./arrow-svg";
 
 const Autocomplete = BaseAutocomplete.Root;
 
-function AutocompleteValue({ ...props }: BaseAutocomplete.Value.Props) {
-  return <BaseAutocomplete.Value data-slot="autocomplete-value" {...props} />;
+function AutocompleteValue({
+  children,
+  ...props
+}: BaseAutocomplete.Value.Props) {
+  return (
+    <BaseAutocomplete.Value data-slot="autocomplete-value" {...props}>
+      {children}
+    </BaseAutocomplete.Value>
+  );
 }
 
 function AutocompleteIcon({
@@ -88,7 +96,7 @@ function AutocompleteList({
   return (
     <BaseAutocomplete.List
       className={cn(
-        "outline-none py-1 data-[empty]:p-0",
+        "outline-none py-1 data-empty:p-0",
         "min-h-0 overflow-y-auto scroll-py-2",
         className,
       )}
@@ -156,10 +164,15 @@ function AutocompleteArrow({
 }: BaseAutocomplete.Arrow.Props) {
   return (
     <BaseAutocomplete.Arrow
-      className={className}
+      className={cn(
+        "data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180",
+        className,
+      )}
       data-slot="autocomplete-arrow"
       {...props}
-    />
+    >
+      <ArrowSvg />
+    </BaseAutocomplete.Arrow>
   );
 }
 
@@ -170,7 +183,7 @@ function AutocompleteStatus({
   return (
     <BaseAutocomplete.Status
       className={cn(
-        "p-3 text-xs text-center text-muted-foreground flex gap-2 items-center empty:m-0 empty:p-0",
+        "p-3 text-sm text-center text-muted-foreground flex gap-2 items-center empty:m-0 empty:p-0",
         className,
       )}
       data-slot="autocomplete-status"
@@ -186,7 +199,7 @@ function AutocompleteEmpty({
   return (
     <BaseAutocomplete.Empty
       className={cn(
-        "p-3 text-xs text-center text-muted-foreground empty:m-0 empty:p-0",
+        "p-3 text-sm text-center text-muted-foreground empty:m-0 empty:p-0",
         className,
       )}
       data-slot="autocomplete-empty"
@@ -221,11 +234,11 @@ function AutocompleteItem({
   return (
     <BaseAutocomplete.Item
       className={cn(
-        "flex items-center gap-2 py-1.5 pl-3.5 pr-8 text-sm",
+        "flex items-center gap-2 py-1.5 text-sm pl-3.5 pr-8",
         "select-none cursor-default outline-none",
         "highlight-on-active",
         "[&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "data-disabled:pointer-events-none data-disabled:opacity-50",
         className,
       )}
       data-slot="autocomplete-item"
@@ -240,7 +253,7 @@ function AutocompleteGroup({
 }: BaseAutocomplete.Group.Props) {
   return (
     <BaseAutocomplete.Group
-      className={cn("mb-1 last:mb-0", className)}
+      className={className}
       data-slot="autocomplete-group"
       {...props}
     />
@@ -254,7 +267,7 @@ function AutocompleteGroupLabel({
   return (
     <BaseAutocomplete.GroupLabel
       className={cn(
-        "px-3.5 py-1.5 text-xs text-muted-foreground font-medium",
+        "px-3.5 py-1.5 text-xs text-muted-foreground font-medium select-none",
         className,
       )}
       data-slot="autocomplete-group-label"
@@ -269,7 +282,7 @@ function AutocompleteSeparator({
 }: BaseAutocomplete.Separator.Props) {
   return (
     <BaseAutocomplete.Separator
-      className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
+      className={cn("bg-border pointer-events-none my-1 h-px", className)}
       data-slot="autocomplete-separator"
       {...props}
     />
@@ -282,6 +295,7 @@ function AutocompleteInputGroup({
   showClear = false,
   variant = "default",
   inputSize = "default",
+  inputClassName,
   addonIcon,
   ...props
 }: BaseAutocomplete.Input.Props & {
@@ -289,6 +303,7 @@ function AutocompleteInputGroup({
   showClear?: boolean;
   variant?: VariantProps<typeof inputVariants>["variant"];
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
+  inputClassName?: string;
   addonIcon?: React.ReactNode;
 }) {
   const paddingClass =
@@ -301,7 +316,7 @@ function AutocompleteInputGroup({
   return (
     <div
       className={cn(
-        "relative w-full inline-flex gap-1 items-center outline-none cursor-text",
+        "relative w-full inline-flex gap-1 items-center outline-none cursor-text rounded-md",
         className,
       )}
       data-slot="autocomplete-input-group"
@@ -309,7 +324,7 @@ function AutocompleteInputGroup({
       {addonIcon && (
         <BaseAutocomplete.Icon
           className="[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground absolute left-1 size-6 flex justify-center items-center"
-          data-slot="autocomplete-addon-icon"
+          data-slot="autocomplete-icon"
         >
           {addonIcon}
         </BaseAutocomplete.Icon>
@@ -319,11 +334,12 @@ function AutocompleteInputGroup({
           inputVariants({ inputSize, variant }),
           addonIcon && "pl-7.5",
           paddingClass,
+          inputClassName,
         )}
         data-slot="autocomplete-input"
         {...props}
       />
-      <div className="absolute right-1 top-0 h-full inline-flex items-center">
+      <div className="absolute right-1.5 top-0 h-full inline-flex items-center">
         {showClear && (
           <BaseAutocomplete.Clear
             aria-label="Clear selection"
@@ -331,7 +347,7 @@ function AutocompleteInputGroup({
             render={
               <Button
                 className="[&_svg]:text-muted-foreground hover:[&_svg]:text-foreground"
-                size={"icon-xs"}
+                size="icon-xs"
                 variant="ghost"
               />
             }
@@ -345,7 +361,7 @@ function AutocompleteInputGroup({
             render={
               <Button
                 className="[&_svg]:text-muted-foreground data-popup-open:[&_svg]:text-foreground hover:[&_svg]:text-foreground"
-                size={"icon-xs"}
+                size="icon-xs"
                 variant="ghost"
               />
             }
@@ -365,11 +381,16 @@ function AutocompleteContent({
   children,
   sideOffset = 6,
   align = "start",
+  side = "bottom",
+  alignOffset = 0,
   matchAnchorWidth = true,
   positionerAnchor,
   ...props
 }: BaseAutocomplete.Popup.Props &
-  Pick<BaseAutocomplete.Positioner.Props, "sideOffset" | "align"> & {
+  Pick<
+    BaseAutocomplete.Positioner.Props,
+    "side" | "sideOffset" | "align" | "alignOffset"
+  > & {
     matchAnchorWidth?: boolean;
     positionerAnchor?: React.RefObject<HTMLDivElement | null>;
   }) {
@@ -377,22 +398,25 @@ function AutocompleteContent({
     <BaseAutocomplete.Portal data-slot="autocomplete-portal">
       <BaseAutocomplete.Positioner
         align={align}
+        alignOffset={alignOffset}
         anchor={positionerAnchor}
         data-slot="autocomplete-positioner"
+        side={side}
         sideOffset={sideOffset}
       >
         <BaseAutocomplete.Popup
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md",
-            "outline outline-1 outline-border dark:-outline-offset-1",
+            "outline-1 outline-border dark:-outline-offset-1",
             "flex flex-col overflow-hidden",
-            "max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))]",
-            matchAnchorWidth && "w-[var(--anchor-width)]",
+            "max-w-(--available-width) max-h-[min(23rem,var(--available-height))]",
+            matchAnchorWidth && "w-(--anchor-width)",
             className,
           )}
           data-slot="autocomplete-content"
           {...props}
         >
+          <AutocompleteArrow />
           {children}
         </BaseAutocomplete.Popup>
       </BaseAutocomplete.Positioner>

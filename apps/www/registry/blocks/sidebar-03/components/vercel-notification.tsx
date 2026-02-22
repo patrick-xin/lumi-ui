@@ -97,7 +97,7 @@ function NotificationPopover() {
   const { open, setOpen } = useNotification();
   return (
     <Popover onOpenChange={setOpen} open={open}>
-      <PopoverTrigger render={<TriggerButton />} />
+      <PopoverTrigger className="relative" render={<TriggerButton />} />
       <PopoverContent
         align="end"
         className="flex flex-col p-0 w-96 bg-background duration-300 h-[50dvh] max-h-[50dvh] overflow-hidden"
@@ -269,7 +269,7 @@ const FilterDropdown = () => {
         render={
           <Button
             aria-label="Filter notifications"
-            className="data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent"
+            className="data-popup-open:bg-accent data-popup-open:hover:bg-accent"
             variant="outline"
           />
         }
@@ -303,9 +303,9 @@ const TriggerButton = (props: React.ComponentProps<typeof Button>) => {
   return (
     <Button
       aria-label="Notifications, you have unread messages"
-      className="relative data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent rounded-full"
+      className="data-popup-open:bg-accent data-popup-open:hover:bg-accent rounded-full"
       size="icon-sm"
-      variant="outline"
+      variant="glow"
       {...props}
     >
       <span>

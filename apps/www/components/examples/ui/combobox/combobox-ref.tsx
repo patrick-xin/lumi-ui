@@ -1,5 +1,8 @@
 "use client";
 
+import { ChevronDownIcon } from "lucide-react";
+import { useRef } from "react";
+import { Button } from "@/registry/ui/button";
 import {
   Combobox,
   ComboboxContent,
@@ -12,8 +15,6 @@ import {
   ComboboxValue,
 } from "@/registry/ui/combobox";
 import { Separator } from "@/registry/ui/separator";
-import { ChevronDownIcon } from "lucide-react";
-import { useRef } from "react";
 
 export function ComboboxInputInsidePopupRefDemo() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -29,9 +30,17 @@ export function ComboboxInputInsidePopupRefDemo() {
           </a>
         </span>
 
-        <ComboboxTrigger className="group hover:bg-accent data-[popup-open]:bg-accent p-1 rounded-md">
+        <ComboboxTrigger
+          render={
+            <Button
+              className="group data-popup-open:bg-accent hover:bg-accent"
+              size="icon-xs"
+              variant="ghost"
+            />
+          }
+        >
           <ComboboxIcon>
-            <ChevronDownIcon className="size-4 group-data-[popup-open]:rotate-180" />
+            <ChevronDownIcon className="size-4 transition-transform duration-200 group-data-popup-open:rotate-180" />
           </ComboboxIcon>
         </ComboboxTrigger>
       </div>

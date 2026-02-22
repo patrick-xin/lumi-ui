@@ -214,7 +214,7 @@ function ContextMenuLabel({
   return (
     <BaseContextMenu.GroupLabel
       className={cn(
-        "px-3 py-1 text-xs text-muted-foreground font-medium data-[inset]:pl-8",
+        "px-3.5 py-1.5 text-xs text-muted-foreground font-medium select-none data-[inset]:pl-8",
         className,
       )}
       data-inset={inset}

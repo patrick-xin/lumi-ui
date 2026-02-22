@@ -17,7 +17,7 @@ function DropdownMenuTrigger<Payload>({
 }: BaseMenu.Trigger.Props<Payload>) {
   return (
     <BaseMenu.Trigger
-      className={className}
+      className={cn(className)}
       data-slot="dropdown-menu-trigger"
       {...props}
     />
@@ -27,7 +27,7 @@ function DropdownMenuTrigger<Payload>({
 function DropdownMenuPortal({ className, ...props }: BaseMenu.Portal.Props) {
   return (
     <BaseMenu.Portal
-      className={className}
+      className={cn(className)}
       data-slot="dropdown-menu-portal"
       {...props}
     />
@@ -53,7 +53,7 @@ function DropdownMenuPositioner({
 }: BaseMenu.Positioner.Props) {
   return (
     <BaseMenu.Positioner
-      className={cn("relative", className)}
+      className={cn("max-w-(--available-width)", className)}
       data-slot="dropdown-menu-positioner"
       {...props}
     />
@@ -70,10 +70,13 @@ function DropdownMenuPopup({ className, ...props }: BaseMenu.Popup.Props) {
   );
 }
 
-function DropdownMenuArrow({ ...props }: BaseMenu.Arrow.Props) {
+function DropdownMenuArrow({ className, ...props }: BaseMenu.Arrow.Props) {
   return (
     <BaseMenu.Arrow
-      className="data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180"
+      className={cn(
+        "data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180",
+        className,
+      )}
       data-slot="dropdown-menu-arrow"
       {...props}
     >
@@ -87,7 +90,7 @@ const dropdownMenuItemVariants = cva(
     "flex items-center gap-2 py-1.5 px-3.5 text-sm",
     "outline-none select-none cursor-default",
     "highlight-on-active",
-    "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
+    "data-disabled:opacity-50 data-disabled:pointer-events-none",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
   ],
   {
@@ -164,7 +167,7 @@ function DropdownMenuSeparator({
 function DropdownMenuGroup({ className, ...props }: BaseMenu.Group.Props) {
   return (
     <BaseMenu.Group
-      className={className}
+      className={cn(className)}
       data-slot="dropdown-menu-group"
       {...props}
     />
@@ -178,7 +181,7 @@ function DropdownMenuGroupLabel({
   return (
     <BaseMenu.GroupLabel
       className={cn(
-        "px-3 py-1 text-xs text-muted-foreground font-medium",
+        "px-3.5 py-1.5 text-xs text-muted-foreground font-medium select-none",
         className,
       )}
       data-slot="dropdown-menu-group-label"
@@ -193,7 +196,7 @@ function DropdownMenuRadioGroup({
 }: BaseMenu.RadioGroup.Props) {
   return (
     <BaseMenu.RadioGroup
-      className={className}
+      className={cn(className)}
       data-slot="dropdown-menu-radio-group"
       {...props}
     />
@@ -207,7 +210,7 @@ function DropdownMenuRadioItem({
 }: BaseMenu.RadioItem.Props) {
   return (
     <BaseMenu.RadioItem
-      className={className}
+      className={cn(className)}
       {...props}
       data-slot="dropdown-menu-radio-item"
     />
@@ -220,7 +223,7 @@ function DropdownMenuCheckboxItem({
 }: BaseMenu.CheckboxItem.Props) {
   return (
     <BaseMenu.CheckboxItem
-      className={className}
+      className={cn(className)}
       data-slot="dropdown-menu-checkbox-item"
       {...props}
     />
@@ -233,7 +236,7 @@ function DropdownMenuCheckboxItemIndicator({
 }: BaseMenu.CheckboxItemIndicator.Props) {
   return (
     <BaseMenu.CheckboxItemIndicator
-      className={className}
+      className={cn(className)}
       data-slot="dropdown-menu-checkbox-item-indicator"
       {...props}
     />
@@ -250,7 +253,7 @@ function DropdownMenuSubMenuTrigger({
 }: BaseMenu.SubmenuTrigger.Props) {
   return (
     <BaseMenu.SubmenuTrigger
-      className={className}
+      className={cn(className)}
       data-slot="dropdown-menu-sub-menu-trigger"
       {...props}
     />
@@ -336,12 +339,12 @@ function DropdownMenuContent({
   ...props
 }: DropdownMenuContentProps) {
   return (
-    <DropdownMenuPortal>
+    <BaseMenu.Portal>
       <BaseMenu.Positioner
         align={align}
         alignOffset={alignOffset}
         className={cn(
-          matchAnchorWidth && "w-[var(--anchor-width)]",
+          matchAnchorWidth && "w-(--anchor-width)",
           "max-h-(--available-height)",
         )}
         side={side}
@@ -349,7 +352,7 @@ function DropdownMenuContent({
       >
         <BaseMenu.Popup
           className={cn(
-            "bg-popover text-popover-foreground rounded-md shadow-md py-1",
+            "relative bg-popover text-popover-foreground rounded-md shadow-md py-1",
             "outline outline-border dark:-outline-offset-1",
             "animate-popup",
             className,
@@ -361,7 +364,7 @@ function DropdownMenuContent({
           {children}
         </BaseMenu.Popup>
       </BaseMenu.Positioner>
-    </DropdownMenuPortal>
+    </BaseMenu.Portal>
   );
 }
 
@@ -386,7 +389,7 @@ function DropdownMenuCheckboxItemContent({
         "grid items-center gap-2 py-1.5 pr-3 pl-3.5 text-sm",
         "outline-none select-none cursor-default",
         "highlight-on-active",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "data-disabled:pointer-events-none data-disabled:opacity-50",
         indicatorPlacement === "start" && "grid-cols-[1rem_1fr]",
         indicatorPlacement === "end" && "grid-cols-[1fr_1rem]",
         className,
@@ -433,7 +436,7 @@ function DropdownMenuRadioItemContent({
         "grid items-center gap-2 py-1.5 pr-3 pl-3.5 text-sm",
         "outline-none select-none cursor-default",
         "highlight-on-active",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "data-disabled:pointer-events-none data-disabled:opacity-50",
         indicatorPlacement === "start" && "grid-cols-[1rem_1fr]",
         indicatorPlacement === "end" && "grid-cols-[1fr_1rem]",
         className,

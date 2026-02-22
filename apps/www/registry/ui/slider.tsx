@@ -35,13 +35,19 @@ function SliderTrack({ className, ...props }: BaseSlider.Track.Props) {
   );
 }
 
-function SliderValue({ className, ...props }: BaseSlider.Value.Props) {
+function SliderValue({
+  className,
+  children,
+  ...props
+}: BaseSlider.Value.Props) {
   return (
     <BaseSlider.Value
       className={cn("text-sm font-medium", className)}
       data-slot="slider-value"
       {...props}
-    />
+    >
+      {children}
+    </BaseSlider.Value>
   );
 }
 

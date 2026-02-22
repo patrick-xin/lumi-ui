@@ -7,7 +7,7 @@ import {
   AutocompleteEmpty,
   AutocompleteGroup,
   AutocompleteGroupLabel,
-  AutocompleteInput,
+  AutocompleteInputGroup,
   AutocompleteItem,
   AutocompleteList,
   AutocompleteRow,
@@ -15,7 +15,7 @@ import {
 } from "@/registry/ui/autocomplete";
 import { Button } from "@/registry/ui/button";
 import { Input } from "@/registry/ui/input";
-import { Separator } from "@/registry/ui/separator";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 export function EmojiPickerAutocompleteDemo() {
   const [pickerOpen, setPickerOpen] = React.useState(false);
@@ -51,9 +51,10 @@ export function EmojiPickerAutocompleteDemo() {
   }
 
   return (
-    <div className="mx-auto w-[16rem]">
+    <div className="mx-auto w-[20rem]">
       <div className="flex items-center gap-2">
         <Input
+          className="bg-background!"
           onChange={(event) => setTextValue(event.target.value)}
           placeholder="iMessage"
           ref={textInputRef}
@@ -77,7 +78,11 @@ export function EmojiPickerAutocompleteDemo() {
           <AutocompleteTrigger
             aria-label="Choose emoji"
             render={
-              <Button size="icon" variant="outline">
+              <Button
+                className="data-popup-open:bg-accent data-popup-open:hover:bg-accent"
+                size="icon"
+                variant="outline"
+              >
                 😀
               </Button>
             }
@@ -85,43 +90,52 @@ export function EmojiPickerAutocompleteDemo() {
 
           <AutocompleteContent
             align="end"
+            className="w-[20rem]"
             matchAnchorWidth={false}
-            sideOffset={4}
+            sideOffset={8}
           >
-            <AutocompleteInput placeholder="Search emojis…" variant="ghost" />
-            <Separator />
-            <AutocompleteEmpty>No emojis found</AutocompleteEmpty>
-            <AutocompleteList>
-              {(group: EmojiGroup) => (
-                <AutocompleteGroup items={group.items} key={group.value}>
-                  <AutocompleteGroupLabel>{group.label}</AutocompleteGroupLabel>
-                  <div className="p-1" role="presentation">
-                    {chunkArray(group.items, COLUMNS).map((row, rowIdx) => (
-                      <AutocompleteRow
-                        className="grid grid-cols-5 gap-2.5"
-                        key={String(rowIdx)}
-                      >
-                        {row.map((rowItem) => (
-                          <AutocompleteItem
-                            className="p-2 items-center justify-center data-[highlighted]:before:rounded-md"
-                            key={rowItem.emoji}
-                            onClick={() => {
-                              handleInsertEmoji(rowItem.emoji);
-                              setPickerOpen(false);
-                            }}
-                            value={rowItem}
-                          >
-                            <span className="text-[1.5rem] leading-none">
-                              {rowItem.emoji}
-                            </span>
-                          </AutocompleteItem>
-                        ))}
-                      </AutocompleteRow>
-                    ))}
-                  </div>
-                </AutocompleteGroup>
-              )}
-            </AutocompleteList>
+            <AutocompleteInputGroup
+              inputClassName="border-b-border"
+              placeholder="Search emojis…"
+              showClear
+              variant="ghost"
+            />
+            <ScrollArea gradientScrollFade noScrollBar>
+              <AutocompleteEmpty>No emojis found</AutocompleteEmpty>
+              <AutocompleteList>
+                {(group: EmojiGroup) => (
+                  <AutocompleteGroup items={group.items} key={group.value}>
+                    <AutocompleteGroupLabel>
+                      {group.label}
+                    </AutocompleteGroupLabel>
+                    <div className="p-2" role="presentation">
+                      {chunkArray(group.items, COLUMNS).map((row, rowIdx) => (
+                        <AutocompleteRow
+                          className="grid grid-cols-5 gap-3 w-full"
+                          key={String(rowIdx)}
+                        >
+                          {row.map((rowItem) => (
+                            <AutocompleteItem
+                              className="p-2 items-center justify-center data-highlighted:before:inset-x-1 data-highlighted:before:rounded-lg min-w-0"
+                              key={rowItem.emoji}
+                              onClick={() => {
+                                handleInsertEmoji(rowItem.emoji);
+                                setPickerOpen(false);
+                              }}
+                              value={rowItem}
+                            >
+                              <span className="text-[1.5rem] leading-none">
+                                {rowItem.emoji}
+                              </span>
+                            </AutocompleteItem>
+                          ))}
+                        </AutocompleteRow>
+                      ))}
+                    </div>
+                  </AutocompleteGroup>
+                )}
+              </AutocompleteList>
+            </ScrollArea>
           </AutocompleteContent>
         </Autocomplete>
       </div>

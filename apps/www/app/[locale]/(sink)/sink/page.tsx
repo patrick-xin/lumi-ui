@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { DataTable } from "@/components/blocks/data-table";
 import {
   Breadcrumb,
@@ -15,7 +16,7 @@ export default function Page() {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
+              <BreadcrumbLink render={<Link href="/" />}>Home</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator className="hidden md:block" />
             <BreadcrumbItem>
@@ -27,6 +28,7 @@ export default function Page() {
       <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
         <div className="grid auto-rows-min gap-6">
           <section className="space-y-2">
+            <div className="flex gap-26 items-center"></div>
             <h2 className="font-semibold text-sm">Data Table</h2>
             <DataTable />
           </section>

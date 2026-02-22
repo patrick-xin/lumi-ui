@@ -20,7 +20,8 @@
     "description": "基于 Base UI 和 Tailwind CSS 的 React 组件库。",
     "subtitle": "构建快速，随心定制。",
     "title": "出色，更出彩",
-    "viewDocs": "查看文档"
+    "viewDocs": "查看文档",
+    "seeInAction": "即刻体验"
   },
   "Navigation": {
     "Docs": "文档",

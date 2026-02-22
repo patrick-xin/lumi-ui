@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
@@ -19,6 +20,7 @@ const fadeUpVariants = {
 
 export default function ComponentShowcase() {
   const [loaded, setLoaded] = React.useState(false);
+  const t = useTranslations("HomePage");
 
   return (
     <motion.section
@@ -73,7 +75,7 @@ export default function ComponentShowcase() {
             nativeButton={false}
             render={
               <Link href="/view/dashboard-01" target="_blank">
-                See in action
+                {t("seeInAction")}
               </Link>
             }
             size="lg"

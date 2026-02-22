@@ -3,6 +3,7 @@ import type { Layout } from "react-resizable-panels";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { AIChat } from "@/registry/blocks/sidebar-03/components/ai-chat";
 import { AppSidebar } from "@/registry/blocks/sidebar-03/components/app-sidebar";
+import { DashboardCommand } from "@/registry/blocks/sidebar-03/components/dashboard-command";
 import { DashboardContent } from "@/registry/blocks/sidebar-03/components/dashboard-content";
 import { Notifications } from "@/registry/blocks/sidebar-03/components/vercel-notification";
 import {
@@ -55,6 +56,7 @@ export default async function Page() {
           <div className="ml-auto flex gap-2">
             <Notifications />
             <ThemeSwitcher />
+            <DashboardCommand />
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4 sm:pt-0">

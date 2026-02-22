@@ -68,7 +68,7 @@ export function NavUser({
             <DropdownMenuTrigger
               render={
                 <SidebarMenuButton
-                  className="data-[popup-open]:bg-accent data-[popup-open]:text-accent-foreground"
+                  className="data-popup-open:bg-accent data-popup-open:text-accent-foreground"
                   size="lg"
                 >
                   {isCollapsed ? (
@@ -90,10 +90,10 @@ export function NavUser({
             <DropdownMenuContent
               align="start"
               matchAnchorWidth={!isCollapsed}
-              sideOffset={4}
+              sideOffset={6}
             >
-              <DropdownMenuItem className="justify-between">
-                <div className="grid text-left text-sm leading-tight">
+              <DropdownMenuItem className="justify-between py-2">
+                <div className="flex flex-col text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
                   <span className="truncate text-xs">{user.email}</span>
                 </div>

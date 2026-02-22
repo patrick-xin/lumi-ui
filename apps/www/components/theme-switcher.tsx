@@ -63,7 +63,7 @@ export function ThemeSwitcher({
         render={
           <Button
             className={cn(
-              "data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent",
+              "data-popup-open:bg-accent data-popup-open:hover:bg-accent",
               className,
             )}
             size="icon-sm"
