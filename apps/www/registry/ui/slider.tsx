@@ -65,7 +65,7 @@ function SliderThumb({ className, ...props }: BaseSlider.Thumb.Props) {
   return (
     <BaseSlider.Thumb
       className={cn(
-        "disabled:pointer-events-none disabled:opacity-50",
+        "disabled:pointer-events-none disabled:opacity-50 select-none",
         className,
       )}
       data-slot="slider-thumb"
@@ -124,7 +124,8 @@ function Slider({
           {Array.from({ length: thumbCount }, (_, i) => (
             <BaseSlider.Thumb
               className={cn(
-                "outline-border ring-ring/50 block size-4 shrink-0 rounded-full bg-white transition-[color,box-shadow] hover:ring-4 disabled:pointer-events-none disabled:opacity-50",
+                "outline-border ring-ring/50 block size-4 shrink-0 rounded-full bg-white transition-[color,box-shadow] hover:ring-4 data-dragging:ring-4 select-none",
+                "disabled:pointer-events-none disabled:opacity-50",
                 "has-[:focus-visible]:ring-4 focus-visible:outline-border",
               )}
               data-slot="slider-thumb"

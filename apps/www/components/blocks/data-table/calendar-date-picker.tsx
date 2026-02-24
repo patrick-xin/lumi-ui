@@ -28,8 +28,9 @@ export function CalendarDatePicker({
 }: CalendarDatePickerProps) {
   const startYear = new Date().getFullYear() - 2;
   const today = React.useMemo(() => new Date(), []);
+  const selectedDate = value ?? today;
   const handleDateSelect = (date: Date | undefined) => {
-    onValueChange(date);
+    onValueChange(date ?? selectedDate);
     onOpenChange(false);
   };
 
@@ -44,7 +45,7 @@ export function CalendarDatePicker({
           sideOffset={12}
         >
           <PopoverPopup
-            className="relative w-64 rounded-md bg-popover outline outline-border dark:-outline-offset-1 text-popover-foreground shadow-2xl shadow-primary/10 border-primary/20 animate-popup"
+            className="relative w-80 rounded-md bg-popover outline outline-border dark:-outline-offset-1 text-popover-foreground shadow-2xl shadow-primary/10 border-primary/20 animate-popup"
             data-slot="popover-content"
           >
             <PopoverArrow />
@@ -52,9 +53,11 @@ export function CalendarDatePicker({
               captionLayout="dropdown"
               className="w-full"
               defaultMonth={value ?? today}
+              disabled={{ after: today }}
+              endMonth={today}
               mode="single"
               onSelect={handleDateSelect}
-              selected={value}
+              selected={selectedDate}
               startYear={startYear}
             />
           </PopoverPopup>

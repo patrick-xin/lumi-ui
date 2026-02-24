@@ -1,20 +1,20 @@
 "use client";
 
-import { Button } from "@/registry/ui/button";
-import {
-    Dialog,
-    DialogBackdrop,
-    DialogClose,
-    DialogPopup,
-    DialogPortal,
-    DialogTitle,
-    DialogViewport,
-} from "@/registry/ui/dialog";
-import { ScrollArea } from "@/registry/ui/scroll-area";
 import type { DialogRootActions } from "@base-ui/react/dialog";
 import { PlusIcon, X } from "lucide-react";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { useRef, useState } from "react";
+import { Button } from "@/registry/ui/button";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogClose,
+  DialogPopup,
+  DialogPortal,
+  DialogTitle,
+  DialogViewport,
+} from "@/registry/ui/dialog";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 
 export function MorphingDialog() {
   const [isOpen, setIsOpen] = useState(false);
@@ -114,7 +114,7 @@ export function MorphingDialog() {
                     <ScrollArea className="h-[calc(100vh-4rem)]" noScrollBar>
                       <motion.div
                         animate={{ opacity: 1 }}
-                        className="flex flex-col h-full"
+                        className="flex flex-col h-full pb-[10vh]"
                         exit={{ opacity: 0 }}
                         initial={{ opacity: 0 }}
                         transition={{

@@ -51,7 +51,7 @@ export function ChartMixedAxes() {
         <div className="space-y-2">
           <CardTitle>Financial Performance</CardTitle>
           <CardDescription>
-            Toggle series visibility using the controls below
+            Toggle series visibility using the controls
           </CardDescription>
         </div>
         <ToggleGroup

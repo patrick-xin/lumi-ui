@@ -1112,6 +1112,77 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "slider-video-trimmer",
+      "title": "Video Trimmer",
+      "description": "A video editing interface for trimming video clips. Features a timeline with draggable handles, a preview player, and export functionality.",
+      "type": "registry:component",
+      "categories": ["media", "form-input"],
+      "meta": {
+        "alignment": "center",
+        "iframeHeight": 600
+      },
+      "dependencies": ["lucide-react", "@base-ui/react"],
+      "registryDependencies": [
+        "utils",
+        "@lumi-ui/badge",
+        "@lumi-ui/button",
+        "@lumi-ui/card",
+        "@lumi-ui/fieldset",
+        "@lumi-ui/slider",
+        "@lumi-ui/toast"
+      ],
+      "files": [
+        {
+          "path": "registry/components/slider-video-trimmer.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "team-switcher",
+      "title": "Team Switcher",
+      "description": "A team switcher component that allows users to switch teams. Features a sheet modal for creating new teams.",
+      "type": "registry:component",
+      "categories": ["form-input", "dashboard"],
+      "meta": {
+        "iframeHeight": 800
+      },
+      "dependencies": ["lucide-react", "@base-ui/react"],
+      "registryDependencies": [
+        "utils",
+        "@lumi-ui/button",
+        "@lumi-ui/combobox",
+        "@lumi-ui/field",
+        "@lumi-ui/form",
+        "@lumi-ui/scroll-area",
+        "@lumi-ui/sheet",
+        "@lumi-ui/toast",
+        "@lumi-ui/textarea",
+        "@lumi-ui/kbd"
+      ],
+      "files": [
+        {
+          "path": "registry/components/team-switcher.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "collapsible-file-tree",
+      "title": "Collapsible File Tree",
+      "description": "A file tree component with collapsible folders and file badges.",
+      "type": "registry:component",
+      "categories": ["layout-navigation"],
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["@lumi-ui/collapsible"],
+      "files": [
+        {
+          "path": "registry/components/collapsible-file-tree.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ],
   "name": "lumi-ui"

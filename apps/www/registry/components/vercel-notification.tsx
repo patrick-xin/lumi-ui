@@ -82,7 +82,22 @@ const NotificationSheet = () => {
   const { open, setOpen } = useNotification();
   return (
     <Sheet onOpenChange={setOpen} open={open}>
-      <SheetTrigger render={<TriggerButton />} />
+      <SheetTrigger
+        className="relative"
+        render={
+          <Button
+            aria-label="Notifications, you have unread messages"
+            size="icon-sm"
+            variant="outline"
+          >
+            <span>
+              <BellIcon />
+            </span>
+            <span className="absolute -top-1 right-0 size-2.5 bg-green-600 rounded-full" />
+            <span className="sr-only">You have unread messages</span>
+          </Button>
+        }
+      />
       <SheetContent
         className="flex flex-col p-0 bg-background duration-300 h-[50dvh] max-h-[50dvh] overflow-hidden"
         side="bottom"
@@ -97,7 +112,22 @@ function NotificationPopover() {
   const { open, setOpen } = useNotification();
   return (
     <Popover onOpenChange={setOpen} open={open}>
-      <PopoverTrigger render={<TriggerButton />} />
+      <PopoverTrigger
+        render={
+          <Button
+            aria-label="Notifications, you have unread messages"
+            className="data-popup-open:bg-accent data-popup-open:hover:bg-accent"
+            size="icon-sm"
+            variant="outline"
+          >
+            <span>
+              <BellIcon />
+            </span>
+            <span className="absolute -top-1 -right-1 size-2.5 bg-green-600 rounded-full" />
+            <span className="sr-only">You have unread messages</span>
+          </Button>
+        }
+      />
       <PopoverContent
         align="end"
         className="flex flex-col p-0 w-96 bg-background duration-300 h-[50dvh] max-h-[50dvh] overflow-hidden"
@@ -134,12 +164,13 @@ const UnderLineTabs = () => {
           >
             Archived
           </TabsTab>
-          <TabIndicator className="bg-foreground -bottom-0.5 left-0 h-0.5 translate-x-(--active-tab-left) translate-y-0" />
+          <TabIndicator className="bg-foreground -bottom-0.5 left-px h-0.5 translate-x-(--active-tab-left) translate-y-0" />
         </TabsList>
         <Button className="mr-2" size="icon-sm" variant="ghost">
           <Settings />
         </Button>
       </div>
+
       <TabsPanel
         className="h-full flex flex-col min-h-0"
         keepMounted
@@ -266,13 +297,7 @@ const FilterDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={
-          <Button
-            aria-label="Filter notifications"
-            className="data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent"
-            variant="outline"
-          />
-        }
+        render={<Button aria-label="Filter notifications" variant="outline" />}
       >
         <PlusIcon />
         Filter
@@ -296,23 +321,5 @@ const FilterDropdown = () => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
-};
-
-const TriggerButton = (props: React.ComponentProps<typeof Button>) => {
-  return (
-    <Button
-      aria-label="Notifications, you have unread messages"
-      className="relative data-popup-open:bg-accent data-popup-open:hover:bg-accent rounded-full"
-      size="icon-sm"
-      variant="outline"
-      {...props}
-    >
-      <span>
-        <BellIcon />
-      </span>
-      <span className="absolute top-0 right-0 size-2.5 bg-green-600 rounded-full" />
-      <span className="sr-only">You have unread messages</span>
-    </Button>
   );
 };

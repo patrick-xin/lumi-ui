@@ -281,7 +281,7 @@ export const T3ModelSelector = () => {
           return (
             <PreviewCardContent
               align="center"
-              className="overscroll-contain p-2"
+              className="overscroll-contain p-2 sm:p-4"
               side="right"
             >
               <div className="space-y-2">

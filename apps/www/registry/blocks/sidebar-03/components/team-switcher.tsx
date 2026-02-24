@@ -89,7 +89,7 @@ export function TeamSwitcher() {
           />
         </SidebarMenuButton>
         <ComboboxContent
-          className="flex flex-col h-56 overflow-hidden"
+          className="flex flex-col h-72 overflow-hidden"
           matchAnchorWidth={!isCollapsed}
           positionerAnchor={containerRef}
           side={isCollapsed ? "right" : "bottom"}
@@ -113,8 +113,8 @@ export function TeamSwitcher() {
           <ComboboxEmpty className="flex-1 mt-12 h-full">
             No member found.
           </ComboboxEmpty>
-          <ScrollArea className="pr-1" gradientScrollFade>
-            <ComboboxList className="flex-1 min-h-0">
+          <ScrollArea className="pr-1 min-h-0" gradientScrollFade>
+            <ComboboxList>
               {(member: TeamMember) => (
                 <ComboboxItemContent
                   indicatorPlacement="end"

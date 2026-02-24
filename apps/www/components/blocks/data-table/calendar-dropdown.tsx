@@ -1,7 +1,7 @@
 "use client";
 
 import type { Column, SortDirection } from "@tanstack/react-table";
-import { addDays, format } from "date-fns";
+import { format } from "date-fns";
 import {
   ArrowDown,
   ArrowUp,
@@ -58,17 +58,14 @@ export const CalendarDropdown = <TData, TValue>({
   const selectedDate =
     typeof dateFilterValue === "string" && dateFilterValue.length > 0
       ? parseFilterDate(dateFilterValue)
-      : new Date();
+      : undefined;
   const selectedRange: DateRange | undefined =
     typeof dateFilterValue === "object" && dateFilterValue !== null
       ? {
           from: parseFilterDate(dateFilterValue.from),
           to: parseFilterDate(dateFilterValue.to),
         }
-      : {
-          from: new Date(new Date().getFullYear(), 0, 12),
-          to: addDays(new Date(new Date().getFullYear(), 0, 12), 30),
-        };
+      : undefined;
   const [rangeOpen, setRangeOpen] = React.useState(false);
   const [dateOpen, setDateOpen] = React.useState(false);
   const rangeRef = React.useRef<HTMLDivElement | null>(null);

@@ -63,14 +63,16 @@ function transformChildren(
       if (node.type === "page") {
         const page = node as DocPageNode;
         const shouldShowStatus = FOLDERS_WITH_STATUS.includes(rootSectionName);
+        const icon =
+          typeof page.icon === "string"
+            ? IconMap[page.icon as keyof typeof icons]
+            : page.icon;
 
         return {
           active: isActive(page.url, pathname),
           disabled: page.status === "planned",
           href: page.url,
-          icon: page.icon
-            ? IconMap[page.icon as keyof typeof icons]
-            : undefined,
+          icon,
           label: page.name,
           status: shouldShowStatus ? page.status : undefined,
           type: "link",

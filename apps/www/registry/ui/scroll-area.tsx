@@ -57,7 +57,7 @@ function ScrollAreaContent({
 }: BaseScrollArea.Content.Props) {
   return (
     <BaseScrollArea.Content
-      className={cn("flex-1 h-full", className)}
+      className={cn("flex-1", className)}
       data-slot="scroll-area-content"
       {...props}
     />
@@ -108,17 +108,18 @@ function ScrollArea({
   noScrollBar?: boolean;
 }) {
   return (
-    <ScrollAreaRoot
+    <BaseScrollArea.Root
       className={cn("flex flex-col h-full", className)}
+      data-slot="scroll-area-root"
       {...props}
     >
       <ScrollAreaViewport
         className="flex-1 min-h-0"
         gradientScrollFade={gradientScrollFade}
       >
-        <ScrollAreaContent data-slot="scroll-area">
+        <BaseScrollArea.Content className="flex-1" data-slot="scroll-area">
           {children}
-        </ScrollAreaContent>
+        </BaseScrollArea.Content>
       </ScrollAreaViewport>
       {!noScrollBar && (
         <>
@@ -127,7 +128,7 @@ function ScrollArea({
         </>
       )}
       <ScrollAreaCorner />
-    </ScrollAreaRoot>
+    </BaseScrollArea.Root>
   );
 }
 

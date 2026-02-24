@@ -14,7 +14,7 @@ function PopoverTrigger<Payload>({
 }: BasePopover.Trigger.Props<Payload>) {
   return (
     <BasePopover.Trigger
-      className={cn("relative", className)}
+      className={cn("relative select-none", className)}
       data-slot="popover-trigger"
       {...props}
     />

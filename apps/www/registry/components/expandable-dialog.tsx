@@ -86,7 +86,7 @@ export function ExpandableDialog() {
                         />
                       </div>
                     </DialogHeader>
-                    <ScrollArea className="pr-1" gradientScrollFade>
+                    <ScrollArea className="pr-1 min-h-0" gradientScrollFade>
                       <div className="space-y-4 p-2 sm:p-4">
                         {Array.from({ length: 30 }).map((_, i) => (
                           <div

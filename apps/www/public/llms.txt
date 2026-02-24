@@ -34,6 +34,7 @@
 - [Scroll Area](https://lumiui.dev/docs/components/layout-nav/scroll-area): Native scroll container with custom scrollbars.
 - [Separator](https://lumiui.dev/docs/components/layout-nav/separator): A separator element accessible to screen readers.
 - [Sidebar](https://lumiui.dev/docs/components/layout-nav/sidebar): Composable, mobile-responsive sidebar component.
+- [Command Menu](https://lumiui.dev/docs/components/layout-nav/command-menu): A mobile-friendly command palette for search and quick actions.
 
 ## Components: Overlays & Dialogs
 - [Dialog](https://lumiui.dev/docs/components/overlays-dialogs/dialog): A popup that opens on top of the entire page.
@@ -61,6 +62,7 @@
 - [Toggle Group](https://lumiui.dev/docs/components/misc/toggle-group): Shared state for a series of toggle buttons.
 - [Toggle](https://lumiui.dev/docs/components/misc/toggle): A two-state button (on/off).
 - [Toolbar](https://lumiui.dev/docs/components/misc/toolbar): Container for grouping buttons and controls.
+- [KBD](https://lumiui.dev/docs/components/misc/kbd): Styles keyboard key hints and key groups.
 
 ## Themes
 - [Dune](https://lumiui.dev/docs/themes/dune): Warm sandstone neutrals with desert sunset vibes.
@@ -80,4 +82,3 @@
 - [Dashboard layout with sidebar and main content area](https://lumiui.dev/view/sidebar-02): Dashboard layout with sidebar and main content area.
 - [Complex user management UI with nested dialogs.](https://lumiui.dev/view/dialog-01): Complex user management UI with nested dialogs.
 - [Image gallery with nested auth dialogs. Inspired by Unsplash.](https://lumiui.dev/view/dialog-02): Image gallery with nested auth dialogs. Inspired by Unsplash.
-

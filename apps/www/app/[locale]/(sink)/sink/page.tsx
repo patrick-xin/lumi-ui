@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { DataTable } from "@/components/blocks/data-table";
+import { ModeSwitcher } from "@/components/mode-switcher";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,6 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/ui/breadcrumb";
+import { TeamSwitcher } from "../../../../registry/components/team-switcher";
 
 export default function Page() {
   return (
@@ -24,15 +26,13 @@ export default function Page() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
+        <ThemeSwitcher />
+        <ModeSwitcher />
       </header>
       <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
-        <div className="grid auto-rows-min gap-6">
-          <section className="space-y-2">
-            <div className="flex gap-26 items-center"></div>
-            <h2 className="font-semibold text-sm">Data Table</h2>
-            <DataTable />
-          </section>
-        </div>
+        <section className="max-w-4xl mx-auto">
+          <TeamSwitcher />
+        </section>
       </div>
     </div>
   );

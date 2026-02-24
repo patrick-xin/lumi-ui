@@ -43,50 +43,87 @@ export const CalendarRangePicker = ({
   onValueChange,
 }: CalendarRangePickerProps) => {
   const today = React.useMemo(() => startOfDay(new Date()), []);
-  const defaultFrom = React.useMemo(() => subMonths(today, 1), [today]);
+  const defaultRange = React.useMemo<DateRange>(
+    () => ({ from: subDays(today, 13), to: today }),
+    [today],
+  );
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth();
   const startMonth = React.useMemo(
     () => new Date(today.getFullYear() - 2, 0, 1),
     [today],
   );
-  const endMonth = React.useMemo(
-    () => new Date(today.getFullYear(), 11, 31),
+  const endMonth = React.useMemo(() => today, [today]);
+  const clampDateToToday = React.useCallback(
+    (date: Date) => (isAfter(date, today) ? today : date),
     [today],
   );
+  const clampRangeToToday = React.useCallback(
+    (range: DateRange | undefined): DateRange | undefined => {
+      if (!range) return undefined;
+
+      const from = range.from ? clampDateToToday(range.from) : undefined;
+      const to = range.to ? clampDateToToday(range.to) : undefined;
+
+      if (from && to && isAfter(from, to)) {
+        return { from: to, to };
+      }
+
+      return { from, to };
+    },
+    [clampDateToToday],
+  );
   const [draftRange, setDraftRange] = React.useState<DateRange | undefined>(
-    () => value,
+    () => value ?? defaultRange,
   );
 
-  const [visibleMonth, setVisibleMonth] = React.useState<Date>(
-    () => value?.from ?? defaultFrom,
+  const [visibleMonth, setVisibleMonth] = React.useState<Date>(() =>
+    clampDateToToday(value?.from ?? defaultRange.from ?? today),
   );
   React.useEffect(() => {
     if (open) {
-      setDraftRange(value);
-      setVisibleMonth(value?.from ?? defaultFrom);
+      const nextRange = clampRangeToToday(value ?? defaultRange);
+      setDraftRange(nextRange);
+      setVisibleMonth(
+        clampDateToToday(nextRange?.from ?? defaultRange.from ?? today),
+      );
     }
-  }, [defaultFrom, open, value]);
+  }, [clampDateToToday, clampRangeToToday, defaultRange, open, today, value]);
 
-  const fromDate = draftRange?.from ?? defaultFrom;
-  const toDate = draftRange?.to ?? draftRange?.from ?? today;
+  const fromDate = draftRange?.from ?? defaultRange.from ?? today;
+  const toDate = draftRange?.to ?? draftRange?.from ?? defaultRange.to ?? today;
+  const isSameDay = (left?: Date, right?: Date) =>
+    left?.getTime() === right?.getTime();
+  const isClearDisabled =
+    (!draftRange?.from && !draftRange?.to) ||
+    (isSameDay(draftRange?.from, defaultRange.from) &&
+      isSameDay(draftRange?.to, defaultRange.to));
 
   const setRange = (nextRange: DateRange | undefined) => {
-    setDraftRange(nextRange);
-    if (nextRange?.from) {
-      setVisibleMonth(nextRange.from);
+    const clampedRange = clampRangeToToday(nextRange);
+    setDraftRange(clampedRange);
+    if (clampedRange?.from) {
+      setVisibleMonth(clampDateToToday(clampedRange.from));
     }
   };
 
   const handleConfirm = () => {
-    onValueChange(draftRange);
+    onValueChange(clampRangeToToday(draftRange));
     onOpenChange(false);
   };
 
+  const handleClear = () => {
+    setDraftRange(defaultRange);
+    setVisibleMonth(clampDateToToday(defaultRange.from ?? today));
+  };
+
   const applyPresetRange = (nextRange: DateRange) => {
-    setDraftRange(nextRange);
-    if (nextRange.from) {
-      setVisibleMonth(nextRange.from);
+    const clampedRange = clampRangeToToday(nextRange);
+    setDraftRange(clampedRange);
+    if (clampedRange?.from) {
+      setVisibleMonth(clampDateToToday(clampedRange.from));
     }
-    onValueChange(nextRange);
+    onValueChange(clampedRange);
     onOpenChange(false);
   };
 
@@ -147,7 +184,9 @@ export const CalendarRangePicker = ({
     targetMonth: number,
     targetYear: number = fromDate.getFullYear(),
   ) => {
-    const nextFrom = toSafeDateInMonth(fromDate, targetMonth, targetYear);
+    const nextFrom = clampDateToToday(
+      toSafeDateInMonth(fromDate, targetMonth, targetYear),
+    );
     const nextTo = isAfter(nextFrom, toDate) ? nextFrom : toDate;
     setRange({ from: nextFrom, to: nextTo });
   };
@@ -156,7 +195,9 @@ export const CalendarRangePicker = ({
     targetMonth: number,
     targetYear: number = toDate.getFullYear(),
   ) => {
-    const nextTo = toSafeDateInMonth(toDate, targetMonth, targetYear);
+    const nextTo = clampDateToToday(
+      toSafeDateInMonth(toDate, targetMonth, targetYear),
+    );
     const nextFrom = isAfter(fromDate, nextTo) ? nextTo : fromDate;
     setRange({ from: nextFrom, to: nextTo });
   };
@@ -179,6 +220,9 @@ export const CalendarRangePicker = ({
             <div className="flex">
               {/* Left side */}
               <div className="flex flex-col gap-2 border-r p-2 mt-2">
+                <div className="text-sm ml-2 text-muted-foreground font-medium">
+                  Quick actions
+                </div>
                 <Button
                   className="justify-start"
                   onClick={() => applyPreset("today")}
@@ -258,6 +302,10 @@ export const CalendarRangePicker = ({
                       <SelectContent alignItemWithTrigger>
                         {months.map((month, monthIndex) => (
                           <SelectItemContent
+                            disabled={
+                              fromDate.getFullYear() === currentYear &&
+                              monthIndex > currentMonth
+                            }
                             key={month}
                             value={String(monthIndex)}
                           >
@@ -306,6 +354,10 @@ export const CalendarRangePicker = ({
                       <SelectContent alignItemWithTrigger>
                         {months.map((month, monthIndex) => (
                           <SelectItemContent
+                            disabled={
+                              toDate.getFullYear() === currentYear &&
+                              monthIndex > currentMonth
+                            }
                             key={month}
                             value={String(monthIndex)}
                           >
@@ -347,18 +399,29 @@ export const CalendarRangePicker = ({
                       range_start: "bg-accent after:bg-accent rounded-r-none",
                     }}
                     defaultMonth={visibleMonth}
+                    disabled={{ after: today }}
                     endMonth={endMonth}
                     mode="range"
                     month={visibleMonth}
                     numberOfMonths={2}
-                    onMonthChange={setVisibleMonth}
+                    onMonthChange={(month) =>
+                      setVisibleMonth(clampDateToToday(month))
+                    }
                     onSelect={setRange}
                     selected={draftRange}
                     showOutsideDays={false}
                     startMonth={startMonth}
                   />
                 </div>
-                <div className="border-t p-2 sm:p-4 flex justify-end">
+                <div className="border-t p-2 sm:p-4 flex justify-end gap-2">
+                  <Button
+                    disabled={isClearDisabled}
+                    onClick={handleClear}
+                    size="sm"
+                    variant="outline"
+                  >
+                    Clear
+                  </Button>
                   <Button onClick={handleConfirm} size="sm">
                     Filter
                   </Button>

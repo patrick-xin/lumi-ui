@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import * as React from "react";
 import { IconMap } from "@/lib/icons";
+import { getResourceLinkIcon } from "@/lib/resource-link-icon";
 import { getSearchGroups } from "@/lib/sidebar-utils";
 import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
@@ -87,7 +88,7 @@ export function SiteCommandMenu({ tree }: { tree: DocRoot }) {
       />
       <CommandMenuContent
         aria-label="Command menu"
-        className="max-w-md shadow-primary/20 shadow-2xl"
+        className="max-w-lg shadow-primary/20 shadow-2xl"
       >
         <Command
           autoHighlight="always"
@@ -115,6 +116,10 @@ export function SiteCommandMenu({ tree }: { tree: DocRoot }) {
                     </CommandGroupLabel>
                     <CommandCollection>
                       {(item: NavItem) => {
+                        const resourceIcon = getResourceLinkIcon(
+                          item.label,
+                          "command",
+                        );
                         const Icon =
                           (item.icon as React.ElementType) ||
                           IconMap[item.folderName] ||
@@ -126,7 +131,9 @@ export function SiteCommandMenu({ tree }: { tree: DocRoot }) {
                             onClick={() => handleItemClick(item)}
                             value={item}
                           >
-                            <Icon className="size-4 text-muted-foreground" />
+                            {resourceIcon ?? (
+                              <Icon className="size-4 text-muted-foreground" />
+                            )}
                             {item.label}
                             {item.status && item.status === "new" && (
                               <span className="inline-block size-2 mt-px rounded-full bg-primary ml-6" />

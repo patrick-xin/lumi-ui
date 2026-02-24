@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { Fieldset } from "@/registry/ui/fieldset";
 import {
   SliderControl,
   SliderIndicator,
@@ -10,11 +11,12 @@ import {
   SliderTrack,
 } from "@/registry/ui/slider";
 
+const histogramData = [
+  5, 12, 25, 45, 80, 100, 60, 45, 30, 20, 10, 5, 40, 60, 30, 15, 5, 2,
+];
+
 export function PriceRangeFilter() {
   const [values, setValues] = React.useState([250, 750]);
-  const histogramData = [
-    5, 12, 25, 45, 80, 100, 60, 45, 30, 20, 10, 5, 40, 60, 30, 15, 5, 2,
-  ];
 
   return (
     <div className="w-full max-w-md p-6 border rounded-xl shadow-sm">
@@ -47,14 +49,18 @@ export function PriceRangeFilter() {
             );
           })}
         </div>
-        <SliderRoot
-          aria-label="price-range-slider"
-          className="absolute inset-x-0 -bottom-2"
-          max={1000}
-          min={0}
-          onValueChange={(val) => setValues(val as number[])}
-          thumbAlignment="edge"
-          value={values}
+        <Fieldset
+          render={
+            <SliderRoot
+              aria-label="price-range-slider"
+              className="absolute inset-x-0 -bottom-2"
+              max={1000}
+              min={0}
+              onValueChange={(val) => setValues(val as number[])}
+              thumbAlignment="edge"
+              value={values}
+            ></SliderRoot>
+          }
         >
           <SliderControl>
             <SliderTrack className="h-6 bg-transparent">
@@ -69,7 +75,7 @@ export function PriceRangeFilter() {
               />
             ))}
           </SliderControl>
-        </SliderRoot>
+        </Fieldset>
       </div>
     </div>
   );
