@@ -21,23 +21,21 @@ export function ContextMenuDemo() {
       <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
         Right click here
       </ContextMenuTrigger>
-      <ContextMenuContent className="w-52">
-        <ContextMenuItem variant="inset">
+      <ContextMenuContent className="w-72">
+        <ContextMenuItem>
           Back
           <ContextMenuShortcut>⌘[</ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem disabled variant="inset">
+        <ContextMenuItem disabled>
           Forward
           <ContextMenuShortcut>⌘]</ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem variant="inset">
+        <ContextMenuItem>
           Reload
           <ContextMenuShortcut>⌘R</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuSub>
-          <ContextMenuSubTriggerGroup variant="inset">
-            More Tools
-          </ContextMenuSubTriggerGroup>
+          <ContextMenuSubTriggerGroup>More Tools</ContextMenuSubTriggerGroup>
           <ContextMenuSubContent className="w-44">
             <ContextMenuItem>Save Page...</ContextMenuItem>
             <ContextMenuItem>Create Shortcut...</ContextMenuItem>

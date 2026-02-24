@@ -43,7 +43,7 @@
     "react": "^19.2.4",
     "react-day-picker": "^9.13.2",
     "react-dom": "^19.2.4",
-    "react-resizable-panels": "^4.5.6",
+    "react-resizable-panels": "^4.6.5",
     "rehype-pretty-code": "^0.14.1",
     "shadcn": "^3.7.0",
     "shiki": "^3.21.0",

@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon, ListFilter, WrapText } from "lucide-react";
+import { CheckIcon } from "lucide-react";
 import * as React from "react";
 import {
   ContextMenu,
@@ -27,13 +27,11 @@ export function ContextMenuCompositeAdvantagesDemo() {
 
       <ContextMenuContent className="w-64">
         <ContextMenuGroup>
-          <ContextMenuLabel inset>Editor layout</ContextMenuLabel>
           <ContextMenuCheckboxItemContent
             checked={showMiniMap}
-            indicatorIcon={<CheckIcon className="size-3.5" />}
+            indicatorIcon={<CheckIcon />}
             onCheckedChange={setShowMiniMap}
           >
-            <ListFilter className="size-4" />
             Show minimap
           </ContextMenuCheckboxItemContent>
           <ContextMenuCheckboxItemContent
@@ -41,13 +39,10 @@ export function ContextMenuCompositeAdvantagesDemo() {
             indicatorPlacement="end"
             onCheckedChange={setWordWrap}
           >
-            <WrapText className="size-4" />
             Enable word wrap
           </ContextMenuCheckboxItemContent>
         </ContextMenuGroup>
-
         <ContextMenuSeparator />
-
         <ContextMenuGroup>
           <ContextMenuLabel inset>Density</ContextMenuLabel>
           <ContextMenuRadioGroup onValueChange={setDensity} value={density}>

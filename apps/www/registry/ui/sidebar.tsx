@@ -342,7 +342,7 @@ function SidebarContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       className={cn(
-        "flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto",
+        "flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto py-2",
         className,
       )}
       data-slot="sidebar-content"
@@ -517,7 +517,7 @@ function SidebarSeparator({
 }: React.ComponentProps<typeof Separator>) {
   return (
     <Separator
-      className={cn("bg-sidebar-border mx-2 w-auto", className)}
+      className={cn("bg-sidebar-border w-auto", className)}
       data-slot="sidebar-separator"
       {...props}
     />

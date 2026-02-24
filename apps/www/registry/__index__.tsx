@@ -2676,19 +2676,19 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "context-menu-composite-advantages": {
-    name: "context-menu-composite-advantages",
+  "context-menu-composite": {
+    name: "context-menu-composite",
     description: "",
     type: "registry:example",
     registryDependencies: ["context-menu"],
     files: [{
-      path: "components/examples/ui/context-menu/context-menu-composite-advantages.tsx",
+      path: "components/examples/ui/context-menu/context-menu-composite.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/context-menu/context-menu-composite-advantages");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "context-menu-composite-advantages";
+      const mod = await import("@/components/examples/ui/context-menu/context-menu-composite");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "context-menu-composite";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -2707,24 +2707,6 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/context-menu/context-menu-demo");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "context-menu-demo";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "context-menu-primitive-control": {
-    name: "context-menu-primitive-control",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["context-menu"],
-    files: [{
-      path: "components/examples/ui/context-menu/context-menu-primitive-control.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/context-menu/context-menu-primitive-control");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "context-menu-primitive-control";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

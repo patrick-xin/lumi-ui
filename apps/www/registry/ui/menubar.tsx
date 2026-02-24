@@ -51,8 +51,8 @@ function MenubarTrigger({ className, ...props }: BaseMenu.Trigger.Props) {
       className={cn(
         "flex items-center rounded-md px-2 py-1 text-sm font-medium outline-none select-none",
         "focus-visible:bg-accent focus-visible:text-accent-foreground",
-        "data-[popup-open]:bg-accent data-[popup-open]:text-accent-foreground",
-        "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
+        "data-popup-open:bg-accent data-popup-open:text-accent-foreground",
+        "data-disabled:opacity-50 data-disabled:pointer-events-none",
         className,
       )}
       data-slot="menubar-trigger"
@@ -98,7 +98,7 @@ const menubarItemVariants = cva(
     "flex items-center gap-2 py-1.5 px-3.5 text-sm",
     "outline-none select-none cursor-default",
     "highlight-on-active",
-    "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
+    "data-disabled:opacity-50 data-disabled:pointer-events-none",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
     "[&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
   ],
@@ -227,7 +227,6 @@ function MenubarSubMenuTrigger({
         "outline-none select-none cursor-default",
         "highlight-on-active",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
-        "data-[inset]:pl-8",
         className,
       )}
       data-slot="menubar-sub-menu-trigger"
@@ -338,7 +337,7 @@ function MenubarCheckboxItemContent({
         "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
         "outline-none select-none cursor-default",
         "highlight-on-active",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "data-disabled:pointer-events-none data-disabled:opacity-50",
         className,
       )}
       data-slot="menubar-checkbox-item-content"
@@ -363,7 +362,7 @@ function MenubarRadioItemContent({
         "flex items-center gap-2 py-1.5 pr-2 pl-8 text-sm",
         "outline-none select-none cursor-default",
         "highlight-on-active",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "data-disabled:pointer-events-none data-disabled:opacity-50",
         className,
       )}
       data-slot="menubar-radio-item-content"

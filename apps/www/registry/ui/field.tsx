@@ -10,9 +10,9 @@ function Field({ className, ...props }: BaseField.Root.Props) {
     <BaseField.Root
       className={cn(
         "group relative flex flex-col gap-2",
-        "has-[[data-slot=checkbox]]:flex-row has-[[data-slot=checkbox]]:items-center has-[[data-slot=checkbox]]:flex-wrap",
-        "has-[[data-slot=radio]]:flex-row has-[[data-slot=radio]]:items-center has-[[data-slot=radio]]:flex-wrap",
-        "has-[[data-slot=switch]]:flex-row has-[[data-slot=switch]]:items-center has-[[data-slot=switch]]:flex-wrap",
+        "has-data-[slot=checkbox]:flex-row has-data-[slot=checkbox]:items-center has-data-[slot=checkbox]:flex-wrap",
+        "has-data-[slot=radio]:flex-row has-data-[slot=radio]:items-center has-data-[slot=radio]:flex-wrap",
+        "has-data-[slot=switch]:flex-row has-data-[slot=switch]:items-center has-data-[slot=switch]:flex-wrap",
         className,
       )}
       data-slot="field"
@@ -26,11 +26,11 @@ function FieldLabel({ className, ...props }: BaseField.Label.Props) {
     <BaseField.Label
       className={cn(
         "inline-flex items-start gap-2 text-sm leading-none font-medium select-none transition-colors",
-        "data-[disabled]:opacity-50",
-        "data-[invalid]:text-destructive",
+        "data-disabled:opacity-50",
+        "data-invalid:text-destructive",
         "group-has-required:after:content-['*'] group-has-required:after:text-destructive group-has-required:after:-ml-0.5",
         "aria-required:after:content-['*'] aria-required:after:text-destructive aria-required:after:-ml-0.5",
-        "[&_[data-slot=checkbox]]:-mt-px [&_[data-slot=switch]]:-mt-0.5",
+        "has-data-[slot=checkbox]:-mt-px has-data-[slot=switch]:-mt-0.5",
         className,
       )}
       data-slot="field-label"

@@ -22,10 +22,7 @@ const NumberFieldGroup = ({
   ...props
 }: BaseNumberField.Group.Props) => (
   <BaseNumberField.Group
-    className={cn(
-      "w-full overflow-hidden data-[disabled]:opacity-50",
-      className,
-    )}
+    className={cn("w-full overflow-hidden data-disabled:opacity-50", className)}
     data-slot="number-field-group"
     {...props}
   />
@@ -127,7 +124,7 @@ const NumberFieldScrubArea = ({
 }: BaseNumberField.ScrubArea.Props) => (
   <BaseNumberField.ScrubArea
     className={cn(
-      "flex cursor-ew-resize items-center gap-1.5 select-none text-sm font-medium text-foreground data-[disabled]:opacity-50",
+      "flex cursor-ew-resize items-center gap-1.5 select-none text-sm font-medium text-foreground data-disabled:opacity-50",
       className,
     )}
     data-slot="number-field-scrub-area"
@@ -152,7 +149,7 @@ function NumberField({
 }: NumberFieldProps) {
   return (
     <BaseNumberField.Root
-      className="flex flex-col gap-2 data-[disabled]:opacity-50  data-[disabled]:pointer-events-none"
+      className="flex flex-col gap-2 data-disabled:opacity-50  data-disabled:pointer-events-none"
       data-slot="number-field"
       {...props}
     >
@@ -160,7 +157,7 @@ function NumberField({
       <BaseNumberField.Group
         className={cn(
           "flex h-9 w-full overflow-hidden rounded-md border border-input bg-transparent shadow-xs",
-          "data-[invalid]:border-destructive data-[invalid]:ring-destructive/20",
+          "data-invalid:border-destructive data-invalid:ring-destructive/20",
         )}
         data-slot="number-field-group"
       >
@@ -169,7 +166,7 @@ function NumberField({
             "flex items-center justify-center shrink-0 h-full aspect-square",
             "border-r border-input bg-input/60 text-foreground",
             "transition-colors hover:bg-input",
-            "data-[disabled]:bg-transparent",
+            "data-disabled:bg-transparent",
           )}
           data-slot="number-field-decrement"
         >
@@ -177,7 +174,7 @@ function NumberField({
         </BaseNumberField.Decrement>
         <BaseNumberField.Input
           className={cn(
-            "flex-1 min-w-0 px-2.5 text-center bg-transparent dark:bg-input/30 text-sm tabular-nums outline-none rounded-xs placeholder:text-muted-foreground focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/80 data-[invalid]:border-destructive/30 data-[invalid]:ring-1 data-[invalid]:ring-destructive/50 data-[invalid]:ring-offset-1 data-[invalid]:ring-offset-destructive/5",
+            "flex-1 min-w-0 px-2.5 text-center bg-transparent dark:bg-input/30 text-sm tabular-nums outline-none rounded-xs placeholder:text-muted-foreground focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring/80 data-invalid:border-destructive/30 data-invalid:ring-1 data-invalid:ring-destructive/50 data-invalid:ring-offset-1 data-invalid:ring-offset-destructive/5",
           )}
           data-slot="number-field-input"
           ref={inputRef}
@@ -187,7 +184,7 @@ function NumberField({
             "flex items-center justify-center shrink-0 h-full aspect-square",
             "border-l border-input bg-input/60 text-foreground",
             "transition-colors hover:bg-input",
-            "data-[disabled]:bg-transparent",
+            "data-disabled:bg-transparent",
           )}
           data-slot="number-field-increment"
         >

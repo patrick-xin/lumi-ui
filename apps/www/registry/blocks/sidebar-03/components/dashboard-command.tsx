@@ -72,7 +72,7 @@ export function DashboardCommand() {
         <Command items={groupedItems}>
           <CommandInput
             autoFocus
-            className="caret-primary"
+            className="caret-primary my-1"
             inputSize="lg"
             placeholder="Search accounts, transactions, reports..."
             showClear

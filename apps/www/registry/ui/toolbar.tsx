@@ -38,7 +38,7 @@ function ToolbarButton({
     <BaseToolbar.Button
       className={cn(
         buttonVariants({ className, size, variant }),
-        "data-[pressed]:bg-accent data-[pressed]:text-accent-foreground",
+        "data-pressed:bg-accent data-pressed:text-accent-foreground",
       )}
       data-slot="toolbar-button"
       {...props}
@@ -52,7 +52,7 @@ function ToolbarSeparator({
 }: BaseToolbar.Separator.Props) {
   return (
     <BaseToolbar.Separator
-      className={cn("bg-border mx-1 h-5 w-[1px]", className)}
+      className={cn("bg-border mx-1 h-5 w-px", className)}
       data-slot="toolbar-separator"
       {...props}
     />
@@ -65,7 +65,7 @@ function ToolbarLink({ className, ...props }: BaseToolbar.Link.Props) {
       className={cn(
         "text-muted-foreground hover:text-foreground inline-flex items-center justify-center gap-2 rounded-md px-2.5 py-1.5 text-sm font-medium underline-offset-4 outline-none transition-colors hover:underline",
         "focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "data-disabled:pointer-events-none data-disabled:opacity-50",
         className,
       )}
       data-slot="toolbar-link"

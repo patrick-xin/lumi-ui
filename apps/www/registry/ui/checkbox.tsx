@@ -35,8 +35,9 @@ function Checkbox({ className, ...props }: BaseCheckbox.Root.Props) {
         "peer inline-flex size-4 shrink-0 rounded-sm border border-input shadow-xs transition-shadow",
         "data-checked:bg-primary data-checked:text-primary-foreground data-checked:border-primary",
         "data-indeterminate:bg-primary data-indeterminate:text-primary-foreground data-indeterminate:border-primary",
-        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:outline-offset-2 focus-visible:ring-primary/30",
-        "data-invalid:ring-destructive/20 dark:data-invalid:ring-destructive/40 data-invalid:border-destructive",
+        "data-checked:focus-visible:outline-offset-2 data-checked:focus-visible:ring-primary/30",
+        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
+        "data-invalid:focus-visible:outline-destructive data-invalid:focus-visible:outline-offset-2 data-invalid:focus-visible:ring-destructive/30",
         "data-disabled:cursor-not-allowed data-disabled:opacity-50",
         className,
       )}
@@ -44,7 +45,7 @@ function Checkbox({ className, ...props }: BaseCheckbox.Root.Props) {
       {...props}
     >
       <BaseCheckbox.Indicator
-        className="flex items-center justify-center text-current data-[unchecked]:hidden"
+        className="flex items-center justify-center text-current data-unchecked:hidden"
         data-slot="checkbox-indicator"
         render={(props, state) => (
           <span {...props}>

@@ -92,7 +92,7 @@ function Slider({
 
   return (
     <BaseSlider.Root
-      className="relative flex flex-col gap-2 w-full touch-none select-none data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[disabled]:opacity-50"
+      className="relative flex flex-col gap-2 w-full touch-none select-none data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-disabled:opacity-50"
       data-slot="slider"
       defaultValue={defaultValue}
       value={value}
@@ -126,7 +126,7 @@ function Slider({
               className={cn(
                 "outline-border ring-ring/50 block size-4 shrink-0 rounded-full bg-white transition-[color,box-shadow] hover:ring-4 data-dragging:ring-4 select-none",
                 "disabled:pointer-events-none disabled:opacity-50",
-                "has-[:focus-visible]:ring-4 focus-visible:outline-border",
+                "has-focus-visible:ring-4 focus-visible:outline-border",
               )}
               data-slot="slider-thumb"
               index={i}
