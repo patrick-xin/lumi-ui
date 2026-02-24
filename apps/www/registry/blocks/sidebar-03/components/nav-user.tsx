@@ -9,6 +9,7 @@ import {
   Settings,
   SmileIcon,
   UserIcon,
+  XIcon,
 } from "lucide-react";
 import { useState } from "react";
 import {
@@ -26,6 +27,7 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
+  DialogElementOutsideContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -48,6 +50,8 @@ import {
   useSidebar,
 } from "@/registry/ui/sidebar";
 import { Textarea } from "@/registry/ui/textarea";
+import { TimelineDemo } from "../../../../components/examples/ui/timeline/timeline-demo";
+import { ScrollArea } from "../../../ui/scroll-area";
 
 export function NavUser({
   user,
@@ -60,6 +64,7 @@ export function NavUser({
   const { isCollapsed } = useSidebar();
   const [open, setOpen] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [changelogOpen, setChangelogOpen] = useState(false);
   return (
     <>
       <SidebarMenu>
@@ -116,7 +121,10 @@ export function NavUser({
                   Connect Integrations
                   <PlugIcon />
                 </DropdownMenuItem>
-                <DropdownMenuItem className="justify-between py-2">
+                <DropdownMenuItem
+                  className="justify-between py-2"
+                  onClick={() => setChangelogOpen(true)}
+                >
                   Changelog
                   <PenIcon />
                 </DropdownMenuItem>
@@ -138,6 +146,7 @@ export function NavUser({
         onOpenChange={setFeedbackOpen}
         open={feedbackOpen}
       />
+      <ChangelogDialog onOpenChange={setChangelogOpen} open={changelogOpen} />
     </>
   );
 }
@@ -202,10 +211,9 @@ function IntegrationItem({ appName }: { appName: string }) {
           <div className="grid gap-2 py-2">
             <Label htmlFor={`api-key-${appName}`}>API Key</Label>
             <Input
+              defaultValue="sk_test_123456789"
               id={`api-key-${appName}`}
-              readOnly
               type="password"
-              value="sk_test_123456789"
             />
           </div>
           <DialogFooter>
@@ -293,6 +301,46 @@ function DialogCloseConfirmation({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+    </Dialog>
+  );
+}
+
+export function ChangelogDialog({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  return (
+    <Dialog onOpenChange={onOpenChange} open={open}>
+      <DialogElementOutsideContent
+        className="overflow-hidden max-w-4xl p-4 sm:p-6"
+        //  layout="center"
+        //  showCloseButton
+      >
+        <DialogClose
+          className="absolute right-2 top-2 size-6 sm:size-8 xl:right-4 xl:top-4 xl:size-10 pointer-events-auto"
+          render={
+            <Button variant="secondary">
+              <XIcon />
+              <span className="sr-only">Close</span>
+            </Button>
+          }
+        />
+        <DialogHeader className="flex-none">
+          <DialogTitle>Changelog</DialogTitle>
+          <DialogDescription>
+            Stay updated with the latest changes.
+          </DialogDescription>
+        </DialogHeader>
+        <ScrollArea className="min-h-0" gradientScrollFade noScrollBar>
+          <TimelineDemo />
+        </ScrollArea>
+        <DialogFooter>
+          <DialogClose render={<Button>Done</Button>} />
+        </DialogFooter>
+      </DialogElementOutsideContent>
     </Dialog>
   );
 }

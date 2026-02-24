@@ -73,16 +73,16 @@ export function TeamSwitcher() {
             render={
               <Button
                 className={cn(
-                  "group/trigger shrink-0 hover:bg-sidebar-accent data-[popup-open]:bg-sidebar-accent data-[popup-open]:text-sidebar-accent-foreground",
+                  "group/trigger shrink-0 hover:bg-sidebar-accent data-popup-open:bg-sidebar-accent data-popup-open:text-sidebar-accent-foreground",
                   isCollapsed ? "mx-auto" : "ml-auto",
                 )}
                 size="icon"
                 variant="unstyled"
               >
                 {isCollapsed ? (
-                  <UserSearchIcon className="size-4.5 text-muted-foreground group-hover/trigger:text-foreground group-data-[popup-open]/trigger:text-foreground" />
+                  <UserSearchIcon className="size-4.5 text-sidebar-foreground" />
                 ) : (
-                  <ChevronsUpDownIcon className="size-4 text-muted-foreground group-hover/trigger:text-foreground group-data-[popup-open]/trigger:text-foreground" />
+                  <ChevronsUpDownIcon className="size-4 text-sidebar-foreground" />
                 )}
               </Button>
             }
@@ -113,7 +113,7 @@ export function TeamSwitcher() {
           <ComboboxEmpty className="flex-1 mt-12 h-full">
             No member found.
           </ComboboxEmpty>
-          <ScrollArea className="pr-1 min-h-0" gradientScrollFade>
+          <ScrollArea className="pr-1 min-h-0" gradientScrollFade noScrollBar>
             <ComboboxList>
               {(member: TeamMember) => (
                 <ComboboxItemContent

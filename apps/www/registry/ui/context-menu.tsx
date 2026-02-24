@@ -125,7 +125,7 @@ const contextMenuItemVariants = cva(
     "flex items-center gap-2 py-1.5 px-3.5 text-sm",
     "outline-none select-none cursor-default",
     "highlight-on-active",
-    "data-[disabled]:opacity-50 data-[disabled]:pointer-events-none",
+    "data-disabled:opacity-50 data-disabled:pointer-events-none",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground hover:[&_svg:not([class*='text-'])]:text-foreground",
   ],
   {
@@ -139,7 +139,6 @@ const contextMenuItemVariants = cva(
           "text-destructive *:[svg]:!text-destructive",
           "data-[highlighted]:text-destructive data-[highlighted]:before:bg-destructive/10 dark:data-[highlighted]:before:bg-destructive/20",
         ],
-        inset: "pl-8",
       },
     },
   },
@@ -214,7 +213,7 @@ function ContextMenuLabel({
   return (
     <BaseContextMenu.GroupLabel
       className={cn(
-        "px-3.5 py-1.5 text-xs text-muted-foreground font-medium select-none data-[inset]:pl-8",
+        "px-3.5 py-1.5 text-xs text-muted-foreground font-medium select-none data-inset:pl-8",
         className,
       )}
       data-inset={inset}
@@ -373,10 +372,10 @@ function ContextMenuCheckboxItemContent({
     <BaseContextMenu.CheckboxItem
       checked={checked}
       className={cn(
-        "grid items-center gap-2 py-1.5 pr-3 pl-2 text-sm",
+        "grid items-center gap-2 py-1.5 pr-3 pl-3.5 text-sm",
         "outline-none select-none cursor-default",
         "highlight-on-active",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "data-disabled:pointer-events-none data-disabled:opacity-50",
         indicatorPlacement === "start" && "grid-cols-[1rem_1fr]",
         indicatorPlacement === "end" && "grid-cols-[1fr_1rem]",
         className,
@@ -424,7 +423,7 @@ function ContextMenuRadioItemContent({
         "grid items-center gap-2 py-1.5 pr-3 pl-2 text-sm",
         "outline-none select-none cursor-default",
         "highlight-on-active",
-        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "data-disabled:pointer-events-none data-disabled:opacity-50",
         indicatorPlacement === "start" && "grid-cols-[1rem_1fr]",
         indicatorPlacement === "end" && "grid-cols-[1fr_1rem] pl-4",
         className,

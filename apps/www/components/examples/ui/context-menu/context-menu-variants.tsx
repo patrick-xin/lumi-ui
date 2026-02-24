@@ -27,23 +27,19 @@ export function ContextMenuVariantsDemo() {
           <ContextMenuShortcut>⌘I</ContextMenuShortcut>
         </ContextMenuItem>
 
-        <ContextMenuItem className="ml-1.5" variant="inset">
+        <ContextMenuItem>
           Mute thread
           <ContextMenuShortcut>⌘M</ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuSub>
-          <ContextMenuSubTriggerGroup className="ml-1.5" variant="inset">
-            More actions
-          </ContextMenuSubTriggerGroup>
+          <ContextMenuSubTriggerGroup>More actions</ContextMenuSubTriggerGroup>
           <ContextMenuSubContent className="w-44">
             <ContextMenuItem>
               <Slash className="size-4" />
               Block sender
             </ContextMenuItem>
-            <ContextMenuItem disabled variant="inset">
-              Restore defaults
-            </ContextMenuItem>
+            <ContextMenuItem disabled>Restore defaults</ContextMenuItem>
           </ContextMenuSubContent>
         </ContextMenuSub>
 
