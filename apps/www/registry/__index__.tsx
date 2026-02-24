@@ -1404,6 +1404,72 @@ export const components: ComponentRegistry = {
     categories: ["form-input","chat"],
     meta: {"alignment":"bottom-center","iframeHeight":800},
   },
+  "slider-video-trimmer": {
+    name: "slider-video-trimmer",
+    title: "Video Trimmer",
+    description: "A video editing interface for trimming video clips. Features a timeline with draggable handles, a preview player, and export functionality.",
+    type: "registry:component",
+    target: "",
+    registryDependencies: ["lucide-react","@base-ui/react"],
+    files:     [
+          {
+                "path": "registry/components/slider-video-trimmer.tsx",
+                "target": "",
+                "type": "registry:component"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/components/slider-video-trimmer");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "slider-video-trimmer";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["media","form-input"],
+    meta: {"alignment":"center","iframeHeight":600},
+  },
+  "team-switcher": {
+    name: "team-switcher",
+    title: "Team Switcher",
+    description: "A team switcher component that allows users to switch teams. Features a sheet modal for creating new teams.",
+    type: "registry:component",
+    target: "",
+    registryDependencies: ["lucide-react","@base-ui/react"],
+    files:     [
+          {
+                "path": "registry/components/team-switcher.tsx",
+                "target": "",
+                "type": "registry:component"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/components/team-switcher");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "team-switcher";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["form-input","dashboard"],
+    meta: {"iframeHeight":800},
+  },
+  "collapsible-file-tree": {
+    name: "collapsible-file-tree",
+    title: "Collapsible File Tree",
+    description: "A file tree component with collapsible folders and file badges.",
+    type: "registry:component",
+    target: "",
+    registryDependencies: ["lucide-react"],
+    files:     [
+          {
+                "path": "registry/components/collapsible-file-tree.tsx",
+                "target": "",
+                "type": "registry:component"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/components/collapsible-file-tree");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "collapsible-file-tree";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: ["layout-navigation"],
+    meta: undefined,
+  },
   "accordion-custom-trigger-icon": {
     name: "accordion-custom-trigger-icon",
     description: "",
@@ -2340,24 +2406,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "collapsible-file-tree": {
-    name: "collapsible-file-tree",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["collapsible"],
-    files: [{
-      path: "components/examples/ui/collapsible/collapsible-file-tree.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/collapsible/collapsible-file-tree");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "collapsible-file-tree";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "collapsible-with-motion": {
     name: "collapsible-with-motion",
     description: "",
@@ -2911,96 +2959,6 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/dialog/dialog-variants");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "dialog-variants";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "drawer-action-sheet": {
-    name: "drawer-action-sheet",
-    description: "",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [{
-      path: "components/examples/ui/drawer/drawer-action-sheet.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/drawer/drawer-action-sheet");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-action-sheet";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "drawer-demo": {
-    name: "drawer-demo",
-    description: "",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [{
-      path: "components/examples/ui/drawer/drawer-demo.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/drawer/drawer-demo");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-demo";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "drawer-mobile-navigation": {
-    name: "drawer-mobile-navigation",
-    description: "",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [{
-      path: "components/examples/ui/drawer/drawer-mobile-navigation.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/drawer/drawer-mobile-navigation");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-mobile-navigation";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "drawer-snap-points": {
-    name: "drawer-snap-points",
-    description: "",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [{
-      path: "components/examples/ui/drawer/drawer-snap-points.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/drawer/drawer-snap-points");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-snap-points";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "drawer-stacked": {
-    name: "drawer-stacked",
-    description: "",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [{
-      path: "components/examples/ui/drawer/drawer-stacked.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/drawer/drawer-stacked");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-stacked";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -5197,6 +5155,60 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/textarea/textarea-variants");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "textarea-variants";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "timeline-demo": {
+    name: "timeline-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [{
+      path: "components/examples/ui/timeline/timeline-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/timeline/timeline-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "timeline-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "timeline-left-side-demo": {
+    name: "timeline-left-side-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [{
+      path: "components/examples/ui/timeline/timeline-left-side-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/timeline/timeline-left-side-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "timeline-left-side-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "timeline-right-side-demo": {
+    name: "timeline-right-side-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [{
+      path: "components/examples/ui/timeline/timeline-right-side-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/timeline/timeline-right-side-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "timeline-right-side-demo";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

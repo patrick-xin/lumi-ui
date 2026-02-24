@@ -48,10 +48,7 @@ export function TeamSwitcher() {
       >
         <ComboboxTrigger
           render={
-            <SidebarMenuButton
-              className="data-[popup-open]:bg-sidebar-accent data-[popup-open]:text-sidebar-accent-foreground"
-              size="lg"
-            >
+            <SidebarMenuButton className="data-[popup-open]:bg-sidebar-accent data-[popup-open]:text-sidebar-accent-foreground">
               <div
                 className={cn(
                   "grid flex-1 text-left text-sm leading-tight",

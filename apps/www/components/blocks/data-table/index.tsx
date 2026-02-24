@@ -21,56 +21,31 @@ import {
   ArrowDownIcon,
   ArrowUpIcon,
   Check,
-  Copy,
-  DollarSign,
   MoreHorizontal,
-  Settings,
   Trash,
   XIcon,
 } from "lucide-react";
-import Link from "next/link";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import {
-  AlertDialog,
-  AlertDialogClose,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  createAlertDialogHandle,
-} from "@/registry/ui/alert-dialog";
+import { createAlertDialogHandle } from "@/registry/ui/alert-dialog";
 import { Button } from "@/registry/ui/button";
 import { Card } from "@/registry/ui/card";
 import { Checkbox } from "@/registry/ui/checkbox";
-import {
-  createDialogHandle,
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/registry/ui/dialog";
+import { createDialogHandle } from "@/registry/ui/dialog";
 import {
   createDropdownMenuHandle,
   DropdownMenu,
   DropdownMenuCheckboxItemContent,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLinkItem,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItemContent,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
 import { Input } from "@/registry/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItemContent,
-  SelectTriggerGroup,
-} from "@/registry/ui/select";
 import { toast } from "@/registry/ui/toast";
+import { ActionDropdown } from "./action-dropdown";
 import {
   CalendarDropdown,
   type RenewalDateFilterValue,
@@ -90,6 +65,10 @@ import {
   STAGE_STYLES,
   STAGES,
 } from "./data";
+import { TableFooter } from "./data-table-footer";
+import { AccountDialog } from "./dialogs/account";
+import { DeleteAccoundDialog } from "./dialogs/delete-accound";
+import { DialogOutsideScrollDemo } from "./dialogs/payment";
 import {
   Table,
   TableBody,
@@ -108,9 +87,10 @@ declare module "@tanstack/react-table" {
 
 const columnHelper = createColumnHelper<DealRow>();
 export const columnMenuHandle = createDropdownMenuHandle<string>();
-const actionMenuHandle = createDropdownMenuHandle<Action>();
-const deleteAlertDialogHandle = createAlertDialogHandle<Action>();
-const accountDialogHandle = createDialogHandle<Action>();
+export const actionMenuHandle = createDropdownMenuHandle<Action>();
+export const deleteAlertDialogHandle = createAlertDialogHandle<Action>();
+export const accountDialogHandle = createDialogHandle<Action>();
+export const paymentDialogHandle = createDialogHandle<Action>();
 
 type RenewalDateRangeFilterValue = {
   from?: string;
@@ -325,7 +305,7 @@ const columns = [
   }),
   columnHelper.accessor("annual_value", {
     cell: ({ row }) => (
-      <span className="tabular-nums ml-1.5">
+      <span className="tabular-nums ml-1.5 font-mono text-muted-foreground">
         {CURRENCY_FORMATTER.format(row.original.annual_value)}
       </span>
     ),
@@ -344,7 +324,9 @@ const columns = [
   }),
   columnHelper.accessor("seats", {
     cell: ({ row }) => (
-      <span className="tabular-nums ml-4">{row.original.seats}</span>
+      <span className="tabular-nums ml-4 font-mono text-muted-foreground">
+        {row.original.seats}
+      </span>
     ),
     header: ({ column }) => (
       <ColumnHeaderDropdown column={column} title="Seats" />
@@ -588,14 +570,9 @@ export function DataTable() {
                 <Button
                   onClick={() => {
                     toast.promise(
-                      new Promise<string>((resolve, reject) => {
-                        const shouldSucceed = Math.random() > 0.5;
+                      new Promise<string>((resolve) => {
                         setTimeout(() => {
-                          if (shouldSucceed) {
-                            resolve("Selected data exported successfully");
-                          } else {
-                            reject(new Error(`Failed to export selected data`));
-                          }
+                          resolve("Selected data exported successfully");
                         }, 2000);
                       }),
                       {
@@ -712,49 +689,16 @@ export function DataTable() {
             </TableBody>
           </Table>
         </div>
-        <div className="flex items-center justify-between p-4">
-          <span className="text-sm text-muted-foreground">
-            {table.getFilteredRowModel().rows.length} row(s)
-          </span>
-
-          <div className="flex items-center gap-4">
-            <span className="text-sm">
-              Page {table.getState().pagination.pageIndex + 1} of{" "}
-              {table.getPageCount()}
-            </span>
-            <div className="flex items-center gap-2">
-              <Button
-                disabled={!table.getCanPreviousPage()}
-                onClick={() => table.previousPage()}
-                size="sm"
-                variant="outline"
-              >
-                Prev
-              </Button>
-              <Button
-                disabled={!table.getCanNextPage()}
-                onClick={() => table.nextPage()}
-                size="sm"
-                variant="outline"
-              >
-                Next
-              </Button>
-            </div>
-            <Select
-              onValueChange={(value) => table.setPageSize(Number(value))}
-              value={table.getState().pagination.pageSize}
-            >
-              <SelectTriggerGroup />
-              <SelectContent alignItemWithTrigger>
-                {[10, 20, 30, 40, 50].map((pageSize) => (
-                  <SelectItemContent key={pageSize} value={pageSize}>
-                    Show {pageSize}
-                  </SelectItemContent>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+        <TableFooter
+          disableNext={!table.getCanNextPage()}
+          disablePrev={!table.getCanPreviousPage()}
+          onNext={() => table.nextPage()}
+          onPageSizeChange={(size) => table.setPageSize(Number(size))}
+          onPrev={() => table.previousPage()}
+          pageCount={table.getPageCount()}
+          rowCount={table.getFilteredRowModel().rows.length}
+          state={table.getState()}
+        />
       </Card>
       <DropdownMenu
         handle={columnMenuHandle}
@@ -889,142 +833,10 @@ export function DataTable() {
           );
         }}
       </DropdownMenu>
-      <DropdownMenu handle={actionMenuHandle}>
-        {({ payload: action }) => {
-          return (
-            <DropdownMenuContent
-              align="start"
-              matchAnchorWidth={false}
-              side="left"
-            >
-              <DropdownMenuItem
-                onClick={() =>
-                  toast.success({
-                    description: `${action?.id} has been copied to the clipboard`,
-                    title: "Action ID copied",
-                  })
-                }
-              >
-                <Copy /> Copy ID
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  accountDialogHandle.openWithPayload({
-                    id: action?.id ?? 1,
-                    name: action?.name ?? "",
-                    owner: action?.owner ?? "",
-                    url: action?.url ?? "",
-                  });
-                }}
-              >
-                <Settings /> View Account
-              </DropdownMenuItem>
-              <DropdownMenuLinkItem render={<Link href="/" />}>
-                <DollarSign /> View payment details
-              </DropdownMenuLinkItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => {
-                  deleteAlertDialogHandle.openWithPayload({
-                    id: action?.id ?? 1,
-                    name: action?.name ?? "",
-                    owner: action?.owner ?? "",
-                    url: action?.url ?? "",
-                  });
-                }}
-                variant="destructive"
-              >
-                <Trash /> Delete Account
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          );
-        }}
-      </DropdownMenu>
-      <AlertDialog handle={deleteAlertDialogHandle}>
-        {({ payload: action }) => {
-          return (
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete{" "}
-                  <span className="text-primary font-semibold">
-                    {action?.owner}'s
-                  </span>{" "}
-                  account {action?.name} and remove their data from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogClose render={<Button variant="ghost" />}>
-                  Cancel
-                </AlertDialogClose>
-                <AlertDialogClose
-                  onClick={() => {
-                    toast.promise(
-                      new Promise<string>((resolve, reject) => {
-                        const shouldSucceed = Math.random() > 0.3;
-                        setTimeout(() => {
-                          if (shouldSucceed) {
-                            resolve(action?.name ?? "");
-                          } else {
-                            reject(
-                              new Error(
-                                `operation failed for deleting ${action?.name}`,
-                              ),
-                            );
-                          }
-                        }, 2000);
-                      }),
-                      {
-                        error: (err: Error) => {
-                          return {
-                            title: `Error: ${err.message}`,
-                          };
-                        },
-                        loading: { title: `Deleting ${action?.name}...` },
-                        success: (data: string) => {
-                          return {
-                            closable: true,
-                            description: `${data} has been deleted.`,
-                            title: `Success`,
-                          };
-                        },
-                      },
-                    );
-                  }}
-                  render={<Button variant="destructive" />}
-                >
-                  Continue
-                </AlertDialogClose>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          );
-        }}
-      </AlertDialog>
-      <Dialog handle={accountDialogHandle}>
-        {({ payload: action }) => {
-          return (
-            <DialogContent layout="top" showCloseButton>
-              <DialogHeader>
-                <DialogTitle>View account {action?.name}</DialogTitle>
-              </DialogHeader>
-              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                <p>
-                  Account ID: <span className="text-primary">{action?.id}</span>
-                </p>
-                <p>
-                  Account Name:{" "}
-                  <span className="text-primary">{action?.name}</span>
-                </p>
-                <p>
-                  Account URL:{" "}
-                  <span className="text-primary">{action?.url}</span>
-                </p>
-              </div>
-            </DialogContent>
-          );
-        }}
-      </Dialog>
+      <ActionDropdown />
+      <AccountDialog />
+      <DeleteAccoundDialog />
+      <DialogOutsideScrollDemo />
     </>
   );
 }

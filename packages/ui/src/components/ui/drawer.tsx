@@ -4,8 +4,8 @@ import { DrawerPreview as BaseDrawer } from "@base-ui/react/drawer";
 import { cva, type VariantProps } from "class-variance-authority";
 import { XIcon } from "lucide-react";
 import type * as React from "react";
-import { cn } from "@/registry/lib/utils";
-import { Button } from "@/registry/ui/button";
+import { cn } from "../../lib/utils";
+import { Button } from "./button";
 
 function DrawerProvider(props: BaseDrawer.Provider.Props) {
   return <BaseDrawer.Provider data-slot="drawer-provider" {...props} />;

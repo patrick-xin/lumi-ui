@@ -1,13 +1,9 @@
 "use client";
 
-import {
-  SiGithub,
-  SiShadcnui,
-  SiTailwindcss,
-} from "@icons-pack/react-simple-icons";
-import { Bot, ChevronRight, CpuIcon, type LucideIcon } from "lucide-react";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { getResourceLinkIcon } from "@/lib/resource-link-icon";
 import { hasActiveChild, normalizeSidebarTree } from "@/lib/sidebar-utils";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/registry/ui/badge";
@@ -122,6 +118,7 @@ const SidebarFolder = ({
 
 const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
   const Icon = item.icon as LucideIcon;
+  const resourceIcon = getResourceLinkIcon(item.label, "sidebar");
   const isExternalUrl =
     item.href.startsWith("http") || item.href.startsWith("https");
   const isExternal = item.external || isExternalUrl;
@@ -159,7 +156,7 @@ const SidebarLink = ({ item }: { item: SidebarLinkItem }) => {
         >
           {Icon && <Icon className="mr-2 size-4 shrink-0" />}
           <ThemeBadge theme={item.label.toLowerCase()} />
-          <ResourceIcon name={item.label} />
+          {resourceIcon}
           <span
             className={cn("truncate", item.label === "Skill" && "text-primary")}
           >
@@ -203,39 +200,6 @@ const ThemeBadge = ({ theme }: { theme: string }) => {
     case "celeste":
       return (
         <div className="bg-[oklch(0.72_0.14_265)] size-1.5 rounded-full mr-2 shadow-[0_0_6px_oklch(0.72_0.14_265)]" />
-      );
-    default:
-      return null;
-  }
-};
-
-const ResourceIcon = ({ name }: { name: string }) => {
-  switch (name) {
-    case "Skill":
-      return <Bot className="mr-1.5 size-4.5 text-primary" />;
-    case "github":
-      return <SiGithub className="mr-1.5 size-4" />;
-    case "tailwind css":
-      return <SiTailwindcss className="mr-1.5 size-4" />;
-    case "shadcn/ui":
-      return <SiShadcnui className="mr-2.5 size-3" />;
-    case "llms.txt":
-      return <CpuIcon className="mr-1.5 size-4" />;
-    case "base-ui":
-      return (
-        <div className="mr-1 ml-1 size-4">
-          <svg
-            aria-label="Base UI"
-            fill="currentcolor"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-          >
-            <title>Base UI</title>
-            <path d="M9.5001 7.01537C9.2245 6.99837 9 7.22385 9 7.49999V23C13.4183 23 17 19.4183 17 15C17 10.7497 13.6854 7.27351 9.5001 7.01537Z"></path>
-            <path d="M8 9.8V12V23C3.58172 23 0 19.0601 0 14.2V12V1C4.41828 1 8 4.93989 8 9.8Z"></path>
-          </svg>
-        </div>
       );
     default:
       return null;

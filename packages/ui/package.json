@@ -2,10 +2,15 @@
   "name": "@lumi-ui/ui",
   "version": "0.0.0",
   "type": "module",
+  "scripts": {
+    "sync:components": "bun x tsx --no-cache scripts/sync-ui-components.ts"
+  },
   "dependencies": {
     "@base-ui/react": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "lucide-react": "^0.545.0",
+    "react-resizable-panels": "^4.5.6",
     "tailwind-merge": "^3.0.0"
   },
   "devDependencies": {

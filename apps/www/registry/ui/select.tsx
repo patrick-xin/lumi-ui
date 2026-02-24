@@ -20,7 +20,7 @@ function SelectTrigger({
   return (
     <BaseSelect.Trigger
       className={cn(
-        "outline-none pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
+        "select-none pointer-coarse:after:absolute pointer-coarse:after:min-h-10 pointer-coarse:after:min-w-10",
         className,
       )}
       data-slot="select-trigger"

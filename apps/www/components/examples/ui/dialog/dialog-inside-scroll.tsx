@@ -26,7 +26,7 @@ export function DialogInsideScrollDemo() {
               content to scroll with fixed header and footer.
             </DialogDescription>
           </DialogHeader>
-          <ScrollArea className="pr-4">
+          <ScrollArea className="pr-4 min-h-0">
             <div className="space-y-4">
               {Array.from({ length: 12 }).map((_, i) => (
                 <div

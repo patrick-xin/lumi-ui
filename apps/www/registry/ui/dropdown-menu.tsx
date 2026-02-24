@@ -17,7 +17,7 @@ function DropdownMenuTrigger<Payload>({
 }: BaseMenu.Trigger.Props<Payload>) {
   return (
     <BaseMenu.Trigger
-      className={cn(className)}
+      className={cn("select-none", className)}
       data-slot="dropdown-menu-trigger"
       {...props}
     />

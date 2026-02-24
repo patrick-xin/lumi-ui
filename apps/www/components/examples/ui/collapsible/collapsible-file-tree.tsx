@@ -1,11 +1,6 @@
 "use client";
 
 import {
-  Collapsible,
-  CollapsiblePanel,
-  CollapsibleTrigger,
-} from "@/registry/ui/collapsible";
-import {
   CheckCircle2,
   ChevronRight,
   File,
@@ -18,6 +13,11 @@ import {
 } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import {
+  Collapsible,
+  CollapsiblePanel,
+  CollapsibleTrigger,
+} from "@/registry/ui/collapsible";
 
 export type TreeItemType = {
   id: string;
@@ -81,7 +81,7 @@ function TreeItem({ item, depth = 0 }: TreeItemProps) {
 
   if (isFolder) {
     return (
-      <Collapsible className="w-full" defaultOpen={item.isOpen}>
+      <Collapsible className="w-full">
         <CollapsibleTrigger
           render={
             <button
@@ -92,9 +92,9 @@ function TreeItem({ item, depth = 0 }: TreeItemProps) {
               style={{ paddingLeft: `${paddingLeft}px` }}
               type="button"
             >
-              <ChevronRight className="size-4 text-muted-foreground shrink-0 transition-transform duration-200 group-data-[panel-open]:rotate-90" />
-              <Folder className="size-4 text-blue-500 fill-blue-500/20 group-data-[panel-open]:hidden" />
-              <FolderOpen className="size-4 text-blue-500 fill-blue-500/20 hidden group-data-[panel-open]:block" />
+              <ChevronRight className="size-4 text-muted-foreground shrink-0 transition-transform duration-200 group-data-panel-open:rotate-90" />
+              <Folder className="size-4 text-blue-500 fill-blue-500/20 group-data-panel-open:hidden" />
+              <FolderOpen className="size-4 text-blue-500 fill-blue-500/20 hidden group-data-panel-open:block" />
               <span className="truncate font-medium">{item.name}</span>
               {renderBadge()}
             </button>
@@ -229,7 +229,7 @@ const exampleData: TreeItemType[] = [
 
 export function CollapsibleFileTreeDemo() {
   return (
-    <div className="w-full max-w-sm rounded-lg border bg-background/50 p-2 font-mono text-sm shadow-sm">
+    <div className="w-full max-w-sm min-h-96 rounded-lg border bg-background/50 p-2 font-mono text-sm shadow-sm">
       {exampleData.map((item) => (
         <TreeItem item={item} key={item.id} />
       ))}

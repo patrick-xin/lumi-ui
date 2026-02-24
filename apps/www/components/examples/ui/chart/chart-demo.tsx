@@ -1,5 +1,14 @@
 "use client";
 
+import * as React from "react";
+import {
+  Area,
+  Bar,
+  CartesianGrid,
+  ComposedChart,
+  XAxis,
+  YAxis,
+} from "recharts";
 import {
   Card,
   CardContent,
@@ -14,15 +23,6 @@ import {
   ChartTooltipContent,
 } from "@/registry/ui/chart";
 import { ToggleGroup, ToggleGroupItem } from "@/registry/ui/toggle-group";
-import * as React from "react";
-import {
-  Area,
-  Bar,
-  CartesianGrid,
-  ComposedChart,
-  XAxis,
-  YAxis,
-} from "recharts";
 
 const data = Array.from({ length: 12 }, (_, i) => ({
   customers: Math.floor(Math.random() * 500) + 100,
@@ -51,7 +51,7 @@ export function ChartMixedAxes() {
         <div className="space-y-2">
           <CardTitle>Financial Performance</CardTitle>
           <CardDescription>
-            Toggle series visibility using the controls below
+            Toggle series visibility using the controls
           </CardDescription>
         </div>
         <ToggleGroup

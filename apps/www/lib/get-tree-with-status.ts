@@ -8,10 +8,9 @@ export function getTreeWithStatus(tree: Root): DocRoot {
   const enrichNode = (node: Node): DocNode => {
     if (node.type === "page") {
       const page = source.getNodePage(node);
-
       return {
         ...node,
-        icon: page?.data.icon,
+        icon: page?.data.icon ?? node.icon,
         status: page?.data.status,
       };
     }

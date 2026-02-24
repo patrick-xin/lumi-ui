@@ -19,7 +19,8 @@
     "lint": "biome lint .",
     "format": "biome format --write .",
     "registry:build": "shadcn build",
-    "registry:sync": "tsx scripts/registry-sync.ts"
+    "registry:sync": "tsx scripts/registry-sync.ts",
+    "sync:llms": "tsx scripts/sync-llms.ts"
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.92",
