@@ -24,7 +24,6 @@ import {
 } from "@/registry/ui/alert-dialog";
 import { Button } from "@/registry/ui/button";
 import {
-  createDialogHandle,
   Dialog,
   DialogClose,
   DialogContent,
@@ -55,8 +54,6 @@ import {
 import { Textarea } from "@/registry/ui/textarea";
 import { toast } from "@/registry/ui/toast";
 import { PreferencesDialogContent } from "./preference";
-
-const preferenceDialogHandle = createDialogHandle();
 
 export function NavUser({
   user,
