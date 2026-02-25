@@ -184,11 +184,7 @@ export function PreferencesDialogContent() {
   );
 
   return (
-    <ScrollArea
-      className="max-h-[70vh] pr-1 w-full"
-      gradientScrollFade
-      noScrollBar
-    >
+    <ScrollArea className="max-h-[70vh] w-full" gradientScrollFade noScrollBar>
       <div className="space-y-4">
         <Card className="bg-card">
           <CardHeader className="pb-2">

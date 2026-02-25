@@ -20,8 +20,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
+import { TooltipTrigger } from "@/registry/ui/tooltip";
 import { CalendarDatePicker } from "./calendar-date-picker";
 import { CalendarRangePicker } from "./calendar-range-picker";
+import { headerTooltipHandle } from "./index";
 
 interface CalendarDropdownProps<TData, TValue> {
   column: Column<TData, TValue>;
@@ -75,13 +77,21 @@ export const CalendarDropdown = <TData, TValue>({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger
-          render={
-            <Button
-              className="data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent cursor-pointer"
-              size="sm"
-              variant="ghost"
+          render={(props, state) => (
+            <TooltipTrigger
+              {...props}
+              disabled={state.open}
+              handle={headerTooltipHandle}
+              payload={{ text: "Filter by date" }}
+              render={
+                <Button
+                  className="data-popup-open:bg-accent data-popup-open:hover:bg-accent cursor-pointer"
+                  size="sm"
+                  variant="ghost"
+                />
+              }
             />
-          }
+          )}
         >
           {title} <Timer />
         </DropdownMenuTrigger>

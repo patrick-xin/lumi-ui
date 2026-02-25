@@ -11,6 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/registry/ui/select";
+import { TooltipTrigger } from "@/registry/ui/tooltip";
+import { headerTooltipHandle } from ".";
 import { PRIORITIES } from "./data";
 
 function getPriorityIcon(priority: string) {
@@ -49,10 +51,18 @@ export function ColumnHeaderSelect<TData, TValue>({
       value={filterValue ?? "all"}
     >
       <SelectTrigger
-        render={<Button className="cursor-pointer" size="sm" variant="ghost" />}
+        render={
+          <TooltipTrigger
+            handle={headerTooltipHandle}
+            payload={{ text: "Choose a priority" }}
+            render={
+              <Button className="cursor-pointer" size="sm" variant="ghost" />
+            }
+          />
+        }
       >
         <SelectValue
-          className="flex items-center gap-1 data-[placeholder]:text-foreground"
+          className="flex items-center gap-1 data-placeholder:text-foreground"
           placeholder={title}
         >
           {(value) => {

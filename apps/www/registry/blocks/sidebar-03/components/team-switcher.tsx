@@ -106,7 +106,7 @@ export function TeamSwitcher() {
               size="icon-xs"
               variant="unstyled"
             >
-              <Kbd className="bg-accent">Esc</Kbd>
+              <Kbd className="bg-accent text-[10px]">Esc</Kbd>
             </Button>
           </div>
           <Separator />

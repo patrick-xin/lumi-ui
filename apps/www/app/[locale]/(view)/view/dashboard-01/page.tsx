@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import type { Layout } from "react-resizable-panels";
+import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { AIChat } from "@/registry/blocks/sidebar-03/components/ai-chat";
 import { AppSidebar } from "@/registry/blocks/sidebar-03/components/app-sidebar";
@@ -39,7 +40,7 @@ export default async function Page() {
     >
       <AppSidebar />
       <MainContent className="bg-background">
-        <header className="flex h-12 bg-background z-10 sticky top-0 items-center gap-2 p-2 sm:p-4">
+        <header className="flex h-14 bg-background z-10 sticky top-0 items-center gap-2 p-2 sm:p-4">
           <SidebarTrigger />
           <Separator className="mr-2 h-4" orientation="vertical" />
           <Breadcrumb>
@@ -56,6 +57,7 @@ export default async function Page() {
           <div className="ml-auto flex gap-2">
             <Notifications />
             <ThemeSwitcher />
+            <ModeSwitcher />
             <DashboardCommand />
           </div>
         </header>

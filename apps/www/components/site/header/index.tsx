@@ -10,6 +10,7 @@ import {
   transformNavigation,
 } from "@/lib/get-tree-with-status";
 import { source } from "@/lib/source";
+import { TooltipProvider } from "@/registry/ui/tooltip";
 import { GitHubLink } from "./github-link";
 import { MainNav } from "./main-nav";
 import { SiteCommandMenu } from "./site-command-menu";
@@ -45,13 +46,15 @@ export function SiteHeader({ locale }: { locale: string }) {
           </Link>
         </div>
         <div className="flex items-center justify-end gap-2 md:gap-3 flex-1">
-          <SiteCommandMenu tree={tree} />
-          <LanguageSelector />
-          <div className="hidden md:flex items-center gap-3">
-            <ThemeSwitcher />
-            <ModeSwitcher />
-            <GitHubLink />
-          </div>
+          <TooltipProvider>
+            <SiteCommandMenu tree={tree} />
+            <LanguageSelector />
+            <div className="hidden md:flex items-center gap-3">
+              <ThemeSwitcher />
+              <ModeSwitcher />
+              <GitHubLink />
+            </div>
+          </TooltipProvider>
         </div>
       </div>
     </header>

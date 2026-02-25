@@ -45,6 +45,13 @@ import {
 } from "@/registry/ui/dropdown-menu";
 import { Input } from "@/registry/ui/input";
 import { toast } from "@/registry/ui/toast";
+import {
+  createTooltipHandle,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/registry/ui/tooltip";
 import { ActionDropdown } from "./action-dropdown";
 import {
   CalendarDropdown,
@@ -91,6 +98,7 @@ export const actionMenuHandle = createDropdownMenuHandle<Action>();
 export const deleteAlertDialogHandle = createAlertDialogHandle<Action>();
 export const accountDialogHandle = createDialogHandle<Action>();
 export const paymentDialogHandle = createDialogHandle<Action>();
+export const headerTooltipHandle = createTooltipHandle<{ text: string }>();
 
 type RenewalDateRangeFilterValue = {
   from?: string;
@@ -218,7 +226,9 @@ const columns = [
   }),
   columnHelper.accessor("account_name", {
     cell: ({ row }) => (
-      <span className="px-2.5">{row.original.account_name}</span>
+      <span className="px-2.5 text-muted-foreground">
+        {row.original.account_name}
+      </span>
     ),
     header: ({ column }) => {
       const sortDirection = column.getIsSorted();
@@ -234,7 +244,9 @@ const columns = [
     size: 180,
   }),
   columnHelper.accessor("owner", {
-    cell: ({ row }) => <span className="px-2.5">{row.original.owner}</span>,
+    cell: ({ row }) => (
+      <span className="px-2.5 text-muted-foreground">{row.original.owner}</span>
+    ),
     header: ({ column }) => {
       const filterValue = (column.getFilterValue() as string) ?? null;
       return <ColumnHeaderCombobox column={column} filterValue={filterValue} />;
@@ -243,7 +255,11 @@ const columns = [
     size: 180,
   }),
   columnHelper.accessor("region", {
-    cell: ({ row }) => <span className="px-2.5">{row.original.region}</span>,
+    cell: ({ row }) => (
+      <span className="px-2.5 text-muted-foreground">
+        {row.original.region}
+      </span>
+    ),
     filterFn: "equals",
     header: ({ column }) => {
       return <ColumnHeaderDropdown column={column} title="Region" />;
@@ -337,7 +353,11 @@ const columns = [
   columnHelper.accessor("renewal_date", {
     cell: ({ row }) => {
       const value = new Date(`${row.original.renewal_date}T00:00:00`);
-      return <span className="px-2 ml-2">{DATE_FORMATTER.format(value)}</span>;
+      return (
+        <span className="px-2 ml-2 text-muted-foreground">
+          {DATE_FORMATTER.format(value)}
+        </span>
+      );
     },
     filterFn: renewalDateFilterFn,
     header: ({ column }) => {
@@ -385,7 +405,14 @@ const columns = [
         />
       );
     },
-    header: "Action",
+    header: () => (
+      <TooltipTrigger
+        handle={headerTooltipHandle}
+        payload={{ text: "Take actions" }}
+      >
+        Action
+      </TooltipTrigger>
+    ),
     id: "action",
     size: 45,
   }),
@@ -662,7 +689,7 @@ export function DataTable() {
               {table.getRowModel().rows.length > 0 ? (
                 table.getRowModel().rows.map((row) => (
                   <TableRow
-                    className="data-[state=selected]:bg-accent/20 border-0"
+                    className="data-[state=selected]:bg-accent/30 hover:bg-accent/30 border-0"
                     data-state={row.getIsSelected() && "selected"}
                     key={row.id}
                   >
@@ -837,6 +864,15 @@ export function DataTable() {
       <AccountDialog />
       <DeleteAccoundDialog />
       <DialogOutsideScrollDemo />
+      <TooltipProvider delay={0}>
+        <Tooltip handle={headerTooltipHandle}>
+          {({ payload }) => {
+            return (
+              <TooltipContent sideOffset={8}>{payload?.text}</TooltipContent>
+            );
+          }}
+        </Tooltip>
+      </TooltipProvider>
     </>
   );
 }
