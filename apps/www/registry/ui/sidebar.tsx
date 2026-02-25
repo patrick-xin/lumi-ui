@@ -306,7 +306,12 @@ function SidebarMenuButton({
   return (
     <Tooltip>
       <TooltipTrigger render={element} />
-      <TooltipContent align="center" side="right" {...tooltipProps} />
+      <TooltipContent
+        align="center"
+        side="right"
+        sideOffset={8}
+        {...tooltipProps}
+      />
     </Tooltip>
   );
 }

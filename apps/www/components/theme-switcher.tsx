@@ -12,6 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip";
 
 const THEME_OPTIONS = [
   {
@@ -29,10 +30,12 @@ export function ThemeSwitcher({
   side = "bottom",
   variant = "glow",
   className,
+  tooltipSideOffset = 10,
 }: {
   side?: "bottom" | "right";
   variant?: "glow" | "ghost";
   className?: string;
+  tooltipSideOffset?: number;
 }) {
   const { setTheme, resolvedTheme } = useTheme();
   const [themeSet, setThemeSet] = useState("celeste");
@@ -59,21 +62,32 @@ export function ThemeSwitcher({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        render={
-          <Button
-            className={cn(
-              "data-popup-open:bg-accent data-popup-open:hover:bg-accent",
-              className,
-            )}
-            size="icon-sm"
-            title="Switch theme"
-            variant={variant}
-          >
-            <PaletteIcon className="size-4 transition-transform" />
-          </Button>
-        }
-      />
+      <Tooltip>
+        <DropdownMenuTrigger
+          render={(props, state) => (
+            <TooltipTrigger
+              disabled={state.open}
+              render={
+                <Button
+                  {...props}
+                  className={cn(
+                    "data-popup-open:bg-accent data-popup-open:hover:bg-accent",
+                    className,
+                  )}
+                  size="icon-sm"
+                  variant={variant}
+                >
+                  <PaletteIcon className="size-4 transition-transform" />
+                </Button>
+              }
+            />
+          )}
+        />
+
+        <TooltipContent sideOffset={tooltipSideOffset}>
+          Switch theme
+        </TooltipContent>
+      </Tooltip>
       <DropdownMenuContent
         className="shadow-md shadow-primary/10 outline dark:-outline-offset-1 outline-primary/10"
         matchAnchorWidth={false}

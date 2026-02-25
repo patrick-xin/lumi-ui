@@ -217,6 +217,34 @@ const activity: Activity[] = [
     time: "1d ago",
     title: "Chargeback window",
   },
+  {
+    id: "a7",
+    subtitle: "Waiting for approval",
+    tag: "info",
+    time: "1d ago",
+    title: "Subscription",
+  },
+  {
+    id: "a8",
+    subtitle: "Subscription",
+    tag: "alert",
+    time: "1d ago",
+    title: "Subscription",
+  },
+  {
+    id: "a9",
+    subtitle: "Ready for payout",
+    tag: "info",
+    time: "1d ago",
+    title: "Payout",
+  },
+  {
+    id: "a10",
+    subtitle: "Weekly report",
+    tag: "success",
+    time: "1d ago",
+    title: "Report",
+  },
 ];
 
 function formatMoney(amount: number) {
@@ -739,7 +767,7 @@ export function DashboardContent() {
                 <CardDescription>Latest operational events.</CardDescription>
               </CardHeader>
               <CardContent>
-                <ScrollArea className="h-64 pr-3" gradientScrollFade>
+                <ScrollArea className="h-64" gradientScrollFade noScrollBar>
                   <div className="space-y-3">
                     {activity.map((a) => (
                       <div className="rounded-lg border p-3" key={a.id}>

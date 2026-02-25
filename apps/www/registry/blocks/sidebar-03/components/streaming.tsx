@@ -198,6 +198,7 @@ export function ChatStreaming() {
         >
           <Input
             autoFocus
+            className="caret-primary"
             disabled={isStreaming}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={isStreaming ? "AI is typing..." : "Type a message..."}

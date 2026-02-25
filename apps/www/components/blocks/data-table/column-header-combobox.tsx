@@ -1,6 +1,6 @@
 import type { Column } from "@tanstack/react-table";
 import { SearchIcon, User } from "lucide-react";
-import { buttonVariants } from "@/registry/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Combobox,
   ComboboxContent,
@@ -13,7 +13,9 @@ import {
 } from "@/registry/ui/combobox";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Separator } from "@/registry/ui/separator";
+import { TooltipTrigger } from "@/registry/ui/tooltip";
 import { OWNER_NAMES } from "./data";
+import { headerTooltipHandle } from "./index";
 
 interface ColumnHeaderComboboxProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -29,6 +31,7 @@ export function ColumnHeaderCombobox<TData, TValue>({
     <Combobox
       autoHighlight
       items={OWNER_NAMES}
+      modal
       onValueChange={(value) => {
         column.setFilterValue(value);
       }}
@@ -36,20 +39,29 @@ export function ColumnHeaderCombobox<TData, TValue>({
     >
       <div className="flex gap-1 items-center text-left">
         <ComboboxTrigger
-          className={buttonVariants({
-            className:
-              "data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent justify-start cursor-pointer",
-            size: "sm",
-            variant: "ghost",
-          })}
-        >
-          <ComboboxValue
-            placeholder={<span className="text-foreground">Owner</span>}
-          />
-          <span className="size-4">
-            {!filterValue && <User className="size-4" />}
-          </span>
-        </ComboboxTrigger>
+          render={(props, state) => (
+            <TooltipTrigger
+              {...props}
+              disabled={state.open}
+              handle={headerTooltipHandle}
+              payload={{ text: "Filter by owner" }}
+              render={
+                <Button
+                  className="data-popup-open:bg-accent data-popup-open:hover:bg-accent justify-start cursor-pointer"
+                  size="sm"
+                  variant="ghost"
+                >
+                  <ComboboxValue
+                    placeholder={<span className="text-foreground">Owner</span>}
+                  />
+                  <span className="size-4">
+                    {!filterValue && <User className="size-4" />}
+                  </span>
+                </Button>
+              }
+            />
+          )}
+        />
       </div>
       <ComboboxContent matchAnchorWidth={false}>
         <ComboboxInputGroup

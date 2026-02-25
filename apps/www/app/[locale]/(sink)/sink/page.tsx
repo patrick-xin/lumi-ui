@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { TeamSwitcher } from "@/registry/components/team-switcher";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,7 +10,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/ui/breadcrumb";
-import { TeamSwitcher } from "../../../../registry/components/team-switcher";
 
 export default function Page() {
   return (

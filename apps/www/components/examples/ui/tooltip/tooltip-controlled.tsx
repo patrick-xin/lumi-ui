@@ -80,7 +80,7 @@ export default function TooltipControlledDemo() {
           <TooltipPositioner sideOffset={10}>
             <TooltipPopup
               className={cn(
-                "bg-popover text-popover-foreground w-fit rounded-md px-3 py-1.5 text-xs text-balance animate-popup data-instant:transition-none",
+                "bg-accent text-accent-foreground w-fit rounded-md px-3 py-1.5 text-xs text-balance animate-popup data-instant:transition-none",
               )}
             >
               hello from tooltip

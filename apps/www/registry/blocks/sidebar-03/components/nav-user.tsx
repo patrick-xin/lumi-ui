@@ -12,6 +12,7 @@ import {
   XIcon,
 } from "lucide-react";
 import { useState } from "react";
+import { TimelineDemo } from "@/components/examples/ui/timeline/timeline-demo";
 import {
   AlertDialog,
   AlertDialogClose,
@@ -43,6 +44,7 @@ import {
 } from "@/registry/ui/dropdown-menu";
 import { Input } from "@/registry/ui/input";
 import { Label } from "@/registry/ui/label";
+import { ScrollArea } from "@/registry/ui/scroll-area";
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -50,8 +52,8 @@ import {
   useSidebar,
 } from "@/registry/ui/sidebar";
 import { Textarea } from "@/registry/ui/textarea";
-import { TimelineDemo } from "../../../../components/examples/ui/timeline/timeline-demo";
-import { ScrollArea } from "../../../ui/scroll-area";
+import { toast } from "@/registry/ui/toast";
+import { PreferencesDialogContent } from "./preference";
 
 export function NavUser({
   user,
@@ -65,6 +67,7 @@ export function NavUser({
   const [open, setOpen] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [changelogOpen, setChangelogOpen] = useState(false);
+  const [preferenceOpen, setPreferenceOpen] = useState(false);
   return (
     <>
       <SidebarMenu>
@@ -97,7 +100,10 @@ export function NavUser({
               matchAnchorWidth={!isCollapsed}
               sideOffset={6}
             >
-              <DropdownMenuItem className="justify-between py-2">
+              <DropdownMenuItem
+                className="justify-between py-2"
+                onClick={() => setPreferenceOpen(true)}
+              >
                 <div className="flex flex-col text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
                   <span className="truncate text-xs">{user.email}</span>
@@ -147,6 +153,10 @@ export function NavUser({
         open={feedbackOpen}
       />
       <ChangelogDialog onOpenChange={setChangelogOpen} open={changelogOpen} />
+      <PreferencesDialog
+        onOpenChange={setPreferenceOpen}
+        open={preferenceOpen}
+      />
     </>
   );
 }
@@ -314,11 +324,7 @@ export function ChangelogDialog({
 }) {
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
-      <DialogElementOutsideContent
-        className="overflow-hidden max-w-4xl p-4 sm:p-6"
-        //  layout="center"
-        //  showCloseButton
-      >
+      <DialogElementOutsideContent className="overflow-hidden max-w-4xl p-4 sm:p-6">
         <DialogClose
           className="absolute right-2 top-2 size-6 sm:size-8 xl:right-4 xl:top-4 xl:size-10 pointer-events-auto"
           render={
@@ -344,3 +350,37 @@ export function ChangelogDialog({
     </Dialog>
   );
 }
+
+const PreferencesDialog = ({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) => {
+  return (
+    <Dialog onOpenChange={onOpenChange} open={open}>
+      <DialogContent className="sm:max-w-3xl" showCloseButton>
+        <DialogHeader>
+          <DialogTitle>Preferences</DialogTitle>
+          <DialogDescription>Manage your preferences.</DialogDescription>
+        </DialogHeader>
+        <PreferencesDialogContent />
+        <DialogFooter>
+          <DialogClose render={<Button variant="ghost">Cancel</Button>} />
+          <Button
+            onClick={() => {
+              toast.success({
+                description: "Your preferences have been saved successfully.",
+                title: "Preferences saved",
+              });
+              onOpenChange(false);
+            }}
+          >
+            Save
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};

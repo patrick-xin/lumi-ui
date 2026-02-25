@@ -59,7 +59,7 @@ export function MobileNav({
               <div className="flex items-center gap-2">
                 <ThemeSwitcher />
                 <ModeSwitcher />
-                <GitHubLink />
+                <GitHubLink tooltip={false} />
               </div>
             </div>
           </div>

@@ -4,14 +4,14 @@ import { LanguagesIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import { usePathname, useRouter } from "@/lib/i18n/navigation";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/registry/ui/button";
+import { Button } from "@/registry/ui/button";
 import {
   Select,
   SelectContent,
   SelectItemContent,
   SelectTrigger,
 } from "@/registry/ui/select";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/registry/ui/tooltip";
 
 const languages = [
   { label: "English", value: "en" },
@@ -42,14 +42,27 @@ export function LanguageSelector() {
       }}
       value={value}
     >
-      <SelectTrigger
-        className={cn(
-          buttonVariants({ size: "icon-sm", variant: "glow" }),
-          "data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent",
-        )}
-      >
-        <LanguagesIcon />
-      </SelectTrigger>
+      <Tooltip>
+        <SelectTrigger
+          render={(props, state) => (
+            <TooltipTrigger
+              disabled={state.open}
+              render={
+                <Button
+                  {...props}
+                  className="data-popup-open:bg-accent data-popup-open:hover:bg-accent"
+                  size="icon-sm"
+                  variant="glow"
+                />
+              }
+            />
+          )}
+        >
+          <LanguagesIcon />
+        </SelectTrigger>
+
+        <TooltipContent>Change language</TooltipContent>
+      </Tooltip>
 
       <SelectContent
         align="center"
@@ -59,7 +72,7 @@ export function LanguageSelector() {
           <SelectItemContent
             className="text-xs font-medium"
             disabled={language.value === value}
-            indicatorIcon={null}
+            hideIndicator
             key={language.value}
             value={language.value}
           >

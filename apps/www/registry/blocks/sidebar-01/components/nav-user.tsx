@@ -1,6 +1,16 @@
 "use client";
 
 import {
+  BookIcon,
+  ChevronsUpDown,
+  HouseIcon,
+  LogOut,
+  PenIcon,
+  Settings,
+  SmileIcon,
+  UserIcon,
+} from "lucide-react";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -14,16 +24,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/registry/ui/sidebar";
-import {
-  BookIcon,
-  ChevronsUpDown,
-  HouseIcon,
-  LogOut,
-  PenIcon,
-  Settings,
-  SmileIcon,
-  UserIcon,
-} from "lucide-react";
 
 export function NavUser({
   user,
