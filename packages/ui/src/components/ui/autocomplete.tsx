@@ -5,9 +5,9 @@ import type { VariantProps } from "class-variance-authority";
 import { ChevronDown, X } from "lucide-react";
 import type * as React from "react";
 import { cn } from "../../lib/utils";
+import { ArrowSvg } from "./arrow-svg";
 import { Button } from "./button";
 import { inputVariants } from "./input";
-import { ArrowSvg } from "./arrow-svg";
 
 const Autocomplete = BaseAutocomplete.Root;
 
@@ -407,10 +407,10 @@ function AutocompleteContent({
         <BaseAutocomplete.Popup
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md",
-            "outline-1 outline-border dark:-outline-offset-1",
             "flex flex-col overflow-hidden",
             "max-w-(--available-width) max-h-[min(23rem,var(--available-height))]",
             matchAnchorWidth && "w-(--anchor-width)",
+            "overlay-outline",
             className,
           )}
           data-slot="autocomplete-content"

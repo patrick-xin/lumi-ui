@@ -130,7 +130,7 @@ function NotificationPopover() {
       />
       <PopoverContent
         align="center"
-        className="flex flex-col p-0 w-96 bg-background duration-300 h-[50dvh] max-h-[50dvh] overflow-hidden"
+        className="flex flex-col p-0 w-96 duration-300 h-[50dvh] max-h-[50dvh] overflow-hidden"
         matchAnchorWidth={false}
         side="bottom"
       >

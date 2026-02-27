@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { TeamSwitcher } from "@/registry/components/team-switcher";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,6 +9,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/ui/breadcrumb";
+import { NavigationMenuDemo } from "../../../../components/examples/ui/navigation-menu/navigation-menu-demo";
+import { ProjectPopover } from "../../../../components/examples/ui/popover/popover-demo";
 
 export default function Page() {
   return (
@@ -30,8 +31,9 @@ export default function Page() {
         <ModeSwitcher />
       </header>
       <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
-        <section className="max-w-4xl mx-auto">
-          <TeamSwitcher />
+        <section className="max-w-4xl mx-auto flex items-center gap-4">
+          <NavigationMenuDemo />
+          <ProjectPopover />
         </section>
       </div>
     </div>

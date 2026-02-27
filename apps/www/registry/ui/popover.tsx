@@ -154,8 +154,8 @@ function PopoverContent({
       >
         <BasePopover.Popup
           className={cn(
-            "relative rounded-md bg-popover p-3 text-popover-foreground shadow-md outline outline-border dark:-outline-offset-1",
-            "animate-popup",
+            "relative p-3 bg-popover text-popover-foreground rounded-md shadow-md",
+            "animate-popup overlay-outline",
             className,
           )}
           data-slot="popover-content"

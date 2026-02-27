@@ -288,10 +288,8 @@ function MenubarContent({
       >
         <BaseMenu.Popup
           className={cn(
-            "bg-popover text-popover-foreground rounded-md shadow-md py-1",
-            "outline-1 outline-border dark:-outline-offset-1",
-            "animate-popup",
-            "min-w-48",
+            "bg-popover text-popover-foreground rounded-md shadow-md py-1 min-w-48",
+            "overlay-outline animate-popup",
             className,
           )}
           data-slot="menubar-content"

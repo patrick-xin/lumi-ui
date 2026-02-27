@@ -100,11 +100,11 @@ function ComboboxContent({
           data-slot="combobox-content"
           className={cn(
             "bg-popover text-popover-foreground rounded-sm shadow-md",
-            "outline outline-1 outline-border dark:-outline-offset-1",
+            "outline outline-border dark:-outline-offset-1",
             "overflow-hidden overflow-y-auto",
-            "max-w-[var(--available-width)] max-h-[min(23rem,var(--available-height))]",
+            "max-w-(--available-width) max-h-[min(23rem,var(--available-height))]",
             "animate-popup",
-            matchAnchorWidth && "w-[var(--anchor-width)]",
+            matchAnchorWidth && "w-(--anchor-width)",
             className,
           )}
           {...props}
@@ -173,6 +173,14 @@ We use **utility** in Tailwind to provide consistent styling across components. 
 ### Theme System
 
 We adopt the **[Shadcn/ui CSS variable approach](https://ui.shadcn.com/docs/theming)** for theming.
+
+### Primitives + Consistent Styles
+
+When you drop down to the primitive layer for maximum layout control, you aren't using the pre-assembled composites. However, you don't lose the global design language. Because Lumi UI leverages built-in global CSS utilities, you can build entirely custom structures while retaining the exact same hover effects, animations, and container treatments as the rest of the application.
+
+For example, here's a fully custom `<Select>` built with primitives. It utilizes `overlay-outline`, `animate-popup`, and `highlight-on-active` to maintain perfect visual consistency:
+
+<ComponentPreview name="custom-select" />
 
 ### The Wrapper Pattern
 

@@ -321,8 +321,7 @@ function ContextMenuContent({
         <BaseContextMenu.Popup
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md py-1",
-            "outline outline-border dark:-outline-offset-1",
-            "animate-popup",
+            "overlay-outline animate-popup",
             className,
           )}
           data-slot="context-menu-content"

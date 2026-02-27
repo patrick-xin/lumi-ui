@@ -87,7 +87,7 @@ const DialogOutsideScrollContent = ({
             <ScrollAreaContent className="flex min-h-full items-center justify-center">
               <DialogPopup
                 className={cn(
-                  "relative mx-auto my-18 p-4 sm:p-6 w-[min(50vw,calc(100vw-2rem))] rounded-lg animate-fade-up bg-popover text-popover-foreground outline-1 outline-border dark:-outline-offset-1",
+                  "relative mx-auto my-18 p-4 sm:p-6 w-[min(50vw,calc(100vw-2rem))] rounded-lg animate-fade-up bg-popover text-popover-foreground overlay-outline",
                   className,
                 )}
                 initialFocus={popupRef}

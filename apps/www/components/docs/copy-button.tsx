@@ -59,7 +59,7 @@ export function CopyButton({
       customContent: (
         <>
           <ToastArrow />
-          <p className="text-xs p-1.5 rounded-sm outline-1 outline-border dark:-outline-offset-1 shadow-md shadow-primary/10 bg-popover text-primary">
+          <p className="text-xs p-1.5 rounded-sm overlay-outline shadow-md shadow-primary/10 bg-popover text-primary">
             Copied
           </p>
         </>

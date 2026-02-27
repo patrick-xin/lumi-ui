@@ -4,7 +4,7 @@ description: Understand Lumi UI's animation system.
 icon: Activity
 ---
 
-Lumi UI provides a streamlined animation system that uses **CSS Transitions** instead of traditional CSS animations, creating a more responsive, native-like experience while keeping your code clean and maintainable.
+Lumi UI uses Base UI's native transition model with **CSS Transitions** and state attributes. We do not depend on `tw-animate` presets like `animate-in` / `animate-out` as the default pattern.
 
 ## Core Philosophy
 
@@ -35,11 +35,13 @@ Lumi UI approach:
 
 | Class | Usage |
 | :--- | :--- |
-| `animate-popup` | Used for Popovers, Dropdowns, Selects etc... |
-| `animate-fade-up` | Used for Dialogs. |
-| `animate-fade-zoom` | Used for Dialogs. |
-| `animate-fade-down` | Used for Dialogs. |
-| `animate-fade` | Used for Backdrops. |
+| `animate-popup` | Popup surfaces (menus, popovers, selects, tooltips). |
+| `animate-fade-up` | Upward-entering sheets/drawers. |
+| `animate-fade-down` | Downward-entering dialogs/sheets. |
+| `animate-slide-left` | Sheet entering from the right. |
+| `animate-slide-right` | Sheet entering from the left. |
+| `animate-fade-zoom` | Zoom-style dialog/command transitions. |
+| `animate-fade` | Backdrops and fade-only surfaces. |
 
 See [Component Compatibility](#component-compatibility) below for details.
 
@@ -49,7 +51,7 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 
 ```css
 @utility animate-popup {
-  @apply origin-[var(--transform-origin)] transition-[opacity,scale,transform] duration-200;
+  @apply origin-[var(--transform-origin)] transition-[opacity,scale,transform] ease-[cubic-bezier(0.23,1,0.32,1)] duration-150;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -59,24 +61,42 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 }
 
 @utility animate-fade-up {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.98;
-    translate: 0 0.5rem;
+    translate: 0 100%;
   }
 }
 
 @utility animate-fade-down {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    scale: 0.98;
-    translate: 0 -0.5rem;
+    translate: 0 -100%;
+  }
+}
+
+@utility animate-slide-left {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: 100% 0;
+  }
+}
+
+@utility animate-slide-right {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: -100% 0;
   }
 }
 
@@ -107,7 +127,7 @@ For unique animation needs, override the utility class.
 
 ## Opting out
 
-Remove the utility class `animate-popup`, `animate-fade-up`, `animate-fade-zoom`, `animate-fade-down` and use standard Tailwind classes for complete control:
+Remove utility classes (`animate-popup`, `animate-fade-up`, `animate-fade-down`, `animate-slide-left`, `animate-slide-right`, `animate-fade-zoom`, `animate-fade`) and use standard Tailwind classes for complete control:
 
 ```tsx
 <PopoverContent
@@ -131,13 +151,27 @@ data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
 ## Component Compatibility
 
 Uses `animate-popup`:
-- Form Input: [Combobox](/docs/components/form-input/combobox) | [Select](/docs/components/form-input/select)
-- Overlays & Dialogs: [ContextMenu](/docs/components/overlays-dialogs/context-menu) | [DropdownMenu](/docs/components/overlays-dialogs/dropdown-menu) | [Popover](/docs/components/overlays-dialogs/popover) | [PreviewCard](/docs/components/overlays-dialogs/preview-card) | [Tooltip](/docs/components/overlays-dialogs/tooltip)
-- Navigation: [Menubar](/docs/components/layout-nav/menubar)
+- Form Input: [Combobox](/docs/components/form-input/combobox), [Select](/docs/components/form-input/select)
+- Overlays & Dialogs: [Context Menu](/docs/components/overlays-dialogs/context-menu), [Dropdown Menu](/docs/components/overlays-dialogs/dropdown-menu), [Popover](/docs/components/overlays-dialogs/popover), [Preview Card](/docs/components/overlays-dialogs/preview-card), [Tooltip](/docs/components/overlays-dialogs/tooltip)
+- Misc: [Menubar](/docs/components/misc/menubar)
+- Feedback & Status: [Toast](/docs/components/feedback-status/toast)
 
 ---
 
-Uses `animate-fade-up`, `animate-fade-zoom`, `animate-fade-down`, `animate-fade`: [Dialog](/docs/components/overlays-dialogs/dialog) | [AlertDialog](/docs/components/overlays-dialogs/alert-dialog)
+Uses `animate-fade`: [Alert Dialog](/docs/components/overlays-dialogs/alert-dialog) backdrop, [Navigation Menu](/docs/components/layout-nav/navigation-menu)
 
+Uses `animate-fade-zoom`: [Command Menu](/docs/components/layout-nav/command-menu), [Alert Dialog](/docs/components/overlays-dialogs/alert-dialog) content (default `layout="center"`)
 
+[Dialog](/docs/components/overlays-dialogs/dialog) by `layout` variant:
+- `center`, `scrollable`: `animate-fade-zoom`
+- `element-outside`, `responsive`, `stacked`: `animate-fade`
+- `top`: `animate-fade-down`
+- backdrop: `animate-fade`
+
+[Sheet](/docs/components/overlays-dialogs/sheet) by `side` variant:
+- `bottom`: `animate-fade-up`
+- `top`: `animate-fade-down`
+- `right`: `animate-slide-left`
+- `left`: `animate-slide-right`
+- backdrop: `animate-fade`
 

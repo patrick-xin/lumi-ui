@@ -2,14 +2,11 @@
 
 import type { MenuRootChangeEventDetails } from "@base-ui/react";
 import type {
-  FilterFn,
   PaginationState,
   RowData,
-  SortingState,
-  VisibilityState,
+  RowSelectionState,
 } from "@tanstack/react-table";
 import {
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -17,20 +14,12 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  Check,
-  MoreHorizontal,
-  Trash,
-  XIcon,
-} from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon, Check, Trash, XIcon } from "lucide-react";
+import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 import * as React from "react";
-import { cn } from "@/lib/utils";
 import { createAlertDialogHandle } from "@/registry/ui/alert-dialog";
 import { Button } from "@/registry/ui/button";
 import { Card } from "@/registry/ui/card";
-import { Checkbox } from "@/registry/ui/checkbox";
 import { createDialogHandle } from "@/registry/ui/dialog";
 import {
   createDropdownMenuHandle,
@@ -50,28 +39,10 @@ import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger,
 } from "@/registry/ui/tooltip";
 import { ActionDropdown } from "./action-dropdown";
-import {
-  CalendarDropdown,
-  type RenewalDateFilterValue,
-} from "./calendar-dropdown";
-import { ColumnHeaderCombobox } from "./column-header-combobox";
-import { ColumnHeaderDropdown } from "./column-header-dropdown";
-import { ColumnHeaderSelect } from "./column-header-select";
-import { ColumnHeaderToggle } from "./column-header-toggle";
-import {
-  type Action,
-  CURRENCY_FORMATTER,
-  DATE_FORMATTER,
-  DEAL_ROWS,
-  type DealRow,
-  PRIORITIES_STYLES,
-  REGIONS,
-  STAGE_STYLES,
-  STAGES,
-} from "./data";
+import { columns } from "./columns";
+import { type Action, DEAL_ROWS } from "./data";
 import { TableFooter } from "./data-table-footer";
 import { AccountDialog } from "./dialogs/account";
 import { DeleteAccoundDialog } from "./dialogs/delete-accound";
@@ -84,6 +55,22 @@ import {
   TableHeader,
   TableRow,
 } from "./tables";
+import {
+  DEFAULT_PAGE_SIZE,
+  getStringArrayFilterValue,
+  getStringFilterValue,
+  parseColumnFilters,
+  parseColumnVisibility,
+  parseSorting,
+  serializeColumnVisibility,
+  serializeSorting,
+  sortAndJoin,
+} from "./url-state";
+import {
+  formatIsoDate,
+  getColumnActionLabel,
+  isRenewalDateRangeFilterValue,
+} from "./utils";
 
 declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends RowData, TValue> {
@@ -92,7 +79,6 @@ declare module "@tanstack/react-table" {
   }
 }
 
-const columnHelper = createColumnHelper<DealRow>();
 export const columnMenuHandle = createDropdownMenuHandle<string>();
 export const actionMenuHandle = createDropdownMenuHandle<Action>();
 export const deleteAlertDialogHandle = createAlertDialogHandle<Action>();
@@ -100,334 +86,91 @@ export const accountDialogHandle = createDialogHandle<Action>();
 export const paymentDialogHandle = createDialogHandle<Action>();
 export const headerTooltipHandle = createTooltipHandle<{ text: string }>();
 
-type RenewalDateRangeFilterValue = {
-  from?: string;
-  to?: string;
+type ActiveAction = {
+  clear: () => void;
+  id: string;
+  label: string;
 };
 
-const isRenewalDateRangeFilterValue = (
-  value: unknown,
-): value is RenewalDateRangeFilterValue => {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
+const resolveUpdater = <T,>(
+  updaterOrValue: T | ((oldValue: T) => T),
+  currentValue: T,
+) =>
+  typeof updaterOrValue === "function"
+    ? (updaterOrValue as (oldValue: T) => T)(currentValue)
+    : updaterOrValue;
 
-  const candidate = value as Record<string, unknown>;
-  const from = candidate.from;
-  const to = candidate.to;
-
-  return (
-    (from === undefined || typeof from === "string") &&
-    (to === undefined || typeof to === "string")
-  );
-};
-
-const parseIsoDate = (value: string) => {
-  const parsedDate = new Date(`${value}T00:00:00`);
-  return Number.isNaN(parsedDate.getTime()) ? undefined : parsedDate;
-};
-
-const formatIsoDate = (value: string) => {
-  const parsedDate = parseIsoDate(value);
-  return parsedDate ? DATE_FORMATTER.format(parsedDate) : value;
-};
-
-const getColumnActionLabel = (columnId: string) => {
-  const labels: Record<string, string> = {
-    account_name: "Account",
-    annual_value: "Acv",
-    owner: "Owner",
-    priority: "Priority",
-    region: "Region",
-    renewal_date: "Renewal Date",
-    seats: "Seats",
-    stage: "Stage",
-  };
-
-  return labels[columnId] ?? columnId;
-};
-
-const renewalDateFilterFn: FilterFn<DealRow> = (row, columnId, filterValue) => {
-  const rowDate = row.getValue<string>(columnId);
-
-  if (typeof filterValue === "string") {
-    return filterValue.length === 0 || rowDate === filterValue;
-  }
-
-  if (!isRenewalDateRangeFilterValue(filterValue)) {
-    return true;
-  }
-
-  const from = filterValue.from;
-  const to = filterValue.to;
-
-  if (!from && !to) {
-    return true;
-  }
-
-  if (from && rowDate < from) {
-    return false;
-  }
-
-  if (to && rowDate > to) {
-    return false;
-  }
-
-  return true;
-};
-
-const columns = [
-  columnHelper.accessor("select", {
-    cell: ({ row }) => (
-      <div className="px-4 flex items-center justify-center">
-        <Checkbox
-          aria-label={`Select account ${row.original.id}`}
-          checked={row.getIsSelected()}
-          className="translate-y-px border-accent cursor-pointer"
-          onCheckedChange={(checked) => row.toggleSelected(checked)}
-        />
-      </div>
-    ),
-    enableHiding: false,
-    enableSorting: false,
-    header: ({ table }) => (
-      <div className="px-4 flex items-center justify-center">
-        <Checkbox
-          aria-label="Select all rows"
-          checked={table.getIsAllPageRowsSelected()}
-          className="translate-y-px border-accent cursor-pointer"
-          onCheckedChange={(checked) =>
-            table.toggleAllPageRowsSelected(checked)
-          }
-        />
-      </div>
-    ),
-    id: "select",
-    size: 50,
-  }),
-  columnHelper.accessor("id", {
-    cell: ({ row }) => (
-      <span className="font-mono text-muted-foreground text-xs px-1">
-        #{row.original.id}
-      </span>
-    ),
-    header: ({ column }) => {
-      const sortDirection = column.getIsSorted();
-      return (
-        <ColumnHeaderToggle
-          column={column}
-          sortDirection={sortDirection}
-          title="ID"
-        />
-      );
-    },
-    id: "id",
-    size: 70,
-  }),
-  columnHelper.accessor("account_name", {
-    cell: ({ row }) => (
-      <span className="px-2.5 text-muted-foreground">
-        {row.original.account_name}
-      </span>
-    ),
-    header: ({ column }) => {
-      const sortDirection = column.getIsSorted();
-      return (
-        <ColumnHeaderDropdown
-          column={column}
-          sortDirection={sortDirection}
-          title="Account"
-        />
-      );
-    },
-    id: "account_name",
-    size: 180,
-  }),
-  columnHelper.accessor("owner", {
-    cell: ({ row }) => (
-      <span className="px-2.5 text-muted-foreground">{row.original.owner}</span>
-    ),
-    header: ({ column }) => {
-      const filterValue = (column.getFilterValue() as string) ?? null;
-      return <ColumnHeaderCombobox column={column} filterValue={filterValue} />;
-    },
-    id: "owner",
-    size: 180,
-  }),
-  columnHelper.accessor("region", {
-    cell: ({ row }) => (
-      <span className="px-2.5 text-muted-foreground">
-        {row.original.region}
-      </span>
-    ),
-    filterFn: "equals",
-    header: ({ column }) => {
-      return <ColumnHeaderDropdown column={column} title="Region" />;
-    },
-    id: "region",
-    meta: {
-      filterOptions: REGIONS,
-      menuType: "radio-filter",
-    },
-    size: 120,
-  }),
-  columnHelper.accessor("stage", {
-    cell: ({ row }) => (
-      <span
-        className={cn(
-          "inline-flex rounded-md px-3 py-1 ml-2 font-medium text-xs",
-          STAGE_STYLES[row.original.stage],
-        )}
-      >
-        {row.original.stage}
-      </span>
-    ),
-    filterFn: "arrIncludesSome",
-    header: ({ column }) => (
-      <ColumnHeaderDropdown column={column} title="Stage" />
-    ),
-    id: "stage",
-    meta: {
-      filterOptions: STAGES,
-      menuType: "checkbox-filter",
-    },
-    size: 130,
-  }),
-  columnHelper.accessor("priority", {
-    cell: ({ row }) => (
-      <span
-        className={cn(
-          "inline-flex rounded-md px-2 py-1 ml-4 font-medium text-xs",
-          PRIORITIES_STYLES[row.original.priority],
-        )}
-      >
-        {row.original.priority}
-      </span>
-    ),
-    filterFn: "equals",
-    header: ({ column }) => {
-      const filterValue = (column.getFilterValue() as string) ?? "";
-
-      return (
-        <ColumnHeaderSelect
-          column={column}
-          filterValue={filterValue}
-          title="Priority"
-        />
-      );
-    },
-    id: "priority",
-    size: 120,
-  }),
-  columnHelper.accessor("annual_value", {
-    cell: ({ row }) => (
-      <span className="tabular-nums ml-1.5 font-mono text-muted-foreground">
-        {CURRENCY_FORMATTER.format(row.original.annual_value)}
-      </span>
-    ),
-    header: ({ column }) => {
-      const sortDirection = column.getIsSorted();
-      return (
-        <ColumnHeaderDropdown
-          column={column}
-          sortDirection={sortDirection}
-          title="Acv"
-        />
-      );
-    },
-    id: "annual_value",
-    size: 120,
-  }),
-  columnHelper.accessor("seats", {
-    cell: ({ row }) => (
-      <span className="tabular-nums ml-4 font-mono text-muted-foreground">
-        {row.original.seats}
-      </span>
-    ),
-    header: ({ column }) => (
-      <ColumnHeaderDropdown column={column} title="Seats" />
-    ),
-    id: "seats",
-    size: 90,
-  }),
-  columnHelper.accessor("renewal_date", {
-    cell: ({ row }) => {
-      const value = new Date(`${row.original.renewal_date}T00:00:00`);
-      return (
-        <span className="px-2 ml-2 text-muted-foreground">
-          {DATE_FORMATTER.format(value)}
-        </span>
-      );
-    },
-    filterFn: renewalDateFilterFn,
-    header: ({ column }) => {
-      const sortDirection = column.getIsSorted();
-      const dateFilterValue = column.getFilterValue() as
-        | RenewalDateFilterValue
-        | undefined;
-      return (
-        <CalendarDropdown
-          column={column}
-          dateFilterValue={dateFilterValue}
-          sortDirection={sortDirection}
-        />
-      );
-    },
-    id: "renewal_date",
-    size: 180,
-  }),
-  columnHelper.accessor("action", {
-    cell: ({ row }) => {
-      const id = row.original.id;
-      const account = row.original.account_name;
-      const owner = row.original.owner;
-      const action = {
-        id,
-        name: account,
-        owner,
-        url: `https://example.com/${id}`,
-      };
-
-      return (
-        <DropdownMenuTrigger
-          handle={actionMenuHandle}
-          payload={action}
-          render={
-            <Button
-              className="p-0 data-popup-open:bg-accent cursor-pointer"
-              size="icon-xs"
-              variant="ghost"
-            >
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          }
-        />
-      );
-    },
-    header: () => (
-      <TooltipTrigger
-        handle={headerTooltipHandle}
-        payload={{ text: "Take actions" }}
-      >
-        Action
-      </TooltipTrigger>
-    ),
-    id: "action",
-    size: 45,
-  }),
-];
+const asPositiveInt = (value: number, fallback: number) =>
+  Number.isFinite(value) && value > 0 ? Math.floor(value) : fallback;
 
 export function DataTable() {
-  type ActiveAction = {
-    clear: () => void;
-    id: string;
-    label: string;
-  };
+  const [urlState, setUrlState] = useQueryStates(
+    {
+      hidden: parseAsString,
+      owner: parseAsString,
+      page: parseAsInteger.withDefault(1),
+      pageSize: parseAsInteger.withDefault(DEFAULT_PAGE_SIZE),
+      priority: parseAsString,
+      query: parseAsString.withDefault(""),
+      region: parseAsString,
+      renewalDate: parseAsString,
+      renewalFrom: parseAsString,
+      renewalTo: parseAsString,
+      sort: parseAsString,
+      stage: parseAsString,
+    },
+    {
+      history: "replace",
+    },
+  );
 
-  const [data, _setData] = React.useState(() => [...DEAL_ROWS]);
+  const globalFilter = urlState.query;
+  const sorting = React.useMemo(
+    () => parseSorting(urlState.sort),
+    [urlState.sort],
+  );
+  const columnVisibility = React.useMemo(
+    () => parseColumnVisibility(urlState.hidden),
+    [urlState.hidden],
+  );
+  const columnFilters = React.useMemo(
+    () =>
+      parseColumnFilters({
+        get: (key: string) => {
+          if (key === "owner") return urlState.owner;
+          if (key === "region") return urlState.region;
+          if (key === "stage") return urlState.stage;
+          if (key === "priority") return urlState.priority;
+          if (key === "renewalDate") return urlState.renewalDate;
+          if (key === "renewalFrom") return urlState.renewalFrom;
+          if (key === "renewalTo") return urlState.renewalTo;
+          return null;
+        },
+      }),
+    [
+      urlState.owner,
+      urlState.priority,
+      urlState.region,
+      urlState.renewalDate,
+      urlState.renewalFrom,
+      urlState.renewalTo,
+      urlState.stage,
+    ],
+  );
+  const pagination = React.useMemo(
+    () =>
+      ({
+        pageIndex: asPositiveInt(urlState.page, 1) - 1,
+        pageSize: asPositiveInt(urlState.pageSize, DEFAULT_PAGE_SIZE),
+      }) satisfies PaginationState,
+    [urlState.page, urlState.pageSize],
+  );
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
+  const [actionMenuOpen, setActionMenuOpen] = React.useState(false);
+  const [actionActiveTrigger, setActionActiveTrigger] = React.useState<
+    string | null
+  >(null);
   const [activeTrigger, setActiveTrigger] = React.useState<string | null>(null);
   const handleOpenChange = (
     isOpen: boolean,
@@ -438,29 +181,93 @@ export function DataTable() {
       setActiveTrigger(eventDetails.trigger?.id ?? null);
     }
   };
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [globalFilter, setGlobalFilter] = React.useState("");
-  const [pagination, setPagination] = React.useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
+  const handleActionOpenChange = (
+    isOpen: boolean,
+    eventDetails: MenuRootChangeEventDetails,
+  ) => {
+    setActionMenuOpen(isOpen);
+    if (isOpen) {
+      setActionActiveTrigger(eventDetails.trigger?.id ?? null);
+    } else {
+      setActionActiveTrigger(null);
+    }
+  };
 
   const table = useReactTable({
     columns,
-    data,
+    data: DEAL_ROWS,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     globalFilterFn: "includesString",
-    onColumnVisibilityChange: setColumnVisibility,
-    onGlobalFilterChange: setGlobalFilter,
-    onPaginationChange: setPagination,
+    onColumnFiltersChange: (updaterOrValue) => {
+      const nextColumnFilters = resolveUpdater(updaterOrValue, columnFilters);
+      const owner = getStringFilterValue(nextColumnFilters, "owner");
+      const region = getStringFilterValue(nextColumnFilters, "region");
+      const stage = getStringArrayFilterValue(nextColumnFilters, "stage");
+      const priority = getStringFilterValue(nextColumnFilters, "priority");
+
+      const renewalFilterValue = nextColumnFilters.find(
+        (filter) => filter.id === "renewal_date",
+      )?.value;
+
+      let renewalDate: string | null = null;
+      let renewalFrom: string | null = null;
+      let renewalTo: string | null = null;
+
+      if (typeof renewalFilterValue === "string" && renewalFilterValue.length) {
+        renewalDate = renewalFilterValue;
+      } else if (isRenewalDateRangeFilterValue(renewalFilterValue)) {
+        renewalFrom = renewalFilterValue.from ?? null;
+        renewalTo = renewalFilterValue.to ?? null;
+      }
+
+      void setUrlState({
+        owner: owner ?? null,
+        page: 1,
+        priority: priority ?? null,
+        region: region ?? null,
+        renewalDate,
+        renewalFrom,
+        renewalTo,
+        stage: stage.length > 0 ? sortAndJoin(stage) : null,
+      });
+    },
+    onColumnVisibilityChange: (updaterOrValue) => {
+      const nextColumnVisibility = resolveUpdater(
+        updaterOrValue,
+        columnVisibility,
+      );
+      const hiddenColumns = serializeColumnVisibility(nextColumnVisibility);
+      void setUrlState({
+        hidden: hiddenColumns || null,
+      });
+    },
+    onGlobalFilterChange: (updaterOrValue) => {
+      const nextGlobalFilter = resolveUpdater(updaterOrValue, globalFilter);
+      void setUrlState({
+        page: 1,
+        query: nextGlobalFilter || null,
+      });
+    },
+    onPaginationChange: (updaterOrValue) => {
+      const nextPagination = resolveUpdater(updaterOrValue, pagination);
+      void setUrlState({
+        page: asPositiveInt(nextPagination.pageIndex + 1, 1),
+        pageSize: asPositiveInt(nextPagination.pageSize, DEFAULT_PAGE_SIZE),
+      });
+    },
     onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
+    onSortingChange: (updaterOrValue) => {
+      const nextSorting = resolveUpdater(updaterOrValue, sorting);
+      void setUrlState({
+        page: 1,
+        sort: serializeSorting(nextSorting) || null,
+      });
+    },
     state: {
+      columnFilters,
       columnVisibility,
       globalFilter,
       pagination,
@@ -475,7 +282,7 @@ export function DataTable() {
     const columnLabel = getColumnActionLabel(sortedColumn.id);
     activeActions.push({
       clear: () => {
-        setSorting((currentSorting) =>
+        table.setSorting((currentSorting) =>
           currentSorting.filter((item) => item.id !== sortedColumn.id),
         );
       },
@@ -550,12 +357,12 @@ export function DataTable() {
 
   return (
     <>
-      <Card className="p-0 gap-0">
+      <Card className="p-0 gap-0 w-full">
         <div className="flex flex-wrap items-center gap-2 p-4">
           <div className="relative w-full max-w-sm">
             <Input
               className="h-9 w-full pr-8"
-              onChange={(event) => setGlobalFilter(event.target.value)}
+              onChange={(event) => table.setGlobalFilter(event.target.value)}
               placeholder="Search all columns..."
               value={globalFilter}
             />
@@ -563,7 +370,7 @@ export function DataTable() {
               <Button
                 aria-label="Clear search"
                 className="absolute top-1/2 right-1 size-6 -translate-y-1/2 p-0"
-                onClick={() => setGlobalFilter("")}
+                onClick={() => table.setGlobalFilter("")}
                 size="icon-xs"
                 variant="ghost"
               >
@@ -687,22 +494,32 @@ export function DataTable() {
             </TableHeader>
             <TableBody>
               {table.getRowModel().rows.length > 0 ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    className="data-[state=selected]:bg-accent/30 hover:bg-accent/30 border-0"
-                    data-state={row.getIsSelected() && "selected"}
-                    key={row.id}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
+                table.getRowModel().rows.map((row) => {
+                  const isActionMenuRowOpen =
+                    actionMenuOpen &&
+                    actionActiveTrigger ===
+                      `action-menu-trigger-${row.original.id}`;
+
+                  return (
+                    <TableRow
+                      className="data-[state=selected]:bg-accent/30 data-[action-open=true]:bg-accent/30 hover:bg-accent/30 border-0"
+                      data-action-open={
+                        isActionMenuRowOpen ? "true" : undefined
+                      }
+                      data-state={row.getIsSelected() && "selected"}
+                      key={row.id}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  );
+                })
               ) : (
                 <TableRow className="h-56 hover:bg-card">
                   <TableCell
@@ -754,7 +571,7 @@ export function DataTable() {
                   }}
                   value={(column.getFilterValue() as string) ?? ""}
                 >
-                  {meta.filterOptions.map((option) => (
+                  {meta.filterOptions.map((option: string) => (
                     <DropdownMenuRadioItemContent
                       closeOnClick
                       indicatorPlacement="end"
@@ -782,7 +599,7 @@ export function DataTable() {
               )}
               {menuType === "checkbox-filter" && meta?.filterOptions && (
                 <div className="flex flex-col gap-1 p-1">
-                  {meta.filterOptions.map((option) => {
+                  {meta.filterOptions.map((option: string) => {
                     const currentFilterValue =
                       (column.getFilterValue() as string[]) ?? [];
                     const isChecked = currentFilterValue.includes(option);
@@ -860,7 +677,11 @@ export function DataTable() {
           );
         }}
       </DropdownMenu>
-      <ActionDropdown />
+      <ActionDropdown
+        onOpenChange={handleActionOpenChange}
+        open={actionMenuOpen}
+        triggerId={actionActiveTrigger}
+      />
       <AccountDialog />
       <DeleteAccoundDialog />
       <DialogOutsideScrollDemo />

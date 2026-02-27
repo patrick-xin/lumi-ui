@@ -28,7 +28,7 @@ export function TabsDemo() {
       </TabsListContent>
 
       <TabsPanel value="profile">
-        <div className="p-4 space-y-4 rounded-md outline outline-1 outline-border dark:-outline-offset-1">
+        <div className="p-4 space-y-4 rounded-md overlay-outline">
           <div className="space-y-2">
             <div className="font-semibold">Profile Settings</div>
             <p className="text-muted-foreground text-sm">
@@ -69,7 +69,7 @@ export function TabsDemo() {
         </div>
       </TabsPanel>
       <TabsPanel value="notifications">
-        <div className="p-4 space-y-4 rounded-md outline outline-1 outline-border dark:-outline-offset-1">
+        <div className="p-4 space-y-4 rounded-md overlay-outline">
           <div className="space-y-2">
             <div className="font-semibold">Notification Preferences</div>
             <p className="text-muted-foreground text-sm">
@@ -112,7 +112,7 @@ export function TabsDemo() {
       </TabsPanel>
 
       <TabsPanel value="billing">
-        <div className="p-4 space-y-4 rounded-md outline outline-1 outline-border dark:-outline-offset-1">
+        <div className="p-4 space-y-4 rounded-md overlay-outline">
           <div className="space-y-2">
             <div className="font-semibold">Billing Information</div>
             <p className="text-muted-foreground text-sm">

@@ -1,3 +1,4 @@
+import type { MenuRootChangeEventDetails } from "@base-ui/react";
 import { Copy, DollarSign, Settings, Trash } from "lucide-react";
 import {
   DropdownMenu,
@@ -14,9 +15,27 @@ import {
   paymentDialogHandle,
 } from "./index";
 
-export function ActionDropdown() {
+type ActionDropdownProps = {
+  onOpenChange: (
+    isOpen: boolean,
+    eventDetails: MenuRootChangeEventDetails,
+  ) => void;
+  open: boolean;
+  triggerId: string | null;
+};
+
+export function ActionDropdown({
+  onOpenChange,
+  open,
+  triggerId,
+}: ActionDropdownProps) {
   return (
-    <DropdownMenu handle={actionMenuHandle}>
+    <DropdownMenu
+      handle={actionMenuHandle}
+      onOpenChange={onOpenChange}
+      open={open}
+      triggerId={triggerId}
+    >
       {({ payload: action }) => {
         return (
           <DropdownMenuContent

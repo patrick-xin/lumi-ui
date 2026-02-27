@@ -1,0 +1,144 @@
+---
+title: Style Guide
+description: Understand Lumi's default style approach and how to opt out when your product needs different behavior.
+---
+
+Lumi incorporates opinionated design choices to elevate your UI. Here is a breakdown of our core style concepts and how they differ from typical defaults.
+
+<Callout variant="warning" title="Prerequisites">
+If you have not completed the CSS utility setup yet, do [Installation](/docs/installation) first and copy the global CSS utilities into your project.
+</Callout>
+
+## Brand Voice
+
+Lumi uses the `primary` color extensively because we believe each brand should have its own distinct voice. You will find the primary color prominent in active states, subtle backgrounds, and focus rings.
+
+Here are some components that actively lean into the primary color by default:
+
+- Button
+- Checkbox
+- Command Menu
+- Input & Textarea
+- Kbd
+- Meter & Progress
+- Radio
+- Resizable
+- Slider
+- Switch
+
+If you want a full shadcn token set (light + dark), use [Lumi Skill](https://github.com/patrick-xin/lumi-ui-skill) and provide your desired primary color and vibe of your app.
+
+## Focus State
+
+Lumi uses a more prominent, offset focus ring for better accessibility and aesthetics, contrasting with standard subtle outlines.
+
+Comparison between shadcn's focus styles and Lumi's focus styles (press `tab` to see the difference):
+
+<ComponentPreview name="focus-comparison" />
+
+## Animation Utilities
+
+Lumi does not rely on `tw-animate` style classes (`animate-in`, `animate-out`, etc.) as the default pattern.
+
+Instead, animations follow Base UI's native transition model with:
+
+- `[data-starting-style]`
+- `[data-ending-style]`
+
+This keeps enter/exit transitions interruptible and smooth during rapid user interaction.
+
+```css
+/* Example of native transition setup */
+.content {
+  transition: opacity 0.2s, transform 0.2s;
+}
+.content[data-starting-style],
+.content[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.95);
+}
+```
+
+### Opting out
+
+- Remove Lumi animation utility classes and use your own transition strategy.
+- Or update the utility definitions in your global CSS.
+
+See [Animation Guide](/docs/animation-guide) for exact utility-to-component mapping.
+
+## Overlay Outline
+
+For overlay surfaces (popup/dialog-like containers), Lumi uses `overlay-outline` as the default frame treatment.
+
+<Callout variant="info" title="Default Approach">
+Lumi defaults to `overlay-outline` for overlay framing. This keeps overlay surfaces visually consistent in both light and dark themes.
+</Callout>
+
+Why outline instead of border by default:
+
+- Overlay surfaces already use spacing, radius, shadow, and animation. Using `outline` avoids coupling frame thickness to element box metrics.
+- `outline` gives a cleaner edge treatment on floating layers while keeping internal layout stable.
+- The dark-mode offset behavior (`dark:-outline-offset-1`) improves visual balance on elevated surfaces.
+
+```tsx
+<div className="overlay-outline bg-background">
+  {/* overlay content */}
+</div>
+```
+
+### Components List
+
+- [Autocomplete](/docs/components/form-input/autocomplete)
+- [Combobox](/docs/components/form-input/combobox)
+- [Command Menu](/docs/components/layout-nav/command-menu)
+- [Context Menu](/docs/components/overlays-dialogs/context-menu)
+- [Dialog](/docs/components/overlays-dialogs/dialog)
+- [Dropdown Menu](/docs/components/overlays-dialogs/dropdown-menu)
+- [Menubar](/docs/components/misc/menubar)
+- [Navigation Menu](/docs/components/layout-nav/navigation-menu)
+- [Popover](/docs/components/overlays-dialogs/popover)
+- [Preview Card](/docs/components/overlays-dialogs/preview-card)
+- [Select](/docs/components/form-input/select)
+- [Tooltip](/docs/components/overlays-dialogs/tooltip)
+
+### Opting out
+
+- Remove `overlay-outline` from the overlay content surface and provide your own frame classes.
+- If you prefer border framing, replace it directly with `border` (plus any dark-mode adjustments you want).
+- Or update the `overlay-outline` utility definition in your global CSS.
+
+## Active Highlight
+
+Use `highlight-on-active` for list/menu option highlighting where hit area and visual highlight should stay decoupled.
+
+```tsx
+<BaseSelect.Item
+  className="highlight-on-active"
+  {...props}
+/>
+```
+
+### Components List
+
+- [Autocomplete](/docs/components/form-input/autocomplete)
+- [Combobox](/docs/components/form-input/combobox)
+- [Context Menu](/docs/components/overlays-dialogs/context-menu)
+- [Dropdown Menu](/docs/components/overlays-dialogs/dropdown-menu)
+- [Menubar](/docs/components/misc/menubar)
+- [Select](/docs/components/form-input/select)
+
+### Opting out
+
+- Remove `highlight-on-active`.
+- Apply highlight styles directly on the item (for example with margin-based inset styles) if that trade-off fits your design.
+- Adjust the utility definition in your global CSS when you want a global tweak to inset or radius.
+
+See [Hit-Test & Highlights](/docs/highlights) for rationale and examples.
+
+## Unified by Utilities
+
+By combining these global utilities (`overlay-outline`, `highlight-on-active`, and `animate-*`), you can drop down to the primitive layer to build completely custom layouts while retaining perfect visual consistency with the rest of the Lumi ecosystem.
+
+For example, here is a custom `Select` component using primitives:
+
+<ComponentPreview name="custom-select" />

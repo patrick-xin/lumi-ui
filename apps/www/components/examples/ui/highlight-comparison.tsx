@@ -22,7 +22,7 @@ export function HighlightComparison() {
             className={cn(
               BaseStyle,
               "pl-6",
-              "data-[highlighted]:relative data-[highlighted]:z-0 data-[highlighted]:before:absolute data-[highlighted]:before:inset-x-3 data-[highlighted]:before:inset-y-0 data-[highlighted]:before:z-[-1] data-[highlighted]:before:rounded-md data-[highlighted]:before:bg-accent data-[highlighted]:text-accent-foreground",
+              "data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-3 data-highlighted:before:inset-y-0 data-highlighted:before:z-[-1] data-highlighted:before:rounded-md data-highlighted:before:bg-accent data-highlighted:text-accent-foreground",
             )}
             onClick={() => alert("Profile item clicked")}
             unstyled
@@ -44,7 +44,7 @@ export function HighlightComparison() {
             className={cn(
               BaseStyle,
               "mx-3",
-              "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
+              "data-highlighted:bg-accent data-highlighted:text-accent-foreground",
             )}
             onClick={() => alert("Profile item clicked")}
             unstyled
