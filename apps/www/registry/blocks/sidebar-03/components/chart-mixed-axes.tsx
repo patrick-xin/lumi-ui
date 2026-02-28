@@ -55,21 +55,19 @@ export function ChartMixedAxes() {
           </CardDescription>
         </div>
         <ToggleGroup
-          className="gap-2 flex-wrap"
           multiple
           onValueChange={(value) => {
             setActiveSeries(value);
           }}
           value={activeSeries}
+          variant="outline"
         >
           {Object.entries(chartConfig).map(([key, config]) => (
             <ToggleGroupItem
               aria-label={`Toggle ${config.label}`}
               className="gap-1 text-xs cursor-pointer"
               key={key}
-              size="sm"
               value={key}
-              variant="outline"
             >
               <div
                 className="h-2 w-2 rounded-[2px]"

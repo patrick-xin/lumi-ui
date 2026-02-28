@@ -15,7 +15,11 @@ export function PopoverWithArrowDemo() {
     <Popover defaultOpen>
       <PopoverTrigger
         render={
-          <Button className="data-popup-open:bg-accent/60" variant="outline" />
+          <Button
+            className="data-popup-open:bg-accent/60"
+            size="icon"
+            variant="outline"
+          />
         }
       >
         <BellIcon />

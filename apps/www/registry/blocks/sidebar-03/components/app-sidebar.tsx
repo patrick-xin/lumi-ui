@@ -133,7 +133,7 @@ const data = {
 
 export function AppSidebar() {
   return (
-    <Sidebar className="bg-background">
+    <Sidebar>
       <SidebarHeader>
         <TeamSwitcher />
         <SearchCombobox />

@@ -27,7 +27,7 @@ export function GitHubLink({ tooltip = true }: { tooltip?: boolean }) {
             />
           }
         />
-        <TooltipContent>GitHub Link</TooltipContent>
+        <TooltipContent>GitHub</TooltipContent>
       </Tooltip>
     );
   }

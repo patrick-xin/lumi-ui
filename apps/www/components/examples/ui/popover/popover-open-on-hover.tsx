@@ -15,10 +15,7 @@ export function PopoverOpenOnHoverDemo() {
   return (
     <Popover>
       <PopoverTrigger
-        className={cn(
-          buttonVariants({ size: "icon-sm", variant: "outline" }),
-          "data-popup-open:bg-accent/60",
-        )}
+        className={cn(buttonVariants({ size: "icon-sm", variant: "outline" }))}
         openOnHover
       >
         <BellIcon aria-label="Notifications" />

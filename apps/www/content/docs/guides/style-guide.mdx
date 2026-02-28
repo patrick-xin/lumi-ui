@@ -28,14 +28,6 @@ Here are some components that actively lean into the primary color by default:
 
 If you want a full shadcn token set (light + dark), use [Lumi Skill](https://github.com/patrick-xin/lumi-ui-skill) and provide your desired primary color and vibe of your app.
 
-## Focus State
-
-Lumi uses a more prominent, offset focus ring for better accessibility and aesthetics, contrasting with standard subtle outlines.
-
-Comparison between shadcn's focus styles and Lumi's focus styles (press `tab` to see the difference):
-
-<ComponentPreview name="focus-comparison" />
-
 ## Animation Utilities
 
 Lumi does not rely on `tw-animate` style classes (`animate-in`, `animate-out`, etc.) as the default pattern.
@@ -49,14 +41,9 @@ This keeps enter/exit transitions interruptible and smooth during rapid user int
 
 ```css
 /* Example of native transition setup */
-.content {
-  transition: opacity 0.2s, transform 0.2s;
-}
-.content[data-starting-style],
-.content[data-ending-style] {
-  opacity: 0;
-  transform: scale(0.95);
-}
+data-[starting-style]:scale-90 data-[starting-style]:opacity-0
+data-[ending-style]:scale-90 data-[ending-style]:opacity-0 
+transition-[transform,scale,opacity] 
 ```
 
 ### Opting out

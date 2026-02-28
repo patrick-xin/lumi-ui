@@ -18,7 +18,7 @@ export function RadioItemsMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button className="data-popup-open:bg-accent/60" variant="outline">
+          <Button variant="outline">
             Sort By <ChevronDownIcon className="size-4" />
           </Button>
         }

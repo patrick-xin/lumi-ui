@@ -24,16 +24,13 @@ import {
 } from "@/registry/ui/sidebar";
 
 const GROUP_ID = "main-layout-persistence";
-const ONBOARDING_COOKIE_NAME = "dashboard-01-onboarding-dismissed";
 
 export default async function Page() {
   const cookieStore = await cookies();
   const layoutCookie = cookieStore.get(GROUP_ID);
-  const onboardingCookie = cookieStore.get(ONBOARDING_COOKIE_NAME);
   const defaultLayout: Layout = layoutCookie
     ? JSON.parse(layoutCookie.value)
     : undefined;
-  const showOnboarding = onboardingCookie?.value !== "1";
 
   return (
     <NuqsAdapter>
@@ -44,7 +41,7 @@ export default async function Page() {
       >
         <AppSidebar />
         <MainContent className="bg-background">
-          <header className="flex h-14 bg-background z-10 sticky top-0 items-center gap-2 p-2 sm:p-4">
+          <header className="flex h-12 bg-background z-10 sticky top-0 items-center gap-2 p-2 sm:p-4">
             <SidebarTrigger />
             <Separator className="mr-2 h-4" orientation="vertical" />
             <Breadcrumb>
@@ -67,7 +64,7 @@ export default async function Page() {
               <DashboardCommand />
             </div>
           </header>
-          <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4 sm:pt-0">
+          <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4 sm:pt-2">
             <DashboardContent showOnboarding={false} />
           </div>
         </MainContent>

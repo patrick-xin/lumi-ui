@@ -31,12 +31,15 @@ import {
   TabsPanel,
   TabsTab,
 } from "@/registry/ui/tabs";
+import { DashboardOnboardingDialog } from "./onboarding-dialog";
 
 const NotificationContext = React.createContext<
   | {
       open: boolean;
       setOpen: (open: boolean) => void;
       onClose: () => void;
+      onBoardingOpen: boolean;
+      setOnBoardingOpen: (open: boolean) => void;
     }
   | undefined
 >(undefined);
@@ -53,18 +56,28 @@ const useNotification = () => {
 
 export const Notifications = () => {
   const [open, setOpen] = React.useState(false);
+  const [onBoardingOpen, setOnBoardingOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
 
   return (
-    <NotificationContext.Provider
-      value={{
-        onClose: handleClose,
-        open,
-        setOpen,
-      }}
-    >
-      <NotificationContent />
-    </NotificationContext.Provider>
+    <>
+      <NotificationContext.Provider
+        value={{
+          onBoardingOpen,
+          onClose: handleClose,
+          open,
+          setOnBoardingOpen,
+          setOpen,
+        }}
+      >
+        <NotificationContent />
+      </NotificationContext.Provider>
+
+      <DashboardOnboardingDialog
+        open={onBoardingOpen}
+        setOpen={setOnBoardingOpen}
+      />
+    </>
   );
 };
 
@@ -141,7 +154,7 @@ function NotificationPopover() {
 }
 
 const UnderLineTabs = () => {
-  const { onClose } = useNotification();
+  const { onClose, setOnBoardingOpen } = useNotification();
   return (
     <Tabs className="h-full" defaultValue="all">
       <div className="flex justify-between h-12 items-center border-b">
@@ -182,6 +195,27 @@ const UnderLineTabs = () => {
           noScrollBar
         >
           <ol className="list-none group w-full">
+            <li className="group/link border-b border-muted hover:bg-accent transition-colors">
+              <button
+                className="outline-none flex justify-between items-center gap-4 p-4 cursor-pointer"
+                onClick={() => {
+                  setOnBoardingOpen(true);
+                  onClose();
+                }}
+                type="button"
+              >
+                <span>
+                  <MessageCircleDashed className="size-4" />
+                </span>
+
+                <div className="flex flex-col justify-start gap-0.5 flex-1 text-left text-primary">
+                  <span className="text-sm">Welcome to Lumi UI</span>
+                  <span className="text-xs text-muted-foreground">
+                    just now
+                  </span>
+                </div>
+              </button>
+            </li>
             {Array.from({ length: 30 }).map((_, index) => (
               <li
                 className="group/link border-b border-muted last:border-0 hover:bg-accent transition-colors"

@@ -60,7 +60,6 @@ import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 import { toast } from "@/registry/ui/toast";
 import { ChartMixedAxes } from "./chart-mixed-axes";
 import { KpiSparkGrid } from "./kpi-card";
-import { DashboardOnboardingDialog } from "./onboarding-dialog";
 import {
   Table,
   TableBody,
@@ -1144,7 +1143,6 @@ export function DashboardContent({
           );
         }}
       </Dialog>
-      <DashboardOnboardingDialog defaultOpen={showOnboarding} />
     </>
   );
 }

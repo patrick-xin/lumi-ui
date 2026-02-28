@@ -17,7 +17,7 @@ export function HoverMenu() {
         delay={200}
         openOnHover
         render={
-          <Button className="data-popup-open:bg-accent/60" variant="outline">
+          <Button variant="outline">
             Workspace <ChevronDownIcon className="size-4" />
           </Button>
         }
