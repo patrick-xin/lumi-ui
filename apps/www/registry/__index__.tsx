@@ -5560,6 +5560,42 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "toggle-group-custom": {
+    name: "toggle-group-custom",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    files: [{
+      path: "components/examples/ui/toggle-group/toggle-group-custom.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/toggle-group/toggle-group-custom");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toggle-group-custom";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-default": {
+    name: "toggle-group-default",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    files: [{
+      path: "components/examples/ui/toggle-group/toggle-group-default.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/toggle-group/toggle-group-default");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toggle-group-default";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "toggle-group-demo": {
     name: "toggle-group-demo",
     description: "",
@@ -5663,6 +5699,42 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/toggle-group/toggle-group-small");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toggle-group-small";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-spacing": {
+    name: "toggle-group-spacing",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    files: [{
+      path: "components/examples/ui/toggle-group/toggle-group-spacing.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/toggle-group/toggle-group-spacing");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toggle-group-spacing";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "toggle-group-vertical": {
+    name: "toggle-group-vertical",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["toggle-group"],
+    files: [{
+      path: "components/examples/ui/toggle-group/toggle-group-vertical.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/toggle-group/toggle-group-vertical");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "toggle-group-vertical";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

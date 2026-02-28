@@ -68,7 +68,7 @@ export default async function Page() {
             </div>
           </header>
           <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4 sm:pt-0">
-            <DashboardContent showOnboarding={showOnboarding} />
+            <DashboardContent showOnboarding={false} />
           </div>
         </MainContent>
         <AIChat />

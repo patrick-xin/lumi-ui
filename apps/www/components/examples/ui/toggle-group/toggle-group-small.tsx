@@ -1,17 +1,17 @@
-import { ToggleGroup, ToggleGroupItem } from "@/registry/ui/toggle-group";
 import { Bold, Italic, Underline } from "lucide-react";
+import { ToggleGroup, ToggleGroupItem } from "@/registry/ui/toggle-group";
 
 export function ToggleGroupDemo() {
   return (
-    <ToggleGroup multiple>
+    <ToggleGroup multiple size="sm" variant="outline">
       <ToggleGroupItem aria-label="Toggle bold" value="bold">
-        <Bold className="h-4 w-4" />
+        <Bold className="size-3.5" />
       </ToggleGroupItem>
       <ToggleGroupItem aria-label="Toggle italic" value="italic">
-        <Italic className="h-4 w-4" />
+        <Italic className="size-3.5" />
       </ToggleGroupItem>
       <ToggleGroupItem aria-label="Toggle strikethrough" value="strikethrough">
-        <Underline className="h-4 w-4" />
+        <Underline className="size-3.5" />
       </ToggleGroupItem>
     </ToggleGroup>
   );
