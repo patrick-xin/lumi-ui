@@ -28,11 +28,12 @@ function markOnboardingAsDismissed() {
 }
 
 export function DashboardOnboardingDialog({
-  defaultOpen = true,
+  open,
+  setOpen,
 }: {
-  defaultOpen?: boolean;
+  open: boolean;
+  setOpen: (open: boolean) => void;
 }) {
-  const [open, setOpen] = React.useState(defaultOpen);
   const [carouselApi, setCarouselApi] = React.useState<CarouselApi>();
   const [activeIndex, setActiveIndex] = React.useState(0);
 

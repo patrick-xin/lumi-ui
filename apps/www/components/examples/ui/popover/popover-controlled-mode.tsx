@@ -34,7 +34,6 @@ export function PopoverControlledModeDemo() {
         <PopoverTrigger
           className={cn(
             buttonVariants({ size: "icon-sm", variant: "outline" }),
-            "data-popup-open:bg-accent/60",
           )}
           handle={demoPopover}
           id="trigger-1"
@@ -51,7 +50,6 @@ export function PopoverControlledModeDemo() {
         <PopoverTrigger
           className={cn(
             buttonVariants({ size: "icon-sm", variant: "outline" }),
-            "data-popup-open:bg-accent/60",
           )}
           handle={demoPopover}
           id="trigger-3"

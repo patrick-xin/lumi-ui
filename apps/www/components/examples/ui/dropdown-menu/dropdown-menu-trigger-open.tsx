@@ -33,7 +33,7 @@ export function DropdownMenuTriggerOpen() {
         <DropdownMenuTrigger
           render={
             <Button
-              className="w-48 data-[popup-open]:bg-accent dark:data-[popup-open]:bg-accent/60 data-[popup-open]:text-accent-foreground"
+              className="w-48 data-popup-open:bg-primary dark:data-popup-open:bg-primary"
               variant="outline"
             >
               Actions

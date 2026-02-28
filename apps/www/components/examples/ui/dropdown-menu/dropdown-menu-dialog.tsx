@@ -28,10 +28,7 @@ export function DropdownMenuDialogDemo() {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button
-              className="w-32 justify-between data-popup-open:bg-accent/60"
-              variant="outline"
-            >
+            <Button className="w-32 justify-between" variant="outline">
               Actions <ChevronDownIcon className="size-4" />
             </Button>
           }
