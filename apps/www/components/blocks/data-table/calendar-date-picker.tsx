@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { cn } from "@/registry/lib/utils";
 import {
   Popover,
   PopoverArrow,
@@ -45,7 +46,10 @@ export function CalendarDatePicker({
           sideOffset={12}
         >
           <PopoverPopup
-            className="relative w-80 rounded-md bg-popover outline outline-border dark:-outline-offset-1 text-popover-foreground shadow-2xl shadow-primary/10 border-primary/20 animate-popup"
+            className={cn(
+              "relative w-80 rounded-md bg-popover text-popover-foreground shadow-2xl shadow-primary/10 border-primary/20",
+              "overlay-outline animate-popup",
+            )}
             data-slot="popover-content"
           >
             <PopoverArrow />

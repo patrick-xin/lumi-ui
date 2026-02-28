@@ -1,33 +1,37 @@
+import { Bold, Italic, Underline } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/registry/ui/toggle-group";
-import { BookmarkIcon, HeartIcon, StarIcon } from "lucide-react";
 
-export function ToggleGroupSpacing() {
+export function ToggleGroupSpacingDemo() {
   return (
-    <ToggleGroup multiple>
-      <ToggleGroupItem
-        aria-label="Toggle star"
-        className="data-[pressed]:bg-transparent data-[pressed]:*:[svg]:fill-yellow-500 data-[pressed]:*:[svg]:stroke-yellow-500"
-        value="star"
-      >
-        <StarIcon />
-        Star
-      </ToggleGroupItem>
-      <ToggleGroupItem
-        aria-label="Toggle heart"
-        className="data-[pressed]:bg-transparent data-[pressed]:*:[svg]:fill-red-500 data-[pressed]:*:[svg]:stroke-red-500"
-        value="heart"
-      >
-        <HeartIcon />
-        Heart
-      </ToggleGroupItem>
-      <ToggleGroupItem
-        aria-label="Toggle bookmark"
-        className="data-[pressed]:bg-transparent data-[pressed]:*:[svg]:fill-blue-500 data-[pressed]:*:[svg]:stroke-blue-500"
-        value="bookmark"
-      >
-        <BookmarkIcon />
-        Bookmark
-      </ToggleGroupItem>
-    </ToggleGroup>
+    <div className="flex flex-col gap-4">
+      <ToggleGroup multiple spacing="lg">
+        <ToggleGroupItem aria-label="Toggle bold" value="bold">
+          <Bold />
+        </ToggleGroupItem>
+        <ToggleGroupItem aria-label="Toggle italic" value="italic">
+          <Italic />
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          aria-label="Toggle strikethrough"
+          value="strikethrough"
+        >
+          <Underline />
+        </ToggleGroupItem>
+      </ToggleGroup>
+      <ToggleGroup multiple spacing="sm">
+        <ToggleGroupItem aria-label="Toggle bold" value="bold">
+          <Bold />
+        </ToggleGroupItem>
+        <ToggleGroupItem aria-label="Toggle italic" value="italic">
+          <Italic />
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          aria-label="Toggle strikethrough"
+          value="strikethrough"
+        >
+          <Underline />
+        </ToggleGroupItem>
+      </ToggleGroup>
+    </div>
   );
 }

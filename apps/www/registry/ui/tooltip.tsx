@@ -129,8 +129,8 @@ function TooltipContent({
       >
         <BaseTooltip.Popup
           className={cn(
-            "bg-accent text-accent-foreground w-fit rounded-md px-3 py-1.5 text-xs text-balance animate-popup duration-0 data-instant:transition-none",
-            "outline-1 outline-border dark:-outline-offset-1 ",
+            "bg-accent text-accent-foreground w-fit rounded-md px-3 py-1.5 text-xs text-balance",
+            "overlay-outline animate-popup duration-0 data-instant:transition-none",
             className,
           )}
           data-slot="tooltip-content"

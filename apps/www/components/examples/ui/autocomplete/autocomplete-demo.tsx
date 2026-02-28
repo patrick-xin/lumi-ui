@@ -22,7 +22,7 @@ export function AutocompleteDemo() {
         showTrigger
       />
 
-      <AutocompleteContent>
+      <AutocompleteContent sideOffset={12}>
         <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
         <AutocompleteList>
           {(tag: Tag) => (

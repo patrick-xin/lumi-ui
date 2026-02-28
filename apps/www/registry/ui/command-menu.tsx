@@ -62,8 +62,8 @@ function CommandMenuContent({
         <DialogPopup
           className={cn(
             "relative flex flex-col overflow-hidden bg-background rounded-md shadow-md dark:shadow-xs",
-            "w-[min(40rem,calc(100vw-2rem))] animate-fade-zoom",
-            "outline-1 outline-border dark:-outline-offset-1",
+            "w-[min(40rem,calc(100vw-2rem))]",
+            "overlay-outline animate-fade-zoom",
             className,
           )}
           data-slot="command-menu-content"
@@ -147,7 +147,11 @@ function CommandScrollArea({
 }: React.ComponentProps<typeof ScrollArea>) {
   return (
     <ScrollArea
-      className={cn("h-auto max-h-64 sm:max-h-96", className)}
+      className={cn(
+        "h-auto max-h-64 sm:max-h-96",
+        "focus-within:outline-1 focus-within:-outline-offset-1 focus-within:outline-primary",
+        className,
+      )}
       data-slot="command-scroll-area"
       {...props}
     />

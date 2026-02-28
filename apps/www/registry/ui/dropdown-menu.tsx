@@ -353,8 +353,7 @@ function DropdownMenuContent({
         <BaseMenu.Popup
           className={cn(
             "relative bg-popover text-popover-foreground rounded-md shadow-md py-1",
-            "outline outline-border dark:-outline-offset-1",
-            "animate-popup",
+            "overlay-outline animate-popup",
             className,
           )}
           data-slot="dropdown-menu-content"

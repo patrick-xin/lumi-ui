@@ -322,7 +322,7 @@ function SelectContent({
         <BaseSelect.Popup
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md overflow-hidden",
-            "outline-1 outline-border dark:-outline-offset-1 animate-popup",
+            "outline outline-border dark:-outline-offset-1 animate-popup",
             "[&:not([data-side=none])]:max-h-(--available-height) min-w-(--anchor-width)",
             "data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:min-w-(--anchor-width+0.3rem)",
             className,

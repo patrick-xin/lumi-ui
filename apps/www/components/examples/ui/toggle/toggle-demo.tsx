@@ -6,9 +6,9 @@ export function ToggleDemo() {
   return (
     <Toggle
       aria-label="Toggle bookmark"
+      className="data-pressed:*:[svg]:fill-primary data-pressed:*:[svg]:stroke-primary"
       size="sm"
-      variant="outline"
-      className="data-[pressed]:bg-transparent data-[pressed]:*:[svg]:fill-blue-500 data-[pressed]:*:[svg]:stroke-blue-500"
+      variant="default"
     >
       <BookmarkIcon />
       Bookmark

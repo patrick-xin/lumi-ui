@@ -1,30 +1,29 @@
 "use client";
 
+import {
+  CheckCircle2,
+  ChevronsUpDownIcon,
+  Circle,
+  CircleDashed,
+  HelpCircle,
+  XCircle,
+} from "lucide-react";
 import { cn } from "@/registry/lib/utils";
 import {
-    Select,
-    SelectContent,
-    SelectItemContent,
-    SelectTriggerGroup,
+  Select,
+  SelectContent,
+  SelectItemContent,
+  SelectTriggerGroup,
 } from "@/registry/ui/select";
-import {
-    CheckCircle2,
-    ChevronsUpDownIcon,
-    Circle,
-    CircleDashed,
-    HelpCircle,
-    XCircle,
-} from "lucide-react";
 
 export function SelectCustomRenderDemo() {
   return (
-    <Select items={statuses}>
+    <Select<Status> itemToStringValue={(status) => status.value}>
       <SelectTriggerGroup
         indicatorIcon={<ChevronsUpDownIcon />}
         placeholder="Select a status"
       >
-        {(val) => {
-          const selected = statuses.find((s) => s.value === val);
+        {(selected: Status) => {
           if (!selected) return null;
 
           const Icon = selected.icon;
@@ -38,7 +37,7 @@ export function SelectCustomRenderDemo() {
       </SelectTriggerGroup>
       <SelectContent alignItemWithTrigger>
         {statuses.map((status) => (
-          <SelectItemContent key={status.value} value={status.value}>
+          <SelectItemContent key={status.value} value={status}>
             <div className="flex items-center gap-2">
               <status.icon className={cn("size-4", status.color)} />
               <span>{status.label}</span>
@@ -50,7 +49,14 @@ export function SelectCustomRenderDemo() {
   );
 }
 
-const statuses = [
+type Status = {
+  color: string;
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string;
+};
+
+const statuses: Status[] = [
   {
     color: "text-muted-foreground",
     icon: CircleDashed,

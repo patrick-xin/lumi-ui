@@ -140,7 +140,7 @@ const viewportVariants = cva("fixed inset-0", {
 });
 
 const popupVariants = cva(
-  "bg-background rounded-md outline-1 outline-border dark:-outline-offset-1 p-4 sm:p-6 shadow-md dark:shadow-xs",
+  "bg-background rounded-md outline outline-border dark:-outline-offset-1 p-4 sm:p-6 shadow-md dark:shadow-xs",
   {
     defaultVariants: {
       layout: "center",

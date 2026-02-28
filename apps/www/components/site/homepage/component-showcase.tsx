@@ -59,7 +59,7 @@ export default function ComponentShowcase() {
               initial={{ opacity: 0 }}
               loading="lazy"
               onLoad={() => setLoaded(true)}
-              src="/view/dashboard-01"
+              src="/playground"
               tabIndex={-1}
               title="Lumi Dashboard"
               transition={{ duration: 0.45, ease: smoothEase }}
@@ -74,7 +74,7 @@ export default function ComponentShowcase() {
             className="shadow-lg shadow-primary/20"
             nativeButton={false}
             render={
-              <Link href="/view/dashboard-01" target="_blank">
+              <Link href="/playground" target="_blank">
                 {t("seeInAction")}
               </Link>
             }

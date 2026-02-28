@@ -88,7 +88,7 @@ export function SiteCommandMenu({ tree }: { tree: DocRoot }) {
       />
       <CommandMenuContent
         aria-label="Command menu"
-        className="max-w-lg shadow-primary/20 shadow-2xl"
+        className="max-w-lg"
       >
         <Command
           autoHighlight="always"

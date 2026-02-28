@@ -31,7 +31,7 @@ export const mdxComponents: MDXComponents = {
     if (props.href.startsWith("https")) {
       return (
         <a
-          className="relative inline-block font-medium text-primary underline underline-offset-4 transition-colors ease-linear"
+          className="relative inline-block font-medium text-primary underline underline-offset-4 transition-colors ease-linear focus-state"
           rel="noopener noreferrer"
           target="_blank"
           {...props}
@@ -41,7 +41,7 @@ export const mdxComponents: MDXComponents = {
 
     return (
       <Link
-        className="inline-flex items-center justify-center text-primary underline-offset-4 underline transition-colors ease-linear"
+        className="inline-flex items-center justify-center text-primary underline-offset-4 underline transition-colors ease-linear focus-state"
         href={props.href}
       >
         {props.children}

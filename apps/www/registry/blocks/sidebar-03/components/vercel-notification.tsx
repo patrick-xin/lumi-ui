@@ -130,7 +130,7 @@ function NotificationPopover() {
       />
       <PopoverContent
         align="center"
-        className="flex flex-col p-0 w-96 bg-background duration-300 h-[50dvh] max-h-[50dvh] overflow-hidden"
+        className="flex flex-col p-0 w-96 duration-300 h-[50dvh] max-h-[50dvh] overflow-hidden"
         matchAnchorWidth={false}
         side="bottom"
       >
@@ -184,7 +184,7 @@ const UnderLineTabs = () => {
           <ol className="list-none group w-full">
             {Array.from({ length: 30 }).map((_, index) => (
               <li
-                className="group/link border-b border-muted last:border-0 hover:bg-muted transition-colors"
+                className="group/link border-b border-muted last:border-0 hover:bg-accent transition-colors"
                 key={index}
               >
                 <a
@@ -224,9 +224,9 @@ const UnderLineTabs = () => {
             ))}
           </ol>
         </ScrollArea>
-        <div className="bg-background border-t border-muted flex-none">
+        <div className="border-t border-input flex-none">
           <Button
-            className="w-full rounded-none cursor-pointer hover:bg-muted shadow-none"
+            className="w-full rounded-none cursor-pointer hover:bg-accent shadow-none"
             onClick={onClose}
             variant="unstyled"
           >

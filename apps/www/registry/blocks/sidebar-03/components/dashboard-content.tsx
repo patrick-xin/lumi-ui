@@ -60,6 +60,7 @@ import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 import { toast } from "@/registry/ui/toast";
 import { ChartMixedAxes } from "./chart-mixed-axes";
 import { KpiSparkGrid } from "./kpi-card";
+import { DashboardOnboardingDialog } from "./onboarding-dialog";
 import {
   Table,
   TableBody,
@@ -326,7 +327,13 @@ const dialogHandle = createDialogHandle<{
   icon: React.ReactNode;
 }>();
 
-export function DashboardContent() {
+type DashboardContentProps = {
+  showOnboarding?: boolean;
+};
+
+export function DashboardContent({
+  showOnboarding = true,
+}: DashboardContentProps) {
   const [query, setQuery] = React.useState("");
   const [showPaid, setShowPaid] = React.useState(true);
   const [showPending, setShowPending] = React.useState(true);
@@ -1137,6 +1144,7 @@ export function DashboardContent() {
           );
         }}
       </Dialog>
+      <DashboardOnboardingDialog defaultOpen={showOnboarding} />
     </>
   );
 }

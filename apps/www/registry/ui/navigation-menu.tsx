@@ -250,8 +250,8 @@ function NavigationMenu({
         >
           <NavigationMenuPopup
             className={cn(
-              "relative rounded-md bg-popover text-popover-foreground",
-              "outline outline-border dark:-outline-offset-1",
+              "relative bg-popover text-popover-foreground rounded-md",
+              "overlay-outline",
               className,
             )}
           >

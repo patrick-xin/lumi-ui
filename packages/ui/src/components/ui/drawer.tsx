@@ -160,7 +160,7 @@ const drawerViewportVariants = cva("fixed inset-0 outline-none", {
 
 const drawerPopupVariants = cva(
   cn(
-    "relative min-h-0 flex flex-col bg-background text-foreground shadow-lg outline-1 outline-border dark:-outline-offset-1",
+    "relative min-h-0 flex flex-col bg-background text-foreground shadow-lg outline outline-border dark:-outline-offset-1",
     "overflow-hidden",
     "transition-[transform,box-shadow,height,padding] duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]",
     "drawer-popup-motion",

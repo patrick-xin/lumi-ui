@@ -21,7 +21,7 @@
 }
 
 @utility focus-state{
-  @apply outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-1;
+  @apply focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10;
 }
 
 @utility extend-touch-target {

@@ -1183,6 +1183,26 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "onboarding-dialog",
+      "title": "Onboarding Dialog",
+      "description": "A multi-step onboarding dialog with carousel navigation.",
+      "type": "registry:component",
+      "categories": ["overlays-dialogs", "dashboard"],
+      "dependencies": ["motion", "@base-ui/react"],
+      "registryDependencies": [
+        "utils",
+        "@lumi-ui/button",
+        "@lumi-ui/carousel",
+        "@lumi-ui/dialog"
+      ],
+      "files": [
+        {
+          "path": "registry/components/onboarding-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ],
   "name": "lumi-ui"

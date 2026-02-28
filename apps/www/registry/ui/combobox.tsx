@@ -408,10 +408,9 @@ function ComboboxContent({
         <BaseCombobox.Popup
           className={cn(
             "bg-popover text-popover-foreground rounded-md shadow-md",
-            "outline-1 outline-border dark:-outline-offset-1",
             "flex flex-col overflow-hidden",
             "max-w-(--available-width) max-h-[min(23rem,var(--available-height))]",
-            "animate-popup",
+            "animate-popup overlay-outline",
             matchAnchorWidth && "w-(--anchor-width)",
             className,
           )}
