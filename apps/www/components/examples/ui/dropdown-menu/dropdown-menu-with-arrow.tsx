@@ -13,10 +13,7 @@ export function DropdownMenuWithArrow() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button
-            className="w-48 data-popup-open:bg-accent/60"
-            variant="outline"
-          >
+          <Button className="w-48" variant="outline">
             Actions
           </Button>
         }

@@ -7,11 +7,14 @@ import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
 
-function Sheet(props: BaseSheet.Root.Props) {
+function Sheet<Payload>(props: BaseSheet.Root.Props<Payload>) {
   return <BaseSheet.Root data-slot="sheet" {...props} />;
 }
 
-function SheetTrigger({ className, ...props }: BaseSheet.Trigger.Props) {
+function SheetTrigger<Payload>({
+  className,
+  ...props
+}: BaseSheet.Trigger.Props<Payload>) {
   return (
     <BaseSheet.Trigger
       className={className}

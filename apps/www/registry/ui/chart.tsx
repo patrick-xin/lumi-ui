@@ -175,6 +175,8 @@ function ChartTooltipContent<TValue extends ValueType, TName extends NameType>({
   labelKey,
 }: CustomTooltipProps<TValue, TName>) {
   const { config } = useChart();
+  const payloadItems = payload ?? [];
+  const isVisible = Boolean(active && payloadItems.length);
 
   const tooltipLabel = React.useMemo(() => {
     if (hideLabel || !payload?.length) {
@@ -216,22 +218,21 @@ function ChartTooltipContent<TValue extends ValueType, TName extends NameType>({
     labelKey,
   ]);
 
-  if (!active || !payload?.length) {
-    return null;
-  }
-
-  const nestLabel = payload.length === 1 && indicator !== "dot";
+  const nestLabel = payloadItems.length === 1 && indicator !== "dot";
 
   return (
     <div
       className={cn(
-        "border-border/50 bg-background grid min-w-16 items-start gap-1.5 rounded-sm border px-2.5 py-1.5 text-xs shadow-xl",
+        "border-border/50 bg-accent text-accent-foreground overlay-outline grid min-w-16 items-start gap-1.5 rounded-sm px-2.5 py-1.5 text-xs shadow-xl",
         className,
       )}
+      // Workaround for Recharts tooltip reset to top-left with custom content:
+      // https://github.com/recharts/recharts/issues/5986
+      style={{ visibility: isVisible ? "visible" : "hidden" }}
     >
       {!nestLabel ? tooltipLabel : null}
       <div className="grid gap-1.5">
-        {payload.map((item, index) => {
+        {payloadItems.map((item, index) => {
           const key = `${nameKey || item.name || item.dataKey || "value"}`;
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
           const indicatorColor = color || item.payload?.fill || item.color;
@@ -245,7 +246,7 @@ function ChartTooltipContent<TValue extends ValueType, TName extends NameType>({
               key={`${item.dataKey}-${index}`}
             >
               {formatter && item?.value !== undefined && item.name ? (
-                formatter(item.value, item.name, item, index, payload)
+                formatter(item.value, item.name, item, index, payloadItems)
               ) : (
                 <>
                   {itemConfig?.icon ? (

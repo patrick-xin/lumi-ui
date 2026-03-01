@@ -19,7 +19,7 @@ import { parseAsInteger, parseAsString, useQueryStates } from "nuqs";
 import * as React from "react";
 import { createAlertDialogHandle } from "@/registry/ui/alert-dialog";
 import { Button } from "@/registry/ui/button";
-import { Card } from "@/registry/ui/card";
+import { Card, CardDescription, CardTitle } from "@/registry/ui/card";
 import { createDialogHandle } from "@/registry/ui/dialog";
 import {
   createDropdownMenuHandle,
@@ -358,8 +358,16 @@ export function DataTable() {
   return (
     <>
       <Card className="p-0 gap-0 w-full">
+        <div className="p-4 pb-0">
+          <CardTitle className="text-base">
+            Accounts Table with Tanstack Table
+          </CardTitle>
+          <CardDescription>
+            Manage accounts settings and preferences.
+          </CardDescription>
+        </div>
         <div className="flex flex-wrap items-center gap-2 p-4">
-          <div className="relative w-full max-w-sm">
+          <div className="relative w-full max-w-xl flex items-center">
             <Input
               className="h-9 w-full pr-8"
               onChange={(event) => table.setGlobalFilter(event.target.value)}

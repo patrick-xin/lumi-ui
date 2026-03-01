@@ -116,14 +116,18 @@ function NotificationPopover() {
         render={
           <Button
             aria-label="Notifications, you have unread messages"
-            className="data-popup-open:bg-accent data-popup-open:hover:bg-accent"
             size="icon-sm"
             variant="outline"
           >
             <span>
               <BellIcon />
             </span>
-            <span className="absolute -top-1 -right-1 size-2.5 bg-green-600 rounded-full" />
+            <span className="absolute -top-1 -right-1 pointer-events-none">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-600 opacity-75"></span>
+                <span className="relative inline-flex size-2 rounded-full bg-green-600"></span>
+              </span>
+            </span>
             <span className="sr-only">You have unread messages</span>
           </Button>
         }

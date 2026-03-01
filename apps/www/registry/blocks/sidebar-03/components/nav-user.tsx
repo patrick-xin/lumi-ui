@@ -11,6 +11,7 @@ import {
   UserIcon,
   XIcon,
 } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { TimelineDemo } from "@/components/examples/ui/timeline/timeline-demo";
 import {
@@ -39,6 +40,7 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLinkItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/registry/ui/dropdown-menu";
@@ -134,10 +136,13 @@ export function NavUser({
                   Changelog
                   <PenIcon />
                 </DropdownMenuItem>
-                <DropdownMenuItem className="justify-between py-2">
+                <DropdownMenuLinkItem
+                  className="justify-between py-2"
+                  render={<Link href="/docs/introduction" />}
+                >
                   Doc
                   <BookIcon />
-                </DropdownMenuItem>
+                </DropdownMenuLinkItem>
                 <DropdownMenuItem className="justify-between py-2">
                   Log out
                   <LogOut />
