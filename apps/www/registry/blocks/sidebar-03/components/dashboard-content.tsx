@@ -5,21 +5,16 @@ import {
   ArrowDownRight,
   ArrowUpRight,
   BookIcon,
-  CreditCard,
   Download,
   DownloadCloud,
   FileIcon,
-  Filter,
   Loader2,
-  MoreHorizontal,
   Receipt,
-  RefreshCw,
-  Search,
   Sparkles,
   TrendingUp,
   Users,
 } from "lucide-react";
-import * as React from "react";
+import type * as React from "react";
 import { DataTable } from "@/components/blocks/data-table";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/registry/ui/avatar";
@@ -42,17 +37,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/registry/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItemContent,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuGroupLabel,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/registry/ui/dropdown-menu";
-import { Input } from "@/registry/ui/input";
 import { Progress } from "@/registry/ui/progress";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 import { Separator } from "@/registry/ui/separator";
@@ -60,26 +44,8 @@ import { Tabs, TabsListContent, TabsPanel, TabsTab } from "@/registry/ui/tabs";
 import { toast } from "@/registry/ui/toast";
 import { ChartMixedAxes } from "./chart-mixed-axes";
 import { KpiSparkGrid } from "./kpi-card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./table";
 import { TeamManagement } from "./team-management";
-
-type TxnStatus = "paid" | "pending" | "failed";
-type Txn = {
-  id: string;
-  date: string;
-  customer: string;
-  email: string;
-  amount: number;
-  status: TxnStatus;
-  method: "Card" | "Bank" | "Wallet";
-};
+import { TransactionsTable, transactions } from "./transactions-table";
 
 type Activity = {
   id: string;
@@ -88,90 +54,6 @@ type Activity = {
   time: string;
   tag?: "alert" | "info" | "success";
 };
-
-const transactions: Txn[] = [
-  {
-    amount: 18420,
-    customer: "Aster Labs",
-    date: "Jan 30, 2026",
-    email: "billing@asterlabs.com",
-    id: "INV-10492",
-    method: "Card",
-    status: "paid",
-  },
-  {
-    amount: 3920,
-    customer: "Northwind",
-    date: "Jan 30, 2026",
-    email: "ap@northwind.io",
-    id: "INV-10491",
-    method: "Bank",
-    status: "pending",
-  },
-  {
-    amount: 1299,
-    customer: "Kairo Studio",
-    date: "Jan 29, 2026",
-    email: "finance@kairo.studio",
-    id: "INV-10490",
-    method: "Wallet",
-    status: "paid",
-  },
-  {
-    amount: 8420,
-    customer: "Veridian",
-    date: "Jan 29, 2026",
-    email: "ops@veridian.co",
-    id: "INV-10489",
-    method: "Card",
-    status: "failed",
-  },
-  {
-    amount: 2190,
-    customer: "Orbital",
-    date: "Jan 28, 2026",
-    email: "accounts@orbital.app",
-    id: "INV-10488",
-    method: "Bank",
-    status: "paid",
-  },
-  {
-    amount: 5600,
-    customer: "Helios Systems",
-    date: "Jan 28, 2026",
-    email: "billing@helios.systems",
-    id: "INV-10487",
-    method: "Card",
-    status: "paid",
-  },
-  {
-    amount: 980,
-    customer: "Monoform",
-    date: "Jan 27, 2026",
-    email: "finance@monoform.design",
-    id: "INV-10486",
-    method: "Wallet",
-    status: "paid",
-  },
-  {
-    amount: 14750,
-    customer: "Polaris Tech",
-    date: "Jan 27, 2026",
-    email: "ap@polaristech.ai",
-    id: "INV-10485",
-    method: "Bank",
-    status: "pending",
-  },
-  {
-    amount: 3200,
-    customer: "NovaWorks",
-    date: "Jan 26, 2026",
-    email: "billing@novaworks.dev",
-    id: "INV-10484",
-    method: "Card",
-    status: "paid",
-  },
-];
 
 const topCustomers = [
   { change: 8.2, mrr: 18420, name: "Aster Labs", plan: "Enterprise" },
@@ -254,29 +136,6 @@ function formatMoney(amount: number) {
   });
 }
 
-function StatusBadge({ status }: { status: TxnStatus }) {
-  if (status === "paid")
-    return (
-      <Badge className="bg-primary/15 text-primary hover:bg-primary/15">
-        Paid
-      </Badge>
-    );
-  if (status === "pending")
-    return (
-      <Badge
-        className="bg-muted text-foreground hover:bg-muted"
-        variant="secondary"
-      >
-        Pending
-      </Badge>
-    );
-  return (
-    <Badge className="bg-destructive/15 text-destructive hover:bg-destructive/15">
-      Failed
-    </Badge>
-  );
-}
-
 function Delta({ value, trend }: { value: string; trend: "up" | "down" }) {
   const Icon = trend === "up" ? ArrowUpRight : ArrowDownRight;
   return (
@@ -331,41 +190,8 @@ type DashboardContentProps = {
 };
 
 export function DashboardContent({
-  showOnboarding = true,
+  showOnboarding: _showOnboarding = true,
 }: DashboardContentProps) {
-  const [query, setQuery] = React.useState("");
-  const [showPaid, setShowPaid] = React.useState(true);
-  const [showPending, setShowPending] = React.useState(true);
-  const [showFailed, setShowFailed] = React.useState(true);
-
-  const filtered = React.useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return transactions.filter((t) => {
-      const statusOk =
-        (t.status === "paid" && showPaid) ||
-        (t.status === "pending" && showPending) ||
-        (t.status === "failed" && showFailed);
-
-      const queryOk =
-        !q ||
-        t.id.toLowerCase().includes(q) ||
-        t.customer.toLowerCase().includes(q) ||
-        t.email.toLowerCase().includes(q);
-
-      return statusOk && queryOk;
-    });
-  }, [query, showPaid, showPending, showFailed]);
-
-  const totalRevenue = transactions.reduce(
-    (acc, t) => acc + (t.status === "paid" ? t.amount : 0),
-    0,
-  );
-  const paidCount = transactions.filter((t) => t.status === "paid").length;
-  const pendingCount = transactions.filter(
-    (t) => t.status === "pending",
-  ).length;
-  const failedCount = transactions.filter((t) => t.status === "failed").length;
-
   async function handleGenerateInsights() {
     const toastId = toast.add({
       customContent: (
@@ -523,187 +349,7 @@ export function DashboardContent({
         <KpiSparkGrid />
         <DataTable />
         <section className="grid gap-4 lg:grid-cols-3">
-          <Card className="lg:col-span-2">
-            <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
-              <div className="space-y-1">
-                <CardTitle className="text-base">Transactions</CardTitle>
-                <CardDescription>
-                  Recent invoices and payment attempts.
-                </CardDescription>
-              </div>
-              <div className="flex items-center gap-2">
-                <Button className="gap-2" size="sm" variant="secondary">
-                  <RefreshCw className="h-4 w-4" />
-                  Refresh
-                </Button>
-                <Button
-                  className="gap-2"
-                  onClick={handleExport}
-                  size="sm"
-                  variant="outline"
-                >
-                  <Download className="h-4 w-4" />
-                  Export
-                </Button>
-              </div>
-            </CardHeader>
-
-            <CardContent className="space-y-4">
-              <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                <div className="relative w-full md:max-w-md">
-                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    className="pl-8"
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search by invoice, customer, email…"
-                    value={query}
-                  />
-                </div>
-
-                <DropdownMenu>
-                  <DropdownMenuTrigger
-                    render={
-                      <Button className="gap-2" size="sm" variant="outline">
-                        <Filter className="h-4 w-4" />
-                        Filter
-                      </Button>
-                    }
-                  ></DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-40">
-                    <DropdownMenuGroup>
-                      <DropdownMenuGroupLabel>Statuses</DropdownMenuGroupLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuCheckboxItemContent
-                        checked={showPaid}
-                        indicatorPlacement="end"
-                        onCheckedChange={(v) => setShowPaid(!!v)}
-                      >
-                        Paid ({paidCount})
-                      </DropdownMenuCheckboxItemContent>
-                      <DropdownMenuCheckboxItemContent
-                        checked={showPending}
-                        indicatorPlacement="end"
-                        onCheckedChange={(v) => setShowPending(!!v)}
-                      >
-                        Pending ({pendingCount})
-                      </DropdownMenuCheckboxItemContent>
-                      <DropdownMenuCheckboxItemContent
-                        checked={showFailed}
-                        indicatorPlacement="end"
-                        onCheckedChange={(v) => setShowFailed(!!v)}
-                      >
-                        Failed ({failedCount})
-                      </DropdownMenuCheckboxItemContent>
-                    </DropdownMenuGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-
-              <div className="rounded-lg border">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[140px]">Invoice</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Customer</TableHead>
-                      <TableHead className="hidden md:table-cell">
-                        Method
-                      </TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Amount</TableHead>
-                      <TableHead className="w-[40px]" />
-                    </TableRow>
-                  </TableHeader>
-
-                  <TableBody>
-                    {filtered.map((t) => (
-                      <TableRow
-                        className="even:bg-primary/5 hover:bg-card even:hover:bg-primary/5 border-0"
-                        key={t.id}
-                      >
-                        <TableCell className="font-medium">{t.id}</TableCell>
-                        <TableCell className="text-muted-foreground">
-                          {t.date}
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex flex-col">
-                            <span>{t.customer}</span>
-                            <span className="text-xs text-muted-foreground">
-                              {t.email}
-                            </span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell text-muted-foreground">
-                          {t.method}
-                        </TableCell>
-                        <TableCell>
-                          <StatusBadge status={t.status} />
-                        </TableCell>
-                        <TableCell className="text-right tabular-nums">
-                          {formatMoney(t.amount)}
-                        </TableCell>
-                        <TableCell className="text-right">
-                          <DropdownMenu>
-                            <DropdownMenuTrigger
-                              render={
-                                <Button
-                                  className="hover:bg-accent data-popup-open:bg-accent"
-                                  size="icon-xs"
-                                  variant="unstyled"
-                                >
-                                  <MoreHorizontal className="h-4 w-4" />
-                                  <span className="sr-only">Actions</span>
-                                </Button>
-                              }
-                            />
-
-                            <DropdownMenuContent
-                              align="end"
-                              matchAnchorWidth={false}
-                            >
-                              <DropdownMenuItem>View invoice</DropdownMenuItem>
-                              <DropdownMenuItem>Copy link</DropdownMenuItem>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem variant="destructive">
-                                Report issue
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-
-                    {filtered.length === 0 && (
-                      <TableRow>
-                        <TableCell
-                          className="py-10 text-center text-sm text-muted-foreground"
-                          colSpan={7}
-                        >
-                          No results. Try another search or filter.
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </div>
-
-              <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <CreditCard className="h-4 w-4" />
-                  <span>Paid revenue:</span>
-                  <span className="font-medium text-foreground tabular-nums">
-                    {formatMoney(totalRevenue)}
-                  </span>
-                </div>
-                <Separator className="h-5" orientation="vertical" />
-                <div className="flex items-center gap-2">
-                  <Sparkles className="h-4 w-4" />
-                  <span>Conversion uplift:</span>
-                  <span className="font-medium text-foreground">+1.7%</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <TransactionsTable onExport={handleExport} />
 
           {/* Right rail */}
           <div className="flex flex-col gap-4">
@@ -966,7 +612,7 @@ export function DashboardContent({
           </Card>
         </section>
         <section className="grid grid-cols-2 gap-6">
-          <Card className="">
+          <Card>
             <CardHeader>
               <CardTitle className="text-base">Account owners</CardTitle>
               <CardDescription>Who’s on point for renewals.</CardDescription>
@@ -1042,7 +688,7 @@ export function DashboardContent({
           <TeamManagement />
         </section>
         <section className="w-full">
-          <Card className="">
+          <Card>
             <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
               <div className="space-y-1">
                 <CardTitle className="text-base">Insights</CardTitle>

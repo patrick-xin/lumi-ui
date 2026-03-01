@@ -36,9 +36,9 @@ const buttonVariants = cva(
           "data-popup-open:bg-primary/90",
         ],
         destructive: [
-          "bg-destructive text-white hover:bg-destructive/90 dark:bg-destructive/30 text-destructive dark:hover:bg-destructive/40",
+          "text-white bg-destructive/80 hover:bg-destructive/70",
           "focus-visible:outline-destructive focus-visible:outline-offset-2 focus-visible:ring-destructive/30",
-          "data-popup-open:bg-destructive/90 dark:data-popup-open:bg-destructive/30 dark:data-popup-open:hover:bg-destructive/30",
+          "data-popup-open:bg-destructive/70",
         ],
         ghost: "hover:bg-accent hover:text-accent-foreground shadow-none",
         glow: "bg-transparent border border-primary/30 dark:border-primary/15 hover:bg-accent dark:hover:bg-accent/30 shadow-md shadow-primary/10 dark:shadow-sm",

@@ -13,15 +13,7 @@ import {
 export function PopoverWithArrowDemo() {
   return (
     <Popover defaultOpen>
-      <PopoverTrigger
-        render={
-          <Button
-            className="data-popup-open:bg-accent/60"
-            size="icon"
-            variant="outline"
-          />
-        }
-      >
+      <PopoverTrigger render={<Button size="icon" variant="outline" />}>
         <BellIcon />
       </PopoverTrigger>
       <PopoverContent showArrow>
