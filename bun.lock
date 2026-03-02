@@ -25,6 +25,7 @@
         "@hookform/resolvers": "^5.2.2",
         "@icons-pack/react-simple-icons": "^13.8.0",
         "@lumi-ui/ui": "workspace:*",
+        "@tanstack/react-hotkeys": "^0.3.0",
         "@tanstack/react-table": "^8.21.3",
         "ai": "^6.0.90",
         "class-variance-authority": "^0.7.1",
@@ -590,7 +591,15 @@
 
     "@tailwindcss/postcss": ["@tailwindcss/postcss@4.1.18", "", { "dependencies": { "@alloc/quick-lru": "^5.2.0", "@tailwindcss/node": "4.1.18", "@tailwindcss/oxide": "4.1.18", "postcss": "^8.4.41", "tailwindcss": "4.1.18" } }, "sha512-Ce0GFnzAOuPyfV5SxjXGn0CubwGcuDB0zcdaPuCSzAa/2vII24JTkH+I6jcbXLb1ctjZMZZI6OjDaLPJQL1S0g=="],
 
+    "@tanstack/hotkeys": ["@tanstack/hotkeys@0.3.0", "", { "dependencies": { "@tanstack/store": "^0.9.1" } }, "sha512-y2uawGLj/GrMNDffaaC0YS7tZPwchDbWAKnU/XObjtyQ4oRGVLyg/2PPbT/hWNQ2PbbrolB098NvlYM0OR3XSw=="],
+
+    "@tanstack/react-hotkeys": ["@tanstack/react-hotkeys@0.3.0", "", { "dependencies": { "@tanstack/hotkeys": "0.3.0", "@tanstack/react-store": "^0.9.1" }, "peerDependencies": { "react": ">=16.8", "react-dom": ">=16.8" } }, "sha512-DkSu+8lDwUGzZLk1WVgT6XtfxTa7mFWOGmiDYK+2pe7GqbnuQgUIQPRdo82yCuHYzNoEJgjoYo/HJ8frD4mmcA=="],
+
+    "@tanstack/react-store": ["@tanstack/react-store@0.9.1", "", { "dependencies": { "@tanstack/store": "0.9.1", "use-sync-external-store": "^1.6.0" }, "peerDependencies": { "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0" } }, "sha512-YzJLnRvy5lIEFTLWBAZmcOjK3+2AepnBv/sr6NZmiqJvq7zTQggyK99Gw8fqYdMdHPQWXjz0epFKJXC+9V2xDA=="],
+
     "@tanstack/react-table": ["@tanstack/react-table@8.21.3", "", { "dependencies": { "@tanstack/table-core": "8.21.3" }, "peerDependencies": { "react": ">=16.8", "react-dom": ">=16.8" } }, "sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww=="],
+
+    "@tanstack/store": ["@tanstack/store@0.9.1", "", {}, "sha512-+qcNkOy0N1qSGsP7omVCW0SDrXtaDcycPqBDE726yryiA5eTDFpjBReaYjghVJwNf1pcPMyzIwTGlYjCSQR0Fg=="],
 
     "@tanstack/table-core": ["@tanstack/table-core@8.21.3", "", {}, "sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg=="],
 

@@ -28,6 +28,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@icons-pack/react-simple-icons": "^13.8.0",
     "@lumi-ui/ui": "workspace:*",
+    "@tanstack/react-hotkeys": "^0.3.0",
     "@tanstack/react-table": "^8.21.3",
     "ai": "^6.0.90",
     "class-variance-authority": "^0.7.1",

@@ -8,7 +8,7 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "checkbox",
+    "@lumi-ui/checkbox",
     "utils"
   ],
   "files": [
