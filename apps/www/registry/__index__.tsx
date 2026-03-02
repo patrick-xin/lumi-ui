@@ -2698,6 +2698,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "command-menu-hotkey": {
+    name: "command-menu-hotkey",
+    description: "",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [{
+      path: "components/examples/ui/command-menu/command-menu-hotkey.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/command-menu/command-menu-hotkey");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "command-menu-hotkey";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "context-menu-composite": {
     name: "context-menu-composite",
     description: "",

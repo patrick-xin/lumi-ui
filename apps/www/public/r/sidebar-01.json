@@ -19,7 +19,7 @@
     "@lumi-ui/collapsible",
     "@lumi-ui/toggle-group",
     "@lumi-ui/toast",
-    "card",
+    "@lumi-ui/card",
     "@lumi-ui/breadcrumb",
     "@lumi-ui/kbd"
   ],

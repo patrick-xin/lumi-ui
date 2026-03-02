@@ -3,8 +3,8 @@
 import { AlertDialog as BaseAlertDialog } from "@base-ui/react/alert-dialog";
 import type { VariantProps } from "class-variance-authority";
 import type * as React from "react";
-import { popupVariants, viewportVariants } from "registry/ui/dialog";
 import { cn } from "@/registry/lib/utils";
+import { popupVariants, viewportVariants } from "@/registry/ui/dialog";
 
 function AlertDialog<Payload>(props: BaseAlertDialog.Root.Props<Payload>) {
   return <BaseAlertDialog.Root data-slot="alert-dialog" {...props} />;

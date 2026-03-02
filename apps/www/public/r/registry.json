@@ -490,7 +490,7 @@
       "type": "registry:ui",
       "description": "Provides a shared state to a series of checkboxes.",
       "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "registryDependencies": ["checkbox", "utils"],
+      "registryDependencies": ["@lumi-ui/checkbox", "utils"],
       "files": [
         {
           "path": "registry/ui/checkbox-group.tsx",
@@ -828,7 +828,7 @@
         "@lumi-ui/collapsible",
         "@lumi-ui/toggle-group",
         "@lumi-ui/toast",
-        "card",
+        "@lumi-ui/card",
         "@lumi-ui/breadcrumb",
         "@lumi-ui/kbd"
       ],
