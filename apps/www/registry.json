@@ -18,6 +18,7 @@
         "@lumi-ui/checkbox-group",
         "@lumi-ui/collapsible",
         "@lumi-ui/combobox",
+        "@lumi-ui/command-menu",
         "@lumi-ui/context-menu",
         "@lumi-ui/dialog",
         "@lumi-ui/drawer",
@@ -336,6 +337,31 @@
       "files": [
         {
           "path": "registry/ui/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command-menu",
+      "title": "Command Menu",
+      "description": "A mobile-friendly command palette for search and quick actions.",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils",
+        "@lumi-ui/arrow-svg",
+        "@lumi-ui/input",
+        "@lumi-ui/dialog",
+        "@lumi-ui/scroll-area",
+        "@lumi-ui/autocomplete"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/command-menu.tsx",
           "type": "registry:ui"
         }
       ]

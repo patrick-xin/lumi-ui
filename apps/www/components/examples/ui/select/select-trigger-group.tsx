@@ -16,7 +16,7 @@ export const SelectTriggerGroupDemo = () => {
           <span className="text-xs font-semibold">Animate icon</span>
           <Select items={fruits}>
             <SelectTriggerGroup
-              className="data-[popup-open]:[&_svg]:rotate-180"
+              className="data-popup-open:[&_svg]:rotate-180"
               placeholder="Select a fruit"
             />
             <SelectContent>

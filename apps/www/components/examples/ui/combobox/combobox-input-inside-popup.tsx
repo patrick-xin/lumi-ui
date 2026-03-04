@@ -13,40 +13,45 @@ import {
   ComboboxTrigger,
   ComboboxValue,
 } from "@/registry/ui/combobox";
+import { Field, FieldLabel } from "@/registry/ui/field";
 import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupDemo() {
   return (
-    <Combobox defaultValue={teamMembers[0]} items={teamMembers}>
-      <ComboboxTrigger
-        className={buttonVariants({
-          className:
-            "justify-between px-3 w-64 data-[popup-open]:bg-accent data-[popup-open]:hover:bg-accent",
-          variant: "outline",
-        })}
-      >
-        <ComboboxValue />
-        <ComboboxIcon>
-          <ChevronsUpDownIcon />
-        </ComboboxIcon>
-      </ComboboxTrigger>
-      <ComboboxContent>
-        <ComboboxInputGroup
-          addonIcon={<SearchIcon />}
-          placeholder="Find member..."
-          variant="ghost"
-        />
-        <Separator />
-        <ComboboxEmpty>No member found.</ComboboxEmpty>
-        <ComboboxList>
-          {(member: TeamMember) => (
-            <ComboboxItemContent key={member.id} value={member}>
-              {member.label}
-            </ComboboxItemContent>
-          )}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+    <Field>
+      <FieldLabel nativeLabel={false} render={<div />}>
+        Team Member
+      </FieldLabel>
+      <Combobox defaultValue={teamMembers[0]} items={teamMembers}>
+        <ComboboxTrigger
+          className={buttonVariants({
+            className: "justify-between px-3 w-64",
+            variant: "outline",
+          })}
+        >
+          <ComboboxValue />
+          <ComboboxIcon>
+            <ChevronsUpDownIcon />
+          </ComboboxIcon>
+        </ComboboxTrigger>
+        <ComboboxContent>
+          <ComboboxInputGroup
+            addonIcon={<SearchIcon />}
+            placeholder="Find member..."
+            variant="ghost"
+          />
+          <Separator />
+          <ComboboxEmpty>No member found.</ComboboxEmpty>
+          <ComboboxList>
+            {(member: TeamMember) => (
+              <ComboboxItemContent key={member.id} value={member}>
+                {member.label}
+              </ComboboxItemContent>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    </Field>
   );
 }
 

@@ -16,6 +16,7 @@
     "@lumi-ui/checkbox-group",
     "@lumi-ui/collapsible",
     "@lumi-ui/combobox",
+    "@lumi-ui/command-menu",
     "@lumi-ui/context-menu",
     "@lumi-ui/dialog",
     "@lumi-ui/drawer",
