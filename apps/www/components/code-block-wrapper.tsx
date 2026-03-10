@@ -32,7 +32,7 @@ export function CodeBlockWrapper({
       {...props}
     >
       {hasCaption ? (
-        <div className="sticky top-0 z-20 flex items-center justify-between border-b bg-code text-code-foreground px-4 py-2 h-12">
+        <div className="sticky top-0 left-0 z-20 flex items-center justify-between border-b bg-code text-code-foreground px-4 py-2 h-12 w-[100cqi]">
           <figcaption className="[&_svg]:text-code-foreground flex items-center gap-2 [&_svg]:size-4 [&_svg]:opacity-70">
             {icon}
             <span className="truncate">{title}</span>
@@ -42,7 +42,7 @@ export function CodeBlockWrapper({
           </div>
         </div>
       ) : (
-        <div className="sticky top-0 z-20 flex justify-end h-0 w-full pointer-events-none overflow-visible">
+        <div className="sticky top-0 left-0 z-20 flex justify-end h-0 w-[100cqi] pointer-events-none overflow-visible">
           <div className="mt-2 mr-2 pointer-events-auto">
             <CopyButton code={code} variant="glow" />
           </div>

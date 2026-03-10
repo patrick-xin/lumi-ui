@@ -157,6 +157,7 @@ const popupVariants = cva(
         ),
         scrollable: cn(
           "relative overflow-hidden min-h-0 h-full max-h-full max-w-full",
+          "[&>[data-slot=scroll-area-root]]:min-h-0",
           "flex flex-col gap-6 w-[min(40rem,calc(100vw-2rem))] rounded-md animate-fade-zoom",
         ),
         stacked: cn(

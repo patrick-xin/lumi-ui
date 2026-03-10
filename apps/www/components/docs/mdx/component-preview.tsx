@@ -29,7 +29,7 @@ export async function ComponentPreview({
 
   if (hideSource) {
     return (
-      <div className="grid w-full *:[figure]:h-[420px] *:[figure]:overflow-scroll *:[figure]:no-scrollbar">
+      <div className="grid w-full [container-type:inline-size] *:[figure]:h-[420px] *:[figure]:overflow-scroll *:[figure]:no-scrollbar">
         <Component />
       </div>
     );
