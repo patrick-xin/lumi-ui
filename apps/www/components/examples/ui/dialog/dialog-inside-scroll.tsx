@@ -26,7 +26,7 @@ export function DialogInsideScrollDemo() {
               content to scroll with fixed header and footer.
             </DialogDescription>
           </DialogHeader>
-          <ScrollArea className="pr-4 min-h-0">
+          <ScrollArea className="pr-4 space-y-4">
             <div className="space-y-4">
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
@@ -47,8 +47,15 @@ export function DialogInsideScrollDemo() {
         <DialogTrigger
           render={<Button variant="outline">Without header footer</Button>}
         />
-        <DialogContent className="sm:p-2" layout="scrollable">
-          <div className="overflow-y-auto px-4">
+        <DialogContent layout="scrollable">
+          <DialogHeader>
+            <DialogTitle>Dialog</DialogTitle>
+            <DialogDescription>
+              This layout keeps the popup fully on screen while allowing its
+              content to scroll with fixed header and footer.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="overflow-y-auto pr-4">
             <div className="space-y-4">
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
@@ -60,6 +67,9 @@ export function DialogInsideScrollDemo() {
               ))}
             </div>
           </div>
+          <DialogFooter>
+            <DialogClose render={<Button>Close</Button>} />
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

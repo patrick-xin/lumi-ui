@@ -243,7 +243,7 @@ export function ComponentView({
             </TabsPanel>
             <TabsPanel keepMounted value="code">
               <div
-                className="grid w-full overflow-scroll no-scrollbar overscroll-contain"
+                className="grid w-full overflow-scroll no-scrollbar overscroll-contain [container-type:inline-size]"
                 style={{ height }}
               >
                 {source}
