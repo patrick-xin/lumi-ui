@@ -93,13 +93,13 @@ function CommandMenuFooter({
   );
 }
 
-function Command({
+const Command = (({
   autoHighlight = "always",
   inline = true,
   keepHighlight = true,
   open = true,
   ...props
-}: React.ComponentProps<typeof Autocomplete>) {
+}: React.ComponentProps<typeof Autocomplete>) => {
   return (
     <Autocomplete
       autoHighlight={autoHighlight}
@@ -110,7 +110,7 @@ function Command({
       {...props}
     />
   );
-}
+}) as typeof Autocomplete;
 
 function CommandInput({
   className,

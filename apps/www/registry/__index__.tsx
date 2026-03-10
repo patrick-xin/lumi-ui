@@ -434,6 +434,28 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "command-menu": {
+    name: "command-menu",
+    title: "Command Menu",
+    description: "A mobile-friendly command palette for search and quick actions.",
+    type: "registry:ui",
+    target: "",
+    registryDependencies: ["@base-ui/react","lucide-react","class-variance-authority"],
+    files:     [
+          {
+                "path": "registry/ui/command-menu.tsx",
+                "target": "",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/ui/command-menu");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "command-menu";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "preview-card": {
     name: "preview-card",
     title: "Preview Card",
@@ -2684,7 +2706,7 @@ export const components: ComponentRegistry = {
     name: "command-menu-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: undefined,
+    registryDependencies: ["command-menu"],
     files: [{
       path: "components/examples/ui/command-menu/command-menu-demo.tsx",
       type: "registry:example",
@@ -2702,7 +2724,7 @@ export const components: ComponentRegistry = {
     name: "command-menu-hotkey",
     description: "",
     type: "registry:example",
-    registryDependencies: undefined,
+    registryDependencies: ["command-menu"],
     files: [{
       path: "components/examples/ui/command-menu/command-menu-hotkey.tsx",
       type: "registry:example",

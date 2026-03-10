@@ -18,6 +18,7 @@
         "@lumi-ui/checkbox-group",
         "@lumi-ui/collapsible",
         "@lumi-ui/combobox",
+        "@lumi-ui/command-menu",
         "@lumi-ui/context-menu",
         "@lumi-ui/dialog",
         "@lumi-ui/drawer",
@@ -341,6 +342,31 @@
       ]
     },
     {
+      "name": "command-menu",
+      "title": "Command Menu",
+      "description": "A mobile-friendly command palette for search and quick actions.",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils",
+        "@lumi-ui/arrow-svg",
+        "@lumi-ui/input",
+        "@lumi-ui/dialog",
+        "@lumi-ui/scroll-area",
+        "@lumi-ui/autocomplete"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/command-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "preview-card",
       "title": "Preview Card",
       "description": "An accessible popup anchored to a button.",
@@ -458,7 +484,7 @@
       "description": "Provides a shared state to a series of toggle buttons.",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "registryDependencies": ["toggle", "utils"],
+      "registryDependencies": ["@lumi-ui/toggle", "utils"],
       "files": [
         {
           "path": "registry/ui/toggle-group.tsx",
