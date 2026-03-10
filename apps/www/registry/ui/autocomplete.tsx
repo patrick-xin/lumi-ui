@@ -5,9 +5,9 @@ import type { VariantProps } from "class-variance-authority";
 import { ChevronDown, X } from "lucide-react";
 import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 import { Button } from "@/registry/ui/button";
 import { inputVariants } from "@/registry/ui/input";
-import { ArrowSvg } from "./arrow-svg";
 
 const Autocomplete = BaseAutocomplete.Root;
 

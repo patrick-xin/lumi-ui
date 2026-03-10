@@ -175,8 +175,7 @@ function SheetContent({
         <BaseSheet.Popup
           className={cn(
             popupVariants({ side }),
-            inset &&
-              "rounded-md outline-1 outline-border dark:outline-offset-1 border-none",
+            inset && "rounded-md overlay-outline",
             className,
           )}
           data-slot="sheet-content"

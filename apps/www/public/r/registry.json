@@ -354,6 +354,7 @@
       "registryDependencies": [
         "utils",
         "@lumi-ui/arrow-svg",
+        "@lumi-ui/input",
         "@lumi-ui/dialog",
         "@lumi-ui/scroll-area",
         "@lumi-ui/autocomplete"
@@ -483,7 +484,7 @@
       "description": "Provides a shared state to a series of toggle buttons.",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "registryDependencies": ["toggle", "utils"],
+      "registryDependencies": ["@lumi-ui/toggle", "utils"],
       "files": [
         {
           "path": "registry/ui/toggle-group.tsx",

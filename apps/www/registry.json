@@ -484,7 +484,7 @@
       "description": "Provides a shared state to a series of toggle buttons.",
       "type": "registry:ui",
       "dependencies": ["@base-ui/react", "class-variance-authority"],
-      "registryDependencies": ["toggle", "utils"],
+      "registryDependencies": ["@lumi-ui/toggle", "utils"],
       "files": [
         {
           "path": "registry/ui/toggle-group.tsx",
