@@ -20,10 +20,12 @@ function Switch({ className, ...props }: BaseSwitch.Root.Props) {
   return (
     <BaseSwitch.Root
       className={cn(
-        "peer inline-flex h-4.5 w-8 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50",
-        "has-focus-visible:ring-4 focus-visible:outline-hidden",
+        "peer inline-flex h-4.5 w-8 shrink-0 items-center rounded-full shadow-xs transition-all border border-transparent",
+        "disabled:cursor-not-allowed disabled:opacity-50",
+        "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         "data-unchecked:bg-input data-checked:bg-input",
         "data-disabled:cursor-not-allowed data-disabled:opacity-50",
+        "aria-invalid:outline aria-invalid:outline-destructive/80 aria-invalid:ring-4 aria-invalid:ring-destructive/20",
         className,
       )}
       data-slot="switch"
