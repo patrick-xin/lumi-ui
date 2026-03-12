@@ -17,7 +17,7 @@ export function HighlightComparison() {
           className="w-56"
           render={<Button>Pseudo-element</Button>}
         />
-        <DropdownMenuContent>
+        <DropdownMenuContent showArrow>
           <DropdownMenuItem
             className={cn(
               BaseStyle,
@@ -37,8 +37,9 @@ export function HighlightComparison() {
           render={<Button>Margin or Padding</Button>}
         />
         <DropdownMenuContent
-        // Or style parent container
-        //className="px-3"
+          showArrow
+          // Or style parent container
+          //className="px-3"
         >
           <DropdownMenuItem
             className={cn(

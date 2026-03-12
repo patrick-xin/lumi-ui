@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { ProjectPopover } from "@/components/examples/ui/popover/popover-demo";
+import { SwitchCustomDemo } from "@/components/examples/ui/switch/switch-custom";
+import { SwitchDemo } from "@/components/examples/ui/switch/switch-demo";
+import { SwitchErrorDemo } from "@/components/examples/ui/switch/switch-error";
 import { ToggleGroupVerticalDemo } from "@/components/examples/ui/toggle-group/toggle-group-vertical";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -34,6 +37,9 @@ export default function Page() {
         <section className="max-w-4xl mx-auto flex items-center gap-4">
           <ProjectPopover />
           <ToggleGroupVerticalDemo />
+          <SwitchCustomDemo />
+          <SwitchErrorDemo />
+          <SwitchDemo />
         </section>
       </div>
     </div>
