@@ -311,7 +311,9 @@ function SidebarMenuButton({
         side="right"
         sideOffset={8}
         {...tooltipProps}
-      />
+      >
+        {tooltipProps.content}
+      </TooltipContent>
     </Tooltip>
   );
 }

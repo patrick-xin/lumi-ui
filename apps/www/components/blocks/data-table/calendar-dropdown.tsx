@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import * as React from "react";
 import type { DateRange } from "react-day-picker";
+import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
   DropdownMenu,
@@ -68,6 +69,7 @@ export const CalendarDropdown = <TData, TValue>({
           to: parseFilterDate(dateFilterValue.to),
         }
       : undefined;
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const [rangeOpen, setRangeOpen] = React.useState(false);
   const [dateOpen, setDateOpen] = React.useState(false);
   const rangeRef = React.useRef<HTMLDivElement | null>(null);
@@ -75,7 +77,20 @@ export const CalendarDropdown = <TData, TValue>({
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu
+        onOpenChange={(open, eventDetails) => {
+          if (
+            !open &&
+            (eventDetails.reason === "outside-press" ||
+              eventDetails.reason === "focus-out") &&
+            (dateOpen || rangeOpen)
+          ) {
+            return;
+          }
+          setMenuOpen(open);
+        }}
+        open={menuOpen}
+      >
         <DropdownMenuTrigger
           render={(props, state) => (
             <TooltipTrigger
@@ -85,7 +100,10 @@ export const CalendarDropdown = <TData, TValue>({
               payload={{ text: "Filter by date" }}
               render={
                 <Button
-                  className="data-popup-open:bg-accent data-popup-open:hover:bg-accent cursor-pointer"
+                  className={cn(
+                    "cursor-pointer",
+                    menuOpen && "bg-accent hover:bg-accent",
+                  )}
                   size="sm"
                   variant="ghost"
                 />
@@ -122,6 +140,7 @@ export const CalendarDropdown = <TData, TValue>({
           </DropdownMenuItem>
           <DropdownMenuItem
             className="text-sm justify-between"
+            closeOnClick={false}
             onClick={() => setRangeOpen(true)}
             ref={rangeRef}
           >
@@ -160,6 +179,8 @@ export const CalendarDropdown = <TData, TValue>({
             from,
             to,
           } satisfies RenewalDateRangeFilterValue);
+
+          setMenuOpen(false);
         }}
         open={rangeOpen}
         ref={rangeRef}
@@ -169,6 +190,7 @@ export const CalendarDropdown = <TData, TValue>({
         onOpenChange={setDateOpen}
         onValueChange={(date) => {
           column.setFilterValue(date ? format(date, "yyyy-MM-dd") : undefined);
+          setMenuOpen(false);
         }}
         open={dateOpen}
         ref={dateRef}
