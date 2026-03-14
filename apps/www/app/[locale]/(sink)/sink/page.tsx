@@ -1,12 +1,7 @@
 import Link from "next/link";
 import { DrawerDemo } from "@/components/examples/ui/drawer/drawer-demo";
 import { DrawerDirectionsDemo } from "@/components/examples/ui/drawer/drawer-directions";
-import { DrawerSelectionDemo } from "@/components/examples/ui/drawer/drawer-selection";
-import { ProjectPopover } from "@/components/examples/ui/popover/popover-demo";
-import { SwitchCustomDemo } from "@/components/examples/ui/switch/switch-custom";
-import { SwitchDemo } from "@/components/examples/ui/switch/switch-demo";
-import { SwitchErrorDemo } from "@/components/examples/ui/switch/switch-error";
-import { ToggleGroupVerticalDemo } from "@/components/examples/ui/toggle-group/toggle-group-vertical";
+import { DrawerStackedDemo } from "@/components/examples/ui/drawer/drawer-stacked";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import {
@@ -42,14 +37,16 @@ export default function Page() {
             Basic
             <DrawerDemo />
             <DrawerDirectionsDemo />
-            <DrawerSelectionDemo />
           </div>
 
+          <DrawerStackedDemo />
+
+          {/* 
           <ProjectPopover />
           <ToggleGroupVerticalDemo />
           <SwitchCustomDemo />
           <SwitchErrorDemo />
-          <SwitchDemo />
+          <SwitchDemo /> */}
         </section>
       </div>
     </div>

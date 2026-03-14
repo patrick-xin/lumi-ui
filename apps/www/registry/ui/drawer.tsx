@@ -104,10 +104,10 @@ function DrawerPopup({
   );
 }
 
-function DrawerInner({ className, ...props }: BaseDrawer.Content.Props) {
+function DrawerInnerContent({ className, ...props }: BaseDrawer.Content.Props) {
   return (
     <BaseDrawer.Content
-      className={cn("mx-auto w-full touch-auto", className)}
+      className={cn("mx-auto w-full", className)}
       data-slot="drawer-inner"
       {...props}
     />
@@ -170,6 +170,34 @@ function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+// Shared base styles (used by both drawer and drawer-stacked)
+const popupBaseStyles = cn(
+  "relative flex flex-col gap-4",
+  "bg-background text-foreground",
+  "outline outline-border",
+  "overflow-y-auto overscroll-contain",
+  "data-[swiping]:select-none",
+  "data-[ending-style]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
+  "[&>[data-slot=scroll-area-root]]:min-h-0",
+);
+
+const popupBottomBaseStyles = cn(
+  "w-full rounded-t-2xl",
+  "max-h-[calc(80vh+var(--drawer-bleed))]",
+  "-mb-(--drawer-bleed)",
+  "data-[ending-style]:[transform:translateY(calc(100%-var(--drawer-bleed)+2px))]",
+  "data-[starting-style]:[transform:translateY(calc(100%-var(--drawer-bleed)+2px))]",
+  "pb-[calc(1.5rem+env(safe-area-inset-bottom,0px)+3rem)]",
+);
+
+const backdropBaseStyles = cn(
+  "[--backdrop-opacity:0.2] dark:[--backdrop-opacity:0.7]",
+  "bg-black opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))]",
+  "duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]",
+  "data-[ending-style]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
+  "data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
+);
+
 const viewportVariants = cva("fixed inset-0 flex", {
   defaultVariants: {
     side: "bottom",
@@ -187,11 +215,9 @@ const viewportVariants = cva("fixed inset-0 flex", {
 
 const popupVariants = cva(
   cn(
-    "relative flex flex-col gap-4 h-auto bg-background text-foreground group/drawer-content outline outline-border touch-auto",
-    "overflow-y-auto overscroll-contain",
+    popupBaseStyles,
+    "group/drawer-content",
     "transition-transform duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]",
-    "data-[swiping]:select-none data-[ending-style]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
-    "[&>[data-slot=scroll-area-root]]:min-h-0",
   ),
   {
     defaultVariants: {
@@ -200,12 +226,9 @@ const popupVariants = cva(
     variants: {
       side: {
         bottom: cn(
-          "w-full rounded-t-2xl h-auto",
-          // adjust max height
-          "max-h-[calc(80vh+var(--drawer-bleed))]",
-          "-mb-(--drawer-bleed) px-4 sm:px-6 pt-4 pb-[calc(1.2rem+env(safe-area-inset-bottom,0px)+var(--drawer-bleed))]",
+          popupBottomBaseStyles,
+          "px-4 sm:px-6 pt-4",
           "[transform:translateY(var(--drawer-swipe-movement-y))]",
-          "data-[ending-style]:[transform:translateY(calc(100%-var(--drawer-bleed)+2px))] data-[starting-style]:[transform:translateY(calc(100%-var(--drawer-bleed)+2px))]",
         ),
         left: cn(
           "-ml-(--drawer-bleed) p-4 pl-[calc(1.2rem+var(--drawer-bleed))]",
@@ -246,11 +269,7 @@ function DrawerContent({
 }: BaseDrawer.Popup.Props & VariantProps<typeof popupVariants>) {
   return (
     <DrawerPortal>
-      <DrawerBackdrop
-        className={cn(
-          "[--backdrop-opacity:0.2] dark:[--backdrop-opacity:0.7] bg-black opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))] duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)] data-[ending-style]:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
-        )}
-      />
+      <BaseDrawer.Backdrop className="[--backdrop-opacity:0.2] dark:[--backdrop-opacity:0.7] fixed inset-0 min-h-dvh bg-black opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))] transition-opacity duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)] data-[swiping]:duration-0 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0 data-[ending-style]:duration-[calc(var(--drawer-swipe-strength)*400ms)] supports-[-webkit-touch-callout:none]:absolute" />
       <BaseDrawer.Viewport
         className={viewportVariants({ side })}
         data-slot="drawer-viewport"
@@ -261,9 +280,7 @@ function DrawerContent({
           data-slot="drawer-content"
           {...props}
         >
-          {side === "bottom" && (
-            <div className="w-12 h-1 flex-none mx-auto rounded-full bg-muted" />
-          )}
+          {side === "bottom" && <DrawerDragHandle />}
           {children}
         </BaseDrawer.Popup>
       </BaseDrawer.Viewport>
@@ -271,21 +288,33 @@ function DrawerContent({
   );
 }
 
+function DrawerDragHandle({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      className={cn(
+        "w-12 h-1 flex-none mx-auto rounded-full bg-muted",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
 const createDrawerHandle = BaseDrawer.createHandle;
 
 export {
-  createDrawerHandle,
   Drawer,
   DrawerBackdrop,
   DrawerClose,
-  // Composite component
-  DrawerContent,
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerIndent,
   DrawerIndentBackground,
-  DrawerInner,
+  DrawerInnerContent,
   DrawerPopup,
   DrawerPortal,
   DrawerProvider,
@@ -293,6 +322,15 @@ export {
   DrawerTitle,
   DrawerTrigger,
   DrawerViewport,
+  DrawerDragHandle,
+  createDrawerHandle,
+  // Variants
   popupVariants,
   viewportVariants,
+  // Shared base styles
+  popupBaseStyles,
+  popupBottomBaseStyles,
+  backdropBaseStyles,
+  // Composite component
+  DrawerContent,
 };
