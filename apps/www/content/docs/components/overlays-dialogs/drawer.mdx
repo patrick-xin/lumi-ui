@@ -1,0 +1,149 @@
+---
+title: Drawer
+description: A panel that slides in from the edge of the screen.
+links:
+  doc: https://base-ui.com/react/components/drawer
+  api: https://base-ui.com/react/components/drawer#api-reference
+status: new
+---
+
+<ComponentPreview name="drawer-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/drawer
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="drawer" title="drawer.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+Add `--drawer-bleed: 3rem;` to your global CSS to enable the bleed effect.
+
+
+## Basic Usage
+```tsx
+import {
+  Drawer,
+  DrawerClose,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerContent,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
+export function DrawerDemo() {
+  return (
+    <Drawer>
+      <DrawerTrigger>Open Drawer</DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+          <DrawerDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <DialogClose>Cancel</DialogClose>
+          <DialogClose>Continue</DialogClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+```
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+```tsx
+<DrawerProvider>
+  <DrawerIndentBackground />
+  <DrawerIndent>
+  <Drawer>
+    <DrawerTrigger />
+    <DrawerSwipeArea />
+    <DrawerContent>
+      <DrawerInner>
+        <DrawerHeader>
+          <DrawerTitle />
+          <DrawerDescription />
+        </DrawerHeader>
+        <DrawerFooter>
+          <DrawerClose />
+        </DrawerFooter>
+      </DrawerInner>
+    </DrawerPortal>
+  </Drawer>
+  </DrawerIndent>
+</DrawerProvider>
+```
+  </TabsPanel>
+  <TabsPanel value="primitive">
+```tsx
+<DrawerProvider>
+  <DrawerIndentBackground />
+  <DrawerIndent>
+  <Drawer>
+    <DrawerTrigger />
+    <DrawerSwipeArea />
+    <DrawerPortal>
+      <DrawerBackdrop />
+      <DrawerViewport>
+        <DrawerPopup>
+          <DrawerInner>
+            <DrawerHeader>
+              <DrawerTitle />
+              <DrawerDescription />
+            </DrawerHeader>
+            <DrawerFooter>
+              <DrawerClose />
+            </DrawerFooter>
+          </DrawerInner>
+        </DrawerPopup>
+      </DrawerViewport>
+    </DrawerPortal>
+  </Drawer>
+  </DrawerIndent>
+</DrawerProvider>
+```
+  </TabsPanel>
+</Tabs>
+
+## Directions
+<ComponentPreview name="drawer-directions" />
+
+## Cookbook
+
+### Enable selection inside drawer
+
+<ComponentPreview name="drawer-selection" />
+
+### Scrollable content
+
+By default, the height of drawer is about 80vh. You can control the height of drawer by either setting a fixed height in the scroll container or changing source code.
+
+<ComponentPreview name="drawer-scroll" />

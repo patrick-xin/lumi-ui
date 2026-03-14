@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { DrawerDemo } from "@/components/examples/ui/drawer/drawer-demo";
+import { DrawerDirectionsDemo } from "@/components/examples/ui/drawer/drawer-directions";
+import { DrawerSelectionDemo } from "@/components/examples/ui/drawer/drawer-selection";
 import { ProjectPopover } from "@/components/examples/ui/popover/popover-demo";
 import { SwitchCustomDemo } from "@/components/examples/ui/switch/switch-custom";
 import { SwitchDemo } from "@/components/examples/ui/switch/switch-demo";
@@ -35,6 +38,13 @@ export default function Page() {
       </header>
       <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
         <section className="max-w-4xl mx-auto flex items-center gap-4">
+          <div className="flex flex-col gap-4">
+            Basic
+            <DrawerDemo />
+            <DrawerDirectionsDemo />
+            <DrawerSelectionDemo />
+          </div>
+
           <ProjectPopover />
           <ToggleGroupVerticalDemo />
           <SwitchCustomDemo />

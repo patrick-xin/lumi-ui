@@ -27,7 +27,7 @@ export function DialogInsideScrollDemo() {
             </DialogDescription>
           </DialogHeader>
           <ScrollArea className="pr-4">
-            <div className="space-y-4">
+            <div aria-hidden className="flex flex-col gap-4 py-4">
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
                   className="flex h-48 w-full shrink-0 items-center justify-center rounded-md bg-accent/30"

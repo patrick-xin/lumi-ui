@@ -162,6 +162,20 @@
       ]
     },
     {
+      "name": "drawer",
+      "title": "Drawer",
+      "description": "A panel that slides in from the edge of the screen.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": ["utils", "@lumi-ui/button"],
+      "files": [
+        {
+          "path": "registry/ui/drawer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "tabs",
       "title": "Tabs",
       "description": "A component for toggling between related panels on the same page.",

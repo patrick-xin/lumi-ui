@@ -64,6 +64,8 @@
   /* Mobile vs Desktop Widths */
   --toast-max-width-mobile: 80%; 
   --toast-max-width-desktop: var(--toast-width);
+
+  --drawer-bleed: 3rem;
 }
 
 @layer base {
