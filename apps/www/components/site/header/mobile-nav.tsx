@@ -3,7 +3,6 @@
 import Link, { type LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
-import { Logo } from "@/components/logo";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { cn } from "@/lib/utils";
@@ -45,7 +44,7 @@ export function MobileNav({
       <DialogPortal>
         <DialogPopup className="top-16 bg-background/80 backdrop-blur-md h-[calc(100dvh-4rem)] fixed w-screen py-0 px-4">
           <div className="flex h-full flex-col gap-4">
-            <ScrollArea gradientScrollFade noScrollBar>
+            <ScrollArea className="flex-none" gradientScrollFade noScrollBar>
               <nav>
                 <TreeNavigation
                   navGroups={navGroups}
@@ -54,8 +53,7 @@ export function MobileNav({
               </nav>
             </ScrollArea>
 
-            <div className="flex items-center justify-between pb-4">
-              <Logo />
+            <div className="flex items-center absolute bottom-0 right-4 z-100 justify-between pb-4">
               <div className="flex items-center gap-2">
                 <ThemeSwitcher />
                 <ModeSwitcher />

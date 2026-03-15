@@ -9,6 +9,7 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
+  DrawerDragHandle,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -100,6 +101,7 @@ export function DrawerDirectionsDemo() {
       >
         {({ payload: direction }) => (
           <DrawerContent side={direction?.direction}>
+            {direction?.direction === "bottom" && <DrawerDragHandle />}
             <DrawerHeader>
               <DrawerTitle>Drawer</DrawerTitle>
               <DrawerDescription>

@@ -12,7 +12,7 @@ import {
 export function SelectGroupedDemo() {
   return (
     <Select items={[...fruits, ...vegetables, ...proteins]}>
-      <SelectTriggerGroup placeholder="Select food" />
+      <SelectTriggerGroup label="Food" placeholder="Select food" />
       <SelectContent alignItemWithTrigger>
         <SelectGroup>
           <SelectGroupLabel>Fruits</SelectGroupLabel>

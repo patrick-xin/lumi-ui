@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { DrawerDemo } from "@/components/examples/ui/drawer/drawer-demo";
 import { DrawerDirectionsDemo } from "@/components/examples/ui/drawer/drawer-directions";
-import { DrawerStackedDemo } from "@/components/examples/ui/drawer/drawer-stacked";
+import { DrawerSwipeDemo } from "@/components/examples/ui/drawer/drawer-swipe";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import {
@@ -39,14 +39,7 @@ export default function Page() {
             <DrawerDirectionsDemo />
           </div>
 
-          <DrawerStackedDemo />
-
-          {/* 
-          <ProjectPopover />
-          <ToggleGroupVerticalDemo />
-          <SwitchCustomDemo />
-          <SwitchErrorDemo />
-          <SwitchDemo /> */}
+          <DrawerSwipeDemo />
         </section>
       </div>
     </div>

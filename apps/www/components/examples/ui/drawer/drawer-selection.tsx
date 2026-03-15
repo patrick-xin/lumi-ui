@@ -4,6 +4,7 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
+  DrawerDragHandle,
   DrawerFooter,
   DrawerHeader,
   DrawerInnerContent,
@@ -16,7 +17,8 @@ export function DrawerSelectionDemo() {
     <Drawer>
       <DrawerTrigger render={<Button variant="outline">Open drawer</Button>} />
       <DrawerContent>
-        <DrawerInnerContent className="mx-auto w-full max-w-lg space-y-4">
+        <DrawerDragHandle />
+        <DrawerInnerContent className="max-w-lg">
           <DrawerHeader>
             <DrawerTitle>Drawer Content</DrawerTitle>
             <DrawerDescription>

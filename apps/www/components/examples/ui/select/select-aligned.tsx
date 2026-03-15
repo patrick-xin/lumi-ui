@@ -8,7 +8,7 @@ import {
 export function SelectAlignItemWithTriggerDemo() {
   return (
     <Select items={fruits}>
-      <SelectTriggerGroup placeholder="Select a fruit" />
+      <SelectTriggerGroup label="Fruit" placeholder="Select a fruit" />
       <SelectContent alignItemWithTrigger>
         {fruits.map((fruit) => (
           <SelectItemContent key={fruit.value} value={fruit.value}>

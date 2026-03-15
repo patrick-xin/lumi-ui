@@ -21,6 +21,7 @@ export function SelectCustomRenderDemo() {
     <Select<Status> itemToStringValue={(status) => status.value}>
       <SelectTriggerGroup
         indicatorIcon={<ChevronsUpDownIcon />}
+        label="Status"
         placeholder="Select a status"
       >
         {(selected: Status) => {

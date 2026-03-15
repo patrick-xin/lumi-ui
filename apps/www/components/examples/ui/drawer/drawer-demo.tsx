@@ -15,6 +15,7 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
+  DrawerDragHandle,
   DrawerFooter,
   DrawerHeader,
   DrawerInnerContent,
@@ -48,7 +49,8 @@ export function DrawerDemo() {
     <Drawer>
       <DrawerTrigger render={<Button variant="outline">Open Drawer</Button>} />
       <DrawerContent>
-        <DrawerInnerContent className="mx-auto w-full max-w-sm space-y-4">
+        <DrawerDragHandle />
+        <DrawerInnerContent className="max-w-sm">
           <DrawerHeader>
             <DrawerTitle>Daily Calorie Goal</DrawerTitle>
             <DrawerDescription>

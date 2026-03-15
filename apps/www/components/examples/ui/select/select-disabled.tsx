@@ -8,18 +8,18 @@ import {
 } from "@/registry/ui/select";
 
 const fruits = [
-  { value: "apple", label: "Apple" },
-  { value: "banana", label: "Banana" },
-  { value: "blueberry", label: "Blueberry" },
-  { value: "grapes", label: "Grapes" },
-  { value: "pineapple", label: "Pineapple" },
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+  { label: "Blueberry", value: "blueberry" },
+  { label: "Grapes", value: "grapes" },
+  { label: "Pineapple", value: "pineapple" },
 ];
 
 export function SelectDisabledDemo() {
   return (
     <div className="flex gap-4">
       <Select items={fruits}>
-        <SelectTriggerGroup placeholder="Select a fruit" />
+        <SelectTriggerGroup label="Fruit" placeholder="Select a fruit" />
         <SelectContent>
           {fruits.map((fruit) => (
             <SelectItemContent
@@ -32,7 +32,7 @@ export function SelectDisabledDemo() {
           ))}
         </SelectContent>
       </Select>
-      <Select items={fruits} disabled>
+      <Select disabled items={fruits}>
         <SelectTriggerGroup placeholder="Select a fruit" />
         <SelectContent>
           {fruits.map((fruit) => (

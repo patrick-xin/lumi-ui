@@ -12,6 +12,25 @@ function Select<Value, Multiple extends boolean | undefined = false>(
   return <BaseSelect.Root {...props} data-slot="select" />;
 }
 
+function SelectLabel({
+  children,
+  className,
+  ...props
+}: BaseSelect.Label.Props) {
+  return (
+    <BaseSelect.Label
+      className={cn(
+        "flex items-center gap-2 text-sm leading-none font-medium cursor-default group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+        className,
+      )}
+      data-slot="select-label"
+      {...props}
+    >
+      {children}
+    </BaseSelect.Label>
+  );
+}
+
 function SelectTrigger({
   children,
   className,
@@ -244,6 +263,7 @@ type SelectTriggerGroupProps = Omit<BaseSelect.Trigger.Props, "children"> & {
   indicatorPlacement?: "start" | "end";
   placeholder?: string;
   children?: BaseSelect.Value.Props["children"];
+  label?: string;
 };
 
 function SelectTriggerGroup({
@@ -253,45 +273,49 @@ function SelectTriggerGroup({
   indicatorIcon,
   indicatorPlacement = "end",
   placeholder,
+  label,
   ...props
 }: SelectTriggerGroupProps) {
   return (
-    <BaseSelect.Trigger
-      className={cn(
-        "border shadow-xs bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60 data-popup-open:bg-accent data-popup-open:text-accent-foreground dark:data-popup-open:bg-accent/60",
-        "group flex items-center gap-2 min-w-32",
-        "rounded-md text-sm transition-[color,box-shadow]",
-        "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
-        "data-invalid:border-destructive data-invalid:ring-destructive/20 dark:data-invalid:ring-destructive/40",
-        "data-disabled:opacity-50 data-disabled:hover:bg-transparent",
-        "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
-        "data-[size=default]:h-9 data-[size=sm]:h-8 data-[size=lg]:h-10",
-        "data-[size=default]:py-1.5 data-[size=sm]:py-1 data-[size=lg]:py-2",
-        indicatorPlacement === "start" ? "pl-1" : "pl-3 pr-1",
-        className,
-      )}
-      data-size={size}
-      data-slot="select-trigger-group"
-      {...props}
-    >
-      <BaseSelect.Value
-        className="flex flex-1 items-center gap-2 truncate line-clamp-1 data-placeholder:text-muted-foreground data-placeholder:before:content-[attr(data-placeholder-text)]"
-        data-placeholder-text={placeholder}
-        data-slot="select-value"
-      >
-        {children}
-      </BaseSelect.Value>
-      <BaseSelect.Icon
+    <div className="flex flex-col gap-1.5">
+      {label && <SelectLabel>{label}</SelectLabel>}
+      <BaseSelect.Trigger
         className={cn(
-          "flex-none shrink-0 pointer-events-none size-6 flex items-center justify-center",
-          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:transition-all",
-          indicatorPlacement === "start" && "-order-1",
+          "border shadow-xs bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60 data-popup-open:bg-accent data-popup-open:text-accent-foreground dark:data-popup-open:bg-accent/60",
+          "group flex items-center gap-2 min-w-32",
+          "rounded-md text-sm transition-[color,box-shadow]",
+          "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
+          "data-invalid:border-destructive data-invalid:ring-destructive/20 dark:data-invalid:ring-destructive/40",
+          "data-disabled:opacity-50 data-disabled:hover:bg-transparent",
+          "[&>span[data-slot='select-value']]:flex-1 [&>span[data-slot='select-value']]:text-left [&>span[data-slot='select-value']]:truncate [&>span[data-slot='select-value']]:min-w-0",
+          "data-[size=default]:h-9 data-[size=sm]:h-8 data-[size=lg]:h-10",
+          "data-[size=default]:py-1.5 data-[size=sm]:py-1 data-[size=lg]:py-2",
+          indicatorPlacement === "start" ? "pl-1" : "pl-3 pr-1",
+          className,
         )}
-        data-slot="select-icon"
+        data-size={size}
+        data-slot="select-trigger-group"
+        {...props}
       >
-        {indicatorIcon || <ChevronDownIcon />}
-      </BaseSelect.Icon>
-    </BaseSelect.Trigger>
+        <BaseSelect.Value
+          className="flex flex-1 items-center gap-2 truncate line-clamp-1 data-placeholder:text-muted-foreground data-placeholder:before:content-[attr(data-placeholder-text)]"
+          data-placeholder-text={placeholder}
+          data-slot="select-value"
+        >
+          {children}
+        </BaseSelect.Value>
+        <BaseSelect.Icon
+          className={cn(
+            "flex-none shrink-0 pointer-events-none size-6 flex items-center justify-center",
+            "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:transition-all",
+            indicatorPlacement === "start" && "-order-1",
+          )}
+          data-slot="select-icon"
+        >
+          {indicatorIcon || <ChevronDownIcon />}
+        </BaseSelect.Icon>
+      </BaseSelect.Trigger>
+    </div>
   );
 }
 
@@ -405,6 +429,7 @@ function SelectItemContent({
 
 export {
   Select,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
   SelectIcon,

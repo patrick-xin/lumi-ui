@@ -79,7 +79,242 @@
   @apply data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-1.5 data-highlighted:before:inset-y-0 data-highlighted:before:z-[-1] data-highlighted:before:rounded-md data-highlighted:before:bg-accent data-highlighted:text-accent-foreground;
 }
 
-/* 
+/*
+   Drawer Popup
+*/
+@layer utilities {
+  .drawer-popup {
+    transition: transform 450ms cubic-bezier(0.32, 0.72, 0, 1);
+
+    &[data-swiping] {
+      @apply select-none;
+    }
+
+    &[data-ending-style] {
+      transition-duration: calc(var(--drawer-swipe-strength) * 400ms);
+    }
+  }
+
+  /* Bottom */
+  .drawer-popup[data-side="bottom"] {
+    @apply -mb-(--drawer-bleed);
+    max-height: calc(80vh + var(--drawer-bleed));
+    transform: translateY(var(--drawer-swipe-movement-y));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(100% - var(--drawer-bleed) + 2px));
+    }
+  }
+
+  /* Top */
+  .drawer-popup[data-side="top"] {
+    @apply -mt-(--drawer-bleed);
+    max-height: calc(80vh + var(--drawer-bleed));
+    transform: translateY(var(--drawer-swipe-movement-y));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(-100% + var(--drawer-bleed) - 2px));
+    }
+  }
+
+  /* Left */
+  .drawer-popup[data-side="left"] {
+    @apply -ml-(--drawer-bleed) h-full;
+    --viewport-padding: 0px;
+    width: calc(24rem + var(--drawer-bleed));
+    max-width: calc(100vw - var(--drawer-bleed) + var(--drawer-bleed));
+    transform: translateX(var(--drawer-swipe-movement-x));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateX(calc(-100% + var(--drawer-bleed) - var(--viewport-padding) - 2px));
+    }
+
+    @supports (-webkit-touch-callout: none) {
+      --drawer-bleed: 0px;
+      @apply ml-0 w-96 max-w-[calc(100vw-20px)] rounded-[10px] pl-6;
+    }
+  }
+
+  /* Right */
+  .drawer-popup[data-side="right"] {
+    @apply -mr-(--drawer-bleed) h-full;
+    --viewport-padding: 0px;
+    width: calc(24rem + var(--drawer-bleed));
+    max-width: calc(100vw - var(--drawer-bleed) + var(--drawer-bleed));
+    transform: translateX(var(--drawer-swipe-movement-x));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateX(calc(100% - var(--drawer-bleed) + var(--viewport-padding) + 2px));
+    }
+
+    @supports (-webkit-touch-callout: none) {
+      --drawer-bleed: 0px;
+      @apply mr-0 w-96 max-w-[calc(100vw-20px)] rounded-[10px] pr-6;
+    }
+  }
+
+  /* Viewport side variants */
+  .drawer-viewport[data-side="left"],
+  .drawer-viewport[data-side="right"] {
+    @supports (-webkit-touch-callout: none) {
+      --viewport-padding: 0.625rem;
+      padding: var(--viewport-padding);
+    }
+  }
+}
+
+/*
+   Drawer Indent
+*/
+@layer utilities {
+  .drawer-indent {
+    --indent-progress: var(--drawer-swipe-progress);
+    --indent-radius: calc(1rem * (1 - var(--indent-progress)));
+    --indent-transition: calc(1 - clamp(0, calc(var(--drawer-swipe-progress) * 100000), 1));
+
+    @apply origin-[center_top] will-change-transform;
+    transform: scale(1) translateY(0);
+    transition:
+      transform 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+      border-radius 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+    transition-duration:
+      calc(400ms * var(--indent-transition)),
+      calc(250ms * var(--indent-transition));
+
+    &[data-active] {
+      transform:
+        scale(calc(0.98 + (0.02 * var(--indent-progress))))
+        translateY(calc(0.5rem * (1 - var(--indent-progress))));
+      border-top-left-radius: var(--indent-radius);
+      border-top-right-radius: var(--indent-radius);
+    }
+  }
+}
+
+/*
+   Drawer Snap Popup
+*/
+@layer utilities {
+  .drawer-snap-popup {
+    @apply overflow-visible min-h-0 touch-none;
+    max-height: calc(100dvh - var(--drawer-snap-top-margin, 1rem));
+
+    /* Snap-based transform + dynamic padding */
+    transform: translateY(calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y)));
+    padding-bottom: max(0px, calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y)));
+
+    transition:
+      transform 450ms cubic-bezier(0.32, 0.72, 0, 1),
+      box-shadow 450ms cubic-bezier(0.32, 0.72, 0, 1);
+
+    box-shadow:
+      0 -16px 48px rgb(0 0 0 / 0.12),
+      0 6px 18px rgb(0 0 0 / 0.06);
+
+    /* Bleed pseudo-element below rounded corners */
+    &::after {
+      content: "";
+      @apply pointer-events-none absolute inset-x-0 top-full;
+      height: var(--drawer-bleed);
+      background-color: inherit;
+    }
+
+    &[data-swiping] {
+      @apply select-none;
+    }
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(100% + 2px));
+      padding-bottom: 0;
+      box-shadow:
+        0 -16px 48px rgb(0 0 0 / 0),
+        0 6px 18px rgb(0 0 0 / 0);
+    }
+
+    &[data-ending-style] {
+      transition-duration: calc(var(--drawer-swipe-strength) * 400ms);
+    }
+  }
+}
+
+/*
+   Drawer Stacked Popup
+*/
+@layer utilities {
+  .drawer-stacked-popup {
+    @apply -mb-(--drawer-bleed);
+    max-height: calc(80vh + var(--drawer-bleed));
+
+    /* Stacking math */
+    --peek: 1rem;
+    --stack-progress: clamp(0, var(--drawer-swipe-progress), 1);
+    --stack-step: 0.05;
+    --stack-peek-offset: max(0px, calc((var(--nested-drawers) - var(--stack-progress)) * var(--peek)));
+    --scale-base: calc(max(0, 1 - (var(--nested-drawers) * var(--stack-step))));
+    --scale: clamp(0, calc(var(--scale-base) + (var(--stack-step) * var(--stack-progress))), 1);
+    --shrink: calc(1 - var(--scale));
+    --height: max(0px, calc(var(--drawer-frontmost-height, var(--drawer-height)) - var(--drawer-bleed)));
+
+    height: var(--drawer-height, auto);
+    transform-origin: 50% calc(100% - var(--drawer-bleed));
+    transform:
+      translateY(calc(var(--drawer-swipe-movement-y) - var(--stack-peek-offset) - (var(--shrink) * var(--height))))
+      scale(var(--scale));
+
+    transition:
+      transform 450ms cubic-bezier(0.32, 0.72, 0, 1),
+      height 450ms cubic-bezier(0.32, 0.72, 0, 1),
+      box-shadow 450ms cubic-bezier(0.32, 0.72, 0, 1);
+
+    /* Shadow */
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+
+    /* Pseudo overlay for nested dimming */
+    &::after {
+      content: "";
+      @apply absolute inset-0 rounded-[inherit] bg-transparent pointer-events-none;
+      transition: background-color 450ms cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    /* Enter/exit */
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(100% - var(--drawer-bleed) + 2px));
+    }
+
+    &[data-ending-style] {
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0);
+      transition-duration: calc(var(--drawer-swipe-strength) * 400ms);
+    }
+
+    /* Swipe states */
+    &[data-swiping] {
+      transition-duration: 0s;
+      @apply select-none;
+    }
+
+    &[data-nested-drawer-swiping] {
+      transition-duration: 0s;
+    }
+
+    /* Nested drawer open */
+    &[data-nested-drawer-open] {
+      height: calc(var(--height) + var(--drawer-bleed));
+      overflow: hidden;
+
+      &::after {
+        background-color: rgb(0 0 0 / 0.05);
+      }
+    }
+  }
+}
+
+/*
    Toast Viewport
 */
 @layer utilities {

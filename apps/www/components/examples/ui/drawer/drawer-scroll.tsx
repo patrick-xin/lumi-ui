@@ -4,6 +4,7 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
+  DrawerDragHandle,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -19,6 +20,7 @@ export function DrawerScrollDemo() {
           render={<Button variant="outline">Drawer with ScrollArea</Button>}
         />
         <DrawerContent>
+          <DrawerDragHandle />
           <DrawerHeader>
             <DrawerTitle>Drawer</DrawerTitle>
             <DrawerDescription>
@@ -48,6 +50,7 @@ export function DrawerScrollDemo() {
           render={<Button variant="outline">Open Drawer</Button>}
         />
         <DrawerContent>
+          <DrawerDragHandle />
           <DrawerHeader>
             <DrawerTitle>Drawer</DrawerTitle>
             <DrawerDescription>

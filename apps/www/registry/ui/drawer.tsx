@@ -12,7 +12,10 @@ function DrawerProvider({ ...props }: BaseDrawer.Provider.Props) {
 function DrawerIndent({ className, ...props }: BaseDrawer.Indent.Props) {
   return (
     <BaseDrawer.Indent
-      className={className}
+      className={cn(
+        "drawer-indent relative bg-background text-foreground min-h-svh",
+        className,
+      )}
       data-slot="drawer-indent"
       {...props}
     />
@@ -25,7 +28,7 @@ function DrawerIndentBackground({
 }: BaseDrawer.IndentBackground.Props) {
   return (
     <BaseDrawer.IndentBackground
-      className={className}
+      className={cn("absolute inset-0 bg-zinc-100 dark:bg-zinc-800", className)}
       data-slot="drawer-indent-background"
       {...props}
     />
@@ -67,8 +70,13 @@ function DrawerBackdrop({ className, ...props }: BaseDrawer.Backdrop.Props) {
   return (
     <BaseDrawer.Backdrop
       className={cn(
-        "fixed inset-0 min-h-dvh bg-black/20 backdrop-blur-xs",
-        "transition-opacity data-[swiping]:duration-0",
+        "fixed inset-0 min-h-dvh bg-black",
+        "[--backdrop-opacity:0.2] dark:[--backdrop-opacity:0.7]",
+        "opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))]",
+        "transition-opacity duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]",
+        "data-[swiping]:duration-0",
+        "data-[ending-style]:opacity-0 data-[ending-style]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
+        "data-[starting-style]:opacity-0",
         "supports-[-webkit-touch-callout:none]:absolute",
         className,
       )}
@@ -81,7 +89,7 @@ function DrawerBackdrop({ className, ...props }: BaseDrawer.Backdrop.Props) {
 function DrawerViewport({ className, ...props }: BaseDrawer.Viewport.Props) {
   return (
     <BaseDrawer.Viewport
-      className={cn("fixed inset-0", className)}
+      className={cn("group fixed inset-0", className)}
       data-slot="drawer-viewport"
       {...props}
     />
@@ -95,7 +103,10 @@ function DrawerPopup({
 }: BaseDrawer.Popup.Props) {
   return (
     <BaseDrawer.Popup
-      className={cn("touch-auto", className)}
+      className={cn(
+        "group touch-auto bg-background text-foreground",
+        className,
+      )}
       data-slot="drawer-popup"
       {...props}
     >
@@ -107,8 +118,8 @@ function DrawerPopup({
 function DrawerInnerContent({ className, ...props }: BaseDrawer.Content.Props) {
   return (
     <BaseDrawer.Content
-      className={cn("mx-auto w-full", className)}
-      data-slot="drawer-inner"
+      className={cn("mx-auto w-full flex flex-col gap-4", className)}
+      data-slot="drawer-inner-content"
       {...props}
     />
   );
@@ -170,44 +181,21 @@ function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-// Shared base styles (used by both drawer and drawer-stacked)
-const popupBaseStyles = cn(
-  "relative flex flex-col gap-4",
-  "bg-background text-foreground",
-  "outline outline-border",
-  "overflow-y-auto overscroll-contain",
-  "data-[swiping]:select-none",
-  "data-[ending-style]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
-  "[&>[data-slot=scroll-area-root]]:min-h-0",
-);
-
-const popupBottomBaseStyles = cn(
-  "w-full rounded-t-2xl",
-  "max-h-[calc(80vh+var(--drawer-bleed))]",
-  "-mb-(--drawer-bleed)",
-  "data-[ending-style]:[transform:translateY(calc(100%-var(--drawer-bleed)+2px))]",
-  "data-[starting-style]:[transform:translateY(calc(100%-var(--drawer-bleed)+2px))]",
-  "pb-[calc(1.5rem+env(safe-area-inset-bottom,0px)+3rem)]",
-);
-
-const backdropBaseStyles = cn(
-  "[--backdrop-opacity:0.2] dark:[--backdrop-opacity:0.7]",
-  "bg-black opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))]",
-  "duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]",
-  "data-[ending-style]:duration-[calc(var(--drawer-swipe-strength)*400ms)]",
-  "data-[ending-style]:opacity-0 data-[starting-style]:opacity-0",
-);
-
 const viewportVariants = cva("fixed inset-0 flex", {
   defaultVariants: {
+    layout: "default",
     side: "bottom",
   },
   variants: {
+    layout: {
+      default: "",
+      snap: "items-end justify-center touch-none",
+      stacked: "items-end justify-center",
+    },
     side: {
       bottom: "items-end justify-center",
-      left: "[--viewport-padding:0px] supports-[-webkit-touch-callout:none]:[--viewport-padding:0.625rem] items-stretch justify-start p-[var(--viewport-padding)]",
-      right:
-        "[--viewport-padding:0px] supports-[-webkit-touch-callout:none]:[--viewport-padding:0.625rem] items-stretch justify-end p-[var(--viewport-padding)]",
+      left: "drawer-viewport items-stretch justify-start",
+      right: "drawer-viewport items-stretch justify-end",
       top: "items-start justify-center",
     },
   },
@@ -215,46 +203,49 @@ const viewportVariants = cva("fixed inset-0 flex", {
 
 const popupVariants = cva(
   cn(
-    popupBaseStyles,
-    "group/drawer-content",
-    "transition-transform duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)]",
+    "relative flex flex-col",
+    "bg-background text-foreground",
+    "outline outline-border",
   ),
   {
     defaultVariants: {
+      layout: "default",
       side: "bottom",
     },
     variants: {
+      layout: {
+        default: cn(
+          "drawer-popup",
+          "gap-4 overflow-y-auto overscroll-contain",
+          "group/drawer-content",
+          "[&>[data-slot=scroll-area-root]]:min-h-0",
+        ),
+        snap: cn("drawer-snap-popup", "w-full rounded-t-2xl"),
+        stacked: cn(
+          "drawer-stacked-popup group/popup",
+          "gap-4 overflow-y-auto overscroll-contain",
+          "w-full rounded-t-2xl",
+          "px-4 sm:px-6 pt-4 pb-[calc(1.2rem+env(safe-area-inset-bottom,0px)+var(--drawer-bleed))]",
+          "[&>[data-slot=scroll-area-root]]:min-h-0",
+        ),
+      },
       side: {
         bottom: cn(
-          popupBottomBaseStyles,
+          "w-full rounded-t-2xl",
           "px-4 sm:px-6 pt-4",
-          "[transform:translateY(var(--drawer-swipe-movement-y))]",
+          "pb-[calc(1.5rem+env(safe-area-inset-bottom,0px)+3rem)]",
         ),
         left: cn(
-          "-ml-(--drawer-bleed) p-4 pl-[calc(1.2rem+var(--drawer-bleed))]",
-          // adjust width
-          "w-[calc(24rem+var(--drawer-bleed))] max-w-[calc(100vw-var(--drawer-bleed)+var(--drawer-bleed))] h-full",
-          "supports-[-webkit-touch-callout:none]:[--drawer-bleed:0px]",
-          "[transform:translateX(var(--drawer-swipe-movement-x))]",
-          "data-[ending-style]:[transform:translateX(calc(-100%+var(--drawer-bleed)-var(--viewport-padding)-2px))] data-[starting-style]:[transform:translateX(calc(-100%+var(--drawer-bleed)-var(--viewport-padding)-2px))]",
-          "supports-[-webkit-touch-callout:none]:ml-0 supports-[-webkit-touch-callout:none]:w-[24rem] supports-[-webkit-touch-callout:none]:max-w-[calc(100vw-20px)] supports-[-webkit-touch-callout:none]:rounded-[10px] supports-[-webkit-touch-callout:none]:pl-6",
+          "p-4 pl-[calc(1.2rem+var(--drawer-bleed))]",
+          "supports-[-webkit-touch-callout:none]:pl-6",
         ),
         right: cn(
-          "-mr-(--drawer-bleed) p-4 pr-[calc(1.2rem+var(--drawer-bleed))]",
-          // adjust width
-          "w-[calc(24rem+var(--drawer-bleed))] max-w-[calc(100vw-var(--drawer-bleed)+var(--drawer-bleed))] h-full",
-          "supports-[-webkit-touch-callout:none]:[--drawer-bleed:0px]",
-          "[transform:translateX(var(--drawer-swipe-movement-x))]",
-          "data-[ending-style]:[transform:translateX(calc(100%-var(--drawer-bleed)+var(--viewport-padding)+2px))] data-[starting-style]:[transform:translateX(calc(100%-var(--drawer-bleed)+var(--viewport-padding)+2px))]",
-          "supports-[-webkit-touch-callout:none]:mr-0 supports-[-webkit-touch-callout:none]:w-[24rem] supports-[-webkit-touch-callout:none]:max-w-[calc(100vw-20px)] supports-[-webkit-touch-callout:none]:rounded-[10px] supports-[-webkit-touch-callout:none]:pr-6",
+          "p-4 pr-[calc(1.2rem+var(--drawer-bleed))]",
+          "supports-[-webkit-touch-callout:none]:pr-6",
         ),
         top: cn(
           "w-full rounded-b-2xl h-auto",
-          // adjust max height
-          "max-h-[calc(80vh+var(--drawer-bleed))]",
-          "-mt-(--drawer-bleed) px-4 sm:px-6 pb-4 pt-[calc(1.2rem+env(safe-area-inset-top,0px)+var(--drawer-bleed))]",
-          "[transform:translateY(var(--drawer-swipe-movement-y))]",
-          "data-[ending-style]:[transform:translateY(calc(-100%+var(--drawer-bleed)-2px))] data-[starting-style]:[transform:translateY(calc(-100%+var(--drawer-bleed)-2px))]",
+          "px-4 sm:px-6 pb-4 pt-[calc(1.2rem+env(safe-area-inset-top,0px)+var(--drawer-bleed))]",
         ),
       },
     },
@@ -265,26 +256,58 @@ function DrawerContent({
   className,
   children,
   side = "bottom",
+  layout,
   ...props
-}: BaseDrawer.Popup.Props & VariantProps<typeof popupVariants>) {
+}: BaseDrawer.Popup.Props &
+  VariantProps<typeof popupVariants> & {
+    layout?: "stacked" | "snap";
+  }) {
   return (
     <DrawerPortal>
-      <BaseDrawer.Backdrop className="[--backdrop-opacity:0.2] dark:[--backdrop-opacity:0.7] fixed inset-0 min-h-dvh bg-black opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))] transition-opacity duration-[450ms] ease-[cubic-bezier(0.32,0.72,0,1)] data-[swiping]:duration-0 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0 data-[ending-style]:duration-[calc(var(--drawer-swipe-strength)*400ms)] supports-[-webkit-touch-callout:none]:absolute" />
+      <DrawerBackdrop />
       <BaseDrawer.Viewport
-        className={viewportVariants({ side })}
+        className={viewportVariants({
+          layout: layout ?? "default",
+          side: layout ? null : side,
+        })}
+        data-side={layout ? "bottom" : side}
         data-slot="drawer-viewport"
       >
         <BaseDrawer.Popup
-          className={cn(popupVariants({ side }), className)}
-          data-side={side}
+          className={cn(
+            popupVariants({
+              layout: layout ?? "default",
+              side: layout ? null : side,
+            }),
+            className,
+          )}
+          data-side={layout ? "bottom" : side}
           data-slot="drawer-content"
           {...props}
         >
-          {side === "bottom" && <DrawerDragHandle />}
           {children}
         </BaseDrawer.Popup>
       </BaseDrawer.Viewport>
     </DrawerPortal>
+  );
+}
+
+function StackedDrawerInnerContent({
+  className,
+  ...props
+}: BaseDrawer.Content.Props) {
+  return (
+    <DrawerInnerContent
+      className={cn(
+        "flex flex-col gap-4",
+        "transition-opacity duration-[300ms] ease-[cubic-bezier(0.45,1.005,0,1.005)]",
+        "group-data-[nested-drawer-open]/popup:opacity-0",
+        "group-data-[nested-drawer-swiping]/popup:opacity-100",
+        className,
+      )}
+      data-slot="stacked-drawer-inner-content"
+      {...props}
+    />
   );
 }
 
@@ -298,6 +321,7 @@ function DrawerDragHandle({
         "w-12 h-1 flex-none mx-auto rounded-full bg-muted",
         className,
       )}
+      data-slot="drawer-drag-handle"
       {...props}
     />
   );
@@ -327,10 +351,7 @@ export {
   // Variants
   popupVariants,
   viewportVariants,
-  // Shared base styles
-  popupBaseStyles,
-  popupBottomBaseStyles,
-  backdropBaseStyles,
   // Composite component
   DrawerContent,
+  StackedDrawerInnerContent,
 };
