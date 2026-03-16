@@ -29,7 +29,7 @@ export function DrawerScrollDemo() {
             </DrawerDescription>
           </DrawerHeader>
           <ScrollArea className="h-[40dvh]" gradientScrollFade noScrollBar>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 max-w-4xl mx-auto w-full">
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
                   className="flex h-48 w-full shrink-0 items-center justify-center rounded-md bg-accent/30"
@@ -40,8 +40,14 @@ export function DrawerScrollDemo() {
               ))}
             </div>
           </ScrollArea>
-          <DrawerFooter>
-            <DrawerClose render={<Button variant="outline">Cancel</Button>} />
+          <DrawerFooter className="max-w-4xl mx-auto w-full flex justify-center">
+            <DrawerClose
+              render={
+                <Button className="w-fit ml-auto" variant="outline">
+                  Close
+                </Button>
+              }
+            />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
@@ -71,7 +77,7 @@ export function DrawerScrollDemo() {
             </div>
           </div>
           <DrawerFooter>
-            <DrawerClose render={<Button variant="outline">Cancel</Button>} />
+            <DrawerClose render={<Button variant="outline">Close</Button>} />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

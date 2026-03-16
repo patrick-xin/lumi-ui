@@ -4,7 +4,6 @@ import { DrawerDirectionsDemo } from "@/components/examples/ui/drawer/drawer-dir
 import { DrawerDialogDemo } from "@/components/examples/ui/drawer/drawer-responsive";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { DrawerDialogSettingsDemo } from "@/registry/components/drawer-settings";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,6 +12,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/ui/breadcrumb";
+import { DrawerBasicDemo } from "../../../../components/examples/ui/drawer/drawer-basic";
+import { DrawerDirectionsInsetDemo } from "../../../../components/examples/ui/drawer/drawer-directions-inset";
+import { DrawerDirectionsResponsiveDemo } from "../../../../components/examples/ui/drawer/drawer-directions-responsive";
 
 export default function Page() {
   return (
@@ -37,9 +39,23 @@ export default function Page() {
           <div className="flex flex-col gap-4">
             Basic
             <DrawerDemo />
-            <DrawerDirectionsDemo />
             <DrawerDialogDemo />
-            <DrawerDialogSettingsDemo />
+            <div className="flex flex-col gap-2">
+              Full bleed(default)
+              <DrawerDirectionsDemo />
+            </div>
+            <div className="flex flex-col gap-2">
+              Inset
+              <DrawerDirectionsInsetDemo />
+            </div>
+            <div className="flex flex-col gap-2">
+              Basic
+              <DrawerBasicDemo />
+            </div>
+            <div className="flex flex-col gap-2">
+              Responsive
+              <DrawerDirectionsResponsiveDemo />
+            </div>
           </div>
         </section>
       </div>

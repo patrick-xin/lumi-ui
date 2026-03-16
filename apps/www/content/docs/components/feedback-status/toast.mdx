@@ -73,8 +73,9 @@ status: new
 ```
 </Step>
 <Step title={<>Paste the following code into your global CSS file. Which handles both the viewport and toast styles and animations.</>}>
+
 ```css title="globals.css"
-/* 
+/*
    Toast Viewport
 */
 @layer utilities {
@@ -84,6 +85,7 @@ status: new
   /* Viewport Positioning */
   .toast-viewport[data-position^="top"] { top: var(--toast-viewport-padding); bottom: auto; }
   .toast-viewport[data-position^="bottom"] { bottom: var(--toast-viewport-padding); top: auto; }
+
   .toast-viewport[data-position$="left"] { left: var(--toast-viewport-padding); right: auto; }
   .toast-viewport[data-position$="right"] { right: var(--toast-viewport-padding); left: auto; }
   .toast-viewport[data-position$="center"] { 
@@ -96,16 +98,13 @@ status: new
 */
 @layer utilities {
   .toast-root {
-    @apply absolute w-full pointer-events-auto;
-    /* Stacking */
-    --toast-index: 0; /* Default fallback */
-    z-index: calc(1000 - var(--toast-index));
+    @apply absolute w-full pointer-events-auto z-[calc(1000-var(--toast-index))];
     
     /* Transitions */
     transition: 
-      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
-      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
-      height 0.15s ease-out;
+      transform 0.5s var(--ease-spring), 
+      opacity 0.5s var(--ease-spring), 
+      height 0.15s var(--ease-spring);
     
     /* Height Calculation */
     height: var(--toast-frontmost-height, var(--toast-height));

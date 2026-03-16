@@ -25,8 +25,8 @@ export function DrawerActionSheetDemo() {
   const [open, setOpen] = React.useState(false);
   return (
     <Drawer onOpenChange={setOpen} open={open}>
-      <DrawerTrigger render={<Button variant="outline">Show options</Button>} />
-      <DrawerContent className="pointer-events-none max-w-md bg-transparent outline-0">
+      <DrawerTrigger render={<Button>Show options</Button>} />
+      <DrawerContent className="pointer-events-none max-w-md outline-0 bg-transparent">
         <DrawerSelectable className="pointer-events-auto overflow-hidden rounded-2xl bg-background overlay-outline">
           <DrawerTitle className="sr-only">Post actions</DrawerTitle>
           <DrawerDescription className="sr-only">
@@ -34,7 +34,7 @@ export function DrawerActionSheetDemo() {
           </DrawerDescription>
           <ul
             aria-label="Profile actions"
-            className="m-0 list-none divide-y divide-border p-0"
+            className="list-none divide-y divide-border"
           >
             {ACTIONS.map((action, index) => (
               <li key={action}>

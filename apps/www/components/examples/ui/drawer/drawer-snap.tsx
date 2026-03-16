@@ -5,13 +5,13 @@ import { Button } from "@/registry/ui/button";
 import {
   Drawer,
   DrawerClose,
-  DrawerContent,
   DrawerDescription,
   DrawerDragHandle,
   DrawerHeader,
   DrawerSelectable,
   DrawerTitle,
   DrawerTrigger,
+  SnapDrawerContent,
 } from "@/registry/ui/drawer";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 
@@ -42,23 +42,26 @@ export function DrawerSnapDemo() {
         <DrawerTrigger
           render={<Button variant="outline">Open snap drawer</Button>}
         />
-        <DrawerContent
-          layout="snap"
+        <SnapDrawerContent
+          className="bg-transparent outline-none"
+          layout="inset"
           style={
             {
               "--drawer-snap-top-margin": `${TOP_MARGIN_REM}rem`,
             } as React.CSSProperties
           }
         >
-          <DrawerDragHandle className="my-4" />
-          <DrawerHeader className="mb-4 mx-4 touch-none sm:mx-auto w-full max-w-md">
-            <DrawerTitle>Snap points</DrawerTitle>
-            <DrawerDescription>
-              Drag the sheet to snap between a compact peek and a near
-              full-height view.
-            </DrawerDescription>
-          </DrawerHeader>
-          <DrawerSelectable className="min-h-0 flex-1 px-4 touch-auto pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] overflow-auto z-10">
+          <div className="rounded-t-lg flex justify-center border border-b-0 flex-col w-full bg-background">
+            <DrawerDragHandle className="my-2" />
+            <DrawerHeader className="mb-4 mx-4 touch-none sm:mx-auto w-full max-w-md">
+              <DrawerTitle>Snap points</DrawerTitle>
+              <DrawerDescription className="text-pretty">
+                Drag the sheet to snap between a compact peek and a near
+                full-height view.
+              </DrawerDescription>
+            </DrawerHeader>
+          </div>
+          <DrawerSelectable className="min-h-0 flex-1 px-4 touch-auto pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] overflow-auto z-10 bg-background border border-t-0 rounded-lg rounded-t-none">
             <div className="mx-auto w-full max-w-md">
               <div aria-hidden className="grid gap-3 mb-6">
                 {Array.from({ length: 20 }, (_, index) => (
@@ -78,7 +81,7 @@ export function DrawerSnapDemo() {
               />
             </div>
           </DrawerSelectable>
-        </DrawerContent>
+        </SnapDrawerContent>
       </Drawer>
       <Drawer snapPoints={snapPointsScrollArea}>
         <DrawerTrigger
@@ -86,8 +89,7 @@ export function DrawerSnapDemo() {
             <Button variant="outline">Open snap drawer with ScrollArea</Button>
           }
         />
-        <DrawerContent
-          layout="snap"
+        <SnapDrawerContent
           style={
             {
               "--drawer-snap-top-margin": `${TOP_MARGIN_REM_SCROLL_AREA}rem`,
@@ -127,7 +129,7 @@ export function DrawerSnapDemo() {
               />
             </div>
           </ScrollArea>
-        </DrawerContent>
+        </SnapDrawerContent>
       </Drawer>
     </div>
   );

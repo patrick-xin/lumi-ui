@@ -23,7 +23,6 @@ import {
 import {
   Drawer,
   DrawerClose,
-  DrawerContent,
   DrawerDescription,
   DrawerDragHandle,
   DrawerFooter,
@@ -31,6 +30,7 @@ import {
   DrawerSelectable,
   DrawerTitle,
   DrawerTrigger,
+  SnapDrawerContent,
 } from "@/registry/ui/drawer";
 import { Label } from "@/registry/ui/label";
 import { ScrollArea } from "@/registry/ui/scroll-area";
@@ -86,8 +86,7 @@ const PreferencesDrawer = ({
       <DrawerTrigger
         render={<Button variant="outline">Drawer with ScrollArea</Button>}
       />
-      <DrawerContent
-        layout="snap"
+      <SnapDrawerContent
         style={
           {
             "--drawer-snap-top-margin": `${TOP_MARGIN_REM}rem`,
@@ -119,7 +118,7 @@ const PreferencesDrawer = ({
             }
           />
         </DrawerFooter>
-      </DrawerContent>
+      </SnapDrawerContent>
     </Drawer>
   );
 };

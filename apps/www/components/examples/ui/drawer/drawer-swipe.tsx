@@ -25,7 +25,7 @@ export function DrawerSwipeDemo() {
       <DrawerPortal>
         <DrawerBackdrop />
         <DrawerViewport
-          className="drawer-viewport flex items-stretch justify-end"
+          className="flex items-stretch justify-end"
           data-side="right"
         >
           <DrawerPopup

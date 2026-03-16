@@ -34,19 +34,17 @@ export function DrawerDialogDemo() {
   if (isDesktop) {
     return (
       <Dialog onOpenChange={setOpen} open={open}>
-        <DialogTrigger render={<Button />}>open dialog</DialogTrigger>
+        <DialogTrigger render={<Button />}>Open</DialogTrigger>
         <DialogContent className="sm:max-w-3xl" layout="center">
           <DialogHeader>
             <DialogTitle>Dialog</DialogTitle>
             <DialogDescription>
-              This is a dialog that opens from the center, with scrollable
-              content.
+              This is a dialog that turns into a drawer on mobile.
             </DialogDescription>
           </DialogHeader>
           <Content />
           <DialogFooter>
-            <DialogClose render={<Button variant="outline">Cancel</Button>} />
-            <DialogClose render={<Button>Save</Button>} />
+            <DialogClose render={<Button variant="outline">Close</Button>} />
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -55,24 +53,20 @@ export function DrawerDialogDemo() {
 
   return (
     <Drawer onOpenChange={setOpen} open={open}>
-      <DrawerTrigger
-        render={<Button variant="outline">Drawer with ScrollArea</Button>}
-      />
-      <DrawerContent>
+      <DrawerTrigger render={<Button>Open</Button>} />
+      <DrawerContent layout="inset">
         <DrawerDragHandle />
         <DrawerHeader>
           <DrawerTitle>Drawer</DrawerTitle>
           <DrawerDescription>
-            This is a drawer that slides in from the bottom, with scrollable
-            content.
+            This is an inset style drawer that turns into a dialog on desktop.
           </DrawerDescription>
         </DrawerHeader>
         <DrawerSelectable className="min-h-0">
           <Content />
         </DrawerSelectable>
         <DrawerFooter>
-          <DrawerClose render={<Button variant="outline">Cancel</Button>} />
-          <DrawerClose render={<Button>Save</Button>} />
+          <DrawerClose render={<Button variant="outline">Close</Button>} />
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
