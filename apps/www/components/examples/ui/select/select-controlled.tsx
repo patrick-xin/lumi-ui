@@ -10,11 +10,11 @@ import {
 } from "@/registry/ui/select";
 
 const fruits = [
-  { value: "apple", label: "Apple" },
-  { value: "banana", label: "Banana" },
-  { value: "blueberry", label: "Blueberry" },
-  { value: "grapes", label: "Grapes" },
-  { value: "pineapple", label: "Pineapple" },
+  { label: "Apple", value: "apple" },
+  { label: "Banana", value: "banana" },
+  { label: "Blueberry", value: "blueberry" },
+  { label: "Grapes", value: "grapes" },
+  { label: "Pineapple", value: "pineapple" },
 ];
 
 export default function SelectControlledDemo() {
@@ -25,16 +25,16 @@ export default function SelectControlledDemo() {
       <div className="flex gap-2">
         <Button onClick={() => setValue("banana")}>Select Banana</Button>
         <Button onClick={() => setValue("grapes")}>Select Grapes</Button>
-        <Button variant="outline" onClick={() => setValue("")}>
+        <Button onClick={() => setValue("")} variant="outline">
           Reset
         </Button>
       </div>
       <Select
         items={fruits}
-        value={value}
         onValueChange={(val) => setValue(val as string)}
+        value={value}
       >
-        <SelectTriggerGroup placeholder="Select a fruit" />
+        <SelectTriggerGroup label="Fruit" placeholder="Select a fruit" />
         <SelectContent>
           {fruits.map((fruit) => (
             <SelectItemContent key={fruit.value} value={fruit.value}>

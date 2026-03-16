@@ -9,9 +9,9 @@ import {
 } from "@/registry/ui/select";
 
 const frameworks = [
-  { value: "next", label: "Next.js" },
-  { value: "svelte", label: "Svelte Kit" },
-  { value: "astro", label: "Astro" },
+  { label: "Next.js", value: "next" },
+  { label: "Svelte Kit", value: "svelte" },
+  { label: "Astro", value: "astro" },
 ];
 
 export function SelectTrackStateDemo() {
@@ -24,10 +24,10 @@ export function SelectTrackStateDemo() {
       </div>
       <Select
         items={frameworks}
-        value={value}
         onValueChange={(val) => setValue(val as string)}
+        value={value}
       >
-        <SelectTriggerGroup placeholder="Select framework" />
+        <SelectTriggerGroup label="Framework" placeholder="Select framework" />
         <SelectContent>
           {frameworks.map((fw) => (
             <SelectItemContent key={fw.value} value={fw.value}>

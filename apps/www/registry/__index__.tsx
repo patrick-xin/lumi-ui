@@ -170,6 +170,28 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "drawer": {
+    name: "drawer",
+    title: "Drawer",
+    description: "A panel that slides in from the edge of the screen.",
+    type: "registry:ui",
+    target: "",
+    registryDependencies: ["@base-ui/react","class-variance-authority"],
+    files:     [
+          {
+                "path": "registry/ui/drawer.tsx",
+                "target": "",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/ui/drawer");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "tabs": {
     name: "tabs",
     title: "Tabs",
@@ -3026,6 +3048,258 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "drawer-action-sheet": {
+    name: "drawer-action-sheet",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-action-sheet.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-action-sheet");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-action-sheet";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-basic": {
+    name: "drawer-basic",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-basic.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-basic");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-basic";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-demo": {
+    name: "drawer-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-directions-inset": {
+    name: "drawer-directions-inset",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-directions-inset.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-directions-inset");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-directions-inset";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-directions-responsive": {
+    name: "drawer-directions-responsive",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-directions-responsive.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-directions-responsive");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-directions-responsive";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-directions": {
+    name: "drawer-directions",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-directions.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-directions");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-directions";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-indent": {
+    name: "drawer-indent",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-indent.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-indent");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-indent";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-mobile-navigation": {
+    name: "drawer-mobile-navigation",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-mobile-navigation.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-mobile-navigation");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-mobile-navigation";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-responsive": {
+    name: "drawer-responsive",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-responsive.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-responsive");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-responsive";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-scroll": {
+    name: "drawer-scroll",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-scroll.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-scroll");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-scroll";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-selection": {
+    name: "drawer-selection",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-selection.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-selection");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-selection";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-snap": {
+    name: "drawer-snap",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-snap.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-snap");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-snap";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-stacked": {
+    name: "drawer-stacked",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-stacked.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-stacked");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-stacked";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "drawer-swipe": {
+    name: "drawer-swipe",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["drawer"],
+    files: [{
+      path: "components/examples/ui/drawer/drawer-swipe.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/drawer/drawer-swipe");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "drawer-swipe";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "dropdown-menu-basic": {
     name: "dropdown-menu-basic",
     description: "",
@@ -4659,6 +4933,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/scroll-area/scroll-area-no-scrollbar");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "scroll-area-no-scrollbar";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "demo": {
+    name: "demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    files: [{
+      path: "components/examples/ui/select/demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/select/demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "demo";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

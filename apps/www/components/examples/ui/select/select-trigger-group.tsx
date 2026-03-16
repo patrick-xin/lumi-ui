@@ -13,10 +13,10 @@ export const SelectTriggerGroupDemo = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="space-y-4">
         <div className="flex flex-col gap-2">
-          <span className="text-xs font-semibold">Animate icon</span>
           <Select items={fruits}>
             <SelectTriggerGroup
               className="data-popup-open:[&_svg]:rotate-180"
+              label="Animate icon"
               placeholder="Select a fruit"
             />
             <SelectContent>
@@ -29,11 +29,11 @@ export const SelectTriggerGroupDemo = () => {
           </Select>
         </div>
         <div className="flex flex-col gap-2">
-          <span className="text-xs font-semibold">Icon placement</span>
           <Select items={fruits}>
             <SelectTriggerGroup
               indicatorIcon={<ChevronsUpDownIcon />}
               indicatorPlacement="start"
+              label="Icon placement"
               placeholder="Select a fruit"
             />
             <SelectContent>
@@ -52,12 +52,10 @@ export const SelectTriggerGroupDemo = () => {
       </div>
       <div className="space-y-4">
         <div className="flex flex-col gap-2">
-          <span className="text-xs font-semibold">
-            Icon placement with alignItemWithTrigger
-          </span>
           <Select items={fruits}>
             <SelectTriggerGroup
               indicatorPlacement="start"
+              label="Icon placement with alignItemWithTrigger"
               placeholder="Select a fruit"
             />
             <SelectContent alignItemWithTrigger>
@@ -74,11 +72,11 @@ export const SelectTriggerGroupDemo = () => {
           </Select>
         </div>
         <div className="flex flex-col gap-2">
-          <span className="text-xs font-semibold">
-            Change icon inside popup
-          </span>
           <Select items={fruits}>
-            <SelectTriggerGroup placeholder="Select a fruit" />
+            <SelectTriggerGroup
+              label="Change icon inside popup"
+              placeholder="Select a fruit"
+            />
             <SelectContent alignItemWithTrigger>
               {fruits.map((fruit) => (
                 <SelectItemContent

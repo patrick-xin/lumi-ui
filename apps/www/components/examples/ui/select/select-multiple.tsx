@@ -38,7 +38,11 @@ function renderValue(value: Language[]) {
 export default function MultiSelectDemo() {
   return (
     <Select defaultValue={["javascript", "typescript"]} multiple>
-      <SelectTriggerGroup className="w-56" placeholder="Select a language">
+      <SelectTriggerGroup
+        className="w-56"
+        label="Languages"
+        placeholder="Select a language"
+      >
         {renderValue}
       </SelectTriggerGroup>
       <SelectContent>

@@ -36,7 +36,7 @@ Add the following utilities to your `globals.css`:
 
 ```css
 @utility animate-fade-up {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -46,7 +46,7 @@ Add the following utilities to your `globals.css`:
 }
 
 @utility animate-fade-down {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -56,7 +56,7 @@ Add the following utilities to your `globals.css`:
 }
 
 @utility animate-slide-left {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -66,7 +66,7 @@ Add the following utilities to your `globals.css`:
 }
 
 @utility animate-slide-right {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -76,7 +76,7 @@ Add the following utilities to your `globals.css`:
 }
 
 @utility animate-fade-zoom {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-200 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -97,9 +97,9 @@ Add the following utilities to your `globals.css`:
 
 If you prefer to write inline css in `popupVariants`, you can replace the following with utility:
 ```css
-data-[starting-style]:scale-94 data-[starting-style]:opacity-0 
-data-[ending-style]:scale-94 data-[ending-style]:opacity-0 
-transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)]
+data-starting-style:scale-94 data-starting-style:opacity-0 
+data-ending-style:scale-94 data-ending-style:opacity-0 
+transition-all duration-200 ease-smooth
 ```
 
 ## Basic Usage

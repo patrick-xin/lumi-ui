@@ -1,0 +1,606 @@
+---
+title: Drawer
+description: A panel that slides in from the edge of the screen.
+links:
+  doc: https://base-ui.com/react/components/drawer
+  api: https://base-ui.com/react/components/drawer#api-reference
+status: new
+---
+
+<ComponentPreview name="drawer-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/drawer
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="drawer" title="drawer.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+<Steps>
+  <Step title={<>Add global variables to your <code>@theme inline</code></>}>
+  ```css
+  @theme inline {
+    /* --- other variables --- */
+    --drawer-bleed: 3rem;
+    --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  ```
+  </Step>
+  <Step title={<>Add the following utilities to your <code>globals.css</code></>}>
+```css title="globals.css"
+@layer utilities {
+  .drawer-popup {
+    touch-action: auto;
+    transition: transform 450ms var(--ease-smooth);
+
+    &[data-swiping] {
+      @apply select-none;
+    }
+
+    &[data-ending-style] {
+      transition-duration: calc(var(--drawer-swipe-strength) * 400ms);
+    }
+  }
+
+  /* Bottom */
+  .drawer-popup[data-side="bottom"] {
+    --drawer-bleed: 0px;
+    --viewport-padding: 1rem;
+    max-height: 80vh;
+    transform: translateY(var(--drawer-swipe-movement-y));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(100% + var(--viewport-padding) + 2px));
+    }
+  }
+
+  /* Bottom fullBleed */
+  .drawer-popup[data-side="bottom"][data-layout="fullBleed"] {
+    @apply -mb-(--drawer-bleed);
+    --viewport-padding: 0px;
+    max-height: calc(80vh + var(--drawer-bleed));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(100% - var(--drawer-bleed) + 2px));
+    }
+  }
+
+  /* Bottom responsive */
+  .drawer-popup[data-side="bottom"][data-layout="responsive"] {
+    @media (min-width: 640px) {
+      margin-bottom: calc(-1 * var(--drawer-bleed));
+      --viewport-padding: 0px;
+      max-height: calc(80vh + var(--drawer-bleed));
+
+      &[data-ending-style],
+      &[data-starting-style] {
+        transform: translateY(calc(100% - var(--drawer-bleed) + 2px));
+      }
+    }
+  }
+
+  /* Top */
+  .drawer-popup[data-side="top"] {
+    --drawer-bleed: 0px;
+    --viewport-padding: 1rem;
+    max-height: 80vh;
+    transform: translateY(var(--drawer-swipe-movement-y));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(-100% - var(--viewport-padding) - 2px));
+    }
+  }
+
+  /* Top fullBleed */
+  .drawer-popup[data-side="top"][data-layout="fullBleed"] {
+    @apply -mt-(--drawer-bleed);
+    --viewport-padding: 0px;
+    max-height: calc(80vh + var(--drawer-bleed));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(-100% + var(--drawer-bleed) - 2px));
+    }
+  }
+
+  /* Top responsive */
+  .drawer-popup[data-side="top"][data-layout="responsive"] {
+    @media (min-width: 640px) {
+      margin-top: calc(-1 * var(--drawer-bleed));
+      --viewport-padding: 0px;
+      max-height: calc(80vh + var(--drawer-bleed));
+
+      &[data-ending-style],
+      &[data-starting-style] {
+        transform: translateY(calc(-100% + var(--drawer-bleed) - 2px));
+      }
+    }
+  }
+
+  /* Left */
+  .drawer-popup[data-side="left"] {
+    @apply h-full w-80 sm:w-96 max-w-[calc(100vw-2rem)];
+    --drawer-bleed: 0px;
+    --viewport-padding: 1rem;
+    transform: translateX(var(--drawer-swipe-movement-x));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateX(calc(-100% - var(--viewport-padding) - 2px));
+    }
+  }
+
+  /* Left fullBleed */
+  .drawer-popup[data-side="left"][data-layout="fullBleed"] {
+    @apply -ml-(--drawer-bleed) w-[calc(20rem+var(--drawer-bleed))] sm:w-[calc(24rem+var(--drawer-bleed))] max-w-[100vw];
+    --viewport-padding: 0px;
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateX(calc(-100% + var(--drawer-bleed) - 2px));
+    }
+  }
+
+  /* Left responsive */
+  .drawer-popup[data-side="left"][data-layout="responsive"] {
+    @media (min-width: 640px) {
+      margin-left: calc(-1 * var(--drawer-bleed));
+      width: calc(24rem + var(--drawer-bleed));
+      max-width: 100vw;
+      --viewport-padding: 0px;
+
+      &[data-ending-style],
+      &[data-starting-style] {
+        transform: translateX(calc(-100% + var(--drawer-bleed) - 2px));
+      }
+    }
+  }
+
+  /* Right */
+  .drawer-popup[data-side="right"] {
+    @apply h-full w-80 sm:w-96 max-w-[calc(100vw-2rem)];
+    --drawer-bleed: 0px;
+    --viewport-padding: 1rem;
+    transform: translateX(var(--drawer-swipe-movement-x));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateX(calc(100% + var(--viewport-padding) + 2px));
+    }
+  }
+
+  /* Right fullBleed */
+  .drawer-popup[data-side="right"][data-layout="fullBleed"] {
+    @apply -mr-(--drawer-bleed) w-[calc(20rem+var(--drawer-bleed))] sm:w-[calc(24rem+var(--drawer-bleed))] max-w-[100vw];
+    --viewport-padding: 0px;
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateX(calc(100% - var(--drawer-bleed) + 2px));
+    }
+  }
+
+  /* Right responsive */
+  .drawer-popup[data-side="right"][data-layout="responsive"] {
+    @media (min-width: 640px) {
+      margin-right: calc(-1 * var(--drawer-bleed));
+      width: calc(24rem + var(--drawer-bleed));
+      max-width: 100vw;
+      --viewport-padding: 0px;
+
+      &[data-ending-style],
+      &[data-starting-style] {
+        transform: translateX(calc(100% - var(--drawer-bleed) + 2px));
+      }
+    }
+  }
+
+}
+```
+  </Step>
+</Steps>
+
+<Callout variant="info" title="Info">
+By default, we include four drawer directions, with three layout options for each direction. You can delete the styles and corespronding variant you don't need based on your app's features.
+</Callout>
+
+## Basic Usage
+```tsx
+import {
+  Drawer,
+  DrawerClose,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerContent,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
+export function DrawerDemo() {
+  return (
+    <Drawer>
+      <DrawerTrigger>Open Drawer</DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+          <DrawerDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <DrawerClose>Cancel</DialogClose>
+          <DrawerClose>Continue</DialogClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+```
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+```tsx
+<DrawerProvider>
+  <DrawerIndentBackground />
+  <DrawerIndent>
+  <Drawer>
+    <DrawerTrigger />
+    <DrawerSwipeArea />
+    <DrawerContent>
+      <DrawerDragHandle />
+      <DrawerSelectable>
+        <DrawerHeader>
+          <DrawerTitle />
+          <DrawerDescription />
+        </DrawerHeader>
+        <DrawerFooter>
+          <DrawerClose />
+        </DrawerFooter>
+      </DrawerSelectable>
+    </DrawerPortal>
+  </Drawer>
+  </DrawerIndent>
+</DrawerProvider>
+```
+</TabsPanel>
+  <TabsPanel value="primitive">
+```tsx
+<DrawerProvider>
+  <DrawerIndentBackground />
+  <DrawerIndent>
+  <Drawer>
+    <DrawerTrigger />
+    <DrawerSwipeArea />
+    <DrawerPortal>
+      <DrawerBackdrop />
+      <DrawerViewport>
+        <DrawerPopup>
+          <DrawerDragHandle />
+          <DrawerSelectable>
+            <DrawerHeader>
+              <DrawerTitle />
+              <DrawerDescription />
+            </DrawerHeader>
+            <DrawerFooter>
+              <DrawerClose />
+            </DrawerFooter>
+          </DrawerSelectable>
+        </DrawerPopup>
+      </DrawerViewport>
+    </DrawerPortal>
+  </Drawer>
+  </DrawerIndent>
+</DrawerProvider>
+```
+  </TabsPanel>
+</Tabs>
+
+## Directions
+<ComponentPreview name="drawer-directions" />
+
+## Layout variants
+
+### Inset
+<ComponentPreview name="drawer-directions-inset" />
+
+### Responsive
+<ComponentPreview name="drawer-directions-responsive" />
+
+
+## Cookbook
+
+### Enable content selection inside drawer
+
+<ComponentPreview name="drawer-selection" />
+
+### Scrollable content
+
+<ComponentPreview name="drawer-scroll" />
+
+### Stacked drawer
+
+<ComponentPreview name="drawer-stacked" />
+
+To enable stacking, use the `Stacked` variant for `DrawerContent` and add the following CSS:
+
+```css title="globals.css"
+/*
+   Drawer Stacked Popup
+*/
+@layer utilities {
+  .drawer-stacked-popup {
+    touch-action: auto;
+    --drawer-bleed: 0px;
+    --viewport-padding: 1rem;
+    max-height: 80vh;
+
+    /* Stacking math */
+    --peek: 1rem;
+    --stack-progress: clamp(0, var(--drawer-swipe-progress), 1);
+    --stack-step: 0.05;
+    --stack-peek-offset: max(0px, calc((var(--nested-drawers) - var(--stack-progress)) * var(--peek)));
+    --scale-base: calc(max(0, 1 - (var(--nested-drawers) * var(--stack-step))));
+    --scale: clamp(0, calc(var(--scale-base) + (var(--stack-step) * var(--stack-progress))), 1);
+    --shrink: calc(1 - var(--scale));
+    --height: max(0px, calc(var(--drawer-frontmost-height, var(--drawer-height)) - var(--drawer-bleed)));
+
+    height: var(--drawer-height, auto);
+    transform-origin: 50% calc(100% - var(--drawer-bleed));
+    transform:
+      translateY(calc(var(--drawer-swipe-movement-y) - var(--stack-peek-offset) - (var(--shrink) * var(--height))))
+      scale(var(--scale));
+
+    transition:
+      transform 450ms var(--ease-smooth),
+      height 450ms var(--ease-smooth),
+      box-shadow 450ms var(--ease-smooth);
+
+    /* Shadow */
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+
+    /* Pseudo overlay for nested dimming */
+    &::after {
+      content: "";
+      @apply absolute inset-0 rounded-[inherit] bg-transparent pointer-events-none;
+      transition: background-color 450ms var(--ease-smooth);
+    }
+
+    /* Enter/exit */
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(100% + var(--viewport-padding) + 2px));
+    }
+
+    &[data-ending-style] {
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0);
+      transition-duration: calc(var(--drawer-swipe-strength) * 400ms);
+    }
+
+    /* Swipe states */
+    &[data-swiping] {
+      transition-duration: 0s;
+      @apply select-none;
+    }
+
+    &[data-nested-drawer-swiping] {
+      transition-duration: 0s;
+    }
+
+    /* Nested drawer open */
+    &[data-nested-drawer-open] {
+      height: calc(var(--height) + var(--drawer-bleed));
+      overflow: hidden;
+
+      &::after {
+        background-color: rgb(0 0 0 / 0.05);
+      }
+    }
+  }
+
+  /* Stacked fullBleed */
+  .drawer-stacked-popup[data-layout="fullBleed"] {
+    @apply -mb-(--drawer-bleed);
+    --viewport-padding: 0px;
+    max-height: calc(80vh + var(--drawer-bleed));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(100% - var(--drawer-bleed) + 2px));
+    }
+  }
+
+  /* Stacked responsive */
+  .drawer-stacked-popup[data-layout="responsive"] {
+    @media (min-width: 640px) {
+      margin-bottom: calc(-1 * var(--drawer-bleed));
+      --viewport-padding: 0px;
+      max-height: calc(80vh + var(--drawer-bleed));
+
+      &[data-ending-style],
+      &[data-starting-style] {
+        transform: translateY(calc(100% - var(--drawer-bleed) + 2px));
+      }
+    }
+  }
+}
+```
+
+
+### Snap points
+
+<ComponentPreview name="drawer-snap" />
+
+For snap points support, add the following CSS:
+
+```css title="globals.css"
+/*
+   Drawer Snap Popup
+*/
+@layer utilities {
+  .drawer-snap-popup {
+    @apply overflow-visible min-h-0 touch-none;
+    --drawer-bleed: 0px;
+    --viewport-padding: 1rem;
+    max-height: calc(100dvh - var(--drawer-snap-top-margin, 1rem));
+
+    /* Snap-based transform + dynamic padding */
+    transform: translateY(calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y)));
+    padding-bottom: max(0px, calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y)));
+
+    transition:
+      transform 450ms var(--ease-smooth);
+
+    /* Bleed pseudo-element below rounded corners */
+    &::after {
+      content: "";
+      @apply pointer-events-none absolute inset-x-0 top-full;
+      height: var(--drawer-bleed);
+      background-color: inherit;
+    }
+
+    &[data-swiping] {
+      @apply select-none;
+    }
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(100% + var(--viewport-padding) + 2px));
+      padding-bottom: 0;
+      box-shadow:
+        0 -16px 48px rgb(0 0 0 / 0),
+        0 6px 18px rgb(0 0 0 / 0);
+    }
+
+    &[data-ending-style] {
+      transition-duration: calc(var(--drawer-swipe-strength) * 400ms);
+    }
+  }
+
+  /* Snap fullBleed */
+  .drawer-snap-popup[data-layout="fullBleed"] {
+    @apply -mb-(--drawer-bleed);
+    --viewport-padding: 0px;
+    max-height: calc(100dvh - var(--drawer-snap-top-margin, 1rem) + var(--drawer-bleed));
+
+    &[data-ending-style],
+    &[data-starting-style] {
+      transform: translateY(calc(100% - var(--drawer-bleed) + 2px));
+    }
+  }
+
+  /* Snap responsive */
+  .drawer-snap-popup[data-layout="responsive"] {
+    @media (min-width: 640px) {
+      margin-bottom: calc(-1 * var(--drawer-bleed));
+      --viewport-padding: 0px;
+      max-height: calc(100dvh - var(--drawer-snap-top-margin, 1rem) + var(--drawer-bleed));
+
+      &[data-ending-style],
+      &[data-starting-style] {
+        transform: translateY(calc(100% - var(--drawer-bleed) + 2px));
+      }
+    }
+  }
+}
+```
+
+### Drawer Indent
+
+Visit [Playground](https://www.lumiui.dev/playground/drawer-indent) to try it out.
+
+#### Setup
+
+```tsx
+import {
+  DrawerIndent,
+  DrawerIndentBackground,
+  DrawerProvider,
+} from "@/components/ui/drawer";
+
+export default function DrawerIndentPage() {
+  return (
+    <DrawerProvider>
+      <DrawerIndentBackground />
+      <DrawerIndent>
+        {/* Your drawer */}
+      </DrawerIndent>
+    </DrawerProvider>
+  );
+}
+```
+
+More info at [Base UI](https://base-ui.com/react/components/drawer#indent-effect).
+
+#### CSS
+
+```css title="globals.css"
+/*
+   Drawer Indent
+*/
+@layer utilities {
+  .drawer-indent {
+    --indent-progress: var(--drawer-swipe-progress);
+    --indent-radius: calc(1rem * (1 - var(--indent-progress)));
+    --indent-transition: calc(1 - clamp(0, calc(var(--drawer-swipe-progress) * 100000), 1));
+
+    @apply origin-[center_top] will-change-transform;
+    transform: scale(1) translateY(0);
+    transition:
+      transform 0.4s var(--ease-smooth),
+      border-radius 0.25s var(--ease-smooth);
+    transition-duration:
+      calc(400ms * var(--indent-transition)),
+      calc(250ms * var(--indent-transition));
+
+    &[data-active] {
+      transform:
+        scale(calc(0.98 + (0.02 * var(--indent-progress))))
+        translateY(calc(0.5rem * (1 - var(--indent-progress))));
+      border-top-left-radius: var(--indent-radius);
+      border-top-right-radius: var(--indent-radius);
+    }
+  }
+}
+```
+### Customization
+
+#### Mobile navigation
+
+<ComponentPreview name="drawer-mobile-navigation" />
+
+#### Action sheet
+
+<ComponentPreview name="drawer-action-sheet" />
+
+#### Responsive dialog
+
+<ComponentPreview name="drawer-responsive" />
+

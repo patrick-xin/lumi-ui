@@ -10,7 +10,11 @@ import {
 export function SelectDemo() {
   return (
     <Select items={fruits}>
-      <SelectTriggerGroup className="w-48" placeholder="Select a fruit" />
+      <SelectTriggerGroup
+        className="w-48"
+        label="Fruit"
+        placeholder="Select a fruit"
+      />
       <SelectContent>
         {fruits.map((fruit) => (
           <SelectItemContent key={fruit.value} value={fruit.value}>

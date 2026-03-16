@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { ProjectPopover } from "@/components/examples/ui/popover/popover-demo";
-import { SwitchCustomDemo } from "@/components/examples/ui/switch/switch-custom";
-import { SwitchDemo } from "@/components/examples/ui/switch/switch-demo";
-import { SwitchErrorDemo } from "@/components/examples/ui/switch/switch-error";
-import { ToggleGroupVerticalDemo } from "@/components/examples/ui/toggle-group/toggle-group-vertical";
+import { DrawerDemo } from "@/components/examples/ui/drawer/drawer-demo";
+import { DrawerDirectionsDemo } from "@/components/examples/ui/drawer/drawer-directions";
+import { DrawerDialogDemo } from "@/components/examples/ui/drawer/drawer-responsive";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import {
@@ -14,6 +12,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/ui/breadcrumb";
+import { DrawerBasicDemo } from "../../../../components/examples/ui/drawer/drawer-basic";
+import { DrawerDirectionsInsetDemo } from "../../../../components/examples/ui/drawer/drawer-directions-inset";
+import { DrawerDirectionsResponsiveDemo } from "../../../../components/examples/ui/drawer/drawer-directions-responsive";
 
 export default function Page() {
   return (
@@ -35,11 +36,27 @@ export default function Page() {
       </header>
       <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
         <section className="max-w-4xl mx-auto flex items-center gap-4">
-          <ProjectPopover />
-          <ToggleGroupVerticalDemo />
-          <SwitchCustomDemo />
-          <SwitchErrorDemo />
-          <SwitchDemo />
+          <div className="flex flex-col gap-4">
+            Basic
+            <DrawerDemo />
+            <DrawerDialogDemo />
+            <div className="flex flex-col gap-2">
+              Full bleed(default)
+              <DrawerDirectionsDemo />
+            </div>
+            <div className="flex flex-col gap-2">
+              Inset
+              <DrawerDirectionsInsetDemo />
+            </div>
+            <div className="flex flex-col gap-2">
+              Basic
+              <DrawerBasicDemo />
+            </div>
+            <div className="flex flex-col gap-2">
+              Responsive
+              <DrawerDirectionsResponsiveDemo />
+            </div>
+          </div>
         </section>
       </div>
     </div>
