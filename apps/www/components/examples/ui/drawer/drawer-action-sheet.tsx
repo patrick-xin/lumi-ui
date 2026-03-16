@@ -7,32 +7,30 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerInnerContent,
+  DrawerSelectable,
   DrawerTitle,
   DrawerTrigger,
 } from "@/registry/ui/drawer";
 import { toast } from "@/registry/ui/toast";
 
 const ACTIONS = [
-  "Unfollow",
-  "Mute",
-  "Add to Favourites",
-  "Add to Close Friends",
-  "Restrict",
+  "Copy link",
+  "Add to Bookmarks",
+  "Mute Notifications",
+  "Share to...",
+  "Report Post",
 ];
 
 export function DrawerActionSheetDemo() {
   const [open, setOpen] = React.useState(false);
   return (
     <Drawer onOpenChange={setOpen} open={open}>
-      <DrawerTrigger
-        render={<Button variant="outline">Open Action Sheet</Button>}
-      />
+      <DrawerTrigger render={<Button variant="outline">Show options</Button>} />
       <DrawerContent className="pointer-events-none max-w-md bg-transparent outline-0">
-        <DrawerInnerContent className="pointer-events-auto overflow-hidden rounded-2xl bg-background overlay-outline">
-          <DrawerTitle className="sr-only">Profile actions</DrawerTitle>
+        <DrawerSelectable className="pointer-events-auto overflow-hidden rounded-2xl bg-background overlay-outline">
+          <DrawerTitle className="sr-only">Post actions</DrawerTitle>
           <DrawerDescription className="sr-only">
-            Choose an action for this user.
+            Choose an action for this post.
           </DrawerDescription>
           <ul
             aria-label="Profile actions"
@@ -55,7 +53,7 @@ export function DrawerActionSheetDemo() {
               </li>
             ))}
           </ul>
-        </DrawerInnerContent>
+        </DrawerSelectable>
         <div className="pointer-events-auto overflow-hidden rounded-2xl">
           <Button
             className="w-full h-12 rounded-2xl"
@@ -63,13 +61,14 @@ export function DrawerActionSheetDemo() {
               setOpen(false);
 
               toast.add({
-                description: "You will no longer see posts from this user.",
-                title: "User blocked",
+                description:
+                  "The post was successfully removed from your feed.",
+                title: "Post removed",
               });
             }}
             variant="destructive"
           >
-            Block User
+            Delete Post
           </Button>
         </div>
       </DrawerContent>

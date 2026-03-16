@@ -7,7 +7,7 @@ import {
   DrawerDragHandle,
   DrawerFooter,
   DrawerHeader,
-  DrawerInnerContent,
+  DrawerSelectable,
   DrawerTitle,
   DrawerTrigger,
 } from "@/registry/ui/drawer";
@@ -18,7 +18,7 @@ export function DrawerSelectionDemo() {
       <DrawerTrigger render={<Button variant="outline">Open drawer</Button>} />
       <DrawerContent>
         <DrawerDragHandle />
-        <DrawerInnerContent className="max-w-lg">
+        <DrawerSelectable className="max-w-lg">
           <DrawerHeader>
             <DrawerTitle>Drawer Content</DrawerTitle>
             <DrawerDescription>
@@ -34,7 +34,7 @@ export function DrawerSelectionDemo() {
               }
             />
           </DrawerFooter>
-        </DrawerInnerContent>
+        </DrawerSelectable>
       </DrawerContent>
     </Drawer>
   );

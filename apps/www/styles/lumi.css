@@ -1,6 +1,6 @@
 /* For popups */
 @utility animate-popup {
-  @apply origin-[var(--transform-origin)] transition-[opacity,scale,transform] ease-[cubic-bezier(0.23,1,0.32,1)] duration-150;
+  @apply origin-[var(--transform-origin)] transition-[opacity,scale,transform] ease-spring duration-150;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -11,7 +11,7 @@
 
 /* For dialogs */
 @utility animate-fade-up {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-450 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -21,7 +21,7 @@
 }
 
 @utility animate-fade-down {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-450 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -31,7 +31,7 @@
 }
 
 @utility animate-slide-left {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-450 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -41,7 +41,7 @@
 }
 
 @utility animate-slide-right {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-450 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -51,7 +51,7 @@
 }
 
 @utility animate-fade-zoom {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-240 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -61,7 +61,7 @@
 }
 
 @utility animate-fade {
-  @apply transition-all duration-200;
+  @apply transition-all duration-240;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -84,7 +84,8 @@
 */
 @layer utilities {
   .drawer-popup {
-    transition: transform 450ms cubic-bezier(0.32, 0.72, 0, 1);
+    touch-action: auto;
+    transition: transform 450ms var(--ease-smooth);
 
     &[data-swiping] {
       @apply select-none;
@@ -121,10 +122,8 @@
 
   /* Left */
   .drawer-popup[data-side="left"] {
-    @apply -ml-(--drawer-bleed) h-full;
+    @apply -ml-(--drawer-bleed) h-full w-[calc(20rem+var(--drawer-bleed))] sm:w-[calc(24rem+var(--drawer-bleed))] max-w-[100vw];
     --viewport-padding: 0px;
-    width: calc(24rem + var(--drawer-bleed));
-    max-width: calc(100vw - var(--drawer-bleed) + var(--drawer-bleed));
     transform: translateX(var(--drawer-swipe-movement-x));
 
     &[data-ending-style],
@@ -134,16 +133,15 @@
 
     @supports (-webkit-touch-callout: none) {
       --drawer-bleed: 0px;
-      @apply ml-0 w-96 max-w-[calc(100vw-20px)] rounded-[10px] pl-6;
+      --viewport-padding: 0.625rem;
+      @apply ml-0 w-80 sm:w-96 max-w-[calc(100vw-20px)] rounded-md pl-6;
     }
   }
 
   /* Right */
   .drawer-popup[data-side="right"] {
-    @apply -mr-(--drawer-bleed) h-full;
+    @apply -mr-(--drawer-bleed) h-full w-[calc(20rem+var(--drawer-bleed))] sm:w-[calc(24rem+var(--drawer-bleed))] max-w-[100vw];
     --viewport-padding: 0px;
-    width: calc(24rem + var(--drawer-bleed));
-    max-width: calc(100vw - var(--drawer-bleed) + var(--drawer-bleed));
     transform: translateX(var(--drawer-swipe-movement-x));
 
     &[data-ending-style],
@@ -153,7 +151,8 @@
 
     @supports (-webkit-touch-callout: none) {
       --drawer-bleed: 0px;
-      @apply mr-0 w-96 max-w-[calc(100vw-20px)] rounded-[10px] pr-6;
+      --viewport-padding: 0.625rem;
+      @apply mr-0 w-80 sm:w-96 max-w-[calc(100vw-20px)] rounded-md pr-6;
     }
   }
 
@@ -179,8 +178,8 @@
     @apply origin-[center_top] will-change-transform;
     transform: scale(1) translateY(0);
     transition:
-      transform 0.4s cubic-bezier(0.32, 0.72, 0, 1),
-      border-radius 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+      transform 0.4s var(--ease-smooth),
+      border-radius 0.25s var(--ease-smooth);
     transition-duration:
       calc(400ms * var(--indent-transition)),
       calc(250ms * var(--indent-transition));
@@ -208,12 +207,7 @@
     padding-bottom: max(0px, calc(var(--drawer-snap-point-offset) + var(--drawer-swipe-movement-y)));
 
     transition:
-      transform 450ms cubic-bezier(0.32, 0.72, 0, 1),
-      box-shadow 450ms cubic-bezier(0.32, 0.72, 0, 1);
-
-    box-shadow:
-      0 -16px 48px rgb(0 0 0 / 0.12),
-      0 6px 18px rgb(0 0 0 / 0.06);
+      transform 450ms var(--ease-smooth);
 
     /* Bleed pseudo-element below rounded corners */
     &::after {
@@ -247,6 +241,7 @@
 */
 @layer utilities {
   .drawer-stacked-popup {
+    touch-action: auto;
     @apply -mb-(--drawer-bleed);
     max-height: calc(80vh + var(--drawer-bleed));
 
@@ -267,9 +262,9 @@
       scale(var(--scale));
 
     transition:
-      transform 450ms cubic-bezier(0.32, 0.72, 0, 1),
-      height 450ms cubic-bezier(0.32, 0.72, 0, 1),
-      box-shadow 450ms cubic-bezier(0.32, 0.72, 0, 1);
+      transform 450ms var(--ease-smooth),
+      height 450ms var(--ease-smooth),
+      box-shadow 450ms var(--ease-smooth);
 
     /* Shadow */
     box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
@@ -278,7 +273,7 @@
     &::after {
       content: "";
       @apply absolute inset-0 rounded-[inherit] bg-transparent pointer-events-none;
-      transition: background-color 450ms cubic-bezier(0.32, 0.72, 0, 1);
+      transition: background-color 450ms var(--ease-smooth);
     }
 
     /* Enter/exit */
@@ -341,9 +336,9 @@
     
     /* Transitions */
     transition: 
-      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
-      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
-      height 0.15s ease-out;
+      transform 0.5s var(--ease-spring), 
+      opacity 0.5s var(--ease-spring), 
+      height 0.15s var(--ease-spring);
     
     /* Height Calculation */
     height: var(--toast-frontmost-height, var(--toast-height));

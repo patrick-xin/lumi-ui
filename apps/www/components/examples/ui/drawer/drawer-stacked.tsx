@@ -9,7 +9,7 @@ import {
   DrawerDragHandle,
   DrawerTitle,
   DrawerTrigger,
-  StackedDrawerInnerContent,
+  StackedDrawerSelectable,
 } from "@/registry/ui/drawer";
 import { Input } from "@/registry/ui/input";
 import { Label } from "@/registry/ui/label";
@@ -21,7 +21,7 @@ export function DrawerStackedDemo() {
       <DrawerTrigger render={<Button />}>Open drawer stack</DrawerTrigger>
       <DrawerContent layout="stacked">
         <DrawerDragHandle className="transition-opacity duration-200 group-data-[nested-drawer-open]/popup:opacity-0 group-data-[nested-drawer-swiping]/popup:opacity-100" />
-        <StackedDrawerInnerContent className="max-w-lg">
+        <StackedDrawerSelectable className="max-w-lg">
           <DrawerTitle>Account</DrawerTitle>
           <DrawerDescription>
             Nested drawers can be styled to stack, while each drawer remains
@@ -30,7 +30,7 @@ export function DrawerStackedDemo() {
           <Drawer>
             <DrawerTrigger render={<Button />}>Security settings</DrawerTrigger>
             <DrawerContent layout="stacked">
-              <StackedDrawerInnerContent className="max-w-lg">
+              <StackedDrawerSelectable className="max-w-lg">
                 <DrawerTitle>Security</DrawerTitle>
                 <DrawerDescription>
                   Review sign-in activity and update your security preferences.
@@ -47,7 +47,7 @@ export function DrawerStackedDemo() {
                         Advanced options
                       </DrawerTrigger>
                       <DrawerContent layout="stacked">
-                        <StackedDrawerInnerContent className="max-w-lg">
+                        <StackedDrawerSelectable className="max-w-lg">
                           <DrawerTitle>Advanced</DrawerTitle>
                           <DrawerDescription>
                             This drawer is taller to demonstrate variable-height
@@ -74,7 +74,7 @@ export function DrawerStackedDemo() {
                               render={<Button variant="outline">Done</Button>}
                             />
                           </div>
-                        </StackedDrawerInnerContent>
+                        </StackedDrawerSelectable>
                       </DrawerContent>
                     </Drawer>
                   </div>
@@ -82,11 +82,11 @@ export function DrawerStackedDemo() {
                     render={<Button variant="outline">Close</Button>}
                   />
                 </div>
-              </StackedDrawerInnerContent>
+              </StackedDrawerSelectable>
             </DrawerContent>
           </Drawer>
           <DrawerClose render={<Button variant="outline">Close</Button>} />
-        </StackedDrawerInnerContent>
+        </StackedDrawerSelectable>
       </DrawerContent>
     </Drawer>
   );

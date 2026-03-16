@@ -7,9 +7,9 @@ import {
   DrawerDescription,
   DrawerDragHandle,
   DrawerHeader,
-  DrawerInnerContent,
   DrawerPopup,
   DrawerPortal,
+  DrawerSelectable,
   DrawerTitle,
   DrawerTrigger,
   DrawerViewport,
@@ -52,7 +52,7 @@ export function DrawerMobileNavigationDemo() {
                       }
                     />
 
-                    <DrawerInnerContent className="w-full">
+                    <DrawerSelectable className="w-full">
                       <DrawerHeader>
                         <DrawerTitle>Menu</DrawerTitle>
                         <DrawerDescription>
@@ -61,7 +61,7 @@ export function DrawerMobileNavigationDemo() {
                         </DrawerDescription>
                       </DrawerHeader>
 
-                      <div className="pb-8 space-y-4">
+                      <div className="pb-6 space-y-4">
                         <ul className="grid list-none gap-2">
                           {ITEMS.map((item) => (
                             <li className="flex" key={item.label}>
@@ -107,7 +107,7 @@ export function DrawerMobileNavigationDemo() {
                           ))}
                         </ul>
                       </div>
-                    </DrawerInnerContent>
+                    </DrawerSelectable>
                   </nav>
                 </DrawerPopup>
               </ScrollAreaContent>

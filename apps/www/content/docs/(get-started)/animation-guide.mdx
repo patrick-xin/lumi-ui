@@ -51,7 +51,7 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 
 ```css
 @utility animate-popup {
-  @apply origin-[var(--transform-origin)] transition-[opacity,scale,transform] ease-[cubic-bezier(0.23,1,0.32,1)] duration-150;
+  @apply origin-[var(--transform-origin)] transition-[opacity,scale,transform] ease-spring duration-150;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -61,7 +61,7 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 }
 
 @utility animate-fade-up {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -71,7 +71,7 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 }
 
 @utility animate-fade-down {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -81,7 +81,7 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 }
 
 @utility animate-slide-left {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -91,7 +91,7 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 }
 
 @utility animate-slide-right {
-  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-300 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -101,7 +101,7 @@ If you installed [init](/docs/installation) command via CLI, you can skip this s
 }
 
 @utility animate-fade-zoom {
-  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+  @apply transition-all duration-200 ease-smooth;
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -131,47 +131,43 @@ Remove utility classes (`animate-popup`, `animate-fade-up`, `animate-fade-down`,
 
 ```tsx
 <PopoverContent
-  className="data-[ending-style]:scale-90 data-[ending-style]:opacity-0 
-  data-[starting-style]:scale-90 data-[starting-style]:opacity-0 
+  className="data-ending-style:scale-90 data-ending-style:opacity-0 
+  data-starting-style:scale-90 data-starting-style:opacity-0 
   origin-[var(--transform-origin)] transition-[transform,scale,opacity]"
 />
 ```
 ```tsx
 <DialogContent
-  className="transition-all duration-200 data-[ending-style]:scale-90 
-  data-[ending-style]:opacity-0 data-[starting-style]:scale-90 
-  data-[starting-style]:opacity-0"
+  className="transition-all duration-200 data-ending-style:scale-90 
+  data-ending-style:opacity-0 data-starting-style:scale-90 
+  data-starting-style:opacity-0"
 />
 ```
 ```tsx
 <DialogBackdrop className="transition-all duration-200 
-data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
+data-ending-style:opacity-0 data-starting-style:opacity-0" />
 ```
 
 ## Component Compatibility
 
-Uses `animate-popup`:
-- Form Input: [Combobox](/docs/components/form-input/combobox), [Select](/docs/components/form-input/select)
-- Overlays & Dialogs: [Context Menu](/docs/components/overlays-dialogs/context-menu), [Dropdown Menu](/docs/components/overlays-dialogs/dropdown-menu), [Popover](/docs/components/overlays-dialogs/popover), [Preview Card](/docs/components/overlays-dialogs/preview-card), [Tooltip](/docs/components/overlays-dialogs/tooltip)
-- Misc: [Menubar](/docs/components/misc/menubar)
-- Feedback & Status: [Toast](/docs/components/feedback-status/toast)
+### `animate-popup`
+Used for surfaces that follow an anchor or require a "springy" entrance:
+- **Form**: [Combobox](/docs/components/form-input/combobox), [Select](/docs/components/form-input/select)
+- **Overlay**: [Context Menu](/docs/components/overlays-dialogs/context-menu), [Dropdown Menu](/docs/components/overlays-dialogs/dropdown-menu), [Popover](/docs/components/overlays-dialogs/popover), [Preview Card](/docs/components/overlays-dialogs/preview-card), [Tooltip](/docs/components/overlays-dialogs/tooltip)
+- **Status**: [Toast](/docs/components/feedback-status/toast)
+- **Misc**: [Menubar](/docs/components/misc/menubar)
 
----
+### `animate-fade` & `animate-fade-zoom`
+Used for center-aligned overlays or static backdrops:
+- **Dialogs**:
+  - `animate-fade-zoom`: [Alert Dialog](/docs/components/overlays-dialogs/alert-dialog), [Command Menu](/docs/components/layout-nav/command-menu), [Dialog](/docs/components/overlays-dialogs/dialog) (`center`, `scrollable`)
+  - `animate-fade`: All backdrops, [Dialog](/docs/components/overlays-dialogs/dialog) (`element-outside`, `responsive`, `stacked`)
+- **Navigation**: [Navigation Menu](/docs/components/layout-nav/navigation-menu)
 
-Uses `animate-fade`: [Alert Dialog](/docs/components/overlays-dialogs/alert-dialog) backdrop, [Navigation Menu](/docs/components/layout-nav/navigation-menu)
-
-Uses `animate-fade-zoom`: [Command Menu](/docs/components/layout-nav/command-menu), [Alert Dialog](/docs/components/overlays-dialogs/alert-dialog) content (default `layout="center"`)
-
-[Dialog](/docs/components/overlays-dialogs/dialog) by `layout` variant:
-- `center`, `scrollable`: `animate-fade-zoom`
-- `element-outside`, `responsive`, `stacked`: `animate-fade`
-- `top`: `animate-fade-down`
-- backdrop: `animate-fade`
-
-[Sheet](/docs/components/overlays-dialogs/sheet) by `side` variant:
-- `bottom`: `animate-fade-up`
-- `top`: `animate-fade-down`
-- `right`: `animate-slide-left`
-- `left`: `animate-slide-right`
-- backdrop: `animate-fade`
+### Directional Animations
+Used for edge-aligned [Sheet](/docs/components/overlays-dialogs/sheet) and [Dialog](/docs/components/overlays-dialogs/dialog) variants:
+- **`animate-fade-up`**: Sheet (`bottom`), Dialog (`bottom`)
+- **`animate-fade-down`**: Sheet (`top`), Dialog (`top`)
+- **`animate-slide-left`**: Sheet (`right`)
+- **`animate-slide-right`**: Sheet (`left`)
 

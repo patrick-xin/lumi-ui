@@ -7,7 +7,7 @@ import {
   DrawerContent,
   DrawerDescription,
   DrawerDragHandle,
-  DrawerInnerContent,
+  DrawerSelectable,
   DrawerTitle,
   DrawerTrigger,
 } from "@/registry/ui/drawer";
@@ -18,7 +18,7 @@ export function DrawerIndentDemo() {
       <DrawerTrigger render={<Button variant="outline">Open drawer</Button>} />
       <DrawerContent>
         <DrawerDragHandle />
-        <DrawerInnerContent className="max-w-lg">
+        <DrawerSelectable className="max-w-lg">
           <DrawerTitle className="text-center">Notifications</DrawerTitle>
           <DrawerDescription className="text-center">
             You are all caught up. Good job!
@@ -26,7 +26,7 @@ export function DrawerIndentDemo() {
           <div className="flex justify-center gap-4">
             <DrawerClose render={<Button variant="outline">Close</Button>} />
           </div>
-        </DrawerInnerContent>
+        </DrawerSelectable>
       </DrawerContent>
     </Drawer>
   );

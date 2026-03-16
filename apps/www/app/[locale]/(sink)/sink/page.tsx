@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { DrawerDemo } from "@/components/examples/ui/drawer/drawer-demo";
 import { DrawerDirectionsDemo } from "@/components/examples/ui/drawer/drawer-directions";
-import { DrawerSwipeDemo } from "@/components/examples/ui/drawer/drawer-swipe";
+import { DrawerDialogDemo } from "@/components/examples/ui/drawer/drawer-responsive";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { DrawerDialogSettingsDemo } from "@/registry/components/drawer-settings";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -37,9 +38,9 @@ export default function Page() {
             Basic
             <DrawerDemo />
             <DrawerDirectionsDemo />
+            <DrawerDialogDemo />
+            <DrawerDialogSettingsDemo />
           </div>
-
-          <DrawerSwipeDemo />
         </section>
       </div>
     </div>

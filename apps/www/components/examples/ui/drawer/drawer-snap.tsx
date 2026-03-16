@@ -9,7 +9,7 @@ import {
   DrawerDescription,
   DrawerDragHandle,
   DrawerHeader,
-  DrawerInnerContent,
+  DrawerSelectable,
   DrawerTitle,
   DrawerTrigger,
 } from "@/registry/ui/drawer";
@@ -51,15 +51,15 @@ export function DrawerSnapDemo() {
           }
         >
           <DrawerDragHandle className="my-4" />
-          <DrawerInnerContent className="min-h-0 flex-1 touch-auto pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] overflow-auto z-10">
-            <div className="mx-auto w-full max-w-[350px]">
-              <DrawerHeader className="mb-4">
-                <DrawerTitle>Snap points</DrawerTitle>
-                <DrawerDescription>
-                  Drag the sheet to snap between a compact peek and a near
-                  full-height view.
-                </DrawerDescription>
-              </DrawerHeader>
+          <DrawerHeader className="mb-4 mx-4 touch-none sm:mx-auto w-full max-w-md">
+            <DrawerTitle>Snap points</DrawerTitle>
+            <DrawerDescription>
+              Drag the sheet to snap between a compact peek and a near
+              full-height view.
+            </DrawerDescription>
+          </DrawerHeader>
+          <DrawerSelectable className="min-h-0 flex-1 px-4 touch-auto pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] overflow-auto z-10">
+            <div className="mx-auto w-full max-w-md">
               <div aria-hidden className="grid gap-3 mb-6">
                 {Array.from({ length: 20 }, (_, index) => (
                   <div
@@ -77,7 +77,7 @@ export function DrawerSnapDemo() {
                 }
               />
             </div>
-          </DrawerInnerContent>
+          </DrawerSelectable>
         </DrawerContent>
       </Drawer>
       <Drawer snapPoints={snapPointsScrollArea}>

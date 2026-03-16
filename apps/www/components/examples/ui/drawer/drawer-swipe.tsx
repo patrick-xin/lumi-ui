@@ -6,9 +6,9 @@ import {
   DrawerBackdrop,
   DrawerClose,
   DrawerDescription,
-  DrawerInnerContent,
   DrawerPopup,
   DrawerPortal,
+  DrawerSelectable,
   DrawerSwipeArea,
   DrawerTitle,
   DrawerViewport,
@@ -32,7 +32,7 @@ export function DrawerSwipeDemo() {
             className="drawer-popup bg-background text-foreground outline outline-border overflow-y-auto overscroll-contain p-6 pr-[calc(1.2rem+var(--drawer-bleed))] supports-[-webkit-touch-callout:none]:pr-6"
             data-side="right"
           >
-            <DrawerInnerContent>
+            <DrawerSelectable>
               <DrawerTitle>Library</DrawerTitle>
               <DrawerDescription>
                 Swipe from the edge whenever you want to jump back into your
@@ -43,7 +43,7 @@ export function DrawerSwipeDemo() {
                   render={<Button variant="outline">Close</Button>}
                 />
               </div>
-            </DrawerInnerContent>
+            </DrawerSelectable>
           </DrawerPopup>
         </DrawerViewport>
       </DrawerPortal>

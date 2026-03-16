@@ -111,7 +111,7 @@ function SelectPositioner({
   return (
     <BaseSelect.Positioner
       alignItemWithTrigger={alignItemWithTrigger}
-      className={cn(className)}
+      className={cn("outline-hidden select-none z-10", className)}
       data-slot="select-positioner"
       {...props}
     />
@@ -339,16 +339,17 @@ function SelectContent({
         align={align}
         alignItemWithTrigger={alignItemWithTrigger}
         alignOffset={alignOffset}
+        className="outline-hidden select-none z-10"
         data-slot="select-positioner"
         side={side}
         sideOffset={sideOffset}
       >
         <BaseSelect.Popup
           className={cn(
-            "bg-popover text-popover-foreground rounded-md shadow-md overflow-hidden",
+            "bg-popover text-popover-foreground rounded-md shadow-md overflow-hidden bg-clip-padding",
             "overlay-outline animate-popup",
             "[&:not([data-side=none])]:max-h-(--available-height) min-w-(--anchor-width)",
-            "data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:min-w-(--anchor-width+0.3rem)",
+            "data-[side=none]:data-ending-style:transition-none data-[side=none]:data-starting-style:transition-none data-[side=none]:data-starting-style:scale-100 data-[side=none]:data-starting-style:opacity-100 data-[side=none]:min-w-[calc(var(--anchor-width)+0.2rem)]",
             className,
           )}
           data-slot="select-content"
