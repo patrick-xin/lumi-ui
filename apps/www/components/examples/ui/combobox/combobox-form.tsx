@@ -39,6 +39,7 @@ export function ComboboxFormDemo() {
             aria-label="Search framework"
             className="w-64"
             placeholder="e.g. Next.js"
+            required
             showClear
             showTrigger
           />

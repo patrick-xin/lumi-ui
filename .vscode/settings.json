@@ -29,5 +29,6 @@
   },
   "[jsonc]": {
     "editor.defaultFormatter": "biomejs.biome"
-  }
+  },
+  "tailwindCSS.classFunctions": ["cva", "cx"]
 }

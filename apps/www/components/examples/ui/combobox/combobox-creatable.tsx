@@ -10,6 +10,7 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
+  ComboboxInputControl,
   ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
@@ -22,6 +23,7 @@ import {
   DialogTitle,
 } from "@/registry/ui/dialog";
 import { Input } from "@/registry/ui/input";
+import { Label } from "../../../../registry/ui/label";
 
 export default function ExampleCreatableCombobox() {
   const id = React.useId();
@@ -31,7 +33,6 @@ export default function ExampleCreatableCombobox() {
   const [query, setQuery] = React.useState("");
   const [openDialog, setOpenDialog] = React.useState(false);
 
-  const containerRef = React.useRef<HTMLDivElement | null>(null);
   const createInputRef = React.useRef<HTMLInputElement | null>(null);
   const comboboxInputRef = React.useRef<HTMLInputElement | null>(null);
   const pendingQueryRef = React.useRef("");
@@ -161,37 +162,34 @@ export default function ExampleCreatableCombobox() {
         }}
         value={selected}
       >
-        <div className="max-w-112 flex flex-col gap-1">
-          <label className="text-sm leading-5 font-medium" htmlFor={id}>
-            Labels
-          </label>
-          <ComboboxChips
-            className="w-64 min-[500px]:w-[22rem]"
-            ref={containerRef}
-          >
-            <ComboboxValue>
-              {(value: LabelItem[]) => (
-                <React.Fragment>
-                  {value.map((label) => (
-                    <ComboboxChip aria-label={label.value} key={label.id}>
-                      {label.value}
-                    </ComboboxChip>
-                  ))}
-                  <ComboboxInput
-                    className="flex-1 min-w-12"
-                    id={id}
-                    onKeyDown={handleInputKeyDown}
-                    placeholder={value.length > 0 ? "" : "e.g. bug"}
-                    ref={comboboxInputRef}
-                    variant="ghost"
-                  />
-                </React.Fragment>
-              )}
-            </ComboboxValue>
-          </ComboboxChips>
+        <div className="max-w-md flex flex-col gap-2">
+          <Label htmlFor={id}>Labels</Label>
+          <ComboboxInputControl className="max-w-xl w-96 border px-1.5 py-1">
+            <ComboboxChips className="w-64 min-[500px]:w-88">
+              <ComboboxValue>
+                {(value: LabelItem[]) => (
+                  <React.Fragment>
+                    {value.map((label) => (
+                      <ComboboxChip aria-label={label.value} key={label.id}>
+                        {label.value}
+                      </ComboboxChip>
+                    ))}
+                    <ComboboxInput
+                      className="flex-1 min-w-12"
+                      id={id}
+                      onKeyDown={handleInputKeyDown}
+                      placeholder={value.length > 0 ? "" : "e.g. bug"}
+                      ref={comboboxInputRef}
+                      variant="ghost"
+                    />
+                  </React.Fragment>
+                )}
+              </ComboboxValue>
+            </ComboboxChips>
+          </ComboboxInputControl>
         </div>
 
-        <ComboboxContent positionerAnchor={containerRef}>
+        <ComboboxContent>
           <ComboboxEmpty>No labels found.</ComboboxEmpty>
           <ComboboxList>
             {(item: LabelItem) =>

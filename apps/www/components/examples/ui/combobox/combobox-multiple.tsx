@@ -7,53 +7,108 @@ import {
   ComboboxChips,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInput,
+  ComboboxInputControl,
   ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
 } from "@/registry/ui/combobox";
+import { Label } from "@/registry/ui/label";
 
 export function ComboboxMultipleSelectDemo() {
-  const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const id = React.useId();
   return (
-    <Combobox items={langs} multiple>
-      <ComboboxChips className="max-w-xl w-96" ref={containerRef}>
-        <ComboboxValue>
-          {(value: ProgrammingLanguage[]) => (
-            <React.Fragment>
-              {value.map((language) => (
-                <ComboboxChip aria-label={language.value} key={language.id}>
-                  {language.value}
-                </ComboboxChip>
-              ))}
-              <ComboboxInputGroup
-                // remove flex-1 will make input always appear in new line, see Async Items (Multiple) example below
-                className="flex-1"
-                inputSize="lg"
-                placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
-                showClear
-                showTrigger
-                variant="ghost"
-              />
-            </React.Fragment>
-          )}
-        </ComboboxValue>
-      </ComboboxChips>
-      <ComboboxContent positionerAnchor={containerRef} sideOffset={4}>
-        <ComboboxEmpty>No languages found.</ComboboxEmpty>
-        <ComboboxList>
-          {(language: ProgrammingLanguage) => (
-            <ComboboxItemContent
-              indicatorPlacement="end"
-              key={language.id}
-              value={language}
-            >
-              {language.value}
-            </ComboboxItemContent>
-          )}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+    <div className="flex gap-4 items-center">
+      <Combobox items={langs} multiple>
+        <div className="max-w-md flex flex-col gap-2">
+          <Label htmlFor={id}>Programming languages</Label>
+          <ComboboxInputControl className="max-w-xl w-96" inputSize="lg">
+            <ComboboxChips>
+              <ComboboxValue>
+                {(value: ProgrammingLanguage[]) => (
+                  <React.Fragment>
+                    {value.map((language) => (
+                      <ComboboxChip
+                        aria-label={language.value}
+                        key={language.id}
+                      >
+                        {language.value}
+                      </ComboboxChip>
+                    ))}
+                    <ComboboxInput
+                      className="flex-1"
+                      id={id}
+                      placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
+                    />
+                  </React.Fragment>
+                )}
+              </ComboboxValue>
+            </ComboboxChips>
+          </ComboboxInputControl>
+        </div>
+
+        <ComboboxContent sideOffset={4}>
+          <ComboboxEmpty>No languages found.</ComboboxEmpty>
+          <ComboboxList>
+            {(language: ProgrammingLanguage) => (
+              <ComboboxItemContent
+                indicatorPlacement="end"
+                key={language.id}
+                value={language}
+              >
+                {language.value}
+              </ComboboxItemContent>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+      <Combobox items={langs} multiple>
+        <div className="max-w-md flex flex-col gap-2">
+          <Label htmlFor={id}>Programming languages</Label>
+          <ComboboxInputControl
+            className="max-w-xl w-96 px-1.5 py-1"
+            inputSize="sm"
+          >
+            <ComboboxChips>
+              <ComboboxValue>
+                {(value: ProgrammingLanguage[]) => (
+                  <React.Fragment>
+                    {value.map((language) => (
+                      <ComboboxChip
+                        aria-label={language.value}
+                        key={language.id}
+                      >
+                        {language.value}
+                      </ComboboxChip>
+                    ))}
+                    <ComboboxInput
+                      className="flex-1"
+                      id={id}
+                      placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
+                    />
+                  </React.Fragment>
+                )}
+              </ComboboxValue>
+            </ComboboxChips>
+          </ComboboxInputControl>
+        </div>
+
+        <ComboboxContent sideOffset={4}>
+          <ComboboxEmpty>No languages found.</ComboboxEmpty>
+          <ComboboxList>
+            {(language: ProgrammingLanguage) => (
+              <ComboboxItemContent
+                indicatorPlacement="end"
+                key={language.id}
+                value={language}
+              >
+                {language.value}
+              </ComboboxItemContent>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    </div>
   );
 }
 

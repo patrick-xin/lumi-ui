@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import {
   Combobox,
   ComboboxContent,
@@ -8,26 +9,32 @@ import {
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
+import { Label } from "@/registry/ui/label";
 
 export function ComboboxDemo() {
+  const id = React.useId();
   return (
-    <Combobox items={frameworks}>
-      <ComboboxInputGroup
-        aria-label="Choose a framework"
-        className="w-52"
-        placeholder="e.g. Next.js"
-      />
-      <ComboboxContent>
-        <ComboboxEmpty>No framework found.</ComboboxEmpty>
-        <ComboboxList>
-          {(item: string) => (
-            <ComboboxItemContent key={item} value={item}>
-              {item}
-            </ComboboxItemContent>
-          )}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+    <div className="flex flex-col gap-2">
+      <Combobox items={frameworks}>
+        <Label htmlFor={id}>Framework</Label>
+        <ComboboxInputGroup
+          aria-label="Choose a framework"
+          className="w-52"
+          id={id}
+          placeholder="e.g. Next.js"
+        />
+        <ComboboxContent>
+          <ComboboxEmpty>No framework found.</ComboboxEmpty>
+          <ComboboxList>
+            {(item: string) => (
+              <ComboboxItemContent key={item} value={item}>
+                {item}
+              </ComboboxItemContent>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+    </div>
   );
 }
 

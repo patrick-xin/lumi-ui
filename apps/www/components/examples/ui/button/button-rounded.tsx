@@ -5,7 +5,7 @@ import { Button } from "@/registry/ui/button";
 export function ButtonRounded() {
   return (
     <div className="flex flex-col gap-8">
-      <Button variant="outline" size="icon" className="rounded-full">
+      <Button className="rounded-full" size="icon" variant="outline">
         <ArrowUpIcon />
       </Button>
     </div>

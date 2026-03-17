@@ -3,19 +3,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/registry/lib/utils";
 
-const inputVariants = cva(
+// Base box appearance — shared between standalone inputs and containers
+const inputBaseVariants = cva(
   [
-    "bg-transparent w-full min-w-0 rounded-md shadow-sm text-base border border-input cursor-text transition-[color,box-shadow,border,ring] appearance-none duration-150",
-    "placeholder:text-muted-foreground placeholder:text-sm",
-    "file:text-foreground file:inline-flex file:items-center file:h-full file:border-0 file:bg-transparent file:text-sm file:font-medium",
-    // focus state
-    "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
-    // selection state
-    "selection:bg-primary selection:text-primary-foreground",
-    // disabled state
+    "rounded-md border border-input shadow-sm outline-0",
+    "transition-[color,box-shadow,border,ring,outline] appearance-none duration-150",
+    // disabled
     "disabled:cursor-default disabled:opacity-50",
-    // invalid state
+    "data-disabled:cursor-default data-disabled:opacity-50",
+    // invalid
     "aria-invalid:outline aria-invalid:outline-destructive/80 aria-invalid:ring-4 aria-invalid:ring-destructive/20",
+    "data-invalid:outline data-invalid:outline-destructive/80 data-invalid:ring-4 data-invalid:ring-destructive/20",
   ],
   {
     defaultVariants: {
@@ -24,15 +22,36 @@ const inputVariants = cva(
     },
     variants: {
       inputSize: {
-        default: "h-9 py-1.5 px-2.5",
-        lg: "h-10 py-2 px-3",
-        sm: "h-8 py-1 px-2",
+        default: "min-h-9",
+        lg: "min-h-10",
+        sm: "min-h-8",
       },
       variant: {
         default: "dark:bg-input/30",
-        ghost:
-          "border-transparent shadow-none ring-0 focus-visible:ring-0 focus-visible:outline-none",
         transparent: "bg-transparent",
+      },
+    },
+  },
+);
+
+// Text behavior — for the actual <input> element
+const inputVariants = cva(
+  [
+    "w-full min-w-0 bg-transparent cursor-text text-base md:text-sm appearance-none outline-0",
+    "placeholder:text-muted-foreground placeholder:text-sm",
+    "file:text-foreground file:inline-flex file:items-center file:h-full file:border-0 file:bg-transparent file:text-sm file:font-medium",
+    // selection
+    "selection:bg-primary selection:text-primary-foreground",
+  ],
+  {
+    defaultVariants: {
+      inputSize: "default",
+    },
+    variants: {
+      inputSize: {
+        default: "py-1.5 px-2.5",
+        lg: "py-2 px-3",
+        sm: "py-1 px-2",
       },
     },
   },
@@ -44,10 +63,15 @@ function Input({
   className,
   type,
   ...props
-}: BaseInput.Props & VariantProps<typeof inputVariants>) {
+}: BaseInput.Props & VariantProps<typeof inputBaseVariants>) {
   return (
     <BaseInput
-      className={cn(inputVariants({ inputSize, variant }), className)}
+      className={cn(
+        inputBaseVariants({ inputSize, variant }),
+        inputVariants({ inputSize }),
+        "input-ring-visible",
+        className,
+      )}
       data-slot="input"
       type={type}
       {...props}
@@ -55,4 +79,4 @@ function Input({
   );
 }
 
-export { Input, inputVariants };
+export { Input, inputBaseVariants, inputVariants };

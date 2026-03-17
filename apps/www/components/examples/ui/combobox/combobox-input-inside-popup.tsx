@@ -9,24 +9,22 @@ import {
   ComboboxIcon,
   ComboboxInputGroup,
   ComboboxItemContent,
+  ComboboxLabel,
   ComboboxList,
   ComboboxTrigger,
   ComboboxValue,
 } from "@/registry/ui/combobox";
-import { Field, FieldLabel } from "@/registry/ui/field";
 import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupDemo() {
   return (
-    <Field>
-      <FieldLabel nativeLabel={false} render={<div />}>
-        Team Member
-      </FieldLabel>
+    <div className="flex flex-col gap-1">
       <Combobox defaultValue={teamMembers[0]} items={teamMembers}>
+        <ComboboxLabel>Team Member</ComboboxLabel>
         <ComboboxTrigger
           className={buttonVariants({
             className: "justify-between px-3 w-64",
-            variant: "outline",
+            variant: "secondary",
           })}
         >
           <ComboboxValue />
@@ -37,21 +35,27 @@ export function ComboboxInputInsidePopupDemo() {
         <ComboboxContent>
           <ComboboxInputGroup
             addonIcon={<SearchIcon />}
+            className="flex-1"
+            embedded
+            inputSize="lg"
             placeholder="Find member..."
-            variant="ghost"
           />
           <Separator />
           <ComboboxEmpty>No member found.</ComboboxEmpty>
           <ComboboxList>
             {(member: TeamMember) => (
-              <ComboboxItemContent key={member.id} value={member}>
+              <ComboboxItemContent
+                indicatorPlacement="end"
+                key={member.id}
+                value={member}
+              >
                 {member.label}
               </ComboboxItemContent>
             )}
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
-    </Field>
+    </div>
   );
 }
 

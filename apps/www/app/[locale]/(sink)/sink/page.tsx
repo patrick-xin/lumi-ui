@@ -12,6 +12,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/ui/breadcrumb";
+import { ButtonError } from "../../../../components/examples/ui/button/button-error";
 import { DrawerBasicDemo } from "../../../../components/examples/ui/drawer/drawer-basic";
 import { DrawerDirectionsInsetDemo } from "../../../../components/examples/ui/drawer/drawer-directions-inset";
 import { DrawerDirectionsResponsiveDemo } from "../../../../components/examples/ui/drawer/drawer-directions-responsive";
@@ -56,6 +57,7 @@ export default function Page() {
               Responsive
               <DrawerDirectionsResponsiveDemo />
             </div>
+            <ButtonError />
           </div>
         </section>
       </div>

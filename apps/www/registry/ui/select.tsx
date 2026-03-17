@@ -12,24 +12,24 @@ function Select<Value, Multiple extends boolean | undefined = false>(
   return <BaseSelect.Root {...props} data-slot="select" />;
 }
 
-function SelectLabel({
-  children,
-  className,
-  ...props
-}: BaseSelect.Label.Props) {
-  return (
-    <BaseSelect.Label
-      className={cn(
-        "flex items-center gap-2 text-sm leading-none font-medium cursor-default group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
-        className,
-      )}
-      data-slot="select-label"
-      {...props}
-    >
-      {children}
-    </BaseSelect.Label>
-  );
-}
+// function SelectLabel({
+//   children,
+//   className,
+//   ...props
+// }: BaseSelect.Label.Props) {
+//   return (
+//     <BaseSelect.Label
+//       className={cn(
+//         "flex items-center gap-2 text-sm leading-none font-medium cursor-default group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+//         className,
+//       )}
+//       data-slot="select-label"
+//       {...props}
+//     >
+//       {children}
+//     </BaseSelect.Label>
+//   );
+// }
 
 function SelectTrigger({
   children,
@@ -278,7 +278,7 @@ function SelectTriggerGroup({
 }: SelectTriggerGroupProps) {
   return (
     <div className="flex flex-col gap-1.5">
-      {label && <SelectLabel>{label}</SelectLabel>}
+      {/* {label && <SelectLabel>{label}</SelectLabel>} */}
       <BaseSelect.Trigger
         className={cn(
           "border shadow-xs bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60 data-popup-open:bg-accent data-popup-open:text-accent-foreground dark:data-popup-open:bg-accent/60",
@@ -430,7 +430,7 @@ function SelectItemContent({
 
 export {
   Select,
-  SelectLabel,
+  // SelectLabel,
   SelectTrigger,
   SelectValue,
   SelectIcon,
