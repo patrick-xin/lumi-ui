@@ -1,19 +1,19 @@
 "use client";
 
 import { ChevronsUpDownIcon, SearchIcon } from "lucide-react";
-import { buttonVariants } from "@/registry/ui/button";
 import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
   ComboboxIcon,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxLabel,
   ComboboxList,
   ComboboxTrigger,
   ComboboxValue,
-} from "@/registry/ui/combobox";
+} from "@/registry/tv/combobox";
+import { buttonVariants } from "@/registry/ui/button";
 import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupDemo() {
@@ -33,10 +33,9 @@ export function ComboboxInputInsidePopupDemo() {
           </ComboboxIcon>
         </ComboboxTrigger>
         <ComboboxContent>
-          <ComboboxInputGroup
+          <ComboboxInputGroupContent
             addonIcon={<SearchIcon />}
             className="flex-1"
-            embedded
             inputSize="lg"
             placeholder="Find member..."
           />

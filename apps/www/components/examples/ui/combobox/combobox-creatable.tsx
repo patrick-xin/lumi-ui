@@ -23,7 +23,7 @@ import {
   DialogTitle,
 } from "@/registry/ui/dialog";
 import { Input } from "@/registry/ui/input";
-import { Label } from "../../../../registry/ui/label";
+import { Label } from "@/registry/ui/label";
 
 export default function ExampleCreatableCombobox() {
   const id = React.useId();
@@ -180,7 +180,6 @@ export default function ExampleCreatableCombobox() {
                       onKeyDown={handleInputKeyDown}
                       placeholder={value.length > 0 ? "" : "e.g. bug"}
                       ref={comboboxInputRef}
-                      variant="ghost"
                     />
                   </React.Fragment>
                 )}

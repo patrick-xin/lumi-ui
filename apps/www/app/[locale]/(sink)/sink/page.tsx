@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { DrawerDemo } from "@/components/examples/ui/drawer/drawer-demo";
-import { DrawerDirectionsDemo } from "@/components/examples/ui/drawer/drawer-directions";
-import { DrawerDialogDemo } from "@/components/examples/ui/drawer/drawer-responsive";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { ComboboxGroupedDemo } from "@/registry/tv/demos/combobox/combobox-grouped";
+import { ComboboxIndicatorDemo } from "@/registry/tv/demos/combobox/combobox-indicator";
+import { ComboboxInputInsidePopupDemo } from "@/registry/tv/demos/combobox/combobox-input-inside-popup";
+import { ComboboxMultipleSelectDemo } from "@/registry/tv/demos/combobox/combobox-multiple";
+import { InputVariantsDemo } from "@/registry/tv/demos/input/input-styles";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,10 +14,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/ui/breadcrumb";
-import { ButtonError } from "../../../../components/examples/ui/button/button-error";
-import { DrawerBasicDemo } from "../../../../components/examples/ui/drawer/drawer-basic";
-import { DrawerDirectionsInsetDemo } from "../../../../components/examples/ui/drawer/drawer-directions-inset";
-import { DrawerDirectionsResponsiveDemo } from "../../../../components/examples/ui/drawer/drawer-directions-responsive";
 
 export default function Page() {
   return (
@@ -36,28 +34,15 @@ export default function Page() {
         <ModeSwitcher />
       </header>
       <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
-        <section className="max-w-4xl mx-auto flex items-center gap-4">
-          <div className="flex flex-col gap-4">
-            Basic
-            <DrawerDemo />
-            <DrawerDialogDemo />
-            <div className="flex flex-col gap-2">
-              Full bleed(default)
-              <DrawerDirectionsDemo />
-            </div>
-            <div className="flex flex-col gap-2">
-              Inset
-              <DrawerDirectionsInsetDemo />
-            </div>
-            <div className="flex flex-col gap-2">
-              Basic
-              <DrawerBasicDemo />
-            </div>
-            <div className="flex flex-col gap-2">
-              Responsive
-              <DrawerDirectionsResponsiveDemo />
-            </div>
-            <ButtonError />
+        <section className="max-w-4xl mx-auto flex flex-col items-center gap-4">
+          <InputVariantsDemo />
+          {/* <InputErrorDemo /> */}
+          {/* <InputSizesDemo /> */}
+          <div className="flex flex-col gap-4 w-full">
+            <ComboboxIndicatorDemo />
+            <ComboboxGroupedDemo />
+            <ComboboxMultipleSelectDemo />
+            <ComboboxInputInsidePopupDemo />
           </div>
         </section>
       </div>

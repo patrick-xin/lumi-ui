@@ -1,15 +1,15 @@
 "use client";
 
 import { SearchIcon } from "lucide-react";
-import { Button } from "@/registry/ui/button";
 import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
-} from "@/registry/ui/combobox";
+} from "@/registry/tv/combobox";
+import { Button } from "@/registry/ui/button";
 import {
   Field,
   FieldDescription,
@@ -34,7 +34,7 @@ export function ComboboxFormDemo() {
         <FieldLabel>Framework</FieldLabel>
         <FieldDescription>Select your favorite framework</FieldDescription>
         <Combobox items={frameworks} required>
-          <ComboboxInputGroup
+          <ComboboxInputGroupContent
             addonIcon={<SearchIcon />}
             aria-label="Search framework"
             className="w-64"

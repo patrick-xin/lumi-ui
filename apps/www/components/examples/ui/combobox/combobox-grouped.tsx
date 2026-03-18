@@ -7,15 +7,15 @@ import {
   ComboboxEmpty,
   ComboboxGroup,
   ComboboxGroupLabel,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
-} from "@/registry/ui/combobox";
+} from "@/registry/tv/combobox";
 
 export function ComboboxGroupedDemo() {
   return (
     <Combobox items={groupedProduce}>
-      <ComboboxInputGroup
+      <ComboboxInputGroupContent
         className="w-64"
         placeholder="Select produce"
         showTrigger

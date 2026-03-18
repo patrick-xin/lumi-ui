@@ -5,15 +5,15 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
-} from "@/registry/ui/combobox";
+} from "@/registry/tv/combobox";
 
 export function ComboboxIndicatorDemo() {
   return (
     <Combobox items={frameworks}>
-      <ComboboxInputGroup
+      <ComboboxInputGroupContent
         aria-label="Choose a framework"
         className="w-52"
         placeholder="e.g. Next.js"

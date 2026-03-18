@@ -6,7 +6,7 @@ import { Check, ChevronDown, X } from "lucide-react";
 import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
-import { inputBaseVariants, inputVariants } from "@/registry/ui/input";
+import { inputVariants } from "@/registry/ui/input";
 
 function Combobox<Value, Multiple extends boolean | undefined = false>({
   children,
@@ -19,23 +19,21 @@ function Combobox<Value, Multiple extends boolean | undefined = false>({
   );
 }
 
-function ComboboxLabel({
+function ComboboxInputControl({
   children,
-  className,
   ...props
-}: BaseCombobox.Label.Props & { className?: string }) {
+}: React.ComponentProps<typeof BaseCombobox.Group>) {
   return (
-    <BaseCombobox.Label
-      className={cn("cursor-default text-sm leading-5 font-medium", className)}
-      data-slot="combobox-label"
-      {...props}
-    >
+    <BaseCombobox.Group data-slot="combobox-group" {...props}>
       {children}
-    </BaseCombobox.Label>
+    </BaseCombobox.Group>
   );
 }
 
-function ComboboxValue({ children, ...props }: BaseCombobox.Value.Props) {
+function ComboboxValue({
+  children,
+  ...props
+}: React.ComponentProps<typeof BaseCombobox.Value>) {
   return (
     <BaseCombobox.Value data-slot="combobox-value" {...props}>
       {children}
@@ -59,13 +57,15 @@ function ComboboxIcon({ className, ...props }: BaseCombobox.Icon.Props) {
 function ComboboxInput({
   className,
   inputSize = "default",
+  variant = "default",
   ...props
 }: BaseCombobox.Input.Props & {
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
+  variant?: VariantProps<typeof inputVariants>["variant"];
 }) {
   return (
     <BaseCombobox.Input
-      className={cn(inputVariants({ inputSize }), className)}
+      className={cn(inputVariants({ inputSize, variant }), className)}
       data-slot="combobox-input"
       {...props}
     />
@@ -103,13 +103,11 @@ function ComboboxChips({ className, ...props }: BaseCombobox.Chips.Props) {
   return (
     <BaseCombobox.Chips
       className={cn(
-        //  "dark:bg-red-900/30 border border-input",
-        //"p-1 min-h-8 **:data-[slot=combobox-input]:h-7.5",
-        //  "rounded-md shadow-xs",
-        "flex w-full flex-wrap items-center gap-1",
-        // "py-1 px-1",
-        // "focus-within:outline focus-within:outline-ring focus-within:ring-4 focus-within:ring-ring/10",
-        // "disabled:cursor-not-allowed disabled:opacity-50",
+        "dark:bg-input/30 border border-input",
+        "p-1 min-h-8 **:data-[slot=combobox-input]:h-7.5",
+        "flex flex-wrap items-center gap-1.5 rounded-md shadow-xs",
+        "focus-within:outline focus-within:outline-ring focus-within:ring-4 focus-within:ring-ring/10",
+        "disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
       data-slot="combobox-chips"
@@ -303,29 +301,6 @@ function ComboboxSeparator({
   );
 }
 
-function ComboboxInputControl({
-  className,
-  variant = "default",
-  inputSize = "default",
-  ...props
-}: BaseCombobox.InputGroup.Props & {
-  variant?: VariantProps<typeof inputBaseVariants>["variant"];
-  inputSize?: VariantProps<typeof inputBaseVariants>["inputSize"];
-}) {
-  return (
-    <BaseCombobox.InputGroup
-      className={cn(
-        inputBaseVariants({ variant, inputSize }),
-        "relative w-full inline-flex gap-1 items-center cursor-text",
-        "input-ring-within",
-        className,
-      )}
-      data-slot="combobox-input-control"
-      {...props}
-    />
-  );
-}
-
 function ComboboxInputGroup({
   className,
   showTrigger = false,
@@ -334,28 +309,26 @@ function ComboboxInputGroup({
   inputSize = "default",
   addonIcon,
   inputClassName,
-  "aria-invalid": ariaInvalid,
-  embedded = false,
   ...props
 }: BaseCombobox.Input.Props & {
   showTrigger?: boolean;
   showClear?: boolean;
-  variant?: VariantProps<typeof inputBaseVariants>["variant"];
-  inputSize?: VariantProps<typeof inputBaseVariants>["inputSize"];
+  variant?: VariantProps<typeof inputVariants>["variant"];
+  inputSize?: VariantProps<typeof inputVariants>["inputSize"];
   addonIcon?: React.ReactNode;
   inputClassName?: string;
-  embedded?: boolean;
 }) {
+  const paddingClass =
+    showTrigger && showClear
+      ? "pr-14"
+      : showTrigger || showClear
+        ? "pr-8"
+        : "pr-3";
+
   return (
-    <BaseCombobox.InputGroup
-      aria-invalid={ariaInvalid}
+    <div
       className={cn(
-        "relative w-full inline-flex gap-1 items-center cursor-text",
-        !embedded && inputBaseVariants({ variant, inputSize }),
-        !embedded && "input-ring-within",
-        "has-[[data-slot=combobox-clear]]:[&_[data-slot=combobox-input]]:pr-8",
-        "has-[[data-slot=combobox-trigger]]:[&_[data-slot=combobox-input]]:pr-8",
-        "has-[[data-slot=combobox-clear]]:has-[[data-slot=combobox-trigger]]:[&_[data-slot=combobox-input]]:pr-14",
+        "relative w-full inline-flex gap-1 items-center outline-none cursor-text rounded-md",
         className,
       )}
       data-slot="combobox-input-group"
@@ -370,8 +343,9 @@ function ComboboxInputGroup({
       )}
       <BaseCombobox.Input
         className={cn(
-          inputVariants({ inputSize }),
+          inputVariants({ inputSize, variant }),
           addonIcon && "pl-7.5",
+          paddingClass,
           inputClassName,
         )}
         data-slot="combobox-input"
@@ -410,21 +384,9 @@ function ComboboxInputGroup({
           </BaseCombobox.Trigger>
         )}
       </div>
-    </BaseCombobox.InputGroup>
+    </div>
   );
 }
-
-// OLD ComboboxInputGroup (pre-InputGroup primitive) - kept as reference
-// function ComboboxInputGroupOld({ ... }) {
-//   return (
-//     <div
-//       className={cn("relative w-full inline-flex gap-1 items-center outline-none cursor-text rounded-md", className)}
-//       data-slot="combobox-input-group"
-//     >
-//       ...
-//     </div>
-//   );
-// }
 
 function ComboboxContent({
   className,
@@ -528,11 +490,10 @@ const useComboboxFilter = BaseCombobox.useFilter;
 
 export {
   Combobox,
-  ComboboxLabel,
+  ComboboxInputControl,
   ComboboxValue,
   ComboboxIcon,
   ComboboxInput,
-  ComboboxInputControl,
   ComboboxClear,
   ComboboxTrigger,
   ComboboxChips,

@@ -8,7 +8,7 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
-  ComboboxInputGroupContent,
+  ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
@@ -22,7 +22,12 @@ export function ComboboxMultipleSelectDemo() {
       <Combobox items={langs} multiple>
         <div className="max-w-md flex flex-col gap-2">
           <Label htmlFor={id}>Programming languages</Label>
-          <ComboboxInputGroupContent className="max-w-xl w-96" inputSize="lg">
+          <ComboboxInputGroup
+            className="max-w-xl w-96"
+            inputSize="sm"
+            multiple
+            variant="default"
+          >
             <ComboboxChips>
               <ComboboxValue>
                 {(value: ProgrammingLanguage[]) => (
@@ -36,15 +41,17 @@ export function ComboboxMultipleSelectDemo() {
                       </ComboboxChip>
                     ))}
                     <ComboboxInput
-                      className="flex-1"
+                      className="flex-1 p-0"
                       id={id}
+                      inputSize="sm"
                       placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
+                      variant="ghost"
                     />
                   </React.Fragment>
                 )}
               </ComboboxValue>
             </ComboboxChips>
-          </ComboboxInputGroupContent>
+          </ComboboxInputGroup>
         </div>
 
         <ComboboxContent sideOffset={4}>
@@ -65,7 +72,12 @@ export function ComboboxMultipleSelectDemo() {
       <Combobox items={langs} multiple>
         <div className="max-w-md flex flex-col gap-2">
           <Label htmlFor={id}>Programming languages</Label>
-          <ComboboxInput className="max-w-xl w-96 px-1.5 py-1" inputSize="sm">
+          <ComboboxInputGroup
+            className="max-w-xl w-96"
+            inputSize="default"
+            multiple
+            variant="default"
+          >
             <ComboboxChips>
               <ComboboxValue>
                 {(value: ProgrammingLanguage[]) => (
@@ -79,15 +91,66 @@ export function ComboboxMultipleSelectDemo() {
                       </ComboboxChip>
                     ))}
                     <ComboboxInput
-                      className="flex-1"
+                      className="flex-1 p-0"
                       id={id}
                       placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
+                      variant="ghost"
                     />
                   </React.Fragment>
                 )}
               </ComboboxValue>
             </ComboboxChips>
-          </ComboboxInput>
+          </ComboboxInputGroup>
+        </div>
+
+        <ComboboxContent sideOffset={4}>
+          <ComboboxEmpty>No languages found.</ComboboxEmpty>
+          <ComboboxList>
+            {(language: ProgrammingLanguage) => (
+              <ComboboxItemContent
+                indicatorPlacement="end"
+                key={language.id}
+                value={language}
+              >
+                {language.value}
+              </ComboboxItemContent>
+            )}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
+      <Combobox items={langs} multiple>
+        <div className="max-w-md flex flex-col gap-2">
+          <Label htmlFor={id}>Programming languages</Label>
+          <ComboboxInputGroup
+            className="max-w-xl w-96"
+            inputSize="lg"
+            multiple
+            variant="default"
+          >
+            <ComboboxChips>
+              <ComboboxValue>
+                {(value: ProgrammingLanguage[]) => (
+                  <React.Fragment>
+                    {value.map((language) => (
+                      <ComboboxChip
+                        aria-label={language.value}
+                        key={language.id}
+                      >
+                        {language.value}
+                      </ComboboxChip>
+                    ))}
+                    <ComboboxInput
+                      className="flex-1 p-0"
+                      id={id}
+                      inputSize="lg"
+                      placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
+                      variant="ghost"
+                    />
+                  </React.Fragment>
+                )}
+              </ComboboxValue>
+            </ComboboxChips>
+          </ComboboxInputGroup>
         </div>
 
         <ComboboxContent sideOffset={4}>

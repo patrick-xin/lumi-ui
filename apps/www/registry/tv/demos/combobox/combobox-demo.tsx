@@ -5,8 +5,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
-  ComboboxInputGroupContent,
+  ComboboxInput,
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/tv/combobox";
@@ -18,29 +17,11 @@ export function ComboboxDemo() {
     <div className="flex flex-col gap-2">
       <Combobox items={frameworks}>
         <Label htmlFor={id}>Framework</Label>
-        <ComboboxInputGroupContent
+        <ComboboxInput
           aria-label="Choose a framework"
           className="w-52"
           id={id}
           placeholder="e.g. Next.js"
-        />
-        <ComboboxContent>
-          <ComboboxEmpty>No framework found.</ComboboxEmpty>
-          <ComboboxList>
-            {(item: string) => (
-              <ComboboxItemContent key={item} value={item}>
-                {item}
-              </ComboboxItemContent>
-            )}
-          </ComboboxList>
-        </ComboboxContent>
-      </Combobox>
-      <Combobox items={frameworks}>
-        <Label htmlFor={id}>Framework</Label>
-        <ComboboxInputGroup
-          aria-label="Choose a framework"
-          className="w-52"
-          id={id}
         />
         <ComboboxContent>
           <ComboboxEmpty>No framework found.</ComboboxEmpty>

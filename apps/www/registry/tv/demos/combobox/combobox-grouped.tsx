@@ -1,5 +1,6 @@
 "use client";
 
+import { Search } from "lucide-react";
 import {
   Combobox,
   ComboboxCollection,
@@ -11,18 +12,21 @@ import {
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/tv/combobox";
-import { ScrollArea } from "@/registry/ui/scroll-area";
+import { Input } from "@/registry/tv/input";
 
-export function ComboboxScrollAreaDemo() {
+export function ComboboxGroupedDemo() {
   return (
-    <Combobox items={groupedProduce}>
-      <ComboboxInputGroupContent
-        className="w-64"
-        placeholder="Select produce"
-        showTrigger
-      />
-      <ComboboxContent>
-        <ScrollArea className="h-48" gradientScrollFade noScrollBar>
+    <div className="flex items-center gap-2">
+      <Combobox items={groupedProduce}>
+        <ComboboxInputGroupContent
+          addonIcon={<Search />}
+          className="w-64"
+          placeholder="Select produce"
+          showClear
+          showTrigger
+          variant="transparent"
+        />
+        <ComboboxContent>
           <ComboboxEmpty>No produce found.</ComboboxEmpty>
           <ComboboxList>
             {(group: ProduceGroup) => (
@@ -42,9 +46,10 @@ export function ComboboxScrollAreaDemo() {
               </ComboboxGroup>
             )}
           </ComboboxList>
-        </ScrollArea>
-      </ComboboxContent>
-    </Combobox>
+        </ComboboxContent>
+      </Combobox>
+      <Input placeholder="input" variant="transparent" />
+    </div>
   );
 }
 

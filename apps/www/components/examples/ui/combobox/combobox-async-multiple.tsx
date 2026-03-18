@@ -168,7 +168,6 @@ export function ComboboxAsyncMultipleDemo() {
                 className="min-w-24"
                 id={id}
                 placeholder={value.length > 0 ? "" : "e.g. Michael"}
-                variant="ghost"
               />
             </React.Fragment>
           )}
