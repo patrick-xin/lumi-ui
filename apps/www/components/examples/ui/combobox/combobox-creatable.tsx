@@ -10,7 +10,8 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
-  ComboboxInputControl,
+  ComboboxInputGroup,
+  ComboboxItem,
   ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
@@ -164,8 +165,8 @@ export default function ExampleCreatableCombobox() {
       >
         <div className="max-w-md flex flex-col gap-2">
           <Label htmlFor={id}>Labels</Label>
-          <ComboboxInputControl className="max-w-xl w-96 border px-1.5 py-1">
-            <ComboboxChips className="w-64 min-[500px]:w-88">
+          <ComboboxInputGroup className="max-w-xl w-72">
+            <ComboboxChips>
               <ComboboxValue>
                 {(value: LabelItem[]) => (
                   <React.Fragment>
@@ -180,12 +181,13 @@ export default function ExampleCreatableCombobox() {
                       onKeyDown={handleInputKeyDown}
                       placeholder={value.length > 0 ? "" : "e.g. bug"}
                       ref={comboboxInputRef}
+                      variant="ghost"
                     />
                   </React.Fragment>
                 )}
               </ComboboxValue>
             </ComboboxChips>
-          </ComboboxInputControl>
+          </ComboboxInputGroup>
         </div>
 
         <ComboboxContent>
@@ -193,14 +195,16 @@ export default function ExampleCreatableCombobox() {
           <ComboboxList>
             {(item: LabelItem) =>
               item.creatable ? (
-                <ComboboxItemContent
-                  indicatorPlacement="none"
+                <ComboboxItem
                   key={item.id}
+                  render={
+                    <Button className="mx-auto mt-2 w-44" size="sm">
+                      <Plus className="size-4" />
+                      <span>Create &quot;{item.creatable}&quot;</span>
+                    </Button>
+                  }
                   value={item}
-                >
-                  <Plus className="size-4" />
-                  <span>Create &quot;{item.creatable}&quot;</span>
-                </ComboboxItemContent>
+                />
               ) : (
                 <ComboboxItemContent
                   indicatorPlacement="end"

@@ -5,15 +5,15 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
-} from "@/registry/ui/combobox";
+} from "@/registry/tv/combobox";
 
 export function ComboboxClearTriggerDemo() {
   return (
     <Combobox items={frameworks}>
-      <ComboboxInputGroup
+      <ComboboxInputGroupContent
         addonIcon={<SearchIcon />}
         className="w-64"
         id="select-framework"

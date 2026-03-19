@@ -1,6 +1,7 @@
 "use client";
 
 import { SearchIcon } from "lucide-react";
+import { Button } from "@/registry/ui/button";
 import {
   Combobox,
   ComboboxContent,
@@ -8,8 +9,7 @@ import {
   ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
-} from "@/registry/tv/combobox";
-import { Button } from "@/registry/ui/button";
+} from "@/registry/ui/combobox";
 import {
   Field,
   FieldDescription,

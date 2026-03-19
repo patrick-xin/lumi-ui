@@ -16,7 +16,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
@@ -83,7 +83,7 @@ export function ProjectQuoteForm() {
       <Field name="clientLocation">
         <Combobox items={LOCATIONS} required>
           <FieldLabel>Headquarters Location</FieldLabel>
-          <ComboboxInputGroup
+          <ComboboxInputGroupContent
             className="w-80"
             placeholder="Select major city..."
             showClear

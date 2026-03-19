@@ -2,6 +2,8 @@ import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
 import { Check, ChevronDown, X } from "lucide-react";
 import type * as React from "react";
 import { cn, tv } from "tailwind-variants";
+import { ArrowSvg } from "@/registry/tv/arrow-svg";
+import { Button } from "@/registry/tv/button";
 import {
   type InputContainerStylesProps,
   type InputStylesProps,
@@ -9,7 +11,6 @@ import {
   inputStyles,
   inputVariant,
 } from "@/registry/tv/input";
-import { Button } from "@/registry/ui/button";
 
 function Combobox<Value, Multiple extends boolean | undefined = false>({
   children,
@@ -178,8 +179,19 @@ function ComboboxPopup({ ...props }: BaseCombobox.Popup.Props) {
   return <BaseCombobox.Popup {...props} />;
 }
 
-function ComboboxArrow({ ...props }: BaseCombobox.Arrow.Props) {
-  return <BaseCombobox.Arrow {...props} />;
+function ComboboxArrow({ className, ...props }: BaseCombobox.Arrow.Props) {
+  return (
+    <BaseCombobox.Arrow
+      className={cn(
+        "data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180",
+        className,
+      )}
+      data-slot="combobox-arrow"
+      {...props}
+    >
+      <ArrowSvg />
+    </BaseCombobox.Arrow>
+  );
 }
 
 function ComboboxStatus({ className, ...props }: BaseCombobox.Status.Props) {
@@ -284,108 +296,6 @@ function ComboboxInputGroup({
   );
 }
 
-// const comboboxInputGroupContentStyles = tv({
-//   extend: inputContainerStyles,
-//   slots: {
-//     root: ["relative flex items-center p-0"],
-//     addonIconWrapper: [
-//       "absolute left-1 size-6 flex justify-center items-center",
-//       "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
-//     ],
-//     actions: [
-//       "absolute right-1.5 top-0 h-full inline-flex items-center gap-0.5",
-//     ],
-//     clear: [
-//       "[&_svg]:text-muted-foreground hover:[&_svg]:text-foreground [&_svg]:pointer-events-none [&_svg]:size-4",
-//     ],
-//     trigger: [
-//       "[&_svg]:text-muted-foreground [&_svg]:pointer-events-none data-popup-open:[&_svg]:text-foreground hover:[&_svg]:text-foreground data-popup-open:bg-accent [&_svg]:size-4",
-//     ],
-//   },
-//   compoundVariants: [
-//     {
-//       variant: ["default", "transparent"],
-//       class: {
-//         root: [
-//           "rounded-md outline outline-border shadow-sm focus-within:outline focus-within:outline-ring focus-within:ring-4 focus-within:ring-ring/10",
-//           "transition-[color,box-shadow,ring,outline] duration-150",
-//         ],
-//       },
-//     },
-//   ],
-//   defaultVariants: {
-//     variant: "default",
-//     inputSize: "default",
-//   },
-// });
-
-// function ComboboxInputGroupContent({
-//   className,
-//   showTrigger = false,
-//   showClear = false,
-//   variant = "default",
-//   inputSize = "default",
-//   inputVariant = "ghost",
-//   addonIcon,
-//   inputClassName,
-//   ...props
-// }: Omit<BaseCombobox.Input.Props, "className"> & {
-//   className?: string;
-//   showTrigger?: boolean;
-//   showClear?: boolean;
-//   addonIcon?: React.ReactNode;
-//   inputClassName?: string;
-//   inputVariant?: InputStylesProps["variant"];
-// } & InputStylesProps) {
-//   const { root, addonIconWrapper, actions, clear, trigger } =
-//     comboboxInputGroupContentStyles({
-//       variant,
-//       inputSize,
-//     });
-
-//   return (
-//     <BaseCombobox.InputGroup className={root({ className })}>
-//       {addonIcon && (
-//         <BaseCombobox.Icon className={addonIconWrapper()}>
-//           {addonIcon}
-//         </BaseCombobox.Icon>
-//       )}
-//       <BaseCombobox.Input
-//         className={inputStyles({
-//           inputSize,
-//           variant: inputVariant,
-//           className: [addonIcon && "pl-8", inputClassName],
-//         })}
-//         {...props}
-//       />
-//       <div className={actions()}>
-//         {showClear && (
-//           <BaseCombobox.Clear
-//             aria-label="Clear selection"
-//             render={
-//               <Button className={clear()} size="icon-xs" variant="ghost" />
-//             }
-//           >
-//             <X />
-//           </BaseCombobox.Clear>
-//         )}
-//         {showTrigger && (
-//           <BaseCombobox.Trigger
-//             aria-label="Open popup"
-//             render={
-//               <Button className={trigger()} size="icon-xs" variant="ghost" />
-//             }
-//           >
-//             <BaseCombobox.Icon>
-//               <ChevronDown />
-//             </BaseCombobox.Icon>
-//           </BaseCombobox.Trigger>
-//         )}
-//       </div>
-//     </BaseCombobox.InputGroup>
-//   );
-// }
-
 const comboboxInputGroupContentStyles = tv({
   extend: inputContainerStyles,
   variants: {
@@ -467,7 +377,6 @@ function ComboboxInputGroupContent({
           {addonIcon}
         </BaseCombobox.Icon>
       )}
-
       <BaseCombobox.Input
         className={inputStyles({
           className: input(),
@@ -476,7 +385,6 @@ function ComboboxInputGroupContent({
         })}
         {...props}
       />
-
       <div className={actions()}>
         {showClear && (
           <BaseCombobox.Clear
@@ -552,7 +460,7 @@ function ComboboxContent({
 
 const comboboxItemContentStyles = tv({
   slots: {
-    root: [
+    base: [
       "grid items-center gap-2 py-1.5 pl-3.5 text-sm text-foreground",
       "outline-none select-none cursor-default highlight-on-active",
       "data-disabled:pointer-events-none data-disabled:opacity-50",
@@ -567,17 +475,17 @@ const comboboxItemContentStyles = tv({
   variants: {
     indicatorPlacement: {
       start: {
-        root: ["grid-cols-[1rem_1fr] pr-8"],
+        base: ["grid-cols-[1rem_1fr] pr-8"],
         indicator: ["col-start-1"],
         content: ["col-start-2"],
       },
       end: {
-        root: ["grid-cols-[1fr_1rem] pr-3"],
+        base: ["grid-cols-[1fr_1rem] pr-3"],
         indicator: ["col-start-2"],
         content: ["col-start-1"],
       },
       none: {
-        root: ["grid-cols-1"],
+        base: ["grid-cols-1"],
       },
     },
   },
@@ -597,12 +505,12 @@ function ComboboxItemContent({
   indicatorIcon?: React.ReactNode;
   className?: string;
 }) {
-  const { root, indicator, content } = comboboxItemContentStyles({
+  const { base, indicator, content } = comboboxItemContentStyles({
     indicatorPlacement,
   });
 
   return (
-    <BaseCombobox.Item className={root({ className })} {...props}>
+    <BaseCombobox.Item className={base({ className })} {...props}>
       {indicatorPlacement !== "none" && (
         <BaseCombobox.ItemIndicator className={indicator()}>
           {indicatorIcon}

@@ -8,7 +8,7 @@ import {
   ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
-} from "@/registry/tv/combobox";
+} from "@/registry/ui/combobox";
 
 export function ComboboxClearTriggerDemo() {
   return (

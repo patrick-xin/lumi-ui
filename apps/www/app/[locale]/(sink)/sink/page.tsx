@@ -14,6 +14,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/ui/breadcrumb";
+import { EmojiPickerAutocompleteDemo } from "../../../../registry/tv/demos/autocomplete/autocomplete-grid-layout";
 
 export default function Page() {
   return (
@@ -36,14 +37,15 @@ export default function Page() {
       <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
         <section className="max-w-4xl mx-auto flex flex-col items-center gap-4">
           <InputVariantsDemo />
-          {/* <InputErrorDemo /> */}
-          {/* <InputSizesDemo /> */}
+
           <div className="flex flex-col gap-4 w-full">
             <ComboboxIndicatorDemo />
             <ComboboxGroupedDemo />
             <ComboboxMultipleSelectDemo />
             <ComboboxInputInsidePopupDemo />
           </div>
+
+          <EmojiPickerAutocompleteDemo />
         </section>
       </div>
     </div>

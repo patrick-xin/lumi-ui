@@ -5,6 +5,7 @@ import type { VariantProps } from "class-variance-authority";
 import { Check, ChevronDown, X } from "lucide-react";
 import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
+import { ArrowSvg } from "@/registry/ui/arrow-svg";
 import { Button } from "@/registry/ui/button";
 import { inputVariants } from "@/registry/ui/input";
 
@@ -19,14 +20,24 @@ function Combobox<Value, Multiple extends boolean | undefined = false>({
   );
 }
 
-function ComboboxInputControl({
+function ComboboxInputGroup({
   children,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Group>) {
+}: React.ComponentProps<typeof BaseCombobox.InputGroup>) {
   return (
-    <BaseCombobox.Group data-slot="combobox-group" {...props}>
+    <BaseCombobox.InputGroup data-slot="combobox-input-group" {...props}>
       {children}
-    </BaseCombobox.Group>
+    </BaseCombobox.InputGroup>
+  );
+}
+
+function ComboboxLabel({ className, ...props }: BaseCombobox.Label.Props) {
+  return (
+    <BaseCombobox.Label
+      className={cn("cursor-default text-sm leading-5 font-medium", className)}
+      data-slot="combobox-label"
+      {...props}
+    />
   );
 }
 
@@ -200,8 +211,19 @@ function ComboboxPopup({ ...props }: BaseCombobox.Popup.Props) {
   return <BaseCombobox.Popup data-slot="combobox-popup" {...props} />;
 }
 
-function ComboboxArrow({ ...props }: BaseCombobox.Arrow.Props) {
-  return <BaseCombobox.Arrow data-slot="combobox-arrow" {...props} />;
+function ComboboxArrow({ className, ...props }: BaseCombobox.Arrow.Props) {
+  return (
+    <BaseCombobox.Arrow
+      className={cn(
+        "data-[side=bottom]:top-[-8px] data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-8px] data-[side=top]:rotate-180",
+        className,
+      )}
+      data-slot="combobox-arrow"
+      {...props}
+    >
+      <ArrowSvg />
+    </BaseCombobox.Arrow>
+  );
 }
 
 function ComboboxStatus({ className, ...props }: BaseCombobox.Status.Props) {
@@ -301,7 +323,7 @@ function ComboboxSeparator({
   );
 }
 
-function ComboboxInputGroup({
+function ComboboxInputGroupContent({
   className,
   showTrigger = false,
   showClear = false,
@@ -490,8 +512,9 @@ const useComboboxFilter = BaseCombobox.useFilter;
 
 export {
   Combobox,
-  ComboboxInputControl,
+  ComboboxInputGroup,
   ComboboxValue,
+  ComboboxLabel,
   ComboboxIcon,
   ComboboxInput,
   ComboboxClear,
@@ -516,7 +539,7 @@ export {
   ComboboxCollection,
   useComboboxFilter,
   // Composite components
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxContent,
   ComboboxItemContent,
 };

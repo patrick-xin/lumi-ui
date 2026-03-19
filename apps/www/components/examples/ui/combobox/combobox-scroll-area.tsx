@@ -10,7 +10,7 @@ import {
   ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
-} from "@/registry/tv/combobox";
+} from "@/registry/ui/combobox";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 
 export function ComboboxScrollAreaDemo() {

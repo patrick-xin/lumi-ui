@@ -1,7 +1,8 @@
 "use client";
 
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, SearchIcon } from "lucide-react";
 import { useRef } from "react";
+import { Button } from "@/registry/ui/button";
 import {
   Combobox,
   ComboboxContent,
@@ -12,8 +13,7 @@ import {
   ComboboxList,
   ComboboxTrigger,
   ComboboxValue,
-} from "@/registry/tv/combobox";
-import { Button } from "@/registry/ui/button";
+} from "@/registry/ui/combobox";
 import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupRefDemo() {
@@ -46,7 +46,11 @@ export function ComboboxInputInsidePopupRefDemo() {
       </div>
 
       <ComboboxContent positionerAnchor={containerRef}>
-        <ComboboxInputGroupContent placeholder="Find member..." />
+        <ComboboxInputGroupContent
+          addonIcon={<SearchIcon />}
+          placeholder="Find member..."
+          variant="ghost"
+        />
         <Separator />
         <ComboboxEmpty>No member found.</ComboboxEmpty>
         <ComboboxList>

@@ -385,6 +385,7 @@ function AutocompleteContent({
   alignOffset = 0,
   matchAnchorWidth = true,
   positionerAnchor,
+  showArrow = false,
   ...props
 }: BaseAutocomplete.Popup.Props &
   Pick<
@@ -393,6 +394,7 @@ function AutocompleteContent({
   > & {
     matchAnchorWidth?: boolean;
     positionerAnchor?: React.RefObject<HTMLDivElement | null>;
+    showArrow?: boolean;
   }) {
   return (
     <BaseAutocomplete.Portal data-slot="autocomplete-portal">
@@ -416,7 +418,7 @@ function AutocompleteContent({
           data-slot="autocomplete-content"
           {...props}
         >
-          <AutocompleteArrow />
+          {showArrow && <AutocompleteArrow />}
           {children}
         </BaseAutocomplete.Popup>
       </BaseAutocomplete.Positioner>

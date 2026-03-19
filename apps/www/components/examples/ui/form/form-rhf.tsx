@@ -20,7 +20,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
@@ -208,7 +208,7 @@ export const FormWithRHF = () => {
                     value={value}
                   >
                     <FieldLabel aria-required>Headquarters Location</FieldLabel>
-                    <ComboboxInputGroup
+                    <ComboboxInputGroupContent
                       className="w-full sm:w-64"
                       onBlur={onBlur}
                       placeholder="Select major city..."

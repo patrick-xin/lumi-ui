@@ -54,12 +54,12 @@ export function EmojiPickerAutocompleteDemo() {
     <div className="mx-auto w-[20rem]">
       <div className="flex items-center gap-2">
         <Input
-          className="bg-background!"
           onChange={(event) => setTextValue(event.target.value)}
           placeholder="iMessage"
           ref={textInputRef}
           type="text"
           value={textValue}
+          variant="transparent"
         />
 
         <Autocomplete
@@ -95,12 +95,12 @@ export function EmojiPickerAutocompleteDemo() {
             sideOffset={8}
           >
             <AutocompleteInputGroup
-              inputClassName="border-b-border"
+              inputClassName="border-b-border rounded-b-none"
               placeholder="Search emojis…"
               showClear
               variant="ghost"
             />
-            <ScrollArea gradientScrollFade noScrollBar>
+            <ScrollArea className="max-h-72" gradientScrollFade noScrollBar>
               <AutocompleteEmpty>No emojis found</AutocompleteEmpty>
               <AutocompleteList>
                 {(group: EmojiGroup) => (
