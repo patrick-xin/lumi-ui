@@ -7,14 +7,13 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxIcon,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxLabel,
   ComboboxList,
   ComboboxTrigger,
   ComboboxValue,
 } from "@/registry/ui/combobox";
-import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupDemo() {
   return (
@@ -33,14 +32,14 @@ export function ComboboxInputInsidePopupDemo() {
           </ComboboxIcon>
         </ComboboxTrigger>
         <ComboboxContent>
-          <ComboboxInputGroup
+          <ComboboxInputGroupContent
             addonIcon={<SearchIcon />}
-            className="flex-1"
+            className="flex-1 border-b"
             embedded
             inputSize="lg"
             placeholder="Find member..."
           />
-          <Separator />
+
           <ComboboxEmpty>No member found.</ComboboxEmpty>
           <ComboboxList>
             {(member: TeamMember) => (

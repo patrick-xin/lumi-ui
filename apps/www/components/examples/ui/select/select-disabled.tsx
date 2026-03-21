@@ -33,7 +33,7 @@ export function SelectDisabledDemo() {
         </SelectContent>
       </Select>
       <Select disabled items={fruits}>
-        <SelectTriggerGroup placeholder="Select a fruit" />
+        <SelectTriggerGroup label="Fruit" placeholder="Select a fruit" />
         <SelectContent>
           {fruits.map((fruit) => (
             <SelectItemContent key={fruit.value} value={fruit.value}>

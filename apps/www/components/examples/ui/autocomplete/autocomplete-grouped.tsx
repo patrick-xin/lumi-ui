@@ -16,7 +16,7 @@ import {
   AutocompleteEmpty,
   AutocompleteGroup,
   AutocompleteGroupLabel,
-  AutocompleteInputGroup,
+  AutocompleteInputGroupContent,
   AutocompleteItem,
   AutocompleteList,
 } from "@/registry/ui/autocomplete";
@@ -63,7 +63,7 @@ export function AutocompleteGroupedDemo() {
       items={groupedCommands}
       itemToStringValue={(item) => item.label}
     >
-      <AutocompleteInputGroup
+      <AutocompleteInputGroupContent
         className="w-72"
         placeholder="Type a command or search..."
       />

@@ -5,7 +5,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
@@ -17,7 +17,7 @@ export function ComboboxDemo() {
     <div className="flex flex-col gap-2">
       <Combobox items={frameworks}>
         <Label htmlFor={id}>Framework</Label>
-        <ComboboxInputGroup
+        <ComboboxInputGroupContent
           aria-label="Choose a framework"
           className="w-52"
           id={id}

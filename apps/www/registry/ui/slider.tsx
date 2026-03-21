@@ -1,6 +1,7 @@
 "use client";
 
 import { Slider as BaseSlider } from "@base-ui/react/slider";
+import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/registry/lib/utils";
@@ -12,6 +13,25 @@ function SliderRoot({ className, ...props }: BaseSlider.Root.Props) {
       data-slot="slider"
       {...props}
     />
+  );
+}
+
+function SliderLabel({
+  children,
+  className,
+  ...props
+}: BaseSlider.Label.Props) {
+  return (
+    <BaseSlider.Label
+      className={cn(
+        "text-sm leading-none font-medium cursor-default",
+        className,
+      )}
+      data-slot="slider-label"
+      {...props}
+    >
+      {children}
+    </BaseSlider.Label>
   );
 }
 
@@ -65,7 +85,7 @@ function SliderThumb({ className, ...props }: BaseSlider.Thumb.Props) {
   return (
     <BaseSlider.Thumb
       className={cn(
-        "disabled:pointer-events-none disabled:opacity-50 select-none",
+        "data-disabled:pointer-events-none data-disabled:opacity-50 select-none",
         className,
       )}
       data-slot="slider-thumb"
@@ -74,16 +94,64 @@ function SliderThumb({ className, ...props }: BaseSlider.Thumb.Props) {
   );
 }
 
+const sliderTrackVariants = cva(
+  [
+    "bg-input relative w-full grow rounded-full select-none",
+    "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto",
+  ],
+  {
+    defaultVariants: {
+      size: "default",
+    },
+    variants: {
+      size: {
+        default: "h-1 data-[orientation=vertical]:w-1",
+        lg: "h-1.5 data-[orientation=vertical]:w-1.5",
+        sm: "h-0.5 data-[orientation=vertical]:w-0.5",
+      },
+    },
+  },
+);
+
+const sliderThumbVariants = cva(
+  [
+    "outline-1 outline-border ring-primary/30 shrink-0 rounded-full bg-background transition-[color,box-shadow] select-none block",
+    "hover:ring-4 data-dragging:has-focus:ring-4",
+    "has-focus-visible:outline-2 has-focus-visible:outline-ring has-focus-visible:ring-4",
+    "data-invalid:outline-destructive/80 data-invalid:ring-4 data-invalid:ring-destructive/20",
+    "data-invalid:has-focus-visible:outline-destructive data-invalid:has-focus-visible:ring-destructive/20",
+    "data-disabled:pointer-events-none",
+  ],
+  {
+    defaultVariants: {
+      size: "default",
+    },
+    variants: {
+      size: {
+        default: "size-3",
+        lg: "size-4",
+        sm: "size-2.5",
+      },
+    },
+  },
+);
+
 function Slider({
   className,
   defaultValue,
   value,
   children,
   inputRef,
+  label,
+  size = "default",
+  thumbLabels,
   ...props
-}: BaseSlider.Root.Props & {
-  inputRef?: React.Ref<HTMLInputElement>;
-}) {
+}: BaseSlider.Root.Props &
+  VariantProps<typeof sliderThumbVariants> & {
+    inputRef?: React.Ref<HTMLInputElement>;
+    label?: string;
+    thumbLabels?: string[];
+  }) {
   const thumbCount = React.useMemo(() => {
     const valueToInspect = value ?? defaultValue;
     if (Array.isArray(valueToInspect)) return valueToInspect.length;
@@ -92,26 +160,37 @@ function Slider({
 
   return (
     <BaseSlider.Root
-      className="relative flex flex-col gap-2 w-full touch-none select-none data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-disabled:opacity-50"
+      className={cn(
+        "data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full space-y-4",
+        "data-disabled:opacity-50 data-disabled:cursor-default",
+        className,
+      )}
       data-slot="slider"
       defaultValue={defaultValue}
       value={value}
       {...props}
     >
+      {(label || children) && (
+        <div className="flex items-center justify-between">
+          {label && (
+            <BaseSlider.Label className="text-sm leading-none font-medium cursor-default">
+              {label}
+            </BaseSlider.Label>
+          )}
+          {children}
+        </div>
+      )}
+
       <BaseSlider.Control
         className={cn(
-          "flex w-full items-center py-2",
+          "flex w-full items-center",
           "touch-none select-none",
           "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:px-2 data-[orientation=vertical]:py-0",
-          className,
         )}
         data-slot="slider-control"
       >
         <BaseSlider.Track
-          className={cn(
-            "bg-input relative h-2 w-full grow rounded-full select-none",
-            "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2",
-          )}
+          className={cn(sliderTrackVariants({ size }))}
           data-slot="slider-track"
         >
           <BaseSlider.Indicator
@@ -123,11 +202,8 @@ function Slider({
           />
           {Array.from({ length: thumbCount }, (_, i) => (
             <BaseSlider.Thumb
-              className={cn(
-                "outline-border ring-ring/50 block size-4 shrink-0 rounded-full bg-white transition-[color,box-shadow] hover:ring-4 data-dragging:ring-4 select-none",
-                "disabled:pointer-events-none disabled:opacity-50",
-                "has-focus-visible:ring-4 focus-visible:outline-border",
-              )}
+              aria-label={thumbLabels?.[i]}
+              className={cn(sliderThumbVariants({ size }))}
               data-slot="slider-thumb"
               index={i}
               inputRef={i === 0 ? inputRef : undefined}
@@ -136,13 +212,13 @@ function Slider({
           ))}
         </BaseSlider.Track>
       </BaseSlider.Control>
-      {children}
     </BaseSlider.Root>
   );
 }
 
 export {
   SliderRoot,
+  SliderLabel,
   SliderControl,
   SliderTrack,
   SliderIndicator,

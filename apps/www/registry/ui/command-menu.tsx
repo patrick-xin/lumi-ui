@@ -19,7 +19,7 @@ import {
   AutocompleteEmpty,
   AutocompleteGroup,
   AutocompleteGroupLabel,
-  AutocompleteInputGroup,
+  AutocompleteInputGroupContent,
   AutocompleteItem,
   AutocompleteList,
   AutocompleteSeparator,
@@ -33,7 +33,7 @@ import {
   DialogTrigger,
   DialogViewport,
 } from "@/registry/ui/dialog";
-import type { inputVariants } from "@/registry/ui/input";
+import type { inputBaseVariants } from "@/registry/ui/input";
 import { ScrollArea } from "@/registry/ui/scroll-area";
 
 function CommandMenu(props: DialogRootProps) {
@@ -117,15 +117,17 @@ function CommandInput({
   inputSize = "lg",
   addonIcon = <Search />,
   ...props
-}: React.ComponentProps<typeof AutocompleteInputGroup> & {
-  inputSize?: VariantProps<typeof inputVariants>["inputSize"];
+}: React.ComponentProps<typeof AutocompleteInputGroupContent> & {
+  inputSize?: VariantProps<typeof inputBaseVariants>["inputSize"];
 }) {
   return (
-    <AutocompleteInputGroup
+    <AutocompleteInputGroupContent
       addonIcon={addonIcon}
       className={cn("shrink-0 border-b rounded-none", className)}
       data-slot="command-input"
+      embedded
       inputSize={inputSize}
+      variant="ghost"
       {...props}
     />
   );

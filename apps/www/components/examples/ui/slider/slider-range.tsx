@@ -4,10 +4,11 @@ export function RangeSliderDemo() {
   return (
     <div className="w-56 p-6">
       <Slider
-        aria-label="range-slider-demo"
         defaultValue={[25, 45]}
+        label="Range Slider"
         max={100}
         step={1}
+        thumbLabels={["min", "max"]}
       >
         <SliderValue />
       </Slider>

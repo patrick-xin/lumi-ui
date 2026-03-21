@@ -7,7 +7,7 @@ import {
   ComboboxEmpty,
   ComboboxGroup,
   ComboboxGroupLabel,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
@@ -16,7 +16,7 @@ import { ScrollArea } from "@/registry/ui/scroll-area";
 export function ComboboxScrollAreaDemo() {
   return (
     <Combobox items={groupedProduce}>
-      <ComboboxInputGroup
+      <ComboboxInputGroupContent
         className="w-64"
         placeholder="Select produce"
         showTrigger

@@ -86,10 +86,7 @@ export function SiteCommandMenu({ tree }: { tree: DocRoot }) {
           </Button>
         }
       />
-      <CommandMenuContent
-        aria-label="Command menu"
-        className="max-w-lg"
-      >
+      <CommandMenuContent aria-label="Command menu" className="max-w-lg">
         <Command
           autoHighlight="always"
           inline
@@ -102,7 +99,6 @@ export function SiteCommandMenu({ tree }: { tree: DocRoot }) {
             className="caret-primary"
             inputSize="lg"
             placeholder={t("placeholder")}
-            variant="ghost"
           />
 
           <CommandEmpty>No results found.</CommandEmpty>

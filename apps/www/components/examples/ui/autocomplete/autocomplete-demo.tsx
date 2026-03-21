@@ -5,7 +5,7 @@ import {
   Autocomplete,
   AutocompleteContent,
   AutocompleteEmpty,
-  AutocompleteInputGroup,
+  AutocompleteInputGroupContent,
   AutocompleteItem,
   AutocompleteList,
 } from "@/registry/ui/autocomplete";
@@ -13,7 +13,7 @@ import {
 export function AutocompleteDemo() {
   return (
     <Autocomplete items={tags}>
-      <AutocompleteInputGroup
+      <AutocompleteInputGroupContent
         addonIcon={<SearchIcon />}
         aria-label="Search framework"
         className="w-64"

@@ -16,7 +16,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
   ComboboxTrigger,
@@ -59,7 +59,7 @@ export function SearchCombobox() {
         sideOffset={isCollapsed ? 2 : -32}
       >
         <div className="flex justify-between items-center relative">
-          <ComboboxInputGroup
+          <ComboboxInputGroupContent
             addonIcon={<SearchIcon />}
             inputSize="lg"
             placeholder="Find..."

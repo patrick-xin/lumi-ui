@@ -9,7 +9,7 @@ import {
   Autocomplete,
   AutocompleteContent,
   AutocompleteEmpty,
-  AutocompleteInputGroup,
+  AutocompleteInputGroupContent,
   AutocompleteItem,
   AutocompleteList,
 } from "@/registry/ui/autocomplete";
@@ -20,7 +20,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
@@ -154,7 +154,7 @@ export const FormWithRHF = () => {
                   value={value}
                 >
                   <FieldLabel aria-required>Preferred Framework</FieldLabel>
-                  <AutocompleteInputGroup
+                  <AutocompleteInputGroupContent
                     className="w-full sm:w-64"
                     onBlur={onBlur}
                     placeholder="e.g. Next.js"
@@ -208,7 +208,7 @@ export const FormWithRHF = () => {
                     value={value}
                   >
                     <FieldLabel aria-required>Headquarters Location</FieldLabel>
-                    <ComboboxInputGroup
+                    <ComboboxInputGroupContent
                       className="w-full sm:w-64"
                       onBlur={onBlur}
                       placeholder="Select major city..."

@@ -10,7 +10,7 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
-  ComboboxInputControl,
+  ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
@@ -23,7 +23,7 @@ import {
   DialogTitle,
 } from "@/registry/ui/dialog";
 import { Input } from "@/registry/ui/input";
-import { Label } from "../../../../registry/ui/label";
+import { Label } from "@/registry/ui/label";
 
 export default function ExampleCreatableCombobox() {
   const id = React.useId();
@@ -164,7 +164,7 @@ export default function ExampleCreatableCombobox() {
       >
         <div className="max-w-md flex flex-col gap-2">
           <Label htmlFor={id}>Labels</Label>
-          <ComboboxInputControl className="max-w-xl w-96 border px-1.5 py-1">
+          <ComboboxInputGroup className="max-w-xl w-96 border px-1.5 py-1">
             <ComboboxChips className="w-64 min-[500px]:w-88">
               <ComboboxValue>
                 {(value: LabelItem[]) => (
@@ -186,7 +186,7 @@ export default function ExampleCreatableCombobox() {
                 )}
               </ComboboxValue>
             </ComboboxChips>
-          </ComboboxInputControl>
+          </ComboboxInputGroup>
         </div>
 
         <ComboboxContent>

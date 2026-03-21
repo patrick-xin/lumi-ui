@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { DrawerDemo } from "@/components/examples/ui/drawer/drawer-demo";
-import { DrawerDirectionsDemo } from "@/components/examples/ui/drawer/drawer-directions";
 import { DrawerDialogDemo } from "@/components/examples/ui/drawer/drawer-responsive";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -12,10 +11,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/ui/breadcrumb";
-import { ButtonError } from "../../../../components/examples/ui/button/button-error";
-import { DrawerBasicDemo } from "../../../../components/examples/ui/drawer/drawer-basic";
-import { DrawerDirectionsInsetDemo } from "../../../../components/examples/ui/drawer/drawer-directions-inset";
-import { DrawerDirectionsResponsiveDemo } from "../../../../components/examples/ui/drawer/drawer-directions-responsive";
+import { SliderSizeDemo } from "../../../../components/examples/ui/slider/slider-size";
+import { SwitchDisabledDemo } from "../../../../components/examples/ui/switch/switch-disabled";
+import { SwitchSizeDemo } from "../../../../components/examples/ui/switch/switch-size";
 
 export default function Page() {
   return (
@@ -41,23 +39,9 @@ export default function Page() {
             Basic
             <DrawerDemo />
             <DrawerDialogDemo />
-            <div className="flex flex-col gap-2">
-              Full bleed(default)
-              <DrawerDirectionsDemo />
-            </div>
-            <div className="flex flex-col gap-2">
-              Inset
-              <DrawerDirectionsInsetDemo />
-            </div>
-            <div className="flex flex-col gap-2">
-              Basic
-              <DrawerBasicDemo />
-            </div>
-            <div className="flex flex-col gap-2">
-              Responsive
-              <DrawerDirectionsResponsiveDemo />
-            </div>
-            <ButtonError />
+            <SwitchSizeDemo />
+            <SliderSizeDemo />
+            <SwitchDisabledDemo />
           </div>
         </section>
       </div>

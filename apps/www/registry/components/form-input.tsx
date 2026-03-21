@@ -37,7 +37,6 @@ const FormInput = <T extends FieldValues>({
   placeholder,
   description,
   rules,
-  variant,
   className,
   controlClassName,
   isRequired = false,
@@ -77,7 +76,6 @@ const FormInput = <T extends FieldValues>({
               multiline ? <Textarea className="min-h-16 py-2" /> : undefined
             }
             value={value || ""}
-            variant={variant}
             {...props}
           />
           {description && <FieldDescription>{description}</FieldDescription>}

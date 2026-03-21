@@ -5,7 +5,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
   ComboboxStatus,
@@ -125,7 +125,7 @@ export function ComboboxAsyncSingleDemo() {
         setError(null);
       }}
     >
-      <ComboboxInputGroup className="w-64" placeholder="Search..." />
+      <ComboboxInputGroupContent className="w-64" placeholder="Search..." />
 
       <ComboboxContent aria-busy={isPending || undefined}>
         <ComboboxStatus className="p-2">{getStatus()}</ComboboxStatus>

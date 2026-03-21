@@ -3,7 +3,7 @@
 import { Field as BaseField } from "@base-ui/react/field";
 import type { VariantProps } from "class-variance-authority";
 import { cn } from "@/registry/lib/utils";
-import { inputVariants } from "@/registry/ui/input";
+import { inputBaseVariants, inputVariants } from "@/registry/ui/input";
 
 function Field({ className, ...props }: BaseField.Root.Props) {
   return (
@@ -46,11 +46,15 @@ function FieldControl({
   ...props
 }: BaseField.Control.Props & {
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
-  variant?: VariantProps<typeof inputVariants>["variant"];
+  variant?: VariantProps<typeof inputBaseVariants>["variant"];
 }) {
   return (
     <BaseField.Control
-      className={cn(inputVariants({ inputSize, variant }), className)}
+      className={cn(
+        inputVariants({ inputSize }),
+        inputBaseVariants({ variant }),
+        className,
+      )}
       data-slot="field-control"
       {...props}
     />

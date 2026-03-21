@@ -5,7 +5,7 @@ import {
   Autocomplete,
   AutocompleteContent,
   AutocompleteEmpty,
-  AutocompleteInputGroup,
+  AutocompleteInputGroupContent,
   AutocompleteItem,
   AutocompleteList,
 } from "@/registry/ui/autocomplete";
@@ -34,7 +34,7 @@ export function AutocompleteFormDemo() {
         <FieldLabel>Framework</FieldLabel>
         <FieldDescription>Select your favorite framework</FieldDescription>
         <Autocomplete items={tags} required>
-          <AutocompleteInputGroup
+          <AutocompleteInputGroupContent
             addonIcon={<SearchIcon />}
             aria-label="Search framework"
             className="w-64"

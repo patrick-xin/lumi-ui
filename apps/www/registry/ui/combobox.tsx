@@ -26,7 +26,10 @@ function ComboboxLabel({
 }: BaseCombobox.Label.Props & { className?: string }) {
   return (
     <BaseCombobox.Label
-      className={cn("cursor-default text-sm leading-5 font-medium", className)}
+      className={cn(
+        "cursor-default text-sm leading-none font-medium",
+        className,
+      )}
       data-slot="combobox-label"
       {...props}
     >
@@ -59,13 +62,18 @@ function ComboboxIcon({ className, ...props }: BaseCombobox.Icon.Props) {
 function ComboboxInput({
   className,
   inputSize = "default",
+  variant = "default",
   ...props
-}: BaseCombobox.Input.Props & {
-  inputSize?: VariantProps<typeof inputVariants>["inputSize"];
-}) {
+}: BaseCombobox.Input.Props &
+  VariantProps<typeof inputVariants> &
+  VariantProps<typeof inputBaseVariants>) {
   return (
     <BaseCombobox.Input
-      className={cn(inputVariants({ inputSize }), className)}
+      className={cn(
+        inputVariants({ inputSize }),
+        inputBaseVariants({ variant }),
+        className,
+      )}
       data-slot="combobox-input"
       {...props}
     />
@@ -102,16 +110,7 @@ function ComboboxTrigger({ className, ...props }: BaseCombobox.Trigger.Props) {
 function ComboboxChips({ className, ...props }: BaseCombobox.Chips.Props) {
   return (
     <BaseCombobox.Chips
-      className={cn(
-        //  "dark:bg-red-900/30 border border-input",
-        //"p-1 min-h-8 **:data-[slot=combobox-input]:h-7.5",
-        //  "rounded-md shadow-xs",
-        "flex w-full flex-wrap items-center gap-1",
-        // "py-1 px-1",
-        // "focus-within:outline focus-within:outline-ring focus-within:ring-4 focus-within:ring-ring/10",
-        // "disabled:cursor-not-allowed disabled:opacity-50",
-        className,
-      )}
+      className={cn("flex w-full flex-wrap items-center gap-1", className)}
       data-slot="combobox-chips"
       {...props}
     />
@@ -303,7 +302,7 @@ function ComboboxSeparator({
   );
 }
 
-function ComboboxInputControl({
+function ComboboxInputGroup({
   className,
   variant = "default",
   inputSize = "default",
@@ -326,7 +325,7 @@ function ComboboxInputControl({
   );
 }
 
-function ComboboxInputGroup({
+function ComboboxInputGroupContent({
   className,
   showTrigger = false,
   showClear = false,
@@ -532,7 +531,7 @@ export {
   ComboboxValue,
   ComboboxIcon,
   ComboboxInput,
-  ComboboxInputControl,
+  ComboboxInputGroup,
   ComboboxClear,
   ComboboxTrigger,
   ComboboxChips,
@@ -555,7 +554,7 @@ export {
   ComboboxCollection,
   useComboboxFilter,
   // Composite components
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxContent,
   ComboboxItemContent,
 };

@@ -19,7 +19,7 @@ import {
   AutocompleteEmpty,
   AutocompleteGroup,
   AutocompleteGroupLabel,
-  AutocompleteInputGroup,
+  AutocompleteInputGroupContent,
   AutocompleteItem,
   AutocompleteList,
   AutocompleteSeparator,
@@ -117,11 +117,11 @@ function CommandInput({
   inputSize = "lg",
   addonIcon = <Search />,
   ...props
-}: React.ComponentProps<typeof AutocompleteInputGroup> & {
+}: React.ComponentProps<typeof AutocompleteInputGroupContent> & {
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
 }) {
   return (
-    <AutocompleteInputGroup
+    <AutocompleteInputGroupContent
       addonIcon={addonIcon}
       className={cn("shrink-0 border-b rounded-none", className)}
       data-slot="command-input"

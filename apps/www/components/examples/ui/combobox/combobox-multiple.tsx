@@ -8,7 +8,7 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxInput,
-  ComboboxInputControl,
+  ComboboxInputGroup,
   ComboboxItemContent,
   ComboboxList,
   ComboboxValue,
@@ -18,54 +18,11 @@ import { Label } from "@/registry/ui/label";
 export function ComboboxMultipleSelectDemo() {
   const id = React.useId();
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex gap-4 items-center justify-center flex-wrap">
       <Combobox items={langs} multiple>
         <div className="max-w-md flex flex-col gap-2">
           <Label htmlFor={id}>Programming languages</Label>
-          <ComboboxInputControl className="max-w-xl w-96" inputSize="lg">
-            <ComboboxChips>
-              <ComboboxValue>
-                {(value: ProgrammingLanguage[]) => (
-                  <React.Fragment>
-                    {value.map((language) => (
-                      <ComboboxChip
-                        aria-label={language.value}
-                        key={language.id}
-                      >
-                        {language.value}
-                      </ComboboxChip>
-                    ))}
-                    <ComboboxInput
-                      className="flex-1"
-                      id={id}
-                      placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
-                    />
-                  </React.Fragment>
-                )}
-              </ComboboxValue>
-            </ComboboxChips>
-          </ComboboxInputControl>
-        </div>
-
-        <ComboboxContent sideOffset={4}>
-          <ComboboxEmpty>No languages found.</ComboboxEmpty>
-          <ComboboxList>
-            {(language: ProgrammingLanguage) => (
-              <ComboboxItemContent
-                indicatorPlacement="end"
-                key={language.id}
-                value={language}
-              >
-                {language.value}
-              </ComboboxItemContent>
-            )}
-          </ComboboxList>
-        </ComboboxContent>
-      </Combobox>
-      <Combobox items={langs} multiple>
-        <div className="max-w-md flex flex-col gap-2">
-          <Label htmlFor={id}>Programming languages</Label>
-          <ComboboxInputControl
+          <ComboboxInputGroup
             className="max-w-xl w-96 px-1.5 py-1"
             inputSize="sm"
           >
@@ -85,12 +42,13 @@ export function ComboboxMultipleSelectDemo() {
                       className="flex-1"
                       id={id}
                       placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
+                      variant="ghost"
                     />
                   </React.Fragment>
                 )}
               </ComboboxValue>
             </ComboboxChips>
-          </ComboboxInputControl>
+          </ComboboxInputGroup>
         </div>
 
         <ComboboxContent sideOffset={4}>

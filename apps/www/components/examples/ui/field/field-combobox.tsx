@@ -4,7 +4,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
@@ -15,7 +15,7 @@ export function FieldComboBoxDemo() {
     <Field>
       <FieldLabel>Fruits</FieldLabel>
       <Combobox items={fruits}>
-        <ComboboxInputGroup
+        <ComboboxInputGroupContent
           aria-label="Choose a fruit"
           className="w-48"
           placeholder="e.g. Apple"

@@ -6,6 +6,7 @@ export function VerticalSliderDemo() {
       <Slider
         aria-label="vertical-slider-demo"
         defaultValue={[50]}
+        label="Vertical Slider"
         max={100}
         orientation="vertical"
       />

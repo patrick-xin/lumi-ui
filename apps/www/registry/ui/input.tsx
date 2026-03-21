@@ -29,12 +29,13 @@ const inputBaseVariants = cva(
       variant: {
         default: "dark:bg-input/30",
         transparent: "bg-transparent",
+        ghost:
+          "bg-transparent border-none shadow-none outline-none rounded-none",
       },
     },
   },
 );
 
-// Text behavior — for the actual <input> element
 const inputVariants = cva(
   [
     "w-full min-w-0 bg-transparent cursor-text text-base md:text-sm appearance-none outline-0",
