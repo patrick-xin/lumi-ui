@@ -1,7 +1,7 @@
 import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
 import { Check, ChevronDown, X } from "lucide-react";
 import type * as React from "react";
-import { cn, tv } from "tailwind-variants";
+import { cn, tv, type VariantProps } from "tailwind-variants";
 import { ArrowSvg } from "@/registry/tv/arrow-svg";
 import { Button } from "@/registry/tv/button";
 import {
@@ -9,7 +9,6 @@ import {
   type InputStylesProps,
   inputContainerStyles,
   inputStyles,
-  inputVariant,
 } from "@/registry/tv/input";
 
 function Combobox<Value, Multiple extends boolean | undefined = false>({
@@ -53,13 +52,18 @@ function ComboboxIcon({ className, ...props }: BaseCombobox.Icon.Props) {
 function ComboboxInput({
   className,
   inputSize,
+  multiple = false,
   variant,
   ...props
 }: Omit<BaseCombobox.Input.Props, "className"> &
-  InputStylesProps & { className?: string }) {
+  InputStylesProps & { className?: string; multiple?: boolean }) {
   return (
     <BaseCombobox.Input
-      className={inputStyles({ variant, inputSize, className })}
+      className={cn(
+        inputStyles({ variant: multiple ? "ghost" : variant, inputSize }),
+        multiple && "flex-1 p-0 h-auto",
+        className,
+      )}
       {...props}
     />
   );
@@ -90,32 +94,97 @@ function ComboboxTrigger({ className, ...props }: BaseCombobox.Trigger.Props) {
   );
 }
 
-function ComboboxChips({ className, ...props }: BaseCombobox.Chips.Props) {
+const comboboxChipsStyles = tv({
+  base: "flex w-full self-stretch items-center flex-wrap gap-1",
+  variants: {
+    size: {
+      sm: "py-1.5",
+      default: "py-1",
+      lg: "py-1.5",
+    },
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
+
+function ComboboxChips({
+  className,
+  size,
+  ...props
+}: Omit<BaseCombobox.Chips.Props, "className"> &
+  VariantProps<typeof comboboxChipsStyles> & {
+    className?: string;
+  }) {
   return (
     <BaseCombobox.Chips
-      className={cn("flex w-full flex-wrap items-center gap-1", className)}
+      className={comboboxChipsStyles({ size, className })}
       {...props}
     />
   );
 }
 
+const comboboxChipStyles = tv({
+  slots: {
+    chip: [
+      "flex items-center w-fit rounded-md shadow-xs bg-input text-input-foreground outline-none cursor-default whitespace-nowrap",
+      "aria-disabled:pointer-events-none aria-disabled:cursor-default aria-disabled:opacity-50",
+      "focus-within:bg-input/80 focus-within:text-input-foreground/80",
+      "[@media(hover:hover)]:data-highlighted:bg-input/80 [@media(hover:hover)]:data-highlighted:text-input-foreground/80",
+    ],
+    remove: [
+      "inline-flex items-center justify-between opacity-50 hover:opacity-100 text-inherit rounded-md",
+      "aria-disabled:opacity-50 aria-disabled:hover:opacity-50",
+      "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+    ],
+  },
+  variants: {
+    size: {
+      sm: {
+        chip: "gap-0.5 px-1.5 py-0.5 text-xs",
+        remove: "p-px [&_svg:not([class*='size-'])]:size-3.5",
+      },
+      default: {
+        chip: "gap-1 px-2 py-1 text-sm",
+        remove: "[&_svg:not([class*='size-'])]:size-4",
+      },
+      lg: {
+        chip: "gap-1 px-2.5 py-1 text-[15px]",
+        remove: "[&_svg:not([class*='size-'])]:size-4",
+      },
+    },
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
+
 function ComboboxChip({
   className,
   children,
+  size,
+  disabled,
   ...props
-}: BaseCombobox.Chip.Props) {
+}: Omit<BaseCombobox.Chip.Props, "className"> &
+  VariantProps<typeof comboboxChipStyles> & {
+    className?: string;
+    disabled?: boolean;
+  }) {
+  const { chip, remove } = comboboxChipStyles({ size });
   return (
     <BaseCombobox.Chip
-      className={cn(
-        "flex items-center gap-1 px-2 py-1 rounded-md shadow-xs text-sm bg-input text-input-foreground outline-none cursor-default",
-        "focus-within:bg-input/80 focus-within:text-input-foreground/80",
-        "[@media(hover:hover)]:data-highlighted:bg-input/80 [@media(hover:hover)]:data-highlighted:text-input-foreground/80",
-        className,
-      )}
+      aria-disabled={disabled}
+      className={chip({ className })}
       {...props}
     >
       {children}
-      <ComboboxChipRemove />
+      <BaseCombobox.ChipRemove
+        aria-label="Remove"
+        className={remove()}
+        disabled={disabled}
+      >
+        <X />
+      </BaseCombobox.ChipRemove>
     </BaseCombobox.Chip>
   );
 }
@@ -131,8 +200,7 @@ function ComboboxChipRemove({
     <BaseCombobox.ChipRemove
       aria-label="Remove"
       className={cn(
-        "p-1 inline-flex items-center justify-center bg-transparent hover:bg-accent text-inherit rounded-md transition-colors",
-        "[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
+        "p-1 inline-flex items-center justify-center text-inherit rounded-md transition-colors",
         className,
       )}
       {...props}
@@ -279,7 +347,6 @@ function ComboboxInputGroup({
   className,
   variant,
   inputSize,
-  multiple,
   ...props
 }: Omit<BaseCombobox.InputGroup.Props, "className"> &
   InputContainerStylesProps & { className?: string }) {
@@ -288,7 +355,6 @@ function ComboboxInputGroup({
       className={inputContainerStyles({
         variant,
         inputSize,
-        multiple,
         className,
       })}
       {...props}
@@ -297,23 +363,14 @@ function ComboboxInputGroup({
 }
 
 const comboboxInputGroupContentStyles = tv({
-  extend: inputContainerStyles,
-  variants: {
-    variant: inputVariant,
-    hasAddonIcon: {
-      true: "",
-      false: "",
-    },
-  },
   slots: {
-    base: ["grid items-center px-2.5"],
+    base: ["grid items-center"],
     addonIconWrapper: [
-      "flex justify-center items-center shrink-0 col-start-1",
-      "size-6",
+      "flex justify-center items-center shrink-0 col-start-1 size-6",
       "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
     ],
-    input: ["col-start-2 w-full min-w-0 p-0"],
-    actions: ["flex items-center gap-0.5 col-start-3"],
+    input: ["col-start-2 w-full min-w-0 p-0 h-auto"],
+    actions: ["flex items-center justify-end col-start-3 min-w-12"],
     clear: [
       "[&_svg]:text-muted-foreground hover:[&_svg]:text-foreground [&_svg]:pointer-events-none [&_svg]:size-4",
     ],
@@ -321,27 +378,22 @@ const comboboxInputGroupContentStyles = tv({
       "[&_svg]:text-muted-foreground [&_svg]:pointer-events-none data-popup-open:[&_svg]:text-foreground hover:[&_svg]:text-foreground data-popup-open:bg-accent [&_svg]:size-4",
     ],
   },
-  compoundVariants: [
-    {
-      variant: ["default", "transparent"],
-      className: {
-        base: [
-          "rounded-md outline outline-border shadow-sm focus-within:outline focus-within:outline-ring focus-within:ring-4 focus-within:ring-ring/10",
-          "transition-[color,box-shadow,ring,outline] duration-150",
+  variants: {
+    hasAddonIcon: {
+      true: { base: "gap-0.5 px-1" },
+    },
+    overlay: {
+      true: {
+        actions: [
+          "grid gap-0 [&>*]:col-start-1 [&>*]:row-start-1 min-w-6",
+          "[&:has([data-slot=clear]:not([hidden]))>[data-slot=trigger]]:hidden",
         ],
       },
     },
-    {
-      hasAddonIcon: true,
-      className: {
-        base: "px-1 gap-0.5",
-      },
-    },
-  ],
+  },
   defaultVariants: {
-    variant: "default",
-    inputSize: "default",
     hasAddonIcon: false,
+    overlay: false,
   },
 });
 
@@ -349,46 +401,60 @@ function ComboboxInputGroupContent({
   className,
   showTrigger = false,
   showClear = false,
+  clearReplacesTrigger = false,
   variant = "default",
   inputSize = "default",
-  inputVariant = "ghost",
+  embedded = false,
   addonIcon,
-  inputClassName,
   ...props
 }: Omit<BaseCombobox.Input.Props, "className"> & {
   className?: string;
   showTrigger?: boolean;
   showClear?: boolean;
+  clearReplacesTrigger?: boolean;
   addonIcon?: React.ReactNode;
-  inputClassName?: string;
-  inputVariant?: InputStylesProps["variant"];
-} & InputStylesProps) {
+  embedded?: boolean;
+} & InputContainerStylesProps) {
+  const renderClear = showClear || clearReplacesTrigger;
+  const renderTrigger = showTrigger || clearReplacesTrigger;
   const { base, addonIconWrapper, input, actions, clear, trigger } =
     comboboxInputGroupContentStyles({
-      variant,
-      inputSize,
       hasAddonIcon: !!addonIcon,
+      overlay: clearReplacesTrigger,
     });
 
   return (
-    <BaseCombobox.InputGroup className={base({ className })}>
+    <BaseCombobox.InputGroup
+      className={cn(
+        inputContainerStyles({
+          variant: embedded ? "ghost" : variant,
+          inputSize,
+          className: base(),
+        }),
+        className,
+        embedded && "border-b",
+      )}
+    >
       {addonIcon && (
         <BaseCombobox.Icon className={addonIconWrapper()}>
           {addonIcon}
         </BaseCombobox.Icon>
       )}
       <BaseCombobox.Input
-        className={inputStyles({
-          className: input(),
-          variant: "ghost",
-          inputSize,
-        })}
+        className={cn(
+          inputStyles({
+            variant: "ghost",
+            inputSize,
+            className: input(),
+          }),
+        )}
         {...props}
       />
       <div className={actions()}>
-        {showClear && (
+        {renderClear && (
           <BaseCombobox.Clear
             aria-label="Clear selection"
+            data-slot="clear"
             render={
               <Button className={clear()} size="icon-xs" variant="ghost" />
             }
@@ -396,9 +462,10 @@ function ComboboxInputGroupContent({
             <X />
           </BaseCombobox.Clear>
         )}
-        {showTrigger && (
+        {renderTrigger && (
           <BaseCombobox.Trigger
             aria-label="Open popup"
+            data-slot="trigger"
             render={
               <Button className={trigger()} size="icon-xs" variant="ghost" />
             }
@@ -525,34 +592,34 @@ const useComboboxFilter = BaseCombobox.useFilter;
 
 export {
   Combobox,
-  ComboboxLabel,
-  ComboboxValue,
+  ComboboxArrow,
+  ComboboxBackdrop,
+  ComboboxChip,
+  ComboboxChipRemove,
+  ComboboxChips,
+  ComboboxClear,
+  ComboboxCollection,
+  ComboboxEmpty,
+  ComboboxGroup,
+  ComboboxGroupLabel,
   ComboboxIcon,
   ComboboxInput,
   ComboboxInputGroup,
-  ComboboxClear,
-  ComboboxTrigger,
-  ComboboxChips,
-  ComboboxChip,
-  ComboboxChipRemove,
-  ComboboxList,
-  ComboboxPortal,
-  ComboboxBackdrop,
-  ComboboxPositioner,
-  ComboboxPopup,
-  ComboboxArrow,
-  ComboboxEmpty,
-  ComboboxGroupLabel,
   ComboboxItem,
-  ComboboxSeparator,
-  ComboboxGroup,
   ComboboxItemIndicator,
+  ComboboxLabel,
+  ComboboxList,
+  ComboboxPopup,
+  ComboboxPortal,
+  ComboboxPositioner,
   ComboboxRow,
+  ComboboxSeparator,
   ComboboxStatus,
-  ComboboxCollection,
+  ComboboxTrigger,
+  ComboboxValue,
   useComboboxFilter,
   // Composite components
   ComboboxInputGroupContent,
-  ComboboxContent,
   ComboboxItemContent,
+  ComboboxContent,
 };

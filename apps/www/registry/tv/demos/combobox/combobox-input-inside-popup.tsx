@@ -37,7 +37,7 @@ export function ComboboxInputInsidePopupDemo() {
         <ComboboxContent>
           <ComboboxInputGroupContent
             addonIcon={<SearchIcon />}
-            className="border-b"
+            embedded
             placeholder="Find member..."
             variant="ghost"
           />
@@ -58,7 +58,7 @@ export function ComboboxInputInsidePopupDemo() {
           <ComboboxTrigger
             className={buttonVariants({
               className: "justify-between px-3 w-64",
-              variant: "secondary",
+              variant: "outline",
             })}
           >
             <ComboboxValue />
@@ -108,6 +108,7 @@ export function ComboboxInputInsidePopupDemo() {
           <ComboboxInputGroupContent
             addonIcon={<SearchIcon />}
             className="border-b border-border"
+            inputSize="lg"
             placeholder="Find member..."
             variant="ghost"
           />

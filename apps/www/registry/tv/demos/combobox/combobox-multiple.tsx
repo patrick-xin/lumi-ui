@@ -25,7 +25,6 @@ export function ComboboxMultipleSelectDemo() {
           <ComboboxInputGroup
             className="max-w-xl w-96"
             inputSize="sm"
-            multiple
             variant="default"
           >
             <ComboboxChips>
@@ -36,16 +35,16 @@ export function ComboboxMultipleSelectDemo() {
                       <ComboboxChip
                         aria-label={language.value}
                         key={language.id}
+                        size="sm"
                       >
                         {language.value}
                       </ComboboxChip>
                     ))}
                     <ComboboxInput
-                      className="flex-1 p-0"
                       id={id}
                       inputSize="sm"
+                      multiple
                       placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
-                      variant="ghost"
                     />
                   </React.Fragment>
                 )}
@@ -75,7 +74,6 @@ export function ComboboxMultipleSelectDemo() {
           <ComboboxInputGroup
             className="max-w-xl w-96"
             inputSize="default"
-            multiple
             variant="default"
           >
             <ComboboxChips>
@@ -91,10 +89,9 @@ export function ComboboxMultipleSelectDemo() {
                       </ComboboxChip>
                     ))}
                     <ComboboxInput
-                      className="flex-1 p-0"
                       id={id}
+                      multiple
                       placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
-                      variant="ghost"
                     />
                   </React.Fragment>
                 )}
@@ -124,7 +121,6 @@ export function ComboboxMultipleSelectDemo() {
           <ComboboxInputGroup
             className="max-w-xl w-96"
             inputSize="lg"
-            multiple
             variant="default"
           >
             <ComboboxChips>
@@ -135,16 +131,16 @@ export function ComboboxMultipleSelectDemo() {
                       <ComboboxChip
                         aria-label={language.value}
                         key={language.id}
+                        size="lg"
                       >
                         {language.value}
                       </ComboboxChip>
                     ))}
                     <ComboboxInput
-                      className="flex-1 p-0"
                       id={id}
                       inputSize="lg"
+                      multiple
                       placeholder={value.length > 0 ? "" : "e.g. TypeScript"}
-                      variant="ghost"
                     />
                   </React.Fragment>
                 )}

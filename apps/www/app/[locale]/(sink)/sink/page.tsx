@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { ComboboxGroupedDemo } from "@/registry/tv/demos/combobox/combobox-grouped";
-import { ComboboxIndicatorDemo } from "@/registry/tv/demos/combobox/combobox-indicator";
-import { ComboboxInputInsidePopupDemo } from "@/registry/tv/demos/combobox/combobox-input-inside-popup";
-import { ComboboxMultipleSelectDemo } from "@/registry/tv/demos/combobox/combobox-multiple";
-import { InputVariantsDemo } from "@/registry/tv/demos/input/input-styles";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,7 +9,10 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/registry/ui/breadcrumb";
-import { EmojiPickerAutocompleteDemo } from "../../../../registry/tv/demos/autocomplete/autocomplete-grid-layout";
+import { ComboboxBasic } from "../../../../registry/tv/demos/combobox/combobox-basic";
+import { ComboboxClearTriggerDemo } from "../../../../registry/tv/demos/combobox/combobox-clear-trigger";
+import { ComboboxInputInsidePopupDemo } from "../../../../registry/tv/demos/combobox/combobox-input-inside-popup";
+import { ComboboxMultipleSelectDemo } from "../../../../registry/tv/demos/combobox/combobox-multiple";
 
 export default function Page() {
   return (
@@ -36,16 +34,10 @@ export default function Page() {
       </header>
       <div className="flex flex-1 flex-col gap-4 p-2 sm:p-4">
         <section className="max-w-4xl mx-auto flex flex-col items-center gap-4">
-          <InputVariantsDemo />
-
-          <div className="flex flex-col gap-4 w-full">
-            <ComboboxIndicatorDemo />
-            <ComboboxGroupedDemo />
-            <ComboboxMultipleSelectDemo />
-            <ComboboxInputInsidePopupDemo />
-          </div>
-
-          <EmojiPickerAutocompleteDemo />
+          <ComboboxBasic />
+          <ComboboxClearTriggerDemo />
+          <ComboboxMultipleSelectDemo />
+          <ComboboxInputInsidePopupDemo />
         </section>
       </div>
     </div>

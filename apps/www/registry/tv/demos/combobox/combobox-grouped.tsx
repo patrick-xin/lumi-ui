@@ -1,6 +1,7 @@
 "use client";
 
 import { Search } from "lucide-react";
+import React from "react";
 import {
   Combobox,
   ComboboxCollection,
@@ -12,44 +13,46 @@ import {
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/tv/combobox";
-import { Input } from "@/registry/tv/input";
+import { Label } from "../../../ui/label";
 
 export function ComboboxGroupedDemo() {
+  const id = React.useId();
   return (
-    <div className="flex items-center gap-2">
-      <Combobox items={groupedProduce}>
+    <Combobox items={groupedProduce}>
+      <div className="flex flex-col gap-2">
+        <Label htmlFor={id}>Select produce</Label>
         <ComboboxInputGroupContent
           addonIcon={<Search />}
           className="w-64"
+          id={id}
           placeholder="Select produce"
           showClear
           showTrigger
-          variant="transparent"
+          variant="default"
         />
-        <ComboboxContent>
-          <ComboboxEmpty>No produce found.</ComboboxEmpty>
-          <ComboboxList>
-            {(group: ProduceGroup) => (
-              <ComboboxGroup items={group.items} key={group.value}>
-                <ComboboxGroupLabel>{group.value}</ComboboxGroupLabel>
-                <ComboboxCollection>
-                  {(item: Produce) => (
-                    <ComboboxItemContent
-                      indicatorPlacement="end"
-                      key={item.id}
-                      value={item}
-                    >
-                      {item.label}
-                    </ComboboxItemContent>
-                  )}
-                </ComboboxCollection>
-              </ComboboxGroup>
-            )}
-          </ComboboxList>
-        </ComboboxContent>
-      </Combobox>
-      <Input placeholder="input" variant="transparent" />
-    </div>
+      </div>
+      <ComboboxContent>
+        <ComboboxEmpty>No produce found.</ComboboxEmpty>
+        <ComboboxList>
+          {(group: ProduceGroup) => (
+            <ComboboxGroup items={group.items} key={group.value}>
+              <ComboboxGroupLabel>{group.value}</ComboboxGroupLabel>
+              <ComboboxCollection>
+                {(item: Produce) => (
+                  <ComboboxItemContent
+                    indicatorPlacement="end"
+                    key={item.id}
+                    value={item}
+                  >
+                    {item.label}
+                  </ComboboxItemContent>
+                )}
+              </ComboboxCollection>
+            </ComboboxGroup>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
   );
 }
 

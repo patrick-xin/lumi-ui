@@ -5,7 +5,8 @@ export function InputSizesDemo() {
     <div className="flex flex-col gap-4">
       <Input placeholder="Default" />
       <Input inputSize="sm" placeholder="Small" />
-      <Input inputSize="lg" placeholder="Large" />
+      <Input inputSize="lg" placeholder="Large" variant="transparent" />
+      <Input inputSize="lg" placeholder="Large" variant="ghost" />
     </div>
   );
 }
