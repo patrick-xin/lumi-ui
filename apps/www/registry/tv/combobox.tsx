@@ -370,7 +370,7 @@ const comboboxInputGroupContentStyles = tv({
       "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:text-muted-foreground",
     ],
     input: ["col-start-2 w-full min-w-0 p-0 h-auto"],
-    actions: ["flex items-center justify-end col-start-3 min-w-12"],
+    actions: ["flex items-center gap-px justify-end col-start-3 min-w-12"],
     clear: [
       "[&_svg]:text-muted-foreground hover:[&_svg]:text-foreground [&_svg]:pointer-events-none [&_svg]:size-4",
     ],
