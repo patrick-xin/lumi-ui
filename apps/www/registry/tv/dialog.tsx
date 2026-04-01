@@ -1,9 +1,9 @@
 "use client";
 
 import { Dialog as BaseDialog } from "@base-ui/react";
-import { tv, type VariantProps } from "tailwind-variants";
 import { XIcon } from "lucide-react";
 import type * as React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
 
@@ -122,14 +122,16 @@ const dialogContentStyles = tv({
     layout: {
       center: {
         viewport: "grid place-items-center p-4",
-        popup: "relative grid w-full gap-4 shadow-lg max-w-lg rounded-lg animate-fade-zoom",
+        popup:
+          "relative grid w-full gap-4 shadow-lg max-w-lg rounded-lg animate-fade-zoom",
       },
       "element-outside": {
         viewport: [
           "flex flex-col items-center justify-center",
           "px-4 py-12 sm:py-16",
         ],
-        popup: "flex h-full w-full justify-center pointer-events-none p-0 bg-transparent outline-0 animate-fade",
+        popup:
+          "flex h-full w-full justify-center pointer-events-none p-0 bg-transparent outline-0 animate-fade",
       },
       responsive: {
         viewport: "flex items-end sm:items-center justify-center sm:p-4",
@@ -161,7 +163,8 @@ const dialogContentStyles = tv({
       },
       top: {
         viewport: "grid grid-rows-[1fr_auto_3fr] justify-items-center p-4",
-        popup: "relative grid w-full gap-4 shadow-xl max-w-lg rounded-md animate-fade-down",
+        popup:
+          "relative grid w-full gap-4 shadow-xl max-w-lg rounded-md animate-fade-down",
       },
     },
   },
