@@ -9,7 +9,7 @@ import {
 
 export default function AccordionDemo() {
   return (
-    <Accordion defaultValue={["item-1"]} className="w-full max-w-md">
+    <Accordion className="w-full max-w-md" defaultValue={["item-1"]}>
       <AccordionItem value="item-1">
         <AccordionSummary>Item 1</AccordionSummary>
         <AccordionPanel>

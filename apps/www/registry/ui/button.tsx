@@ -42,10 +42,10 @@ const buttonVariants = cva(
           "data-popup-open:bg-destructive/70",
         ],
         ghost: "hover:bg-accent hover:text-accent-foreground shadow-none",
-        glow: "bg-transparent border border-primary/30 dark:border-primary/15 hover:bg-accent dark:hover:bg-accent/30 shadow-md shadow-primary/10 dark:shadow-sm",
+        glow: "bg-transparent border border-primary/30 dark:border-primary/15 hover:bg-accent dark:hover:bg-input/30 shadow-md shadow-primary/10 dark:shadow-sm",
         link: "text-primary underline-offset-4 hover:underline aria-invalid:text-destructive",
         outline: [
-          "border border-primary/30 dark:border-primary/15 shadow-xs bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60",
+          "border hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:hover:bg-input/50",
           "data-popup-open:bg-accent data-popup-open:text-accent-foreground dark:data-popup-open:bg-accent/60",
         ],
         secondary: [
