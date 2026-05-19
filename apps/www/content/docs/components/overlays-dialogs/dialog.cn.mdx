@@ -76,6 +76,13 @@ links:
 }
 ```
 
+如果你倾向于在 `popupVariants` 中直接写内联 css，可以用以下内容替换工具类：
+```css
+data-starting-style:scale-94 data-starting-style:opacity-0 
+data-ending-style:scale-94 data-ending-style:opacity-0 
+transition-all duration-200 ease-smooth
+```
+
 ## 基本用法
 
 ```tsx

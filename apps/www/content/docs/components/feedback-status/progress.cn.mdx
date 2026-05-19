@@ -1,0 +1,47 @@
+---
+title: 进度条
+description: 显示一项耗时任务的执行状态。
+links:
+  doc: https://base-ui.com/react/components/progress
+  api: https://base-ui.com/react/components/progress#api-reference
+---
+
+<ComponentPreview name="progress-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/progress
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="progress" title="progress.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## 实用示例
+
+### 带标签和数值
+
+<ComponentPreview name="progress-with-label" />
+
+### 不确定状态
+
+<ComponentPreview name="progress-indeterminate" />
+
+### 自定义指示器
+
+<ComponentPreview name="progress-custom" />

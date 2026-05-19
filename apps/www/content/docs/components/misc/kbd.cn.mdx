@@ -1,0 +1,53 @@
+---
+title: 键盘按键
+description: 展示来自键盘的文本输入。
+---
+
+<ComponentPreview name="kbd-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/kbd
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="kbd" title="kbd.tsx" collapsible/>
+      </Step>
+      <Step title="根据你的项目设置，更新导入路径。"/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## 组件结构
+
+```tsx
+<KbdGroup>
+  <Kbd/>
+</KbdGroup>
+```
+
+## 功能特性
+
+### 配合分组使用
+
+<ComponentPreview name="kbd-group" />
+
+### 配合提示气泡使用
+
+<ComponentPreview name="kbd-tooltip" />
+
+### 配合按钮使用
+
+<ComponentPreview name="kbd-button" />

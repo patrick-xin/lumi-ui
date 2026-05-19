@@ -173,6 +173,14 @@ Base UI 提供了行为基础，而我们提供了视觉一致性。
 
 我们采用了 **[Shadcn/ui 的 CSS 变量方案](https://ui.shadcn.com/docs/theming)** 来实现主题。
 
+### 基础组件 + 统一样式
+
+当你下沉到基础组件层以获得最大的布局控制权时，你并未使用预组装的复合组件。然而，你并不会因此失去全局的设计语言。因为 Lumi UI 利用了内置的全局 CSS 工具类，你可以构建完全自定义的结构，同时保留与应用其他部分完全相同的悬停效果、动画和容器样式。
+
+例如，下面是一个使用基础组件构建的完全自定义的 `<Select>`。它使用了 `overlay-outline`、`animate-popup` 和 `highlight-on-active`，以保持视觉上的完美一致性：
+
+<ComponentPreview name="custom-select" />
+
 ### 封装器模式
 
 每个基础组件都遵循以下结构：

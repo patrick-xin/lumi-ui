@@ -1,6 +1,6 @@
 ---
-title: Drawer
-description: A panel that slides in from the edge of the screen.
+title: 抽屉
+description: 从屏幕边缘滑入的面板。
 links:
   doc: https://base-ui.com/react/components/drawer
   api: https://base-ui.com/react/components/drawer#api-reference
@@ -9,12 +9,12 @@ status: new
 
 <ComponentPreview name="drawer-demo" />
 
-## Installation
+## 安装
 
 <CodeTabs>
   <TabsList>
     <TabsTab value="cli">CLI</TabsTab>
-    <TabsTab value="manual">Manual</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
   </TabsList>
 
   <TabsPanel value="cli">
@@ -25,7 +25,7 @@ status: new
 
   <TabsPanel value="manual">
     <Steps>
-      <Step title="Copy and paste the following code into your project.">
+      <Step title="将以下代码复制并粘贴到你的项目中。">
         <ComponentSourceCode name="drawer" title="drawer.tsx" collapsible/>
       </Step>
     </Steps>
@@ -33,16 +33,16 @@ status: new
 </CodeTabs>
 
 <Steps>
-  <Step title={<>Add global variables to your <code>@theme inline</code></>}>
+  <Step title={<>将全局变量添加到你的 <code>@theme inline</code> 中</>}>
   ```css
   @theme inline {
-    /* --- other variables --- */
+    /* --- 其他变量 --- */
     --drawer-bleed: 3rem;
     --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
   }
   ```
   </Step>
-  <Step title={<>Add the following utilities to your <code>globals.css</code></>}>
+  <Step title={<>将以下工具类添加到你的 <code>globals.css</code> 中</>}>
 ```css title="globals.css"
 @layer utilities {
   .drawer-popup {
@@ -219,11 +219,11 @@ status: new
   </Step>
 </Steps>
 
-<Callout variant="info" title="Info">
-By default, we include four drawer directions, with three layout options for each direction. You can delete the styles and corespronding variant you don't need based on your app's features.
+<Callout variant="info" title="信息">
+默认情况下，我们提供了四个方向的抽屉样式，每个方向都包含三种布局选项。你可以根据自己应用的需求，删除不需要的样式和对应的变体。
 </Callout>
 
-## Basic Usage
+## 基本用法
 ```tsx
 import {
   Drawer,
@@ -239,18 +239,17 @@ import {
 export function DrawerDemo() {
   return (
     <Drawer>
-      <DrawerTrigger>Open Drawer</DrawerTrigger>
+      <DrawerTrigger>打开抽屉</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+          <DrawerTitle>确定要执行此操作吗？</DrawerTitle>
           <DrawerDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            此操作无法撤销。这将永久删除你的账户，并从我们的服务器中移除你的数据。
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
-          <DrawerClose>Cancel</DrawerClose>
-          <DrawerClose>Continue</DrawerClose>
+          <DrawerClose>取消</DrawerClose>
+          <DrawerClose>继续</DrawerClose>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
@@ -258,12 +257,12 @@ export function DrawerDemo() {
 }
 ```
 
-## Anatomy
+## 组件结构
 
 <Tabs defaultValue="common">
   <TabsList>
-    <TabsTab value="common">Common usage</TabsTab>
-    <TabsTab value="primitive">Primitive usage</TabsTab>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
   </TabsList>
 
   <TabsPanel value="common">
@@ -323,33 +322,33 @@ export function DrawerDemo() {
   </TabsPanel>
 </Tabs>
 
-## Directions
+## 方向
 <ComponentPreview name="drawer-directions" />
 
-## Layout variants
+## 布局变体
 
-### Inset
+### 嵌入式
 <ComponentPreview name="drawer-directions-inset" />
 
-### Responsive
+### 响应式
 <ComponentPreview name="drawer-directions-responsive" />
 
 
-## Cookbook
+## 实用示例
 
-### Enable content selection inside drawer
+### 启用抽屉内的内容选中
 
 <ComponentPreview name="drawer-selection" />
 
-### Scrollable content
+### 可滚动内容
 
 <ComponentPreview name="drawer-scroll" />
 
-### Stacked drawer
+### 层叠抽屉
 
 <ComponentPreview name="drawer-stacked" />
 
-To enable stacking, use the `Stacked` variant for `DrawerContent` and add the following CSS:
+要启用层叠效果，请为 `DrawerContent` 使用 `Stacked` 变体，并添加以下 CSS：
 
 ```css title="globals.css"
 /*
@@ -454,11 +453,11 @@ To enable stacking, use the `Stacked` variant for `DrawerContent` and add the fo
 ```
 
 
-### Snap points
+### 吸附点
 
 <ComponentPreview name="drawer-snap" />
 
-For snap points support, add the following CSS:
+要启用吸附点支持，请添加以下 CSS：
 
 ```css title="globals.css"
 /*
@@ -532,11 +531,11 @@ For snap points support, add the following CSS:
 }
 ```
 
-### Drawer Indent
+### 抽屉缩进效果
 
-Visit [Playground](https://www.lumiui.dev/playground/drawer-indent) to try it out.
+访问 [Playground](https://www.lumiui.dev/playground/drawer-indent) 进行体验。
 
-#### Setup
+#### 设置
 
 ```tsx
 import {
@@ -550,14 +549,14 @@ export default function DrawerIndentPage() {
     <DrawerProvider>
       <DrawerIndentBackground />
       <DrawerIndent>
-        {/* Your drawer */}
+        {/* 你的抽屉 */}
       </DrawerIndent>
     </DrawerProvider>
   );
 }
 ```
 
-More info at [Base UI](https://base-ui.com/react/components/drawer#indent-effect).
+更多信息请参阅 [Base UI](https://base-ui.com/react/components/drawer#indent-effect)。
 
 #### CSS
 
@@ -590,17 +589,16 @@ More info at [Base UI](https://base-ui.com/react/components/drawer#indent-effect
   }
 }
 ```
-### Customization
+### 自定义
 
-#### Mobile navigation
+#### 移动端导航
 
 <ComponentPreview name="drawer-mobile-navigation" />
 
-#### Action sheet
+#### 操作面板
 
 <ComponentPreview name="drawer-action-sheet" />
 
-#### Responsive dialog
+#### 响应式对话框
 
 <ComponentPreview name="drawer-responsive" />
-

@@ -1,0 +1,52 @@
+---
+title: 复选框
+description: 一个易于自定义样式的复选框组件。
+links:
+  doc: https://base-ui.com/react/components/checkbox
+  api: https://base-ui.com/react/components/checkbox#api-reference
+---
+
+<ComponentPreview name="checkbox-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/checkbox
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="checkbox" title="checkbox.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+### 禁用状态
+<ComponentPreview name="checkbox-disabled" />
+
+## 实用示例
+
+### 受控模式
+<ComponentPreview name="checkbox-controlled" />
+
+<Callout variant="warning" title="警告">
+表单控件必须具备可访问的名称。建议使用 [`<Field>`](/docs/components/form-input/field) 来提供可见的文本标签和描述，或者用 `aria-label` 属性作为替代方案。
+</Callout>
+
+
+### 表单集成
+<ComponentPreview name="checkbox-form" />
+
+### 表单集成（包裹标签）
+<ComponentPreview name="checkbox-form-enclosing-label" />

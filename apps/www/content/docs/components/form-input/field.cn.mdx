@@ -1,0 +1,101 @@
+---
+title: 字段
+description: 为表单控件提供标签关联和校验能力的组件。
+links:
+  doc: https://base-ui.com/react/components/field
+  api: https://base-ui.com/react/components/field#api-reference
+---
+
+<ComponentPreview name="field-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/field
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="field" title="field.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 组件结构
+
+```tsx
+<Field>
+  <FieldLabel />
+  <FieldControl />
+  <FieldDescription />
+  <FieldItem />
+  <FieldError />
+  <FieldValidity />
+</Field>
+```
+
+<Callout variant="warning" title="警告">
+  表单控件必须有可访问的名称，才能被辅助技术正确识别。`<FieldLabel>` 和 `<FieldDescription>` 会自动为其关联的控件分配可访问名称和描述。
+</Callout>
+
+
+## 状态与校验
+
+### 必填
+<ComponentPreview name="field-required" />
+
+### 错误状态
+<ComponentPreview name="field-error" />
+
+### 校验状态
+<ComponentPreview name="field-validity" />
+
+## 与其他表单控件配合
+
+### Select
+<ComponentPreview name="field-select" />
+
+### Autocomplete
+<ComponentPreview name="field-autocomplete" />
+
+### Combobox
+<ComponentPreview name="field-combobox" />
+
+<Callout variant="success" title="提示">
+  你可以将 [`<Checkbox>`](/docs/components/form-input/checkbox)、[`<Radio>`](/docs/components/form-input/radio-group) 和 [`<Switch>`](/docs/components/form-input/switch) 包裹在 `<FieldLabel>` 内，实现隐式标签关联。具体示例见下方。
+</Callout>
+
+### Checkbox
+<ComponentPreview name="field-checkbox" />
+
+### Fieldset
+<ComponentPreview name="field-fieldset" />
+
+### Radio Group
+<ComponentPreview name="field-radio" />
+
+## 表单集成
+
+更多信息请参阅 [表单集成](/docs/guides/forms/basic)。
+
+## API 参考
+
+| 组件 | 描述 |
+| :--- | :--- |
+| [`Field`](https://base-ui.com/react/components/field#root) | 组合字段的所有部分。渲染一个 `<div>` 元素。 |
+| [`FieldLabel`](https://base-ui.com/react/components/field#label) | 与字段控件自动关联的可访问标签。渲染一个 `<label>` 元素。 |
+| [`FieldControl`](https://base-ui.com/react/components/field#control) | 需要被标签关联和校验的表单控件。渲染一个 `<input>` 元素。你也可以省略这一部分，改用任意 Base UI 输入组件。例如 `Input`、`Checkbox` 或 `Select` 等都能与 `Field` 开箱即用地协同工作。 |
+| [`FieldDescription`](https://base-ui.com/react/components/field#description) | 包含字段附加信息的段落。渲染一个 `<p>` 元素。 |
+| [`FieldItem`](https://base-ui.com/react/components/field#item) | 在复选框组或单选框组中，将单个选项与其标签和描述组合在一起。渲染一个 `<div>` 元素。 |
+| [`FieldError`](https://base-ui.com/react/components/field#error) | 当字段控件校验失败时显示的错误信息。渲染一个 `<div>` 元素。 |
+| [`FieldValidity`](https://base-ui.com/react/components/field#validity) | 根据字段的校验状态显示自定义信息。`children` 必须是一个接收字段校验状态作为参数的函数。 |

@@ -43,10 +43,52 @@ icon: Play
     ```
 
     这一步确保了所有 Lumi UI 的样式都能被正确地限定作用域，并与你的应用其他部分隔离。更多细节可以参考 Base UI 关于 [Portals](https://base-ui.com/react/overview/quick-start#portals) 的文档。
+
+    <Callout title="提示" variant="info">  
+      请记得给 `body` 添加 `relative`，以支持 iOS。
+    </Callout>
   </Step>
 
-  
-    <Step title="安装全部 UI 组件">
+  <Step title="添加设计令牌">
+  在 `@theme inline` 块中添加全局变量：
+  ```css title="globals.css"
+    /* 用于弹出层/提示消息 */
+    --ease-spring: cubic-bezier(0.23, 1, 0.32, 1);
+
+    /* 用于抽屉/对话框 */
+    --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  ```
+  </Step>
+
+  <Step title="添加 CSS 工具类">
+   将以下 CSS 工具类粘贴到你的全局样式文件中（例如 `globals.css` 或类似文件）：
+
+   ```css title="globals.css"
+    /* 弹出层动画 */
+    @utility animate-popup {
+      @apply origin-[var(--transform-origin)] transition-[opacity,scale,transform] ease-spring duration-150;
+      &[data-starting-style],
+      &[data-ending-style] {
+        opacity: 0;
+        scale: 0.95;
+      }
+    }
+
+    /* 浮层描边 */
+    @utility overlay-outline {
+      @apply outline outline-border dark:-outline-offset-1;
+    }
+
+    /* 选中高亮 */
+    @utility highlight-on-active {
+      @apply data-highlighted:relative data-highlighted:z-0 data-highlighted:before:absolute data-highlighted:before:inset-x-1.5 data-highlighted:before:inset-y-0 data-highlighted:before:z-[-1] data-highlighted:before:rounded-md data-highlighted:before:bg-accent data-highlighted:text-accent-foreground;
+    }
+   ```
+
+   [对话框](/docs/components/overlays-dialogs/dialog)、[抽屉](/docs/components/overlays-dialogs/drawer) 和 [提示消息](/docs/components/feedback-status/toast#installation) 的组件级 CSS 可以在它们各自的安装指南中找到。
+  </Step>
+
+  <Step title="安装全部 UI 组件">
     执行以下命令，一次性安装 Lumi UI 的全部组件：
 
     ```bash

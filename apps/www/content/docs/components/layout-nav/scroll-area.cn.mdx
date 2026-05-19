@@ -1,0 +1,69 @@
+---
+title: 滚动区域
+description: 一个带自定义滚动条的原生滚动容器。
+links:
+  doc: https://base-ui.com/react/components/scroll-area
+  api: https://base-ui.com/react/components/scroll-area#api-reference
+---
+
+<ComponentPreview name="scroll-area-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/scroll-area
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="scroll-area" title="scroll-area.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## 用法
+
+```tsx
+import { ScrollArea } from "@/components/ui/scroll-area"
+```
+
+```tsx
+<ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
+  小丑开始在深夜潜入城堡，把笑话散落在各个角落：国王的枕头下、汤碗里，甚至是皇家洗手间里。
+  国王大发雷霆，却始终拦不住小丑。直到有一天，王国里的人们发现，小丑留下的笑话实在太好笑了，
+  忍不住捧腹大笑。一旦笑起来，就再也停不下来。
+</ScrollArea>
+```
+
+## 示例
+
+### 横向滚动
+
+<ComponentPreview name="scroll-area-horizontal-scrolling" />
+
+### 双向滚动条
+
+<ComponentPreview name="scroll-area-both" />
+
+### 渐变滚动淡出
+
+<ComponentPreview name="scroll-area-gradient-scroll-fade" />
+
+### 横向滚动淡出
+
+<ComponentPreview name="scroll-area-horizontal-scrolling-fade" />
+
+### 无滚动条
+
+<ComponentPreview name="scroll-area-no-scrollbar" />

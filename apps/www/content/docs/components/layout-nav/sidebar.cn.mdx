@@ -1,0 +1,337 @@
+---
+title: 侧边栏
+description: 一个可组合、适配移动端的侧边栏组件。
+---
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/sidebar
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="sidebar" title="sidebar.tsx"/>
+      </Step>
+      <Step title="根据你的项目设置，更新导入路径。"/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+灵感来自 [shadcn/ui](https://ui.shadcn.com/)，基于 [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels) 构建。
+
+[在线示例](/blocks/sidebar)
+
+## 组件结构
+```tsx
+<SidebarProvider>
+  <Sidebar>
+    <SidebarHeader />
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel />
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton />
+              <SidebarMenuSub>
+                <SidebarMenuSubItem />
+              </SidebarMenuSub>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+      <SidebarFooter />
+    </Sidebar>
+    <MainContent />
+</SidebarProvider>
+```
+
+
+
+
+## 配置项
+
+侧边栏的行为由 `sidebar.tsx` 中的几个常量控制。你可以根据需要修改它们。
+
+| 常量 | 默认值 | 描述 |
+| :--- | :--- | :--- |
+| `SIDEBAR_COOKIE_MAX_AGE` | 7 天 | 侧边栏状态（cookie）的持久化时长。 |
+| `DEFAULT_WIDTH` | `25rem` | 侧边栏展开时的默认宽度。 |
+| `MIN_WIDTH` | `15rem` | 侧边栏可调整到的最小宽度。 |
+| `MAX_WIDTH` | `25rem` | 侧边栏可调整到的最大宽度（对于固定宽度场景，通常与默认值相同）。 |
+| `SIDEBAR_KEYBOARD_SHORTCUT` | `b` | 用于切换侧边栏的快捷键（`Command+b` 或 `Control+b`）。 |
+
+## 用法
+
+### CollapsibleType
+
+你可以将 `collapsibleType` 属性设置为 `icon` 或 `sidebar`，以控制侧边栏的折叠方式。`ICON_MODE_WIDTH_PX` 是侧边栏在图标模式下的宽度。如果设置为 `sidebar`，侧边栏在折叠时会被完全隐藏。详见 [示例](/blocks/sidebar)。
+
+### 与 Next.js 配合
+
+为了避免水合不匹配并在刷新之间保持侧边栏状态，建议在服务端从 cookie 中读取状态，并将其传给 `SidebarProvider`。
+
+```tsx title="layout.tsx"
+import { AppSidebar } from "@/components/app-sidebar"
+import {
+  MainContent,
+  SidebarProvider,
+} from "@components/ui/sidebar"
+import { cookies } from "next/headers"
+import type { Layout } from "react-resizable-panels"
+
+const GROUP_ID = "main-layout-persistence";
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const layoutCookie = cookieStore.get(GROUP_ID);
+
+  const defaultLayout: Layout = layoutCookie
+    ? JSON.parse(layoutCookie.value)
+    : undefined;
+
+  return (
+    <SidebarProvider 
+      collapsibleType="icon"
+      defaultLayout={defaultLayout}
+      groupId={GROUP_ID}
+    >
+      <AppSidebar />
+      <MainContent>{children}</MainContent>
+    </SidebarProvider>
+  )
+}
+```
+
+### 与 TanStack Start 配合
+```ts title="utils.ts"
+import { createServerFn } from "@tanstack/react-start";
+import { getCookie } from "@tanstack/react-start/server";
+import type { Layout } from "react-resizable-panels";
+
+const GROUP_ID = "main-layout-persistence";
+
+export const getSidebarLayout = createServerFn({ method: "GET" }).handler(
+	async () => {
+		const raw = getCookie(GROUP_ID);
+		if (!raw) return undefined;
+
+		try {
+			return JSON.parse(raw) as Layout;
+		} catch {
+			return undefined;
+		}
+	},
+);
+
+function getCookieValue(name: string): string | undefined {
+	if (typeof document === "undefined") return undefined;
+
+	const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	const m = document.cookie.match(new RegExp(`(?:^|;\\s*)${escaped}=([^;]*)`));
+	return m ? m[1] : undefined;
+}
+
+export function getSidebarLayoutClient(): Layout | undefined {
+	const raw = getCookieValue(GROUP_ID);
+	if (!raw) return undefined;
+
+	try {
+		return JSON.parse(decodeURIComponent(raw)) as Layout;
+	} catch {
+		return undefined;
+	}
+}
+```
+
+```tsx title="route.tsx"
+import { AppSidebar } from "@/components/app-sidebar";
+import { MainContent, SidebarProvider } from "@/components/ui/sidebar";
+import { getSidebarLayout, getSidebarLayoutClient } from "@/utils";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
+
+const GROUP_ID = "main-layout-persistence";
+
+export const Route = createFileRoute("/dashboard/")({
+	component: RouteComponent,
+	beforeLoad: async () => {
+		if (typeof document === "undefined") {
+			return { defaultLayout: await getSidebarLayout() };
+		} else {
+			return { defaultLayout: getSidebarLayoutClient() };
+		}
+	},
+});
+
+function RouteComponent() {
+	const { defaultLayout } = Route.useRouteContext();
+	return (
+		<SidebarProvider
+			collapsibleType="icon"
+			groupId={GROUP_ID}
+			defaultLayout={defaultLayout}
+		>
+			<AppSidebar />
+			<MainContent>
+        <Outlet />
+      </MainContent>
+		</SidebarProvider>
+	);
+}
+
+```
+
+### 配合客户端 Cookie 使用
+
+将 `SidebarProvider` 替换为以下代码：
+
+```tsx
+const SidebarProvider = ({
+	collapsibleType = "icon",
+	children,
+	groupId,
+}: {
+	children: ReactNode;
+	collapsibleType?: Collapsible;
+	groupId: string;
+}) => {
+	const { defaultLayout, onLayoutChanged } = useDefaultLayout({
+		id: groupId,
+		storage: localStorage,
+	});
+	const isMobile = useIsMobile();
+	const sidebarRef = usePanelRef();
+	const mobileHandle = useMemo(() => createSheetHandle(), []);
+	const collapsedSize = collapsibleType === "icon" ? ICON_MODE_WIDTH_PX : 0;
+
+	// 图标模式
+	const [isCollapsed, setIsCollapsed] = useState(() => {
+		// 没有 cookie 时，默认展开
+		if (!defaultLayout || !defaultLayout.sidebar) return false;
+
+		// cookie 中保存的是百分比值（0-100）
+		const savedPercentage = defaultLayout.sidebar;
+
+		// 与安全阈值进行比较
+		return savedPercentage < COLLAPSED_PERCENTAGE_THRESHOLD;
+	});
+
+	const toggleSidebar = React.useCallback(() => {
+		const panel = sidebarRef.current;
+		if (!panel) return;
+		if (panel.isCollapsed()) {
+			panel.expand();
+		} else {
+			panel.collapse();
+		}
+	}, [sidebarRef]);
+
+	React.useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (
+				event.key === SIDEBAR_KEYBOARD_SHORTCUT &&
+				(event.metaKey || event.ctrlKey)
+			) {
+				event.preventDefault();
+				toggleSidebar();
+			}
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, [toggleSidebar]);
+
+	return (
+		<SidebarContext.Provider
+			value={{
+				collapsedSize,
+				collapsibleType,
+				isCollapsed,
+				isMobile,
+				mobileHandle,
+				setIsCollapsed,
+				sidebarRef,
+				toggleSidebar,
+			}}
+		>
+			<TooltipProvider>
+				<div className="h-screen w-screen overflow-hidden">
+					<ResizableGroup
+						data-slot="sidebar-wrapper"
+						id={groupId}
+						defaultLayout={defaultLayout}
+						onLayoutChanged={onLayoutChanged}
+						orientation="horizontal"
+						resizeTargetMinimumSize={{ coarse: 37, fine: 27 }}
+					>
+						{children}
+					</ResizableGroup>
+				</div>
+			</TooltipProvider>
+		</SidebarContext.Provider>
+	);
+};
+```
+
+
+## API 参考
+
+### SidebarProvider
+
+渲染一个 `<div>`，用于包裹整个应用布局并处理状态管理。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `defaultLayout` | `Layout` | 初始布局状态，通常从 cookie 中恢复。 |
+| `collapsibleType` | `"icon" \| "sidebar"` | 定义侧边栏的折叠方式（图标模式或完全隐藏）。默认为 `"icon"`。 |
+| `groupId` | `string` | 侧边栏组的唯一 ID，用于限定持久化 cookie 的作用域。 |
+| `children` | `ReactNode` | 要包裹的内容。 |
+
+### Sidebar
+
+在桌面端渲染为 `ResizablePanel`（即一个 `<div>`），在移动端渲染为 `Sheet`。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `side` | `"left" \| "right"` | 侧边栏出现在屏幕的哪一侧。默认为 `"left"`。 |
+| `variant` | `"sidebar" \| "floating" \| "inset"` | 侧边栏的视觉样式变体。 |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"` | 控制折叠时的行为。 |
+
+### SidebarMenuButton
+
+默认渲染为 `<button>`，或使用传入的 `asChild`。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `isActive` | `boolean` | 按钮是否处于选中状态。 |
+| `variant` | `"default" \| "outline"` | 按钮的视觉样式变体。 |
+| `size` | `"default" \| "sm" \| "lg"` | 按钮尺寸。 |
+| `tooltip` | `string \| ComponentProps<typeof TooltipContent>` | 当侧边栏折叠时显示的工具提示内容。 |
+
+### 其他组件
+
+| 组件 | 渲染为 | 描述 |
+| :--- | :--- | :--- |
+| `SidebarContent` | `div` | 侧边栏内可滚动的内容区域。 |
+| `SidebarHeader` | `div` | 侧边栏顶部的固定头部区域。 |
+| `SidebarFooter` | `div` | 侧边栏底部的固定页脚区域。 |
+| `SidebarGroup` | `div` | 侧边栏内的一个分区或分组。 |
+| `SidebarGroupLabel` | `div` | 侧边栏分组的标题。 |
+| `SidebarGroupContent` | `div` | 侧边栏分组内的内容/选项。 |
+| `SidebarMenu` | `ul` | 菜单项的容器。 |
+| `SidebarMenuItem` | `li` | 菜单中的单个项。 |
+| `SidebarMenuSub` | `ul` | 嵌套子菜单项的容器。 |
+| `SidebarMenuSubItem` | `li` | 子菜单中的单个项。 |
+| `SidebarMenuSubButton` | `a` | 子菜单项中可点击的按钮。 |
+| `SidebarTrigger` | `Button` | 用于切换侧边栏显示/隐藏的按钮。 |
+| `SidebarSeparator` | `Separator` | 项目之间的视觉分隔线。 |
+| `MainContent` | `div` | 页面主要内容区域，与侧边栏并排显示。 |

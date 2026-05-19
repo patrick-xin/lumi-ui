@@ -1,6 +1,6 @@
 ---
-title: Preview Card
-description: A popup that appears when a link is hovered, showing a preview for sighted users.
+title: 预览卡片
+description: 当鼠标悬停在链接上时出现的弹出层，为可视用户提供内容预览。
 links:
   doc: https://base-ui.com/react/components/preview-card
   api: https://base-ui.com/react/components/preview-card#api-reference
@@ -8,12 +8,12 @@ links:
 
 <ComponentPreview name="preview-card-demo" />
 
-## Installation
+## 安装
 
 <CodeTabs>
   <TabsList>
     <TabsTab value="cli">CLI</TabsTab>
-    <TabsTab value="manual">Manual</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
   </TabsList>
 
   <TabsPanel value="cli">
@@ -24,14 +24,14 @@ links:
 
   <TabsPanel value="manual">
     <Steps>
-      <Step title="Copy and paste the following code into your project.">
+      <Step title="将以下代码复制并粘贴到你的项目中。">
         <ComponentSourceCode name="preview-card" title="preview-card.tsx" collapsible/>
       </Step>
     </Steps>
   </TabsPanel>
 </CodeTabs>
 
-## Basic Usage
+## 基本用法
 
 ```tsx
 import {
@@ -43,19 +43,19 @@ import {
 
 ```tsx
 <PreviewCard>
-  <PreviewCardTrigger>Hover</PreviewCardTrigger>
+  <PreviewCardTrigger>悬停查看</PreviewCardTrigger>
   <PreviewCardContent>
     The React Framework – created and maintained by @vercel.
   </PreviewCardContent>
 </PreviewCard>
 ```
 
-## Anatomy
+## 组件结构
 
 <Tabs defaultValue="common">
   <TabsList>
-    <TabsTab value="common">Common usage</TabsTab>
-    <TabsTab value="primitive">Primitive usage</TabsTab>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
   </TabsList>
 
   <TabsPanel value="common">
@@ -84,8 +84,8 @@ import {
   </TabsPanel>
 </Tabs>
 
-## Cookbook
+## 实用示例
 
-`PreviewCardTrigger` renders `a` by default. Use render props to render other elements.
+`PreviewCardTrigger` 默认渲染为 `a` 标签。使用 render 属性可渲染为其他元素。
 
 <ComponentPreview name="preview-card-render" />

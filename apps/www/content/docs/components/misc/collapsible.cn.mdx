@@ -1,0 +1,93 @@
+---
+title: 折叠面板
+description: 一个由按钮控制展开和收起的面板。
+links:
+  doc: https://base-ui.com/react/components/collapsible
+  api: https://base-ui.com/react/components/collapsible#api-reference
+---
+
+<ComponentPreview name="collapsible-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/collapsible
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="collapsible" title="collapsible.tsx" collapsible/>
+      </Step>
+      <Step title="根据你的项目设置，更新导入路径。"/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 基本用法
+
+```tsx
+import {
+  Collapsible,
+  CollapsiblePanel,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+```
+
+```tsx
+<Collapsible>
+  <CollapsibleTrigger>我可以在我的项目中使用它吗？</CollapsibleTrigger>
+  <CollapsiblePanel>
+    可以。可免费用于个人和商业项目，无需署名。
+  </CollapsiblePanel>
+</Collapsible>
+```
+
+### 组件结构
+
+```tsx
+<Collapsible>
+  <CollapsibleTrigger/>
+  <CollapsiblePanel/>
+</Collapsible>
+```
+
+## 实用示例
+
+### 配合 Motion 使用
+
+<ComponentPreview name="collapsible-with-motion" />
+
+### 文件树
+
+<ComponentPreview name="collapsible-file-tree" />
+
+## API 参考
+
+| 组件 | 描述 |
+| :--- | :--- |
+| [`Collapsible`](https://base-ui.com/react/components/collapsible#root) | 组合折叠面板的所有部分。渲染 `<div>` 元素。 |
+| [`CollapsibleTrigger`](https://base-ui.com/react/components/collapsible#trigger) | 用于打开和关闭折叠面板的按钮。渲染 `<button>` 元素。 |
+| [`CollapsiblePanel`](https://base-ui.com/react/components/collapsible#panel) | 包含折叠内容的面板。渲染 `<div>` 元素。 |
+
+### CollapsiblePanel
+
+| 属性 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `animation` | `"css"` \| `"none"` | `"css"` | 控制折叠面板的默认动画方式。 |
+
+### 配合 Motion 使用
+
+Base UI 会通过 `render` 属性将其 `className`（包括过渡样式）传递到你的自定义组件上。这会导致 CSS 动画和 JS 动画同时运行，从而产生卡顿。
+
+<Callout variant="info" title="重要">
+  当配合 Motion 等动画库使用 `render` 时，你可以设置 `animation="none"` 来重置默认的 CSS 过渡，避免 CSS 过渡与 JavaScript 动画之间产生冲突。
+</Callout>

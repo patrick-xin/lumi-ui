@@ -1,0 +1,394 @@
+---
+title: 提示消息
+description: 生成提示消息通知。
+links:
+  doc: https://base-ui.com/react/components/toast
+  api: https://base-ui.com/react/components/toast#api-reference
+---
+
+<ComponentPreview name="toast-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/toast
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="toast" title="toast.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+<Steps>
+<Step title={<>在你的根布局中渲染一次 <code>Toaster</code> 组件。</>}>
+   ```tsx title="app/layout.tsx"
+  export default function RootLayout({
+    children,
+  }: Readonly<{
+    children: React.ReactNode;
+  }>) {
+    return (  
+      <html>
+        <body>
+          <div className="root">
+            {children}
+            <Toaster
+              position="bottom-right"
+              swipeDirection={["right", "down"]}
+              limit={3}
+            />
+          </div>
+        </body>
+      </html>
+    );
+  }
+```
+</Step>
+<Step title={<>在全局 CSS 文件的 <code>@theme</code> 块中添加以下全局 CSS 变量。</>}>
+```css title="globals.css"
+  /* 距离窗口边缘的间距 */
+  --toast-viewport-padding: 2rem;
+  /* 提示消息宽度 */
+  --toast-width: 22rem;
+  /* 多条提示消息之间的间距 */
+  --toast-gap: 0.75rem;
+  /* 堆叠状态下提示消息之间的间距 */
+  --toast-peek: 0.75rem;
+  /* 移动端与桌面端宽度 */
+  --toast-max-width-mobile: 80%; 
+  --toast-max-width-desktop: var(--toast-width);
+```
+</Step>
+<Step title={<>将以下代码粘贴到你的全局 CSS 文件中，它会同时处理视口和提示消息的样式与动画。</>}>
+
+```css title="globals.css"
+/*
+   Toast Viewport
+*/
+@layer utilities {
+  .toast-viewport {
+    @apply fixed z-10 flex flex-col w-[var(--toast-max-width-mobile)] lg:w-[var(--toast-max-width-desktop)] outline-none pointer-events-none;
+  }
+  /* Viewport Positioning */
+  .toast-viewport[data-position^="top"] { top: var(--toast-viewport-padding); bottom: auto; }
+  .toast-viewport[data-position^="bottom"] { bottom: var(--toast-viewport-padding); top: auto; }
+
+  .toast-viewport[data-position$="left"] { left: var(--toast-viewport-padding); right: auto; }
+  .toast-viewport[data-position$="right"] { right: var(--toast-viewport-padding); left: auto; }
+  .toast-viewport[data-position$="center"] { 
+    @apply left-1/2 right-auto -translate-x-1/2;
+  }
+}
+
+/* 
+   Toast Root
+*/
+@layer utilities {
+  .toast-root {
+    @apply absolute w-full pointer-events-auto z-[calc(1000-var(--toast-index))];
+    
+    /* Transitions */
+    transition: 
+      transform 0.5s var(--ease-spring), 
+      opacity 0.5s var(--ease-spring), 
+      height 0.15s var(--ease-spring);
+    
+    /* Height Calculation */
+    height: var(--toast-frontmost-height, var(--toast-height));
+    
+    /* Common Ghost Element (for hit areas) */
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: calc(var(--toast-gap) + 1px);
+      background: transparent;
+    }
+    
+    /* Math for collapsed stacking (shrinking effect) */
+    --toast-scale: calc(max(0, 1 - (var(--toast-index) * 0.1)));
+    --toast-shrink: calc(1 - var(--toast-scale));
+    --toast-height-approx: var(--toast-frontmost-height, var(--toast-height));
+  }
+  /* 
+    Positions
+  */
+  /* Bottom */
+  .toast-root[data-position^="bottom"] {
+    @apply bottom-0 top-auto;
+    transform-origin: bottom center;
+
+    /* Direction Multipliers: Bottom is "Positive" direction for entering from below */
+    --dir-y: 1; 
+    
+    /* Calculate Offsets */
+    --collapsed-offset-y: calc(
+      (var(--toast-index) * var(--toast-peek) * -1) - /* Stack peek upwards */
+      (var(--toast-shrink) * var(--toast-height-approx)) /* Shrink upwards */
+    );
+    
+    --expanded-offset-y: calc(
+      (var(--toast-offset-y) * -1) - /* Move up based on total stack height */
+      (var(--toast-index) * var(--toast-gap))
+    );
+
+    /* Default Transform: Collapsed + Swipe Handling */
+    transform: 
+      translateX(var(--toast-swipe-movement-x, 0px)) 
+      translateY(calc(var(--toast-swipe-movement-y, 0px) + var(--collapsed-offset-y))) 
+      scale(var(--toast-scale));
+  }
+
+  /* Top */
+  .toast-root[data-position^="top"] {
+    @apply top-0 bottom-auto;
+    transform-origin: top center;
+
+    /* Direction Multipliers: Top is "Negative" direction for entering from above */
+    --dir-y: -1;
+
+    /* Calculate Offsets (Signs flipped from Bottom) */
+    --collapsed-offset-y: calc(
+      (var(--toast-index) * var(--toast-peek)) + /* Stack peek downwards */
+      (var(--toast-shrink) * var(--toast-height-approx)) /* Shrink downwards */
+    );
+    
+    --expanded-offset-y: calc(
+      var(--toast-offset-y) + 
+      (var(--toast-index) * var(--toast-gap))
+    );
+
+    /* Default Transform: Collapsed + Swipe Handling */
+    transform: 
+      translateX(var(--toast-swipe-movement-x, 0px)) 
+      translateY(calc(var(--toast-swipe-movement-y, 0px) + var(--collapsed-offset-y))) 
+      scale(var(--toast-scale));
+  }
+  
+  /* 
+    State Modifiers
+  */
+  /* Expanded State */
+  .toast-root[data-expanded] {
+    height: var(--toast-height);
+    transform: 
+      translateX(var(--toast-swipe-movement-x, 0px)) 
+      translateY(var(--expanded-offset-y)) 
+      scale(1);
+  }
+  /* Entering Animation */
+  .toast-root[data-starting-style] {
+    opacity: 0;
+    transform: translateY(calc(var(--dir-y) * 150%));
+  }
+  /* Exiting Animation */
+  .toast-root[data-ending-style] {
+    opacity: 0;
+    /* Default Exit */
+    &:not([data-swipe-direction]) {
+      transform: translateY(calc(var(--dir-y) * 150%));
+    }
+    /* Swipe Up/Down */
+    &[data-swipe-direction="up"] {
+      transform: translateY(calc(var(--toast-swipe-movement-y) - 150%));
+    }
+    &[data-swipe-direction="down"] {
+      transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
+    }
+    /* Swipe Left/Right */
+    &[data-swipe-direction="left"] {
+      transform: 
+        translateX(calc(var(--toast-swipe-movement-x) - 150%)) 
+        translateY(var(--expanded-offset-y));
+    }
+    &[data-swipe-direction="right"] {
+      transform: 
+        translateX(calc(var(--toast-swipe-movement-x) + 150%)) 
+        translateY(var(--expanded-offset-y));
+    }
+  }
+  /* Limited State */
+  .toast-root[data-limited] {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+```
+</Step>
+<Step title={<>使用 <code>toast</code> 对象，在你应用的任何地方触发通知。</>}>
+```tsx
+import { toast } from "@/components/ui/toast"
+
+toast.add({ title: "事件已创建", description: "周一上午 9:00" })
+
+// 语义化变体
+toast.success({ title: "成功", description: "你的事件已创建" })
+toast.error({ title: "出错了", description: "请重试" })
+```
+</Step>
+
+</Steps>
+
+
+## 功能特性
+
+### 提示消息变体
+
+<ComponentPreview name="toast-variant" />
+
+### 滑动方向
+
+默认情况下，提示消息可以朝四个方向滑动关闭。你可以通过设置 `swipeDirection` 属性来明确指定方向。
+
+### 提示消息位置
+
+提示消息默认显示在右下角。你可以通过设置 `position` 属性来调整位置。
+
+### 可关闭
+
+<ComponentPreview name="toast-closable" />
+
+### Promise 状态
+
+<ComponentPreview name="toast-promise" />
+
+### 不同高度
+
+<ComponentPreview name="toast-height" />
+
+## 实用示例
+
+### 撤销操作
+
+<ComponentPreview name="toast-undo" />
+
+### 锚定提示消息
+
+<ComponentPreview name="toast-anchored" />
+
+### 更新提示消息
+
+<ComponentPreview name="toast-update" />
+
+### 自定义内容
+
+<ComponentPreview name="toast-custom" />
+
+### 自定义锚定提示消息
+
+<ComponentPreview name="toast-anchored-custom" />
+
+## 自定义
+
+由于代码完全归你所有，你可以调整内部逻辑以适配你的设计系统。
+
+### 样式（变体）
+
+我们使用 cva 来管理变体。修改 `toastVariants` 的定义即可更改颜色或边框。
+
+```tsx title="toast.tsx"
+const toastVariants = cva(
+  "rounded-sm outline ...", // 基础样式
+  {
+    variants: {
+      type: {
+        // 在这里添加新类型或修改已有的配色方案
+        purple: "bg-purple-50 text-purple-900 border-purple-200", 
+      }
+    }
+  }
+)
+```
+
+### 图标
+
+图标通过 Icons 常量映射。你可以替换为其他图标库或自定义的 SVG。
+
+```tsx title="toast.tsx"
+const Icons = {
+  success: CheckCircle2, // 替换为你自己的图标
+  error: AlertCircle,
+  // ...
+};
+```
+
+### 布局结构
+如果你想调整布局（例如将操作按钮放到文本下方而不是右侧），修改 StackedToast -> ToastContent 中的 JSX 即可。
+
+```tsx title="toast.tsx"
+<div className="flex flex-col gap-2"> {/* 改为纵向排列 */}
+   <ToastTitle>{toast.title}</ToastTitle>
+   {/* ... */}
+</div>
+```
+### 锚定提示消息
+`toast.anchor()` 方法非常适合用于「已复制！」这类提示或上下文相关的错误提示。它内部使用了独立的 `BaseToast.Provider`。如果你需要不同的布局，可以自定义 `AnchoredToast` 组件，或者使用 `toast.anchor` 创建符合你使用场景的独特设计。
+
+### 动画
+动画通过 CSS / Tailwind 类来实现。默认支持所有提示消息位置和滑动关闭方向。你可以自由修改 CSS 以适配你的设计系统。
+
+<Callout title="提示" variant="info">
+  `AnchoredToast` 使用工具类 `animate-popup` 处理动画。如果你想替换它，可以在 `BaseToast.Root` 中使用下面的代码片段：
+</Callout>
+
+```tsx title="toast.tsx"
+<BaseToast.Root
+  data-slot="toast-root"
+  toast={toast}
+  className={cn(
+    !isCustomContent && toastVariants({ type: "default" }),
+    "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 ",
+    "data-[ending-style]:opacity-0 data-[ending-style]:scale-95 ",
+    "transition-all duration-200"
+  )}
+>
+```
+
+
+## API 参考
+
+### Toaster
+渲染视口的提供者组件。
+
+| 属性 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `position` | `ToastPosition` | `"bottom-right"` | 提示消息堆栈出现的位置。可选值：`top-left`、`top-center`、`top-right`、`bottom-left`、`bottom-center`、`bottom-right`。 |
+| `swipeDirection` | `SwipeDirection` | `["down", "right"]` | 用户可以滑动关闭的方向。`["up", "down", "left", "right"]` |
+| `limit` | `number` | `3` | 同时显示的提示消息数量上限。 |
+
+### toast
+管理提示消息的核心接口。扩展自 Base UI 的 [`useToastManager`](https://base-ui.com/react/components/toast#usetoastmanager)。
+
+| 方法 | 参数 | 描述 |
+| :--- | :--- | :--- |
+| `success` | `options` | 预设 `type: "success"` |
+| `error` | `options` | 预设 `type: "error"` |
+| `warning` | `options` | 预设 `type: "warning"` |
+| `info` | `options` | 预设 `type: "info"` |
+| `anchor` | `element, options` | 创建一条物理上附着于某个 DOM 元素的提示消息（弹出框风格）。 |
+
+
+### options
+在 Base UI 的 [`Method options`](https://base-ui.com/react/components/toast#method-options) 基础上扩展了自定义数据字段。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `closable` | `boolean` | 设为 `true` 时，渲染一个关闭按钮。 |
+| `customContent` | `ReactNode` | 覆盖提示消息的默认内部结构（如果是 AnchoredToast，则包括箭头）。 |
+
+
+
+

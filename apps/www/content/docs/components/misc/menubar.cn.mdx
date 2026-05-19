@@ -1,0 +1,121 @@
+---
+title: 菜单栏
+description: 为你的应用提供命令和选项的菜单栏。
+links:
+  doc: https://base-ui.com/react/components/menubar
+  api: https://base-ui.com/react/components/menubar#api-reference
+---
+
+<ComponentPreview name="menubar-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/menubar
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="menubar" title="menubar.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+     ```tsx
+  <Menubar>
+      <MenubarMenu>
+        <MenubarMenuTrigger />
+        <MenubarMenuContent>
+          <MenubarMenuItem />
+          <MenubarMenuItem>
+            <MenubarMenuShortcut />
+          </MenubarMenuItem>
+          <MenubarMenuSeparator />
+          <MenubarMenuGroup>
+            <MenubarMenuGroupLabel />
+          </MenubarMenuGroup>
+          <MenubarMenuRadioGroup>
+            <MenubarMenuRadioItemContent />
+          </MenubarMenuRadioGroup>
+          <MenubarMenuCheckboxItemContent />
+          <MenubarMenuSubMenu>
+            <MenubarMenuSubMenuTriggerGroup />
+            <MenubarMenuSubMenuContent>
+              {/* 子菜单项 */}
+            </MenubarMenuSubMenuContent>
+          </MenubarMenuSubMenu>
+        </MenubarMenuContent>
+      </MenubarMenu>
+  </Menubar>
+
+     ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+    ```tsx
+    <Menubar>
+      <MenubarMenuTrigger />
+      <MenubarMenuPortal>
+        <MenubarMenuBackdrop />
+        <MenubarMenuPositioner>
+          <MenubarMenuPopup>
+            <MenubarMenuArrow />
+            <MenubarMenuItem />
+            <MenubarMenuSeparator />
+            <MenubarMenuGroup>
+              <MenubarMenuGroupLabel />
+            </MenubarMenuGroup>
+            <MenubarMenuRadioGroup>
+              <MenubarMenuRadioItem />
+            </MenubarMenuRadioGroup>
+            <MenubarMenuCheckboxItem />
+            <MenubarMenuSubmenuRoot>
+              <MenubarMenuSubmenuTrigger />
+            </MenubarMenuSubmenuRoot>
+          </MenubarMenuPopup>
+        </MenubarMenuPositioner>
+      </MenubarMenuPortal>
+    </Menubar>
+
+```
+  </TabsPanel>
+</Tabs>
+
+## 功能特性
+
+### 配合分组使用
+
+<ComponentPreview name="menubar-with-group" />
+
+### 嵌套菜单
+
+<ComponentPreview name="menubar-nested-menus" />
+
+### 配合复选框和单选组
+
+<ComponentPreview name="menubar-checkbox-group" />
+
+## 实用示例
+
+### 自定义菜单栏样式
+
+<ComponentPreview name="menubar-style" />

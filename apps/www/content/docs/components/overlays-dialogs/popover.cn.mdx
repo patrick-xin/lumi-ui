@@ -1,0 +1,225 @@
+---
+title: 弹出框
+description: 锚定在按钮上的可访问弹出层。
+links:
+  doc: https://base-ui.com/react/components/popover
+  api: https://base-ui.com/react/components/popover#api-reference
+---
+
+<ComponentPreview name="popover-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/popover
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="popover" title="popover.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## 基本用法
+
+```tsx
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/registry/ui/popover";
+
+export function PopoverDemo() {
+  return (
+    <Popover>
+      <PopoverTrigger>打开</PopoverTrigger>
+      <PopoverContent>
+        <PopoverTitle>弹出框标题</PopoverTitle>
+        <PopoverDescription>弹出框描述</PopoverDescription>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+```tsx
+<Popover>   
+  <PopoverTrigger />
+  <PopoverContent>     
+    <PopoverTitle />     
+    <PopoverDescription />     
+  </PopoverContent> 
+</Popover>
+```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+```tsx
+<Popover>
+  <PopoverTrigger />
+  <PopoverPortal>
+    <PopoverBackdrop />
+    <PopoverPositioner>
+      <PopoverPopup>
+        <PopoverArrow />
+        <PopoverViewport>
+          <PopoverTitle />
+          <PopoverDescription />
+          <PopoverClose />
+        </PopoverViewport>
+      </PopoverPopup>
+    </PopoverPositioner>
+  </PopoverPortal>
+</Popover>
+```
+  </TabsPanel>
+</Tabs>
+
+## 功能特性
+
+### 带箭头
+
+<ComponentPreview name="popover-with-arrow" />
+
+### 与触发器等宽
+
+<ComponentPreview name="popover-match-anchor-width" />
+
+## 实用示例
+
+### 悬停打开
+
+<ComponentPreview name="popover-open-on-hover" />
+
+### 分离的触发器
+
+```tsx
+import { createPopoverHandle } from "@/components/ui/popover";
+
+const demoPopover = createPopoverHandle();
+
+<PopoverTrigger handle={demoPopover}>
+  触发器
+</PopoverTrigger>
+
+<Popover handle={demoPopover}>
+  ...
+</Popover>
+```
+
+<ComponentPreview name="popover-detached-trigger" />
+
+
+### 多个触发器
+
+单个弹出框可以由多个触发元素打开。你可以通过让多个分离的触发器共享同一个 handle 来实现，或者在单个 `<Popover>` 中放置多个 `<PopoverTrigger>` 组件。
+
+```tsx title="同一弹出框中的多个触发器"
+<Popover>
+  <PopoverTrigger>触发器 1</PopoverTrigger>
+  <PopoverTrigger>触发器 2</PopoverTrigger>
+  ...
+</Popover>
+```
+
+```tsx title="多个分离的触发器"
+const demoPopover = createPopoverHandle();
+
+<PopoverTrigger handle={demoPopover}>
+  触发器 1
+</PopoverTrigger>
+
+<PopoverTrigger handle={demoPopover}>
+  触发器 2
+</PopoverTrigger>
+
+<Popover handle={demoPopover}>
+  ...
+</Popover>
+```
+
+弹出框可以根据是哪个触发器打开它来渲染不同的内容。具体做法是向 `<PopoverTrigger>` 传递一个载荷（payload），并在 `<Popover>` 中使用 `function-as-a-child` 模式。通过为 `createPopoverHandle()` 函数提供类型参数，载荷可以获得严格的类型约束：
+
+```tsx
+const demoPopover = createPopoverHandle<{ text: string }>();
+
+<PopoverTrigger handle={demoPopover} payload={{ text: '触发器 1' }}>
+  触发器 1
+</PopoverTrigger>
+
+<PopoverTrigger handle={demoPopover} payload={{ text: '触发器 2' }}>
+  触发器 2
+</PopoverTrigger>
+
+<Popover handle={demoPopover}>
+  {({ payload }) => (
+    <PopoverPortal>
+      <PopoverPositioner>
+        <PopoverPopup>
+          <PopoverArrow />
+          <PopoverTitle>弹出框</PopoverTitle>
+          {payload !== undefined && (
+            <PopoverDescription>
+              此弹出框由 {payload.text} 打开
+            </PopoverDescription>
+          )}
+        </PopoverPopup>
+      </PopoverPositioner>
+    </PopoverPortal>
+  )}
+</Popover>
+```
+
+### 受控模式与多个触发器
+
+你可以通过 `<Popover>` 上的 `open` 和 `onOpenChange` 属性从外部控制弹出框的打开状态，从而根据应用状态管理其可见性。当使用多个触发器时，你需要通过 `<Popover>` 上的 `triggerId` 属性和每个 `<PopoverTrigger>` 上的 `id` 属性来管理当前哪个触发器处于激活状态。
+
+需要注意的是，并没有单独的 `onTriggerIdChange` 属性。相反，`onOpenChange` 回调会接收一个额外参数 `eventDetails`，其中包含了发起本次状态变更的触发器元素。
+
+<ComponentPreview name="popover-controlled-mode" />
+
+### 弹出框动画
+
+你可以在弹出框于不同触发元素之间切换时为其添加动画效果，包括位置、尺寸和内容的过渡动画。
+
+#### 位置与尺寸
+
+要为弹出框的位置添加动画，请对 Positioner 的 left、right、top 和 bottom 属性应用 CSS 过渡。要为尺寸添加动画，请对 Popup 的 width 和 height 应用过渡。
+
+#### 内容
+
+弹出框还支持内容过渡。当不同触发器在同一个弹出框中显示不同内容时，这个特性会非常有用。
+
+要启用内容动画，请将内容包裹在 `<PopoverViewport>` 部分中。这个部分提供了实现方向感知动画所需的能力。它会渲染一个带有 data-activation-direction 属性（left、right、up 或 down）的 div，用于指示新触发器相对于上一个触发器的位置。
+
+在 `<PopoverViewport>` 内部，内容会进一步被包裹在带有 data 属性的 div 中，以便于添加样式：
+  
+- `data-current`：当前可见的内容，可能是没有过渡时的当前内容，也可能是过渡时进入的内容。
+- `data-previous`：过渡过程中即将退出的内容。
+
+你可以利用这些属性为进入和退出动画设置样式。
+
+<ComponentPreview name="popover-with-animation" />

@@ -1,0 +1,48 @@
+---
+title: 字段组
+description: 一个原生的 fieldset 元素，带有便于自定义样式的 legend。
+links:
+  doc: https://base-ui.com/react/components/fieldset
+  api: https://base-ui.com/react/components/fieldset#api-reference
+---
+
+<ComponentPreview name="fieldset-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/fieldset
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="fieldset" title="fieldset.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+### 组件结构
+```tsx
+<Fieldset>
+  <FieldsetLegend/>
+  <FieldsetDescription/>
+</Fieldset>
+```
+
+## 带描述和标签
+
+<ComponentPreview name="fieldset-with-description-label" />
+
+## 表单集成
+
+更多信息请参阅 [表单集成](/docs/guides/forms/basic)。

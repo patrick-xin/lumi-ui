@@ -1,0 +1,87 @@
+---
+title: 数字输入框
+description: 一个数字输入元素，带有增减按钮和拖动调节区域。
+links:
+  doc: https://base-ui.com/react/components/number-field
+  api: https://base-ui.com/react/components/number-field#api-reference
+---
+
+<ComponentPreview name="number-field-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/number-field
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="number-field" title="number-field.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+```tsx
+import { NumberField } from "@/components/ui/number-field"
+```
+
+```tsx
+<NumberField />
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <NumberField>
+      <NumberFieldScrubArea />
+    </NumberField>
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <NumberFieldRoot>
+      <NumberFieldScrubArea>
+        <NumberFieldScrubAreaCursor />
+      </NumberFieldScrubArea>
+      <NumberFieldGroup>
+        <NumberFieldIncrement />
+        <NumberFieldInput />
+        <NumberFieldDecrement />
+      </NumberFieldGroup>
+    </NumberFieldRoot>
+   ```
+  </TabsPanel>
+</Tabs>
+
+
+## 带拖动调节区域
+
+<ComponentPreview name="number-field-scrubarea" />
+
+<Callout variant="warning" title="警告">
+表单控件必须有可访问的名称。推荐使用 [`<Field>`](/docs/components/form-input/field) 提供可见的文本标签和说明，或者使用 `aria-label` 属性作为替代方案。
+</Callout>
+
+
+## 表单集成
+<ComponentPreview name="number-field-form" />
+
+更多信息请参阅 [表单集成](/docs/guides/forms/basic)。

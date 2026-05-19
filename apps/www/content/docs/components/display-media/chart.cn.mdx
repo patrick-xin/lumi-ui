@@ -1,0 +1,54 @@
+---
+title: 图表
+description: 基于 Recharts v3 构建的美观、类型完备的图表组件。
+links:
+  doc: https://ui.shadcn.com/docs/components/radix/chart
+---
+
+<ComponentPreview name="chart-demo"/>
+
+<Callout variant="info" title="提示">
+此组件基于 Shadcn Chart 改造而来，已适配 Recharts v3。
+</Callout>
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/chart
+    ```
+  </TabsPanel>
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="安装 recharts">
+        ```bash
+        npm install recharts@latest
+        ```
+      </Step>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="chart" title="chart.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 示例
+
+<ComponentPreview name="chart-cluster-cpu"/>
+<ComponentPreview name="chart-ev-market"/>
+<ComponentPreview name="chart-radar-ai"/>
+<ComponentPreview name="chart-radial-energy"/>
+<ComponentPreview name="chart-scatter-quadrant"/>
+
+## 来源致谢
+
+- 改编自 [Shadcn Charts](https://ui.shadcn.com/docs/components/base/chart)，以适配 Recharts v3 的破坏性变更。
+- Recharts v3 的迁移逻辑参考自这个 [GitHub 讨论](https://github.com/shadcn-ui/ui/issues/7669#issuecomment-2998299159)。
+
+
+

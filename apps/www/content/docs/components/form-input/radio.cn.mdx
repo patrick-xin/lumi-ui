@@ -1,0 +1,88 @@
+---
+title: 单选按钮
+description: 一个易于自定义样式的单选按钮组件。
+links:
+  doc: https://base-ui.com/react/components/radio
+  api: https://base-ui.com/react/components/radio#api-reference
+---
+
+<ComponentPreview name="radio-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/radio
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="radio" title="radio.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 基本用法
+
+```tsx
+import { RadioGroup, Radio } from "@/components/ui/radio"
+```
+
+```tsx
+<RadioGroup>
+  <Radio />
+  <Radio />
+</RadioGroup>
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <RadioGroup>
+      <Radio />
+    </RadioGroup>
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <RadioGroup>
+      <RadioRoot>
+        <RadioIndicator />
+      </RadioRoot>
+    </RadioGroup>
+   ```
+  </TabsPanel>
+</Tabs>
+
+<Callout variant="info" title="提示">
+`Radio` 必须始终放在 `RadioGroup` 内使用。
+</Callout>
+
+<Callout variant="warning" title="警告">
+表单控件必须具备可访问的名称。建议使用 [`<Fieldset>`](/docs/components/form-input/fieldset) 和 [`<Field>`](/docs/components/form-input/field) 来提供可见的文本标签和描述，或者用 `aria-label` 属性作为替代方案。
+</Callout>
+
+## 自定义样式
+<ComponentPreview name="radio-custom" />
+
+## 表单集成
+<ComponentPreview name="radio-with-fieldset-field" />
+
+更多信息请参阅 [表单集成](/docs/guides/forms/basic)。

@@ -1,0 +1,122 @@
+---
+title: 滑块
+description: 一个易于自定义样式的范围输入控件。
+links:
+  doc: https://base-ui.com/react/components/slider
+  api: https://base-ui.com/react/components/slider#api-reference
+---
+
+<ComponentPreview name="slider-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/slider
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="slider" title="slider.tsx" collapsible/>
+      </Step>
+       <Step title="根据你的项目设置，更新导入路径。"/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 基本用法
+
+```tsx
+import { Slider } from "@/components/ui/slider"
+```
+
+```tsx
+<Slider />
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <Slider />
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <SliderRoot>
+      <SliderLabel />
+      <SliderValue />
+      <SliderControl>
+        <SliderTrack>
+          <SliderIndicator />
+          <SliderThumb />
+        </SliderTrack>
+      </SliderControl>
+    </SliderRoot>
+   ```
+  </TabsPanel>
+</Tabs>
+
+## 功能特性
+
+### 标签
+
+使用 `label` 属性添加可见的标签。如果滑块没有可见标签，请通过 `thumbLabels` 为每个滑块手柄提供 `aria-label`。
+
+```tsx
+{/* 可见标签 */}
+<Slider label="音量" defaultValue={[50]} />
+
+{/* 通过 thumbLabels 提供不可见标签 */}
+<Slider thumbLabels={["音量"]} defaultValue={[50]} />
+
+{/* 带标签手柄的范围滑块 */}
+<Slider
+  label="价格范围"
+  thumbLabels={["最低价格", "最高价格"]}
+  defaultValue={[25, 75]}
+/>
+```
+
+### 尺寸
+<ComponentPreview name="slider-size" />
+
+### 禁用状态
+<ComponentPreview name="slider-disabled" />
+
+### 范围滑块
+<ComponentPreview name="slider-range" />
+
+### 垂直滑块
+<ComponentPreview name="slider-vertical" />
+
+### 边缘对齐的手柄
+
+使用 `thumbAlignment="edge"` 让手柄保持在轨道内部。当滑块紧贴容器边缘，或位于带有 `overflow: hidden` 的父容器中时非常有用。
+
+<ComponentPreview name="slider-edge" />
+
+## 实用示例
+
+### 自定义滑块
+<ComponentPreview name="slider-custom" />
+
+### 表单集成
+<ComponentPreview name="slider-form" />
+
+更多信息请参阅 [表单集成](/docs/guides/forms/basic)。
