@@ -413,18 +413,6 @@ function ComboboxInputGroupContent({
   );
 }
 
-// OLD ComboboxInputGroup (pre-InputGroup primitive) - kept as reference
-// function ComboboxInputGroupOld({ ... }) {
-//   return (
-//     <div
-//       className={cn("relative w-full inline-flex gap-1 items-center outline-none cursor-text rounded-md", className)}
-//       data-slot="combobox-input-group"
-//     >
-//       ...
-//     </div>
-//   );
-// }
-
 function ComboboxContent({
   className,
   children,

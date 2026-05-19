@@ -1,0 +1,286 @@
+---
+title: OTP Field
+description: A one-time password input composed of individual character slots.
+links:
+  doc: https://base-ui.com/react/components/otp-field
+  api: https://base-ui.com/react/components/otp-field#api-reference
+status: new
+---
+
+<ComponentPreview name="otp-field-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">Manual</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/otp-field
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="Copy and paste the following code into your project.">
+        <ComponentSourceCode name="otp-field" title="otp-field.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+```tsx
+import { OTPField } from "@/components/ui/otp-field"
+```
+
+```tsx
+<OTPField length={6} />
+```
+
+## Anatomy
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">Common usage</TabsTab>
+    <TabsTab value="primitive">Primitive usage</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <OTPField length={6} />
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <OTPFieldRoot length={6}>
+      <OTPFieldInput />
+      <OTPFieldSeparator />
+      <OTPFieldInput />
+    </OTPFieldRoot>
+   ```
+  </TabsPanel>
+</Tabs>
+
+
+
+## Size
+
+<ComponentPreview name="otp-field-sizes" />
+
+## Alphanumeric
+
+Use `validationType="alphanumeric"` for recovery, backup, or invite codes that mix letters and numbers. See [Validation types](#validation-types) for the full enum.
+
+<ComponentPreview name="otp-field-alphanumeric" />
+
+## Grouped
+
+Wrap subsets of inputs in your own layout elements and use `<OTPFieldSeparator>` when you want the code presented in smaller visual chunks such as `123-456`. Requires primitive usage — the composite renders inputs only.
+
+<ComponentPreview name="otp-field-grouped" />
+
+## Masked
+
+Use the `mask` prop to obscure every slot, or pass `type="password"` to individual `<OTPFieldInput>` parts for per-slot control.
+
+<ComponentPreview name="otp-field-masked" />
+
+```tsx title="Per-slot masking"
+<OTPFieldRoot length={6}>
+  <OTPFieldInput />
+  <OTPFieldInput />
+  <OTPFieldInput type="password" />
+  <OTPFieldInput type="password" />
+  <OTPFieldInput type="password" />
+  <OTPFieldInput type="password" />
+</OTPFieldRoot>
+```
+
+## Placeholder hints
+
+`<OTPFieldInput>` is a real input, so native `placeholder` props and CSS work as usual. This example keeps placeholder hints visible until the active slot receives focus.
+
+<ComponentPreview name="otp-field-placeholder" />
+
+
+<Callout variant="warning" title="Warning">
+Form controls must have an accessible name. Prefer using [`<Field>`](/docs/components/form-input/field) to provide a visible text label and description, or use the `aria-label` attribute as an alternative. See [Accessibility](#accessibility).
+</Callout>
+
+## Accessibility
+
+Every OTP field must have an accessible name. Choose one of the two patterns below.
+
+### With a native label
+
+Pass `id` to `<OTPFieldRoot>` and pair it with `<label htmlFor>`. The first slot picks up the label automatically; add `aria-label` to remaining slots so screen readers announce which character is focused. Use `aria-describedby` for supporting text.
+
+```tsx
+<label htmlFor="verification-code">Verification code</label>
+<OTPFieldRoot
+  id="verification-code"
+  length={6}
+  aria-describedby="verification-code-help"
+>
+  <OTPFieldInput />
+  <OTPFieldInput aria-label="Character 2 of 6" />
+  <OTPFieldInput aria-label="Character 3 of 6" />
+  <OTPFieldInput aria-label="Character 4 of 6" />
+  <OTPFieldInput aria-label="Character 5 of 6" />
+  <OTPFieldInput aria-label="Character 6 of 6" />
+</OTPFieldRoot>
+<p id="verification-code-help">
+  Enter the 6-character code we sent to your device.
+</p>
+```
+
+The composite `<OTPField>` already adds the per-slot `aria-label`s — when using it, you only need `id` + `<label>`.
+
+### With Field
+
+Use [`<Field>`](/docs/components/form-input/field) to handle label association, descriptions, and form validation automatically:
+
+```tsx
+<Field name="verificationCode">
+  <FieldLabel>Verification code</FieldLabel>
+  <FieldDescription>
+    Enter the 6-digit code we sent to your device.
+  </FieldDescription>
+  <OTPField length={6} required />
+  <FieldError />
+</Field>
+```
+
+## Custom sanitization
+
+Set `validationType="none"` with `sanitizeValue` to normalize pasted values before they reach state. Use `inputMode` when a custom rule still needs a specific virtual keyboard hint, and `onValueInvalid` to react to rejected characters. This example accepts digits `0-3` only, shakes the focused slot on rejection, and announces what was dropped via `aria-live`.
+
+<ComponentPreview name="otp-field-sanitize" />
+
+<Callout variant="warning" title="sanitizeValue requires validationType='none'">
+`sanitizeValue` is **silently ignored** when `validationType` is `'numeric'`, `'alpha'`, or `'alphanumeric'` — the built-in sanitizer wins. To combine built-in rules with custom logic, set `validationType="none"` and re-implement the rule inside your sanitizer.
+</Callout>
+
+<Callout variant="info" title="Shake keyframes">
+The demo ships its keyframes inline via a `<style>` tag so it's drop-in. For production, lift the `@keyframes otp-shake-a/b` and `.otp-shake-a/b` rules into your global CSS (or a Tailwind plugin) and remove the `<style>` element.
+</Callout>
+
+## With Form
+
+<ComponentPreview name="otp-field-form" />
+
+Pass `autoSubmit` to submit the owning form automatically when all slots are filled, or use `onValueComplete` to react to completion without submitting. See [Complete & autoSubmit](#complete--autosubmit) for the callback order.
+
+See [Form Integration](/docs/guides/forms/basic) for more information.
+
+
+### Native form submission
+
+The form value is a single string of length `length` keyed by `name` on `<OTPFieldRoot>`:
+
+```tsx
+<form action="/verify" method="post">
+  <OTPField length={6} name="code" required />
+</form>
+// POST body: { code: "123456" }
+```
+
+Combine with `autoSubmit` to skip the explicit submit button entirely. For client-side libraries (React Hook Form, Conform, etc.), drive the field with `value` + `onValueChange` and validate against `value.length === length`.
+
+## Controlled vs uncontrolled
+
+```tsx title="Uncontrolled — simplest"
+<OTPField defaultValue="123" length={6} onValueComplete={handleComplete} />
+```
+
+```tsx title="Controlled — value drives every render"
+const [value, setValue] = useState("");
+
+<OTPField length={6} value={value} onValueChange={setValue} />
+```
+
+`value` and `defaultValue` are mutually exclusive. The value is **always a single string** up to `length` characters — never an array. The string only reaches `length === value.length` when the field is complete.
+
+## Complete & autoSubmit
+
+Callback order on each keystroke or paste that fills the field:
+
+1. **`onValueChange(value, { reason })`** — fires for typing, paste, clear, or keyboard nav that mutates the value.
+2. **`onValueComplete(value, { reason })`** — fires once `value.length === length`, after the state update is applied. `reason` is `'input-change' | 'input-paste'`.
+3. **Form submit** — only if `autoSubmit` is set. Runs immediately after `onValueComplete`.
+
+`onValueComplete` fires whether or not `autoSubmit` is enabled — use it to advance a wizard step, call a verify API, or close a dialog without submitting a form.
+
+
+
+## API Reference
+
+### Components
+
+| Component | Description |
+| :--- | :--- |
+| [`OTPFieldRoot`](https://base-ui.com/react/components/otp-field#root) | Groups all OTP field parts and manages state. Renders a `<div>`. |
+| [`OTPFieldInput`](https://base-ui.com/react/components/otp-field#input) | An individual character slot. Renders an `<input>`. |
+| [`OTPFieldSeparator`](https://base-ui.com/react/components/otp-field#separator) | A visual separator between slots or groups. Renders a `<div>`. |
+| `OTPField` | Pre-assembled composite that renders Root with `length` inputs. Inputs only — drop to primitives for separators or grouped layouts. |
+
+### OTPFieldRoot Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `length` * | `number` | — | Number of slots. Required. |
+| `validationType` | `'numeric' \| 'alpha' \| 'alphanumeric' \| 'none'` | `'numeric'` | Built-in input validation. See [Validation types](#validation-types). |
+| `value` | `string` | — | Controlled value. |
+| `defaultValue` | `string` | — | Initial uncontrolled value. |
+| `onValueChange` | `(value, details) => void` | — | Fires on every change. `details.reason` is `'input-change' \| 'input-clear' \| 'input-paste' \| 'keyboard'`. |
+| `onValueComplete` | `(value, details) => void` | — | Fires once all slots are filled, after `onValueChange`. `details.reason` is `'input-change' \| 'input-paste'`. |
+| `onValueInvalid` | `(value, details) => void` | — | Fires when sanitization rejects characters, before the value updates. |
+| `sanitizeValue` | `(value: string) => string` | — | Custom sanitizer. **Only invoked when `validationType="none"`.** |
+| `autoSubmit` | `boolean` | `false` | Submit the owning form when the OTP becomes complete. |
+| `mask` | `boolean` | `false` | Mask entered characters on all slots. |
+| `autoComplete` | `string` | `'one-time-code'` | Applied to the first slot and hidden validation input. |
+| `inputMode` | `'numeric' \| 'text' \| 'tel' \| 'email' \| ...` | derived from `validationType` | Virtual keyboard hint override. |
+| `name` | `string` | — | Form field name. The submitted value is a single string. |
+| `id` | `string` | — | id of the first input. Subsequent slots derive `${id}-2`, `${id}-3`, etc. |
+| `disabled` | `boolean` | `false` | Disable all slots. |
+| `readOnly` | `boolean` | `false` | Prevent value changes. |
+| `required` | `boolean` | `false` | Required for form submission. |
+| `form` | `string` | — | id of an external `<form>` to associate with. |
+
+### OTPFieldInput Props
+
+Renders an `<input>` element. Accepts all native input attributes (`type`, `placeholder`, `aria-label`, `onFocus`, etc.) plus the Base UI render-prop trio: `className`, `style`, `render`.
+
+The wrapper in this registry adds an `inputSize` variant: `'sm' | 'default' | 'lg'`.
+
+### Validation types
+
+| Value | Accepts | Default `inputMode` |
+| :--- | :--- | :--- |
+| `'numeric'` (default) | `0-9` | `numeric` |
+| `'alpha'` | `A-Z`, `a-z` | `text` |
+| `'alphanumeric'` | `A-Z`, `a-z`, `0-9` | `text` |
+| `'none'` | Whatever `sanitizeValue` returns | `text` (override via `inputMode`) |
+
+### State data attributes
+
+`<OTPFieldRoot>` exposes:
+
+| Attribute | Present when |
+| :--- | :--- |
+| `data-complete` | All slots are filled. |
+| `data-filled` | At least one slot has a value. |
+| `data-focused` | Any slot has focus. |
+| `data-disabled` | The field is disabled. |
+| `data-readonly` | The field is read-only. |
+| `data-required` | The field is required. |
+| `data-invalid` / `data-valid` | Inside `<Field>` after validation runs. |
+| `data-dirty` | Value differs from the initial value. |
+| `data-touched` | The field has been focused at least once. |
+
+`<OTPFieldInput>` exposes a per-slot `data-filled` plus all of the Root attributes (mirrored for styling convenience).
+
