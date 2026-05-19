@@ -1,0 +1,254 @@
+---
+title: 警示对话框
+description: 一个模态对话框，用于打断用户并展示重要内容，需要用户作出响应。
+links:
+  doc: https://base-ui.com/react/components/alert-dialog
+  api: https://base-ui.com/react/components/alert-dialog#api-reference
+---
+
+<ComponentPreview name="alert-dialog-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/alert-dialog
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="alert-dialog" title="alert-dialog.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+将以下工具类添加到你的 `globals.css` 中：
+
+```css
+@utility animate-fade-up {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 0.5rem;
+  }
+}
+
+@utility animate-fade-down {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 -0.5rem;
+  }
+}
+
+@utility animate-fade-zoom {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+@utility animate-fade {
+  @apply transition-all duration-200;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+```
+
+## 基本用法
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogClose,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+```
+```tsx
+export function AlertDialogDemo() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger>显示警示对话框</AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>确定要执行此操作吗？</AlertDialogTitle>
+          <AlertDialogDescription>
+            此操作无法撤销。这将永久删除你的账户，并从我们的服务器中移除你的数据。
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogClose>取消</AlertDialogClose>
+          <AlertDialogClose>继续</AlertDialogClose>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+}
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+    ```tsx
+    <AlertDialog>
+      <AlertDialogTrigger />
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle />
+          <AlertDialogDescription />
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogClose />
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+  ```tsx
+  <AlertDialog>   
+    <AlertDialogTrigger />
+    <AlertDialogPortal>     
+      <AlertDialogBackdrop />     
+      <AlertDialogViewport>       
+        <AlertDialogPopup>
+          <AlertDialogHeader>         
+            <AlertDialogTitle />         
+            <AlertDialogDescription />         
+          </AlertDialogHeader>         
+          <AlertDialogFooter>         
+            <AlertDialogClose />       
+          </AlertDialogFooter>       
+        </AlertDialogPopup>     
+      </AlertDialogViewport>   
+    </AlertDialogPortal> 
+  </AlertDialog>
+  ```
+  </TabsPanel>
+</Tabs>
+
+
+## 实用示例
+
+### 从下拉菜单触发
+通过 `DropdownMenuItem` 的 `onClick` 处理器手动控制对话框状态并以编程方式将其打开。
+
+<ComponentPreview name="alert-dialog-open-from-menu" />
+
+### 关闭确认
+此示例演示了一个嵌套的确认对话框，当用户尝试丢弃未保存的输入时触发。为了实现父级表单退到背景的视觉层叠效果，请使用 [`DialogStackedContent`](/docs/components/overlays-dialogs/dialog#composite-component) 和 `AlertDialogStackedContent`。
+
+<ComponentPreview name="alert-dialog-close-confirmation" />
+
+### 分离的触发器
+如果你需要从组件树中完全不同的位置触发警示对话框，或者将触发器嵌套在根组件内不太现实，可以使用 `createAlertDialogHandle` 远程地将 `AlertDialogTrigger` 与 `AlertDialog` 链接起来。
+
+```tsx
+const deleteAlertHandle = createAlertDialogHandle();
+```
+
+<ComponentPreview name="alert-dialog-detached-triggers" />
+
+### 多个触发器
+
+单个警示对话框可以由多个触发元素打开。你可以通过让多个分离的触发器共享同一个 handle 来实现，或者在单个 `<AlertDialog>` 中放置多个 `<AlertDialogTrigger>` 组件。
+
+```tsx title="在根组件内的多个触发器"
+<AlertDialogRoot>
+  <AlertDialogTrigger>触发器 1</AlertDialogTrigger>
+  <AlertDialogTrigger>触发器 2</AlertDialogTrigger>
+  ...
+</AlertDialogRoot>
+```
+```tsx title="多个分离的触发器"
+const demoAlertDialog = createAlertDialogHandle();
+
+<AlertDialogTrigger handle={demoAlertDialog}>触发器 1</AlertDialogTrigger>
+<AlertDialogTrigger handle={demoAlertDialog}>触发器 2</AlertDialogTrigger>
+<AlertDialog handle={demoAlertDialog}>
+  ...
+</AlertDialog>
+```
+
+警示对话框也可以根据是哪个触发器打开它来渲染不同的内容。具体做法是向 `<AlertDialogTrigger>` 传递一个载荷（payload），并在 `<AlertDialog>` 中使用 function-as-a-child 模式。
+
+通过为 `createAlertDialogHandle()` 函数提供类型参数，载荷可以获得严格的类型约束。
+
+<ComponentPreview name="alert-dialog-render-different-content" />
+
+### 受控模式与多个触发器
+
+你可以通过 `<AlertDialog>` 上的 `open` 和 `onOpenChange` 属性从外部控制警示对话框的打开状态，从而根据应用状态管理其可见性。当使用多个触发器时，你需要通过 `<AlertDialog>` 上的 `triggerId` 属性和每个 `<AlertDialogTrigger>` 上的 `id` 属性来管理当前哪个触发器处于激活状态。
+
+需要注意的是，并没有单独的 `onTriggerIdChange` 属性。相反，`onOpenChange` 回调会接收一个额外参数 `eventDetails`，其中包含了发起本次状态变更的触发器元素。
+
+<ComponentPreview name="alert-dialog-controlled-mode" />
+
+## API 参考
+
+### 基础组件
+
+| 组件 | 描述 |
+| :--- | :--- |
+| [`AlertDialog`](https://base-ui.com/react/components/alert-dialog#root) | 组合警示对话框的所有部分。不渲染自己的 HTML 元素。 |
+| [`AlertDialogTrigger`](https://base-ui.com/react/components/alert-dialog#trigger) | 用于打开警示对话框的按钮。渲染 `<button>` 元素。 |
+| [`AlertDialogPortal`](https://base-ui.com/react/components/alert-dialog#portal) | 将弹出层移动到 DOM 不同位置的传送门元素。渲染 `<div>` 元素。|
+| [`AlertDialogViewport`](https://base-ui.com/react/components/alert-dialog#viewport) | 对话框弹出层的定位容器，可设为可滚动。渲染 `<div>` 元素。 |
+| [`AlertDialogPopup`](https://base-ui.com/react/components/alert-dialog#popup) | 警示对话框内容的容器。必须在 `AlertDialogPortal` 内使用。渲染 `<div>` 元素。 |
+| [`AlertDialogBackdrop`](https://base-ui.com/react/components/alert-dialog#backdrop) | 显示在弹出层下方的遮罩层。渲染 `<div>` 元素。 |
+| [`AlertDialogTitle`](https://base-ui.com/react/components/alert-dialog#title) | 标记对话框的标题。渲染 `<h2>` 元素。 |
+| [`AlertDialogDescription`](https://base-ui.com/react/components/alert-dialog#description) | 包含警示对话框附加信息的段落。渲染 `<p>` 元素。 |
+| [`AlertDialogClose`](https://base-ui.com/react/components/alert-dialog#close) | 用于关闭警示对话框的按钮。渲染 `<button>` 元素。 |
+| `AlertDialogHeader` | 用于便捷布局的样式化容器。渲染 `<div>` 元素。 |
+| `AlertDialogFooter` | 用于便捷布局的样式化容器。渲染 `<div>` 元素。 |
+
+### 复合组件
+
+| 组件 | 描述 |
+| :--- | :--- |
+| `AlertDialogContent` | 预组装的组件，将 `AlertDialogPortal`、`AlertDialogBackdrop`、`AlertDialogViewport` 和 `AlertDialogPopup` 与默认样式组合在一起。 |
+
+
+### AlertDialogContent 布局变体
+
+| 变体 | 描述 |
+| :--- | :--- |
+| `responsive` | 移动端底部抽屉；桌面端居中模态框。 |
+| `center` | 带向上淡入过渡的居中模态框。 |
+| `top` | 带向下淡入过渡的顶部对齐模态框。 |
+| `scrollable` | 用于内部滚动的固定页头/页脚布局。 |
+| `stacked` | 支持嵌套对话框的缩放和偏移。 |
+| `element-outside` | 支持弹出框外的交互元素。 |

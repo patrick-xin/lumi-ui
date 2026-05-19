@@ -1,0 +1,286 @@
+---
+title: 验证码输入
+description: 由若干独立字符格子组成的一次性密码输入框。
+links:
+  doc: https://base-ui.com/react/components/otp-field
+  api: https://base-ui.com/react/components/otp-field#api-reference
+status: new
+---
+
+<ComponentPreview name="otp-field-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/otp-field
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="otp-field" title="otp-field.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+```tsx
+import { OTPField } from "@/components/ui/otp-field"
+```
+
+```tsx
+<OTPField length={6} />
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <OTPField length={6} />
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <OTPFieldRoot length={6}>
+      <OTPFieldInput />
+      <OTPFieldSeparator />
+      <OTPFieldInput />
+    </OTPFieldRoot>
+   ```
+  </TabsPanel>
+</Tabs>
+
+
+
+## 尺寸
+
+<ComponentPreview name="otp-field-sizes" />
+
+## 字母数字混合
+
+对于恢复码、备份码或邀请码这类字母数字混合的场景，可以使用 `validationType="alphanumeric"`。完整枚举见 [校验类型](#校验类型)。
+
+<ComponentPreview name="otp-field-alphanumeric" />
+
+## 分组显示
+
+当你希望像 `123-456` 这样把验证码以小块的形式呈现时，可以将子集输入框包裹在你自己的布局元素中，并搭配 `<OTPFieldSeparator>` 使用。这需要使用基础组件 —— 复合组件只会渲染输入框。
+
+<ComponentPreview name="otp-field-grouped" />
+
+## 遮罩显示
+
+使用 `mask` 属性可以遮罩所有格子，或者向单个 `<OTPFieldInput>` 传入 `type="password"`，实现按格子级别的精细控制。
+
+<ComponentPreview name="otp-field-masked" />
+
+```tsx title="按格子遮罩"
+<OTPFieldRoot length={6}>
+  <OTPFieldInput />
+  <OTPFieldInput />
+  <OTPFieldInput type="password" />
+  <OTPFieldInput type="password" />
+  <OTPFieldInput type="password" />
+  <OTPFieldInput type="password" />
+</OTPFieldRoot>
+```
+
+## 占位符提示
+
+`<OTPFieldInput>` 是一个真正的 input，所以原生的 `placeholder` 属性和 CSS 都能照常使用。下面这个示例会一直显示占位符提示，直到当前活动的格子获得焦点为止。
+
+<ComponentPreview name="otp-field-placeholder" />
+
+
+<Callout variant="warning" title="警告">
+表单控件必须有可访问的名称。推荐使用 [`<Field>`](/docs/components/form-input/field) 提供可见的文本标签和说明，或者使用 `aria-label` 属性作为替代方案。详见 [无障碍](#无障碍)。
+</Callout>
+
+## 无障碍
+
+每个 OTP 输入框都必须有可访问的名称。在下面两种模式中任选其一即可。
+
+### 使用原生 label
+
+把 `id` 传给 `<OTPFieldRoot>`，再用 `<label htmlFor>` 与之关联。第一个格子会自动接收这个 label；其余格子加上 `aria-label`，这样屏幕阅读器才能播报当前聚焦的是第几个字符。辅助说明文字使用 `aria-describedby` 关联。
+
+```tsx
+<label htmlFor="verification-code">验证码</label>
+<OTPFieldRoot
+  id="verification-code"
+  length={6}
+  aria-describedby="verification-code-help"
+>
+  <OTPFieldInput />
+  <OTPFieldInput aria-label="第 2 位，共 6 位" />
+  <OTPFieldInput aria-label="第 3 位，共 6 位" />
+  <OTPFieldInput aria-label="第 4 位，共 6 位" />
+  <OTPFieldInput aria-label="第 5 位，共 6 位" />
+  <OTPFieldInput aria-label="第 6 位，共 6 位" />
+</OTPFieldRoot>
+<p id="verification-code-help">
+  请输入我们发送到你设备的 6 位验证码。
+</p>
+```
+
+复合组件 `<OTPField>` 已经为每个格子自动加上了 `aria-label`，使用时只需提供 `id` 和 `<label>` 即可。
+
+### 配合 Field 使用
+
+使用 [`<Field>`](/docs/components/form-input/field) 可以自动处理标签关联、描述和表单校验：
+
+```tsx
+<Field name="verificationCode">
+  <FieldLabel>验证码</FieldLabel>
+  <FieldDescription>
+    请输入我们发送到你设备的 6 位验证码。
+  </FieldDescription>
+  <OTPField length={6} required />
+  <FieldError />
+</Field>
+```
+
+## 自定义清洗逻辑
+
+将 `validationType` 设为 `"none"` 并搭配 `sanitizeValue`，可以在数值进入 state 之前对粘贴内容进行规范化。如果自定义规则仍需要特定的虚拟键盘提示，使用 `inputMode` 指定；用 `onValueInvalid` 来响应被拒绝的字符。下面这个示例只接受数字 `0-3`，被拒绝时会让聚焦格子抖动，并通过 `aria-live` 播报被丢弃的内容。
+
+<ComponentPreview name="otp-field-sanitize" />
+
+<Callout variant="warning" title="sanitizeValue 仅在 validationType='none' 时生效">
+当 `validationType` 为 `'numeric'`、`'alpha'` 或 `'alphanumeric'` 时，`sanitizeValue` 会**被静默忽略** —— 内置的清洗逻辑会优先生效。如果想在内置规则之上加入自定义逻辑，请将 `validationType` 设为 `"none"`，并在自己的清洗函数中重新实现该规则。
+</Callout>
+
+<Callout variant="info" title="抖动动画的 keyframes">
+为了开箱即用，演示中通过 `<style>` 标签内联了 keyframes。在生产环境下，建议把 `@keyframes otp-shake-a/b` 和 `.otp-shake-a/b` 规则提到全局 CSS（或 Tailwind 插件）中，并移除 `<style>` 元素。
+</Callout>
+
+## 与 Form 配合
+
+<ComponentPreview name="otp-field-form" />
+
+传入 `autoSubmit`，会在所有格子填满后自动提交所在表单；或者使用 `onValueComplete`，在不提交表单的情况下响应填写完成事件。回调顺序详见 [Complete 与 autoSubmit](#complete-与-autosubmit)。
+
+更多信息请参阅 [表单集成](/docs/guides/forms/basic)。
+
+
+### 原生表单提交
+
+提交的表单值是一个长度为 `length` 的字符串，键名为 `<OTPFieldRoot>` 上的 `name`：
+
+```tsx
+<form action="/verify" method="post">
+  <OTPField length={6} name="code" required />
+</form>
+// POST body: { code: "123456" }
+```
+
+搭配 `autoSubmit` 可以完全省去显式的提交按钮。对于客户端表单库（React Hook Form、Conform 等），可用 `value` + `onValueChange` 驱动字段，并以 `value.length === length` 作为校验条件。
+
+## 受控与非受控
+
+```tsx title="非受控 —— 最简单"
+<OTPField defaultValue="123" length={6} onValueComplete={handleComplete} />
+```
+
+```tsx title="受控 —— value 驱动每一次渲染"
+const [value, setValue] = useState("");
+
+<OTPField length={6} value={value} onValueChange={setValue} />
+```
+
+`value` 和 `defaultValue` 互斥。值**始终是一个长度不超过 `length` 的字符串** —— 永远不是数组。只有当字段填写完成时，`value.length` 才会等于 `length`。
+
+## Complete 与 autoSubmit
+
+每次按键或粘贴使字段被填满时，回调的触发顺序为：
+
+1. **`onValueChange(value, { reason })`** —— 在输入、粘贴、清空或导致值改变的键盘导航时触发。
+2. **`onValueComplete(value, { reason })`** —— 当 `value.length === length` 时触发一次，且在状态更新完成之后。`reason` 可能是 `'input-change' | 'input-paste'`。
+3. **表单提交** —— 仅当设置了 `autoSubmit` 时才会触发，紧随 `onValueComplete` 之后执行。
+
+无论是否启用 `autoSubmit`，`onValueComplete` 都会触发 —— 你可以用它来推进向导步骤、调用校验 API，或者在不提交表单的情况下关闭对话框。
+
+
+
+## API 参考
+
+### 组件
+
+| 组件 | 描述 |
+| :--- | :--- |
+| [`OTPFieldRoot`](https://base-ui.com/react/components/otp-field#root) | 组合所有 OTP 字段部件并管理状态。渲染一个 `<div>`。 |
+| [`OTPFieldInput`](https://base-ui.com/react/components/otp-field#input) | 单个字符输入格子。渲染一个 `<input>`。 |
+| [`OTPFieldSeparator`](https://base-ui.com/react/components/otp-field#separator) | 格子之间或分组之间的视觉分隔符。渲染一个 `<div>`。 |
+| `OTPField` | 预组合的复合组件，渲染包含 `length` 个输入框的 Root。只包含输入框 —— 如需分隔符或分组布局，请改用基础组件。 |
+
+### OTPFieldRoot 属性
+
+| 属性 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `length` * | `number` | — | 格子的数量。必填。 |
+| `validationType` | `'numeric' \| 'alpha' \| 'alphanumeric' \| 'none'` | `'numeric'` | 内置的输入校验。详见 [校验类型](#校验类型)。 |
+| `value` | `string` | — | 受控值。 |
+| `defaultValue` | `string` | — | 非受控状态下的初始值。 |
+| `onValueChange` | `(value, details) => void` | — | 每次值变化时触发。`details.reason` 可能是 `'input-change' \| 'input-clear' \| 'input-paste' \| 'keyboard'`。 |
+| `onValueComplete` | `(value, details) => void` | — | 所有格子被填满后触发，紧随 `onValueChange` 之后。`details.reason` 可能是 `'input-change' \| 'input-paste'`。 |
+| `onValueInvalid` | `(value, details) => void` | — | 清洗逻辑拒绝字符时触发，在值更新之前。 |
+| `sanitizeValue` | `(value: string) => string` | — | 自定义清洗函数。**仅在 `validationType="none"` 时被调用。** |
+| `autoSubmit` | `boolean` | `false` | OTP 填写完成后自动提交所在表单。 |
+| `mask` | `boolean` | `false` | 在所有格子上遮罩已输入的字符。 |
+| `autoComplete` | `string` | `'one-time-code'` | 应用于第一个格子和隐藏的校验 input。 |
+| `inputMode` | `'numeric' \| 'text' \| 'tel' \| 'email' \| ...` | 根据 `validationType` 推导 | 覆盖虚拟键盘提示。 |
+| `name` | `string` | — | 表单字段名。提交的值为单个字符串。 |
+| `id` | `string` | — | 第一个 input 的 id。后续格子依次为 `${id}-2`、`${id}-3`，以此类推。 |
+| `disabled` | `boolean` | `false` | 禁用所有格子。 |
+| `readOnly` | `boolean` | `false` | 阻止值变化。 |
+| `required` | `boolean` | `false` | 表单提交时必填。 |
+| `form` | `string` | — | 外部 `<form>` 元素的 id，用于关联。 |
+
+### OTPFieldInput 属性
+
+渲染一个 `<input>` 元素。接受所有原生 input 属性（`type`、`placeholder`、`aria-label`、`onFocus` 等），以及 Base UI 的渲染属性三件套：`className`、`style`、`render`。
+
+本组件库的包装层还额外提供了一个 `inputSize` 变体：`'sm' | 'default' | 'lg'`。
+
+### 校验类型
+
+| 值 | 接受的字符 | 默认 `inputMode` |
+| :--- | :--- | :--- |
+| `'numeric'` (默认) | `0-9` | `numeric` |
+| `'alpha'` | `A-Z`、`a-z` | `text` |
+| `'alphanumeric'` | `A-Z`、`a-z`、`0-9` | `text` |
+| `'none'` | 由 `sanitizeValue` 返回的内容决定 | `text`（可通过 `inputMode` 覆盖） |
+
+### 状态 data 属性
+
+`<OTPFieldRoot>` 暴露以下属性：
+
+| 属性 | 出现条件 |
+| :--- | :--- |
+| `data-complete` | 所有格子都已填满。 |
+| `data-filled` | 至少有一个格子有值。 |
+| `data-focused` | 有任意格子聚焦。 |
+| `data-disabled` | 字段处于禁用状态。 |
+| `data-readonly` | 字段处于只读状态。 |
+| `data-required` | 字段为必填。 |
+| `data-invalid` / `data-valid` | 在 `<Field>` 内并已运行校验后出现。 |
+| `data-dirty` | 当前值与初始值不同。 |
+| `data-touched` | 字段至少被聚焦过一次。 |
+
+`<OTPFieldInput>` 在每个格子上暴露 `data-filled`，同时也镜像了 Root 上的全部属性，方便样式控制。
+

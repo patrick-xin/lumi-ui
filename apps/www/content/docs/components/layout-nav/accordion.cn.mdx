@@ -1,0 +1,158 @@
+---
+title: 手风琴
+description: 一组带标题的可折叠面板。
+links:
+  doc: https://base-ui.com/react/components/accordion
+  api: https://base-ui.com/react/components/accordion#api-reference
+---
+
+<ComponentPreview name="accordion-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/accordion
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="accordion" title="accordion.tsx" collapsible/>
+      </Step>
+      <Step title="根据你的项目设置，更新导入路径。"/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 基本用法
+
+```tsx
+import {
+  Accordion,
+  AccordionItem,
+  AccordionPanel,
+  AccordionSummary,
+} from "@/components/ui/accordion";
+```
+
+```tsx
+export function AccordionDemo() {
+  return (
+    <Accordion defaultValue={["item-1"]} className="w-full max-w-md">
+      <AccordionItem value="item-1">
+        <AccordionSummary>什么是 Lumi UI？</AccordionSummary>
+        <AccordionPanel>
+          Lumi UI 是一个开源的组件库，专为使用 React 构建美观且无障碍的用户界面而设计。
+        </AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionSummary>组件可以自定义吗？</AccordionSummary>
+        <AccordionPanel>
+          当然可以。组件基于 Tailwind CSS 和 CVA 构建，便于样式调整和扩展，能轻松匹配你的品牌风格。
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+```
+
+## 组件结构
+
+<Tabs defaultValue="Common">
+  <TabsList>
+    <TabsTab value="Common">常用组合</TabsTab>
+    <TabsTab value="Primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="Common">
+```tsx
+<Accordion>
+  <AccordionItem>
+    <AccordionSummary/>
+    <AccordionPanel/>
+  </AccordionItem>
+</Accordion>
+```
+  </TabsPanel>
+
+  <TabsPanel value="Primitive">
+```tsx
+<Accordion>
+  <AccordionItem>
+    <AccordionHeader>
+      <AccordionTrigger/>
+    </AccordionHeader>
+    <AccordionPanel/>
+  </AccordionItem>
+</Accordion>
+```
+  </TabsPanel>
+</Tabs>
+
+## 实用示例
+
+### 带图标的自定义触发器
+
+<ComponentPreview name="accordion-custom-trigger-icon" />
+
+### 不带图标的自定义触发器
+
+<ComponentPreview name="accordion-custom-trigger-without-icon" />
+
+### 默认展开面板
+
+要让某个手风琴项默认展开，给 `AccordionItem` 设置一个唯一的 `value`，然后把这个值放入数组传给 `Accordion` 组件的 `defaultValue` 属性。
+
+<ComponentPreview name="accordion-default-open-single" />
+
+如果想默认展开多个面板，请确保 `multiple` 属性设置为 `true`，并在 `defaultValue` 数组中包含每个面板的 value。
+
+<ComponentPreview name="accordion-default-open-multiple" />
+
+### 多项展开
+
+通过 `multiple` 属性，让手风琴支持同时展开多个面板。
+
+<ComponentPreview name="accordion-single" />
+
+### 禁用面板
+
+向 `AccordionItem` 传入 `disabled` 属性即可禁用某个面板。
+
+<ComponentPreview name="accordion-disabled" />
+
+### 配合 Motion 使用
+
+Base UI 会通过 `render` 属性把自身的 `className`（包括过渡样式）传递给你的自定义组件。这会导致 CSS 动画和 JS 动画同时运行，从而出现卡顿。
+
+<Callout variant="info" title="重要">
+  当配合 Motion 等动画库使用 `render` 时，你可以设置 `animation="none"` 来重置默认的 CSS 过渡，避免 CSS 过渡和 JavaScript 动画之间产生冲突。
+</Callout>
+
+<ComponentPreview name="accordion-motion" />
+
+
+## API 参考
+
+| 组件 | 描述 |
+| :--- | :--- |
+| [`Accordion`](https://base-ui.com/react/components/accordion#accordion)  | 组合手风琴的所有部分。渲染一个 `<div>` 元素。
+| [`AccordionItem`](https://base-ui.com/react/components/accordion#accordionitem)  | 将一个手风琴标题与对应的面板组合在一起。渲染一个 `<div>` 元素。
+| [`AccordionHeader`](https://base-ui.com/react/components/accordion#accordionheader)  | 标记对应面板的标题。渲染一个 `<h3>` 元素。
+| [`AccordionTrigger`](https://base-ui.com/react/components/accordion#accordiontrigger)  | 用于展开和折叠对应面板的按钮。渲染一个 `<button>` 元素。
+| [`AccordionPanel`](https://base-ui.com/react/components/accordion#accordionpanel)  | 可折叠的面板，承载手风琴项的内容。渲染一个 `<div>` 元素。
+| `AccordionSummary` | 包装 `AccordionHeader` 和 `AccordionTrigger` 的样式化容器。
+
+### AccordionPanel
+
+| 属性 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `animation` | `"css"` \| `"none"` | `"css"` | 控制手风琴面板的默认动画。 |

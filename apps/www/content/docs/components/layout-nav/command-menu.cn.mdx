@@ -1,0 +1,281 @@
+---
+title: 命令菜单
+description: 一个移动端友好的命令面板，用于搜索和快速操作。
+---
+
+<ComponentPreview name="command-menu-demo" />
+
+基于以下组件构建：
+
+- [Dialog](/docs/components/overlays-dialogs/dialog)
+- [Autocomplete](/docs/components/form-input/autocomplete)
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/command-menu
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将 `registry/ui/command-menu.tsx` 复制到 `components/ui/command-menu.tsx`。"/>
+      <Step title="确保 `dialog`、`autocomplete` 和 `scroll-area` 已在你的项目中可用。"/>
+      <Step title="根据你的项目设置，更新导入路径。"/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 组件结构
+
+```tsx
+<CommandMenu>
+  <CommandMenuTrigger />
+  <CommandMenuContent>
+    <Command items={groupedItems}>
+      <CommandInput />
+      <CommandEmpty />
+      <CommandScrollArea>
+        <CommandList>
+          <CommandGroup>
+            <CommandGroupLabel />
+            <CommandCollection>
+              <CommandItem>
+                <CommandShortcut />
+              </CommandItem>
+            </CommandCollection>
+          </CommandGroup>
+          <CommandSeparator />
+        </CommandList>
+      </CommandScrollArea>
+    </Command>
+    <CommandMenuFooter />
+  </CommandMenuContent>
+</CommandMenu>
+```
+
+
+## 基本用法
+
+```tsx
+"use client";
+
+import * as React from "react";
+import {
+  Command,
+  CommandCollection,
+  CommandEmpty,
+  CommandGroup,
+  CommandGroupLabel,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandMenu,
+  CommandMenuContent,
+  CommandMenuTrigger,
+  CommandScrollArea,
+} from "@/components/ui/command-menu";
+import { Button } from "@/components/ui/button";
+
+export function CommandMenuMinimal() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <CommandMenu onOpenChange={setOpen} open={open}>
+      <CommandMenuTrigger render={<Button variant="outline">打开</Button>} />
+      <CommandMenuContent aria-label="命令菜单">
+        <Command items={groupedItems}>
+          <CommandInput placeholder="搜索..." />
+          <CommandEmpty>未找到结果。</CommandEmpty>
+          <CommandScrollArea>
+            <CommandList>
+              {(group: Group) => (
+                <CommandGroup items={group.items} key={group.value}>
+                  <CommandGroupLabel>{group.value}</CommandGroupLabel>
+                  <CommandCollection>
+                    {(item: Item) => (
+                      <CommandItem
+                        key={item.value}
+                        onClick={() => setOpen(false)}
+                        value={item}
+                      >
+                        {item.label}
+                      </CommandItem>
+                    )}
+                  </CommandCollection>
+                </CommandGroup>
+              )}
+            </CommandList>
+          </CommandScrollArea>
+        </Command>
+      </CommandMenuContent>
+    </CommandMenu>
+  );
+}
+
+type Item = { value: string; label: string };
+type Group = { value: string; items: Item[] };
+
+const groupedItems: Group[] = [
+  {
+    value: "资源",
+    items: [
+      { label: "文档", value: "docs" },
+      { label: "组件", value: "components" },
+    ],
+  },
+  {
+    value: "操作",
+    items: [{ label: "设置", value: "settings" }],
+  },
+];
+```
+
+## 实用示例
+
+下面这些自定义都在 `components/ui/command-menu.tsx` 中完成。
+
+### 居中显示命令菜单
+
+```tsx
+<DialogViewport
+  className={cn(
+    "flex flex-col items-center justify-center",
+    // 添加顶部内边距，让弹窗向下移动
+     "pt-[10dvh]",
+  )}
+>
+```
+
+### 调整位置
+
+通过视口顶部内边距控制弹窗的高低位置：
+
+- `pt-[20dvh]`：更低
+- `pt-[10dvh]`：默认
+- `pt-[5dvh]`：更高
+
+```tsx
+<DialogViewport className={cn("flex flex-col items-center", "pt-[10dvh]")} />
+```
+
+### 调整弹窗宽度和动画
+
+在 `CommandMenuContent` 中，下面这段类名控制宽度和默认动画：
+
+```tsx
+"w-[min(40rem,calc(100vw-2rem))] animate-fade-zoom"
+```
+
+- `w-[min(40rem,calc(100vw-2rem))]` 让菜单在移动端也保持良好显示。
+- 你可以把 `animate-fade-zoom` 替换为 [动画指南](/docs/animation-guide) 中支持的任意工具类。
+
+### CommandScrollArea
+
+默认的 `CommandScrollArea` 使用：
+
+```tsx
+"h-auto max-h-64 sm:max-h-96"
+```
+
+- `h-auto` 让内容高度自动适应。
+- `max-h-64` 是可选项，可以让列表显示得更短。
+
+你也可以跳过 `CommandScrollArea`，使用自己的容器：
+
+```tsx
+<div className="h-auto max-h-80 overflow-y-auto">
+  <CommandList>{/* 选项列表 */}</CommandList>
+</div>
+```
+
+### 替换输入框
+
+`CommandInput` 基于 `AutocompleteInputGroupContent` 构建，可显示一个清除按钮（`showClear`）。
+
+如果你需要完全的控制权，可以用 `AutocompleteInput` 替换它：
+
+```tsx
+import { AutocompleteInput } from "@/components/ui/autocomplete";
+
+<Command items={groupedItems}>
+  <AutocompleteInput className="border-b px-4 py-3" placeholder="搜索..." />
+</Command>
+```
+
+### 配合 TanStack Hotkeys 使用
+
+<ComponentPreview name="command-menu-hotkey"/>
+
+
+### 调整 CommandItem 的高亮样式
+
+`CommandItem` 使用了带内嵌定位的高亮类：
+
+```tsx
+"group/command-item ... data-[highlighted]:before:inset-x-3"
+```
+
+调整 inset 值（如 `inset-x-2`、`inset-x-4` 等），就能改变高亮“胶囊”的宽度，无需在父级列表容器上额外添加内边距。
+
+更多细节请参阅 [命中测试与高亮](/docs/highlights)。
+
+## API 参考
+
+### CommandMenuContent
+
+一个复合内容包装器，组合了 `DialogPortal`、`DialogBackdrop`、`DialogViewport` 和 `DialogPopup`。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `className` | `string` | 弹窗容器的额外 CSS 类名。 |
+| `children` | `React.ReactNode` | 在弹窗内渲染的内容。 |
+| `...props` | `DialogPopupProps` | 将所有其他属性传递给底层的 dialog popup。 |
+
+### Command
+
+为命令交互预配置的 autocomplete 根组件。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `autoHighlight` | `Autocomplete prop` | 默认为 `"always"`，适合键盘优先的操作流程。 |
+| `inline` | `boolean` | 默认为 `true`，保持列表内联渲染。 |
+| `keepHighlight` | `boolean` | 默认为 `true`，保留高亮项的状态。 |
+| `open` | `boolean` | 默认为 `true`，让列表在对话框中始终可见。 |
+| `...props` | `React.ComponentProps<typeof Autocomplete>` | 将所有其他属性传递给底层的 autocomplete 根组件。 |
+
+### CommandInput
+
+一个基于 `AutocompleteInputGroupContent` 的复合输入框。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `addonIcon` | `React.ReactNode` | 前缀图标；默认为 `<Search />`。 |
+| `inputSize` | `"default" \| "sm" \| "lg"` | 输入框尺寸；默认为 `"lg"`。 |
+| `className` | `string` | 输入组的额外类名。 |
+| `...props` | `React.ComponentProps<typeof AutocompleteInputGroupContent>` | 将所有其他 input-group 属性传递下去。 |
+
+### CommandScrollArea
+
+命令结果的滚动容器。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `React.ComponentProps<typeof ScrollArea>` | 将所有其他属性传递给底层的 scroll area。 |
+
+### CommandItem
+
+带有内置高亮状态的命令行项。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `className` | `string` | 用于项目布局和交互样式的额外类名。 |
+| `...props` | `AutocompleteItemProps` | 将所有其他属性传递给底层的 autocomplete item。 |

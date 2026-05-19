@@ -1,0 +1,55 @@
+---
+title: 头像
+description: 一个易于自定义样式的头像组件。
+links:
+  doc: https://base-ui.com/react/components/avatar
+  api: https://base-ui.com/react/components/avatar#api-reference
+---
+
+<ComponentPreview name="avatar-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/avatar
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="avatar" title="avatar.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## 组件结构
+
+```tsx
+ <Avatar>
+  <AvatarImage/>
+  <AvatarFallback/>
+ </Avatar>
+```
+
+## 基本用法
+
+```tsx
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+```
+
+```tsx
+<Avatar>
+  <AvatarImage src="https://github.com/patrick-xin.png" />
+  <AvatarFallback>CN</AvatarFallback>
+</Avatar>
+```

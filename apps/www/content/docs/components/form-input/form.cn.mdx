@@ -1,0 +1,70 @@
+---
+title: 表单
+description: 一个原生的 form 元素，提供统一的错误处理。
+links:
+  doc: https://base-ui.com/react/components/form
+  api: https://base-ui.com/react/components/form#api-reference
+---
+
+<ComponentPreview name="form-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/form
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="form" title="form.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 基本用法
+Form 通常与 [Field](/docs/components/form-input/field) 一同组合使用。
+
+```tsx
+import { Form } from "@/components/ui/form"
+import { Field, FieldLabel, FieldControl, FieldError, FieldDescription } from "@/components/ui/field"
+```
+
+```tsx
+<Form>
+  <Field name="username">
+    <FieldLabel>用户名</FieldLabel>
+    <FieldControl required minLength={3} />
+    <FieldDescription>公开显示的名称。</FieldDescription>
+    <FieldError />
+  </Field>
+</Form>
+```
+
+
+## 实用示例
+
+### 原生提交
+<ComponentPreview name="form-native-submit" />
+
+### 表单提交回调
+<ComponentPreview name="form-on-form-submit" />
+
+### 配合 Zod 使用
+<ComponentPreview name="form-zod" />
+
+### 配合 Server Action 和 Zod 使用
+<ComponentPreview name="form-server-action-zod" />
+
+### 与其他组件集成
+
+详见 [表单指南](/docs/guides/forms/basic)。

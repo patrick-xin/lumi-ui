@@ -1,0 +1,177 @@
+---
+title: 右键菜单
+description: 在鼠标右键点击或长按时，在指针位置弹出的菜单。
+links:
+  doc: https://base-ui.com/react/components/context-menu
+  api: https://base-ui.com/react/components/context-menu#api-reference
+---
+
+<ComponentPreview name="context-menu-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/context-menu
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="context-menu" title="context-menu.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+     ```tsx
+     <ContextMenu>
+       <ContextMenuTrigger />
+       <ContextMenuContent>
+         <ContextMenuItem />
+         <ContextMenuLinkItem />
+         <ContextMenuItem>
+           <ContextMenuShortcut />
+         </ContextMenuItem>
+         <ContextMenuSeparator />
+         <ContextMenuGroup>
+           <ContextMenuLabel />
+         </ContextMenuGroup>
+         <ContextMenuRadioGroup>
+           <ContextMenuRadioItemContent />
+         </ContextMenuRadioGroup>
+         <ContextMenuCheckboxItemContent />
+         <ContextMenuSub>
+           <ContextMenuSubTriggerGroup />
+           <ContextMenuSubContent>
+             {/* 子菜单项 */}
+           </ContextMenuSubContent>
+         </ContextMenuSub>
+       </ContextMenuContent>
+     </ContextMenu>
+     ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+    ```tsx
+    <ContextMenu>
+      <ContextMenuTrigger />
+      <ContextMenuPortal>
+        <ContextMenuBackdrop />
+        <ContextMenuPositioner>
+          <ContextMenuPopup>
+            <ContextMenuArrow />
+            <ContextMenuItem />
+            <ContextMenuLinkItem />
+            <ContextMenuSeparator />
+            <ContextMenuGroup>
+              <ContextMenuLabel />
+            </ContextMenuGroup>
+            <ContextMenuRadioGroup>
+              <ContextMenuRadioItem />
+            </ContextMenuRadioGroup>
+            <ContextMenuCheckboxItem />
+            <ContextMenuSub>
+              <ContextMenuSubTrigger />
+            </ContextMenuSub>
+          </ContextMenuPopup>
+        </ContextMenuPositioner>
+      </ContextMenuPortal>
+    </ContextMenu>
+    ```
+  </TabsPanel>
+</Tabs>
+
+## 基本用法
+
+<ComponentPreview name="context-menu-demo" />
+
+## 功能特性
+
+### 复合组件的简便用法
+
+<ComponentPreview name="context-menu-composite" />
+
+### 菜单项变体
+
+<ComponentPreview name="context-menu-variants" />
+
+## API 参考
+
+### ContextMenuContent
+
+一个高阶容器组件，将 `ContextMenuPortal`、`ContextMenuPositioner` 和 `ContextMenuPopup` 组合成一个带样式的内容元素。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | 打开时希望相对于锚点元素的哪一侧渲染。 |
+| `sideOffset` | `number` | 距离锚点的像素值。 |
+| `align` | `"start" \| "center" \| "end"` | 相对于锚点的对齐方式。 |
+| `alignOffset` | `number` | 从 `"start"` 或 `"end"` 对齐边缘的像素偏移量。 |
+| `showArrow` | `boolean` | 是否渲染箭头元素。 |
+| `matchAnchorWidth` | `boolean` | 弹出层宽度是否与锚点元素的宽度一致。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `BaseContextMenu.Popup.Props` | 将所有其他属性传递给底层的 popup 组件。 |
+
+### ContextMenuCheckboxItemContent
+
+一个高阶的复选项组件，将 `ContextMenuCheckboxItem` 和 `CheckboxItemIndicator` 组合成一个带样式的单一元素，并支持配置指示器图标的位置。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `indicatorPlacement` | `"start" \| "end"` | 指示器图标相对于内容的位置。 |
+| `indicatorIcon` | `React.ReactNode` | 用作选中指示器的图标。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `BaseContextMenu.CheckboxItem.Props` | 将所有其他属性传递给底层的复选项组件。 |
+
+### ContextMenuRadioItemContent
+
+一个高阶的单选项组件，将 `ContextMenuRadioItem` 和 `RadioItemIndicator` 组合成一个带样式的单一元素，并支持配置指示器图标的位置。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `indicatorPlacement` | `"start" \| "end"` | 指示器图标相对于内容的位置。 |
+| `indicatorIcon` | `React.ReactNode` | 用作已选指示器的图标。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `BaseContextMenu.RadioItem.Props` | 将所有其他属性传递给底层的单选项组件。 |
+
+### ContextMenuSubTriggerGroup
+
+一个复合的子菜单触发器组件，渲染触发内容和一个箭头图标，同时复用右键菜单项的样式变体。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `variant` | `"default" \| "destructive" \| "inset"` | 应用于触发行的视觉样式变体。 |
+| `unstyled` | `boolean` | 为 `true` 时禁用内置的触发器样式。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `children` | `React.ReactNode` | 触发器的内容。 |
+| `...props` | `BaseContextMenu.SubmenuTrigger.Props` | 将所有其他属性传递给底层的子菜单触发器组件。 |
+
+### ContextMenuSubContent
+
+子菜单的复合内容组件。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | 打开时希望相对于锚点元素的哪一侧渲染。 |
+| `sideOffset` | `number` | 距离锚点的像素值。 |
+| `align` | `"start" \| "center" \| "end"` | 相对于锚点的对齐方式。 |
+| `alignOffset` | `number` | 从 `"start"` 或 `"end"` 对齐边缘的像素偏移量。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `ContextMenuContentProps` | 将所有其他属性传递给底层的 `ContextMenuContent` 组件。 |

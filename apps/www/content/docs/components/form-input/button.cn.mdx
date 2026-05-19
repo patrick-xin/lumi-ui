@@ -1,0 +1,137 @@
+---
+title: 按钮
+description: 显示一个按钮，或一个看起来像按钮的组件。
+links:
+  doc: https://base-ui.com/react/components/button
+  api: https://base-ui.com/react/components/button#api-reference
+---
+
+<ComponentPreview name="button-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/button
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="button" title="button.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 基本用法
+```tsx
+import { Button } from "@/components/ui/button"
+```
+
+```tsx
+<Button>按钮</Button>
+```
+
+## 样式变体
+<ComponentPreview name="button-variants" />
+
+## 尺寸
+<ComponentPreview name="button-sizes" />
+
+## 圆角
+
+使用 `rounded-full` 类，让按钮变成圆形。
+
+<ComponentPreview name="button-rounded" />
+
+## 带图标
+图标与文字之间的间距会根据按钮尺寸自动调整，你无需手动给图标添加任何 margin。
+
+<ComponentPreview name="button-with-icon" />
+
+## 状态
+
+### 聚焦
+<ComponentPreview name="button-focus" />
+
+### 禁用状态
+<ComponentPreview name="button-disabled" />
+
+### 加载状态
+<ComponentPreview name="button-loading" />
+
+
+## 实用示例
+
+### 渲染为其他标签
+
+Base UI 使用 `render` 属性来改变底层的 DOM 元素，同时保留无障碍特性和组件行为。这取代了 Radix UI 中的 `asChild` 模式。
+
+```tsx /render/ /nativeButton/
+<Button render={<div />} nativeButton={false}>
+  可以包含复杂子元素的按钮
+</Button>
+```
+
+下面是一个把链接渲染成按钮样式的例子。
+
+```tsx /render/ /nativeButton/
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+
+export function ButtonLink() {
+  return (
+    <Button render={<Link href="/login" />} nativeButton={false}>
+      登录
+    </Button>
+  )
+}
+```
+
+<Callout variant="warning" title="警告">
+当渲染为非 button 元素时，请务必设置 `nativeButton={false}`，以确保正确的无障碍语义。
+</Callout>
+
+### 加载状态
+
+`isLoading` 属性会自动禁用按钮并阻止用户交互。
+
+<Callout variant="info" title="无障碍提示">
+**与标准的 `disabled` 属性不同，`isLoading` 会保留按钮的焦点（通过 `focusableWhenDisabled` 实现）。这避免了在异步表单提交期间焦点丢失到 `body` 上，从而保证键盘导航流畅。**
+</Callout>
+
+<ComponentPreview name="button-loading" />
+
+### 鼠标指针
+
+Tailwind v4 将按钮组件的鼠标指针样式从 `cursor: pointer` 改为了 `cursor: default`。
+
+如果你想保留 `cursor: pointer` 的行为，可以在 CSS 文件中添加以下代码：
+
+```css
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+```
+
+## API 参考
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `variant` | `default` \| `destructive` \| `outline` \| `secondary` \| `ghost` \| `link` \| `glow` \| `unstyled` | 按钮的视觉样式。 |
+| `size` | `default` \| `sm` \| `lg` \| `icon` \| `icon-sm` \| `icon-lg` \| `icon-xs` | 按钮的尺寸。`icon-*` 变体为正方形。 |
+| `isLoading` | `boolean` | `false` | 将按钮设置为加载状态，禁用交互，但保留键盘可聚焦性。 |
+| [`render`](https://base-ui.com/react/components/button#Button-render) | `ReactElement` | 替换底层的 HTML 元素。 |
+|  [`nativeButton`](https://base-ui.com/react/components/button#Button-nativeButton) | `boolean` | 为 `false` 时，按钮将渲染为其他标签。 |
+|  [`focusableWhenDisabled`](https://base-ui.com/react/components/button#Button-focusableWhenDisabled) | `boolean` | 按钮在禁用状态下是否仍可聚焦。 |

@@ -1,0 +1,167 @@
+---
+title: 自动完成
+description: 一个在输入时智能提示选项的输入框组件。
+links:
+  doc: https://base-ui.com/react/components/autocomplete
+  api: https://base-ui.com/react/components/autocomplete#api-reference
+---
+
+<ComponentPreview name="autocomplete-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/autocomplete
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="autocomplete" title="autocomplete.tsx"/>
+      </Step>
+      <Step title="根据你的项目设置，更新导入路径。"/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+     ```tsx
+     <Autocomplete>
+       <AutocompleteInputGroupContent />
+       <AutocompleteValue />
+       <AutocompleteContent>
+         <AutocompleteStatus />
+         <AutocompleteEmpty />
+         <AutocompleteList>
+           <AutocompleteRow>
+             <AutocompleteItem />
+           </AutocompleteRow>
+           <AutocompleteSeparator />
+           <AutocompleteGroup>
+             <AutocompleteGroupLabel />
+           </AutocompleteGroup>
+           <AutocompleteCollection />
+         </AutocompleteList>
+       </AutocompleteContent>
+     </Autocomplete>
+     ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+    ```tsx
+  <Autocomplete>
+      <AutocompleteInput />
+      <AutocompleteTrigger />
+      <AutocompleteIcon />
+      <AutocompleteClear />
+      <AutocompleteValue />
+      <AutocompletePortal>
+        <AutocompleteBackdrop />
+        <AutocompletePositioner>
+          <AutocompletePopup>
+            <AutocompleteArrow />
+            <AutocompleteStatus />
+            <AutocompleteEmpty />
+            <AutocompleteList>
+              <AutocompleteRow>
+                <AutocompleteItem />
+              </AutocompleteRow>
+              <AutocompleteSeparator />
+              <AutocompleteGroup>
+                <AutocompleteGroupLabel />
+              </AutocompleteGroup>
+              <AutocompleteCollection />
+            </AutocompleteList>
+          </AutocompletePopup>
+        </AutocompletePositioner>
+      </AutocompletePortal>
+  </Autocomplete>
+```
+
+  </TabsPanel>
+</Tabs>
+
+
+## 实用示例
+
+### 异步加载
+在用户输入时异步加载选项，并渲染自定义的状态内容。
+<ComponentPreview name="autocomplete-async" />
+
+### 内联补全
+通过 `mode` 属性，让用户使用方向键导航时，将高亮项自动填充到输入框中。可接受 `aria-autocomplete` 的取值：`list`、`both`、`inline` 或 `none`。
+<ComponentPreview name="autocomplete-inline" />
+
+### 分组
+使用 `<AutocompleteGroup>` 和 `<AutocompleteGroupLabel>` 在弹窗内添加分区标题，将相关选项组织在一起。
+
+分组数据由一个对象数组表示，每个对象包含 `items` 属性（即该组的选项数组）。你可以额外提供一个字段（例如 `value`）作为分组标签的标题文本。
+<ComponentPreview name="autocomplete-grouped" />
+
+### 模糊匹配
+即便查询内容与选项文本并不完全匹配，模糊匹配也能帮你找到相关结果。
+<ComponentPreview name="autocomplete-fuzzy-matching" />
+
+### 限制结果数量
+通过 `limit` 属性限制可见选项的数量，并使用 `<AutocompleteStatus>` 引导用户优化查询条件。
+<ComponentPreview name="autocomplete-limit-result" />
+
+### 自动高亮
+在 `<Autocomplete>` 上设置 `autoHighlight` 属性，用户输入时第一个匹配项会被自动高亮。如果希望高亮始终存在（例如列表内嵌在对话框中时），可将该属性的值设为 `always`。
+
+这个属性可以和 `keepHighlight`、`highlightItemOnHover` 组合使用，以配置鼠标交互时高亮的行为方式。
+<ComponentPreview name="autocomplete-auto-highlight" />
+
+### 网格布局
+通过将每一行用 `<AutocompleteRow>` 包裹，可以让选项以网格布局展示。
+<ComponentPreview name="autocomplete-grid-layout" />
+
+### 表单集成
+在表单中使用自动完成。
+<ComponentPreview name="autocomplete-form" />
+
+## API 参考
+
+### AutocompleteInputGroupContent
+
+一个复合组件，将 `AutocompleteInput`、`Icon`、`AutocompleteClear` 和 `AutocompleteTrigger` 整合为一个带样式的单一元素。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `showTrigger` | `boolean` | 是否显示触发器图标。 |
+| `showClear` | `boolean` | 是否显示清除图标。 |
+| `addonIcon` | `React.ReactNode` | 是否显示附加图标。 |
+| `variant` | `"ghost" \| "default" \| "transparent"` | 输入框组的视觉变体。 |
+| `inputSize` | `"default" \| "sm" \| "lg"` | 输入框的尺寸。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `AutocompleteInput.Props` | 将所有其他属性传递给底层的 `AutocompleteInput.Props`。 |
+
+### AutocompleteContent
+
+一个复合组件，将 `AutocompletePortal`、`AutocompletePositioner` 和 `AutocompletePopup` 整合为一个带样式的下拉内容元素。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `sideOffset` | `number` | 相对于锚点的偏移距离。 |
+| `align` | `"start" \| "center" \| "end"` | 相对于锚点的对齐方式。 |
+| `matchAnchorWidth` | `boolean` | 弹窗宽度是否与锚点宽度保持一致。 |
+| `positionerAnchor` | `React.RefObject<HTMLDivElement \| null>` | 传递给定位器的 ref，用于自定义锚定。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `AutocompletePopup.Props` | 将所有其他属性传递给底层的 `AutocompletePopup.Props`。 |

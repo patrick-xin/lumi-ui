@@ -1,0 +1,205 @@
+---
+title: 组合框
+description: 一个输入框，搭配一组预定义选项供用户选择。
+links:
+  doc: https://base-ui.com/react/components/combobox
+  api: https://base-ui.com/react/components/combobox#api-reference
+---
+
+<ComponentPreview name="combobox-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/combobox
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="combobox" title="combobox.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+     ```tsx
+     <Combobox>
+       <ComboboxTrigger />
+       <ComboboxInputGroupContent />
+
+       <ComboboxChips>
+         <ComboboxChip />
+       </ComboboxChips>
+
+       <ComboboxContent>
+         <ComboboxStatus />
+         <ComboboxEmpty />
+         <ComboboxList>
+           <ComboboxRow>
+             <ComboboxItemContent />
+           </ComboboxRow>
+           <ComboboxSeparator />
+           <ComboboxGroup>
+             <ComboboxGroupLabel />
+           </ComboboxGroup>
+           <ComboboxCollection />
+         </ComboboxList>
+       </ComboboxContent>
+     </Combobox>
+     ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+    ```tsx
+<Combobox>
+  <ComboboxLabel />
+
+  <ComboboxInputGroup>
+    <ComboboxInput />
+    <ComboboxTrigger />
+    <ComboboxIcon />
+    <ComboboxClear />
+    <ComboboxValue />
+
+    <ComboboxChips>
+      <ComboboxChip>
+        <ComboboxChipRemove />
+      </ComboboxChip>
+    </ComboboxChips>
+  </ComboboxInputGroup>
+
+  <ComboboxPortal>
+    <ComboboxBackdrop />
+    <ComboboxPositioner>
+      <ComboboxPopup>
+        <ComboboxArrow />
+
+        <ComboboxStatus />
+        <ComboboxEmpty />
+
+        <ComboboxList>
+          <ComboboxRow>
+            <ComboboxItem>
+              <ComboboxItemIndicator />
+            </ComboboxItem>
+          </ComboboxRow>
+
+          <ComboboxSeparator />
+
+          <ComboboxGroup>
+            <ComboboxGroupLabel />
+          </ComboboxGroup>
+
+          <ComboboxCollection />
+        </ComboboxList>
+      </ComboboxPopup>
+    </ComboboxPositioner>
+  </ComboboxPortal>
+</Combobox>
+    ```
+  </TabsPanel>
+</Tabs>
+
+## 功能特性
+
+### 带清除按钮、触发按钮和图标
+<ComponentPreview name="combobox-clear-trigger" />
+
+### 输入框置于弹窗内
+使用 `ComboboxTrigger` 替代 `ComboboxInputGroup`，可将输入框放入弹窗内。在 `ComboboxInput` 上设置 `variant="ghost"` 以去除边框和聚焦样式。
+
+<ComponentPreview name="combobox-input-inside-popup" />
+
+### 修改指示器图标及位置
+<ComponentPreview name="combobox-indicator" />
+
+### 分组
+<ComponentPreview name="combobox-grouped" />
+
+### 自定义锚点 (positionerAnchor)
+
+`ComboboxContent` 默认以 `ComboboxTrigger` 作为锚点。如果你希望弹窗宽度与外层容器一致，可以手动将该容器指定为锚点。
+<ComponentPreview name="combobox-ref" />
+
+## 实用示例
+
+### 配合滚动区域
+<ComponentPreview name="combobox-scroll-area" />
+
+### 多选
+<ComponentPreview name="combobox-multiple" />
+
+### 可创建选项
+<ComponentPreview name="combobox-creatable" />
+
+### 异步加载（单选）
+<ComponentPreview name="combobox-async-single" />
+
+### 异步加载（多选）
+<ComponentPreview name="combobox-async-multiple" />
+
+## 自定义样式
+<ComponentPreview name="combobox-customization" />
+
+## 表单集成
+<ComponentPreview name="combobox-form" />
+
+## API 参考
+
+### ComboboxInputGroup
+
+一个高阶的输入组件，它将 `ComboboxInput`、`Icon`、`ComboboxClear` 和 `ComboboxTrigger` 整合为一个带样式的单一元素。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `showTrigger` | `boolean` | 是否显示触发器图标。 |
+| `showClear` | `boolean` | 是否显示清除图标。 |
+| `addonIcon` | `React.ReactNode` | 是否显示附加图标。 |
+| `variant` | `"ghost" \| "default" \| "transparent"` | 输入框组的视觉变体。 |
+| `inputSize` | `"default" \| "sm" \| "lg"` | 输入框的尺寸。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `ComboboxInput.Props` | 将所有其他属性传递给底层的 `ComboboxInput.Props`。 |
+
+
+### ComboboxContent
+
+一个高阶的容器组件，它将 `ComboboxPortal`、`ComboboxPositioner` 和 `ComboboxPopup` 整合为一个带样式的下拉内容元素。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `sideOffset` | `number` | 相对于锚点的偏移距离。 |
+| `align` | `"start" \| "center" \| "end"` | 相对于锚点的对齐方式。 |
+| `matchAnchorWidth` | `boolean` | 弹窗宽度是否与锚点宽度保持一致。 |
+| `positionerAnchor` | `React.RefObject<HTMLDivElement \| null>` | 传递给定位器的 ref，用于自定义锚定。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `ComboboxPopup.Props` | 将所有其他属性传递给底层的 `ComboboxPopup.Props`。 |
+
+### ComboboxItemContent
+
+一个高阶的选项组件，它将 `Item` 和 `ItemIndicator` 整合为一个带样式的单一元素，并可配置图标位置。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `indicatorPlacement` | `"start" \| "end" \| "none"` | 指示器图标相对于内容的位置。 |
+| `indicatorIcon` | `React.ReactNode` | 用作选项指示器的图标。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `ComboboxItem.Props` | 将所有其他属性传递给底层的 `ComboboxItem.Props`。 |

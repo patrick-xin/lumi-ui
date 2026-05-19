@@ -1,0 +1,84 @@
+---
+title: 输入框
+description: 一个原生的 input 元素，可与 Field 自动协同工作。
+links:
+  doc: https://base-ui.com/react/components/input
+  api: https://base-ui.com/react/components/input#api-reference
+---
+
+<ComponentPreview name="input-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/input
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="input" title="input.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## 基本用法
+
+```tsx
+import { Input } from "@/components/ui/input"
+```
+
+```tsx
+<Input />
+```
+
+## 样式变体
+
+### 尺寸
+
+<ComponentPreview name="input-sizes" />
+
+### 外观
+
+<ComponentPreview name="input-styles" />
+
+### 禁用状态
+
+<ComponentPreview name="input-disabled" />
+
+### 错误状态
+
+<ComponentPreview name="input-error" />
+
+### 文件输入
+
+<ComponentPreview name="input-file" />
+
+### 带按钮
+
+<ComponentPreview name="input-with-button" />
+
+## 实用示例
+
+<Callout variant="warning" title="警告">
+表单控件必须有可访问的名称：输入框需要一个有意义的标签。推荐使用 [`<Field>`](/docs/components/form-input/field) 提供可见的文本标签和说明，或者使用 `aria-label` 属性作为替代方案。具体示例见下方。
+</Callout>
+
+
+### 与 Field 配合
+
+<ComponentPreview name="input-with-label" />
+
+### 与 Form 配合
+
+<ComponentPreview name="input-with-form" />

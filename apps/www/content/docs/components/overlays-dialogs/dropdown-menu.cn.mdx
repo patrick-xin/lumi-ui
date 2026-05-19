@@ -1,0 +1,222 @@
+---
+title: 下拉菜单
+description: 一个以下拉形式展示的操作列表，并支持键盘导航。
+links:
+  doc: https://base-ui.com/react/components/menu
+  api: https://base-ui.com/react/components/menu#api-reference
+---
+
+<ComponentPreview name="dropdown-menu-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/dropdown-menu
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="dropdown-menu" title="dropdown-menu.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+     ```tsx
+     <Dropdown>
+       <DropdownMenuTrigger />
+       <DropdownMenuContent>
+          <DropdownMenuItem />
+          <DropdownMenuLinkItem />
+          <DropdownMenuItem>
+            <DropdownMenuShortcut />
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuGroupLabel />
+          </DropdownMenuGroup>
+          <DropdownMenuRadioGroup>
+            <DropdownMenuRadioItemContent />
+          </DropdownMenuRadioGroup>
+          <DropdownMenuCheckboxItemContent />
+          <DropdownMenuSubMenu>
+            <DropdownMenuSubMenuTriggerGroup />
+            <DropdownMenuSubMenuContent>
+              {/* 子菜单项 */}
+            </DropdownMenuSubMenuContent>
+          </DropdownMenuSubMenu>
+       </DropdownMenuContent>
+     </Dropdown>
+     ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+    ```tsx
+    <DropdownMenu>
+      <DropdownMenuTrigger />
+      <DropdownMenuPortal>
+        <DropdownMenuBackdrop />
+        <DropdownMenuPositioner>
+          <DropdownMenuPopup>
+            <DropdownMenuArrow />
+            <DropdownMenuItem />
+            <DropdownMenuLinkItem />
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuGroupLabel />
+            </DropdownMenuGroup>
+            <DropdownMenuRadioGroup>
+              <DropdownMenuRadioItem />
+            </DropdownMenuRadioGroup>
+            <DropdownMenuCheckboxItem />
+            <DropdownMenuSubmenuRoot>
+              <DropdownMenuSubmenuTrigger />
+            </DropdownMenuSubmenuRoot>
+          </DropdownMenuPopup>
+        </DropdownMenuPositioner>
+      </DropdownMenuPortal>
+    </DropdownMenu>
+```
+
+  </TabsPanel>
+</Tabs>
+
+
+## 基本用法
+
+<ComponentPreview name="dropdown-menu-basic" />
+
+## 功能特性
+
+### 与触发器等宽
+
+<ComponentPreview name="dropdown-menu-match-anchor-width" />
+
+### 带箭头
+
+<ComponentPreview name="dropdown-menu-with-arrow" />
+
+### 分组标签
+
+<ComponentPreview name="dropdown-menu-group" />
+
+### 嵌套子菜单
+
+<ComponentPreview name="dropdown-menu-nested" />
+
+### 复选项
+
+<ComponentPreview name="dropdown-menu-checkbox" />
+
+### 单选项
+
+<ComponentPreview name="dropdown-menu-radio" />
+
+## 实用示例
+
+### 触发器打开时的样式
+<ComponentPreview name="dropdown-menu-trigger-open" />
+
+### 悬停打开
+<ComponentPreview name="dropdown-menu-open-on-hover" />
+
+### 点击后关闭
+<ComponentPreview name="dropdown-menu-control" />
+
+### 跳转到其他页面
+`DropdownMenuLinkItem` 默认渲染为 `a` 标签。使用 `render` 属性可根据你的框架渲染对应的链接组件。
+<ComponentPreview name="dropdown-menu-navigation" />
+
+### 打开对话框
+
+通过菜单项的 `onClick` 处理器手动控制对话框状态并将其打开。
+<ComponentPreview name="dropdown-menu-dialog" />
+
+### 分离的触发器
+
+<ComponentPreview name="dropdown-menu-detached-trigger" />
+
+### 多个触发器
+
+<ComponentPreview name="dropdown-menu-multiple-triggers" />
+
+## API 参考
+
+### DropdownMenuContent
+
+一个高阶容器组件，将 `DropdownMenuPortal`、`DropdownMenuPositioner` 和 `DropdownMenuPopup` 组合成一个带样式的下拉内容元素。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | 打开时希望相对于锚点元素的哪一侧渲染。 |
+| `sideOffset` | `number` | 距离锚点的像素值。 |
+| `align` | `"start" \| "center" \| "end"` | 相对于锚点的对齐方式。 |
+| `alignOffset` | `number` | 从 `"start"` 或 `"end"` 对齐边缘的像素偏移量。 |
+| `showArrow` | `boolean` | 是否渲染箭头元素。 |
+| `matchAnchorWidth` | `boolean` | 弹出层宽度是否与锚点元素的宽度一致。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `BaseMenu.Popup.Props` | 将所有其他属性传递给底层的 `BaseMenu.Popup` 组件。 |
+
+### DropdownMenuCheckboxItemContent
+
+一个高阶的复选项组件，将 `CheckboxItem` 和 `CheckboxItemIndicator` 组合成一个带样式的单一元素，并支持配置图标位置。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `indicatorPlacement` | `"start" \| "end"` | 指示器图标相对于内容的位置。 |
+| `indicatorIcon` | `React.ReactNode` | 用作菜单项指示器的图标。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `DropdownMenuCheckboxItem.Props` | 将所有其他属性传递给底层的 `DropdownMenuCheckboxItem` 组件。 |
+
+### DropdownMenuRadioItemContent
+
+一个高阶的单选项组件，将 `RadioItem` 和 `RadioItemIndicator` 组合成一个带样式的单一元素，并支持配置图标位置。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `indicatorPlacement` | `"start" \| "end"` | 指示器图标相对于内容的位置。 |
+| `indicatorIcon` | `React.ReactNode` | 用作菜单项指示器的图标。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `DropdownMenuRadioItem.Props` | 将所有其他属性传递给底层的 `DropdownMenuRadioItem` 组件。 |
+
+### DropdownMenuSubMenuTriggerGroup
+
+一个复合触发器组件，渲染触发内容和一个箭头图标。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `children` | `React.ReactNode` | 触发器的内容。 |
+| `...props` | `BaseMenu.SubmenuTrigger.Props` | 将所有其他属性传递给底层的 `BaseMenu.SubmenuTrigger` 组件。 |
+
+### DropdownMenuSubMenuContent
+
+子菜单的复合内容组件。
+
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | 打开时希望相对于锚点元素的哪一侧渲染。 |
+| `sideOffset` | `number` | 距离锚点的像素值。 |
+| `align` | `"start" \| "center" \| "end"` | 相对于锚点的对齐方式。 |
+| `alignOffset` | `number` | 从 `"start"` 或 `"end"` 对齐边缘的像素偏移量。 |
+| `className` | `string` | 额外的 CSS 类名。 |
+| `...props` | `DropdownMenuContentProps` | 将所有其他属性传递给底层的 `DropdownMenuContent` 组件。 |

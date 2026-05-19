@@ -1,0 +1,94 @@
+---
+title: 开关
+description: 一个用于指示某项设置开启或关闭的控件。
+links:
+  doc: https://base-ui.com/react/components/switch
+  api: https://base-ui.com/react/components/switch#api-reference
+---
+
+<ComponentPreview name="switch-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/switch
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="switch" title="switch.tsx" collapsible/>
+      </Step>
+       <Step title="根据你的项目设置，更新导入路径。"/>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+## 基本用法
+
+```tsx
+import { Switch } from "@/components/ui/switch"
+```
+
+```tsx
+<Switch />
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+   ```tsx
+    <Switch />
+   ```
+  </TabsPanel>
+
+  <TabsPanel value="primitive">
+   ```tsx
+    <SwitchRoot>
+      <SwitchThumb />
+    </SwitchRoot>
+   ```
+  </TabsPanel>
+</Tabs>
+
+## 尺寸
+
+<ComponentPreview name="switch-size" />
+
+## 禁用状态
+
+<ComponentPreview name="switch-disabled" />
+
+## 错误状态
+
+<ComponentPreview name="switch-error" />
+
+## 自定义样式
+
+<ComponentPreview name="switch-custom" />
+
+<Callout variant="warning" title="警告">
+表单控件必须具备可访问的名称。建议使用 [`<Field>`](/docs/components/form-input/field) 来提供可见的文本标签和描述，或者用 `aria-label` 属性作为替代方案。
+</Callout>
+
+## 表单集成
+<ComponentPreview name="switch-form" />
+
+## 表单集成（包裹标签）
+<ComponentPreview name="switch-enclosing-label" />
+
+更多信息请参阅 [表单集成](/docs/guides/forms/basic)。

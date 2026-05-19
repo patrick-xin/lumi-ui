@@ -1,0 +1,199 @@
+---
+title: 侧边面板
+description: 对 Dialog 组件的扩展，用于展示与屏幕主内容互补的信息。
+links:
+  doc: https://base-ui.com/react/components/dialog
+  api: https://base-ui.com/react/components/dialog#api-reference
+---
+
+<ComponentPreview name="sheet-demo" />
+
+## 安装
+
+<CodeTabs>
+  <TabsList>
+    <TabsTab value="cli">CLI</TabsTab>
+    <TabsTab value="manual">手动安装</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="cli">
+    ```bash
+    npx shadcn@latest add @lumi-ui/sheet
+    ```
+  </TabsPanel>
+
+  <TabsPanel value="manual">
+    <Steps>
+      <Step title="将以下代码复制并粘贴到你的项目中。">
+        <ComponentSourceCode name="sheet" title="sheet.tsx" collapsible/>
+      </Step>
+    </Steps>
+  </TabsPanel>
+</CodeTabs>
+
+将以下工具类添加到你的 `globals.css` 中：
+
+```css
+@utility animate-fade-up {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: 0 100%;
+  }
+}
+
+@utility animate-fade-down {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: 0 -100%;
+  }
+}
+
+@utility animate-slide-left {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: 100% 0;
+  }
+}
+
+@utility animate-slide-right {
+  @apply transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    translate: -100% 0;
+  }
+}
+
+@utility animate-fade-zoom {
+  @apply transition-all duration-200 ease-[cubic-bezier(0.25,1,0.5,1)];
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+@utility animate-fade {
+  @apply transition-all duration-200;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+```
+
+## 基本用法
+```tsx
+import {
+  Sheet,
+  SheetClose,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
+export function SheetDemo() {
+  return (
+    <Sheet>
+      <SheetTrigger>打开侧边面板</SheetTrigger>
+      <SheetContent showCloseButton>
+        <SheetHeader>
+          <SheetTitle>确定要执行此操作吗？</SheetTitle>
+          <SheetDescription>
+            此操作无法撤销。这将永久删除你的账户，并从我们的服务器中移除你的数据。
+          </SheetDescription>
+        </SheetHeader>
+        <SheetFooter>
+          <SheetClose>取消</SheetClose>
+          <SheetClose>继续</SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  );
+}
+```
+
+## 组件结构
+
+<Tabs defaultValue="common">
+  <TabsList>
+    <TabsTab value="common">常用组合</TabsTab>
+    <TabsTab value="primitive">基础组件</TabsTab>
+  </TabsList>
+
+  <TabsPanel value="common">
+```tsx
+<Sheet>
+  <SheetTrigger />
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle />
+      <SheetDescription />
+    </SheetHeader>
+    <SheetFooter>
+      <SheetClose />
+    </SheetFooter>
+  </SheetContent>
+</Sheet>
+```
+  </TabsPanel>
+  <TabsPanel value="primitive">
+```tsx
+<Sheet>
+  <SheetTrigger />
+  <SheetPortal>
+    <SheetBackdrop />
+    <SheetViewport>
+      <SheetPopup>
+        <SheetHeader>
+          <SheetTitle />
+          <SheetDescription />
+        </SheetHeader>
+        <SheetFooter>
+          <SheetClose />
+        </SheetFooter>
+      </SheetPopup>
+    </SheetViewport>
+  </SheetPortal>
+</Sheet>
+```
+  </TabsPanel>
+</Tabs>
+
+## 样式变体
+<ComponentPreview name="sheet-variants" />
+
+## API 参考
+
+`Sheet` 组件底层使用了 [`Dialog`](/docs/components/overlays-dialogs/dialog) 组件，详情请参阅 [此处](/docs/components/overlays-dialogs/dialog#api-reference)
+
+### 复合组件
+
+| 组件 | 描述 |
+| :--- | :--- |
+| `SheetContent` | **标准用法**。组合 Portal、Backdrop、Viewport 和 Popup。 |
+
+### SheetContent 方向变体
+
+| 变体 | 描述 |
+| :--- | :--- |
+| `right` (默认) | 从左侧滑入。 |
+| `left` | 从右侧滑入。 |
+| `top` | 从底部滑入。 |
+| `bottom` | 从顶部滑入。 |
+| `inset` | 侧边面板与视口分离。 |
