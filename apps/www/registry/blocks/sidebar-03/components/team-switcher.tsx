@@ -8,7 +8,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
   ComboboxTrigger,
@@ -95,7 +95,7 @@ export function TeamSwitcher() {
           side={isCollapsed ? "right" : "bottom"}
         >
           <div className="flex justify-between items-center relative flex-none">
-            <ComboboxInputGroup
+            <ComboboxInputGroupContent
               className="caret-primary"
               placeholder="Find member..."
               variant="ghost"

@@ -595,6 +595,20 @@
       ]
     },
     {
+      "name": "otp-field",
+      "title": "OTP Field",
+      "description": "A one-time password input composed of individual character slots.",
+      "type": "registry:ui",
+      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/ui/otp-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "toolbar",
       "title": "Toolbar",
       "description": "A container for grouping a set of buttons and controls.",

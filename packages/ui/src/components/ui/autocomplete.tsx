@@ -289,7 +289,7 @@ function AutocompleteSeparator({
   );
 }
 
-function AutocompleteInputGroup({
+function AutocompleteInputGroupContent({
   className,
   showTrigger = false,
   showClear = false,
@@ -449,6 +449,6 @@ export {
   AutocompleteCollection,
   useAutocompleteFilter,
   // Composite components
-  AutocompleteInputGroup,
+  AutocompleteInputGroupContent,
   AutocompleteContent,
 };

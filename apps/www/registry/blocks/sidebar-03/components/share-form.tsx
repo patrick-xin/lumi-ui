@@ -17,7 +17,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
   ComboboxTrigger,
@@ -300,7 +300,7 @@ export function ShareForm({ invoiceId }: ShareFormProps) {
                 <X />
               </Button>
               <div className="flex-none relative">
-                <ComboboxInputGroup
+                <ComboboxInputGroupContent
                   inputClassName="border-b-border rounded-none caret-primary"
                   inputSize="lg"
                   placeholder="Search by name or email..."

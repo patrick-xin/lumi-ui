@@ -40,6 +40,7 @@ export function ThemeSwitcher({
   const { setTheme, resolvedTheme } = useTheme();
   const [themeSet, setThemeSet] = useState("celeste");
   const [mode, setMode] = useState("dark");
+  const [open, setOpen] = useState(false);
   const mounted = useMounted();
 
   useEffect(() => {
@@ -61,15 +62,14 @@ export function ThemeSwitcher({
   }
 
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={setOpen} open={open}>
       <Tooltip>
-        <DropdownMenuTrigger
-          render={(props, state) => (
-            <TooltipTrigger
-              disabled={state.open}
+        <TooltipTrigger
+          disabled={open}
+          render={
+            <DropdownMenuTrigger
               render={
                 <Button
-                  {...props}
                   className={cn(
                     "data-popup-open:bg-accent data-popup-open:hover:bg-accent",
                     className,
@@ -81,7 +81,7 @@ export function ThemeSwitcher({
                 </Button>
               }
             />
-          )}
+          }
         />
 
         <TooltipContent sideOffset={tooltipSideOffset}>

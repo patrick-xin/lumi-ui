@@ -8,7 +8,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
   ComboboxTrigger,
@@ -73,7 +73,10 @@ export function TeamSwitcher() {
           side={isCollapsed ? "right" : "bottom"}
         >
           <div className="flex justify-between items-center relative">
-            <ComboboxInputGroup placeholder="Find member..." variant="ghost" />
+            <ComboboxInputGroupContent
+              placeholder="Find member..."
+              variant="ghost"
+            />
             <Button
               className="absolute hidden lg:block right-2 rounded-sm text-muted-foreground cursor-pointer"
               onClick={() => setComboboxOpen(false)}

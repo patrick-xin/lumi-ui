@@ -44,7 +44,7 @@ links:
      ```tsx
      <Combobox>
        <ComboboxTrigger />
-       <ComboboxInputGroup />
+       <ComboboxInputGroupContent />
 
        <ComboboxChips>
          <ComboboxChip />
@@ -70,47 +70,51 @@ links:
 
   <TabsPanel value="primitive">
     ```tsx
-    <Combobox>
-      <ComboboxInput />
-      <ComboboxTrigger />
-      <ComboboxIcon />
-      <ComboboxClear />
-      <ComboboxValue />
+<Combobox>
+  <ComboboxLabel />
 
-      <ComboboxChips>
-        <ComboboxChip>
-          <ComboboxChipRemove />
-        </ComboboxChip>
-      </ComboboxChips>
+  <ComboboxInputGroup>
+    <ComboboxInput />
+    <ComboboxTrigger />
+    <ComboboxIcon />
+    <ComboboxClear />
+    <ComboboxValue />
 
-      <ComboboxPortal>
-        <ComboboxBackdrop />
-        <ComboboxPositioner>
-          <ComboboxPopup>
-            <ComboboxArrow />
+    <ComboboxChips>
+      <ComboboxChip>
+        <ComboboxChipRemove />
+      </ComboboxChip>
+    </ComboboxChips>
+  </ComboboxInputGroup>
 
-            <ComboboxStatus />
-            <ComboboxEmpty />
+  <ComboboxPortal>
+    <ComboboxBackdrop />
+    <ComboboxPositioner>
+      <ComboboxPopup>
+        <ComboboxArrow />
 
-            <ComboboxList>
-              <ComboboxRow>
-                <ComboboxItem>
-                  <ComboboxItemIndicator />
-                </ComboboxItem>
-              </ComboboxRow>
+        <ComboboxStatus />
+        <ComboboxEmpty />
 
-              <ComboboxSeparator />
+        <ComboboxList>
+          <ComboboxRow>
+            <ComboboxItem>
+              <ComboboxItemIndicator />
+            </ComboboxItem>
+          </ComboboxRow>
 
-              <ComboboxGroup>
-                <ComboboxGroupLabel />
-              </ComboboxGroup>
+          <ComboboxSeparator />
 
-              <ComboboxCollection />
-            </ComboboxList>
-          </ComboboxPopup>
-        </ComboboxPositioner>
-      </ComboboxPortal>
-    </Combobox>
+          <ComboboxGroup>
+            <ComboboxGroupLabel />
+          </ComboboxGroup>
+
+          <ComboboxCollection />
+        </ComboboxList>
+      </ComboboxPopup>
+    </ComboboxPositioner>
+  </ComboboxPortal>
+</Combobox>
     ```
   </TabsPanel>
 </Tabs>

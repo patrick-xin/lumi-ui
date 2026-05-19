@@ -8,7 +8,7 @@ import {
   ComboboxChips,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
   ComboboxStatus,
@@ -164,11 +164,11 @@ export function ComboboxAsyncMultipleDemo() {
                   </ComboboxChip>
                 ))}
 
-              <ComboboxInputGroup
+              <ComboboxInputGroupContent
                 className="min-w-24"
                 id={id}
                 placeholder={value.length > 0 ? "" : "e.g. Michael"}
-                variant="ghost"
+                variant="transparent"
               />
             </React.Fragment>
           )}

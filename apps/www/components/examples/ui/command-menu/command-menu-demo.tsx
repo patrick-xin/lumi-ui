@@ -77,7 +77,6 @@ export function CommandMenuDemo() {
             inputSize="lg"
             placeholder="Search documentation..."
             showClear
-            variant="ghost"
           />
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandScrollArea gradientScrollFade noScrollBar>

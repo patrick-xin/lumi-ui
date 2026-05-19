@@ -808,6 +808,28 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "otp-field": {
+    name: "otp-field",
+    title: "OTP Field",
+    description: "A one-time password input composed of individual character slots.",
+    type: "registry:ui",
+    target: "",
+    registryDependencies: ["@base-ui/react","class-variance-authority","lucide-react"],
+    files:     [
+          {
+                "path": "registry/ui/otp-field.tsx",
+                "target": "",
+                "type": "registry:ui"
+          }
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("registry/ui/otp-field");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "otp-field";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "toolbar": {
     name: "toolbar",
     title: "Toolbar",
@@ -2035,6 +2057,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/button/button-disabled");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "button-disabled";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "button-error": {
+    name: "button-error",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["button"],
+    files: [{
+      path: "components/examples/ui/button/button-error.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/button/button-error");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "button-error";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -4452,6 +4492,150 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "otp-field-alphanumeric": {
+    name: "otp-field-alphanumeric",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["otp-field"],
+    files: [{
+      path: "components/examples/ui/otp-field/otp-field-alphanumeric.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/otp-field/otp-field-alphanumeric");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "otp-field-alphanumeric";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "otp-field-demo": {
+    name: "otp-field-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["otp-field"],
+    files: [{
+      path: "components/examples/ui/otp-field/otp-field-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/otp-field/otp-field-demo");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "otp-field-demo";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "otp-field-form": {
+    name: "otp-field-form",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["otp-field"],
+    files: [{
+      path: "components/examples/ui/otp-field/otp-field-form.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/otp-field/otp-field-form");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "otp-field-form";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "otp-field-grouped": {
+    name: "otp-field-grouped",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["otp-field"],
+    files: [{
+      path: "components/examples/ui/otp-field/otp-field-grouped.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/otp-field/otp-field-grouped");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "otp-field-grouped";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "otp-field-masked": {
+    name: "otp-field-masked",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["otp-field"],
+    files: [{
+      path: "components/examples/ui/otp-field/otp-field-masked.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/otp-field/otp-field-masked");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "otp-field-masked";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "otp-field-placeholder": {
+    name: "otp-field-placeholder",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["otp-field"],
+    files: [{
+      path: "components/examples/ui/otp-field/otp-field-placeholder.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/otp-field/otp-field-placeholder");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "otp-field-placeholder";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "otp-field-sanitize": {
+    name: "otp-field-sanitize",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["otp-field"],
+    files: [{
+      path: "components/examples/ui/otp-field/otp-field-sanitize.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/otp-field/otp-field-sanitize");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "otp-field-sanitize";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "otp-field-sizes": {
+    name: "otp-field-sizes",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["otp-field"],
+    files: [{
+      path: "components/examples/ui/otp-field/otp-field-sizes.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/otp-field/otp-field-sizes");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "otp-field-sizes";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "popover-controlled-mode": {
     name: "popover-controlled-mode",
     description: "",
@@ -5262,6 +5446,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "slider-disabled": {
+    name: "slider-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["slider"],
+    files: [{
+      path: "components/examples/ui/slider/slider-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/slider/slider-disabled");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "slider-disabled";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "slider-edge": {
     name: "slider-edge",
     description: "",
@@ -5311,6 +5513,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/slider/slider-range");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "slider-range";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "slider-size": {
+    name: "slider-size",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["slider"],
+    files: [{
+      path: "components/examples/ui/slider/slider-size.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/slider/slider-size");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "slider-size";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,
@@ -5370,6 +5590,24 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
+  "switch-disabled": {
+    name: "switch-disabled",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["switch"],
+    files: [{
+      path: "components/examples/ui/switch/switch-disabled.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/switch/switch-disabled");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "switch-disabled";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "switch-enclosing-label": {
     name: "switch-enclosing-label",
     description: "",
@@ -5419,6 +5657,24 @@ export const components: ComponentRegistry = {
     component: React.lazy(async () => {
       const mod = await import("@/components/examples/ui/switch/switch-form");
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "switch-form";
+      return { default: mod.default || mod[exportName] };
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "switch-size": {
+    name: "switch-size",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["switch"],
+    files: [{
+      path: "components/examples/ui/switch/switch-size.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/components/examples/ui/switch/switch-size");
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "switch-size";
       return { default: mod.default || mod[exportName] };
     }),
     categories: undefined,

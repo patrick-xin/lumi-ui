@@ -9,6 +9,15 @@
   }
 }
 
+/* Input Ring */
+@utility input-ring-visible {
+  @apply focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10;
+}
+
+@utility input-ring-within {
+  @apply focus-within:outline focus-within:outline-ring focus-within:ring-4 focus-within:ring-ring/10;
+}
+
 /* For dialogs */
 @utility animate-fade-up {
   @apply transition-all duration-450 ease-smooth;

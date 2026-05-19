@@ -55,11 +55,11 @@ We flatten the export structure so every component is accessible at the root lev
 
 ```tsx
 // AI-friendly
-import { ComboboxInput, ComboboxItem, ComboboxPortal } from '@/components/ui/combobox'
+import { ComboboxInputGroupContent, ComboboxItem, ComboboxPortal } from '@/components/ui/combobox'
 
 // Nested namespaces - AI struggles
 import { Combobox } from '@base-ui/react/combobox'
-// AI must now infer: Combobox.Input? Combobox.Item? ComboboxInput?
+// AI must now infer: Combobox.Input? Combobox.Item? ComboboxInputGroupContent?
 ```
 
 **Why this matters:**

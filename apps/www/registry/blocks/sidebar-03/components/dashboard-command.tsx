@@ -76,7 +76,6 @@ export function DashboardCommand() {
             inputSize="lg"
             placeholder="Search accounts, transactions, reports..."
             showClear
-            variant="ghost"
           />
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandScrollArea gradientScrollFade noScrollBar>

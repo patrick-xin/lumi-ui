@@ -20,7 +20,7 @@ function SelectLabel({
   return (
     <BaseSelect.Label
       className={cn(
-        "flex items-center gap-2 text-sm leading-none font-medium cursor-default group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+        "text-sm leading-none font-medium cursor-default",
         className,
       )}
       data-slot="select-label"
@@ -277,7 +277,7 @@ function SelectTriggerGroup({
   ...props
 }: SelectTriggerGroupProps) {
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-2">
       {label && <SelectLabel>{label}</SelectLabel>}
       <BaseSelect.Trigger
         className={cn(

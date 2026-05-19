@@ -6,7 +6,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
@@ -34,11 +34,12 @@ export function ComboboxFormDemo() {
         <FieldLabel>Framework</FieldLabel>
         <FieldDescription>Select your favorite framework</FieldDescription>
         <Combobox items={frameworks} required>
-          <ComboboxInputGroup
+          <ComboboxInputGroupContent
             addonIcon={<SearchIcon />}
             aria-label="Search framework"
             className="w-64"
             placeholder="e.g. Next.js"
+            required
             showClear
             showTrigger
           />

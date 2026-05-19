@@ -198,7 +198,7 @@ You can skip `CommandScrollArea` and use your own container:
 
 ### Swap Input
 
-`CommandInput` is built on `AutocompleteInputGroup` and can show a clear button (`showClear`).
+`CommandInput` is built on `AutocompleteInputGroupContent` and can show a clear button (`showClear`).
 
 If you need full control, replace it with `AutocompleteInput`:
 
@@ -253,14 +253,14 @@ A preconfigured autocomplete root for command interactions.
 
 ### CommandInput
 
-A composite input based on `AutocompleteInputGroup`.
+A composite input based on `AutocompleteInputGroupContent`.
 
 | Prop | Type | Description |
 | :--- | :--- | :--- |
 | `addonIcon` | `React.ReactNode` | Prefix icon; defaults to `<Search />`. |
 | `inputSize` | `"default" \| "sm" \| "lg"` | Input size; defaults to `"lg"`. |
 | `className` | `string` | Additional classes for the input group. |
-| `...props` | `React.ComponentProps<typeof AutocompleteInputGroup>` | Passes all other input-group props. |
+| `...props` | `React.ComponentProps<typeof AutocompleteInputGroupContent>` | Passes all other input-group props. |
 
 ### CommandScrollArea
 

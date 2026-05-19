@@ -7,7 +7,7 @@ import {
   AutocompleteEmpty,
   AutocompleteGroup,
   AutocompleteGroupLabel,
-  AutocompleteInputGroup,
+  AutocompleteInputGroupContent,
   AutocompleteItem,
   AutocompleteList,
   AutocompleteRow,
@@ -94,13 +94,13 @@ export function EmojiPickerAutocompleteDemo() {
             matchAnchorWidth={false}
             sideOffset={8}
           >
-            <AutocompleteInputGroup
-              inputClassName="border-b-border"
+            <AutocompleteInputGroupContent
+              className="border-b"
+              embedded
               placeholder="Search emojis…"
               showClear
-              variant="ghost"
             />
-            <ScrollArea gradientScrollFade noScrollBar>
+            <ScrollArea className="h-72" gradientScrollFade noScrollBar>
               <AutocompleteEmpty>No emojis found</AutocompleteEmpty>
               <AutocompleteList>
                 {(group: EmojiGroup) => (

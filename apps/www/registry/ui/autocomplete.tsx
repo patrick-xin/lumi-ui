@@ -7,7 +7,7 @@ import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { ArrowSvg } from "@/registry/ui/arrow-svg";
 import { Button } from "@/registry/ui/button";
-import { inputVariants } from "@/registry/ui/input";
+import { inputBaseVariants, inputVariants } from "@/registry/ui/input";
 
 const Autocomplete = BaseAutocomplete.Root;
 
@@ -43,13 +43,16 @@ function AutocompleteInput({
   variant = "default",
   inputSize = "default",
   ...props
-}: BaseAutocomplete.Input.Props & {
-  variant?: VariantProps<typeof inputVariants>["variant"];
-  inputSize?: VariantProps<typeof inputVariants>["inputSize"];
-}) {
+}: BaseAutocomplete.Input.Props &
+  VariantProps<typeof inputVariants> &
+  VariantProps<typeof inputBaseVariants>) {
   return (
     <BaseAutocomplete.Input
-      className={cn(inputVariants({ inputSize, variant }), className)}
+      className={cn(
+        inputVariants({ inputSize }),
+        inputBaseVariants({ variant }),
+        className,
+      )}
       data-slot="autocomplete-input"
       {...props}
     />
@@ -289,7 +292,7 @@ function AutocompleteSeparator({
   );
 }
 
-function AutocompleteInputGroup({
+function AutocompleteInputGroupContent({
   className,
   showTrigger = false,
   showClear = false,
@@ -297,14 +300,18 @@ function AutocompleteInputGroup({
   inputSize = "default",
   inputClassName,
   addonIcon,
+  ariaInvalid,
+  embedded,
   ...props
 }: BaseAutocomplete.Input.Props & {
   showTrigger?: boolean;
   showClear?: boolean;
-  variant?: VariantProps<typeof inputVariants>["variant"];
-  inputSize?: VariantProps<typeof inputVariants>["inputSize"];
+  variant?: VariantProps<typeof inputBaseVariants>["variant"];
+  inputSize?: VariantProps<typeof inputBaseVariants>["inputSize"];
   inputClassName?: string;
   addonIcon?: React.ReactNode;
+  embedded?: boolean;
+  ariaInvalid?: boolean;
 }) {
   const paddingClass =
     showTrigger && showClear
@@ -314,9 +321,15 @@ function AutocompleteInputGroup({
         : "pr-3";
 
   return (
-    <div
+    <BaseAutocomplete.InputGroup
+      aria-invalid={ariaInvalid}
       className={cn(
-        "relative w-full inline-flex gap-1 items-center outline-none cursor-text rounded-md",
+        "relative w-full inline-flex gap-1 items-center cursor-text",
+        !embedded && inputBaseVariants({ variant, inputSize }),
+        !embedded && "input-ring-within",
+        "has-[[data-slot=combobox-clear]]:[&_[data-slot=combobox-input]]:pr-8",
+        "has-[[data-slot=combobox-trigger]]:[&_[data-slot=combobox-input]]:pr-8",
+        "has-[[data-slot=combobox-clear]]:has-[[data-slot=combobox-trigger]]:[&_[data-slot=combobox-input]]:pr-14",
         className,
       )}
       data-slot="autocomplete-input-group"
@@ -331,7 +344,7 @@ function AutocompleteInputGroup({
       )}
       <BaseAutocomplete.Input
         className={cn(
-          inputVariants({ inputSize, variant }),
+          inputVariants({ inputSize }),
           addonIcon && "pl-7.5",
           paddingClass,
           inputClassName,
@@ -372,7 +385,7 @@ function AutocompleteInputGroup({
           </BaseAutocomplete.Trigger>
         )}
       </div>
-    </div>
+    </BaseAutocomplete.InputGroup>
   );
 }
 
@@ -449,6 +462,6 @@ export {
   AutocompleteCollection,
   useAutocompleteFilter,
   // Composite components
-  AutocompleteInputGroup,
+  AutocompleteInputGroupContent,
   AutocompleteContent,
 };

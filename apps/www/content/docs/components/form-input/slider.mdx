@@ -59,6 +59,7 @@ import { Slider } from "@/components/ui/slider"
   <TabsPanel value="primitive">
    ```tsx
     <SliderRoot>
+      <SliderLabel />
       <SliderValue />
       <SliderControl>
         <SliderTrack>
@@ -73,6 +74,31 @@ import { Slider } from "@/components/ui/slider"
 
 ## Features
 
+### Label
+
+Use the `label` prop to add a visible label. For sliders without a visible label, use `aria-label` on each thumb via `thumbLabels`.
+
+```tsx
+{/* Visible label */}
+<Slider label="Volume" defaultValue={[50]} />
+
+{/* Invisible label via thumbLabels */}
+<Slider thumbLabels={["Volume"]} defaultValue={[50]} />
+
+{/* Range slider with labeled thumbs */}
+<Slider
+  label="Price range"
+  thumbLabels={["Minimum price", "Maximum price"]}
+  defaultValue={[25, 75]}
+/>
+```
+
+### Size
+<ComponentPreview name="slider-size" />
+
+### Disabled
+<ComponentPreview name="slider-disabled" />
+
 ### Range Slider
 <ComponentPreview name="slider-range" />
 
@@ -81,24 +107,9 @@ import { Slider } from "@/components/ui/slider"
 
 ### Edge Aligned Thumbs
 
-<Callout variant="info" title="Note">
-By default, the slider thumb is centered on the value. This means at 0% and 100%, half of the thumb hangs outside the track's bounds.
-</Callout>
-
-Use `thumbAlignment="edge"` to keep the entire thumb **contained inside the track boundaries**. This is useful when:
-1.  The slider is flush against a screen edge or container wall.
-2.  The parent container has `overflow: hidden` (which would otherwise clip half the thumb).
-
-| Mode | Visual Behavior |
-| :--- | :--- |
-| **`center`** (Default) | The **center** of the thumb aligns with the start/end. The thumb overflows the track by 50% of its width. |
-| **`edge`** | The **outer edge** of the thumb aligns with the start/end. The thumb stays 100% inside the track. |
+Use `thumbAlignment="edge"` to keep the thumb contained inside the track. Useful when the slider is flush against a container edge or inside an `overflow: hidden` parent.
 
 <ComponentPreview name="slider-edge" />
-
-<Callout variant="warning" title="Warning">
-Form controls must have an accessible name. Prefer using [`<Field>`](/docs/components/form-input/field) to provide a visible text label and description, or use the aria-label attribute as an alternative. 
-</Callout>
 
 ## Cookbook
 

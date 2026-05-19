@@ -7,7 +7,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
   ComboboxTrigger,
@@ -63,7 +63,7 @@ export function TeamSwitcher() {
         />
         <ComboboxContent className="h-72">
           <div className="flex justify-between items-center relative">
-            <ComboboxInputGroup
+            <ComboboxInputGroupContent
               inputClassName="border-b-border"
               placeholder="Find member..."
               variant="ghost"

@@ -5,7 +5,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
   ComboboxTrigger,
@@ -64,7 +64,7 @@ export function ColumnHeaderCombobox<TData, TValue>({
         />
       </div>
       <ComboboxContent matchAnchorWidth={false}>
-        <ComboboxInputGroup
+        <ComboboxInputGroupContent
           addonIcon={<SearchIcon />}
           inputClassName="text-sm"
           placeholder="Find owner..."

@@ -6,7 +6,7 @@ import { Check, ChevronDown, X } from "lucide-react";
 import type * as React from "react";
 import { cn } from "@/registry/lib/utils";
 import { Button } from "@/registry/ui/button";
-import { inputVariants } from "@/registry/ui/input";
+import { inputBaseVariants, inputVariants } from "@/registry/ui/input";
 
 function Combobox<Value, Multiple extends boolean | undefined = false>({
   children,
@@ -19,10 +19,26 @@ function Combobox<Value, Multiple extends boolean | undefined = false>({
   );
 }
 
-function ComboboxValue({
+function ComboboxLabel({
   children,
+  className,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Value>) {
+}: BaseCombobox.Label.Props & { className?: string }) {
+  return (
+    <BaseCombobox.Label
+      className={cn(
+        "cursor-default text-sm leading-none font-medium",
+        className,
+      )}
+      data-slot="combobox-label"
+      {...props}
+    >
+      {children}
+    </BaseCombobox.Label>
+  );
+}
+
+function ComboboxValue({ children, ...props }: BaseCombobox.Value.Props) {
   return (
     <BaseCombobox.Value data-slot="combobox-value" {...props}>
       {children}
@@ -48,13 +64,16 @@ function ComboboxInput({
   inputSize = "default",
   variant = "default",
   ...props
-}: BaseCombobox.Input.Props & {
-  inputSize?: VariantProps<typeof inputVariants>["inputSize"];
-  variant?: VariantProps<typeof inputVariants>["variant"];
-}) {
+}: BaseCombobox.Input.Props &
+  VariantProps<typeof inputVariants> &
+  VariantProps<typeof inputBaseVariants>) {
   return (
     <BaseCombobox.Input
-      className={cn(inputVariants({ inputSize, variant }), className)}
+      className={cn(
+        inputVariants({ inputSize }),
+        inputBaseVariants({ variant }),
+        className,
+      )}
       data-slot="combobox-input"
       {...props}
     />
@@ -91,14 +110,7 @@ function ComboboxTrigger({ className, ...props }: BaseCombobox.Trigger.Props) {
 function ComboboxChips({ className, ...props }: BaseCombobox.Chips.Props) {
   return (
     <BaseCombobox.Chips
-      className={cn(
-        "dark:bg-input/30 border border-input",
-        "p-1 min-h-8 **:data-[slot=combobox-input]:h-7.5",
-        "flex flex-wrap items-center gap-1.5 rounded-md shadow-xs",
-        "focus-within:outline focus-within:outline-ring focus-within:ring-4 focus-within:ring-ring/10",
-        "disabled:cursor-not-allowed disabled:opacity-50",
-        className,
-      )}
+      className={cn("flex w-full flex-wrap items-center gap-1", className)}
       data-slot="combobox-chips"
       {...props}
     />
@@ -292,32 +304,57 @@ function ComboboxSeparator({
 
 function ComboboxInputGroup({
   className,
+  variant = "default",
+  inputSize = "default",
+  ...props
+}: BaseCombobox.InputGroup.Props & {
+  variant?: VariantProps<typeof inputBaseVariants>["variant"];
+  inputSize?: VariantProps<typeof inputBaseVariants>["inputSize"];
+}) {
+  return (
+    <BaseCombobox.InputGroup
+      className={cn(
+        inputBaseVariants({ variant, inputSize }),
+        "relative w-full inline-flex gap-1 items-center cursor-text",
+        "input-ring-within",
+        className,
+      )}
+      data-slot="combobox-input-control"
+      {...props}
+    />
+  );
+}
+
+function ComboboxInputGroupContent({
+  className,
   showTrigger = false,
   showClear = false,
   variant = "default",
   inputSize = "default",
   addonIcon,
   inputClassName,
+  "aria-invalid": ariaInvalid,
+  embedded = false,
   ...props
 }: BaseCombobox.Input.Props & {
   showTrigger?: boolean;
   showClear?: boolean;
-  variant?: VariantProps<typeof inputVariants>["variant"];
-  inputSize?: VariantProps<typeof inputVariants>["inputSize"];
+  variant?: VariantProps<typeof inputBaseVariants>["variant"];
+  inputSize?: VariantProps<typeof inputBaseVariants>["inputSize"];
   addonIcon?: React.ReactNode;
   inputClassName?: string;
+  embedded?: boolean;
 }) {
-  const paddingClass =
-    showTrigger && showClear
-      ? "pr-14"
-      : showTrigger || showClear
-        ? "pr-8"
-        : "pr-3";
-
   return (
-    <div
+    <BaseCombobox.InputGroup
+      aria-invalid={ariaInvalid}
       className={cn(
-        "relative w-full inline-flex gap-1 items-center outline-none cursor-text rounded-md",
+        "relative w-full inline-flex gap-1 items-center cursor-text",
+        !embedded && inputBaseVariants({ variant, inputSize }),
+        !embedded && "input-ring-within",
+        "has-[[data-slot=combobox-clear]]:[&_[data-slot=combobox-input]]:pr-8",
+        "has-[[data-slot=combobox-trigger]]:[&_[data-slot=combobox-input]]:pr-8",
+        "has-[[data-slot=combobox-clear]]:has-[[data-slot=combobox-trigger]]:[&_[data-slot=combobox-input]]:pr-14",
         className,
       )}
       data-slot="combobox-input-group"
@@ -332,9 +369,8 @@ function ComboboxInputGroup({
       )}
       <BaseCombobox.Input
         className={cn(
-          inputVariants({ inputSize, variant }),
+          inputVariants({ inputSize }),
           addonIcon && "pl-7.5",
-          paddingClass,
           inputClassName,
         )}
         data-slot="combobox-input"
@@ -373,7 +409,7 @@ function ComboboxInputGroup({
           </BaseCombobox.Trigger>
         )}
       </div>
-    </div>
+    </BaseCombobox.InputGroup>
   );
 }
 
@@ -479,9 +515,11 @@ const useComboboxFilter = BaseCombobox.useFilter;
 
 export {
   Combobox,
+  ComboboxLabel,
   ComboboxValue,
   ComboboxIcon,
   ComboboxInput,
+  ComboboxInputGroup,
   ComboboxClear,
   ComboboxTrigger,
   ComboboxChips,
@@ -504,7 +542,7 @@ export {
   ComboboxCollection,
   useComboboxFilter,
   // Composite components
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxContent,
   ComboboxItemContent,
 };

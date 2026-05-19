@@ -8,13 +8,12 @@ import {
   ComboboxContent,
   ComboboxEmpty,
   ComboboxIcon,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
   ComboboxTrigger,
   ComboboxValue,
 } from "@/registry/ui/combobox";
-import { Separator } from "@/registry/ui/separator";
 
 export function ComboboxInputInsidePopupRefDemo() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -46,8 +45,12 @@ export function ComboboxInputInsidePopupRefDemo() {
       </div>
 
       <ComboboxContent positionerAnchor={containerRef}>
-        <ComboboxInputGroup placeholder="Find member..." variant="ghost" />
-        <Separator />
+        <ComboboxInputGroupContent
+          className="border-b"
+          embedded
+          placeholder="Find member..."
+          variant="transparent"
+        />
         <ComboboxEmpty>No member found.</ComboboxEmpty>
         <ComboboxList>
           {(member: TeamMember) => (

@@ -5,7 +5,7 @@ import {
   Autocomplete,
   AutocompleteContent,
   AutocompleteEmpty,
-  AutocompleteInputGroup,
+  AutocompleteInputGroupContent,
   AutocompleteItem,
   AutocompleteList,
 } from "@/registry/ui/autocomplete";
@@ -16,7 +16,7 @@ import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
-  ComboboxInputGroup,
+  ComboboxInputGroupContent,
   ComboboxItemContent,
   ComboboxList,
 } from "@/registry/ui/combobox";
@@ -83,7 +83,7 @@ export function ProjectQuoteForm() {
       <Field name="clientLocation">
         <Combobox items={LOCATIONS} required>
           <FieldLabel>Headquarters Location</FieldLabel>
-          <ComboboxInputGroup
+          <ComboboxInputGroupContent
             className="w-80"
             placeholder="Select major city..."
             showClear
@@ -109,7 +109,7 @@ export function ProjectQuoteForm() {
           required
         >
           <FieldLabel>Preferred Framework</FieldLabel>
-          <AutocompleteInputGroup
+          <AutocompleteInputGroupContent
             className="w-80"
             placeholder="e.g. Next.js"
             showClear
