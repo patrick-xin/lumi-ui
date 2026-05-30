@@ -102,7 +102,7 @@ export const T3ModelSelector = () => {
                 </Label>
                 <Input
                   aria-label="Search models"
-                  className="caret-primary"
+                  className="caret-primary focus-visible:ring-0"
                   id="searchModel"
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search models..."

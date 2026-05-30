@@ -155,20 +155,6 @@ import { OTPField } from "@/components/ui/otp-field"
 </Field>
 ```
 
-## 自定义清洗逻辑
-
-将 `validationType` 设为 `"none"` 并搭配 `sanitizeValue`，可以在数值进入 state 之前对粘贴内容进行规范化。如果自定义规则仍需要特定的虚拟键盘提示，使用 `inputMode` 指定；用 `onValueInvalid` 来响应被拒绝的字符。下面这个示例只接受数字 `0-3`，被拒绝时会让聚焦格子抖动，并通过 `aria-live` 播报被丢弃的内容。
-
-<ComponentPreview name="otp-field-sanitize" />
-
-<Callout variant="warning" title="sanitizeValue 仅在 validationType='none' 时生效">
-当 `validationType` 为 `'numeric'`、`'alpha'` 或 `'alphanumeric'` 时，`sanitizeValue` 会**被静默忽略** —— 内置的清洗逻辑会优先生效。如果想在内置规则之上加入自定义逻辑，请将 `validationType` 设为 `"none"`，并在自己的清洗函数中重新实现该规则。
-</Callout>
-
-<Callout variant="info" title="抖动动画的 keyframes">
-为了开箱即用，演示中通过 `<style>` 标签内联了 keyframes。在生产环境下，建议把 `@keyframes otp-shake-a/b` 和 `.otp-shake-a/b` 规则提到全局 CSS（或 Tailwind 插件）中，并移除 `<style>` 元素。
-</Callout>
-
 ## 与 Form 配合
 
 <ComponentPreview name="otp-field-form" />

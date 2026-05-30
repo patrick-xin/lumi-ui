@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp-field",
+  "title": "OTP Field",
+  "description": "A one-time password input composed of individual character slots.",
+  "dependencies": [
+    "@base-ui/react",
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/otp-field.tsx",
+      "content": "\"use client\";\n\nimport { OTPFieldPreview as BaseOTPField } from \"@base-ui/react/otp-field\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { Minus } from \"lucide-react\";\nimport { cn } from \"@/registry/lib/utils\";\n\nconst otpFieldInputVariants = cva(\n  [\n    \"box-border rounded-md border border-input bg-transparent text-center font-medium tabular-nums\",\n    \"appearance-none outline-0 transition-[color,box-shadow,border,ring,outline] duration-150\",\n    \"dark:bg-input/30\",\n    \"placeholder:text-muted-foreground\",\n    \"focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10\",\n    \"disabled:cursor-default disabled:opacity-50\",\n    \"data-disabled:cursor-default data-disabled:opacity-50\",\n    \"aria-invalid:outline aria-invalid:outline-destructive/80 aria-invalid:ring-4 aria-invalid:ring-destructive/20 aria-invalid:border-destructive\",\n    \"aria-invalid:focus-visible:border-destructive aria-invalid:focus-visible:outline-destructive aria-invalid:focus-visible:ring-destructive/20\",\n    \"data-invalid:outline data-invalid:outline-destructive/80 data-invalid:ring-4 data-invalid:ring-destructive/20 data-invalid:border-destructive\",\n  ],\n  {\n    defaultVariants: {\n      inputSize: \"default\",\n    },\n    variants: {\n      inputSize: {\n        default: \"h-9 w-9 text-sm\",\n        sm: \"h-8 w-8 text-sm\",\n        lg: \"h-11 w-10 text-base\",\n      },\n    },\n  },\n);\n\nfunction OTPFieldRoot({ className, ...props }: BaseOTPField.Root.Props) {\n  return (\n    <BaseOTPField.Root\n      className={cn(\n        \"flex items-center gap-2 data-disabled:opacity-50\",\n        className,\n      )}\n      data-slot=\"otp-field\"\n      {...props}\n    />\n  );\n}\n\nfunction OTPFieldInput({\n  className,\n  inputSize,\n  ...props\n}: BaseOTPField.Input.Props & VariantProps<typeof otpFieldInputVariants>) {\n  return (\n    <BaseOTPField.Input\n      className={cn(otpFieldInputVariants({ inputSize }), className)}\n      data-slot=\"otp-field-input\"\n      {...props}\n    />\n  );\n}\n\nfunction OTPFieldSeparator({\n  className,\n  children,\n  ...props\n}: BaseOTPField.Separator.Props) {\n  return (\n    <BaseOTPField.Separator\n      className={cn(\n        \"flex w-4 items-center justify-center text-muted-foreground\",\n        className,\n      )}\n      data-slot=\"otp-field-separator\"\n      {...props}\n    >\n      {children ?? <Minus />}\n    </BaseOTPField.Separator>\n  );\n}\n\ntype OTPFieldProps = BaseOTPField.Root.Props &\n  VariantProps<typeof otpFieldInputVariants> & {\n    inputClassName?: string;\n  };\n\nfunction OTPField({\n  className,\n  inputClassName,\n  inputSize,\n  length,\n  ...props\n}: OTPFieldProps) {\n  return (\n    <OTPFieldRoot className={className} length={length} {...props}>\n      {Array.from({ length }, (_, index) => (\n        <OTPFieldInput\n          aria-label={`Character ${index + 1} of ${length}`}\n          className={inputClassName}\n          inputSize={inputSize}\n          key={index}\n        />\n      ))}\n    </OTPFieldRoot>\n  );\n}\n\nexport {\n  OTPFieldRoot,\n  OTPFieldInput,\n  OTPFieldSeparator,\n  otpFieldInputVariants,\n  // Composite component\n  OTPField,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

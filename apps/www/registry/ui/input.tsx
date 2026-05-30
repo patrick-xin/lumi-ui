@@ -8,6 +8,7 @@ const inputBaseVariants = cva(
   [
     "rounded-md border border-input shadow-sm outline-0",
     "transition-[color,box-shadow,border,ring,outline] appearance-none duration-150",
+    "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
     // disabled
     "disabled:cursor-default disabled:opacity-50",
     "data-disabled:cursor-default data-disabled:opacity-50",
@@ -70,7 +71,6 @@ function Input({
       className={cn(
         inputBaseVariants({ inputSize, variant }),
         inputVariants({ inputSize }),
-        "input-ring-visible",
         className,
       )}
       data-slot="input"
