@@ -97,6 +97,7 @@ export function TeamSwitcher() {
           <div className="flex justify-between items-center relative flex-none">
             <ComboboxInputGroupContent
               className="caret-primary"
+              embedded
               placeholder="Find member..."
               variant="ghost"
             />

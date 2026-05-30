@@ -11,13 +11,12 @@ const otpFieldInputVariants = cva(
     "appearance-none outline-0 transition-[color,box-shadow,border,ring,outline] duration-150",
     "dark:bg-input/30",
     "placeholder:text-muted-foreground",
-    "focus-visible:z-10 input-ring-visible focus-visible:border-ring",
+    "focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10",
     "disabled:cursor-default disabled:opacity-50",
     "data-disabled:cursor-default data-disabled:opacity-50",
     "aria-invalid:outline aria-invalid:outline-destructive/80 aria-invalid:ring-4 aria-invalid:ring-destructive/20 aria-invalid:border-destructive",
     "aria-invalid:focus-visible:border-destructive aria-invalid:focus-visible:outline-destructive aria-invalid:focus-visible:ring-destructive/20",
     "data-invalid:outline data-invalid:outline-destructive/80 data-invalid:ring-4 data-invalid:ring-destructive/20 data-invalid:border-destructive",
-    "data-invalid:focus-visible:border-destructive data-invalid:focus-visible:outline-destructive data-invalid:focus-visible:ring-destructive/20",
   ],
   {
     defaultVariants: {

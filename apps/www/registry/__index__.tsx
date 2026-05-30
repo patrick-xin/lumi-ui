@@ -4600,24 +4600,6 @@ export const components: ComponentRegistry = {
     categories: undefined,
     meta: undefined,
   },
-  "otp-field-sanitize": {
-    name: "otp-field-sanitize",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["otp-field"],
-    files: [{
-      path: "components/examples/ui/otp-field/otp-field-sanitize.tsx",
-      type: "registry:example",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/components/examples/ui/otp-field/otp-field-sanitize");
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || "otp-field-sanitize";
-      return { default: mod.default || mod[exportName] };
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
   "otp-field-sizes": {
     name: "otp-field-sizes",
     description: "",

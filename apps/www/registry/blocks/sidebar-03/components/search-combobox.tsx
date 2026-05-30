@@ -61,6 +61,7 @@ export function SearchCombobox() {
         <div className="flex justify-between items-center relative">
           <ComboboxInputGroupContent
             addonIcon={<SearchIcon />}
+            embedded
             inputSize="lg"
             placeholder="Find..."
             variant="ghost"

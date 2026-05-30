@@ -7,7 +7,6 @@ import { OTPFieldFormDemo } from "@/components/examples/ui/otp-field/otp-field-f
 import { OTPFieldGroupedDemo } from "@/components/examples/ui/otp-field/otp-field-grouped";
 import { OTPFieldMaskedDemo } from "@/components/examples/ui/otp-field/otp-field-masked";
 import { OTPFieldPlaceholderDemo } from "@/components/examples/ui/otp-field/otp-field-placeholder";
-import { OTPFieldSanitizeDemo } from "@/components/examples/ui/otp-field/otp-field-sanitize";
 import { OTPFieldSizesDemo } from "@/components/examples/ui/otp-field/otp-field-sizes";
 import { ModeSwitcher } from "@/components/mode-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -87,9 +86,6 @@ export default function Page() {
             </DemoBlock>
             <DemoBlock title="Placeholder hints">
               <OTPFieldPlaceholderDemo />
-            </DemoBlock>
-            <DemoBlock title="Custom sanitization">
-              <OTPFieldSanitizeDemo />
             </DemoBlock>
             <DemoBlock title="With Form">
               <OTPFieldFormDemo />

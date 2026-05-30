@@ -155,20 +155,6 @@ Use [`<Field>`](/docs/components/form-input/field) to handle label association, 
 </Field>
 ```
 
-## Custom sanitization
-
-Set `validationType="none"` with `sanitizeValue` to normalize pasted values before they reach state. Use `inputMode` when a custom rule still needs a specific virtual keyboard hint, and `onValueInvalid` to react to rejected characters. This example accepts digits `0-3` only, shakes the focused slot on rejection, and announces what was dropped via `aria-live`.
-
-<ComponentPreview name="otp-field-sanitize" />
-
-<Callout variant="warning" title="sanitizeValue requires validationType='none'">
-`sanitizeValue` is **silently ignored** when `validationType` is `'numeric'`, `'alpha'`, or `'alphanumeric'` — the built-in sanitizer wins. To combine built-in rules with custom logic, set `validationType="none"` and re-implement the rule inside your sanitizer.
-</Callout>
-
-<Callout variant="info" title="Shake keyframes">
-The demo ships its keyframes inline via a `<style>` tag so it's drop-in. For production, lift the `@keyframes otp-shake-a/b` and `.otp-shake-a/b` rules into your global CSS (or a Tailwind plugin) and remove the `<style>` element.
-</Callout>
-
 ## With Form
 
 <ComponentPreview name="otp-field-form" />

@@ -316,7 +316,7 @@ function ComboboxInputGroup({
       className={cn(
         inputBaseVariants({ variant, inputSize }),
         "relative w-full inline-flex gap-1 items-center cursor-text",
-        "input-ring-within",
+        "focus-within:outline focus-within:outline-ring focus-within:ring-4 focus-within:ring-ring/10",
         className,
       )}
       data-slot="combobox-input-control"
@@ -351,7 +351,8 @@ function ComboboxInputGroupContent({
       className={cn(
         "relative w-full inline-flex gap-1 items-center cursor-text",
         !embedded && inputBaseVariants({ variant, inputSize }),
-        !embedded && "input-ring-within",
+        !embedded &&
+          "focus-within:outline focus-within:outline-ring focus-within:ring-4 focus-within:ring-ring/10",
         "has-[[data-slot=combobox-clear]]:[&_[data-slot=combobox-input]]:pr-8",
         "has-[[data-slot=combobox-trigger]]:[&_[data-slot=combobox-input]]:pr-8",
         "has-[[data-slot=combobox-clear]]:has-[[data-slot=combobox-trigger]]:[&_[data-slot=combobox-input]]:pr-14",
