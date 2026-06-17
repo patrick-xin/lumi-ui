@@ -23,7 +23,7 @@ export function ComboboxInputInsidePopupDemo() {
         <ComboboxTrigger
           className={buttonVariants({
             className: "justify-between px-3 w-64",
-            variant: "secondary",
+            variant: "outline",
           })}
         >
           <ComboboxValue />

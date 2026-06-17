@@ -164,8 +164,8 @@ function NumberField({
         <BaseNumberField.Decrement
           className={cn(
             "flex items-center justify-center shrink-0 h-full aspect-square",
-            "border-r border-input bg-input/60 text-foreground",
-            "transition-colors hover:bg-input",
+            "border-r border-input bg-transparent text-foreground",
+            "transition-colors hover:bg-primary/8",
             "data-disabled:bg-transparent",
           )}
           data-slot="number-field-decrement"
@@ -182,8 +182,8 @@ function NumberField({
         <BaseNumberField.Increment
           className={cn(
             "flex items-center justify-center shrink-0 h-full aspect-square",
-            "border-l border-input bg-input/60 text-foreground",
-            "transition-colors hover:bg-input",
+            "border-l border-input bg-transparent text-foreground",
+            "transition-colors hover:bg-primary/8",
             "data-disabled:bg-transparent",
           )}
           data-slot="number-field-increment"

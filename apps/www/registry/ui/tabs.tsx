@@ -104,7 +104,7 @@ function TabsListContent({
       {children}
       <TabIndicator
         className={cn(
-          "rounded-md bg-background dark:bg-accent",
+          "rounded-md bg-secondary",
           "top-1/2 -translate-y-1/2 left-0 data-[orientation=horizontal]:h-[calc(100%-8px)]",
           "data-[orientation=vertical]:left-1/2 data-[orientation=vertical]:-translate-x-1/2 data-[orientation=vertical]:top-0 data-[orientation=vertical]:translate-y-(--active-tab-top)",
         )}

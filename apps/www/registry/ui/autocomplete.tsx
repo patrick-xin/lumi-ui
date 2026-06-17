@@ -430,7 +430,6 @@ function AutocompleteContent({
           data-slot="autocomplete-content"
           {...props}
         >
-          <AutocompleteArrow />
           {children}
         </BaseAutocomplete.Popup>
       </BaseAutocomplete.Positioner>
