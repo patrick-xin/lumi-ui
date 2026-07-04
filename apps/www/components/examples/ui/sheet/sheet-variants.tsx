@@ -117,7 +117,11 @@ export function SheetDemo() {
                 <SheetTitle>Inset Left</SheetTitle>
                 <SheetDescription>With ScrollArea</SheetDescription>
               </SheetHeader>
-              <ScrollArea className="pr-4" gradientScrollFade noScrollBar>
+              <ScrollArea
+                className="pr-4 min-h-0"
+                gradientScrollFade
+                noScrollBar
+              >
                 <div className="flex flex-col gap-4">
                   {Array.from({ length: 12 }).map((_, i) => (
                     <div

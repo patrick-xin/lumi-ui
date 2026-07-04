@@ -1,6 +1,6 @@
 "use client";
 
-import { OTPFieldPreview as BaseOTPField } from "@base-ui/react/otp-field";
+import { OTPField as BaseOTPField } from "@base-ui/react/otp-field";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Minus } from "lucide-react";
 import { cn } from "@/registry/lib/utils";

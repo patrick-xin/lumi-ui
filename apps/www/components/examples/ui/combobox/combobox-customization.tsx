@@ -1,5 +1,15 @@
 "use client";
 
+import {
+  Check,
+  CheckCircle2,
+  Circle,
+  CircleDashed,
+  CircleDot,
+  XCircle,
+} from "lucide-react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/registry/ui/button";
 import {
   Combobox,
@@ -18,16 +28,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/registry/ui/tooltip";
-import {
-  Check,
-  CheckCircle2,
-  Circle,
-  CircleDashed,
-  CircleDot,
-  XCircle,
-} from "lucide-react";
-import * as React from "react";
-import { cn } from "@/lib/utils";
 
 const projectStatusTooltipHandle = createTooltipHandle();
 

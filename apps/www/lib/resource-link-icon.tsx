@@ -6,6 +6,7 @@ import {
 import { Bot, CpuIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { TonexLogo } from "../components/icons";
 
 type ResourceLinkIconVariant = "sidebar" | "command";
 
@@ -87,6 +88,16 @@ export function getResourceLinkIcon(
           className={
             variant === "sidebar"
               ? "mr-1 ml-1 size-4"
+              : "size-4 text-muted-foreground"
+          }
+        />
+      );
+    case "tonex":
+      return (
+        <TonexLogo
+          className={
+            variant === "sidebar"
+              ? "mr-1 size-4"
               : "size-4 text-muted-foreground"
           }
         />
