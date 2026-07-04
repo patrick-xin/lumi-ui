@@ -31,7 +31,7 @@ const inputBaseVariants = cva(
         default: "dark:bg-input/30",
         transparent: "bg-transparent",
         ghost:
-          "bg-transparent border-none shadow-none outline-none rounded-none",
+          "bg-transparent border-none shadow-none outline-none rounded-none focus-visible:ring-0",
       },
     },
   },
