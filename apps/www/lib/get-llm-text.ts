@@ -93,7 +93,7 @@ async function getComponentSourceCode(
       return null;
     }
 
-    const filePath = path.join(process.cwd(), component.files[0].path);
+    const filePath = path.join(/*turbopackIgnore: true*/ process.cwd(), component.files[0].path);
     const originalCode = await fs.readFile(filePath, "utf-8");
     return rewriteRegistryImports(originalCode);
   } catch (error) {

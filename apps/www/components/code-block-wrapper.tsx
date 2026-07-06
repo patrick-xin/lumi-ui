@@ -24,7 +24,7 @@ export function CodeBlockWrapper({
   return (
     <figure
       className={cn(
-        "relative flex flex-col rounded-md w-full max-w-full",
+        "relative flex flex-col rounded-md w-full max-w-full @container",
         className,
       )}
       data-language={language}

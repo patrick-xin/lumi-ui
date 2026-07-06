@@ -27,7 +27,7 @@ export async function ComponentSourceCode({
   const { files } = components[name];
 
   const originalCode = await fs.readFile(
-    path.join(process.cwd(), files[0].path),
+    path.join(/*turbopackIgnore: true*/ process.cwd(), files[0].path),
     "utf-8",
   );
   const code = rewriteRegistryImports(originalCode);
