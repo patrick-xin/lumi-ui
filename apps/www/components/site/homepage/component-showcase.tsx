@@ -59,7 +59,7 @@ export default function ComponentShowcase() {
               initial={{ opacity: 0 }}
               loading="lazy"
               onLoad={() => setLoaded(true)}
-              src="/playground"
+              src="/showcase"
               tabIndex={-1}
               title="Lumi Dashboard"
               transition={{ duration: 0.45, ease: smoothEase }}
